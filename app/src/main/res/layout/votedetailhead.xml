@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent">
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:gravity="center_vertical"
+         android:paddingLeft="15dp"
+         android:paddingRight="15dp"
+         android:layout_height="wrap_content">
+         <com.example.heshequ.view.CircleView
+             android:layout_width="34dp"
+             android:layout_height="34dp"
+             android:id="@+id/ivHead"
+             android:src="@mipmap/head3"
+             />
+         <TextView
+             android:layout_width="0dp"
+             android:layout_weight="1"
+             android:textSize="14sp"
+             android:id="@+id/tvName"
+             android:textColor="#333333"
+             android:layout_marginLeft="10dp"
+             android:layout_height="wrap_content" />
+
+         <TextView
+             android:id="@+id/tvTime2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             />
+         <TextView
+             android:layout_width="wrap_content"
+             android:textColor="#999999"
+             android:textSize="12sp"
+             android:id="@+id/tvTime"
+             android:layout_height="wrap_content" />
+     </LinearLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/tvVoteTitle"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="75dp"
+            android:textColor="#ffffff"
+            android:id="@+id/btStatus"
+            android:background="@drawable/ing_bg"
+            android:textSize="13sp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="true"
+            android:text="进行中"
+            android:layout_height="26dp"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:id="@+id/tvContent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:textColor="#353537"
+        android:textSize="11sp"
+        android:id="@+id/tvEndTime"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="20dp"
+        style="@style/h_line_8"/>
+</LinearLayout>

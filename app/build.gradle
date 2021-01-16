@@ -1,0 +1,142 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "com.example.heshequ"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        /*****************************************/
+        //start
+        renderscriptTargetApi 26
+        renderscriptSupportModeEnabled true
+        //end
+
+        multiDexEnabled true
+        dexOptions {
+            incremental true
+            javaMaxHeapSize "4g"
+        }
+        /*******************************************/
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    /**************************************************/
+//    signingConfigs {
+//        debug {
+//            keyAlias 'xiangyu'
+//            keyPassword '123456'
+//            storeFile file("../xiangyu.jks")
+//            storePassword '123456'
+//        }
+//    }
+    useLibrary 'org.apache.http.legacy'
+    /*************************************************/
+}
+
+dependencies {
+
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation files('libs\\open_sdk_r6008_lite.jar')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    testCompile 'junit:junit:4.12'
+    //noinspection GradleCompatible
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.youth.banner:banner:1.4.4'
+    compile files('libs/open_sdk_r6008_lite.jar')
+    //compile files('libs/glide-3.6.1.jar')
+    implementation 'com.githang:status-bar-compat:0.5'
+
+    //加载图片快速方法
+    implementation 'com.facebook.fresco:fresco:0.12.0'
+    // 在 API < 14 上的机器支持 WebP 时，需要添加
+    implementation 'com.facebook.fresco:animated-base-support:0.12.0'
+
+    // 支持 GIF 动图，需要添加
+    implementation 'com.facebook.fresco:animated-gif:0.12.0'
+
+    // 支持 WebP （静态图+动图），需要添加
+    implementation 'com.facebook.fresco:animated-webp:0.12.0'
+    implementation 'com.facebook.fresco:webpsupport:0.12.0'
+
+    // 仅支持 WebP 静态图，需要添加
+    implementation 'com.facebook.fresco:webpsupport:0.12.0'
+
+    //to here
+
+    //滚度刻度尺
+    implementation 'com.zkk.view:ZkkRulerView:1.0.0'
+
+    implementation 'com.alibaba:fastjson:1.1.46.android'
+
+    implementation 'com.jcodecraeer:xrecyclerview:1.5.8'
+    implementation 'top.zibin:Luban:1.1.2'
+    implementation 'com.jude:rollviewpager:1.2.9'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    //生成二维码依赖
+    implementation 'cn.yipianfengye.android:zxing-library:2.1'
+    //布兰柯基工具类
+    implementation 'com.blankj:utilcode:1.24.2'
+    implementation 'net.qiujuer.genius:blur:2.0.0-beta4'
+    implementation 'com.lzy.net:okhttputils:+'
+    //版本号使用 + 可以自动引用最新版
+    implementation 'com.lzy.net:okhttpserver:+'
+    //版本号使用 + 可以自动引用最新
+    //小三角 需要 Maven https://jitpack.io
+    implementation 'com.github.zengzhaoxing:SharpView:v2.3.0'
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.4'
+    implementation 'org.jsoup:jsoup:1.11.2'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    //compile 'com.umeng.sdk:common:latest.integration'
+    implementation 'com.umeng.sdk:analytics:latest.integration'
+    implementation 'com.sina.weibo.sdk:core:4.3.0:openDefaultRelease@aar'
+    implementation 'com.umeng.sdk:utdid:1.1.5.3'
+    //PushSDK
+    implementation 'com.umeng.sdk:push:4.2.0'
+    implementation 'com.umeng.sdk:common:1.5.3'
+    implementation 'com.android.support:multidex:1.0.1'
+    implementation 'com.github.huzhenjie:RichTextEditor:1.0.2'
+
+    implementation('com.github.huzhenjie:RichTextEditor:1.0.2') {
+        exclude group: 'com.github.bumptech.glide'
+    }
+    //hotfix
+    /**
+     *  友盟推送 和 阿里热修复同属阿里系产品  它们同时使用 com.aliyun.ams:alicloud-android-utils:XX.jar 一起使用会出现如下BUG
+     *  需要阿里云Maven
+     *
+     * Error:Execution failed for task ':app:transformClassesWithJarMergingForRelease'.
+     * > com.android.build.api.transform.TransformException: java.util.zip.ZipException: duplicate entry: com/alibaba/sdk/android/utils/a.class
+     * */
+    implementation('com.aliyun.ams:alicloud-android-hotfix:3.2.6') {
+        exclude module: 'alicloud-android-utils'
+    }
+
+    // XRefreshView
+    implementation 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
+
+    // Picasso图片加载框架
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    // 加载中
+    implementation 'com.github.limxing:Android-PromptDialog:1.1.3'
+
+
+
+}

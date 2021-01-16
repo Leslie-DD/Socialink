@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/base_color_white"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2">
+        <include layout="@layout/new_title_bar2"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout2"
+        android:gravity="center_horizontal"
+        android:id="@+id/headandsex"
+        android:orientation="horizontal">
+        <com.example.heshequ.view.CircleView
+            android:layout_width="75dp"
+            android:src="@mipmap/head3"
+            android:id="@+id/ivHead"
+            android:layout_height="75dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/xingbie"
+            android:layout_gravity="bottom"
+            android:src="@mipmap/me19" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/headandsex"
+        android:id="@+id/nicheng">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+            android:id="@+id/nicknametext"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+            android:gravity="center"
+            android:text=""
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nicheng"
+        android:id="@+id/gexing">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+            android:id="@+id/gexingqianming"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+            android:gravity="center"
+            android:text=""
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gexing"
+        android:id="@+id/shengri">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="生日"
+
+            />
+
+        <TextView
+            android:id="@+id/friendsetTip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/right3"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#999999"
+            />
+
+
+        <ImageView
+            android:id="@+id/right3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:src="@mipmap/selected" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shengri"
+        android:id="@+id/xuexiao">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="学校"
+
+            />
+
+        <TextView
+            android:id="@+id/friendsetTip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/right4"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#999999"
+            />
+
+
+        <ImageView
+            android:id="@+id/right4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:src="@mipmap/selected" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xuexiao"
+        android:id="@+id/xueyuan">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="学院"
+
+            />
+
+        <TextView
+            android:id="@+id/friendsetTip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/right5"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#999999"
+            />
+
+
+        <ImageView
+            android:id="@+id/right5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:src="@mipmap/selected" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xueyuan"
+        android:id="@+id/zhuanye">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="专业"
+
+            />
+
+        <TextView
+            android:id="@+id/friendsetTip6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/right6"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#999999"
+            />
+
+
+        <ImageView
+            android:id="@+id/right6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:src="@mipmap/selected" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/zhuanye"
+        android:id="@+id/nianji">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="年级"
+
+            />
+
+        <TextView
+            android:id="@+id/friendsetTip7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/right7"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#999999"
+            />
+
+
+        <ImageView
+            android:id="@+id/right7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:src="@mipmap/selected" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nianji"
+        android:id="@+id/qingan">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="情感状态"
+
+            />
+
+        <TextView
+            android:id="@+id/friendsetTip9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/right9"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#999999"
+            />
+
+
+        <ImageView
+            android:id="@+id/right9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:src="@mipmap/selected" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qingan"
+        android:id="@+id/jiaxiang">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="家乡"
+
+            />
+
+        <TextView
+            android:id="@+id/friendsetTip10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="11dp"
+            android:layout_toStartOf="@+id/right10"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="#999999"
+            />
+
+
+        <ImageView
+            android:id="@+id/right10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="11dp"
+            android:src="@mipmap/selected" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/jiaxiang"
+        android:id="@+id/dongtai">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="8dp"
+            android:paddingTop="14dp"
+
+            android:text="ta的动态"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/dongtai">
+        <Button
+            android:id="@+id/deletefriend"
+
+            android:background="@drawable/base_bg_21"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="50dp"
+            android:text="删除好友" />
+
+        <Button
+            android:id="@+id/sendmessage"
+
+            android:background="@drawable/base_bg_20"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="50dp"
+            android:text="发送消息" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+

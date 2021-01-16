@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.heshequ">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于访问网络，网络定位需要上网 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 闪光权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 自杀权限 -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" /> <!-- 地理位置权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="com.example.heshequ.SophixStubApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/launcher_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.example.heshequ.activity.knowledge.CreateArticleActivity"></activity>
+        <activity android:name="com.example.heshequ.activity.knowledge.MyColoumnDetailActivity" />
+        <activity android:name="com.example.heshequ.activity.knowledge.MyArticleDetialActivity" />
+        <activity android:name="com.example.heshequ.activity.knowledge.MyKnowledgeActivity" />
+        <activity android:name="com.example.heshequ.activity.knowledge.SubscriptionDetailActivity" />
+        <activity android:name="com.example.heshequ.activity.knowledge.ArticleDetialActivity" />
+        <!--        <activity android:name="com.example.meet.activity.knowledge.KnowledgeActivity" /> &lt;!&ndash; hotfix &ndash;&gt;-->
+        <activity android:name="com.example.heshequ.classification.ClassifationActivity" />
+        <activity android:name="com.example.heshequ.activity.oldsecond.SecondActivity" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="25276821" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="6eaffbe12556f4ee01eb51a1e4415812" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCsHffLo0xQwcEGLDJRsoNj+3efTyYxJ6NlKrG0iHpoJxCXGGWaTfjw7lEFiCVqTtmdkAyYGCzhnhKsPm5Cb/q7J3NTgqyVM+6xoUG1wOsi/GbgHzhfQtDiS7rZwLffYU4fOkzF7EAM0MGifbAePGFIENltBklvp8DE2LPFlZRalpWbvVazp3PDlCmqcSsuLPY/JgwSvYewLSnCVaDiqIy+CQkbejYMU+VizIjmXzcuwHuATtj1a2pnIwmLMy5MsNgdLTeAmYn2xDvYmBX0jGLmAvJwIVPfrJgzQY5LicVgiqidhfhk7eNiCbvtBMR4rpYtGUn6WU78sTjJTYPdEdWFAgMBAAECggEBAJE2s4M24kNcRTus/ENbZmlrl5BsWd+s/rlzHP0hDI1lMCUaq1ZVpMu5ddhB9rdLkWTTTRzhgLRWBpEWFzasfZF7hlyV6n/zkdaCJAtxmbEp3K4JCSmuGMhkdmATrc6krSHBsVZnrd5iHoy2mGnaLYV82cSXQkwW75fk8T+ppMIL1jNnkNnVfxJECpysgQ98o07iIam0erWovOSR3nwC5AJAWdPMiytSJbT4ejIlnIj9u3DCknJE5ZyL65sJdLhiQC1x+9owoGSEGod0QtKYqr1BAxtsQqsQtErgcn5rh2neRcv0kr458C4uzJoRvAmqO4MfHIU2v8UXwOtEryePv+ECgYEA8/6tNhzQEvpWPcbcKOByf0prVQaSM5UZBnbsWSPLsRWtrlOlGj2Rd5zbKLCNaX4TRtVwNCqrGijnQ4MnYRP8ySuJxzmb6IKEz/7eW9tIXzo4JpZi8e9fdojuAfN5pQg0LpAaR9QeqsZCXVdTWon01pw614QHhV4/ZbNVjAZBcH0CgYEAtJXt7zgNWolv3VHwemhLyJ/pm8rMn1YIkxKGZuaMX0G4UU/R0SIH83JTjTpyGJbtt2waM5jGUtaiACjncb674VmpbtKd0TXtX/2j9Lo/vnklpZLFQe0Zrr++0iKrzV8CyxClXsLfs51YAgi2Kw6QY4WwhAbFQJM/RVUouTNIT6kCgYEAjOandDZTWoJCR06NWPW0aRm6vdEboLobR4Zpmlh3in3wXFllYK/pT1+/l9HM9/yceS1MrHNvd53jXzNgDEmUkz+XQvtbs3ub4tlV40nQk111i6MQ5JHNWRBeEbZeqxT/vVvuMUinpQr0zB5fvksonr59pHNUPIpepgZYApKiO6kCgYEApjRvvwJZ2AAygwJNUHv5c/cqLQcj+WpXjfU42jBK9cko+T17oP2vT7Ljj1JBfLw8odrO6rornkaI55i+G4Quq6O4O5WBRvJZPUXWxwE8dfROX+uLvbeZMaqs1/6tHOHbUkZJzcOR3GBuhcC62ToYTmDXK0yH830SeJ9+UaYPYbECgYBZlZxtccH+aoNboTmH/e6yFW52Y5DykbAYidFHSevg26uUQsfXUMf2bESjRDrcdjD0PLjAeOnZA2hNjARKiwIrI+UUvLaoVdWDB2mgYoR9qmXK6Euhfs75W+U5oX+wZFA9Qf9Te+vP6fHqkRKmULHqs8+IZJs2AhL+16UcR3Niaw==" /> <!-- hotfix -->
+        <!-- UMENG -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5b625c79b27b0a37e50003f9" />
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="5c39f8d167966af902ba0377bac30758" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Channel_ID" /> <!-- UMENG -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.heshequ.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- 元数据 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider> <!-- <_____________________________微信sdk_________________________________________________ -->
+        <activity
+            android:name="com.example.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name" /> <!-- <_____________________________________________________________________________________ -->
+        <!-- <_____________________________腾讯sdk_________________________________________________ -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1107493816" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- ____________________________________________________________________________________> -->
+        <activity
+            android:name="com.example.heshequ.activity.MainActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.heshequ.activity.WebActivity" />
+        <activity android:name="com.example.heshequ.activity.team.ImagePreviewActivity" />
+        <activity android:name="com.example.heshequ.activity.team.EditorNoticeActivity" />
+        <activity android:name="com.example.heshequ.activity.team.QRcodeActivity" />
+        <activity android:name="com.example.heshequ.activity.TeamMembersActivity" />
+        <activity android:name="com.example.heshequ.activity.team.PersonalInformationActivity" />
+        <activity android:name="com.example.heshequ.activity.team.OtherSayActivity" />
+        <activity android:name="com.example.heshequ.activity.login.LabelSelectionActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name="com.example.heshequ.activity.oldsecond.GoodsecondActivity" />
+        <activity android:name="com.example.heshequ.activity.newsencond.secondhandpost" />
+        <activity android:name="com.example.heshequ.activity.oldsecond.secondhanduserinfo" />
+        <activity android:name="com.example.heshequ.activity.flowview.TeamActivity" />
+        <activity android:name="com.example.heshequ.activity.flowview.WenwenActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MyPullTheBlackActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.AttentionActivity" />
+        <activity android:name="com.example.heshequ.activity.team.MessageActivity" />
+        <activity android:name="com.example.heshequ.activity.team.ChatHistoryActivity" />
+        <activity android:name="com.example.heshequ.activity.login.LoginActivity" />
+        <activity android:name="com.example.heshequ.activity.login.StudentIdLoginActivity" />
+        <activity android:name="com.example.heshequ.activity.login.ForgetPwdActivity" />
+        <activity android:name="com.example.heshequ.activity.login.SignActivity" />
+        <activity android:name="com.example.heshequ.activity.login.DefaultProblemActivity" />
+        <activity android:name="com.example.heshequ.activity.team.TeamIntroduceActivity" />
+        <activity android:name="com.example.heshequ.activity.team.PartyBuildingActivity" />
+        <activity android:name="com.example.heshequ.activity.team.SayDetailActivity" />
+        <activity android:name="com.example.heshequ.activity.team.AddTjActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.ChangePhoneNumActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.BaseInfoActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.SettingActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.AuthenticationActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MyQuestionActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MySayActivity" />
+        <activity android:name="com.example.heshequ.activity.wenwen.WenwenDetailActivity" />
+        <activity android:name="com.example.heshequ.activity.wenwen.WwSecondActivity" />
+        <activity android:name="com.example.heshequ.activity.wenwen.ZcArticleActivity" />
+        <activity android:name="com.example.heshequ.activity.wenwen.ZcQusetionActivity" />
+        <activity android:name="com.example.heshequ.activity.wenwen.SendQuestionActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MyCollectActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MyFootprintActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MyTeamActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MyMessageActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.FeedBackActivity" />
+        <activity android:name="com.example.heshequ.activity.team.AddTeamActivity" />
+        <activity android:name="com.example.heshequ.activity.statement.EditorialBulletinActivity" />
+        <activity android:name="com.example.heshequ.activity.statement.ReleaseActivitiesActivity" />
+        <activity android:name="com.example.heshequ.activity.statement.PublishVoteActivity" />
+        <activity android:name="com.example.heshequ.activity.statement.VoteDetailActivity" />
+        <activity android:name="com.example.heshequ.activity.team.StatementActivity" />
+        <activity
+            android:name="com.example.heshequ.activity.team.StatementDetailActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name="com.example.heshequ.activity.team.TjDetailActivity" />
+        <activity android:name="com.example.heshequ.activity.mine.MyQuestionActivity1" />
+        <activity android:name="com.example.heshequ.activity.team.SearchMembersActivity" />
+        <activity android:name="com.example.heshequ.activity.HomeSearchActivity" />
+        <activity android:name="com.example.heshequ.activity.WwSearchActivity" />
+        <activity android:name="com.example.heshequ.activity.TeamSearchActivity" />
+        <activity android:name="com.example.heshequ.activity.statement.BullertinDetailActivity" />
+        <activity
+            android:name="com.example.heshequ.activity.team.ActivityDateilActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name="com.example.heshequ.activity.team.ApplyJoinTDActivity" />
+        <activity android:name="com.example.heshequ.activity.team.AppliedMemberActivity" />
+        <activity android:name="com.example.heshequ.activity.ScanActivity" />
+        <activity android:name="com.example.heshequ.activity.team.TeamDetailActivity2" />
+        <activity android:name="com.example.heshequ.secondma.android.CaptureActivity" />
+        <activity android:name="com.example.heshequ.activity.ReportActivity" />
+        <activity android:name="com.example.heshequ.activity.team.ChooseTeamLableActivity" />
+        <activity android:name="com.example.heshequ.activity.team.NewAddActivity" />
+        <activity android:name="com.example.heshequ.activity.oldsecond.GoodDetailActivity" />
+        <activity android:name="com.example.heshequ.activity.oldsecond.MygoodActivity" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendActivity" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendFiltrate" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendSearch" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendActivity2" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendActivity3" />
+        <activity android:name="com.example.heshequ.activity.friend.SendNew" />
+        <activity android:name="com.example.heshequ.activity.timetable.TimetableCheckin" />
+        <activity android:name="com.example.heshequ.activity.timetable.TimetableSelect" />
+        <activity android:name="com.example.heshequ.activity.timetable.TimetableShow" />
+        <activity android:name="com.example.heshequ.activity.timetable.TimetableSecondCheckin" />
+        <activity android:name="com.example.heshequ.activity.timetable.ZhouSelect" />
+        <activity android:name="com.example.heshequ.activity.timetable.Zhoushow" />
+        <activity android:name="com.example.heshequ.activity.timetable.ZhongnanShow" />
+        <activity android:name="com.example.heshequ.activity.timetable.TimetableAddCourse" />
+        <activity android:name="com.example.heshequ.activity.timetable.ShidaZhouShow" />
+        <activity android:name="com.example.heshequ.activity.timetable.ShidaTimetableShow" />
+        <activity android:name="com.example.heshequ.activity.timetable.ShidaZhouSelect" />
+        <activity android:name="com.example.heshequ.activity.friend.NewDetail" />
+        <activity android:name="com.example.heshequ.activity.friend.MyDynamic" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendShijuanShow" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendGexingSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendJiaxiangSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendNianjiSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendNichengset" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendAnswerQues" />
+        <activity android:name="com.example.heshequ.activity.friend.OthersDynamic" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendAddNews" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendQinganSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendShengriSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendShijuanSet" />
+        <activity android:name="com.example.heshequ.activity.friend.Friendxingbieset" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendXuexiaoSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendXueyuanSet" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendZhuanyeSet" />
+        <activity android:name="com.example.heshequ.activity.friend.MyFriendDetail" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendFiltrateShow" />
+        <activity android:name="com.example.heshequ.activity.friend.GPSActivity" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendDetail" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendNearDetail" />
+        <activity android:name="com.example.heshequ.activity.friend.FriendShowAnswers" />
+        <activity android:name="com.example.heshequ.activity.oldsecond.GoodsearchActivity" />
+        <activity android:name="com.example.heshequ.activity.newsencond.SecondHandActivity" />
+        <activity android:name="com.example.heshequ.activity.newsencond.SearchGoodActivity" />
+    </application>
+
+
+</manifest>

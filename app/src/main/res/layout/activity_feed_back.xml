@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.example.heshequ.activity.mine.FeedBackActivity">
+    <include layout="@layout/new_title_bar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:background="#f8f8fd"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_height="46dp"
+        android:id="@+id/llType">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvType" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/right"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/etContent"
+        android:layout_marginTop="10dp"
+        android:maxLength="512"
+        android:padding="15dp"
+        android:gravity="top"
+        android:background="#f8f8fd"
+        android:textSize="15sp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:hint="请输入反馈内容"
+
+        android:layout_height="200dp"
+        />
+</LinearLayout>

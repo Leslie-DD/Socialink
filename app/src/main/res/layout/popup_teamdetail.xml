@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhaoxing.view.sharpview.SharpLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="15dp"
+    android:orientation="vertical"
+    app:radius="5dp"
+    app:arrowDirection="top"
+    app:backgroundColor="@android:color/white"
+    app:relativePosition="80%"
+    app:sharpSize="5dp"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/ll_share"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/shares"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_collect"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivCollect"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/savess"
+            />
+
+        <TextView
+            android:id="@+id/tvCollect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收藏"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_invisible"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivInvisible"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/invisible"
+            />
+
+        <TextView
+            android:id="@+id/tvInVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置不可见"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_joins"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivJoin"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/joins"
+            />
+
+        <TextView
+            android:id="@+id/tvJoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入团队"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_editor"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/edit_1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑团队"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_label"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/lable"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编辑团队标签"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_jb"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/ivjb"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/report"
+            />
+
+        <TextView
+            android:id="@+id/tvjb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="举报团队"
+            android:layout_marginLeft="16dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_st"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/ivst"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/yiguanbi"
+            />
+
+        <TextView
+            android:id="@+id/tvst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码加团(关)"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_st_o"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/ivst_o"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/yikaiqi"
+            />
+
+        <TextView
+            android:id="@+id/tvst_o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码加团(开)"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_st_loading"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/yiguanbi"
+            />
+
+        <TextView
+            android:id="@+id/secretCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="检测中"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_st_join"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/yikaiqi"
+            />
+
+        <TextView
+            android:id="@+id/secretJoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码加团"
+            android:layout_marginLeft="16dp" />
+    </LinearLayout>
+
+</com.zhaoxing.view.sharpview.SharpLinearLayout>

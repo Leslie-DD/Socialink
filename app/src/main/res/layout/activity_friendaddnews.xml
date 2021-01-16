@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/base_color_white"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+    <LinearLayout
+
+        android:orientation="vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/new_title_bar2"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:id="@+id/vp"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+    <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
+    <!--android:layout_below="@+id/ll"-->
+    <!--android:id="@+id/rv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+    <!--</com.jcodecraeer.xrecyclerview.XRecyclerView>-->
+
+</RelativeLayout>
+
+

@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/base_color_white"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/new_title_bar2"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDistance"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="距离："
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="right"
+            android:hint="不限距离"
+            android:paddingRight="15dp"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/selected" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#F1EBEB" />
+    <LinearLayout
+        android:id="@+id/llAge"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="年龄："
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvAge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="right"
+            android:hint="不限年龄"
+            android:paddingRight="15dp"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/selected" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#F1EBEB" />
+    <LinearLayout
+        android:id="@+id/llSex"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="性别："
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvSex"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="right"
+            android:hint="不限性别"
+            android:paddingRight="15dp"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/selected" />
+
+    </LinearLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#F1EBEB" />
+    <LinearLayout
+        android:id="@+id/llSchool"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="30dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="学校："
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvSchool"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:gravity="right"
+            android:hint="不限学校"
+            android:paddingRight="15dp"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/selected" />
+
+    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/head"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/juli">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1.0"-->
+<!--            android:background="#fff"-->
+<!--            android:drawablePadding="10dp"-->
+
+<!--            android:gravity="center_vertical"-->
+<!--            android:paddingLeft="0dp"-->
+<!--            android:paddingRight="0dp"-->
+<!--            android:paddingTop="0dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="请选择您希望看到的用户与您的距离"-->
+<!--            />-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/julixuanze"-->
+<!--        android:layout_below="@id/juli"-->
+<!--        android:orientation="vertical">-->
+<!--        <RadioGroup-->
+<!--            android:id="@+id/rg_1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:orientation="horizontal">-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rb_1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="不限"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rb_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="0-1km"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rb_3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="1-2km"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rb_4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="2-3km"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rb_5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="3km以上"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--        </RadioGroup>-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/julixuanze"-->
+<!--        android:id="@+id/nianling">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1.0"-->
+<!--            android:background="#fff"-->
+<!--            android:drawablePadding="10dp"-->
+
+<!--            android:gravity="center_vertical"-->
+<!--            android:paddingLeft="0dp"-->
+<!--            android:paddingRight="0dp"-->
+<!--            android:paddingTop="0dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="年龄"-->
+
+<!--            />-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/nianlingxuanze"-->
+<!--        android:layout_below="@id/nianling"-->
+<!--        android:orientation="vertical">-->
+<!--        <RadioGroup-->
+<!--            android:id="@+id/rn_1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:orientation="horizontal">-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rc_1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="不限"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rc_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="10-20岁"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rc_3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="21-25岁"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rc_4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="26-30岁"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--        </RadioGroup>-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/nianlingxuanze"-->
+<!--        android:id="@+id/xingbie">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1.0"-->
+<!--            android:background="#fff"-->
+<!--            android:drawablePadding="10dp"-->
+
+<!--            android:gravity="center_vertical"-->
+<!--            android:paddingLeft="0dp"-->
+<!--            android:paddingRight="0dp"-->
+<!--            android:paddingTop="0dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="性别"-->
+
+<!--            />-->
+
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/xingbiexuanze"-->
+<!--        android:layout_below="@id/xingbie"-->
+<!--        android:orientation="vertical">-->
+<!--        <RadioGroup-->
+<!--            android:id="@+id/rx_1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:orientation="horizontal">-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rd_1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="不限"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rd_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="男"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rd_3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="女"-->
+<!--                android:textSize="15sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+
+<!--        </RadioGroup>-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/xingbiexuanze"-->
+<!--        android:id="@+id/xuexiao">-->
+
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1.0"-->
+<!--            android:background="#fff"-->
+<!--            android:drawablePadding="10dp"-->
+
+<!--            android:gravity="center_vertical"-->
+<!--            android:paddingLeft="0dp"-->
+<!--            android:paddingRight="0dp"-->
+<!--            android:paddingTop="0dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:text="学校"-->
+
+<!--            />-->
+
+
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/xuexiaoxuanze"-->
+<!--        android:layout_below="@id/xuexiao"-->
+<!--        android:orientation="vertical">-->
+<!--        <RadioGroup-->
+<!--            android:id="@+id/rxx_1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:orientation="vertical">-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="不限"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="湖南大学"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="中南大学"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="湖南师范大学"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="湘潭大学"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_6"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="长沙理工大学"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_7"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="湖南农业大学"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/re_8"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="湖南科技大学"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textColor="@color/blue"-->
+<!--                />-->
+<!--        </RadioGroup>-->
+<!--    </LinearLayout>-->
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="10dip"
+        android:background="#E3EDFF" />
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/xuexiaoxuanze"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/buttonappearence"
+        android:text="确认"
+        android:textColor="@color/most_white" />
+</LinearLayout>
+
+

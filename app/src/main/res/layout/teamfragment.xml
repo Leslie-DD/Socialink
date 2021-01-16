@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <RelativeLayout
+            android:id="@+id/rlNew"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="最新"
+                android:textColor="#F9BF36"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/ivNew"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@id/tvNew"
+                android:background="@drawable/oval_bg" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="#e5e5e5" />
+
+        <RelativeLayout
+            android:id="@+id/rlVote"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvVote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="投票"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/ivVote"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@id/tvVote"
+                android:background="@drawable/oval_bg" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="#e5e5e5" />
+
+        <RelativeLayout
+            android:id="@+id/rlActivity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="活动"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/ivActivity"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@id/tvActivity"
+                android:background="@drawable/oval_bg" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:background="#e5e5e5" />
+
+        <RelativeLayout
+            android:id="@+id/rlNotice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tvNotice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="公告"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/ivNotice"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@id/tvNotice"
+                android:background="@drawable/oval_bg" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.heshequ.view.MyXRecyclerView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"></com.example.heshequ.view.MyXRecyclerView>
+
+        <TextView
+            android:visibility="gone"
+            android:text="暂无数据"
+            android:layout_centerInParent="true"
+            android:textSize="17sp"
+            android:textColor="@color/text9"
+            android:id="@+id/tvTips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</LinearLayout>

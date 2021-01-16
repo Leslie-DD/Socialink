@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.example.heshequ.activity.login.DefaultProblemActivity">
+    <include layout="@layout/new_title_bar2"/>
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginLeft="15dp"
+        android:textColor="#333333"
+        android:text="预设问题,为了更改手机使用"
+        android:layout_height="wrap_content" />
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:background="#f8f8fd"
+         android:paddingLeft="15dp"
+         android:paddingRight="15dp"
+         android:layout_marginTop="14dp"
+         android:layout_height="46dp">
+         <TextView
+             android:layout_width="match_parent"
+             android:gravity="center_vertical"
+             android:textSize="15sp"
+             android:textColor="#333333"
+             android:text="请选择问题名称"
+             android:id="@+id/tvQuestion1"
+             android:layout_height="match_parent" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/seemore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+     </RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#f8f8fd"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:id="@+id/etAnswer1"
+        android:paddingRight="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:hint="请填写答案"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#f8f8fd"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_height="46dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            android:text="请选择问题名称"
+            android:id="@+id/tvQuestion2"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/seemore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#f8f8fd"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:id="@+id/etAnswer2"
+        android:paddingRight="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:hint="请填写答案"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#f8f8fd"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_height="46dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            android:text="请选择问题名称"
+            android:id="@+id/tvQuestion3"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/seemore"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#f8f8fd"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:id="@+id/etAnswer3"
+        android:paddingRight="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:hint="请填写答案"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+    <Button
+        style="@style/save_style"
+        android:text="提交"
+        android:id="@+id/btSub"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="跳过"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvSkip" />
+</LinearLayout>

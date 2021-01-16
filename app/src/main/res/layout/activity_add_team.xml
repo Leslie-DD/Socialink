@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:gravity="center_horizontal"
+    tools:context="com.example.heshequ.activity.team.AddTeamActivity">
+   <include layout="@layout/new_title_bar2"/>
+    <com.example.heshequ.view.CircleView
+        android:layout_width="60dp"
+        android:id="@+id/ivHead"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:src="@mipmap/head3"
+        android:layout_height="60dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="上传头像"
+        android:textColor="#333333"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:background="#f8f8fd"
+        android:layout_margin="14dp"
+        android:maxLength="20"
+        android:textSize="12sp"
+        android:paddingLeft="15dp"
+        android:hint="输入团队名称"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:layout_height="38dp"
+        android:id="@+id/etName" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:layout_marginTop="26dp"
+        android:text="添加标签让更多人搜到你"
+        android:layout_height="wrap_content" />
+    <com.example.heshequ.view.FlowLayout
+        app:width_space="10dp"
+        app:height_space="10dp"
+        android:id="@+id/flow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <Button
+        style="@style/save_style"
+        android:id="@+id/btSave"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="40dp"
+        android:text="确定"/>
+</LinearLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_color_white"
+    android:orientation="vertical">
+
+<!--    <include layout="@layout/new_title_bar2" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llSearch"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/gray_search"
+            android:gravity="center_vertical">
+            <!--            app:layout_constraintEnd_toEndOf="parent">-->
+
+            <TextView
+                android:id="@+id/searchgood"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:drawableLeft="@mipmap/innquire"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:hint="搜索相关"
+                android:textColor="@color/text66"
+                android:textColorHint="@color/text9"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivRight"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="center" />
+    </LinearLayout>
+
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll"
+        android:layout_marginTop="0dp"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+
+    <!--    </LinearLayout>-->
+
+</LinearLayout>

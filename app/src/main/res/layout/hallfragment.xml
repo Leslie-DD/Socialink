@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.heshequ.view.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:id="@+id/sv"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="match_parent">
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="#ffffff"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:orientation="vertical"-->
+                <!--android:id="@+id/llHead"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:background="@color/base_blue"-->
+                    <!--android:paddingLeft="15dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:paddingRight="15dp"-->
+                    <!--android:layout_height="90dp">-->
+                    <!--<com.book.douziit.meet.view.CircleView-->
+                        <!--android:layout_width="60dp"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:id="@+id/ivTeamHead"/>-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:textSize="15sp"-->
+                            <!--android:textColor="#ffffff"-->
+                            <!--android:id="@+id/tvTeamName"-->
+                            <!--android:layout_height="wrap_content" />-->
+                        <!--<TextView-->
+                            <!--android:layout_marginTop="10dp"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:textColor="#ffffff"-->
+                            <!--android:textSize="12sp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:id="@+id/tvMInfo" />-->
+                    <!--</LinearLayout>-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="25dp"-->
+                        <!--android:src="@mipmap/ewm"-->
+                        <!--android:id="@+id/ivEWM"-->
+                        <!--android:layout_height="25dp" />-->
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/ll_teamMembers"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:paddingLeft="15dp"-->
+                    <!--android:paddingRight="15dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:layout_height="65dp">-->
+                    <!--<com.book.douziit.meet.view.CircleView-->
+                        <!--android:layout_width="33dp"-->
+                        <!--android:id="@+id/ivGroupHead"-->
+                        <!--android:layout_height="33dp" />-->
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:id="@+id/tvName"-->
+                            <!--android:textSize="13sp"-->
+                            <!--android:textColor="#313131"-->
+                            <!--android:layout_height="wrap_content" />-->
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:id="@+id/tvRole"-->
+                            <!--android:text="团长"-->
+                            <!--android:layout_marginTop="2dp"-->
+                            <!--android:textSize="12sp"-->
+                            <!--android:textColor="#939399"-->
+                            <!--android:layout_height="wrap_content" />-->
+                    <!--</LinearLayout>-->
+                    <!--<View-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:id="@+id/view"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_height="wrap_content"/>-->
+                    <!--&lt;!&ndash;<com.book.douziit.meet.view.MyGv-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_weight="1.6"-->
+                        <!--android:numColumns="3"-->
+                        <!--android:horizontalSpacing="5dp"-->
+                        <!--android:id="@+id/gv"-->
+                        <!--android:layout_height="match_parent">-->
+                    <!--</com.book.douziit.meet.view.MyGv>&ndash;&gt;-->
+
+                    <!--<com.book.douziit.meet.view.CircleView-->
+                        <!--android:id="@+id/iv3"-->
+                        <!--android:layout_width="33dp"-->
+                        <!--android:layout_height="33dp" />-->
+
+                    <!--<com.book.douziit.meet.view.CircleView-->
+                        <!--android:id="@+id/iv2"-->
+                        <!--android:layout_width="33dp"-->
+                        <!--android:layout_height="33dp"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--/>-->
+
+                    <!--<com.book.douziit.meet.view.CircleView-->
+                        <!--android:id="@+id/iv1"-->
+                        <!--android:layout_width="33dp"-->
+                        <!--android:layout_height="33dp"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--/>-->
+
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="10dp"-->
+                        <!--android:src="@mipmap/seemore"-->
+                        <!--android:layout_marginLeft="10dp"-->
+                        <!--android:layout_height="19dp" />-->
+                <!--</LinearLayout>-->
+
+                <!--<View-->
+                    <!--style="@style/h_line"/>-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:paddingTop="16dp"-->
+                    <!--android:paddingBottom="16dp"-->
+                    <!--android:paddingLeft="25dp"-->
+                    <!--android:textColor="#FCC032"-->
+                    <!--android:textSize="12sp"-->
+                    <!--android:text="公告：欢迎大家来相遇社区，一起happy！！"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/tvContent" />-->
+                <!--<View-->
+                    <!--style="@style/h_line_8"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:paddingTop="15dp"-->
+                <!--android:id="@+id/llVis"-->
+                <!--android:paddingBottom="15dp"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:paddingRight="12dp"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<TextView-->
+                    <!--style="@style/tv_style"-->
+                    <!--android:id="@+id/tvHall"-->
+                    <!--android:text="大厅"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--style="@style/tv_style"-->
+                    <!--android:id="@+id/tvStatement"-->
+                    <!--android:text="团言"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--style="@style/tv_style"-->
+                    <!--android:id="@+id/tvTeam"-->
+                    <!--android:text="团队"-->
+                    <!--/>-->
+                <!--<TextView-->
+                    <!--style="@style/tv_style"-->
+                    <!--android:id="@+id/tvManager"-->
+                    <!--android:text="管理"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+        <RelativeLayout
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_width="match_parent"
+            android:background="#f5f5f5"
+            android:layout_height="180dp" >
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@mipmap/mrtp"
+                android:id="@+id/ivPic"
+                android:scaleType="centerCrop"
+                android:layout_height="match_parent" />
+            <TextView
+                style="@style/editor_style"
+                android:id="@+id/tvPicEditor"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:padding="15dp"
+                />
+        </RelativeLayout>
+
+
+        <View
+            android:layout_marginTop="10dp"
+            style="@style/h_line_8"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp">
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/view_4_17"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:text="团队介绍"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                style="@style/editor_style"
+                android:id="@+id/tvTeamEditor"
+                android:layout_alignParentRight="true"
+                android:padding="15dp"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:id="@+id/tvIntroduction"
+            android:lineSpacingExtra="2dp"
+            android:letterSpacing="0.05"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#333333"/>
+
+        <View
+            android:layout_marginTop="20dp"
+            style="@style/h_line_8"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp">
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/view_4_17"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:text="他们说"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                android:text="更多"
+                android:gravity="center_vertical"
+                android:id="@+id/tvOtherMore"
+                android:layout_marginRight="15dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <com.example.heshequ.view.MyLv
+            android:layout_width="match_parent"
+            android:id="@+id/lv"
+            android:dividerHeight="1px"
+            android:divider="#f5f5f5"
+            android:layout_height="wrap_content">
+        </com.example.heshequ.view.MyLv>
+        <View
+            android:layout_marginTop="20dp"
+            style="@style/h_line_8"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp">
+            <View
+                android:layout_marginLeft="15dp"
+                style="@style/view_4_17"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:text="团建"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                android:text="编辑"
+                android:visibility="gone"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/tvTjEditor"
+                android:layout_marginRight="15dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+
+                android:textColor="#999999"
+                android:textSize="12sp"
+                android:text="更多"
+                android:gravity="center_vertical|right"
+                android:id="@+id/tvTjMore"
+                android:layout_marginRight="15dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+        <com.example.heshequ.view.MyRecyclerview
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"
+            android:id="@+id/ivRecycview"
+            android:scrollbars="none"
+
+            android:layout_height="wrap_content">
+
+        </com.example.heshequ.view.MyRecyclerview>
+    </LinearLayout>
+    </com.example.heshequ.view.MyScrollView>

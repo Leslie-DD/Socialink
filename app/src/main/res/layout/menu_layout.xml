@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+
+    >
+
+    <LinearLayout
+        android:id="@+id/team"
+        android:background="@drawable/shap_left"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="3dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/team3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="团队"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/base_blue"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/wenwen"
+        android:background="@color/base_color_white"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="3dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/wenwen3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="问问"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/base_blue"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/schedulecard"
+        android:background="@color/base_color_white"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="3dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/schedulecard3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课程表"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/base_blue"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/secondhand"
+        android:background="@color/base_color_white"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="3dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/secondhand3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="二手"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/base_blue"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/makefriends"
+        android:background="@drawable/shap_right"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="3dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/makefriends3"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交友"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/base_blue"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/base_color_white"
+    android:paddingTop="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <com.example.heshequ.view.CircleView
+            android:id="@+id/ivHead"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="5dp"
+            android:src="@mipmap/head3" />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivHead"
+            android:layout_toLeftOf="@+id/tvTime"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivHead"
+                android:layout_margin="1dp"
+                android:layout_marginLeft="10dp"
+                android:lines="1"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text3"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tvCollegeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/ivHead"
+                android:layout_margin="1dp"
+                android:layout_marginLeft="10dp"
+                android:lines="1"
+                android:layout_centerVertical="true"
+                android:textColor="@color/text3"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <!--
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivHead"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="10dp"
+            android:lines="1"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text3"
+            android:textSize="15sp" />
+        -->
+        <TextView
+            android:id="@+id/tvfriendnewtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:drawableLeft="@mipmap/time" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="80sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="right"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tvfriendnewtime"
+            android:textColor="@color/text93"
+            android:textSize="13.5sp" />
+
+        <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_weight="1"></View>-->
+
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:lineSpacingMultiplier="1.35"
+            android:textSize="14sp"
+            android:textColor="@color/text6e"
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.example.heshequ.view.MyGv
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:horizontalSpacing="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="3dp"
+        android:verticalSpacing="10dp"
+        android:background="#ffffff"
+        android:id="@+id/gv">
+    </com.example.heshequ.view.MyGv>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:lines="1"
+            android:ellipsize="end"
+            android:layout_marginRight="15dp"
+            android:id="@+id/tvBelong"
+            android:textSize="13sp"
+            android:textColor="@color/textab"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:paddingLeft="8dp"
+            android:paddingRight="10dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:id="@+id/llSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginRight="5dp"
+                android:scaleType="fitCenter"
+                android:id="@+id/ivImg"
+                android:src="@mipmap/sc"
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
+            <TextView
+                android:id="@+id/tvLoves"
+                android:textSize="13sp"
+                android:textColor="@color/textab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <View
+        android:background="@color/f8"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"></View>
+
+</LinearLayout>

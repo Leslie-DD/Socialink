@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.example.heshequ.activity.mine.SettingActivity">
+   <include layout="@layout/new_title_bar2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:scaleType="center"
+            android:src="@mipmap/set1"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="我加入的团队"
+            android:layout_marginLeft="5dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:id="@+id/tvTeam"
+            android:textColor="#999999"
+            android:text="可见"
+
+            android:gravity="right"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="45dp"
+            android:id="@+id/ivTeam"
+            android:paddingLeft="10dp"
+            android:src="@mipmap/dakai"
+            android:layout_height="20dp" />
+    </LinearLayout>
+    <View
+       style="@style/h_line"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:scaleType="center"
+            android:src="@mipmap/set1"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="我加入的问题"
+            android:layout_marginLeft="5dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:textColor="#999999"
+            android:text="可见"
+            android:id="@+id/tvQuestion"
+            android:gravity="right"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="45dp"
+            android:id="@+id/ivQuestion"
+            android:paddingLeft="10dp"
+            android:src="@mipmap/dakai"
+            android:layout_height="20dp" />
+    </LinearLayout>
+    <View
+        style="@style/h_line_8"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:id="@+id/llChangePhone"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:scaleType="center"
+            android:src="@mipmap/set3"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="更换手机号"
+            android:layout_marginLeft="5dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/right"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        style="@style/h_line"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:id="@+id/llSetQuestion"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:scaleType="center"
+            android:src="@mipmap/set4"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="预设问题"
+            android:layout_marginLeft="5dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/right"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        style="@style/h_line"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:id="@+id/llLable"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:scaleType="center"
+            android:src="@mipmap/set5"
+            android:layout_height="20dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="标签设置"
+            android:layout_marginLeft="5dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/right"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        style="@style/h_line"/>
+</LinearLayout>

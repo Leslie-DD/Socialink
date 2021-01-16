@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/base_color_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="7dp"
+        android:id="@+id/llSearch"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/llBack"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/ivBack"
+                android:src="@mipmap/goback"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etContent"
+            android:layout_marginRight="15dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:background="@drawable/gray_search"
+            android:layout_marginLeft="4dp"
+            android:drawablePadding="5dp"
+            android:hint="搜索相关"
+            android:drawableLeft="@mipmap/innquire"
+            android:layout_gravity="center_vertical"
+            android:textColorHint="@color/text9"
+            android:textColor="@color/text66"
+            android:textSize="15sp"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llFl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="标签搜索"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="10dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e6e6e6"
+            />
+        <com.example.heshequ.view.FlowLayout
+            app:width_space="2dp"
+            app:height_space="2dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/flow_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llData"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/base_color_white"
+            android:fadingEdge="none"
+            android:stretchColumns="0,7"
+            app:tabIndicatorColor="@color/titlecolor"
+            app:tabIndicatorHeight="2dp"
+            app:tabSelectedTextColor="@color/titlecolor"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@color/text66" />
+        <com.example.heshequ.view.NoScrollViewPager
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.example.heshequ.view.NoScrollViewPager>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.example.heshequ.view.CircleView
+            android:id="@+id/ivHead"
+            android:src="@mipmap/head3"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+        <TextView
+            android:id="@+id/tvName"
+            android:lines="1"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/text3"
+            android:textSize="14.5sp"
+            android:text="张三"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tvTime"
+            android:lines="1"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/text9"
+            android:textSize="13sp"
+            android:text="今天  12:00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/tvDel"
+            android:visibility="gone"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="删除"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="57dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:lineSpacingMultiplier="1.35"
+            android:textSize="13sp"
+            android:textColor="@color/text66"
+            android:text="湖南大学有没有轮滑社湖南大学有没有轮滑社湖南大学有没有轮滑社湖南大学有没有轮滑社"
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

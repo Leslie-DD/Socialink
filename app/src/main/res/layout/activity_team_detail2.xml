@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/base_color_white"
+    android:layout_height="match_parent">
+    <include layout="@layout/title_bar" />
+   <com.example.heshequ.view.MyXRecyclerView
+       android:layout_marginTop="50dp"
+       android:id="@+id/rv"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+   </com.example.heshequ.view.MyXRecyclerView>
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:paddingTop="15dp"
+        android:background="#ffffff"
+        android:visibility="gone"
+        android:id="@+id/llInVis"
+        android:paddingBottom="15dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/tv_style"
+            android:id="@+id/tvHall2"
+            android:text="大厅"
+            />
+        <TextView
+            style="@style/tv_style"
+            android:id="@+id/tvStatement2"
+            android:text="团言"
+            />
+        <TextView
+            style="@style/tv_style"
+            android:id="@+id/tvTeam2"
+            android:text="团队"
+            />
+        <TextView
+            style="@style/tv_style"
+            android:id="@+id/tvManager2"
+            android:text="管理"
+            />
+    </LinearLayout>
+    <com.example.heshequ.view.DragImageView
+        android:layout_width="60dp"
+        android:id="@+id/ivAdd"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="28dp"
+        android:src="@mipmap/feedbacks"
+        android:layout_height="60dp" />
+
+    <ImageView
+        android:id="@+id/ivAddBj"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="#ccFFFFFF"
+        />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:id="@+id/ivAdd3"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/cjgg"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:id="@+id/ivAdd4"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/cjhd"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:id="@+id/ivAdd5"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:src="@mipmap/cjtp"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:id="@+id/ivAdd2"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="28dp"
+        android:src="@mipmap/chuangjian"
+        android:layout_height="50dp" />
+
+
+    <!--<com.rance.library.SectorMenuButton
+        android:id="@+id/center_sector_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:aebAnimDurationMillis="175"
+        app:aebBlurBackground="true"
+        app:aebBlurRadius="10"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="28dp"
+        app:aebButtonElevation="0dp"
+        app:aebButtonGapDp="30dp"
+        app:aebEndAngleDegree="180"
+        app:aebIsSelectionMode="false"
+        app:aebMainButtonRotateAnimDurationMillis="300"
+        app:aebMainButtonRotateDegree="0"
+        app:aebMainButtonSizeDp="50dp"
+        app:aebRippleEffect="true"
+        app:aebStartAngleDegree="90"
+        app:aebSubButtonSizeDp="40dp" />-->
+
+
+</RelativeLayout>

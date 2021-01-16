@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.heshequ.activity.team.MessageActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
+        <include layout="@layout/new_title_bar2"/>
+    </LinearLayout>
+
+    <ImageView
+
+        android:id="@+id/historyofchat"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+
+        android:src="@mipmap/historyofchat" />
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        >
+        <include layout="@layout/only_rv_item"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+
+        android:id="@+id/commentLinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+
+        android:paddingTop="5dp"
+        android:paddingBottom="8dp"
+        >
+
+        <EditText
+            android:id="@+id/msgEditText2"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:layout_marginLeft="12dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/text3"
+            android:background="@drawable/edittext_bg"
+            android:textCursorDrawable="@null"
+            />
+
+        <ImageView
+            android:id="@+id/msgSend2"
+            android:layout_width="0dip"
+            android:layout_height="40dp"
+            android:paddingLeft="7.5dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:src="@mipmap/send" />
+
+        <ImageView
+            android:id="@+id/sendother"
+            android:layout_width="0dip"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="7.5dp"
+            android:layout_weight="1"
+            android:src="@mipmap/other" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

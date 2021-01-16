@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    tools:context="com.example.heshequ.activity.login.StudentIdLoginActivity">
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/head0"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/backgroundofphoto"
+        android:gravity="center"
+        fresco:actualImageScaleType="centerInside"
+        fresco:failureImage="@mipmap/failphoto"
+        fresco:failureImageScaleType="centerInside"
+        fresco:placeholderImage="@mipmap/logo"
+        fresco:progressBarAutoRotateInterval="5000"
+        fresco:progressBarImage="@mipmap/loadingphoto"
+        />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/head"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/backgroundofphoto"
+        android:gravity="center"
+        fresco:actualImageScaleType="fitCenter"
+        fresco:failureImage="@mipmap/failphoto"
+        fresco:failureImageScaleType="centerInside"
+        fresco:placeholderImage="@mipmap/logo"
+        fresco:progressBarAutoRotateInterval="5000"
+        fresco:progressBarImage="@mipmap/loadingphoto"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llSchool"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="#f8f8fd"
+            android:gravity="center_vertical"
+            android:paddingLeft="30dp">
+
+            <TextView
+                android:id="@+id/etSchool"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:hint="选择学校"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/selected"
+                android:layout_marginRight="10dp"
+                />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etUser"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/bg_f8f8fd_23"
+            android:gravity="center_vertical"
+            android:hint="请输入您的账号"
+            android:paddingLeft="30dp"
+            android:text="201726010508"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/etPwd"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/bg_f8f8fd_23"
+            android:gravity="center_vertical"
+            android:hint="请输入您的密码"
+            android:inputType="textPassword"
+            android:paddingLeft="30dp"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/etVerificationcode"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_f8f8fd_23"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:hint="请输入验证码"
+            android:paddingLeft="30dp"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:textSize="15sp" />
+
+
+        <Button
+            android:id="@+id/btLogin"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_00bbff_23"
+            android:text="登录"
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/studentidlogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="25dp"
+                android:paddingTop="20dp"
+                android:text="账号登陆" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

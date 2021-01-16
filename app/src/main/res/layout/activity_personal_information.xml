@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="com.example.heshequ.activity.team.PersonalInformationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="center"
+            android:src="@mipmap/goback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="个人信息"
+            android:textColor="#333333"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/ivMore"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="center"
+            android:layout_alignParentEnd="true"
+            android:src="@mipmap/more3"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00BBFF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="15dp">
+
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+            <com.example.heshequ.view.CircleView
+                android:id="@+id/ivHead"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/head3" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/zz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="小强"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/ivSex"
+                    android:src="@mipmap/me19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:id="@+id/tvSchool"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/base_color_white"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="湖南大学"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关注"
+                    android:background="@color/grgray"
+                    android:textColor="@color/f8"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/attentions"
+                    android:visibility="gone"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="拉黑"
+                    android:background="@color/grgray"
+                    android:textColor="@color/f8"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/pulltheblack"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/zl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/ll"
+                >
+
+
+
+                <TextView
+                    android:id="@+id/tvUserNikeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/base_color_white"
+                    android:textSize="12sp"
+                    />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    >
+                    <TextView
+                        android:layout_width="130dp"
+                        android:id="@+id/all"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bar_all_tm"
+                        android:layout_height="10dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:id="@+id/current"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bar_current"
+                        android:layout_height="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tvLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/all"
+                        android:text="LV6"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvSet"
+                android:layout_width="100dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="170dp"
+                android:background="@drawable/bar_all_14"
+                android:gravity="center"
+                android:text="设为管理员"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
+
+            <LinearLayout
+                android:layout_below="@id/zl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/base_color_white"
+                >
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/base_color_white"
+                    android:text="年龄"/>
+                <TextView
+                    android:id="@+id/xz"
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/base_color_white"
+                    android:text="星座"/>
+                <TextView
+                    android:id="@+id/rd"
+                    android:layout_marginLeft="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/base_color_white"
+                    android:text="热度"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#00BBFF"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/gr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="个人说明"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textColor="@color/base_color_white"
+            android:background="@drawable/activity_flag"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="8"
+            android:gravity="start"
+            android:padding="10dp"
+            android:background="@drawable/input_person"
+            android:maxLines="2"
+            android:textSize="12sp"
+            android:text="这个人很懒，什么也没有留下。"
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/messages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/message"
+                android:visibility="gone"
+                />
+
+            <ImageView
+                android:id="@+id/guanzhu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@mipmap/guanzhu"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        >
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/tvTeam"
+            style="@style/tv_style1"
+            android:text="Ta的团队" />
+
+        <TextView
+            android:id="@+id/tvQu"
+            style="@style/tv_style1"
+            android:text="Ta的问题" />
+
+        <TextView
+            android:id="@+id/tvDyn"
+            style="@style/tv_style1"
+            android:text="Ta的动态" />
+
+        <TextView
+            android:id="@+id/tvPhoto"
+            style="@style/tv_style1"
+            android:text="Ta的相册" />
+        <TextView
+            android:id="@+id/tvgood"
+            style="@style/tv_style1"
+            android:text="Ta的商品" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTip"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:paddingBottom="250dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/bkj" />
+
+        <TextView
+            android:id="@+id/tvTipContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:text="Ta设置了不可见"
+            />
+    </LinearLayout>
+
+
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"/>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/rvQu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"/>
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/rvGood"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>

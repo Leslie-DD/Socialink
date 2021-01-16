@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_marginTop="20dp"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="50dp"
+                android:id="@+id/llHead">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="#999999"
+                    android:textSize="15sp"
+                    android:text="添加投票"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/collapse"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                style="@style/h_line"
+                android:layout_height="2px"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:id="@+id/etTheme"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:textColorHint="#cccccc"
+                android:hint="输入投票主题"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/vote_bg"/>
+            <com.example.heshequ.view.MyLv
+                android:layout_width="match_parent"
+                android:id="@+id/lv"
+                android:dividerHeight="1px"
+                android:divider="#ffffff"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/vote_bg"
+                android:layout_height="wrap_content"></com.example.heshequ.view.MyLv>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="最多支持15个选项,每个选项不超过40字"
+                android:layout_margin="15dp"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/vote_bg"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/llType"
+                android:gravity="center_vertical"
+                android:layout_marginRight="15dp"
+                android:layout_height="38dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="投票类型"
+                    android:textColor="#999999"
+                    android:layout_marginLeft="20dp"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="单选"
+                    android:gravity="right"
+                    android:textColor="#999999"
+                    android:id="@+id/tvType"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@mipmap/selected"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <Button
+                style="@style/save_style"
+                android:layout_width="82dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_00bbff_17"
+                android:text="加入"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="18dp"
+                android:id="@+id/btJoin"
+                android:layout_gravity="right"
+                android:layout_marginRight="20dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

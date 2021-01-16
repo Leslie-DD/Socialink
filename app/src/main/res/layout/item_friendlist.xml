@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/base_color_white"
+    android:paddingTop="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.example.heshequ.view.CircleView
+            android:id="@+id/ivHead"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="5dp"
+            android:src="@mipmap/head3" />
+        <com.example.heshequ.view.CircleView
+            android:id="@+id/FriendSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toRightOf="@+id/ivHead"
+            android:layout_marginRight="5dp"
+
+            android:drawableLeft="@mipmap/me19"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/FriendSex"
+            android:gravity="center_vertical|left"
+            android:lines="1"
+
+            android:textColor="@color/text93"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/tvCollege"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvName"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical|right"
+
+            android:textColor="@color/text93"
+            android:textSize="15sp" />
+
+        <!--<View-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_weight="1"></View>-->
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:lineSpacingMultiplier="1.35"
+                android:textSize="14sp"
+                android:textColor="@color/text93"
+                android:id="@+id/tvAge"
+                android:gravity="center_vertical|left"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               />
+            <TextView
+                android:lineSpacingMultiplier="1.35"
+                android:textSize="14sp"
+                android:textColor="@color/text93"
+                android:id="@+id/age1"
+                android:gravity="center_vertical|left"
+                android:text="岁"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="67">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:lineSpacingMultiplier="1.35"
+                android:textSize="14sp"
+                android:textColor="@color/text93"
+                android:id="@+id/tvDistance"
+                android:gravity="center_vertical|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:lineSpacingMultiplier="1.35"
+                android:textSize="14sp"
+                android:textColor="@color/text93"
+                android:id="@+id/distance1"
+                android:gravity="center_vertical|right"
+                android:text="km"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:gravity="center_vertical">
+
+
+        <TextView
+            android:id="@+id/tvSay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/text93"
+            android:textSize="13sp" />
+
+        <LinearLayout
+            android:id="@+id/llSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="10dp"
+            android:paddingTop="6dp">
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:background="@color/f8"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"></View>
+</LinearLayout>

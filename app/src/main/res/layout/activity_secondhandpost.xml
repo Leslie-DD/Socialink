@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.example.heshequ.activity.mine.AuthenticationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/new_title_bar"></include>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/gooddescribe"
+                    android:layout_width="match_parent"
+                    android:layout_height="128dp"
+                    android:background="#f8f8fd"
+                    android:hint="请输入商品描述"
+                    android:paddingLeft="15dp"
+                    android:textColor="#333333"
+                    android:textColorHint="#999999"
+                    android:textSize="15sp" />
+                <com.example.heshequ.view.MyGv
+                    android:id="@+id/gw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:horizontalSpacing="12dp"
+                    android:numColumns="3"
+                    android:verticalSpacing="6dp"></com.example.heshequ.view.MyGv>
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/llSelect"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="7dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/ivNm"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="7dp"
+                        android:paddingRight="7dp"
+                        android:src="@mipmap/selected2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textSize="14sp"
+                        android:textColor="@color/text3"
+                        android:text="匿名发布"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="5dip"
+                    android:background="#E3EDFF" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:text="商品价格"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/goodprice"
+                        android:layout_width="132dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:background="#f8f8fd"
+                        android:gravity="left|center_vertical"
+                        android:hint="￥价格"
+                        android:paddingLeft="15dp"
+                        android:textColor="#333333"
+                        android:textColorHint="#999999"
+                        android:textSize="15sp" />
+                </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:paddingLeft="15dp"-->
+<!--                    android:layout_height="30dp">-->
+<!--                    <TextView-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="选择标签"-->
+<!--                        android:textColor="#929292"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:id="@+id/tvBelong" />-->
+<!--                </LinearLayout>-->
+<!--                <com.example.meet.view.FlowLayout-->
+<!--                    app:width_space="10dp"-->
+<!--                    app:height_space="10dp"-->
+<!--                    android:id="@+id/flow_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="15dp"/>-->
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="5dip"
+                    android:background="#E3EDFF" />
+                <LinearLayout
+                    android:id="@+id/llClassify"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30dp">
+
+                    <TextView
+                        android:id="@+id/tv_category1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:text="一级分类"
+                        android:textColor="#333333"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tv_category2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:gravity="left"
+                        android:hint="二级分类"
+                        android:paddingRight="15dp"
+                        android:textColor="#333333"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/selected" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="10dip"
+                    android:background="#E3EDFF" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

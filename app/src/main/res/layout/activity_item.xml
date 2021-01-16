@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:background="#ffffff"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="18dp"
+            android:text="活动"
+            android:textSize="10dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/activity_flag"
+            android:drawableLeft="@mipmap/huodong"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:id="@+id/tvActivityName"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:text="删除"
+            android:id="@+id/tvDel"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@mipmap/delete"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="发起人: "
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="李思思"
+            android:layout_marginLeft="3dp"
+            android:id="@+id/tvName"
+            android:textColor="@color/base_blue"
+            android:textSize="12sp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.example.heshequ.view.MyGv
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:background="#ffffff"
+        android:id="@+id/gv">
+        </com.example.heshequ.view.MyGv>
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:gravity="center_vertical"
+         android:layout_marginTop="10dp"
+         android:layout_height="wrap_content">
+         <TextView
+             android:layout_width="0dp"
+             android:layout_weight="1"
+             android:id="@+id/tvTime"
+             android:textSize="12sp"
+             android:textColor="#353537"
+             android:layout_height="wrap_content" />
+         <Button
+             android:layout_width="76dp"
+             android:textColor="#ffffff"
+             android:textSize="13sp"
+             android:id="@+id/btStatus"
+             android:text="我要报名"
+             android:background="@drawable/bg_00bbff_13"
+             android:layout_height="26dp" />
+     </LinearLayout>
+</LinearLayout>

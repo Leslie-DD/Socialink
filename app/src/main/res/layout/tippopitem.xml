@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhaoxing.view.sharpview.SharpLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    app:radius="5dp"
+    app:arrowDirection="top"
+    app:backgroundColor="@android:color/white"
+    app:relativePosition="80%"
+    app:sharpSize="5dp">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="7dp"
+        android:id="@+id/llShare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/savess" />
+
+        <TextView
+            android:id="@+id/tvStatu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:paddingRight="10dp"
+            android:text="收藏"
+            android:textColor="@color/text66"
+            android:textSize="14.5sp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textf2" />
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:id="@+id/llJuBao"
+        android:paddingTop="8dp"
+        android:paddingBottom="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/report" />
+
+        <TextView
+            android:id="@+id/jubao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:paddingRight="10dp"
+            android:text="举报"
+            android:textColor="@color/text66"
+            android:textSize="14.5sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/textf2" />
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:id="@+id/llDel"
+        android:visibility="gone"
+        android:paddingTop="8dp"
+        android:paddingBottom="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/delete_1" />
+
+        <TextView
+            android:id="@+id/tvdel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:paddingRight="10dp"
+            android:text="删除"
+            android:textColor="@color/text66"
+            android:textSize="14.5sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:id="@+id/llSharp"
+        android:paddingTop="8dp"
+        android:visibility="gone"
+        android:paddingBottom="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="5dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/shares" />
+
+        <TextView
+            android:id="@+id/tvSharp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:paddingRight="10dp"
+            android:text="分享"
+            android:textColor="@color/text66"
+            android:textSize="14.5sp" />
+    </LinearLayout>
+</com.zhaoxing.view.sharpview.SharpLinearLayout>

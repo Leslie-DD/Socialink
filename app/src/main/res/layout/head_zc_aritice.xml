@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@mipmap/mrtp"
+        android:id="@+id/ivImg"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/text3"
+            android:layout_marginRight="15dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textSize="15sp"
+            android:text="HR告诉你怎么准备找工作的流程?"
+            android:id="@+id/tvTitles"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:paddingRight="15dp"
+            android:paddingLeft="10dp"
+            android:id="@+id/llZan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ivZan"
+                android:layout_marginRight="5dp"
+                android:src="@mipmap/zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="13sp"
+                android:textColor="@color/textab"
+                android:text="0"
+                android:id="@+id/tvZan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="13sp"
+            android:text="李思思"
+            android:id="@+id/tvName"
+            android:textColor="@color/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="7dp"
+            android:textSize="13sp"
+            android:text="长沙移动资深HR"
+            android:id="@+id/tvJob"
+            android:textColor="@color/text9"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="13sp"
+            android:text="今天发布"
+            android:id="@+id/tvTime"
+            android:textColor="@color/text9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!--<TextView
+        android:lineSpacingMultiplier="1.4"
+        android:text="      如今，是信息高速发展的时代，要找一个最符合自己实力最接近择业目标的单位首先必须获取市场就业信息。就业信息是指有关求职就业方面的消息和情况，一般内容包括国家政治经济状况就业指导计划、社会各部门需求情况以及未来各产业职业的发展趋势等宏观情况。再具体些还包括某些行业部门对就业者素质的要求，某一职业的发展情况，地区的差异性，单位的具体情况如规模还有大学毕业生的供需状况等。"
+        android:layout_marginBottom="18dp"
+        android:id="@+id/tvContent"
+        android:textSize="13sp"
+        android:textColor="@color/text66"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />-->
+
+    <com.example.heshequ.view.NoScrollWebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <View
+        android:background="@color/f8"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"></View>
+    <TextView
+        android:drawableLeft="@mipmap/icons1"
+        android:drawablePadding="8dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="12dp"
+        android:text="评论"
+        android:textSize="14sp"
+        android:textColor="@color/text66"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:text="暂无评论"
+        android:layout_centerInParent="true"
+        android:textSize="17sp"
+        android:textColor="@color/text9"
+        android:id="@+id/tvTips"
+        android:paddingTop="60dp"
+        android:paddingBottom="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

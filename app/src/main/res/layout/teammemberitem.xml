@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_marginTop="5dp"
+       android:id="@+id/llHead"
+       android:layout_marginBottom="10dp"
+       android:gravity="center_vertical"
+       android:layout_height="wrap_content">
+       <TextView
+           android:layout_width="wrap_content"
+           android:id="@+id/tvTop"
+           android:textSize="12sp"
+           android:paddingLeft="10dp"
+           android:paddingRight="10dp"
+           android:text="团长、副团长(3人)"
+           android:layout_height="wrap_content" />
+       <View
+           android:layout_width="match_parent"
+           android:background="#F0F0F5"
+           android:layout_height="1px"/>
+   </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingRight="15dp"
+        android:id="@+id/llBg"
+        android:paddingLeft="15dp"
+       android:gravity="center_vertical"
+        android:layout_height="55dp">
+        <com.example.heshequ.view.CircleView
+            android:layout_width="34dp"
+            android:id="@+id/ivHead"
+            android:src="@mipmap/head3"
+            android:layout_height="34dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tvName"
+            android:layout_marginLeft="10dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="wrap_content" />
+         <TextView
+             android:layout_width="40dp"
+             android:id="@+id/tvLevel"
+             android:textSize="12sp"
+             android:textColor="#ffffff"
+             android:text="lv6"
+             android:background="@drawable/ffdb74_10"
+             android:layout_marginLeft="10dp"
+             android:gravity="center"
+             android:layout_height="20dp"
+             />
+
+        <TextView
+            android:layout_width="40dp"
+            android:id="@+id/tvType"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text="队长"
+            android:background="@drawable/bg_7bd8fa_10"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_height="20dp"
+            />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:id="@+id/etMark"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:hint="输入备注名"
+            android:visibility="invisible"
+            android:textSize="13sp"
+            android:textColor="#CCCCCC"
+            android:textColorHint="#999999"
+            android:layout_height="32dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:id="@+id/btSave"
+            android:layout_marginLeft="10dp"
+            android:text="保存"
+            android:visibility="gone"
+            android:textColor="#ffffff"
+            android:background="@drawable/bg_37c4f8_14"
+            android:textSize="12sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:text="编辑"
+            android:visibility="gone"
+            android:id="@+id/tvEditor"
+            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

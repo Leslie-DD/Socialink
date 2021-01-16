@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.example.heshequ.activity.mine.MyQuestionActivity">
+    <include layout="@layout/new_title_bar2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingTop="15dp"
+        android:background="#ffffff"
+        android:id="@+id/llInVis"
+        android:paddingBottom="15dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:layout_height="wrap_content">
+        <TextView
+            style="@style/tv_style"
+            android:id="@+id/tvTeam"
+            android:text="团队"
+            />
+        <TextView
+            style="@style/tv_style"
+            android:id="@+id/tvWw"
+            android:text="问问"
+            />
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:id="@+id/vp"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

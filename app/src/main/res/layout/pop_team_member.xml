@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhaoxing.view.sharpview.SharpLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="15dp"
+    android:orientation="vertical"
+    app:radius="5dp"
+    app:arrowDirection="top"
+    app:backgroundColor="@android:color/white"
+    app:relativePosition="80%"
+    app:sharpSize="5dp"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/llEditor"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/edit"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDel"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/delete_1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="踢出"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/llAttention"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:layout_margin="10dp"-->
+        <!--&gt;-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/guanzhu"-->
+            <!--android:layout_width="18dp"-->
+            <!--android:layout_height="18dp"-->
+            <!--android:src="@mipmap/guanzhu"-->
+            <!--/>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="关注"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/llBlack"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/lahei"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="拉黑"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llBlack1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/yilahei"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已拉黑"
+            android:layout_marginLeft="16dp"
+            />
+    </LinearLayout>
+</com.zhaoxing.view.sharpview.SharpLinearLayout>

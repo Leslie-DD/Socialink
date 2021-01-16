@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.heshequ.activity.team.ChatHistoryActivity"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:paddingLeft="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/goback"
+            android:id="@+id/historyback"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/historyback"
+            android:layout_toLeftOf="@+id/historysearch"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:background="#fafafa"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:id="@+id/historyedit"
+                android:textCursorDrawable="@null"
+                android:background="@drawable/edittext_bg"
+            />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/historysearch"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/historysearch"
+            android:layout_marginRight="5dp"
+            />
+    </RelativeLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="55dp"
+        android:layout_marginTop="45dp"
+        >
+        <include layout="@layout/only_rv_item"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        >
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_register_info_height_value"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="11.0dip"-->
+            <!--android:includeFontPadding="false"-->
+            <!--android:maxHeight="24.0sp"-->
+            <!--android:text="Today"-->
+            <!--android:textColor="#cc222222"-->
+            <!--android:textSize="24.0sp" />-->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <com.zkk.view.rulerview.RulerView
+                android:id="@+id/ruler_height"
+                android:layout_width="fill_parent"
+                android:layout_height="58.0dip"
+                android:layout_marginTop="24.0dip"
+                app:alphaEnable="true"
+                app:lineColor="@color/back1"
+                app:lineMaxHeight="40dp"
+                app:lineMidHeight="30dp"
+                app:lineMinHeight="20dp"
+                app:lineSpaceWidth="10dp"
+                app:lineWidth="2dip"
+                app:textColor="@color/bg_color"
+                app:minValue="80.0"
+                app:maxValue="250.0"
+                app:perValue="1"
+                app:selectorValue="165.0"
+                />
+
+            <ImageView
+                android:layout_width="14.0dip"
+                android:layout_height="46.0dip"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="11.0dip"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_info_ruler_height"
+                android:id="@+id/imageView4" />
+
+            <TextView
+                android:id="@+id/tv_register_info_height_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/imageView4"
+                android:text="Today"
+                android:textColor="@color/back1"/>
+        </RelativeLayout>
+
+
+
+
+
+    </LinearLayout>
+</RelativeLayout>

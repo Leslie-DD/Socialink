@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="com.example.heshequ.activity.team.EditorNoticeActivity">
+   <include layout="@layout/new_title_bar"/>
+    <EditText
+        android:layout_width="match_parent"
+         android:background="#F8F8FD"
+        android:padding="15dp"
+        android:hint="请输入公告标题"
+        android:id="@+id/etTitle"
+        android:textColorHint="#999999"
+        android:textColor="#999999"
+        android:textSize="15sp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:background="#F8F8FD"
+        android:id="@+id/etContent"
+        android:textColorHint="#999999"
+        android:textSize="15sp"
+        android:hint="请输入公告内容"
+        android:textColor="#999999"
+        android:gravity="top"
+        android:layout_height="200dp" />
+</LinearLayout>

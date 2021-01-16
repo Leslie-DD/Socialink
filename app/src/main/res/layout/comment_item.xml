@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp"
+    android:background="#ffffff"
+    android:paddingTop="10dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <com.example.heshequ.view.CircleView
+            android:layout_width="34dp"
+            android:id="@+id/ivHead"
+            android:src="@mipmap/head3"
+            android:layout_height="34dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tvName"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tvTime"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:visibility="gone"
+            android:gravity="center_vertical|right"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:text="删除"
+            android:id="@+id/tvDel"
+
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:lineSpacingExtra="2dp"
+        android:id="@+id/tvComment"
+        android:letterSpacing="0.05"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        />
+</LinearLayout>

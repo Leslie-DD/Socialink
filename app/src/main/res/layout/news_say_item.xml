@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:background="#ffffff"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="15dp"
+        android:orientation="vertical"
+        android:background="@drawable/e6_bg"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp">
+            <TextView
+                android:layout_width="55dp"
+                android:gravity="right"
+                android:text="12月11号"
+                android:layout_marginRight="5dp"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvTime" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:padding="4dp"
+                android:src="@mipmap/closed"
+                android:id="@+id/ivClose"
+                android:layout_gravity="right"
+                android:layout_alignParentRight="true"
+                android:layout_height="20dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <com.example.heshequ.view.CircleView
+                android:layout_width="35dp"
+                android:id="@+id/ivHead"
+                android:src="@mipmap/head3"
+                android:layout_height="35dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:text="李思思"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/tvName"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="回复了您的团言"
+                android:textColor="#999999"
+                android:textSize="12sp"
+                android:id="@+id/tvTip"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:text="看到你们的请求，可以加入吗？"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDesc" />
+
+    </LinearLayout>
+</LinearLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="55dp"
+            android:gravity="right"
+            android:text="12月11号"
+            android:layout_marginRight="5dp"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTime" />
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:padding="15dp"
+             android:orientation="vertical"
+             android:background="@drawable/e6_bg"
+             android:layout_height="wrap_content">
+             <ImageView
+                 android:layout_width="20dp"
+                 android:padding="4dp"
+                 android:src="@mipmap/closed"
+                 android:id="@+id/ivClose"
+                 android:layout_gravity="right"
+                 android:layout_height="20dp" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_marginTop="5dp"
+                 android:gravity="center_vertical"
+                 android:layout_height="wrap_content">
+                 <com.example.meet.view.CircleView
+                     android:layout_width="35dp"
+                     android:id="@+id/ivHead"
+                     android:src="@mipmap/head3"
+                     android:layout_height="35dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:textSize="14sp"
+                     android:textColor="#333333"
+                     android:text="李思思"
+                     android:layout_marginLeft="10dp"
+                     android:id="@+id/tvName"
+                     android:layout_height="wrap_content" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:text="回复了您的团言"
+                     android:textColor="#999999"
+                     android:textSize="12sp"
+                     android:id="@+id/tvTip"
+                     android:layout_marginLeft="10dp"
+                     android:layout_height="wrap_content" />
+
+             </LinearLayout>
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_marginTop="10dp"
+                 android:textSize="14sp"
+                 android:textColor="#333333"
+                 android:text="看到你们的请求，可以加入吗？"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/tvDesc" />
+
+         </LinearLayout>
+    </LinearLayout-->

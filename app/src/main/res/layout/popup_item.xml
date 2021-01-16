@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="5dp"
+    android:orientation="horizontal"
+    tools:context="com.example.heshequ.activity.team.MessageActivity"
+    >
+
+    <!-- 这里的linearLayout加android:background=""这个属性要谨慎，如果加了后，popwindow是不能半透明了的 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <Button
+            android:id="@+id/first"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/base_color_white"
+            android:layout_weight="1"
+            android:text="相册" />
+
+        <Button
+            android:id="@+id/second"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/base_color_white"
+            android:layout_weight="1"
+            android:text="相机" />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_marginTop="50dp"
+        android:id="@+id/iv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

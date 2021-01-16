@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/base_color_white"
+    tools:context="com.example.heshequ.activity.ReportActivity">
+
+    <include layout="@layout/new_title_bar"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e6e6e6"
+        android:layout_marginTop="20dp"
+        >
+
+        <EditText
+            android:id="@+id/etContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:minHeight="150dp"
+            android:maxLength="128"
+            android:background="@null"
+            android:hint="请输入举报的内容"
+            android:textSize="14sp"
+            android:gravity="top"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btJb"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="举报"
+        android:background="@drawable/bg_00bbff_4"
+        android:textColor="@color/base_color_white"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="100dp"
+        />
+
+</LinearLayout>

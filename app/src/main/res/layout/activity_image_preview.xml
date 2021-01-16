@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff171b19"
+    android:orientation="vertical" >
+    <com.example.heshequ.view.CustomViewPager2
+        android:id="@+id/imageBrowseViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <LinearLayout
+        android:id="@+id/main_linear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal" />
+    <!--android:background="#38393e"-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rlDel"
+        android:visibility="gone"
+        android:layout_height="50dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:src="@mipmap/back_little"
+            android:scaleType="center"
+            android:id="@+id/ivBack"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="60dp"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:id="@+id/tvTip"
+            android:text="1/1"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="50dp"
+            android:src="@mipmap/delete"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:id="@+id/ivDel"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/base_color_white"
+    android:paddingTop="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.example.heshequ.view.CircleView
+            android:id="@+id/ivHead"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="35dp"
+            android:layout_height="35dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tvName"
+                android:lines="1"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/text3"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvCollege"
+                android:lines="1"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/text7"
+                android:layout_marginTop="5dp"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="65dp"
+            android:layout_height="20dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/ffdb74_10"
+            android:text="团言"
+            android:textColor="@android:color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawableLeft="@mipmap/ty"
+            android:drawablePadding="5dp"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tvSpeak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center_vertical"
+            android:maxLines="5"
+            android:ellipsize="end"
+            android:layout_marginLeft="5dp"
+            android:textSize="13sp"
+            android:textColor="@color/textab"
+            />
+
+
+    </RelativeLayout>
+
+    <com.example.heshequ.view.MyGv
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:id="@+id/gw"
+        android:numColumns="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.example.heshequ.view.MyGv>
+
+    <RelativeLayout
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/tz"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="13sp"
+                android:layout_marginLeft="5dp"
+                android:text="团长:  "
+                android:textColor="@color/textab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvTz"
+                android:textSize="14sp"
+                android:text="李思思"
+                android:textColor="@color/yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:src="@mipmap/cys"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="13sp"
+                android:layout_marginLeft="5dp"
+                android:text="成员数:  "
+                android:textColor="@color/textab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvNum"
+                android:textSize="13sp"
+                android:text="20人"
+                android:textColor="@color/textab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:background="@color/f8"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+</LinearLayout>

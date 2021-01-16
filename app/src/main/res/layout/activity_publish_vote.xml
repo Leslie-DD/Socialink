@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+   android:orientation="vertical"
+    tools:context="com.example.heshequ.activity.statement.PublishVoteActivity">
+   <include layout="@layout/new_title_bar"/>
+  <ExpandableListView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:id="@+id/eblv"
+      android:groupIndicator="@null"
+      android:divider="@null"
+      android:layout_weight="1"></ExpandableListView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+       android:background="@drawable/gradient"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:id="@+id/llAddVote"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="添加投票"
+            android:textSize="15sp"
+            android:textColor="#999999"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/unfold"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

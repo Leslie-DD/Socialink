@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.heshequ.activity.statement.VoteDetailActivity">
+    <include layout="@layout/new_title_bar2"/>
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/eblv"
+        android:groupIndicator="@null"
+        android:divider="@null"
+        android:layout_weight="1"></ExpandableListView>
+</LinearLayout>

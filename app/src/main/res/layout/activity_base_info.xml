@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.heshequ.activity.mine.BaseInfoActivity">
+   <include layout="@layout/new_title_bar2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:id="@+id/llHead"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content"
+        >
+        <com.example.heshequ.view.CircleView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/ivHead"
+            android:src="@mipmap/head3"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:text="修改头像"
+            android:gravity="right"
+            android:layout_height="wrap_content">
+        </TextView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@mipmap/right"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        style="@style/h_line"/>
+   <ListView
+       android:layout_width="match_parent"
+       android:id="@+id/lv"
+       android:divider="@null"
+       android:layout_height="match_parent">
+   </ListView>
+</LinearLayout>

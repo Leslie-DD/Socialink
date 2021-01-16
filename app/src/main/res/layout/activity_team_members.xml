@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+
+    tools:context="com.example.heshequ.activity.TeamMembersActivity">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="50dp">
+       <ImageView
+           android:layout_width="50dp"
+           android:id="@+id/ivBack"
+           android:scaleType="center"
+           android:src="@mipmap/goback"
+           android:layout_height="50dp" />
+       <TextView
+           android:layout_width="wrap_content"
+           android:id="@+id/tvTitle"
+           android:layout_centerInParent="true"
+           android:textColor="#333333"
+           android:textSize="18sp"
+           android:text="团队成员"
+           android:layout_height="wrap_content" />
+   </RelativeLayout>
+    <LinearLayout
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:background="@drawable/f8f8fd_17"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_height="34dp">
+        <ImageView
+            android:layout_width="34dp"
+            android:src="@mipmap/innquire"
+            android:scaleType="center"
+            android:id="@+id/ivSearch"
+            android:layout_height="34dp" />
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:textSize="12sp"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:hint="搜索相关"
+            android:layout_marginLeft="10dp"
+            android:background="#00000000"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/lv"
+        android:layout_marginTop="10dp"
+        android:divider="@null"
+        android:layout_height="match_parent">
+
+    </ListView>
+</LinearLayout>

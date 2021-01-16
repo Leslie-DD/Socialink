@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:layout_height="match_parent">
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:gravity="center"
+              android:textColor="@color/base_blue"
+              android:text="上传照片"
+              android:id="@+id/tvUp"
+              />
+    <View style="@style/h_line"></View>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textColor="@color/base_blue"
+        android:text="拍照"
+        android:id="@+id/tvPic"
+        />
+</LinearLayout>

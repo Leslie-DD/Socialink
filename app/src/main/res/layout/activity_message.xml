@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingBottom="20dp">
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/left"
+        >
+
+        <com.example.heshequ.view.CircleView
+            android:id="@+id/messageimageViewleft"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/head3" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/receivephoto"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12dp"
+            android:adjustViewBounds="true"
+            android:visibility="gone"
+
+            android:background="@drawable/backgroundofphoto"
+            fresco:placeholderImage="@mipmap/takeplace"
+            fresco:progressBarImage="@mipmap/loadingphoto"
+            fresco:failureImage="@mipmap/failphoto"
+            fresco:failureImageScaleType="centerInside"
+
+            fresco:progressBarAutoRotateInterval="5000"
+            fresco:actualImageScaleType="centerInside"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/il"
+            android:visibility="gone"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/shape_corner"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="60dp"
+                >
+                <TextView
+                    android:id="@+id/messagetextViewleft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/most_white"
+                    android:text="我的也难看毕竟很多函数都要点进去看是干嘛的这是条我的也难看毕竟很多函数都要点进去看是干嘛的" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        />
+
+
+        <com.example.heshequ.view.CircleView
+            android:id="@+id/messageimageViewr"
+            android:layout_height="45dp"
+            android:layout_width="45dp"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/head3" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sendphoto"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:layout_toStartOf="@+id/messageimageViewr"
+            android:adjustViewBounds="true"
+            android:visibility="gone"
+            android:background="@drawable/backgroundofphoto"
+            fresco:placeholderImage="@mipmap/takeplace"
+            fresco:progressBarImage="@mipmap/loadingphoto"
+            fresco:failureImage="@mipmap/failphoto"
+            fresco:failureImageScaleType="centerInside"
+            fresco:progressBarAutoRotateInterval="5000"
+            fresco:actualImageScaleType="fitEnd"
+            />
+        <TextView
+            android:id="@+id/read2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/sendphoto"
+            android:layout_below="@+id/sendphoto"
+            android:text="未读"
+            android:textColor="@color/red"
+            android:visibility="gone"/>
+        <LinearLayout
+            android:id="@+id/li"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/messageimageViewr"
+            android:background="@drawable/shape_corner"
+            android:layout_marginLeft="60dp">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/messagetextViewr"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/most_white"
+                android:text="都叫见到少啊随机发哦啊是就发哦i是接送飞机萨松加佛i是大师傅大师傅但是"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/li"
+            android:layout_below="@+id/li"
+            android:text="未读"
+            android:textColor="@color/red"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+</LinearLayout>
+
+

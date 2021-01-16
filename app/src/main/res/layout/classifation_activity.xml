@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.heshequ.classification.ClassifationActivity"
+    android:orientation="vertical">
+
+
+   <LinearLayout
+       android:id="@+id/ll_word_find_activity_root"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+
+      <ImageButton
+          android:id="@+id/classification_back"
+          android:layout_width="30dp"
+          android:layout_height="match_parent"
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="5dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginRight="10dp"
+          android:layout_marginBottom="8dp"
+          android:background="@drawable/icon_back"
+          android:paddingTop="5dp"
+          android:scaleType="centerInside" />
+
+      <com.example.heshequ.classification.ClearEditText
+          android:id="@+id/et_classi_search"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_marginTop="3dp"
+          android:layout_marginRight="5dp"
+          android:layout_marginBottom="3dp"
+          android:layout_weight="0.6"
+          android:background="@drawable/edittext_background"
+          android:drawableLeft="@drawable/icon_search"
+          android:drawableRight="@drawable/edittext_delete_selector"
+          android:gravity="left|center_vertical"
+          android:hint="搜索"
+          android:paddingLeft="10dp"
+          android:paddingTop="3dp"
+          android:paddingRight="10dp"
+          android:paddingBottom="3dp"
+          android:singleLine="true"
+          android:textSize="14sp" />
+
+   </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:baselineAligned="false"
+       android:orientation="horizontal">
+
+      <ListView
+          android:id="@+id/lv_menu"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:background="#EDECEC" />
+
+      <RelativeLayout
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="3"
+          android:background="@color/white">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lv_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+         </LinearLayout>
+
+         <TextView
+             android:id="@+id/tv_titile"
+             android:layout_width="match_parent"
+             android:layout_height="35dp"
+             android:background="#DCDBDB"
+             android:gravity="center_vertical"
+             android:paddingLeft="20dp"
+             android:text="@string/app_name" />
+
+      </RelativeLayout>
+   </LinearLayout>
+
+
+</LinearLayout>

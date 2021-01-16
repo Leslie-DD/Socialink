@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:background="#ffffff"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.example.heshequ.view.CircleView
+            android:layout_width="35dp"
+            android:id="@+id/ivHead"
+            android:layout_height="35dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/ivHead"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#313133"
+                android:textSize="13sp"
+                android:id="@+id/tvName"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tvTime"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+   <TextView
+       android:layout_width="match_parent"
+       android:id="@+id/tvContent"
+       android:textSize="13sp"
+       android:textColor="#333333"
+       android:layout_marginTop="12dp"
+       android:layout_height="wrap_content" />
+
+    <com.example.heshequ.view.MyGv
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:background="#ffffff"
+        android:id="@+id/gv">
+    </com.example.heshequ.view.MyGv>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="#ABABB3"
+            android:textSize="12sp"
+            android:id="@+id/tvDel"
+            android:text="删除"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="15dp"
+            android:id="@+id/ivZan"
+            android:src="@mipmap/zan"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#ABABB3"
+            android:textSize="11sp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/tvFabulousCount"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/ivComment"
+            android:src="@mipmap/pl"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#ABABB3"
+            android:textSize="11sp"
+            android:id="@+id/tvCommentCount"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

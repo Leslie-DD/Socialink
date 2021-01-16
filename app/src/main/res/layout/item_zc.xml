@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/mrtp"
+            android:scaleType="fitXY"
+            android:id="@+id/ivImg"
+            android:layout_width="110dp"
+            android:layout_height="75dp" />
+        <RelativeLayout
+            android:layout_marginLeft="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvTitle"
+                android:text="HR教你如何突出重围？"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:textColor="@color/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/tvTime"
+                android:text="12:08"
+                android:textSize="13sp"
+                android:textColor="@color/text9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:maxLength="11"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/tvName"
+                    android:text="李思思"
+                    android:textSize="13sp"
+                    android:textColor="@color/text66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/tvJob"
+                    android:text="长沙移动资深HR"
+                    android:textSize="13sp"
+                    android:textColor="@color/text9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:textColor="@color/text66"
+        android:text="截止时间：2018-05-28"
+        android:id="@+id/tvEnd"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:paddingTop="17dp"
+        android:paddingBottom="18dp"
+        android:textSize="13sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:background="@color/f8"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"></View>
+</LinearLayout>

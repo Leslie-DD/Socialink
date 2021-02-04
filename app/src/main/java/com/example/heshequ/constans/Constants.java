@@ -1,6 +1,6 @@
 package com.example.heshequ.constans;
 
-import com.tencent.mm.opensdk.openapi.IWXAPI;
+//import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 /**
  * Created by dev06 on 2018/5/15.

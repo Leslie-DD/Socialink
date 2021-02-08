@@ -2,6 +2,8 @@ package com.example.heshequ.constans;
 
 //import com.tencent.mm.opensdk.openapi.IWXAPI;
 
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+
 /**
  * Created by dev06 on 2018/5/15.
  */
@@ -15,27 +17,11 @@ public class Constants {
     public static String url5="http://mvimg10.meitudata.com/569b9090af0526344.jpg";
 
 
-//    public static String base_url="http://xiangyu.douziit.com";  //线上
-//    public static String base_url = "http://39.96.15.88:8080/xiangyu";
-//    public static String base_url = "http://192.168.43.71:8080/xiangyu";
-//    public static String base_url="http://meet.xindun.hn.cn/";   //线上
-//    public static String base_url="http://139.224.233.10:80";    //线上
-//    public static String base_url="http://192.168.43.192/xiangyu";   //测试
-//    public static String base_url="http://47.103.11.8:8080/xiangyu";    //二手市场
-//    public static String base_url="https://weixin.univmeet.cn/xiangyu"; //测试2
-//    public static String base_url="http://118.89.41.105:8080/xiangyu"; //测试2
-//    public static String base_url_tmp = "http://118.89.41.105:8080/xiangyu";
+    public static String base_url = "http://he.univmeet.cn:8080/xiangyu";
+    public static String base_url_tmp = "http://he.univmeet.cn:8080/xiangyu";
 
-//    public static String base_url = "http://120.55.47.233:8081/xiangyu";  //2020小学期 星磊
-//    public static String base_url_tmp = "http://120.55.47.233:8081/xiangyu";
 
-    public static String base_url = "http://175.24.34.31:8080/xiangyu"; //2020-09-21 22:20
-    public static String base_url_tmp = "http://175.24.34.31:8080/xiangyu";
-
-    //public static String base_url = "http://192.168.43.192/xiangyu";
-    //public static String base_url="http://192.168.1.125:8080";
-
-    public static final String APP_AD_WX = "wx78748a644eb7d5f7"; // wx78748a644eb7d5f7
+    public static final String APP_AD_WX = "wx78748a644eb7d5f7";
     public static IWXAPI api;
 
     /** 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY */

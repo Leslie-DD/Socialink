@@ -44,8 +44,19 @@ android {
 //    }
     useLibrary 'org.apache.http.legacy'
     /*************************************************/
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def fileName = "Meeting"+
+                    "v${defaultConfig.versionName}"+
+                    "_${defaultConfig.versionCode}"+".apk"
+//                    "_${releaseTime()}"+".apk"
+            outputFileName = fileName
+        }
+    }
 }
-
+def releaseTime(){
+    return new Date().format("yyyyMMddHHmm")
+}
 dependencies {
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -136,7 +147,5 @@ dependencies {
 
     // 加载中
     implementation 'com.github.limxing:Android-PromptDialog:1.1.3'
-
-
 
 }

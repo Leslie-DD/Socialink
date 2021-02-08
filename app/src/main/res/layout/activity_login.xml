@@ -63,7 +63,6 @@
                 android:hint="请输入您的账号"
                 android:inputType="number"
                 android:paddingLeft="30dp"
-                android:text="13278880691"
                 android:textColor="#333333"
                 android:textColorHint="#999999"
                 android:textSize="15sp" />
@@ -80,7 +79,6 @@
                 android:hint="请输入您的密码"
                 android:inputType="textPassword"
                 android:paddingLeft="30dp"
-                android:text="123456"
                 android:textColor="#333333"
                 android:textColorHint="#999999"
                 android:textSize="15sp" />

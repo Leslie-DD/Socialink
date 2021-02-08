@@ -113,6 +113,7 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         int ret = result.optInt("ret");
+//        Utils.toastShort(mContext, ret+" ");
         switch (where) {
             case getCode:
                 if (ret == 0) {
@@ -144,7 +145,9 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
                 break;
             case signCode:
                 if (ret == 0) {
-                    Utils.toastShort(mContext, "注册成功");
+//                    Utils.toastShort(mContext, "注册成功");
+//                    Utils.toastShort(mContext, ret+" " + result.optString("msg"));
+                    Utils.toastShort(mContext, result.optString("msg"));
                     startActivity(new Intent(this, DefaultProblemActivity.class)
                             .putExtra("phone", phone)
                             .putExtra("pwd", pwd)

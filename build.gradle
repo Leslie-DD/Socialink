@@ -2,7 +2,7 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven { // 移动热修复 com.aliyun.ams:alicloud-android-hotfix:3.2.6
             url "http://maven.aliyun.com/nexus/content/repositories/releases"
         }
@@ -18,15 +18,19 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
         maven { // 移动热修复 com.aliyun.ams:alicloud-android-hotfix:3.2.6
             url "http://maven.aliyun.com/nexus/content/repositories/releases"
         }
         maven { // 安卓带有尖角气泡的控件 com.github.zengzhaoxing:SharpView:v2.3.0
             url "https://jitpack.io"
         }
-        maven { // 新浪微博第三方登陆 com.sina.weibo.sdk:core:4.3.0:openDefaultRelease@aar
-            url "https://dl.bintray.com/thelasterstar/maven/" }
+        maven {
+            url "https://maven.aliyun.com/repository/google"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/jcenter"
+        }
     }
 }
 

@@ -5,10 +5,11 @@ buildscript {
         mavenCentral()
         maven { // 移动热修复 com.aliyun.ams:alicloud-android-hotfix:3.2.6
             url "http://maven.aliyun.com/nexus/content/repositories/releases"
+            allowInsecureProtocol = true
         }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath 'com.android.tools.build:gradle:7.2.2'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -21,6 +22,7 @@ allprojects {
         mavenCentral()
         maven { // 移动热修复 com.aliyun.ams:alicloud-android-hotfix:3.2.6
             url "http://maven.aliyun.com/nexus/content/repositories/releases"
+            allowInsecureProtocol = true
         }
         maven { // 安卓带有尖角气泡的控件 com.github.zengzhaoxing:SharpView:v2.3.0
             url "https://jitpack.io"

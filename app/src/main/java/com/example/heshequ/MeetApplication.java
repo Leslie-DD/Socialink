@@ -1,6 +1,7 @@
 package com.example.heshequ;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -9,14 +10,12 @@ import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.multidex.MultiDexApplication;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.utils.CrashHandler;
-import com.example.heshequ.utils.QueryPatchUtils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sina.weibo.sdk.WbSdk;
@@ -39,7 +38,7 @@ import java.util.List;
  * Hulk_Zhang on 2017/8/23 16:48
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class MeetApplication extends MultiDexApplication {
+public class MeetApplication extends Application {
     public ImageLoader mImageLoader = ImageLoader.getInstance();
     private List<Activity> activityList = new ArrayList<>();
     private static MeetApplication instance;
@@ -68,11 +67,6 @@ public class MeetApplication extends MultiDexApplication {
         initUm();
         CrashHandler.getInstance().init(this);
         initActivityLifecycleCallbacks();
-
-        /*查询是否有更新补丁*/
-        //SophixManager.getInstance().queryAndLoadNewPatch();
-        /*1.4h查询一次是否有更新补丁（平均单台设备每天免费查询20次，查询超过20次，收费标准：2元/万次请求。）*/
-        QueryPatchUtils.freeQuery();
     }
 
     private void regTowx(){

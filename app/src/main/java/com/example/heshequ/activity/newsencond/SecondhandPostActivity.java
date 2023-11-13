@@ -59,8 +59,8 @@ import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class secondhandpost extends NetWorkActivity implements View.OnClickListener{
-    private TextView tvCancle;
+public class SecondhandPostActivity extends NetWorkActivity implements View.OnClickListener{
+    private TextView tvCancel;
     private TextView tvTitle;
     private TextView tvSave;
 
@@ -166,8 +166,8 @@ public class secondhandpost extends NetWorkActivity implements View.OnClickListe
         llClassify.setOnClickListener(this);
         llSelect = (LinearLayout) findViewById(R.id.llSelect);
         llSelect.setOnClickListener(this);
-        tvCancle = (TextView) findViewById(R.id.tvCancel);
-        tvCancle.setOnClickListener(this);
+        tvCancel = (TextView) findViewById(R.id.tvCancel);
+        tvCancel.setOnClickListener(this);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("发布商品");
         tvSave = (TextView) findViewById(R.id.tvSave);
@@ -358,7 +358,7 @@ public class secondhandpost extends NetWorkActivity implements View.OnClickListe
                                         intent.putExtra("item", 2);
                                         intent.setAction("fragment.listener");
                                         sendBroadcast(intent);
-                                        secondhandpost.this.finish();
+                                        SecondhandPostActivity.this.finish();
                                         Utils.toastShort(mContext, "发布成功");
                                         promptDialog.dismiss();
                                     } else {
@@ -435,7 +435,7 @@ public class secondhandpost extends NetWorkActivity implements View.OnClickListe
         gwPictureAdapter.setData(strings);
         Luban.with(this).load(new File(path)).
                 setCompressListener(new OnCompressListener() {
-                    //                    @Override
+                    @Override
                     public void onStart() {
 
                     }

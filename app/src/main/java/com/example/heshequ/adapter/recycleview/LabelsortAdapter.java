@@ -27,8 +27,6 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.squareup.picasso.Picasso;
-
 /**
  * Created by dell on 2019/9/5.
  */
@@ -212,12 +210,9 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                      * 选取商品图片的第一张
                      */
                      if (bean.photos == null || bean.photos.size() == 0) {
-                         Picasso
-                                 .with(context)
-                                 .cancelRequest(ivImage);
                          ivImage.setImageResource(R.drawable.noimg);
                     } else {
-                         Picasso
+                         Glide
                                  .with(context)
                                  .load(WenConstans.BaseUrl + bean.photos.get(0).photoId)
                                  .placeholder(R.drawable.noimg)//图片加载中显示

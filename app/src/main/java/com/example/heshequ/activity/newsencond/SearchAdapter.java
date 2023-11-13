@@ -65,7 +65,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             @Override
             public void onClick(View v) {
                 MobclickAgent.onEvent(MeetApplication.getInstance(), "event_goodnumadd");
-                startActivity(new Intent(mContext, secondhandpost.class));
+                startActivity(new Intent(mContext, SecondhandPostActivity.class));
 //                Toast.makeText(mContext, "你点击了AddGood" , Toast.LENGTH_SHORT).show();
             }
         });

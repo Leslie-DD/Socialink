@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.activity.WebActivity;
-import com.example.heshequ.activity.newsencond.secondhandpost;
+import com.example.heshequ.activity.newsencond.SecondhandPostActivity;
 import com.example.heshequ.adapter.MyBannerAdapter;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.adapter.recycleview.RecycleAdapter;
@@ -198,7 +198,7 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 MobclickAgent.onEvent(MeetApplication.getInstance(), "event_goodnumadd");
-                startActivity(new Intent(mContext, secondhandpost.class));
+                startActivity(new Intent(mContext, SecondhandPostActivity.class));
             }
         });
 

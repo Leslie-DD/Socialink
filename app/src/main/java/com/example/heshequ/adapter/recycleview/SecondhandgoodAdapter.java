@@ -24,19 +24,12 @@ import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
-import com.squareup.picasso.Picasso;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-
-//import android.support.v7.widget.RecyclerView;
-
-/**
- * Created by dell on 2019/8/18.
- */
 
 public class SecondhandgoodAdapter extends RecyclerView.Adapter {
     private Context context;
@@ -54,7 +47,8 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
         map.put(labelName, data);
         this.notifyDataSetChanged();
     }
-    public void setData(List<SecondhandgoodBean> data){
+
+    public void setData(List<SecondhandgoodBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -64,7 +58,6 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
         this.context = context;
 
     }
-
 
 
     @Override
@@ -77,8 +70,7 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
         if (viewType == 0) {
 //            views = LayoutInflater.from(context).inflate(R.layout.item_secondhandgood, parent, false);
             views = LayoutInflater.from(context).inflate(R.layout.item_second_good, parent, false);
-        }
-        else{
+        } else {
 
         }
         return new ViewHolder(views, viewType);
@@ -90,6 +82,7 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
         viewHolder.setData(position);
 
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivImg;
@@ -103,7 +96,7 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
 
         private ImageView ivImage; // 商品宣传图
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
                 ivImg = (ImageView) view.findViewById(R.id.ivImg);
@@ -117,8 +110,7 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
                 gv = (MyGv) view.findViewById(R.id.gv);
                 llSave = (LinearLayout) view.findViewById(R.id.llSave);
                 ivImage = (ImageView) view.findViewById(R.id.ivImage);
-            }
-            else{
+            } else {
 
             }
         }
@@ -212,12 +204,9 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
                  * 选取商品图片的第一张
                  */
                 if (data.get(position).photos == null || data.get(position).photos.size() == 0) {
-                    Picasso
-                            .with(context)
-                            .cancelRequest(ivImage);
                     ivImage.setImageResource(R.drawable.noimg);
                 } else {
-                    Picasso
+                    Glide
                             .with(context)
                             .load(WenConstans.BaseUrl + data.get(position).photos.get(0).photoId)
                             .placeholder(R.drawable.noimg)//图片加载中显示
@@ -228,12 +217,12 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (data.get(position).type!=1) {
-                            MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotAsk");
-                            if (Objects.equals(data.get(position).uid, Constants.uid + "")){
-                                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myQuestionClick");
+                        if (data.get(position).type != 1) {
+                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
+                            if (Objects.equals(data.get(position).uid, Constants.uid + "")) {
+                                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
                             }
-                            MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                             Intent intent = new Intent(context, GoodDetailActivity.class);
                             Bundle bundle = new Bundle();
@@ -253,12 +242,11 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
 
                     }
                 });
-            }else if (data.get(position).type == 1){
+            } else if (data.get(position).type == 1) {
 
             }
         }
     }
-
 
 
     @Override
@@ -267,16 +255,15 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
     private DoSaveListener mDoSaveListener;
-    public interface DoSaveListener{
+
+    public interface DoSaveListener {
         void doSave(int position);
     }
-    public void DoSaveListener(DoSaveListener mDoSaveListener){
-        this.mDoSaveListener=mDoSaveListener;
-    }
 
+    public void DoSaveListener(DoSaveListener mDoSaveListener) {
+        this.mDoSaveListener = mDoSaveListener;
+    }
 
 
 }

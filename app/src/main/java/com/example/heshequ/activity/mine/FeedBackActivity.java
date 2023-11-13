@@ -63,7 +63,7 @@ public class FeedBackActivity extends NetWorkActivity implements View.OnClickLis
         //获取反馈类型
         setBodyParams(new String[]{"type"}, new String[]{"feedback"});
         sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/pub/category/list.do",
-                new String[]{}, new String[]{}, getCode, false, false, Constants.token);
+                new String[]{}, new String[]{}, getCode, false, Constants.token);
     }
 
     private void event() {

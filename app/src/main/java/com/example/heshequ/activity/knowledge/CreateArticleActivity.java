@@ -179,11 +179,11 @@ public class CreateArticleActivity extends NetWorkActivity {
     }
 
     private void getData(int id){
-        sendConnection(HttpRequest.HttpMethod.GET, WenConstans.getMyArticleDetail + "?id=" +id,new String[]{},new String[]{},100, false,false,WenConstans.token);
+        sendConnection(HttpRequest.HttpMethod.GET, WenConstans.getMyArticleDetail + "?id=" +id,new String[]{},new String[]{},100, false, WenConstans.token);
     }
 
     private void ModifyArticle(int id){
-        sendConnection(HttpRequest.HttpMethod.PUT, WenConstans.midifyArticle,new String[]{},new String[]{},100, false,false,WenConstans.token);
+        sendConnection(HttpRequest.HttpMethod.PUT, WenConstans.midifyArticle,new String[]{},new String[]{},100, false, WenConstans.token);
     }
 
     @Override

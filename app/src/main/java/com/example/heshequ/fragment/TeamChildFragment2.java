@@ -55,19 +55,19 @@ public class TeamChildFragment2 extends BaseTeamPagerFragment {
                 setBodyParams(new String[]{"type","pn","ps"},
                         new String[]{""+5,""+pn,""+Constants.default_PS});
                 sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url+"/api/club/base/pglist.do",
-                        new String[]{},new String[]{},GETDATA,sp.getString("token",""));
+                        GETDATA,sp.getString("token",""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type","pn","ps"},
                         new String[]{""+5,""+pn,""+Constants.default_PS});
                 sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url+"/api/club/base/pglist.do",
-                        new String[]{},new String[]{},REFDATA,sp.getString("token",""));
+                        REFDATA,sp.getString("token",""));
                 break;
             case 2:
                 setBodyParams(new String[]{"type","pn","ps"},
                         new String[]{""+5,""+pn,""+Constants.default_PS});
                 sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url+"/api/club/base/pglist.do",
-                        new String[]{},new String[]{},LOADATA,sp.getString("token",""));
+                        LOADATA,sp.getString("token",""));
                 break;
         }
     }

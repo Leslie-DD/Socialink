@@ -117,7 +117,7 @@ public class ArticleDetialActivity extends NetWorkActivity implements View.OnCli
         }
     }
     private void getData(int id){
-        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getArticleDetail + "?id=" +id,new String[]{},new String[]{},100, false,false,WenConstans.token);
+        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getArticleDetail + "?id=" +id,new String[]{},new String[]{},100, false, WenConstans.token);
     }
     @Override
     public void onResume() {

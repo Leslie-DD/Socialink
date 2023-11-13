@@ -138,12 +138,12 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
                 finish();
                 break;
             case R.id.unsubscribe:
-                sendConnection(HttpRequest.HttpMethod.POST,WenConstans.unsubscribe + "?id=" +subscriptionId,new String[]{},new String[]{},200, false,false,WenConstans.token);
+                sendConnection(HttpRequest.HttpMethod.POST,WenConstans.unsubscribe + "?id=" +subscriptionId,new String[]{},new String[]{},200, false, WenConstans.token);
                 break;
         }
     }
     private void getData(){
-        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getColumnDetail + "?id=" +subscriptionId,new String[]{},new String[]{},100, false,false,WenConstans.token);
+        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getColumnDetail + "?id=" +subscriptionId,new String[]{},new String[]{},100, false, WenConstans.token);
 
     }
     @Override

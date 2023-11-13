@@ -116,7 +116,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
     private void initUserinfo() {
         setBodyParams(new String[]{"uid"},new String[]{""+Constants.uid});
         sendConnection(HttpRequest.HttpMethod.POST,Constants.base_url+"/api/user/info.do",
-                new String[]{},new String[]{},initUserInfo,Constants.token);
+                initUserInfo,Constants.token);
     }
 
     private void getXiangyuMoney () {

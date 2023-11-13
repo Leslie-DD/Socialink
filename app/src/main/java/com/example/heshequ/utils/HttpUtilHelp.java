@@ -2,9 +2,9 @@ package com.example.heshequ.utils;
 
 import com.lidroid.xutils.HttpUtils;
 
-public class HttputilHelp {
+public class HttpUtilHelp {
 	 private static HttpUtils httpUtils;
-      private HttputilHelp() {
+      private HttpUtilHelp() {
       }
       public static HttpUtils getHttpUtils () {
     	  if (httpUtils == null) {

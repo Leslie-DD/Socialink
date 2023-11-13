@@ -306,19 +306,19 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
                 sendConnection(HttpRequest.HttpMethod.POST, WenConstans.MyFoots,
-                        new String[]{}, new String[]{}, GETDATA, sp.getString("token", ""));
+                        GETDATA, sp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
                 sendConnection(HttpRequest.HttpMethod.POST, WenConstans.MyFoots,
-                        new String[]{}, new String[]{}, REFDATA, sp.getString("token", ""));
+                        REFDATA, sp.getString("token", ""));
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
                 sendConnection(HttpRequest.HttpMethod.POST, WenConstans.MyFoots,
-                        new String[]{}, new String[]{}, LOADATA, sp.getString("token", ""));
+                        LOADATA, sp.getString("token", ""));
                 break;
         }
     }

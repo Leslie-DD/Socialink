@@ -291,7 +291,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
                 // 活动删除
                 setBodyParams(new String[]{"id"}, new String[]{"" + id});
                 sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/activity/delete.do",
-                        new String[]{}, new String[]{}, DelCode, Constants.token);
+                        DelCode, Constants.token);
             }
         });
 
@@ -301,7 +301,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
                 // 报名 或者 取消
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 1});
                 sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/activity/apply.do",
-                        new String[]{}, new String[]{}, ApplyCode, Constants.token);
+                        ApplyCode, Constants.token);
             }
         });
     }

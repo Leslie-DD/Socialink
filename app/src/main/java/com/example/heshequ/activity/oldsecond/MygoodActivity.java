@@ -2,10 +2,12 @@ package com.example.heshequ.activity.oldsecond;
 
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
@@ -24,7 +26,7 @@ import java.util.List;
 public class MygoodActivity extends NetWorkActivity implements View.OnClickListener {
     private ViewPager vp;
     private List<GoodLabel> labelList = new ArrayList<>();
-    private ArrayList<android.support.v4.app.Fragment> list;
+    private ArrayList<Fragment> list;
     private MygoodFragment mygoodfragment;
 
     private MyFragmentPagerAdapter adapter;

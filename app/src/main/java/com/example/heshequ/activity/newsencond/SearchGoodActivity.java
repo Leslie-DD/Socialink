@@ -2,11 +2,12 @@ package com.example.heshequ.activity.newsencond;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.andview.refreshview.XRefreshView;
 import com.example.heshequ.R;

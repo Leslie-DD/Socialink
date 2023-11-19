@@ -2,12 +2,13 @@ package com.example.heshequ.fragment;
 
 import android.graphics.Color;
 import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;

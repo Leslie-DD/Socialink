@@ -1,7 +1,6 @@
 package com.example.heshequ.activity.oldsecond;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -10,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.SecondhandgoodAdapter;

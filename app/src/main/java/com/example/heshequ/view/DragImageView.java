@@ -1,10 +1,11 @@
 package com.example.heshequ.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+
+import androidx.annotation.Nullable;
 
 /**
  * 可拖动的ImageView
@@ -12,7 +13,7 @@ import android.view.MotionEvent;
  * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
  */
 
-public class DragImageView extends android.support.v7.widget.AppCompatImageView {
+public class DragImageView extends androidx.appcompat.widget.AppCompatImageView {
     private static final String TAG = "DragImageView";
     private int sx;
     private int sy;

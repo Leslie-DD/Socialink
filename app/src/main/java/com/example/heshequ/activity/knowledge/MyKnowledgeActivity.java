@@ -1,11 +1,12 @@
 package com.example.heshequ.activity.knowledge;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;

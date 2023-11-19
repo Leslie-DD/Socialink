@@ -7,12 +7,13 @@ package com.example.heshequ.activity.team;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.MessageAdapter;

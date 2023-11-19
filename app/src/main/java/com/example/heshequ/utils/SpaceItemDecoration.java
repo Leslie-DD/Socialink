@@ -2,8 +2,9 @@ package com.example.heshequ.utils;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by dev06 on 2018/5/15.

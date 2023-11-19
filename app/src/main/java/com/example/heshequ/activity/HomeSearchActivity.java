@@ -2,8 +2,6 @@ package com.example.heshequ.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -13,6 +11,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
@@ -25,6 +25,7 @@ import com.example.heshequ.fragment.WwSearchFragment;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.FlowLayout;
 import com.example.heshequ.view.NoScrollViewPager;
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

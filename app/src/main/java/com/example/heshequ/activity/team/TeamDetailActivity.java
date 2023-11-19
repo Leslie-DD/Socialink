@@ -1,9 +1,10 @@
 package com.example.heshequ.activity.team;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.OtherSayAdapter;

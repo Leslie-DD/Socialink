@@ -3,9 +3,10 @@ package com.example.heshequ.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Path;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import com.example.heshequ.utils.Utils;
 

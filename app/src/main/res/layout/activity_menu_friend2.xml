@@ -108,13 +108,13 @@
 
 
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:layout_marginTop="150dp"
         android:layout_width="match_parent"
         android:id="@+id/vp"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
     <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
     <!--android:layout_below="@+id/ll"-->
     <!--android:id="@+id/rv"-->

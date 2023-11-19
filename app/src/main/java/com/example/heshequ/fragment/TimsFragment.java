@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.TeamSearchActivity;
 import com.example.heshequ.activity.flowview.TeamActivity;
@@ -17,7 +16,6 @@ import com.example.heshequ.activity.team.AddTeamActivity;
 import com.example.heshequ.adapter.MytPagersAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.view.NoScrollViewPager;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
 
@@ -130,11 +128,9 @@ public class TimsFragment extends NetWorkFragment implements View.OnClickListene
             case R.id.ivBack:
                 break;
             case R.id.llSearch:
-                MobclickAgent.onEvent(mContext, "event_teamSearch");
                 startActivity(new Intent(mContext, TeamSearchActivity.class));
                 break;
             case R.id.ivAdd:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myTeamAddNewTeam");
                 startActivity(new Intent(mContext, AddTeamActivity.class));
                 break;
             case R.id.tvMine:
@@ -157,12 +153,10 @@ public class TimsFragment extends NetWorkFragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }

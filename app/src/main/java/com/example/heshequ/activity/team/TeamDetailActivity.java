@@ -14,8 +14,6 @@ import com.example.heshequ.entity.TestBean;
 import com.example.heshequ.utils.SpaceItemDecoration;
 import com.example.heshequ.view.MyLv;
 import com.example.heshequ.view.MyRecyclerview;
-import com.tencent.mm.opensdk.utils.Log;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -137,18 +135,4 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
         tvManager.setSelected(status == 3 ? true : false);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        Log.e("this.getClass().getSimpleName()", this.getClass().getSimpleName());
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

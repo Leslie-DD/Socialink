@@ -124,12 +124,9 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
 
-//                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotAsk");
-//                    if (Objects.equals(data.get(position).getReplyId(), Constants.uid + "")){
-//                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myQuestionClick");
-//                    }
-//                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
-
+//                    //                    if (Objects.equals(data.get(position).getReplyId(), Constants.uid + "")){
+//                        //                    }
+//                    
                     Intent intent = new Intent(context, FriendShowAnswers.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("FriendAdd", data.get(position));

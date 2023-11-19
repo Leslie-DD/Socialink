@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.knowledge.CreateArticleActivity;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
@@ -17,7 +16,6 @@ import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.fragment.knowledge.RecommendFragment;
 import com.example.heshequ.fragment.knowledge.SubscriptionFragment;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -145,7 +143,6 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
                 setTvBg(1);
                 break;
             case R.id.ivAdd:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myTeamAddNewTeam");
                 startActivity(new Intent(mContext, CreateArticleActivity.class));
                 break;
         }
@@ -153,16 +150,12 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
 //    @Override
 //    public void onResume() {
 //        super.onResume();
-//        MobclickAgent.onResume(getContext());
-//        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-//    }
+//        //        //    }
 //
 //    @Override
 //    public void onPause() {
 //        super.onPause();
-//        MobclickAgent.onPause(getContext());
-//        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-//    }
+//        //        //    }
 
 
     @Override

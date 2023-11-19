@@ -10,7 +10,6 @@ import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -305,12 +304,6 @@ public class TimetableShow extends NetWorkActivity implements View.OnClickListen
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
     public void getData() {
         setBodyParams(new String[]{"studentId", "pwd", "yearFirst", "yearSecond", "num", "Date", "currentWeek", "school"}, new String[]{studentId, pwd, year_1, year_2, term_1, today_1, week_1, schoolname});
@@ -318,10 +311,5 @@ public class TimetableShow extends NetWorkActivity implements View.OnClickListen
         Log.e("token", WenConstans.Timetabletoken + "");
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
+
 }

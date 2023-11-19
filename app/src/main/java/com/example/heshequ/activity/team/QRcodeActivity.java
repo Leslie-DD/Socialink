@@ -15,7 +15,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.utils.ZxingUtils;
 import com.example.heshequ.view.CircleView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,17 +71,5 @@ public class QRcodeActivity extends NetWorkActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

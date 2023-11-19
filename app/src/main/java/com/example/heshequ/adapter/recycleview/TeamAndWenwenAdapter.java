@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
@@ -32,7 +31,6 @@ import com.example.heshequ.constans.P;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -239,15 +237,12 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (type == 1) {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_collectionEnterQuestion");
                         Intent intent = new Intent(context, WenwenDetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("wenwen", data.get(position));
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                     } else {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_collectionEnterHall");
                         Intent intent = new Intent(context, TeamDetailActivity2.class);
                         intent.putExtra("id", Integer.parseInt(data.get(position).id));
                         context.startActivity(intent);

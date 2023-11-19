@@ -29,7 +29,6 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
@@ -43,7 +42,6 @@ import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -355,7 +353,6 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(String s, Call call, Response response) {
-                                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_activityController");
                                     try {
                                         JSONObject result = new JSONObject(s);
                                         switch (result.optInt("code")) {
@@ -407,7 +404,6 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                                 .execute(new StringCallback() {
                                     @Override
                                     public void onSuccess(String s, Call call, Response response) {
-                                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_activityController");
                                         try {
                                             JSONObject result = new JSONObject(s);
                                             switch (result.optInt("code")) {
@@ -457,7 +453,6 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                                 .execute(new StringCallback() {
                                     @Override
                                     public void onSuccess(String s, Call call, Response response) {
-                                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_activityController");
                                         try {
                                             JSONObject result = new JSONObject(s);
                                             switch (result.optInt("code")) {
@@ -592,20 +587,6 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
 
                     }
                 }).launch();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
 

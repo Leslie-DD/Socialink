@@ -21,7 +21,6 @@ import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
 
@@ -57,7 +56,6 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         try {
             Gson gson = new Gson();
             if (where == 100) {
-                MobclickAgent.onEvent(mContext, "event_teamSearch");
                 if (hasRefresh) {
                     hasRefresh = false;
                     rv.refreshComplete();

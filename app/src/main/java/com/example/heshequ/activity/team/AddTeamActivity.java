@@ -22,7 +22,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.Label;
@@ -35,7 +34,6 @@ import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.FlowLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -175,7 +173,6 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
                 }
                 break;
             case addCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_createTeam");
                 code = result.optInt("code");
                 if (code == 0) {
                                  /*int id=result.optJSONObject("data").optInt("id");
@@ -349,17 +346,5 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

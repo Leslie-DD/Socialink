@@ -24,7 +24,6 @@ import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -131,7 +130,6 @@ public class GoodsearchActivity extends NetWorkActivity implements View.OnClickL
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     private void getGoodData(int png, String content) {
@@ -148,7 +146,6 @@ public class GoodsearchActivity extends NetWorkActivity implements View.OnClickL
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

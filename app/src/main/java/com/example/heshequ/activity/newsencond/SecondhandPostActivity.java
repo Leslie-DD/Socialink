@@ -43,7 +43,6 @@ import com.example.heshequ.view.FlowLayout;
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -256,12 +255,6 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
         pop.setContentView(pv);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
     private void initPickerView() {
         pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
@@ -454,11 +447,6 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
                 }).launch();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
+
 }
 

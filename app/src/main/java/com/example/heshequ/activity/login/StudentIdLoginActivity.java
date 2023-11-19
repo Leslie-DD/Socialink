@@ -28,9 +28,6 @@ import com.example.heshequ.utils.Utils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.PushAgent;
-import com.umeng.message.UTrack;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -319,24 +316,12 @@ public class StudentIdLoginActivity extends NetWorkActivity implements View.OnCl
             JSONObject dd = new JSONObject(result.optString("data"));
             String token = dd.optString("token");
             int uid = dd.optInt("uid");
-//            WenConstans.id=uid;
             Constants.uid = uid;
             memory.edit().putString("ID", studentId).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
-            PushAgent mPushAgent = PushAgent.getInstance(this);
-            mPushAgent.addAlias("" + uid, "uid", new UTrack.ICallBack() {
-                @Override
-                public void onMessage(boolean b, String s) {
-                    Log.e("DDQ", "b == " + b + ", s = " + s);
-                    if (b) {
-                        memory.edit().putBoolean("alias", true).apply();
-                    }
-                }
-            });
+
             this.finish();
             startActivity(new Intent(mContext, MainActivity.class));
             Utils.toastShort(mContext, "登录成功");
-            MobclickAgent.onProfileSignIn("" + uid);
-            MobclickAgent.onEvent(mContext, "event_userLog");
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
         }
@@ -397,18 +382,5 @@ public class StudentIdLoginActivity extends NetWorkActivity implements View.OnCl
         Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
 }

@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
@@ -42,7 +41,6 @@ import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -231,11 +229,8 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onClick(View v) {
                         if (data.get(position).type != 1) {
-                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
                             if (Objects.equals(data.get(position).uid, Constants.uid + "")) {
-                                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
                             }
-                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                             Intent intent = new Intent(context, WenwenDetailActivity.class);
                             Bundle bundle = new Bundle();
@@ -267,7 +262,6 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                     bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
                         @Override
                         public void onItemClick(int position) {
-                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askCenterBanner");
                             context.startActivity(new Intent(context, WebActivity.class)
                                     .putExtra("url", imgsData.get(position).getLinkUrl()));
                         }

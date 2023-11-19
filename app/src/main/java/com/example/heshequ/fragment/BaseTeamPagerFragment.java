@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.adapter.recycleview.CommentTeamAdapter;
@@ -17,7 +16,6 @@ import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
 
@@ -116,14 +114,11 @@ public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerV
         switch (type) {
             case 1:
                 if (adapter.getData().get(position).getCreator() == Constants.uid) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myTeamEnterDetail");
                 }
                 break;
             case 2:
-                MobclickAgent.onEvent(mContext, "event_teamEnterHall");
                 break;
             case 3:
-                MobclickAgent.onEvent(mContext, "event_teamActivityEnterHall");
                 break;
         }
     }

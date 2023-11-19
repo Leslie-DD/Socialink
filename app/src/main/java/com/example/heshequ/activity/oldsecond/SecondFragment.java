@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.newsencond.SecondhandPostActivity;
@@ -41,7 +40,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -197,7 +195,6 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         ivRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_goodnumadd");
                 startActivity(new Intent(mContext, SecondhandPostActivity.class));
             }
         });
@@ -243,7 +240,6 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
             @Override
             public void onItemClick(int position) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstBanner");
                 startActivity(new Intent(getContext(), WebActivity.class)
                         .putExtra("url", imgsData.get(position).getLinkUrl()));
             }
@@ -278,14 +274,12 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.llSearch:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstSearch");
 
                 Intent intent = new Intent(mContext, GoodsearchActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("category2_id", 0);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                MobclickAgent.onEvent(mContext, "event_teamSearch");
                 break;
             case R.id.second_classifation:
                 Intent intent2 = new Intent(getContext(), ClassifationActivity.class);

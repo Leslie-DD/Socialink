@@ -9,12 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.knowledge.ArticleDetialActivity;
 import com.example.heshequ.bean.knowledge.ArticleSimpleBean;
 import com.google.gson.Gson;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,20 +76,13 @@ public class ColumnDetailAdapter extends RecyclerView.Adapter {
             tvComment.setText("" + data.get(position).commentNum);
             tvTime.setText("" + data.get(position).createTime);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, ArticleDetialActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ArticleId", data.get(position).id);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
 
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
-
-                    Intent intent = new Intent(context, ArticleDetialActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("ArticleId", data.get(position).id);
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-
-                }
             });
         }
     }

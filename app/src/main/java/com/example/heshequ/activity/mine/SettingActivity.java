@@ -17,7 +17,6 @@ import com.example.heshequ.bean.UserInfoBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefUserInfo;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -103,14 +102,12 @@ public class SettingActivity extends NetWorkActivity implements View.OnClickList
                 break;
             case R.id.llSetQuestion:
                 startActivity(new Intent(mContext, DefaultProblemActivity.class).putExtra("type", 2));
-                MobclickAgent.onEvent(mContext, "event_settingQuestion");
                 break;
             case R.id.llLable:
                 startActivity(new Intent(mContext, LabelSelectionActivity.class)
                         .putExtra("type", 2)
                         .putExtra("userLabelsBeans", userLabelsBeans)
                 );
-                MobclickAgent.onEvent(mContext, "event_signSetting");
                 this.finish();
                 break;
         }
@@ -154,18 +151,5 @@ public class SettingActivity extends NetWorkActivity implements View.OnClickList
         Utils.toastShort(mContext, "网络异常");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
 }

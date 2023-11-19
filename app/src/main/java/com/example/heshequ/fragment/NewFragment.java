@@ -22,7 +22,6 @@ import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -208,12 +207,10 @@ public class NewFragment extends NetWorkFragment implements XRecyclerView.Loadin
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(getActivity());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(getActivity());
     }
 }

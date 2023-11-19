@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.adapter.recycleview.HotWenwenAdapter;
@@ -35,7 +34,6 @@ import com.example.heshequ.view.FlowLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,14 +75,13 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         try {
             Gson gson = new Gson();
             if (where == 100) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askSearch");
                 if (hasRefresh) {
                     hasRefresh = false;
                     rv.refreshComplete();
                 }
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
+                    if (data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
                                 new TypeToken<List<WenwenBean>>() {
                                 }.getType());
@@ -382,19 +379,5 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         if (brodcast != null) {
             unregisterReceiver(brodcast);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }

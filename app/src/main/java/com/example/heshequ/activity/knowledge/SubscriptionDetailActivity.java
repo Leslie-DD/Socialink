@@ -19,7 +19,6 @@ import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -151,19 +150,6 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
         sendGetConnection(WenConstans.getColumnDetail + "?id=" + subscriptionId, new String[]{}, new String[]{}, 100, WenConstans.token);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
     @Override
     public void onRefresh() {

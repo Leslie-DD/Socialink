@@ -56,9 +56,6 @@ import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.PushAgent;
-import com.umeng.message.UTrack;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -150,18 +147,6 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
 //            return;
 //        }
         Constants.uid = sp.getInt("uid", 1);
-        if (!sp.getBoolean("alias", false)) {
-            PushAgent mPushAgent = PushAgent.getInstance(this);
-            mPushAgent.addAlias("" + Constants.uid, "uid", new UTrack.ICallBack() {
-                @Override
-                public void onMessage(boolean b, String s) {
-                    if (b) {
-                        sp.edit().putBoolean("alias", true).apply();
-                        Log.e("DDQ", "设置推送别名成功");
-                    }
-                }
-            });
-        }
         Constants.token = sp.getString("token", "");
         WenConstans.token = sp.getString("token", "");
         Constants.userName = sp.getString("user", "18274962484");
@@ -341,24 +326,12 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvUp:  // 退出登录/登录
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myLogOut");
                 pop.dismiss();
                 sp.edit().putString("phone", "").putString("token", "").putInt("uid", 1).putBoolean("isLogin", false).apply();
                 sp.edit().putBoolean("isLogin", false).apply();
                 Constants.uid = 1;
-                PushAgent mPushAgent = PushAgent.getInstance(this);
-                mPushAgent.deleteAlias("" + Constants.uid, "uid", new UTrack.ICallBack() {
-                    @Override
-                    public void onMessage(boolean b, String s) {
-                        if (b) {
-                            sp.edit().putBoolean("alias", false).apply();
-                            Log.e("DDQ", "清除推送别名成功");
-                        }
-                    }
-                });
                 MeetApplication.getInstance().finishAll();
                 startActivity(new Intent(mContext, LoginActivity.class));
-                MobclickAgent.onProfileSignOff();
                 break;
             case R.id.tvPic: //取消
                 pop.dismiss();
@@ -370,7 +343,6 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
                 clum = 0;
                 clearAllSelect();
                 rb1.setSelected(true);
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterFirst");
                 if (Build.VERSION.SDK_INT >= 21) {
                     decorView.setSystemUiVisibility(oldSystemUiVisibility);
                 } else {
@@ -387,7 +359,6 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
                 redStatu(0);
                 clearAllSelect();
                 rb4.setSelected(true);
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterMessage");
                 if (Build.VERSION.SDK_INT >= 21) {
                     decorView.setSystemUiVisibility(oldSystemUiVisibility);
                 } else {
@@ -403,8 +374,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
 //                clum = 3;
 //                clearAllSelect();
 //                rb3.setSelected(true);
-//                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterKnowledge");
-//                if (Build.VERSION.SDK_INT >= 21) {
+//                //                if (Build.VERSION.SDK_INT >= 21) {
 //                    decorView.setSystemUiVisibility(oldSystemUiVisibility);
 //                } else {
 //                    BarUtils.setStatusBarVisibility(this, true);
@@ -420,7 +390,6 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
                 clum = 4;
                 clearAllSelect();
                 rb5.setSelected(true);
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_my");
                 if (Build.VERSION.SDK_INT >= 21) {
                     oldSystemUiVisibility = decorView.getSystemUiVisibility();
                     int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -538,18 +507,6 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         rb4.setSelected(false);
 //        rb3.setSelected(false);
         rb5.setSelected(false);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     public void redStatu(int type) {

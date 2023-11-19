@@ -15,9 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,21 +48,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         holder.tv_slide_searchgood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstSearch");
                 Intent intent = new Intent(mContext, SearchGoodActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("type", 0);
 //                bundle.putInt("category2_id", 0);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                MobclickAgent.onEvent(mContext, "event_teamSearch");
-//                Toast.makeText(mContext, "你点击了Search" , Toast.LENGTH_SHORT).show();
+                //                Toast.makeText(mContext, "你点击了Search" , Toast.LENGTH_SHORT).show();
             }
         });
         holder.iv_addgood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_goodnumadd");
                 startActivity(new Intent(mContext, SecondhandPostActivity.class));
 //                Toast.makeText(mContext, "你点击了AddGood" , Toast.LENGTH_SHORT).show();
             }

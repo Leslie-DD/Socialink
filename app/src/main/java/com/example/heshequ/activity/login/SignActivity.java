@@ -28,7 +28,6 @@ import com.example.heshequ.utils.MatcherUtils;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,7 +116,6 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
         switch (where) {
             case getCode:
                 if (ret == 0) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_getCode");
                     if (result.optInt("code") == 0) {
                         new Thread(new Runnable() {
                             @Override
@@ -299,19 +297,6 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
     @Override
     protected void onDestroy() {

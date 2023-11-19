@@ -10,7 +10,6 @@ import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +64,6 @@ public class ApplyJoinTDActivity extends NetWorkActivity implements View.OnClick
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (where == join) {
-            MobclickAgent.onEvent(mContext, "event_teamApply");
             if (result.optInt("code") == 0) {
                 Utils.toastShort(mContext, "申请成功");
                 this.finish();
@@ -78,20 +76,6 @@ public class ApplyJoinTDActivity extends NetWorkActivity implements View.OnClick
     @Override
     protected void onFailure(String result, int where) {
         Utils.toastShort(mContext, "网络异常");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
 

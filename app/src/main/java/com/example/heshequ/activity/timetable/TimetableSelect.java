@@ -13,7 +13,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -219,17 +218,5 @@ public class TimetableSelect extends NetWorkActivity implements View.OnClickList
         sendPost(WenConstans.ZhongnanGetTimetable, 1, WenConstans.Timetabletoken);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

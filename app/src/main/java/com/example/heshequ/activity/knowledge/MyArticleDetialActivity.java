@@ -16,7 +16,6 @@ import com.example.heshequ.bean.knowledge.RecommendItemBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -124,17 +123,5 @@ public class MyArticleDetialActivity extends NetWorkActivity implements View.OnC
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

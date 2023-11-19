@@ -21,7 +21,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -267,17 +266,4 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
         sendPost(WenConstans.FriendInfo, 1, WenConstans.token);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

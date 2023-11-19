@@ -47,7 +47,6 @@ import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -425,7 +424,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         switch (where) {
             case upHead:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_changeIcon");
                 if (result.optInt("code") == 0) {
                     Glide.with(this).load(path).asBitmap().into(ivHead);
                     EventBus.getDefault().post(new RefUserInfo());
@@ -445,7 +443,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 }
                 break;
             case upSex:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_changeSex");
                 if (result.optInt("code") == 0) {
                     if (sex == 1) {
                         data.get(1).setTip("男");
@@ -459,7 +456,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 }
                 break;
             case 10086:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_changeSchool");
                 if (result.optInt("code") == 0) {
                     datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
                     }.getType());
@@ -514,17 +510,5 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         Utils.toastShort(mContext, "网络错误");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

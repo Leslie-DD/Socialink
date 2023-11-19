@@ -19,7 +19,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.EncryptUtils;
 import com.example.heshequ.utils.MatcherUtils;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,7 +89,6 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         switch (where) {
             case getCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_getCode");
                 if (result.optInt("code") == 0) {
                     new Thread(new Runnable() {
                         @Override
@@ -116,7 +114,6 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                 }
                 break;
             case resetPwdCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_changePwd");
                 if (result.optInt("code") == 0) {
                     this.finish();
                 }
@@ -225,19 +222,6 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
     @Override
     protected void onDestroy() {

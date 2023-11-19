@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.statement.BullertinDetailActivity;
 import com.example.heshequ.activity.statement.VoteDetailActivity;
@@ -28,7 +27,6 @@ import com.example.heshequ.constans.P;
 import com.example.heshequ.entity.TeamTestBean;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.MyGv;
-import com.umeng.analytics.MobclickAgent;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -313,7 +311,6 @@ public class TeamAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
                     //进入详情
                     context.startActivity(
                             new Intent(context, ActivityDateilActivity.class)

@@ -11,7 +11,6 @@ import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -123,17 +122,5 @@ public class FriendShijuanSet extends NetWorkActivity implements View.OnClickLis
         sendPost(Constants.base_url + "/api/social/modifyquest.do", 100, WenConstans.token);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

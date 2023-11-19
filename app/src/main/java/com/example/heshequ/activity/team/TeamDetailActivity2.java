@@ -1,7 +1,5 @@
 package com.example.heshequ.activity.team;
 
-import static com.example.heshequ.MeetApplication.mTencent;
-
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -41,7 +39,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.ReportActivity;
 import com.example.heshequ.activity.TeamMembersActivity;
@@ -65,7 +62,6 @@ import com.example.heshequ.fragment.HallFragment;
 import com.example.heshequ.fragment.ManagerFragment;
 import com.example.heshequ.fragment.StatementFragment;
 import com.example.heshequ.fragment.TeamFragment;
-import com.example.heshequ.interfaces.BaseUiListener;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
@@ -76,11 +72,6 @@ import com.example.heshequ.view.PayPasswordView;
 import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.sina.weibo.sdk.auth.sso.SsoHandler;
-import com.sina.weibo.sdk.share.WbShareCallback;
-import com.sina.weibo.sdk.share.WbShareHandler;
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -95,7 +86,7 @@ import java.util.Map;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener, WbShareCallback {
+public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
     private ImageView ivAdd2, ivAdd3, ivAdd4, ivAdd5, ivAddBj;
     private boolean LockMenu = false;
     private DragImageView ivAdd;
@@ -154,8 +145,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     private BottomShareFragment shareFragment;
     private boolean isQQShare;
     private boolean isWBShare;
-    private WbShareHandler wbShareHandler;
-    private SsoHandler ssoHandler;
     private String teamName;
 
     public int IDENTIFY = 3;//普通团员 2-> 管理员 1-> 团长
@@ -281,9 +270,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         //获取团队详情数据
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
         sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
-//        checkSecret();
-        wbShareHandler = new WbShareHandler(this);
-        wbShareHandler.registerApp();
     }
 
     public void setTitleName(String name) {
@@ -646,15 +632,13 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 //                Utils.toastShort(mContext,"button" + index);
 //                switch (index) {
 //                    case 1:
-//                        MobclickAgent.onEvent(mContext, "event_postVote");
-//                        startActivity(new Intent(mContext, PublishVoteActivity.class));
+//                        //                        startActivity(new Intent(mContext, PublishVoteActivity.class));
 //                        break;
 //                    case 2:
 //                        startActivity(new Intent(mContext, ReleaseActivitiesActivity.class).putExtra("type", 1));
 //                        break;
 //                    case 3:
-//                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterNoticeVC");
-//                        startActivity(new Intent(mContext, EditorialBulletinActivity.class).putExtra("type", 1));
+//                        //                        startActivity(new Intent(mContext, EditorialBulletinActivity.class).putExtra("type", 1));
 //                        break;
 //                }
 //            }
@@ -1151,14 +1135,12 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 showSecretChangePop();
                 break;
             case R.id.ivAdd: //添加团言
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterPostTeamSay");
                 startActivity(new Intent(this, StatementActivity.class).putExtra("teamId", teamId));
                 break;
             case R.id.ll_teamMembers:
                 Intent intent = new Intent(mContext, TeamMembersActivity.class);
                 intent.putExtra("id", id);
                 startActivity(intent);
-                MobclickAgent.onEvent(mContext, "event_teamMember");
                 break;
 
             case R.id.ivEWM:
@@ -1168,7 +1150,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                     intent.putExtra("bean", cBean);
                 }
                 startActivity(intent);
-                MobclickAgent.onEvent(mContext, "event_teamCode");
                 //toast
                 break;
             case R.id.ivBack:
@@ -1301,7 +1282,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
             case R.id.ivAdd3:
                 close();
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterNoticeVC");
                 startActivity(new Intent(mContext, EditorialBulletinActivity.class).putExtra("type", 1));
                 break;
             case R.id.ivAdd4:
@@ -1310,7 +1290,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
             case R.id.ivAdd5:
                 close();
-                MobclickAgent.onEvent(mContext, "event_postVote");
                 startActivity(new Intent(mContext, PublishVoteActivity.class));
                 break;
         }
@@ -1360,16 +1339,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (null != mTencent) {
-            if (isQQShare) {
-                mTencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener(this));
-                isQQShare = false;
-            }
-        }
-        if (isWBShare) {
-            wbShareHandler.doResultIntent(data, this);
-            isWBShare = false;
-        }
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -1518,8 +1487,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
 
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
         sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
@@ -1528,64 +1495,20 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
 
     }
 
     @Override
     public void clickPosition(int position) {
         ShareBean shareBean = shareFragment.getGvData().get(position);
-        if (shareBean.getName().equals("微信好友")) {
-            if (!Utils.isWeChatAppInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装微信客户端");
-                return;
-            }
-            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, Constants.base_url + cBean.getLogoImage(), Constants.base_url + "teaminfo.html?id=" + cBean.getId(), cBean.getName(), "所属学校：" + cBean.getCollege() + "\n" + cBean.getIntroduction());
-        } else if (shareBean.getName().equals("朋友圈")) {
-            if (!Utils.isWeChatAppInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装微信客户端");
-                return;
-            }
-            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, Constants.base_url + cBean.getLogoImage(), Constants.base_url + "teaminfo.html?id=" + cBean.getId(), cBean.getName(), "所属学校：" + cBean.getCollege() + "\n" + cBean.getIntroduction());
-        } else if (shareBean.getName().equals("微博")) {
-            if (!Utils.isWeiboInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安新浪微博客户端");
-                return;
-            }
-            isWBShare = true;
-            Utils.shareToWeibo(wbShareHandler, Constants.base_url + cBean.getLogoImage(), cBean.getName(), "所属学校：" + cBean.getCollege() + "\n" + cBean.getIntroduction() + Constants.base_url + "teaminfo.html?id=" + cBean.getId());
-            //ssoHandler.authorize(new SelfWbAuthListener(this));
-        } else if (shareBean.getName().equals("QQ")) {
-            if (!Utils.isQQClientInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装QQ客户端");
-                return;
-            }
-            isQQShare = true;
-            Utils.sendQQShare(this, Constants.base_url + cBean.getLogoImage(), Constants.base_url + "teaminfo.html?id=" + cBean.getId(), cBean.getName(), "所属学校：" + cBean.getCollege() + "\n" + cBean.getIntroduction());
-        }
+        // TODO: support
+        Utils.toastShort(mContext, "尚不支持");
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
     }
-
-    @Override
-    public void onWbShareSuccess() {
-        Utils.toastShort(mContext, "微博分享成功");
-    }
-
-    @Override
-    public void onWbShareCancel() {
-        Utils.toastShort(mContext, "取消了微博分享");
-    }
-
-    @Override
-    public void onWbShareFail() {
-        Utils.toastShort(mContext, "微博分享失败");
-    }
-
 
     /**
      * 打开菜单

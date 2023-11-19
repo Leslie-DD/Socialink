@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.wenwen.ZcArticleActivity;
 import com.example.heshequ.activity.wenwen.ZcQusetionActivity;
@@ -26,7 +25,6 @@ import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -289,7 +287,6 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                             Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
                             return;
                         }
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askSpecailRunning");
                         intent = new Intent(mContext, ZcArticleActivity.class);
                         bundle = new Bundle();
                         bundle.putSerializable("beans", zcList3.get(position));
@@ -301,7 +298,6 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                             Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
                             return;
                         }
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askArticleEnter");
                         intent = new Intent(mContext, ZcQusetionActivity.class);
                         bundle = new Bundle();
                         bundle.putSerializable("beans", zcList4.get(position));

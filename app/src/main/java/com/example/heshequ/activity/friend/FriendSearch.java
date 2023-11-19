@@ -24,7 +24,6 @@ import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
@@ -121,7 +120,6 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     private void getFriendData(String content) {
@@ -132,7 +130,6 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

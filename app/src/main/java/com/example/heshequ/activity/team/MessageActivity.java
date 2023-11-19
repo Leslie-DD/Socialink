@@ -34,7 +34,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -551,13 +550,11 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
     //继承父类函数，实现加载后页面回复
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     @Override
     //继承父类函数，实现加载时页面悬停
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 }

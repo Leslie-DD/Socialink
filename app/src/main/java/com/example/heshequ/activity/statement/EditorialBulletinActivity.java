@@ -14,7 +14,6 @@ import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefTDteamEvent;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -140,18 +139,10 @@ public class EditorialBulletinActivity extends NetWorkActivity implements View.O
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
 
     }
 }

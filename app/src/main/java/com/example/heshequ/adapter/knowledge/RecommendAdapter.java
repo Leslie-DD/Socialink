@@ -11,19 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.knowledge.ArticleDetialActivity;
 import com.example.heshequ.bean.knowledge.RecommendItemBean;
-import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class RecommendAdapter extends RecyclerView.Adapter {
     private Context context;
@@ -100,23 +96,13 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             tvAgree.setText("" + data.get(position).likeNum);
             tvComment.setText("" + data.get(position).commentNum);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, ArticleDetialActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("ArticleId", data.get(position).id);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
 
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
-                    if (Objects.equals(data.get(position).author.id, Constants.uid + "")) {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
-                    }
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
-
-                    Intent intent = new Intent(context, ArticleDetialActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("ArticleId", data.get(position).id);
-                    intent.putExtras(bundle);
-                    context.startActivity(intent);
-
-                }
             });
         }
     }

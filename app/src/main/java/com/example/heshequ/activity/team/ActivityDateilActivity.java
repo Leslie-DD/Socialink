@@ -1,7 +1,5 @@
 package com.example.heshequ.activity.team;
 
-import static com.example.heshequ.MeetApplication.mTencent;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -43,17 +41,12 @@ import com.example.heshequ.entity.PhotosBean;
 import com.example.heshequ.entity.RefTDteamEvent;
 import com.example.heshequ.entity.TeamTestBean;
 import com.example.heshequ.fragment.BottomShareFragment;
-import com.example.heshequ.interfaces.BaseUiListener;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.sina.weibo.sdk.share.WbShareCallback;
-import com.sina.weibo.sdk.share.WbShareHandler;
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -66,7 +59,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ActivityDateilActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener, WbShareCallback {
+public class ActivityDateilActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
     private int activityId;
     private ImageView ivBack, ivShare, ivRight;
     private TextView tvTitle;
@@ -98,7 +91,6 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
     private LinearLayout ll_editor, ll_del, ll_cacel;
     private BottomShareFragment shareFragment;
     private boolean isQQShare;
-    private WbShareHandler wbShareHandler;
     private AlertDialog deldialog;
     private int delid;
     private final int initData = 1000;
@@ -164,8 +156,6 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         gvEmoji = (GridView) findViewById(R.id.gvEmoji);
         gvEmojiAdapter = new GvEmojiAdapter(this, Constants.emojis);
         gvEmoji.setAdapter(gvEmojiAdapter);
-        wbShareHandler = new WbShareHandler(this);
-        wbShareHandler.registerApp();
         initDialog();
     }
 
@@ -589,7 +579,6 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
                 }
                 break;
             case sendComment:
-                MobclickAgent.onEvent(mContext, "event_postComment");
                 switch (result.optInt("code")) {
                     case 0:
                         pn = 1;
@@ -697,86 +686,12 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
     @Override
     public void clickPosition(int position) {
         ShareBean shareBean = shareFragment.getGvData().get(position);
-        if (shareBean.getName().equals("微信好友")) {
-            if (!Utils.isWeChatAppInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装微信客户端");
-                return;
-            }
-            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
-                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
-                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            } else {
-                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            }
-        } else if (shareBean.getName().equals("朋友圈")) {
-            if (!Utils.isWeChatAppInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装微信客户端");
-                return;
-            }
-            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
-                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
-                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            } else {
-                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            }
-        } else if (shareBean.getName().equals("微博")) {
-            if (!Utils.isWeiboInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安新浪微博客户端");
-                return;
-            }
-            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
-                Utils.shareToWeibo(wbShareHandler, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
-                        bean.getTitle(), bean.getContent() + Constants.base_url + "ActiveInfo.html?id=" + bean.getId());
-            } else {
-                Utils.shareToWeibo(wbShareHandler, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        bean.getTitle(), bean.getContent() + Constants.base_url + "ActiveInfo.html?id=" + bean.getId());
-            }
-        } else if (shareBean.getName().equals("QQ")) {
-            if (!Utils.isQQClientInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装QQ客户端");
-                return;
-            }
-            isQQShare = true;
-            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
-                Utils.sendQQShare(this, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
-                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            } else {
-                Utils.sendQQShare(this, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            }
-        }
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (null != mTencent) {
-            if (isQQShare) {
-                mTencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener(this));
-                isQQShare = false;
-            } else {
-                if (data != null) {
-                    wbShareHandler.doResultIntent(data, this);
-                }
-            }
-        }
+        // TODO: support
+        Utils.toastShort(mContext, "尚不支持");
     }
 
 
@@ -785,18 +700,4 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         super.onNewIntent(intent);
     }
 
-    @Override
-    public void onWbShareSuccess() {
-        Utils.toastShort(mContext, "微博分享成功");
-    }
-
-    @Override
-    public void onWbShareCancel() {
-        Utils.toastShort(mContext, "取消了微博分享");
-    }
-
-    @Override
-    public void onWbShareFail() {
-        Utils.toastShort(mContext, "微博分享失败");
-    }
 }

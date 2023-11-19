@@ -38,8 +38,6 @@ import com.example.heshequ.view.MyLv;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.sina.weibo.sdk.share.WbShareHandler;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,7 +87,6 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
     private boolean isWBShare;
     private NewDisscussAdapter newDisscussAdapter;
 
-    private WbShareHandler wbShareHandler;
     private String save = "收藏";
     private int resultPosition;
     private RefreshBrodcast brodcast;
@@ -187,9 +184,6 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         }
 
         initDialog();
-
-        wbShareHandler = new WbShareHandler(this);
-        wbShareHandler.registerApp();
 
     }
 
@@ -450,12 +444,6 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
     public void doSecond(int position) {
         resultPosition = position;
@@ -467,10 +455,5 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         startActivityForResult(intent, 100);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
+
 }

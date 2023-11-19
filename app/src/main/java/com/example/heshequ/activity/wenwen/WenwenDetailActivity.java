@@ -1,7 +1,5 @@
 package com.example.heshequ.activity.wenwen;
 
-import static com.example.heshequ.MeetApplication.mTencent;
-
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -36,7 +34,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.fragment.BottomShareFragment;
-import com.example.heshequ.interfaces.BaseUiListener;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyLv;
@@ -44,10 +41,6 @@ import com.example.heshequ.view.XialaPop;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.sina.weibo.sdk.share.WbShareCallback;
-import com.sina.weibo.sdk.share.WbShareHandler;
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -62,7 +55,7 @@ import java.util.List;
  * Hulk_Zhang on 2018/5/30 09:58
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class WenwenDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener, WbShareCallback {
+public class WenwenDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
     private int type = 0;
     private CircleView ivHead;
     private EditText etContent;
@@ -97,7 +90,6 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
     private BottomShareFragment shareFragment;
     private boolean isQQShare;
     private boolean isWBShare;
-    private WbShareHandler wbShareHandler;
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
@@ -365,9 +357,6 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
         }
 
         initDialog();
-
-        wbShareHandler = new WbShareHandler(this);
-        wbShareHandler.registerApp();
     }
 
     private void initDialog() {
@@ -579,34 +568,8 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
     @Override
     public void clickPosition(int position) {
         ShareBean shareBean = shareFragment.getGvData().get(position);
-        if (shareBean.getName().equals("微信好友")) {
-            if (!Utils.isWeChatAppInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装微信客户端");
-                return;
-            }
-            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, Constants.base_url + wenwenBean.header, Constants.base_url + "AskInfo.html?id=" + wenwenBean.id, wenwenBean.title, wenwenBean.content);
-        } else if (shareBean.getName().equals("朋友圈")) {
-            if (!Utils.isWeChatAppInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装微信客户端");
-                return;
-            }
-            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, Constants.base_url + wenwenBean.header, Constants.base_url + "AskInfo.html?id=" + wenwenBean.id, wenwenBean.title, wenwenBean.content);
-        } else if (shareBean.getName().equals("微博")) {
-            if (!Utils.isWeiboInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安新浪微博客户端");
-                return;
-            }
-            isWBShare = true;
-            Utils.shareToWeibo(wbShareHandler, Constants.base_url + wenwenBean.header, wenwenBean.title, wenwenBean.content + Constants.base_url + "AskInfo.html?id=" + wenwenBean.id);
-            //ssoHandler.authorize(new SelfWbAuthListener(this));
-        } else if (shareBean.getName().equals("QQ")) {
-            if (!Utils.isQQClientInstalled(this)) {
-                Utils.toastShort(mContext, "您还未安装QQ客户端");
-                return;
-            }
-            isQQShare = true;
-            Utils.sendQQShare(this, Constants.base_url + wenwenBean.header, Constants.base_url + "AskInfo.html?id=" + wenwenBean.id, wenwenBean.title, wenwenBean.content);
-        }
+        // TODO: support
+        Utils.toastShort(mContext, "尚不支持");
     }
 
     @Override
@@ -615,46 +578,9 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
     }
 
     @Override
-    public void onWbShareSuccess() {
-        Utils.toastShort(mContext, "微博分享成功");
-    }
-
-    @Override
-    public void onWbShareCancel() {
-        Utils.toastShort(mContext, "取消了微博分享");
-    }
-
-    @Override
-    public void onWbShareFail() {
-        Utils.toastShort(mContext, "微博分享失败");
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (null != mTencent) {
-            if (isQQShare) {
-                mTencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener(this));
-                isQQShare = false;
-            }
-        }
-        if (isWBShare) {
-            wbShareHandler.doResultIntent(data, this);
-            isWBShare = false;
-        }
+
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
 }

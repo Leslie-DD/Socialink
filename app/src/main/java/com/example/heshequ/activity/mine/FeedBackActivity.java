@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.CategoryBean;
@@ -21,7 +20,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,7 +127,6 @@ public class FeedBackActivity extends NetWorkActivity implements View.OnClickLis
                 cp = 0;
                 break;
             case sendCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_feedBack");
                 Utils.toastShort(mContext, "感谢您的反馈,我们会及时处理！");
                 finish();
                 break;
@@ -167,17 +164,5 @@ public class FeedBackActivity extends NetWorkActivity implements View.OnClickLis
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

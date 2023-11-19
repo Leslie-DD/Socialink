@@ -21,7 +21,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -341,7 +340,6 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
                 break;
             case 2:
                 //Utils.toastShort(getActivity(),"团言详情");
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
                 Intent intent1 = new Intent(mContext, StatementDetailActivity.class);
                 intent1.putExtra("bean", adapter.getData().get(position));
                 startActivity(intent1);

@@ -18,7 +18,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -227,7 +226,6 @@ public class ChildFragment1 extends NetWorkFragment implements CommentTeamAdapte
 
     @Override
     public void OnItemClick(int position) {
-        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotTeam");
         Intent intent = new Intent(mContext, TeamDetailActivity2.class);
         intent.putExtra("id", adapter.getData().get(position).getId());
         startActivity(intent);

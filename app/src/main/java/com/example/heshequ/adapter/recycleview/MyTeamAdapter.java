@@ -11,13 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 
@@ -137,7 +135,6 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterTeam");
                     Intent intent = new Intent(context, TeamDetailActivity2.class);
                     intent.putExtra("id", data.get(position).getId());
                     context.startActivity(intent);

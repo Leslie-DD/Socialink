@@ -45,7 +45,6 @@ import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
@@ -1191,14 +1190,12 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
         this.finish();
     }
 }

@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.activity.team.StatementDetailActivity;
@@ -23,7 +22,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +151,6 @@ public class OtherSayAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
                 Intent intent = new Intent(context, StatementDetailActivity.class);
                 teamBean = new TeamBean();
                 teamBean.setSpeak(data.get(position));

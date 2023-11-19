@@ -31,7 +31,6 @@ import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -99,7 +98,6 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
         ivRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myTeamAddNewTeam");
                 startActivity(new Intent(mContext, AddTeamActivity.class));
             }
         });
@@ -358,20 +356,6 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
         getData(pn, type);
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
     @Override
     protected void onDestroy() {

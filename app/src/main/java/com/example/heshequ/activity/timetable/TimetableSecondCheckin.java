@@ -14,7 +14,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -164,17 +163,6 @@ public class TimetableSecondCheckin extends NetWorkActivity implements View.OnCl
 //        setBodyParams(new String[]{"key", "verification"}, new String[]{key, verification});
 //        sendPost(WenConstans.ZhongnanGetYanzheng,1 , null);
 //    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
+
 }

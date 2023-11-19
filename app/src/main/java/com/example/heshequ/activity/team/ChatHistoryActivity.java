@@ -25,7 +25,6 @@ import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 import com.zkk.view.rulerview.RulerView;
 
 import org.json.JSONException;
@@ -428,14 +427,12 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
 
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     @Override
     //继承父类函数，实现加载时页面悬停
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
 }

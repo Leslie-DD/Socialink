@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
@@ -39,7 +38,6 @@ import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -385,7 +383,6 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                             bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
-                                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_hotTeamBanner");
                                     context.startActivity(new Intent(context, WebActivity.class)
                                             .putExtra("url", imgsData.get(position).getLinkUrl()));
                                 }

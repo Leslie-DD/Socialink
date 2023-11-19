@@ -1,11 +1,6 @@
 package com.example.heshequ.utils;
 
 import static android.content.Context.APP_OPS_SERVICE;
-import static com.tencent.open.SocialConstants.PARAM_APP_SOURCE;
-import static com.tencent.open.SocialConstants.PARAM_IMAGE_URL;
-import static com.tencent.open.SocialConstants.PARAM_SUMMARY;
-import static com.tencent.open.SocialConstants.PARAM_TARGET_URL;
-import static com.tencent.open.SocialConstants.PARAM_TITLE;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,7 +17,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PorterDuff.Mode;
@@ -33,14 +27,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.renderscript.Allocation;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -59,16 +51,8 @@ import com.example.heshequ.R;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.Name;
 import com.example.heshequ.entity.TeamMemberBean;
-import com.example.heshequ.interfaces.BaseUiListener;
 import com.example.heshequ.view.CircleView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.sina.weibo.sdk.api.ImageObject;
-import com.sina.weibo.sdk.api.TextObject;
-import com.sina.weibo.sdk.api.WeiboMultiMessage;
-import com.sina.weibo.sdk.share.WbShareHandler;
-import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -106,7 +90,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1290,212 +1273,6 @@ public class Utils {
         } catch (Exception e) {
             return htmltext;
         }
-    }
-
-    /**
-     * 将bitmap 压缩至32KB以下
-     **/
-    private static byte[] WeChatBitmapToByteArray(Bitmap bmp, boolean needRecycle) {
-        //首先进行一次大范围的压缩
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, output);
-        float zoom = (float) Math.sqrt(32 * 1024 / (float) output.toByteArray().length); //获取缩放比例
-        // 设置矩阵数据
-        Matrix matrix = new Matrix();
-        matrix.setScale(zoom, zoom);
-        // 根据矩阵数据进行新bitmap的创建
-        Bitmap resultBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
-        output.reset();
-        resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
-        // 如果进行了上面的压缩后，依旧大于32K，就进行小范围的微调压缩
-        while (output.toByteArray().length > 32 * 1024) {
-            matrix.setScale(0.9f, 0.9f);//每次缩小 1/10
-            resultBitmap = Bitmap.createBitmap(
-                    resultBitmap, 0, 0,
-                    resultBitmap.getWidth(), resultBitmap.getHeight(), matrix, true);
-            output.reset();
-            resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
-        }
-        return output.toByteArray();
-    }
-
-
-    private static String buildTransaction(final String type) {
-        return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
-    }
-
-    /**
-     * 微信分享
-     * <p>
-     * code ==>
-     * SendMessageToWX.Req.WXSceneSession;   //设置发送给朋友
-     * SendMessageToWX.Req.WXSceneTimeline;  //设置发送到朋友圈
-     *
-     * @param code        分享类型
-     * @param Url         网址
-     * @param title       标题
-     * @param description 描述。
-     */
-    public static void SendWeiXinShare(final int code, String imgurl, final String Url, final String title, final String description) {
-        Log.e("DDQ-->", "URL ==>" + Url);
-        UrlToBitmapUtil.getInstance().getBitMap(imgurl, new UrlToBitmapUtil.CompleteListener() {
-            @Override
-            public void onComplete(Bitmap bitmap) {
-                WXWebpageObject webpage = new WXWebpageObject();
-                webpage.webpageUrl = Url;
-                final WXMediaMessage msg = new WXMediaMessage(webpage);
-                msg.title = title;
-                msg.description = description;   //网页描述
-                msg.setThumbImage(bitmap);
-                msg.thumbData = WeChatBitmapToByteArray(bitmap, true);
-                SendMessageToWX.Req req = new SendMessageToWX.Req();
-                req.message = msg;
-                req.transaction = buildTransaction("img");
-                req.scene = code;
-                Constants.api.sendReq(req);
-            }
-
-            @Override
-            public void onFailure() {
-                Log.e("DDQ", "微信压缩图加载失败,分享失败");
-            }
-        });
-
-
-        /*WXWebpageObject webpage = new WXWebpageObject();
-        webpage.webpageUrl = Url;
-        final WXMediaMessage msg = new WXMediaMessage(webpage);
-        msg.title = title;
-        msg.description = description;   //网页描述
-        SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.message = msg;
-        req.scene = code;
-        Constants.api.sendReq(req);*/
-    }
-
-    /**
-     * 判断微信客户端是否存在
-     *
-     * @return true安装, false未安装
-     */
-    public static boolean isWeChatAppInstalled(Context context) {
-        final PackageManager packageManager = context.getPackageManager();// 获取packagemanager
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
-        if (pinfo != null) {
-            for (int i = 0; i < pinfo.size(); i++) {
-                String pn = pinfo.get(i).packageName;
-                if (pn.equalsIgnoreCase("com.tencent.mm")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * QQ 分享
-     *
-     * @param context     上下文
-     * @param imgurl      图片网址
-     * @param Url         网址
-     * @param title       标题
-     * @param description 描述。
-     */
-    public static void sendQQShare(Activity context, String imgurl, String Url, String title, String description) {
-        Bundle bundle = new Bundle();
-        //这条分享消息被好友点击后的跳转URL。
-        bundle.putString(PARAM_TARGET_URL, Url);
-        //分享的标题。注：PARAM_TITLE、PARAM_IMAGE_URL、PARAM_	SUMMARY不能全为空，最少必须有一个是有值的。
-        bundle.putString(PARAM_TITLE, title);
-        //分享的图片URL
-        bundle.putString(PARAM_IMAGE_URL, imgurl);
-        //分享的消息摘要，最长50个字
-        bundle.putString(PARAM_SUMMARY, description);
-        //标识该消息的来源应用，值为应用名称+AppId。
-        bundle.putString(PARAM_APP_SOURCE, "湘遇" + 1107493816);
-        MeetApplication.mTencent.shareToQQ(context, bundle, new BaseUiListener(context));
-    }
-
-    /**
-     * 判断qq是否是否存在
-     *
-     * @return true安装, false未安装
-     */
-    public static boolean isQQClientInstalled(Context context) {
-        final PackageManager packageManager = context.getPackageManager();
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-        if (pinfo != null) {
-            for (int i = 0; i < pinfo.size(); i++) {
-                String pn = pinfo.get(i).packageName;
-                if (pn.equals("com.tencent.mobileqq")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 微博分享
-     *
-     * @param shareHandler
-     * @param imgurl       图片网址
-     * @param title        标题
-     * @param text         描述。
-     */
-    public static void shareToWeibo(final WbShareHandler shareHandler, String imgurl, final String title, final String text) {
-        UrlToBitmapUtil.getInstance().getBitMap(imgurl, new UrlToBitmapUtil.CompleteListener() {
-            @Override
-            public void onComplete(Bitmap bitmap) {
-                //创建文本消息对象
-                TextObject textObject = new TextObject();
-                textObject.text = text;
-                textObject.title = title;
-                //创建图片消息对象，如果只分享文字和网页就不用加图片
-                WeiboMultiMessage message = new WeiboMultiMessage();
-                ImageObject imageObject = new ImageObject();
-                // 设置 Bitmap 类型的图片到视频对象里        设置缩略图。 注意：最终压缩过的缩略图大小 不得超过 32kb。
-                imageObject.setImageObject(bitmap);
-                message.textObject = textObject;
-                message.imageObject = imageObject;
-                shareHandler.shareMessage(message, false);
-            }
-
-            @Override
-            public void onFailure() {
-                Log.e("DDQ", "微博压缩图加载失败,分享失败");
-            }
-        });
-
-        //创建文本消息对象
-        /*TextObject textObject =new TextObject();
-        textObject.text= text;
-        textObject.title= title;
-        //创建图片消息对象，如果只分享文字和网页就不用加图片
-        WeiboMultiMessage message =new WeiboMultiMessage();
-        message.textObject= textObject;
-        shareHandler.shareMessage(message,false);*/
-
-    }
-
-    /**
-     * 判断新浪微博客户端是否存在
-     *
-     * @return true安装, false未安装
-     */
-    public static boolean isWeiboInstalled(@NonNull Context context) {
-        PackageManager pm;
-        if ((pm = context.getApplicationContext().getPackageManager()) == null) {
-            return false;
-        }
-        List<PackageInfo> packages = pm.getInstalledPackages(0);
-        for (PackageInfo info : packages) {
-            String name = info.packageName.toLowerCase(Locale.ENGLISH);
-            if ("com.sina.weibo".equals(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static int getVerCode(Context context) {

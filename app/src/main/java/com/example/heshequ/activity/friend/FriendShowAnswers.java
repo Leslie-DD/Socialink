@@ -17,7 +17,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -253,17 +252,5 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
         sendPost(Constants.base_url + "/api/social/getPaper.do", 100, WenConstans.token);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

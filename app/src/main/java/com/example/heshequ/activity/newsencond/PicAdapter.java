@@ -1,8 +1,5 @@
 package com.example.heshequ.activity.newsencond;
 
-import static com.blankj.utilcode.util.ActivityUtils.startActivity;
-import static com.taobao.accs.AccsClientConfig.getContext;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.adapter.MyBannerAdapter;
@@ -21,7 +17,6 @@ import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.HomeBannerImgsBean;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +40,6 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
         mList3 = list3;
     }
 
-
     @NonNull
     @Override
     public PicAdapter.PicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,27 +50,17 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PicAdapter.PicViewHolder holder, int position) {
 
-        bannerAdapter = new MyBannerAdapter(holder.rpSliderBanner, getContext());
+        bannerAdapter = new MyBannerAdapter(holder.rpSliderBanner, mContext);
         holder.rpSliderBanner.setAdapter(bannerAdapter);
         bannerAdapter.setData(mList2);
         holder.rpSliderBanner.setPlayDelay(3000);
         holder.rpSliderBanner.setAnimationDurtion(500);
-        holder.rpSliderBanner.setHintView(new ColorPointHintView(getContext(), Color.parseColor("#00bbff"), Color.WHITE));
-        bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstBanner");
-                startActivity(new Intent(getContext(), WebActivity.class)
-                        .putExtra("url", mList3.get(position).getLinkUrl()));
-            }
-        });
+        holder.rpSliderBanner.setHintView(new ColorPointHintView(mContext, Color.parseColor("#00bbff"), Color.WHITE));
+        bannerAdapter.setonBanneritemClickListener(position1 ->
+                mContext.startActivity(new Intent(mContext, WebActivity.class).putExtra("url", mList3.get(position1).getLinkUrl()))
+        );
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "你点击的是Banner", Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.itemView.setOnClickListener(v -> Toast.makeText(mContext, "你点击的是Banner", Toast.LENGTH_SHORT).show());
     }
 
     @Override

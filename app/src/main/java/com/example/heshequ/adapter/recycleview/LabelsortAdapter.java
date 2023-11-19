@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.oldsecond.GoodDetailActivity;
 import com.example.heshequ.bean.SecondhandgoodBean;
@@ -22,7 +21,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -246,16 +244,13 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (type == 1) {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_collectionEnterQuestion");
                         Intent intent = new Intent(context, GoodDetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("Secondhandgood", data.get(position));
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                     } else {
-//                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_collectionEnterHall");
-//                        Intent intent = new Intent(context, TeamDetailActivity2.class);
+//                        //                        Intent intent = new Intent(context, TeamDetailActivity2.class);
 //                        intent.putExtra("id",Integer.parseInt(data.get(position).id));
 //                        context.startActivity(intent);
                     }

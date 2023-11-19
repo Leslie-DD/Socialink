@@ -18,7 +18,6 @@ import com.blankj.utilcode.util.SizeUtils;
 import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.view.ProgressView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,7 +62,6 @@ public class WebActivity extends NetWorkActivity {
         //2、LayoutAlgorithm.SINGLE_COLUMN 适应屏幕，内容将自动缩放
         mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.getSettings().supportMultipleWindows();
         mWebView.getSettings().setAllowContentAccess(true);
@@ -112,20 +110,6 @@ public class WebActivity extends NetWorkActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
     private class MyWebChromeClient extends WebChromeClient {

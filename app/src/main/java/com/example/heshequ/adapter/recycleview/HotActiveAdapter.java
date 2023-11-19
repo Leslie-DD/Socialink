@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.ActivityDateilActivity;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
@@ -28,7 +27,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -167,7 +165,6 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotActivity");
                     context.startActivity(
                             new Intent(context, ActivityDateilActivity.class)
                                     .putExtra("id", hotBean.getId())

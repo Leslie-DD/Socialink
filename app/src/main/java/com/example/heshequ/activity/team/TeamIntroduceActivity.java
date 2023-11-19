@@ -12,7 +12,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.EventBean;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -105,17 +104,5 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
         Utils.toastShort(mContext, "网络异常");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

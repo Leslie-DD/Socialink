@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.MessageActivity;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
@@ -31,7 +30,6 @@ import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -189,7 +187,6 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                                                     Utils.toastShort(context, "该团言已被删除");
                                                     return;
                                                 }
-                                                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_messageEnterTeamSay");
                                                 context.startActivity(new Intent(context, StatementDetailActivity.class)
                                                         .putExtra("bean", bean)
                                                         .putExtra("type", 3));
@@ -216,8 +213,6 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                                             if (result.optInt("code") == 0) {
                                                 WenwenBean wenwenBean = gson.fromJson(result.optString("data"), WenwenBean.class);
                                                 if (wenwenBean != null) {
-                                                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_messageEnterQuestion");
-                                                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
                                                     Intent intent = new Intent(context, WenwenDetailActivity.class);
                                                     Bundle bundle = new Bundle();
                                                     bundle.putSerializable("wenwen", wenwenBean);
@@ -254,8 +249,6 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                                             if (result.optInt("code") == 0) {
                                                 WenwenBean wenwenBean = gson.fromJson(result.optString("data"), WenwenBean.class);
                                                 if (wenwenBean != null) {
-                                                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_messageEnterQuestion");
-                                                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                                                     Intent intent = new Intent(context, WenwenDetailActivity.class);
                                                     Bundle bundle = new Bundle();

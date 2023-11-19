@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.WwSearchActivity;
@@ -39,7 +38,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
 
@@ -219,7 +217,6 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
         bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
             @Override
             public void onItemClick(int position) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askBanner");
                 startActivity(new Intent(getActivity(), WebActivity.class)
                         .putExtra("url", imgsData.get(position).getLinkUrl()));
             }
@@ -240,7 +237,6 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
                 startActivity(intentActivity);
                 break;
             case R.id.ivSecondMa:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askEnterNewAsk");
                 intentActivity = new Intent(getActivity(), SendQuestionActivity.class);
                 startActivity(intentActivity);
                 break;
@@ -406,13 +402,11 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
     @Override

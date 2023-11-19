@@ -10,7 +10,6 @@ import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.fragment.News_FriendFragment;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -101,20 +100,6 @@ public class FriendAddNews extends NetWorkActivity implements View.OnClickListen
                 finish();
                 break;
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }
 

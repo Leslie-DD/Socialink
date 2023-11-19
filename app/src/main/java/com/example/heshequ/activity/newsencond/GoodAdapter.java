@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.oldsecond.GoodDetailActivity;
 import com.example.heshequ.bean.SecondhandgoodBean;
@@ -23,7 +22,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,8 +159,6 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_collectionEnterQuestion");
                     Intent intent = new Intent(mContext, GoodDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("Secondhandgood", mList.get(position));

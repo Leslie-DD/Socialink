@@ -1,9 +1,5 @@
 package com.example.heshequ.constans;
 
-//import com.tencent.mm.opensdk.openapi.IWXAPI;
-
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-
 /**
  * Created by dev06 on 2018/5/15.
  */
@@ -22,7 +18,6 @@ public class Constants {
 
 
     public static final String APP_AD_WX = "wx78748a644eb7d5f7";
-    public static IWXAPI api;
 
     /**
      * 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY

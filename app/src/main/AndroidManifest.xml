@@ -2,11 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.heshequ">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于写入缓存数据到扩展存储卡 -->
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 震动权限 -->
@@ -23,6 +28,7 @@
         android:icon="@mipmap/launcher_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.heshequ.activity.knowledge.CreateArticleActivity" />
         <activity android:name="com.example.heshequ.activity.knowledge.MyColoumnDetailActivity" />
@@ -33,25 +39,25 @@
         <!--        <activity android:name="com.example.meet.activity.knowledge.KnowledgeActivity" /> &lt;!&ndash; hotfix &ndash;&gt;-->
         <activity android:name="com.example.heshequ.classification.ClassifationActivity" />
         <activity android:name="com.example.heshequ.activity.oldsecond.SecondActivity" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="25276821" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.APPSECRET"
-            android:value="6eaffbe12556f4ee01eb51a1e4415812" />
-        <meta-data
-            android:name="com.taobao.android.hotfix.RSASECRET"
-            android:value="MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCsHffLo0xQwcEGLDJRsoNj+3efTyYxJ6NlKrG0iHpoJxCXGGWaTfjw7lEFiCVqTtmdkAyYGCzhnhKsPm5Cb/q7J3NTgqyVM+6xoUG1wOsi/GbgHzhfQtDiS7rZwLffYU4fOkzF7EAM0MGifbAePGFIENltBklvp8DE2LPFlZRalpWbvVazp3PDlCmqcSsuLPY/JgwSvYewLSnCVaDiqIy+CQkbejYMU+VizIjmXzcuwHuATtj1a2pnIwmLMy5MsNgdLTeAmYn2xDvYmBX0jGLmAvJwIVPfrJgzQY5LicVgiqidhfhk7eNiCbvtBMR4rpYtGUn6WU78sTjJTYPdEdWFAgMBAAECggEBAJE2s4M24kNcRTus/ENbZmlrl5BsWd+s/rlzHP0hDI1lMCUaq1ZVpMu5ddhB9rdLkWTTTRzhgLRWBpEWFzasfZF7hlyV6n/zkdaCJAtxmbEp3K4JCSmuGMhkdmATrc6krSHBsVZnrd5iHoy2mGnaLYV82cSXQkwW75fk8T+ppMIL1jNnkNnVfxJECpysgQ98o07iIam0erWovOSR3nwC5AJAWdPMiytSJbT4ejIlnIj9u3DCknJE5ZyL65sJdLhiQC1x+9owoGSEGod0QtKYqr1BAxtsQqsQtErgcn5rh2neRcv0kr458C4uzJoRvAmqO4MfHIU2v8UXwOtEryePv+ECgYEA8/6tNhzQEvpWPcbcKOByf0prVQaSM5UZBnbsWSPLsRWtrlOlGj2Rd5zbKLCNaX4TRtVwNCqrGijnQ4MnYRP8ySuJxzmb6IKEz/7eW9tIXzo4JpZi8e9fdojuAfN5pQg0LpAaR9QeqsZCXVdTWon01pw614QHhV4/ZbNVjAZBcH0CgYEAtJXt7zgNWolv3VHwemhLyJ/pm8rMn1YIkxKGZuaMX0G4UU/R0SIH83JTjTpyGJbtt2waM5jGUtaiACjncb674VmpbtKd0TXtX/2j9Lo/vnklpZLFQe0Zrr++0iKrzV8CyxClXsLfs51YAgi2Kw6QY4WwhAbFQJM/RVUouTNIT6kCgYEAjOandDZTWoJCR06NWPW0aRm6vdEboLobR4Zpmlh3in3wXFllYK/pT1+/l9HM9/yceS1MrHNvd53jXzNgDEmUkz+XQvtbs3ub4tlV40nQk111i6MQ5JHNWRBeEbZeqxT/vVvuMUinpQr0zB5fvksonr59pHNUPIpepgZYApKiO6kCgYEApjRvvwJZ2AAygwJNUHv5c/cqLQcj+WpXjfU42jBK9cko+T17oP2vT7Ljj1JBfLw8odrO6rornkaI55i+G4Quq6O4O5WBRvJZPUXWxwE8dfROX+uLvbeZMaqs1/6tHOHbUkZJzcOR3GBuhcC62ToYTmDXK0yH830SeJ9+UaYPYbECgYBZlZxtccH+aoNboTmH/e6yFW52Y5DykbAYidFHSevg26uUQsfXUMf2bESjRDrcdjD0PLjAeOnZA2hNjARKiwIrI+UUvLaoVdWDB2mgYoR9qmXK6Euhfs75W+U5oX+wZFA9Qf9Te+vP6fHqkRKmULHqs8+IZJs2AhL+16UcR3Niaw==" /> <!-- hotfix -->
+<!--        <meta-data-->
+<!--            android:name="com.taobao.android.hotfix.IDSECRET"-->
+<!--            android:value="25276821" />-->
+<!--        <meta-data-->
+<!--            android:name="com.taobao.android.hotfix.APPSECRET"-->
+<!--            android:value="6eaffbe12556f4ee01eb51a1e4415812" />-->
+<!--        <meta-data-->
+<!--            android:name="com.taobao.android.hotfix.RSASECRET"-->
+<!--            android:value="MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCsHffLo0xQwcEGLDJRsoNj+3efTyYxJ6NlKrG0iHpoJxCXGGWaTfjw7lEFiCVqTtmdkAyYGCzhnhKsPm5Cb/q7J3NTgqyVM+6xoUG1wOsi/GbgHzhfQtDiS7rZwLffYU4fOkzF7EAM0MGifbAePGFIENltBklvp8DE2LPFlZRalpWbvVazp3PDlCmqcSsuLPY/JgwSvYewLSnCVaDiqIy+CQkbejYMU+VizIjmXzcuwHuATtj1a2pnIwmLMy5MsNgdLTeAmYn2xDvYmBX0jGLmAvJwIVPfrJgzQY5LicVgiqidhfhk7eNiCbvtBMR4rpYtGUn6WU78sTjJTYPdEdWFAgMBAAECggEBAJE2s4M24kNcRTus/ENbZmlrl5BsWd+s/rlzHP0hDI1lMCUaq1ZVpMu5ddhB9rdLkWTTTRzhgLRWBpEWFzasfZF7hlyV6n/zkdaCJAtxmbEp3K4JCSmuGMhkdmATrc6krSHBsVZnrd5iHoy2mGnaLYV82cSXQkwW75fk8T+ppMIL1jNnkNnVfxJECpysgQ98o07iIam0erWovOSR3nwC5AJAWdPMiytSJbT4ejIlnIj9u3DCknJE5ZyL65sJdLhiQC1x+9owoGSEGod0QtKYqr1BAxtsQqsQtErgcn5rh2neRcv0kr458C4uzJoRvAmqO4MfHIU2v8UXwOtEryePv+ECgYEA8/6tNhzQEvpWPcbcKOByf0prVQaSM5UZBnbsWSPLsRWtrlOlGj2Rd5zbKLCNaX4TRtVwNCqrGijnQ4MnYRP8ySuJxzmb6IKEz/7eW9tIXzo4JpZi8e9fdojuAfN5pQg0LpAaR9QeqsZCXVdTWon01pw614QHhV4/ZbNVjAZBcH0CgYEAtJXt7zgNWolv3VHwemhLyJ/pm8rMn1YIkxKGZuaMX0G4UU/R0SIH83JTjTpyGJbtt2waM5jGUtaiACjncb674VmpbtKd0TXtX/2j9Lo/vnklpZLFQe0Zrr++0iKrzV8CyxClXsLfs51YAgi2Kw6QY4WwhAbFQJM/RVUouTNIT6kCgYEAjOandDZTWoJCR06NWPW0aRm6vdEboLobR4Zpmlh3in3wXFllYK/pT1+/l9HM9/yceS1MrHNvd53jXzNgDEmUkz+XQvtbs3ub4tlV40nQk111i6MQ5JHNWRBeEbZeqxT/vVvuMUinpQr0zB5fvksonr59pHNUPIpepgZYApKiO6kCgYEApjRvvwJZ2AAygwJNUHv5c/cqLQcj+WpXjfU42jBK9cko+T17oP2vT7Ljj1JBfLw8odrO6rornkaI55i+G4Quq6O4O5WBRvJZPUXWxwE8dfROX+uLvbeZMaqs1/6tHOHbUkZJzcOR3GBuhcC62ToYTmDXK0yH830SeJ9+UaYPYbECgYBZlZxtccH+aoNboTmH/e6yFW52Y5DykbAYidFHSevg26uUQsfXUMf2bESjRDrcdjD0PLjAeOnZA2hNjARKiwIrI+UUvLaoVdWDB2mgYoR9qmXK6Euhfs75W+U5oX+wZFA9Qf9Te+vP6fHqkRKmULHqs8+IZJs2AhL+16UcR3Niaw==" /> &lt;!&ndash; hotfix &ndash;&gt;-->
         <!-- UMENG -->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="5b625c79b27b0a37e50003f9" />
-        <meta-data
-            android:name="UMENG_MESSAGE_SECRET"
-            android:value="5c39f8d167966af902ba0377bac30758" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="Channel_ID" /> <!-- UMENG -->
+<!--        <meta-data-->
+<!--            android:name="UMENG_APPKEY"-->
+<!--            android:value="5b625c79b27b0a37e50003f9" />-->
+<!--        <meta-data-->
+<!--            android:name="UMENG_MESSAGE_SECRET"-->
+<!--            android:value="5c39f8d167966af902ba0377bac30758" />-->
+<!--        <meta-data-->
+<!--            android:name="UMENG_CHANNEL"-->
+<!--            android:value="Channel_ID" /> &lt;!&ndash; UMENG &ndash;&gt;-->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.heshequ.FileProvider"
@@ -67,26 +73,9 @@
             android:name="com.example.wxapi.WXEntryActivity"
             android:exported="true"
             android:label="@string/app_name" /> <!-- <_____________________________________________________________________________________ -->
-        <!-- <_____________________________腾讯sdk_________________________________________________ -->
-        <activity
-            android:name="com.tencent.tauth.AuthActivity"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="tencent1107493816" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.tencent.connect.common.AssistActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- ____________________________________________________________________________________> -->
         <activity
             android:name="com.example.heshequ.activity.MainActivity"
+            android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

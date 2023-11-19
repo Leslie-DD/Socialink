@@ -17,7 +17,6 @@ import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.AgeBean;
 import com.example.heshequ.bean.knowledge.DistanceBean;
 import com.example.heshequ.constans.Constants;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -378,20 +377,6 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
                 break;
 
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
     private void getFiltrateData() {

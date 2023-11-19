@@ -2,34 +2,13 @@ package com.example.heshequ;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.example.heshequ.constans.Constants;
-import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.utils.CrashHandler;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.sina.weibo.sdk.WbSdk;
-import com.sina.weibo.sdk.auth.AuthInfo;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-import com.tencent.tauth.Tencent;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.commonsdk.UMConfigure;
-import com.umeng.message.IUmengRegisterCallback;
-import com.umeng.message.PushAgent;
-import com.umeng.message.UmengMessageHandler;
-import com.umeng.message.entity.UMessage;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +21,6 @@ public class MeetApplication extends Application {
     public ImageLoader mImageLoader = ImageLoader.getInstance();
     private List<Activity> activityList = new ArrayList<>();
     private static MeetApplication instance;
-    public static Tencent mTencent;
-    private PushAgent mPushAgent;
     private String typeId;
     private int mFinalCount;
 
@@ -54,24 +31,9 @@ public class MeetApplication extends Application {
         Fresco.initialize(this);
         Log.e("THIS = ", this.toString());
         instance = this;
-        UMConfigure.init(this, null, null, UMConfigure.DEVICE_TYPE_PHONE, "");
-        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_appLaunch");
-        regTowx();
-        if (mTencent == null) {
-            mTencent = Tencent.createInstance("1107493816", this.getApplicationContext());
-        }
-        AuthInfo mAuthInfo = new AuthInfo(this, Constants.APP_KEY_WB, Constants.REDIRECT_URL, Constants.SCOPE);
-        WbSdk.install(this, mAuthInfo);
         //注册你的ShareHandler：
-        initUm();
         CrashHandler.getInstance().init(this);
         initActivityLifecycleCallbacks();
-    }
-
-    private void regTowx() {
-        Constants.api = WXAPIFactory.createWXAPI(getApplicationContext(), Constants.APP_AD_WX, true);
-        Constants.api.registerApp(Constants.APP_AD_WX);
     }
 
     public static MeetApplication getInstance() {
@@ -138,71 +100,6 @@ public class MeetApplication extends Application {
     //获取sp
     public SharedPreferences getSharedPreferences() {
         return getInstance().getApplicationContext().getSharedPreferences("meet", 0);
-    }
-
-    private void initUm() {
-        try {
-            mPushAgent = PushAgent.getInstance(this);
-            mPushAgent.setMessageHandler(new UmengMessageHandler() {
-                @Override
-                public Notification getNotification(Context context, UMessage uMessage) {
-                    Log.e("ying", "getNotification");
-                    RefreshBean refreshBean = new RefreshBean();
-                    if (uMessage.extra != null) {
-                        if (uMessage.extra.containsKey("type")) {
-                            typeId = uMessage.extra.get("type");
-                            Log.e("ying", "uMessage.extra:" + typeId);
-                        } else {
-                            typeId = "0";
-                        }
-                    } else {
-                        typeId = "0";
-                    }
-                    Log.e("ying", "uMessage.extra:" + typeId);
-                    refreshBean.type = typeId;
-                    EventBus.getDefault().post(refreshBean);
-
-                    if (Build.VERSION.SDK_INT >= 26) {
-                        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                        NotificationChannel channel = new NotificationChannel("channel_id", "channel_name", NotificationManager.IMPORTANCE_HIGH);
-                        if (manager != null) {
-                            manager.createNotificationChannel(channel);
-                        }
-                        Notification.Builder builder = new Notification.Builder(context, "channel_id");
-                        builder.setSmallIcon(R.mipmap.launcher_icon)
-                                .setWhen(System.currentTimeMillis())
-                                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.launcher_icon))
-                                .setContentTitle(uMessage.title)
-                                .setContentText(uMessage.text)
-                                .setAutoCancel(true);
-                        return builder.build();
-                    } else {
-                        NotificationCompat.Builder mBuilder
-                                = new NotificationCompat.Builder(context)
-                                .setSmallIcon(R.mipmap.launcher_icon)
-                                .setTicker("湘遇").setContentTitle(uMessage.title).setDefaults(Notification.DEFAULT_SOUND)
-                                .setAutoCancel(true).setWhen(System.currentTimeMillis())
-                                .setContentText(uMessage.text);
-                        return mBuilder.build();
-                    }
-                }
-            });
-            mPushAgent.register(new IUmengRegisterCallback() {
-                @Override
-                public void onSuccess(String deviceToken) {
-                    Log.e("ying", "deviceToken" + deviceToken);
-                    //注册成功会返回device token
-                }
-
-                @Override
-                public void onFailure(String s, String s1) {
-                    Log.e("ying", "deviceToken没有-" + s + "--" + s1);
-                }
-            });
-        } catch (Exception e) {
-            Log.e("ying", e.toString());
-        }
-
     }
 
     private void initActivityLifecycleCallbacks() {

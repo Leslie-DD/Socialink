@@ -17,7 +17,6 @@ import com.example.heshequ.entity.TeamMemberBean;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -174,20 +173,6 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
     @Override
     protected void onFailure(String result, int where) {
         Utils.toastShort(this, "网络异常");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
 

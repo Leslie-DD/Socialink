@@ -38,7 +38,6 @@ import com.example.heshequ.view.MyGv;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -550,7 +549,6 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
                 }
                 break;
             case sendComment:
-                MobclickAgent.onEvent(mContext, "event_postComment");
                 switch (result.optInt("code")) {
                     case 0:
                         //Utils.toastShort(this, result.optString("msg"));
@@ -643,18 +641,5 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
         Utils.toastShort(this, "网络异常");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
 }

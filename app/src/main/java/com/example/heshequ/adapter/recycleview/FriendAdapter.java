@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.friend.FriendDetail;
 import com.example.heshequ.bean.FriendListBean;
@@ -23,7 +22,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -138,11 +136,8 @@ public class FriendAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
 
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
                     if (Objects.equals(data.get(position).user_id, Constants.uid + "")) {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
                     }
-                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                     Intent intent = new Intent(context, FriendDetail.class);
                     Bundle bundle = new Bundle();

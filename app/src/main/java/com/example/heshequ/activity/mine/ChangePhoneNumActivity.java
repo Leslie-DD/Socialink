@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.CpqAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -29,7 +28,6 @@ import com.example.heshequ.utils.MatcherUtils;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -218,7 +216,6 @@ public class ChangePhoneNumActivity extends NetWorkActivity implements View.OnCl
         int ret = result.optInt("code");
         switch (where) {
             case getCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_getCode");
                 if (ret == 0) {
                     Utils.toastShort(this, "获取验证码成功");
                 } else {
@@ -257,7 +254,6 @@ public class ChangePhoneNumActivity extends NetWorkActivity implements View.OnCl
                 }
                 break;
             case 66:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_changePhone");
                 if (ret == 0) {
                     this.finish();
                     Utils.toastShort(mContext, "更改成功");
@@ -273,19 +269,6 @@ public class ChangePhoneNumActivity extends NetWorkActivity implements View.OnCl
         Utils.toastShort(mContext, "网络错误");
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 
     @Override
     protected void onDestroy() {

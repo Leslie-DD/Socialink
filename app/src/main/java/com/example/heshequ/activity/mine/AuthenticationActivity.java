@@ -29,7 +29,6 @@ import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -188,7 +187,6 @@ public class AuthenticationActivity extends NetWorkActivity implements View.OnCl
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
-                                MobclickAgent.onEvent(mContext, "event_realNameAuth");
                                 try {
                                     JSONObject result = new JSONObject(s);
                                     switch (result.optInt("code")) {
@@ -299,17 +297,5 @@ public class AuthenticationActivity extends NetWorkActivity implements View.OnCl
                 }).launch();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

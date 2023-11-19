@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,16 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.EventBean;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.PushAgent;
-import com.umeng.message.UTrack;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -102,24 +97,12 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
 //            startActivity(intent1);
 
             sp.edit().putString("phone", Phone).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
-            PushAgent mPushAgent = PushAgent.getInstance(this);
-            mPushAgent.addAlias("" + uid, "uid", new UTrack.ICallBack() {
-                @Override
-                public void onMessage(boolean b, String s) {
-                    Log.e("DDQ", "b == " + b + ", s = " + s);
-                    if (b) {
-                        sp.edit().putBoolean("alias", true).apply();
-                    }
-                }
-            });
             this.finish();
             startActivity(new Intent(mContext, MainActivity.class));
 
             //WenConstans.id = uid;
             Utils.toastShort(mContext, "登录成功；用户id：" + Constants.uid);
 
-            MobclickAgent.onProfileSignIn("" + uid);
-            MobclickAgent.onEvent(mContext, "event_userLog");
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
         }
@@ -161,23 +144,10 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
                 sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
                 break;
             case R.id.tvSign:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_goRegist");
                 startActivity(new Intent(mContext, SignActivity.class));
                 break;
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

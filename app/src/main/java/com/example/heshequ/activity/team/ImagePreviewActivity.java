@@ -22,7 +22,6 @@ import com.example.heshequ.base.BaseActivity;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.entity.DelEvent;
 import com.example.heshequ.view.CustomViewPager2;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -265,17 +264,5 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
 }

@@ -35,7 +35,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -237,12 +236,6 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
         pop.setContentView(pv);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
 
     public void onClick(View v) {
         switch (v.getId()) {
@@ -381,10 +374,5 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
                 }).launch();
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
-    }
+
 }

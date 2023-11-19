@@ -15,7 +15,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -189,20 +188,6 @@ public class FriendAnswerQues extends NetWorkActivity implements View.OnClickLis
     private void getData() {
         setBodyParams(new String[]{"user_id"}, new String[]{"" + hisid});
         sendPost(Constants.base_url + "/api/social/getquest.do", 100, WenConstans.token);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }
 

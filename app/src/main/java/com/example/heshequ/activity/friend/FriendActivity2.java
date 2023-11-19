@@ -18,7 +18,6 @@ import com.example.heshequ.fragment.FriendFragment;
 import com.example.heshequ.fragment.NearFragment;
 import com.example.heshequ.fragment.NewFragment;
 import com.example.heshequ.utils.Utils;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -173,7 +172,6 @@ public class FriendActivity2 extends NetWorkActivity implements View.OnClickList
                 startActivity(intent2);
                 break;
             case R.id.FriendFiltrate:
-                // MobclickAgent.onEvent(MeetApplication.getInstance(),"event_askEnterNewAsk");
                 Intent intent1 = new Intent(FriendActivity2.this, SendNew.class);
                 startActivity(intent1);
                 break;
@@ -202,19 +200,5 @@ public class FriendActivity2 extends NetWorkActivity implements View.OnClickList
                 finish();
                 break;
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }

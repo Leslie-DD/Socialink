@@ -13,7 +13,6 @@ import com.example.heshequ.adapter.recycleview.LableAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.GoodLabel;
 import com.example.heshequ.fragment.MygoodFragment;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -78,13 +77,11 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

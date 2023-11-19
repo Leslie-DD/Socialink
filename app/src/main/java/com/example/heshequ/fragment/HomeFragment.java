@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.HomeSearchActivity;
 import com.example.heshequ.activity.MainActivity;
@@ -46,7 +45,6 @@ import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -247,7 +245,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
             @Override
             public void onItemClick(int position) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstBanner");
                 startActivity(new Intent(getActivity(), WebActivity.class)
                         .putExtra("url", imgsData.get(position).getLinkUrl()));
             }
@@ -281,14 +278,11 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
                 startActivity(new Intent(mContext, GPSActivity.class));
                 break;
             case R.id.llSearch:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstSearch");
                 Intent intent = new Intent(getActivity(), HomeSearchActivity.class);
                 startActivity(intent);
-                MobclickAgent.onEvent(mContext, "event_teamSearch");
                 break;
             case R.id.ivSecondMa:
                 //
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstScan");
                 startActivity(new Intent(mContext, CaptureActivity.class));
                 break;
             case R.id.tv1:
@@ -466,13 +460,11 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 
     @Override

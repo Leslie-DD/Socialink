@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.activity.knowledge.MyKnowledgeActivity;
@@ -45,7 +44,6 @@ import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.ArcImageView;
 import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
-import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -149,38 +147,30 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                         startActivity(new Intent(mContext, MyTeamActivity.class));
                         break;
                     case 1://我的创作
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterCollection");
                         startActivity(new Intent(mContext, MyKnowledgeActivity.class));
                         break;
                     case 2:  //我的收藏
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterCollection");
                         startActivity(new Intent(mContext, MyCollectActivity.class));
                         break;
                     case 3: //我的足迹
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterFoot");
                         startActivity(new Intent(mContext, MyFootprintActivity.class));
                         break;
                     case 4://我的拉黑
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_my_pull_the_back");
                         startActivity(new Intent(mContext, MyPullTheBlackActivity.class));
                         break;
                     case 5://实名认证
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterRealName");
                         if (certFlag == -1) {
                             return;
                         }
                         startActivity(new Intent(mContext, AuthenticationActivity.class).putExtra("certFlag", certFlag));
                         break;
                     case 6://意见反馈
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterFeedback");
                         startActivity(new Intent(mContext, FeedBackActivity.class));
                         break;
                     case 7://修改密码
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterChangePwd");
                         startActivity(new Intent(mContext, ForgetPwdActivity.class));
                         break;
                     case 8://设置
-                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterSetting");
                         startActivity(new Intent(mContext, SettingActivity.class)
                                         .putExtra("settingAsk", settingAsk)
                                         .putExtra("settingClub", settingClub)
@@ -314,26 +304,21 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                     Utils.toastShort(getActivity(), "数据加载中~");
                     return;
                 }
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterMyInfo");
                 startActivity(new Intent(mContext, BaseInfoActivity.class).putExtra("userinfobean", userInfoBean));
                 break;
             case R.id.llSay:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterMyWord");
                 startActivity(new Intent(mContext, MySayActivity.class));
                 break;
             case R.id.llQuestion:
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterMyQuestion");
                 startActivity(new Intent(mContext, MyQuestionActivity1.class));
                 break;
             case R.id.llnotice:
 
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterMyQuestion");
                 startActivity(new Intent(mContext, AttentionActivity.class));
                 break;
 
             case R.id.llSecondhand:
 
-                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_enterMyGood");
                 startActivity(new Intent(mContext, MygoodActivity.class));
                 break;
         }

@@ -12,13 +12,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.oldsecond.GoodDetailActivity;
 import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 import com.umeng.analytics.MobclickAgent;
@@ -48,7 +48,7 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
 //        map.put(labelName, data);
 //        this.notifyDataSetChanged();
 //    }
-    public void setData(List<FriendListBean> data){
+    public void setData(List<FriendListBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -60,15 +60,11 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             views = LayoutInflater.from(context).inflate(R.layout.item_friendlist, parent, false);
-        }
-        else{
+        } else {
 
         }
         return new ViewHolder(views, viewType);
@@ -80,32 +76,32 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
         viewHolder.setData(position);
 
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivImg;
 
-        private CircleView ivHead,FriendSex;
-        private TextView tvName,tvCollege ,tvSay, tvAge,tvDistance;
+        private CircleView ivHead, FriendSex;
+        private TextView tvName, tvCollege, tvSay, tvAge, tvDistance;
 
         private LinearLayout llSave;
         private RollPagerView rollPagerView;
         private LinearLayout ll;
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
                 ivImg = (ImageView) view.findViewById(R.id.ivImg);
                 ivHead = (CircleView) view.findViewById(R.id.ivHead);
                 tvName = (TextView) view.findViewById(R.id.tvName);
-                FriendSex= (CircleView) view.findViewById(R.id.FriendSex);
+                FriendSex = (CircleView) view.findViewById(R.id.FriendSex);
                 tvCollege = (TextView) view.findViewById(R.id.tvCollege);
                 tvSay = (TextView) view.findViewById(R.id.tvSay);
                 tvAge = (TextView) view.findViewById(R.id.tvAge);
                 tvDistance = (TextView) view.findViewById(R.id.tvDistance);
 
                 llSave = (LinearLayout) view.findViewById(R.id.llSave);
-            }
-            else{
+            } else {
 
             }
         }
@@ -115,8 +111,8 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
 
             tvCollege.setText(data.get(position).college == null ? "" : data.get(position).college);
             tvSay.setText(data.get(position).descroption == null ? "" : data.get(position).descroption);
-            tvAge.setText(""+data.get(position).age);
-            tvDistance.setText(""+data.get(position).distance );
+            tvAge.setText("" + data.get(position).age);
+            tvDistance.setText("" + data.get(position).distance);
 
             tvName.setText(data.get(position).nickname == null ? "" : data.get(position).nickname);
             if (TextUtils.isEmpty(data.get(position).url)) {
@@ -133,7 +129,7 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
 //                    ivImg.setImageResource(R.mipmap.saved);
 //                    tvLoves.setTextColor(Color.parseColor("#00bbff"));
 //                }
-            if (data.get(position).descroption != null ) {
+            if (data.get(position).descroption != null) {
 
                 tvSay.setText(data.get(position).descroption);
             } else {
@@ -141,16 +137,15 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
             }
 
 
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotAsk");
-                    if (Objects.equals(data.get(position).user_id, Constants.uid + "")){
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myQuestionClick");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
+                    if (Objects.equals(data.get(position).user_id, Constants.uid + "")) {
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
                     }
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                     Intent intent = new Intent(context, GoodDetailActivity.class);
                     Bundle bundle = new Bundle();
@@ -175,20 +170,19 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
     }
 
 
-
     @Override
     public int getItemCount() {
         return data.size();
     }
 
 
-
-
     private SecondhandgoodAdapter.DoSaveListener mDoSaveListener;
-    public interface DoSaveListener{
+
+    public interface DoSaveListener {
         void doSave(int position);
     }
-    public void DoSaveListener(SecondhandgoodAdapter.DoSaveListener mDoSaveListener){
-        this.mDoSaveListener=mDoSaveListener;
+
+    public void DoSaveListener(SecondhandgoodAdapter.DoSaveListener mDoSaveListener) {
+        this.mDoSaveListener = mDoSaveListener;
     }
 }

@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.DefaultProblemActivity;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.base.NetWorkActivity;
@@ -15,8 +17,6 @@ import com.example.heshequ.bean.UserInfoBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefUserInfo;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;

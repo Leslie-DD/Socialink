@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.adapter.recycleview.SearchTeamAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -25,7 +26,6 @@ import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.entity.TestBean;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.FlowLayout;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -42,7 +42,7 @@ import java.util.List;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, TextWatcher {
-    private LinearLayout llBack,llFl;
+    private LinearLayout llBack, llFl;
     private EditText etContent;
     private XRecyclerView rv;
     private TextView tvTips;
@@ -50,12 +50,12 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
     private RelativeLayout rlData;
     private boolean isLable = false;
     private int i = 0;
-    private int pn=1;
-    private int ps=10;
+    private int pn = 1;
+    private int ps = 10;
     private String content;
     private boolean hasRefresh;
     private int totalPage;
-    private List<SearchTeamBean> newList,moreList;
+    private List<SearchTeamBean> newList, moreList;
     private int clickPosition;
     private FlowLayout flowLayout;
     private ArrayList<LabelSelectionActivity.LableBean> datas;
@@ -63,40 +63,41 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        if (ResultUtils.isFail(result,this)){
+        if (ResultUtils.isFail(result, this)) {
             return;
         }
         try {
-            Gson gson=new Gson();
-            if (where==100){
-                if (hasRefresh){
-                    hasRefresh=false;
+            Gson gson = new Gson();
+            if (where == 100) {
+                if (hasRefresh) {
+                    hasRefresh = false;
                     rv.refreshComplete();
                 }
-                if (result.has("data")){
-                    JSONObject data=result.getJSONObject("data");
-                    if (data!=null&&data.has("list")){
+                if (result.has("data")) {
+                    JSONObject data = result.getJSONObject("data");
+                    if (data != null && data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<SearchTeamBean>>(){}.getType());
-                        if (newList==null||newList.size()==0){
-                            newList=new ArrayList<>();
+                                new TypeToken<List<SearchTeamBean>>() {
+                                }.getType());
+                        if (newList == null || newList.size() == 0) {
+                            newList = new ArrayList<>();
                         }
-                        if (data.has("totalPage")){
-                            totalPage=data.getInt("totalPage");
+                        if (data.has("totalPage")) {
+                            totalPage = data.getInt("totalPage");
                         }
-                    }else{
-                        newList=new ArrayList<>();
+                    } else {
+                        newList = new ArrayList<>();
                     }
-                }else{
-                    newList=new ArrayList<>();
+                } else {
+                    newList = new ArrayList<>();
                 }
-                if (newList.size()==0){
+                if (newList.size() == 0) {
                     tvTips.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     tvTips.setVisibility(View.GONE);
                 }
                 setList(newList);
-            }else if(where==101){
+            } else if (where == 101) {
                 rv.loadMoreComplete();
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
@@ -110,27 +111,28 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
                     } else {
                         moreList = new ArrayList<>();
                     }
-                }else{
+                } else {
                     moreList = new ArrayList<>();
                 }
                 newList.addAll(moreList);
-                if (newList.size()==0){
+                if (newList.size() == 0) {
                     tvTips.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     tvTips.setVisibility(View.GONE);
                 }
                 setList(newList);
-            }else if (where == 10086){
-                if (result.optInt("code") == 0){
-                    datas = gson.fromJson(result.optString("data"),new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>(){}.getType());
-                    if (datas!=null && datas.size()>0){
-                        for (LabelSelectionActivity.LableBean b:datas){
+            } else if (where == 10086) {
+                if (result.optInt("code") == 0) {
+                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    }.getType());
+                    if (datas != null && datas.size() > 0) {
+                        for (LabelSelectionActivity.LableBean b : datas) {
                             // 循环添加TextView到容器
                             TestBean bean = new TestBean();
                             bean.setName(b.getValue());
                             testData.add(bean);
                             final TextView view = new TextView(this);
-                            view.setText("#"+b.getValue()+"#");
+                            view.setText("#" + b.getValue() + "#");
                             view.setTextColor(Color.parseColor("#999999"));
                             view.setHeight(Utils.dip2px(this, 34));
                             view.setPadding(Utils.dip2px(this, 17), 0, Utils.dip2px(this, 17), 0);
@@ -156,7 +158,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
                                     }
                                     isLable = true;
                                     //setTvBg(view, testData.get(index).getStatus());
-                                    etContent.setText(text.replace("#",""));
+                                    etContent.setText(text.replace("#", ""));
                                     etContent.setSelection(etContent.getText().toString().trim().length());
 
                                 }
@@ -164,11 +166,11 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
                             flowLayout.addView(view);
                         }
                     }
-                }else{
-                    Utils.toastShort(mContext,result.optString("msg"));
+                } else {
+                    Utils.toastShort(mContext, result.optString("msg"));
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -198,7 +200,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
         etContent = (EditText) findViewById(R.id.etContent);
         tvTips = (TextView) findViewById(R.id.tvTips);
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(this,true,true,rv);
+        ConsTants.initXrecycleView(this, true, true, rv);
         adapter = new SearchTeamAdapter(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
@@ -210,8 +212,8 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
     }
 
     private void getLableData() {
-        setBodyParams(new String[]{"type"},new String[]{"label"});
-        sendPost(Constants.base_url+"/api/pub/category/list.do",10086,Constants.token);
+        setBodyParams(new String[]{"type"}, new String[]{"label"});
+        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
     private void event() {
@@ -225,8 +227,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
         etContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId== EditorInfo.IME_ACTION_SEND ||(event!=null&&event.getKeyCode()== KeyEvent.KEYCODE_SEARCH))
-                {
+                if (actionId == EditorInfo.IME_ACTION_SEND || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_SEARCH)) {
                     //do something;
                     getData(etContent.getText().toString().trim());
                     return true;
@@ -238,7 +239,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
 
 
     private void getData(String s) {
-        pn=1;
+        pn = 1;
         content = s;
         if (!isLable) {
             if (TextUtils.isEmpty(s)) {
@@ -249,13 +250,13 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
                         new String[]{"1", pn + "", ps + "", s});
             }
             sendPost(Constants.base_url + "/api/club/base/pglist.do", 100, Constants.token);
-        }else{
-            setBodyParams(new String[]{"pn","ps","label"}, new String[]{pn+"",ps+"",content});
-            sendPost(Constants.base_url + "/api/club/base/labelList.do",100, Constants.token);
+        } else {
+            setBodyParams(new String[]{"pn", "ps", "label"}, new String[]{pn + "", ps + "", content});
+            sendPost(Constants.base_url + "/api/club/base/labelList.do", 100, Constants.token);
         }
     }
 
-    private void getMore(){
+    private void getMore() {
         if (!isLable) {
             if (TextUtils.isEmpty(content)) {
                 setBodyParams(new String[]{"type", "pn", "ps"},
@@ -265,9 +266,9 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
                         new String[]{"2", pn + "", ps + "", content});
             }
             sendPost(Constants.base_url + "/api/club/base/pglist.do", 101, Constants.token);
-        }else{
-            setBodyParams(new String[]{"pn","ps","label"}, new String[]{pn+"",ps+"",content});
-            sendPost(Constants.base_url + "/api/club/base/labelList.do",101, Constants.token);
+        } else {
+            setBodyParams(new String[]{"pn", "ps", "label"}, new String[]{pn + "", ps + "", content});
+            sendPost(Constants.base_url + "/api/club/base/labelList.do", 101, Constants.token);
         }
     }
 
@@ -306,16 +307,16 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (s!=null){
-            if (s.length()!=2) {
+        if (s != null) {
+            if (s.length() != 2) {
                 isLable = false;
             }
             getData(s.toString());
         }
-        if (s.length() == 0){
+        if (s.length() == 0) {
             llFl.setVisibility(View.VISIBLE);
             rlData.setVisibility(View.INVISIBLE);
-        }else{
+        } else {
             llFl.setVisibility(View.GONE);
             rlData.setVisibility(View.VISIBLE);
         }

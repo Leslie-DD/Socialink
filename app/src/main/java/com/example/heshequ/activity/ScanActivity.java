@@ -3,6 +3,7 @@ package com.example.heshequ.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.umeng.analytics.MobclickAgent;

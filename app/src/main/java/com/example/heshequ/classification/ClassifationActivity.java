@@ -12,9 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.WenConstans;
-import com.example.heshequ.R;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.json.JSONException;
@@ -55,9 +55,9 @@ public class ClassifationActivity extends NetWorkActivity implements View.OnClic
 //                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 //        }
         et_search = findViewById(R.id.et_classi_search);
-        Drawable drawable=getResources().getDrawable(R.drawable.icon_search);
-        drawable.setBounds(0,0,80,80);  // 第一0是距左边距离，第二0是距上边距离，30、35分别是长宽
-        et_search.setCompoundDrawables(drawable,null,null,null);
+        Drawable drawable = getResources().getDrawable(R.drawable.icon_search);
+        drawable.setBounds(0, 0, 80, 80);  // 第一0是距左边距离，第二0是距上边距离，30、35分别是长宽
+        et_search.setCompoundDrawables(drawable, null, null, null);
 
         ib_back = findViewById(R.id.classification_back);
         ib_back.setOnClickListener(this);
@@ -66,6 +66,7 @@ public class ClassifationActivity extends NetWorkActivity implements View.OnClic
         getData();
 //        loadData();
     }
+
     private void getData() {
         sendPost(WenConstans.SecondhandClassify, 102, WenConstans.token);
     }

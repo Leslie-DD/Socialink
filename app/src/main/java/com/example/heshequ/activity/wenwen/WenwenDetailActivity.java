@@ -1,5 +1,7 @@
 package com.example.heshequ.activity.wenwen;
 
+import static com.example.heshequ.MeetApplication.mTencent;
+
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -19,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.ReportActivity;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.adapter.listview.PictureAdapter;
@@ -37,8 +41,6 @@ import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyLv;
 import com.example.heshequ.view.XialaPop;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -55,8 +57,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.heshequ.MeetApplication.mTencent;
 
 /**
  * Hulk_Zhang on 2018/5/30 09:58
@@ -458,7 +458,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
                 sendDisscuss(content);
                 break;
             case R.id.ivRight:
-                XialaPop.showSelectPop(this, save, wenwenBean.uid.equals(Constants.uid + ""),true, new XialaPop.TextListener() {
+                XialaPop.showSelectPop(this, save, wenwenBean.uid.equals(Constants.uid + ""), true, new XialaPop.TextListener() {
                     @Override
                     public void selectPosition(int num) {
                         if (num == 0) {    //收藏相关
@@ -471,7 +471,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
                             jbWw();
                         } else if (num == 2) {
                             DelWw();
-                        }else if (num == 3){
+                        } else if (num == 3) {
                             //ToastUtils.showShort("分享");
                             showShare();
                         }
@@ -597,7 +597,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
                 return;
             }
             isWBShare = true;
-            Utils.shareToWeibo(wbShareHandler, Constants.base_url + wenwenBean.header,  wenwenBean.title, wenwenBean.content + Constants.base_url + "AskInfo.html?id=" + wenwenBean.id);
+            Utils.shareToWeibo(wbShareHandler, Constants.base_url + wenwenBean.header, wenwenBean.title, wenwenBean.content + Constants.base_url + "AskInfo.html?id=" + wenwenBean.id);
             //ssoHandler.authorize(new SelfWbAuthListener(this));
         } else if (shareBean.getName().equals("QQ")) {
             if (!Utils.isQQClientInstalled(this)) {

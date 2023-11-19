@@ -30,11 +30,11 @@ public class CodeCreator {
         int offsetY = h / 2;
 
         /*生成logo*/
-        if (logo!=null){
+        if (logo != null) {
             Matrix matrix = new Matrix();
-            float scaleFactor = Math.min(w * 1.0f / 5 / logo.getWidth(), h * 1.0f / 5 /logo.getHeight());
-            matrix.postScale(scaleFactor,scaleFactor);
-            logoBitmap= Bitmap.createBitmap(logo, 0, 0, logo.getWidth(),   logo.getHeight(), matrix, true);
+            float scaleFactor = Math.min(w * 1.0f / 5 / logo.getWidth(), h * 1.0f / 5 / logo.getHeight());
+            matrix.postScale(scaleFactor, scaleFactor);
+            logoBitmap = Bitmap.createBitmap(logo, 0, 0, logo.getWidth(), logo.getHeight(), matrix, true);
         }
 
 
@@ -63,17 +63,17 @@ public class CodeCreator {
         int[] pixels = new int[w * h];
         for (int y = 0; y < h; y++) {
             for (int x = 0; x < w; x++) {
-                if(x >= offsetX && x < offsetX + logoW && y>= offsetY && y < offsetY + logoH){
-                    int pixel = logoBitmap.getPixel(x-offsetX,y-offsetY);
-                    if(pixel == 0){
-                        if(matrix.get(x, y)){
+                if (x >= offsetX && x < offsetX + logoW && y >= offsetY && y < offsetY + logoH) {
+                    int pixel = logoBitmap.getPixel(x - offsetX, y - offsetY);
+                    if (pixel == 0) {
+                        if (matrix.get(x, y)) {
                             pixel = 0xff000000;
-                        }else{
+                        } else {
                             pixel = 0xffffffff;
                         }
                     }
                     pixels[y * w + x] = pixel;
-                }else{
+                } else {
                     if (matrix.get(x, y)) {
                         pixels[y * w + x] = 0xff000000;
                     } else {

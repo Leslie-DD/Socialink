@@ -9,11 +9,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -33,6 +33,7 @@ public class FriendQinganSet extends NetWorkActivity implements View.OnClickList
     public static String zhuanye;
     public static String nianji;
     private Button set;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +44,11 @@ public class FriendQinganSet extends NetWorkActivity implements View.OnClickList
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = radioGroup.findViewById(i);
                 qingancontent = radioButton.getText().toString();
-                Toast.makeText(FriendQinganSet.this,radioButton.getText(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(FriendQinganSet.this, radioButton.getText(), Toast.LENGTH_SHORT).show();
             }
         });
         Intent intent1 = getIntent();
-        nianji  = intent1.getStringExtra("nianji");
+        nianji = intent1.getStringExtra("nianji");
         xueyuan = intent1.getStringExtra("xueyuan");
         zhuanye = intent1.getStringExtra("zhuanye");
         jiaxiang = intent1.getStringExtra("jiaxiang");
@@ -58,41 +59,47 @@ public class FriendQinganSet extends NetWorkActivity implements View.OnClickList
          * 定义未修改情感时返回的数据
          * 没有下面的程序，返回会报错
          */
-        Intent i=new Intent();
+        Intent i = new Intent();
         i.putExtra("qinggan", "");
-        setResult(0,i);
+        setResult(0, i);
 
         init();
         event();
     }
+
     private void init() {
         setText("情感状态设置");
         set = (Button) findViewById(R.id.set);
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         set.setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         int ret = result.optInt("code");
         if (ret == 0) {
             Utils.toastShort(mContext, result.optString("msg"));
-            Intent i=new Intent();
+            Intent i = new Intent();
             i.putExtra("qinggan", qingan);
-            setResult(1,i);
+            setResult(1, i);
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
         }
     }
+
     private void getData() {
-        setBodyParams(new String[]{"hometown","emotion","academy","profession", "schoolgrade","user_id"}, new String[]{""+jiaxiang,""+qingan,""+xueyuan,""+zhuanye,""+nianji,""+id});
-        sendPost(Constants.base_url+"/api/social/updateinfor.do", 100, WenConstans.token);
+        setBodyParams(new String[]{"hometown", "emotion", "academy", "profession", "schoolgrade", "user_id"}, new String[]{"" + jiaxiang, "" + qingan, "" + xueyuan, "" + zhuanye, "" + nianji, "" + id});
+        sendPost(Constants.base_url + "/api/social/updateinfor.do", 100, WenConstans.token);
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -115,6 +122,7 @@ public class FriendQinganSet extends NetWorkActivity implements View.OnClickList
                 break;
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

@@ -19,20 +19,52 @@ public class FriendBean implements Serializable {
     private String profession; //专业
     private String schoolgrate;  //年级
     private int sex;    //性别
-    public String getName(){
+
+    public String getName() {
         return nickname;
     }
-    public int getSex(){return sex;}
-    public String getSchoolgrate(){return schoolgrate;}
-    public String getAcademy(){return academy;}
-    public String getNickname(){return nickname;}
-    public ContactsContract.Data getBirthday(){return birthday;}
-    public String getCollege(){return college;}
-    public int getEmotion(){return emotion;}
-    public String getHometown(){return hometown;}
-    public String getDescroption(){return descroption;}
-    public String getHeader(){return header;}
-    public void SetHeader(String heander){
-        this.header=header;
+
+    public int getSex() {
+        return sex;
+    }
+
+    public String getSchoolgrate() {
+        return schoolgrate;
+    }
+
+    public String getAcademy() {
+        return academy;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public ContactsContract.Data getBirthday() {
+        return birthday;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public int getEmotion() {
+        return emotion;
+    }
+
+    public String getHometown() {
+        return hometown;
+    }
+
+    public String getDescroption() {
+        return descroption;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void SetHeader(String heander) {
+        this.header = header;
     }
 }

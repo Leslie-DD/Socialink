@@ -3,6 +3,7 @@
  */
 
 package com.example.heshequ.adapter.recycleview;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,18 +15,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.heshequ.activity.team.PersonalInformationActivity;
+import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
+import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.bean.MsgSayBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class TeamNewsAdapter extends RecyclerView.Adapter {
@@ -35,10 +36,10 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
     private ArrayList<MsgSayBean.SayBean> data = new ArrayList<>();
     private ItemEventListener listener;
 
-    public TeamNewsAdapter(Context context,ArrayList<MsgSayBean.SayBean> data) {
+    public TeamNewsAdapter(Context context, ArrayList<MsgSayBean.SayBean> data) {
         super();
         this.context = context;
-        this.data=data;
+        this.data = data;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -52,7 +53,7 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
         this.notifyDataSetChanged();
     }
 
-    public void setItemEventListener(ItemEventListener listener){
+    public void setItemEventListener(ItemEventListener listener) {
         this.listener = listener;
     }
 
@@ -75,26 +76,28 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvTime,tvName,tvTeamName,tvDesc,tvRefuse,tvAgree,tvTip,Tvjoin;
+        private TextView tvTime, tvName, tvTeamName, tvDesc, tvRefuse, tvAgree, tvTip, Tvjoin;
         private CircleView ivHead;
         private ImageView ivClose;
+
         public ViewHolder(View view) {
             super(view);
             Tvjoin = (TextView) view.findViewById(R.id.Tvjoin);
-            tvTime= (TextView) view.findViewById(R.id.tvTime);
-            tvName= (TextView) view.findViewById(R.id.tvName);
-            tvTeamName= (TextView) view.findViewById(R.id.tvTeamName);
-            tvDesc= (TextView) view.findViewById(R.id.tvDesc);
-            tvRefuse= (TextView) view.findViewById(R.id.tvRefuse);
-            tvAgree= (TextView) view.findViewById(R.id.tvAgree);
-            tvTip= (TextView) view.findViewById(R.id.tvTip);
-            ivHead= (CircleView) view.findViewById(R.id.ivHead);
-            ivClose= (ImageView) view.findViewById(R.id.ivClose);
+            tvTime = (TextView) view.findViewById(R.id.tvTime);
+            tvName = (TextView) view.findViewById(R.id.tvName);
+            tvTeamName = (TextView) view.findViewById(R.id.tvTeamName);
+            tvDesc = (TextView) view.findViewById(R.id.tvDesc);
+            tvRefuse = (TextView) view.findViewById(R.id.tvRefuse);
+            tvAgree = (TextView) view.findViewById(R.id.tvAgree);
+            tvTip = (TextView) view.findViewById(R.id.tvTip);
+            ivHead = (CircleView) view.findViewById(R.id.ivHead);
+            ivClose = (ImageView) view.findViewById(R.id.ivClose);
         }
+
         public void setData(final int position) {
             final MsgSayBean.SayBean sayBean = data.get(position);
             if (sayBean != null) {
-                if (sayBean.getContent()!=null){
+                if (sayBean.getContent() != null) {
                     if (sayBean.getNickName().equals("admin") || sayBean.getContent().contains("解封") || sayBean.getContent().contains("封禁")) {
                         tvName.setText(sayBean.getNickName());
                         tvTip.setText("");
@@ -114,9 +117,9 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
                     }
                 }
 
-                if (sayBean.getNickName().equals(Constants.userName)){
+                if (sayBean.getNickName().equals(Constants.userName)) {
                     tvName.setText("你");
-                }else {
+                } else {
                     tvName.setText(sayBean.getNickName());
                 }
                 if (!TextUtils.isEmpty(sayBean.getHeader())) {
@@ -133,7 +136,7 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
                 tvAgree.setVisibility(sayBean.getStatus() == 0 ? View.VISIBLE : View.GONE);
                 tvTip.setVisibility(sayBean.getStatus() == 0 ? View.GONE : View.VISIBLE);
                 tvTip.setText(sayBean.getStatus() == 2 ? "已同意" : "已拒绝");
-                if (sayBean.getStatus()==5){
+                if (sayBean.getStatus() == 5) {
                     tvName.setVisibility(View.GONE);
                     Tvjoin.setVisibility(View.GONE);
                     tvName.setText("你");
@@ -165,16 +168,18 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
                 ivHead.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid",sayBean.getReplyId()));
+                        context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", sayBean.getReplyId()));
                     }
                 });
             }
         }
     }
 
-    public interface ItemEventListener{
+    public interface ItemEventListener {
         void onRefuse(int position);
+
         void onAgree(int position);
+
         void onDel(int position);
     }
 }

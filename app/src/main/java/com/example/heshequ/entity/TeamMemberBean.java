@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * Created by dev06 on 2018/5/17.
  */
-public class TeamMemberBean implements Comparable<TeamMemberBean>,Serializable {
-    private String header,initialLetter;
+public class TeamMemberBean implements Comparable<TeamMemberBean>, Serializable {
+    private String header, initialLetter;
     private String nickname;
     private String userName;
     private int role;
@@ -122,12 +122,12 @@ public class TeamMemberBean implements Comparable<TeamMemberBean>,Serializable {
 
     @Override
     public int compareTo(TeamMemberBean rhs) {
-        if(getInitialLetter().equals(rhs.getInitialLetter())){
+        if (getInitialLetter().equals(rhs.getInitialLetter())) {
             return getNickname().compareTo(rhs.getNickname());
-        }else{
-            if("#".equals(getInitialLetter())){
+        } else {
+            if ("#".equals(getInitialLetter())) {
                 return 1;
-            }else if("#".equals(rhs.getInitialLetter())){
+            } else if ("#".equals(rhs.getInitialLetter())) {
                 return -1;
             }
             return getInitialLetter().compareTo(rhs.getInitialLetter());

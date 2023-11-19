@@ -36,7 +36,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.Classi
         mList = list;
     }
 
-    public void setPosi(int posi){
+    public void setPosi(int posi) {
         this.posi = posi;
         notifyDataSetChanged();
     }
@@ -53,7 +53,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.Classi
     public void onBindViewHolder(@NonNull ClassifyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         holder.tvText.setText(mList.get(position).getCategory2Name());
-        for(int i=0;i<mList.size();i++) {
+        for (int i = 0; i < mList.size(); i++) {
             if (position == this.posi) {
                 holder.tvText.setTextColor(Color.parseColor("#000000"));
                 holder.tvText.setTextSize(16);
@@ -89,6 +89,7 @@ public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.Classi
     public class ClassifyViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvText;
+
         public ClassifyViewHolder(View itemView) {
             super(itemView);
             // 这里分类item先用slide的

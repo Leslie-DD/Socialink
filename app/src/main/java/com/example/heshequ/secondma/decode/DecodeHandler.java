@@ -64,7 +64,6 @@ public final class DecodeHandler extends Handler {
     }
 
     /**
-     *
      * 解码
      */
     private void decode(byte[] data, int width, int height) {
@@ -97,7 +96,6 @@ public final class DecodeHandler extends Handler {
                 multiFormatReader.reset();
             }
         }
-
 
 
         Handler handler = activity.getHandler();

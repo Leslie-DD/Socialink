@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/5/25.
  */
-public class BuildingBean implements Serializable{
+public class BuildingBean implements Serializable {
 
 
     /**
@@ -54,8 +54,6 @@ public class BuildingBean implements Serializable{
     private int commentAmount;
     private int isLike;
     private String time;
-
-
 
 
     /**
@@ -194,9 +192,8 @@ public class BuildingBean implements Serializable{
         this.likes = likes;
     }
 
-    public static class PhotosBean implements Serializable{
+    public static class PhotosBean implements Serializable {
         /**
-         *
          * photoId : /info/file/pub.do?fileId=speak/20180529/1_20180529191753_292.jpg
          * bzId : 5
          */
@@ -230,7 +227,7 @@ public class BuildingBean implements Serializable{
     }
 
 
-    public static class LikesBean implements Serializable{
+    public static class LikesBean implements Serializable {
         private int uid;
         private String presentorName;
         private int bzId;

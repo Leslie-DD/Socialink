@@ -4,8 +4,8 @@ package com.example.heshequ.entity;
  * Created by dev06 on 2018/5/29.
  */
 public class TeamNewsBean {
-    private String time,name,teamName,desc,head,tip;
-    private int id,status;
+    private String time, name, teamName, desc, head, tip;
+    private int id, status;
 
     public String getTip() {
         return tip;

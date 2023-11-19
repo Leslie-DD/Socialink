@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
         this.listener = listener;
     }
 
-    public MyTeamAdapter(Context context,ArrayList<TeamBean> data) {
+    public MyTeamAdapter(Context context, ArrayList<TeamBean> data) {
         super();
         this.context = context;
         this.data = data;
@@ -51,7 +51,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
         this.notifyDataSetChanged();
     }
 
-    public ArrayList<TeamBean> getData(){
+    public ArrayList<TeamBean> getData() {
         return data;
     }
 
@@ -93,35 +93,33 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(final int position) {
-            if (data.get(position).getLogoImage() == null)
-            {
+            if (data.get(position).getLogoImage() == null) {
                 Glide.with(context).load(R.mipmap.head3).asBitmap().into(ivHead);
-            }
-           else if (data.get(position).getLogoImage().isEmpty()){
+            } else if (data.get(position).getLogoImage().isEmpty()) {
                 Glide.with(context).load(R.mipmap.head3).asBitmap().into(ivHead);
-            }else{
-                Glide.with(context).load(Constants.base_url+data.get(position).getLogoImage()).asBitmap().into(ivHead);
+            } else {
+                Glide.with(context).load(Constants.base_url + data.get(position).getLogoImage()).asBitmap().into(ivHead);
             }
             tvName.setText(data.get(position).getName());
 
-            if (data.get(position).getCreator() == Constants.uid){
+            if (data.get(position).getCreator() == Constants.uid) {
                 ivCanSee.setVisibility(View.VISIBLE);
                 //tvEditor.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 ivCanSee.setVisibility(View.INVISIBLE);
-               // tvEditor.setVisibility(View.INVISIBLE);
+                // tvEditor.setVisibility(View.INVISIBLE);
             }
 
-            if (data.get(position).getSettingVisible() == 0){
-                ivCanSee.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.kj));
-            }else if (data.get(position).getSettingVisible() == 1){
-                ivCanSee.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.bkj));
+            if (data.get(position).getSettingVisible() == 0) {
+                ivCanSee.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.kj));
+            } else if (data.get(position).getSettingVisible() == 1) {
+                ivCanSee.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.bkj));
             }
 
             ivCanSee.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener!=null){
+                    if (listener != null) {
                         listener.OnCanSee(position);
                     }
                 }
@@ -139,7 +137,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myEnterTeam");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myEnterTeam");
                     Intent intent = new Intent(context, TeamDetailActivity2.class);
                     intent.putExtra("id", data.get(position).getId());
                     context.startActivity(intent);
@@ -148,7 +146,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public interface OnClickEventListener{
+    public interface OnClickEventListener {
         void OnCanSee(int position);
 
         void OnEditor(int position);

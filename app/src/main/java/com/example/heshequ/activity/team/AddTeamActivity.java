@@ -21,6 +21,9 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.Label;
 import com.example.heshequ.constans.Constants;
@@ -30,9 +33,6 @@ import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.FlowLayout;
-import com.example.heshequ.MeetApplication;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.umeng.analytics.MobclickAgent;
@@ -50,7 +50,7 @@ import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
 public class AddTeamActivity extends NetWorkActivity implements View.OnClickListener {
-    private final  int PHOTO_REQUEST_CUT = 300;
+    private final int PHOTO_REQUEST_CUT = 300;
     private Button btSave;
     private EditText etName;
     private CircleView ivHead;
@@ -175,7 +175,7 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
                 }
                 break;
             case addCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_createTeam");
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_createTeam");
                 code = result.optInt("code");
                 if (code == 0) {
                                  /*int id=result.optJSONObject("data").optInt("id");
@@ -251,8 +251,8 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
     }
 
     /*
-	 * 剪切图片
-	 */
+     * 剪切图片
+     */
     private void crop(Uri uri) {
         // 裁剪图片意图
         Intent intent = new Intent("com.android.camera.action.CROP");
@@ -268,8 +268,8 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
             intent.putExtra("aspectY", 1);
         }
         // 裁剪后输出图片的尺寸大小
-        intent.putExtra("outputX", Utils.dip2px(this,75));
-        intent.putExtra("outputY", Utils.dip2px(this,75));
+        intent.putExtra("outputX", Utils.dip2px(this, 75));
+        intent.putExtra("outputY", Utils.dip2px(this, 75));
         //裁剪后的图片Uri路径，uritempFile为Uri类变量
         uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "XiangYuIcon.jpg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
@@ -342,7 +342,7 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
                     Utils.toastShort(mContext, "请先选择团队的标签");
                     return;
                 }
-                setBodyParams(new String[]{"file"}, new File[]{fileList.get(0)});
+                setFileBodyParams(new String[]{"file"}, new File[]{fileList.get(0)});
                 setBodyParams(new String[]{"name", "labels"}, new String[]{name, label});
                 sendPost(Constants.base_url + "/api/club/base/save.do", addCode, Constants.token);
                 break;

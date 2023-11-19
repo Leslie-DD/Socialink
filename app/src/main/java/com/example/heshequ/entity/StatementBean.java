@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/6/7.
  */
-public class StatementBean implements Serializable{
+public class StatementBean implements Serializable {
 
     /**
      * id : 7
@@ -51,7 +51,7 @@ public class StatementBean implements Serializable{
     private String time;
     private ArrayList<PhotosBean> photos;
     private ArrayList<LikesBean> likes;
-    private ArrayList<String> imgs=new ArrayList<>();
+    private ArrayList<String> imgs = new ArrayList<>();
 
 
     public ArrayList<String> getImgs() {
@@ -63,10 +63,10 @@ public class StatementBean implements Serializable{
     }
 
     public void setImgs() {
-        if(photos!=null) {
-            imgs=new ArrayList<>();
-            for (int i = 0; i <photos.size() ; i++) {
-                   imgs.add(Constants.base_url+photos.get(i).getPhotoId());
+        if (photos != null) {
+            imgs = new ArrayList<>();
+            for (int i = 0; i < photos.size(); i++) {
+                imgs.add(Constants.base_url + photos.get(i).getPhotoId());
             }
         }
     }
@@ -93,14 +93,14 @@ public class StatementBean implements Serializable{
      */
 
     //private ArrayList<PhotosBean> photos;
+
     /**
      * uid : 2
      * presentorName : 15874893244
      * bzId : 7
      */
 
-   //private ArrayList<LikesBean> likes;
-
+    //private ArrayList<LikesBean> likes;
     public int getId() {
         return id;
     }
@@ -198,8 +198,7 @@ public class StatementBean implements Serializable{
     }
 
 
-
-    public static class LikesBean implements Serializable{
+    public static class LikesBean implements Serializable {
         private int uid;
         private String presentorName;
         private int bzId;

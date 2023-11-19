@@ -4,16 +4,16 @@ package com.example.heshequ.activity.friend;
  * Created by dell on 2020/3/26.
  */
 
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.FriendSearchAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
@@ -21,7 +21,6 @@ import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -35,14 +34,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendSearch extends NetWorkActivity implements View.OnClickListener , XRecyclerView.LoadingListener{
+public class FriendSearch extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
     private int totalPage = 1;
-    private List<FriendListBean> allList, moreList,newList;
+    private List<FriendListBean> allList, moreList, newList;
     private boolean hasRefresh;
     private TextView tvTips;
     private LinearLayout llTip;
     private int clickPosition;
-    private LinearLayout llBack,search;
+    private LinearLayout llBack, search;
     private XRecyclerView rv;
     private EditText etContent;
     private ArrayList<FriendListBean> goodData;
@@ -63,6 +62,7 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
 
 
     }
+
     private void init() {
         rv = (XRecyclerView) findViewById(R.id.rv);
         ConsTants.initXrecycleView(this, true, true, rv);
@@ -96,7 +96,7 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.e("昵称长度<",s.length()+">");
+                Log.e("昵称长度<", s.length() + ">");
                 if (s.length() >= 32) {
                     Utils.toastShort(mContext, "已达最长字符，无法继续输入");
                 }
@@ -104,8 +104,8 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
         });
 
 
-
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -117,12 +117,14 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
         }
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
-    private void getFriendData( String content) {
+
+    private void getFriendData(String content) {
         setBodyParams(new String[]{"content"}, new String[]{"" + content});
         sendPost(Constants.base_url + "/api/social/search.do", 10086, Constants.token);
     }
@@ -132,6 +134,7 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (ResultUtils.isFail(result, this)) {
@@ -140,7 +143,7 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
 
         Gson gson = new Gson();
         if (where == 10086) {
-            Log.e("s","ssssssssssssssssssssssssssssssssssssssssss2");
+            Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss2");
             allList = new ArrayList<>();
             if (hasRefresh) {
                 hasRefresh = false;
@@ -149,14 +152,14 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
             if (result.has("data")) {
 
 
-                Log.e("s","ssssssssssssssssssssssssssssssssssssssssss1");
+                Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss1");
                 JSONArray data = result.getJSONArray("data");
 
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendListBean>>() {
                             }.getType());
-                    Log.e("s","ssssssssssssssssssssssssssssssssssssssssss");
+                    Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss");
                     if (allList == null || allList.size() == 0) {
                         allList = new ArrayList<>();
                     }
@@ -171,7 +174,7 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONArray("data");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendListBean>>() {
                             }.getType());

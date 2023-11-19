@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.OtherSayActivity;
 import com.example.heshequ.activity.team.PartyBuildingActivity;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
@@ -27,11 +29,8 @@ import com.example.heshequ.utils.SpaceItemDecoration;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.MyLv;
 import com.example.heshequ.view.MyRecyclerview;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -145,10 +144,10 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
         if (mActivity.id != 0) {
             //获取他们说
             setBodyParams(new String[]{"type", "id"}, new String[]{"3", mActivity.id + ""});
-            sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/speak/pglist.do", getSayCode, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/club/speak/pglist.do", getSayCode, Constants.token);
             //获取推荐团建
             setBodyParams(new String[]{"type", "id"}, new String[]{"1", mActivity.id + ""});
-            sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
 
         }
         if (cBean != null) {
@@ -156,7 +155,7 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
         }
         lv.setFocusable(false);
 
-        if (Constants.isJoin && Constants.isAdmin){
+        if (Constants.isJoin && Constants.isAdmin) {
             tvPicEditor.setVisibility(View.VISIBLE);
             tvTeamEditor.setVisibility(View.VISIBLE);
         }
@@ -187,7 +186,7 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
         }
     }
 
-    public void setivPic(String path){
+    public void setivPic(String path) {
         Glide.with(this).load(path).asBitmap().into(ivPic);
     }
 
@@ -208,7 +207,7 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
             @Override
             public void onDel(int position) {
                 setBodyParams(new String[]{"speakId"}, new String[]{"" + testData.get(position).getId()});
-                sendPost(Constants.base_url + "/api/club/speak/delete.do", DelCode, Constants.token);
+                sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", DelCode, Constants.token);
             }
         });
     }
@@ -255,14 +254,14 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
     public void addRefresh(RefStatementEvent event) {
         //获取他们说
         setBodyParams(new String[]{"type", "id"}, new String[]{"3", mActivity.id + ""});
-        sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/speak/pglist.do", getSayCode, Constants.token);
+        sendPostConnection(Constants.base_url + "/api/club/speak/pglist.do", getSayCode, Constants.token);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refTj(RefTjEvent event) {
         //获取推荐团建
         setBodyParams(new String[]{"type", "id"}, new String[]{"1", mActivity.id + ""});
-        sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
+        sendPostConnection(Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
     }
 
     @Override

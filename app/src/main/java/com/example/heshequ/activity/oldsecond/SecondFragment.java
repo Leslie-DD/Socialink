@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.newsencond.SecondhandPostActivity;
 import com.example.heshequ.adapter.MyBannerAdapter;
@@ -35,7 +36,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CustomViewPager;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -121,7 +121,7 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
                 String json = result.toString();
 //                Log.e("strJSON",json);
                 ClassificationBean classificationBean = com.alibaba.fastjson.JSONObject.parseObject(json, ClassificationBean.class);
-                ClassifySecondaryBean classifySecondaryBean = new ClassifySecondaryBean("","推荐",0,0);
+                ClassifySecondaryBean classifySecondaryBean = new ClassifySecondaryBean("", "推荐", 0, 0);
                 classifySecondaryBeanList.add(classifySecondaryBean);
                 for (int i = 0; i < classificationBean.getData().size(); i++) {
                     String category1Name = classificationBean.getData().get(i).getCategory1Name();
@@ -265,12 +265,12 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
     //获取首页轮播图
     private void getImgs() {
         setBodyParams(new String[]{"category"}, new String[]{"" + 1});
-        sendPost(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
+        sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
     }
 
     // 获取二级分类
     private void getCategory() {
-        sendPost(WenConstans.SecondhandClassify, 102, WenConstans.token);
+        sendPostConnection(WenConstans.SecondhandClassify, 102, WenConstans.token);
     }
 
 
@@ -303,9 +303,15 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
 //        Utils.toastShort(mContext, "setTvBg() 重新计算高度 "+status);
 //        vp.resetHeight(status);
 
-        if (this.status == status) { return; }
-        if (vp != null) { vp.setCurrentItem(status); }
-        if (vp != null && vp.getCurrentItem() != status) { vp.setCurrentItem(status); }
+        if (this.status == status) {
+            return;
+        }
+        if (vp != null) {
+            vp.setCurrentItem(status);
+        }
+        if (vp != null && vp.getCurrentItem() != status) {
+            vp.setCurrentItem(status);
+        }
     }
 
     private void event() {

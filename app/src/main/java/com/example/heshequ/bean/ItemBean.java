@@ -5,7 +5,7 @@ package com.example.heshequ.bean;
  */
 public class ItemBean {
     private String name;
-    private String tip="";
+    private String tip = "";
     private int resId;
     private int status;
     private int type = 0;//我的消息中红点使用

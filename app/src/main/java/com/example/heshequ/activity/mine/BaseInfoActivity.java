@@ -370,7 +370,7 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
 
                         @Override
                         public void onSuccess(File file) {
-                            setBodyParams(new String[]{"file"}, new File[]{file});
+                            setFileBodyParams(new String[]{"file"}, new File[]{file});
                             sendPost(Constants.base_url + "/api/user/update.do", upHead, Constants.token);
                         }
 
@@ -380,7 +380,7 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
 
     /*
      * 剪切图片
-	 */
+     */
     private void crop(Uri uri) {
         // 裁剪图片意图
         Intent intent = new Intent("com.android.camera.action.CROP");

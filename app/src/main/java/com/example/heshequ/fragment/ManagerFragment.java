@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.TeamMembersActivity;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.base.NetWorkFragment;
@@ -15,8 +16,6 @@ import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,7 +31,7 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
     private TextView tvTip, tvActivityTip, tvNoticeTip, tvVoteTip, tvNoAdmin, tvComment;
     private ImageView ivStatus, ivActivity, ivNotice, ivVote, ivComment;
     private LinearLayout llManager, llAdmin;
-    private int s1, s2 = 1, s3 = 1, s4 = 1,s5 = 1;
+    private int s1, s2 = 1, s3 = 1, s4 = 1, s5 = 1;
     private TeamDetailActivity2 mActivity;
     private TeamBean cBean;
     private int status;
@@ -74,7 +73,7 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
         init();
         event();
 
-        Log.e("token: ",Constants.token);
+        Log.e("token: ", Constants.token);
         return view;
     }
 
@@ -85,13 +84,13 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
         tvActivityTip = (TextView) view.findViewById(R.id.tvActivityTip);
         tvNoticeTip = (TextView) view.findViewById(R.id.tvNoticeTip);
         tvVoteTip = (TextView) view.findViewById(R.id.tvVoteTip);
-        tvComment = (TextView)view.findViewById(R.id.tvComment);
+        tvComment = (TextView) view.findViewById(R.id.tvComment);
         mActivity = (TeamDetailActivity2) getActivity();
         ivStatus = (ImageView) view.findViewById(R.id.ivStatus);
         ivActivity = (ImageView) view.findViewById(R.id.ivActivity);
         ivNotice = (ImageView) view.findViewById(R.id.ivNotice);
         ivVote = (ImageView) view.findViewById(R.id.ivVote);
-        ivComment = (ImageView)view.findViewById(R.id.ivComment);
+        ivComment = (ImageView) view.findViewById(R.id.ivComment);
         llManager = (LinearLayout) view.findViewById(R.id.llManager);
         setUi();
 
@@ -112,7 +111,7 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
         ivStatus.setImageResource(cBean.getSettingSpeak() == 1 ? R.mipmap.guanbi : R.mipmap.dakai);
         tvTip.setText(cBean.getSettingSpeak() == 1 ? "不可见" : "可见");
         ivComment.setImageResource(cBean.getSettingSpeakComment() == 1 ? R.mipmap.guanbi : R.mipmap.dakai);
-        tvComment.setText(cBean.getSettingSpeakComment() == 1 ? "不可评论":"可评论");
+        tvComment.setText(cBean.getSettingSpeakComment() == 1 ? "不可评论" : "可评论");
         ivVote.setImageResource(cBean.getSettingVote() == 1 ? R.mipmap.guanbi : R.mipmap.dakai);
         tvVoteTip.setText(cBean.getSettingVote() == 1 ? "不可见" : "可见");
         ivActivity.setImageResource(cBean.getSettingActivity() == 1 ? R.mipmap.guanbi : R.mipmap.dakai);
@@ -187,10 +186,10 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
                 setBodyParams(new String[]{"id", "settingVote"}, new String[]{mActivity.id + "", Math.abs(cBean.getSettingVote() - 1) + ""});
                 break;
             case 4://团言评论
-                setBodyParams(new String []{"id","settingSpeakComment"}, new String[]{mActivity.id+" ",Math.abs(cBean.getSettingSpeakComment() - 1)+""});
+                setBodyParams(new String[]{"id", "settingSpeakComment"}, new String[]{mActivity.id + " ", Math.abs(cBean.getSettingSpeakComment() - 1) + ""});
 
         }
-        sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/base/setvisibility.do", getCode, Constants.token);
+        sendPostConnection(Constants.base_url + "/api/club/base/setvisibility.do", getCode, Constants.token);
     }
 
     @Override

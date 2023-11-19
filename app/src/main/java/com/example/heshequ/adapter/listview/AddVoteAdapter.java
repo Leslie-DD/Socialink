@@ -23,11 +23,13 @@ import java.util.ArrayList;
  */
 public class AddVoteAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Item> data=new ArrayList<>();
-    public AddVoteAdapter(Context context,ArrayList<Item> data) {
-        this.context=context;
-        this.data=data;
+    private ArrayList<Item> data = new ArrayList<>();
+
+    public AddVoteAdapter(Context context, ArrayList<Item> data) {
+        this.context = context;
+        this.data = data;
     }
+
     public void setData(ArrayList<Item> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -51,22 +53,22 @@ public class AddVoteAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;
-        final Item item=data.get(position);
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.voew_additem,null);
+        final Item item = data.get(position);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.voew_additem, null);
             viewHolder = new ViewHolder();
-            viewHolder.etName= (EditText) view.findViewById(R.id.etName);
-            viewHolder.ivIcom= (ImageView) view.findViewById(R.id.ivIcon);
+            viewHolder.etName = (EditText) view.findViewById(R.id.etName);
+            viewHolder.ivIcom = (ImageView) view.findViewById(R.id.ivIcon);
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
         viewHolder.etName.setTag(item);
         viewHolder.etName.clearFocus();
-        viewHolder.ivIcom.setImageResource(position==data.size()-1?R.mipmap.increasdtp:R.mipmap.remove);
+        viewHolder.ivIcom.setImageResource(position == data.size() - 1 ? R.mipmap.increasdtp : R.mipmap.remove);
         viewHolder.etName.setText(item.getName());
-        viewHolder.etName.setHint(position==data.size()-1?"添加选项":"选项"+(position+1));
+        viewHolder.etName.setHint(position == data.size() - 1 ? "添加选项" : "选项" + (position + 1));
         viewHolder.etName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -75,7 +77,7 @@ public class AddVoteAdapter extends BaseAdapter {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Item item1= (Item) viewHolder.etName.getTag();
+                Item item1 = (Item) viewHolder.etName.getTag();
                 item1.setName(charSequence.toString());
             }
 
@@ -84,18 +86,17 @@ public class AddVoteAdapter extends BaseAdapter {
 
             }
         });
-        viewHolder.etName.setEnabled(position==data.size()-1?false:true);
+        viewHolder.etName.setEnabled(position == data.size() - 1 ? false : true);
         viewHolder.ivIcom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(position==data.size()-1)
-                {
-                    if (data.size() > 15){
-                        Utils.toastShort(context,"最多只能添加15个选项");
+                if (position == data.size() - 1) {
+                    if (data.size() > 15) {
+                        Utils.toastShort(context, "最多只能添加15个选项");
                         return;
                     }
-                    data.add(data.size()-1,new Item());
-                }else {
+                    data.add(data.size() - 1, new Item());
+                } else {
                     data.remove(position);
                 }
                 notifyDataSetChanged();
@@ -103,8 +104,9 @@ public class AddVoteAdapter extends BaseAdapter {
         });
         return view;
     }
-    public class ViewHolder{
-            EditText etName;
-           ImageView ivIcom;
+
+    public class ViewHolder {
+        EditText etName;
+        ImageView ivIcom;
     }
 }

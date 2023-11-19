@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.knowledge.SubscriptionAdapter;
 import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -14,11 +15,9 @@ import com.example.heshequ.bean.knowledge.SubscriptionItemBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -28,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubscriptionFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener{
+public class SubscriptionFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener {
     private View view;
     private XRecyclerView rv;
     private SubscriptionAdapter adapter;
@@ -43,7 +42,7 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
         init();
-        getData(pn,ps);
+        getData(pn, ps);
         return view;
     }
 
@@ -56,10 +55,10 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
         rv.setLoadingListener(this);
     }
 
-    private void getData(int pn,int ps) {
-        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getSubscription +"?pageSize="+ps +"&pageNum=" +pn,100,WenConstans.token);
-        Log.e("token",""+WenConstans.token);
-        Log.e("userid",""+WenConstans.id);
+    private void getData(int pn, int ps) {
+        sendGetConnection(WenConstans.getSubscription + "?pageSize=" + ps + "&pageNum=" + pn, 100, WenConstans.token);
+        Log.e("token", "" + WenConstans.token);
+        Log.e("userid", "" + WenConstans.id);
     }
 
     @Override
@@ -79,7 +78,7 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
 
                 JSONArray data = result.getJSONObject("data").getJSONArray("list");
 
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<SubscriptionItemBean>>() {
                             }.getType());
@@ -91,14 +90,13 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
             }
 
             adapter.setData(allList);
-        }
-        else if (where == 101) {
+        } else if (where == 101) {
 
             rv.loadMoreComplete();
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONObject("data").getJSONArray("list");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<SubscriptionItemBean>>() {
                             }.getType());
@@ -122,7 +120,6 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
     }
 
 
-
     @Override
     protected void onFailure(String result, int where) {
 
@@ -132,7 +129,7 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
     public void onRefresh() {
         hasRefresh = true;
         pn = 1;
-        getData(pn,ps);
+        getData(pn, ps);
     }
 
     @Override
@@ -146,7 +143,7 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
                 }
             }, 1000);
         } else {
-            getData(pn,ps);
+            getData(pn, ps);
         }
     }
 
@@ -161,6 +158,7 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

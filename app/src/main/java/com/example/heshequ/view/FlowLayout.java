@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.heshequ.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +42,8 @@ public class FlowLayout extends ViewGroup {
 
         // 获取自定义属性
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.FlowLayout);
-        horizontal_space = array.getDimension(R.styleable.FlowLayout_width_space,0);
-        vertical_space =  array.getDimension(R.styleable.FlowLayout_height_space,0);
+        horizontal_space = array.getDimension(R.styleable.FlowLayout_width_space, 0);
+        vertical_space = array.getDimension(R.styleable.FlowLayout_height_space, 0);
         array.recycle();
 
     }

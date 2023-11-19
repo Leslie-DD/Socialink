@@ -10,13 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.knowledge.CreateArticleActivity;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.fragment.knowledge.RecommendFragment;
 import com.example.heshequ.fragment.knowledge.SubscriptionFragment;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -50,7 +50,6 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
     private ImageView ivAdd;
 
 
-
     @Override
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_knowledge, null);
@@ -61,7 +60,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void RefreshData(RefreshBean refreshBean){
+    public void RefreshData(RefreshBean refreshBean) {
 //        RecommendFragment t1= (RecommendFragment) adapter.getItem(0);
 //        SubscriptionFragment t2= (SubscriptionFragment) adapter.getItem(1);
 //
@@ -75,6 +74,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
 //            }
 //        }
     }
+
     private void init() {
 //        setText("知识");
         tvRecommend = (TextView) view.findViewById(R.id.tvRecommend);
@@ -85,7 +85,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
         ivAdd.setOnClickListener(this);
         list = new ArrayList<>();
         recommendFragment = new RecommendFragment();
-        subscriptionFragment =new SubscriptionFragment();
+        subscriptionFragment = new SubscriptionFragment();
 
         list.add(recommendFragment);
         list.add(subscriptionFragment);
@@ -95,6 +95,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
         vp.setCurrentItem(0);
         setTvBg(0);
     }
+
     private void event() {
 //        view.findViewById(R.id.ivBack).setOnClickListener(this);
 
@@ -115,6 +116,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
         tvRecommend.setOnClickListener(this);
         tvSubscription.setOnClickListener(this);
     }
+
     public void setTvBg(int status) {
         if (this.status == status) {
             return;
@@ -129,6 +131,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
             vp.setCurrentItem(status);
         }
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -142,7 +145,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
                 setTvBg(1);
                 break;
             case R.id.ivAdd:
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myTeamAddNewTeam");
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myTeamAddNewTeam");
                 startActivity(new Intent(mContext, CreateArticleActivity.class));
                 break;
         }

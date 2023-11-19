@@ -7,7 +7,7 @@ public class Item {
     private int id;
     private String name;
     private int status;  // 0 未选  1 选
-    private int count,total;
+    private int count, total;
 
     public int getCount() {
         return count;

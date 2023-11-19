@@ -9,15 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.heshequ.MeetApplication;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.entity.RefTeamChild1;
 import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
 import com.google.gson.Gson;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -65,19 +64,19 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
             case 0:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/base/pglist.do",
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         GETDATA, sp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/base/pglist.do",
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         REFDATA, sp.getString("token", ""));
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/base/pglist.do",
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         LOADATA, sp.getString("token", ""));
                 break;
         }
@@ -152,13 +151,13 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                                             teamBean2.setCollectionNumber(teamBean.getCollectionNumber());
                                             teamBean2.setMemberNumber(teamBean.getMemberNumber());
                                             list.add(teamBean2);
-                                        }else {
+                                        } else {
                                             teamBean.setItemType(1);
                                             list.add(teamBean);
                                         }
                                     }
                                     setData(list);
-                                }else{
+                                } else {
                                     list = new ArrayList<>();
                                     setData(list);
                                     tvNoData.setVisibility(View.VISIBLE);
@@ -169,7 +168,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                         }
                         break;
                     default:
-                        Utils.toastShort(mContext,result.optString("msg"));
+                        Utils.toastShort(mContext, result.optString("msg"));
                         break;
                 }
                 break;
@@ -197,7 +196,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                                             teamBean1.setCollectionNumber(teamBean.getCollectionNumber());
                                             teamBean1.setMemberNumber(teamBean.getMemberNumber());
                                             list.add(teamBean1);
-                                        }else if (teamBean.getActivity() != null) {
+                                        } else if (teamBean.getActivity() != null) {
                                             TeamBean teamBean2 = new TeamBean();
                                             teamBean2.setItemType(3);
                                             teamBean2.setActivity(teamBean.getActivity());
@@ -209,13 +208,13 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                                             teamBean2.setCollectionNumber(teamBean.getCollectionNumber());
                                             teamBean2.setMemberNumber(teamBean.getMemberNumber());
                                             list.add(teamBean2);
-                                        }else{
+                                        } else {
                                             teamBean.setItemType(1);
                                             list.add(teamBean);
                                         }
                                     }
                                     setData(list);
-                                }else{
+                                } else {
                                     tvNoData.setVisibility(View.VISIBLE);
                                     list = new ArrayList<>();
                                     setData(list);
@@ -226,7 +225,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                         }
                         break;
                     default:
-                        Utils.toastShort(mContext,result.optString("msg"));
+                        Utils.toastShort(mContext, result.optString("msg"));
                         break;
                 }
                 break;
@@ -252,7 +251,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                                             teamBean1.setCollectionNumber(teamBean.getCollectionNumber());
                                             teamBean1.setMemberNumber(teamBean.getMemberNumber());
                                             list.add(teamBean1);
-                                        }else if (teamBean.getActivity() != null) {
+                                        } else if (teamBean.getActivity() != null) {
                                             TeamBean teamBean2 = new TeamBean();
                                             teamBean2.setItemType(3);
                                             teamBean2.setActivity(teamBean.getActivity());
@@ -264,7 +263,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                                             teamBean2.setCollectionNumber(teamBean.getCollectionNumber());
                                             teamBean2.setMemberNumber(teamBean.getMemberNumber());
                                             list.add(teamBean2);
-                                        }else{
+                                        } else {
                                             teamBean.setItemType(1);
                                             list.add(teamBean);
                                         }
@@ -277,7 +276,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
                         }
                         break;
                     default:
-                        Utils.toastShort(mContext,result.optString("msg"));
+                        Utils.toastShort(mContext, result.optString("msg"));
                         break;
                 }
                 break;
@@ -296,22 +295,21 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
         getData(pn, type);
     }
 
-    @Subscribe (threadMode = ThreadMode.MAIN)
-    public void addRefresh(RefStatementEvent event){
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void addRefresh(RefStatementEvent event) {
         pn = 1;
         type = 1;
         getData(pn, type);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void RefreshData(RefreshBean refreshBean){
-        if (refreshBean.type.equals("1")){
+    public void RefreshData(RefreshBean refreshBean) {
+        if (refreshBean.type.equals("1")) {
             pn = 1;
             type = 1;
             getData(pn, type);
         }
     }
-
 
 
     @Override

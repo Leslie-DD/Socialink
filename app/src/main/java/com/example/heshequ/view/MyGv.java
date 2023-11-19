@@ -9,7 +9,7 @@ import android.widget.GridView;
 
 /**
  * @author dev06
- *         2016年6月17日
+ * 2016年6月17日
  */
 public class MyGv extends GridView {
 

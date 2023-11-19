@@ -20,11 +20,11 @@ import java.util.ArrayList;
 public class ActiviteDateilAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<String> data=new ArrayList<>();
+    private ArrayList<String> data = new ArrayList<>();
 
-    public ActiviteDateilAdapter(Context context,ArrayList<String> data) {
-        this.data=data;
-        this.context=context;
+    public ActiviteDateilAdapter(Context context, ArrayList<String> data) {
+        this.data = data;
+        this.context = context;
     }
 
     public void setData(ArrayList<String> data) {
@@ -50,13 +50,13 @@ public class ActiviteDateilAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if(convertView==null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_activity_dateil,null);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_activity_dateil, null);
             viewHolder = new ViewHolder();
-            viewHolder.iv= (ImageView) convertView.findViewById(R.id.iv);
+            viewHolder.iv = (ImageView) convertView.findViewById(R.id.iv);
 
             convertView.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -66,7 +66,7 @@ public class ActiviteDateilAdapter extends BaseAdapter {
     }
 
 
-    public class ViewHolder{
+    public class ViewHolder {
         ImageView iv;
     }
 }

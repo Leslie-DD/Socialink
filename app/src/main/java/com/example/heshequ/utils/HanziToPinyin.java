@@ -26,17 +26,17 @@ public class HanziToPinyin {
 
     public static HanziToPinyin getInstance() {
         Class var0 = HanziToPinyin.class;
-        synchronized(HanziToPinyin.class) {
-            if(sInstance != null) {
+        synchronized (HanziToPinyin.class) {
+            if (sInstance != null) {
                 return sInstance;
             } else {
                 Locale[] var1 = Collator.getAvailableLocales();
                 Locale[] var2 = var1;
                 int var3 = var1.length;
 
-                for(int var4 = 0; var4 < var3; ++var4) {
+                for (int var4 = 0; var4 < var3; ++var4) {
                     Locale var5 = var2[var4];
-                    if(var5.equals(Locale.CHINA) || var5.getLanguage().equals("zh") && var5.getCountry().equals("HANS")) {
+                    if (var5.equals(Locale.CHINA) || var5.getLanguage().equals("zh") && var5.getCountry().equals("HANS")) {
                         sInstance = new HanziToPinyin(true);
                         return sInstance;
                     }
@@ -54,12 +54,12 @@ public class HanziToPinyin {
         char[] var2 = UNIHANS;
         int var3 = var2.length;
 
-        for(int var4 = 0; var4 < var3; ++var4) {
+        for (int var4 = 0; var4 < var3; ++var4) {
             char var5 = var2[var4];
-            if(var0 != var5) {
+            if (var0 != var5) {
                 String var6 = Character.toString(var5);
                 int var7 = COLLATOR.compare(var1, var6);
-                if(var7 >= 0) {
+                if (var7 >= 0) {
                     return false;
                 }
 
@@ -75,29 +75,29 @@ public class HanziToPinyin {
         String var3 = Character.toString(var1);
         var2.source = var3;
         int var4 = -1;
-        if(var1 < 256) {
+        if (var1 < 256) {
             var2.type = 1;
             var2.target = var3;
             return var2;
         } else {
             int var5 = COLLATOR.compare(var3, "阿");
-            if(var5 < 0) {
+            if (var5 < 0) {
                 var2.type = 3;
                 var2.target = var3;
                 return var2;
             } else {
-                if(var5 == 0) {
+                if (var5 == 0) {
                     var2.type = 2;
                     var4 = 0;
                 } else {
                     var5 = COLLATOR.compare(var3, "\u9fff");
-                    if(var5 > 0) {
+                    if (var5 > 0) {
                         var2.type = 3;
                         var2.target = var3;
                         return var2;
                     }
 
-                    if(var5 == 0) {
+                    if (var5 == 0) {
                         var2.type = 2;
                         var4 = UNIHANS.length - 1;
                     }
@@ -105,19 +105,19 @@ public class HanziToPinyin {
 
                 var2.type = 2;
                 int var7;
-                if(var4 < 0) {
+                if (var4 < 0) {
                     int var6 = 0;
                     var7 = UNIHANS.length - 1;
 
-                    while(var6 <= var7) {
+                    while (var6 <= var7) {
                         var4 = (var6 + var7) / 2;
                         String var8 = Character.toString(UNIHANS[var4]);
                         var5 = COLLATOR.compare(var3, var8);
-                        if(var5 == 0) {
+                        if (var5 == 0) {
                             break;
                         }
 
-                        if(var5 > 0) {
+                        if (var5 > 0) {
                             var6 = var4 + 1;
                         } else {
                             var7 = var4 - 1;
@@ -125,18 +125,18 @@ public class HanziToPinyin {
                     }
                 }
 
-                if(var5 < 0) {
+                if (var5 < 0) {
                     --var4;
                 }
 
                 StringBuilder var9 = new StringBuilder();
 
-                for(var7 = 0; var7 < PINYINS[var4].length && PINYINS[var4][var7] != 0; ++var7) {
-                    var9.append((char)PINYINS[var4][var7]);
+                for (var7 = 0; var7 < PINYINS[var4].length && PINYINS[var4][var7] != 0; ++var7) {
+                    var9.append((char) PINYINS[var4][var7]);
                 }
 
                 var2.target = var9.toString();
-                if(TextUtils.isEmpty(var2.target)) {
+                if (TextUtils.isEmpty(var2.target)) {
                     var2.type = 3;
                     var2.target = var2.source;
                 }
@@ -148,19 +148,19 @@ public class HanziToPinyin {
 
     public ArrayList<Token> get(String var1) {
         ArrayList var2 = new ArrayList();
-        if(this.mHasChinaCollator && !TextUtils.isEmpty(var1)) {
+        if (this.mHasChinaCollator && !TextUtils.isEmpty(var1)) {
             int var3 = var1.length();
             StringBuilder var4 = new StringBuilder();
             int var5 = 1;
 
-            for(int var6 = 0; var6 < var3; ++var6) {
+            for (int var6 = 0; var6 < var3; ++var6) {
                 char var7 = var1.charAt(var6);
-                if(var7 == 32) {
-                    if(var4.length() > 0) {
+                if (var7 == 32) {
+                    if (var4.length() > 0) {
                         this.addToken(var4, var2, var5);
                     }
-                } else if(var7 < 256) {
-                    if(var5 != 1 && var4.length() > 0) {
+                } else if (var7 < 256) {
+                    if (var5 != 1 && var4.length() > 0) {
                         this.addToken(var4, var2, var5);
                     }
 
@@ -168,15 +168,15 @@ public class HanziToPinyin {
                     var4.append(var7);
                 } else {
                     Token var8 = this.getToken(var7);
-                    if(var8.type == 2) {
-                        if(var4.length() > 0) {
+                    if (var8.type == 2) {
+                        if (var4.length() > 0) {
                             this.addToken(var4, var2, var5);
                         }
 
                         var2.add(var8);
                         var5 = 2;
                     } else {
-                        if(var5 != var8.type && var4.length() > 0) {
+                        if (var5 != var8.type && var4.length() > 0) {
                             this.addToken(var4, var2, var5);
                         }
 
@@ -186,7 +186,7 @@ public class HanziToPinyin {
                 }
             }
 
-            if(var4.length() > 0) {
+            if (var4.length() > 0) {
                 this.addToken(var4, var2, var5);
             }
 

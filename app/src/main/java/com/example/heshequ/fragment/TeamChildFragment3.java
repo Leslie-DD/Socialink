@@ -8,13 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.heshequ.MeetApplication;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefTeamChild1;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
 import com.google.gson.Gson;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -61,20 +60,20 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
             case 0:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/base/pglist.do",
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         GETDATA, sp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/base/pglist.do",
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         REFDATA, sp.getString("token", ""));
 
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/base/pglist.do",
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         LOADATA, sp.getString("token", ""));
                 break;
         }
@@ -129,7 +128,7 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
                                         list.add(teamBean);
                                     }
                                     setData(list);
-                                }else{
+                                } else {
                                     tvNoData.setVisibility(View.VISIBLE);
                                     list = new ArrayList<>();
                                     setData(list);
@@ -141,7 +140,7 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
                         }
                         break;
                     default:
-                        Utils.toastShort(mContext,result.optString("msg"));
+                        Utils.toastShort(mContext, result.optString("msg"));
                         break;
                 }
                 break;
@@ -161,7 +160,7 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
                                         list.add(teamBean);
                                     }
                                     setData(list);
-                                }else{
+                                } else {
                                     tvNoData.setVisibility(View.VISIBLE);
                                     list = new ArrayList<>();
                                     setData(list);
@@ -172,7 +171,7 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
                         }
                         break;
                     default:
-                        Utils.toastShort(mContext,result.optString("msg"));
+                        Utils.toastShort(mContext, result.optString("msg"));
                         break;
                 }
                 break;
@@ -197,7 +196,7 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
                         }
                         break;
                     default:
-                        Utils.toastShort(mContext,result.optString("msg"));
+                        Utils.toastShort(mContext, result.optString("msg"));
                         break;
                 }
                 break;
@@ -206,7 +205,7 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void addTeam(RefTeamChild1 bean) {
-        Log.e("DDQ","刷新");
+        Log.e("DDQ", "刷新");
         pn = 1;
         type = 1;
         getData(pn, type);

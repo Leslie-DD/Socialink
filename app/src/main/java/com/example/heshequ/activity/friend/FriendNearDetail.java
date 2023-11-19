@@ -9,14 +9,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.umeng.analytics.MobclickAgent;
@@ -33,13 +33,13 @@ import okhttp3.Response;
 
 public class FriendNearDetail extends NetWorkActivity implements View.OnClickListener {
     private FriendListBean friendListBean;
-    private TextView friendsetTip1,friendsetTip2,friendsetTip3,friendsetTip4,friendsetTip5,friendsetTip6,friendsetTip7,friendsetTip8,friendsetTip9,friendsetTip10,friendsetTip11;
+    private TextView friendsetTip1, friendsetTip2, friendsetTip3, friendsetTip4, friendsetTip5, friendsetTip6, friendsetTip7, friendsetTip8, friendsetTip9, friendsetTip10, friendsetTip11;
     private static int hisid;
     private static int uid;
     private CircleView ivHead;
     private Button set;
     private LinearLayout dongtai;
-    public static int sex ;
+    public static int sex;
     public static String nianji1;
     public static String zhuanye1;
     public static String nicheng1;
@@ -50,6 +50,7 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
     public static String daxue1;
     public static String shengri1;
     public static String xueyuan1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,17 +60,18 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
         friendListBean = (FriendListBean) getIntent().getSerializableExtra("FriendNear");
 //        uid = WenConstans.id;
         uid = Constants.uid;
-        String ids = uid+"";
-        if(ids.equals("0")){
-            Intent intents  = new Intent(FriendNearDetail.this, LoginActivity.class);
+        String ids = uid + "";
+        if (ids.equals("0")) {
+            Intent intents = new Intent(FriendNearDetail.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "用户详情页面，我们需要验证您的身份", Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, "用户详情页面，我们需要验证您的身份", Toast.LENGTH_LONG).show();
         }
         hisid = friendListBean.user_id;
         init();
         event();
     }
+
     private void init() {
         setText("用户详情");
         ivHead = (CircleView) findViewById(R.id.ivHead);
@@ -84,19 +86,22 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
         friendsetTip9 = (TextView) findViewById(R.id.friendsetTip9);
         friendsetTip10 = (TextView) findViewById(R.id.friendsetTip10);
         friendsetTip11 = (TextView) findViewById(R.id.friendsetTip11);
-        set = (Button)findViewById(R.id.set);
+        set = (Button) findViewById(R.id.set);
         getData();
 
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         set.setOnClickListener(this);
 
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         int ret = result.optInt("code");
@@ -160,9 +165,10 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
             }
         }
     }
+
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
@@ -170,7 +176,7 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
                 OkHttpUtils.post(WenConstans.JudgeSetques)
                         .tag(this)
                         .headers(Constants.Token_Header, WenConstans.token)
-                        .params("uid", hisid+"")
+                        .params("uid", hisid + "")
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
@@ -178,18 +184,17 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
                                 Log.e("gerenxinxi", "sresult:" + s);
                                 try {
                                     JSONObject result = new JSONObject(s);
-                                    JSONObject dd= new JSONObject(result.optString("data"));
+                                    JSONObject dd = new JSONObject(result.optString("data"));
                                     String setques = dd.getString("setQues");
-                                    Log.e("setques",""+setques);
-                                    if(setques.equals("true")) {
+                                    Log.e("setques", "" + setques);
+                                    if (setques.equals("true")) {
                                         Intent intent1 = new Intent();
-                                        intent1.putExtra("hisid", hisid+ "");
+                                        intent1.putExtra("hisid", hisid + "");
                                         intent1.setClass(FriendNearDetail.this, FriendAnswerQues.class);
                                         startActivity(intent1);
 
-                                    }
-                                    else {
-                                        Toast.makeText(FriendNearDetail.this, "这位用户没有设置试卷，您不能加他为好友", Toast.LENGTH_LONG ).show();
+                                    } else {
+                                        Toast.makeText(FriendNearDetail.this, "这位用户没有设置试卷，您不能加他为好友", Toast.LENGTH_LONG).show();
                                     }
                                 } catch (JSONException e) {
                                     Log.e("gerenxinxi", "JSONException: " + e.toString());
@@ -208,10 +213,12 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
                 break;
         }
     }
-    private void getData(){
-        setBodyParams(new String[]{"uid", "hisid"}, new String[]{""+uid,""+hisid});
-        sendPost(WenConstans.FriendInfo, 1,WenConstans.token);
+
+    private void getData() {
+        setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + uid, "" + hisid});
+        sendPost(WenConstans.FriendInfo, 1, WenConstans.token);
     }
+
     @Override
     public void onResume() {
         super.onResume();

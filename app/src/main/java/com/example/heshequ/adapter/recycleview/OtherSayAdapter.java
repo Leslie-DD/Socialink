@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class OtherSayAdapter extends RecyclerView.Adapter {
@@ -44,7 +44,7 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
     private int type;  // 1 团言   2 他们说
     private DelItemListener listener;
 
-    public OtherSayAdapter(Context context, ArrayList<TeamBean.SpeakBean> data,int type) {
+    public OtherSayAdapter(Context context, ArrayList<TeamBean.SpeakBean> data, int type) {
         super();
         this.context = context;
         this.inflater = LayoutInflater.from(context);
@@ -83,7 +83,7 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
     class ViewHolder extends RecyclerView.ViewHolder {
         private MyGv gv;
         private CircleView ivHead;
-        private TextView tvName, tvContent, tvTime, tvFabulousCount, tvCommentCount,tvDel;
+        private TextView tvName, tvContent, tvTime, tvFabulousCount, tvCommentCount, tvDel;
 
         public ViewHolder(View view) {
             super(view);
@@ -99,7 +99,7 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
 
         public void setData(final int position) {
             final TeamBean.SpeakBean bean = data.get(position);
-            if (bean.getPresentor() == Constants.uid || Constants.isAdmin){
+            if (bean.getPresentor() == Constants.uid || Constants.isAdmin) {
                 tvDel.setVisibility(View.VISIBLE);
             }
             tvName.setText(bean.getPresentorName());
@@ -110,10 +110,10 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
             if (TextUtils.isEmpty(bean.getHeader())) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url+bean.getHeader()).asBitmap().into(ivHead);
+                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(ivHead);
             }
             bean.setImgs();
-            Log.e("DDQ",bean.getImgs().size()+"imgsize");
+            Log.e("DDQ", bean.getImgs().size() + "imgsize");
             if (bean.getImgs() == null || bean.getImgs().size() == 0) {
                 gv.setVisibility(View.GONE);
             } else {
@@ -140,7 +140,7 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
                         intent.putStringArrayListExtra("imageList", bean.getImgs());
                         intent.putExtra(P.START_ITEM_POSITION, i);
                         intent.putExtra(P.START_IAMGE_POSITION, i);
-                        intent.putExtra("isdel2",false);
+                        intent.putExtra("isdel2", false);
                         context.startActivity(intent);
                     }
                 });
@@ -149,12 +149,12 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myTeamSayClick");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myTeamSayClick");
                     Intent intent = new Intent(context, StatementDetailActivity.class);
                     TeamBean teamBean = new TeamBean();
                     teamBean.setSpeak(data.get(position));
                     intent.putExtra("bean", teamBean);
-                    intent.putExtra("type",type);
+                    intent.putExtra("type", type);
                     context.startActivity(intent);
                 }
             });
@@ -163,7 +163,7 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     //Utils.toastShort(context,"删除");
-                    if (listener!=null) {
+                    if (listener != null) {
                         listener.onDel(position);
                     }
                     /*setBodyParams(new String[]{"speakId"}, new String[]{"" + speakId});
@@ -174,11 +174,11 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public interface DelItemListener{
+    public interface DelItemListener {
         void onDel(int position);
     }
 
-    public void setDelItemListener(DelItemListener listener){
+    public void setDelItemListener(DelItemListener listener) {
         this.listener = listener;
     }
 

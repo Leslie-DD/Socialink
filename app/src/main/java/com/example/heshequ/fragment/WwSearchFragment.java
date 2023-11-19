@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.HotWenwenAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -17,7 +18,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -35,15 +35,15 @@ import java.util.List;
 public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, HotWenwenAdapter.DoSaveListener {
 
     private View view;
-    private int pn=1;
-    private int ps=10;
+    private int pn = 1;
+    private int ps = 10;
     private XRecyclerView rv;
     private TextView tvTips;
     private String content;
     private boolean hasRefresh;
     private int totalPage;
     private FragmentBrodcast brodcast;
-    private List<WenwenBean> newList,moreList;
+    private List<WenwenBean> newList, moreList;
     private HotWenwenAdapter adapter;
     private int clickPosition;
 
@@ -51,43 +51,44 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        if (ResultUtils.isFail(result,getActivity())){
+        if (ResultUtils.isFail(result, getActivity())) {
             return;
         }
         try {
-            Gson gson=new Gson();
-            if (where==100){
-                MobclickAgent.onEvent(mContext,"event_teamSearch");
-                if (hasRefresh){
-                    hasRefresh=false;
+            Gson gson = new Gson();
+            if (where == 100) {
+                MobclickAgent.onEvent(mContext, "event_teamSearch");
+                if (hasRefresh) {
+                    hasRefresh = false;
                     rv.refreshComplete();
                 }
-                if (result.has("data")){
-                    JSONObject data=result.getJSONObject("data");
-                    if (data!=null&&data.has("list")){
+                if (result.has("data")) {
+                    JSONObject data = result.getJSONObject("data");
+                    if (data != null && data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>(){}.getType());
-                        if (newList==null||newList.size()==0){
-                            newList=new ArrayList<>();
+                                new TypeToken<List<WenwenBean>>() {
+                                }.getType());
+                        if (newList == null || newList.size() == 0) {
+                            newList = new ArrayList<>();
                         }
-                        if (data.has("totalPage")){
-                            totalPage=data.getInt("totalPage");
+                        if (data.has("totalPage")) {
+                            totalPage = data.getInt("totalPage");
                         }
-                    }else{
-                        newList=new ArrayList<>();
+                    } else {
+                        newList = new ArrayList<>();
                     }
-                }else{
-                    newList=new ArrayList<>();
+                } else {
+                    newList = new ArrayList<>();
                 }
-                if (newList.size()==0){
+                if (newList.size() == 0) {
                     tvTips.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     tvTips.setVisibility(View.GONE);
                 }
                 setList(newList);
-            }else if(where==101){
-                if (hasRefresh){
-                    hasRefresh=false;
+            } else if (where == 101) {
+                if (hasRefresh) {
+                    hasRefresh = false;
                     rv.refreshComplete();
                 }
                 rv.loadMoreComplete();
@@ -103,31 +104,31 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
                     } else {
                         moreList = new ArrayList<>();
                     }
-                }else{
+                } else {
                     moreList = new ArrayList<>();
                 }
                 newList.addAll(moreList);
-                if (newList.size()==0){
+                if (newList.size() == 0) {
                     tvTips.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     tvTips.setVisibility(View.GONE);
                 }
                 setList(newList);
-            }else if (where==1000){
-                Utils.toastShort(mContext,result.getString("msg")+"");
-                int zan=newList.get(clickPosition).likeAmount;
-                if (TextUtils.isEmpty(newList.get(clickPosition).userLike)){
-                    newList.get(clickPosition).userLike="1";
-                    zan=zan+1;
-                    newList.get(clickPosition).likeAmount=zan;
-                }else{
-                    newList.get(clickPosition).userLike="";
-                    zan=zan-1;
-                    newList.get(clickPosition).likeAmount=zan;
+            } else if (where == 1000) {
+                Utils.toastShort(mContext, result.getString("msg") + "");
+                int zan = newList.get(clickPosition).likeAmount;
+                if (TextUtils.isEmpty(newList.get(clickPosition).userLike)) {
+                    newList.get(clickPosition).userLike = "1";
+                    zan = zan + 1;
+                    newList.get(clickPosition).likeAmount = zan;
+                } else {
+                    newList.get(clickPosition).userLike = "";
+                    zan = zan - 1;
+                    newList.get(clickPosition).likeAmount = zan;
                 }
                 adapter.setData(newList);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -143,10 +144,10 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_only_recycleview,null);
+        view = inflater.inflate(R.layout.fragment_only_recycleview, null);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(getActivity(),true,true,rv);
+        ConsTants.initXrecycleView(getActivity(), true, true, rv);
         adapter = new HotWenwenAdapter(getActivity());
         adapter.DoSaveListener(this);
         rv.setAdapter(adapter);
@@ -157,7 +158,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
     }
 
     public void getData(String s) {
-        pn=1;
+        pn = 1;
         content = s;
         if (!islabel) {
             if (TextUtils.isEmpty(s)) {
@@ -167,14 +168,15 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
                 setBodyParams(new String[]{"type", "pn", "ps", "name"},
                         new String[]{"2", pn + "", ps + "", s});
             }
-            sendPost(WenConstans.WenwenList, 100, Constants.token);
-        }else{
-            setBodyParams(new String[]{"pn","ps","label"},
-                    new String[]{pn+"",ps+"",content});
-            sendPost(Constants.base_url + "/api/ask/base/labelList.do",101, Constants.token);
+            sendPostConnection(WenConstans.WenwenList, 100, Constants.token);
+        } else {
+            setBodyParams(new String[]{"pn", "ps", "label"},
+                    new String[]{pn + "", ps + "", content});
+            sendPostConnection(Constants.base_url + "/api/ask/base/labelList.do", 101, Constants.token);
         }
     }
-    private void getMore(){
+
+    private void getMore() {
         if (!islabel) {
             if (TextUtils.isEmpty(content)) {
                 setBodyParams(new String[]{"type", "pn", "ps"},
@@ -183,24 +185,24 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
                 setBodyParams(new String[]{"type", "pn", "ps", "name"},
                         new String[]{"2", pn + "", ps + "", content});
             }
-            sendPost(WenConstans.WenwenList, 101, Constants.token);
-        }else{
-            setBodyParams(new String[]{"pn","ps","label"},
-                    new String[]{pn+"",ps+"",content});
-            sendPost(Constants.base_url + "/api/ask/base/labelList.do",101, Constants.token);
+            sendPostConnection(WenConstans.WenwenList, 101, Constants.token);
+        } else {
+            setBodyParams(new String[]{"pn", "ps", "label"},
+                    new String[]{pn + "", ps + "", content});
+            sendPostConnection(Constants.base_url + "/api/ask/base/labelList.do", 101, Constants.token);
         }
     }
 
     public void getLableWwData(String content) {
         islabel = true;
-        pn=1;
+        pn = 1;
         this.content = content;
-        setBodyParams(new String[]{"pn","ps","label"},
-                new String[]{pn+"",ps+"",content});
-        sendPost(Constants.base_url + "/api/ask/base/labelList.do",100, Constants.token);
+        setBodyParams(new String[]{"pn", "ps", "label"},
+                new String[]{pn + "", ps + "", content});
+        sendPostConnection(Constants.base_url + "/api/ask/base/labelList.do", 100, Constants.token);
     }
 
-    public void setIslabel(boolean islabel){
+    public void setIslabel(boolean islabel) {
         this.islabel = islabel;
     }
 
@@ -228,29 +230,29 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     @Override
     public void doSave(int position) {
         clickPosition = position;
-        setBodyParams(new String[]{"id"},new String[]{newList.get(position).id+""});
-        sendPost(WenConstans.WwLike,1000,WenConstans.token);
+        setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id + ""});
+        sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData(content);
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -259,7 +261,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }

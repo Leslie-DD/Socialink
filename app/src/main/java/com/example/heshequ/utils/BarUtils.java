@@ -1,5 +1,7 @@
 package com.example.heshequ.utils;
 
+import static android.Manifest.permission.EXPAND_STATUS_BAR;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -28,8 +30,6 @@ import com.example.heshequ.MeetApplication;
 
 import java.lang.reflect.Method;
 
-import static android.Manifest.permission.EXPAND_STATUS_BAR;
-
 /**
  * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
  */
@@ -40,11 +40,11 @@ public final class BarUtils {
     // status bar
     ///////////////////////////////////////////////////////////////////////////
 
-    private static final int    DEFAULT_ALPHA = 112;
-    private static final String TAG_COLOR     = "TAG_COLOR";
-    private static final String TAG_ALPHA     = "TAG_ALPHA";
-    private static final String TAG_OFFSET    = "TAG_OFFSET";
-    private static final int    KEY_OFFSET    = -123;
+    private static final int DEFAULT_ALPHA = 112;
+    private static final String TAG_COLOR = "TAG_COLOR";
+    private static final String TAG_ALPHA = "TAG_ALPHA";
+    private static final String TAG_OFFSET = "TAG_OFFSET";
+    private static final int KEY_OFFSET = -123;
 
     private BarUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");

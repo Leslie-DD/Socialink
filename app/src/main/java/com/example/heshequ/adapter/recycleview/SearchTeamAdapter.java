@@ -12,19 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.bean.SearchTeamBean;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class SearchTeamAdapter extends RecyclerView.Adapter {
@@ -70,20 +70,21 @@ public class SearchTeamAdapter extends RecyclerView.Adapter {
 //        private ImageView ivImg;
 
         private CircleView ivHead;
-        private TextView tvName,tvTitle,tvTz,tvNum;
+        private TextView tvName, tvTitle, tvTz, tvNum;
 //        private GridView gw;
 
         public ViewHolder(View view) {
             super(view);
-            ivHead= (CircleView) view.findViewById(R.id.ivHead);
-            tvName= (TextView) view.findViewById(R.id.tvName);
-            tvTitle= (TextView) view.findViewById(R.id.tvTitle);
-            tvTz= (TextView) view.findViewById(R.id.tvTz);
-            tvNum= (TextView) view.findViewById(R.id.tvNum);
+            ivHead = (CircleView) view.findViewById(R.id.ivHead);
+            tvName = (TextView) view.findViewById(R.id.tvName);
+            tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+            tvTz = (TextView) view.findViewById(R.id.tvTz);
+            tvNum = (TextView) view.findViewById(R.id.tvNum);
         }
+
         public void setData(final int position) {
-            SearchTeamBean bean=data.get(position);
-            if (bean!=null){
+            SearchTeamBean bean = data.get(position);
+            if (bean != null) {
                 Glide.with(context).load(WenConstans.BaseUrl + bean.logoImage)
                         .asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 tvName.setText(bean.name + "");
@@ -95,7 +96,7 @@ public class SearchTeamAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, TeamDetailActivity2.class);
-                    intent.putExtra("id",Integer.parseInt(data.get(position).id));
+                    intent.putExtra("id", Integer.parseInt(data.get(position).id));
                     context.startActivity(intent);
                 }
             });

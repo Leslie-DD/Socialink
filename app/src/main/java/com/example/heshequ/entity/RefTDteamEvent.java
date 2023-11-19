@@ -14,7 +14,7 @@ public class RefTDteamEvent {
         this.ref = ref;
     }
 
-    public RefTDteamEvent(int[] ref,boolean isDel) {
+    public RefTDteamEvent(int[] ref, boolean isDel) {
         this.ref = ref;
         this.isDel = isDel;
     }

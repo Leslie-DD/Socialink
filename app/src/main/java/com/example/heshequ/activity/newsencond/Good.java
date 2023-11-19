@@ -21,16 +21,20 @@ public class Good {
         this.image = image;
         this.price = price;
     }
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
-    public String getImage(){
+
+    public String getImage() {
         return this.image;
     }
-    public float getPrice(){
+
+    public float getPrice() {
         return this.price;
     }
-    public String printGood(){
-        return "name: "+this.name+"\nprice: "+this.price;
+
+    public String printGood() {
+        return "name: " + this.name + "\nprice: " + this.price;
     }
 }

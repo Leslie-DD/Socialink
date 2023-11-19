@@ -39,7 +39,6 @@ final class CameraConfigurationManager {
     private Point cameraResolution;
 
 
-
     CameraConfigurationManager(Context context) {
         this.context = context;
     }
@@ -173,7 +172,6 @@ final class CameraConfigurationManager {
         }
         return tenBestValue;
     }
-
 
 
     private void setZoom(Camera.Parameters parameters) {

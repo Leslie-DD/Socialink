@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.VoteAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
@@ -24,8 +26,6 @@ import com.example.heshequ.entity.VoteBean;
 import com.example.heshequ.entity.VoteDataBean;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 

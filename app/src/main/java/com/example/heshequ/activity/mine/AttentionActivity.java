@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.AttentionAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.AttentionBean;
@@ -13,7 +14,6 @@ import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -30,7 +30,7 @@ import java.util.List;
  * 我的关注
  */
 
-public class AttentionActivity extends NetWorkActivity implements XRecyclerView.LoadingListener{
+public class AttentionActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private XRecyclerView rv;
     private TextView tvNoData;
     private AttentionAdapter adapter;
@@ -44,7 +44,8 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
     private int ps = 0;
     private int allpn = 0;
     private AlertDialog deldialog;
-    private final int DELETE=1001;
+    private final int DELETE = 1001;
+
     //继承父类初始化
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
         init();
         event();
     }
+
     //从此函数返回
     private void event() {
         rv.setLoadingListener(this);
@@ -64,6 +66,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
             }
         });
     }
+
     //数据的初始化，加载数据，请求网络
     private void init() {
         setText("我的关注");
@@ -79,10 +82,9 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
     }
 
 
-    private void getData(int pn)
-    {
-        setBodyParams(new String[]{"pn", "ps"}, new String[]{"" +pn, ""+ps});
-        sendPost(WenConstans.SearchAttention,getCode, Constants.token);
+    private void getData(int pn) {
+        setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, "" + ps});
+        sendPost(WenConstans.SearchAttention, getCode, Constants.token);
     }
 
     //刷新功能
@@ -90,14 +92,14 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
     public void onRefresh() {
         new Handler().postDelayed(
                 new Runnable() {
-            @Override
-            public void run() {
-                pn = 1;
-                isref = true;
-                getData(1);
-                rv.refreshComplete();
-            }
-        }, 1000);
+                    @Override
+                    public void run() {
+                        pn = 1;
+                        isref = true;
+                        getData(1);
+                        rv.refreshComplete();
+                    }
+                }, 1000);
     }
 
     @Override
@@ -106,7 +108,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (pn<allpn){
+                if (pn < allpn) {
                     pn++;
                     isref = false;
                     getData(pn);
@@ -127,7 +129,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
 
     //网络请求成功，取数据并将其放到item中
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        if (where ==getCode ) {
+        if (where == getCode) {
             try {
                 testData = new ArrayList<>();
                 JSONObject data = new JSONObject(result.optString("data"));
@@ -140,7 +142,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
                         if (isref) {
                             //lvadapter.setData(2,testData);
                             adapter.setData(testData);
-                            tvNoData.setVisibility(testData.size()>0?View.GONE:View.VISIBLE);
+                            tvNoData.setVisibility(testData.size() > 0 ? View.GONE : View.VISIBLE);
                         } else {
                             testData.add(testData2);
                         }
@@ -150,23 +152,16 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-        else if(where==DELETE)
-        {
+        } else if (where == DELETE) {
             //取消关注弹窗
             pn = 1;
             getData(pn);
-            Utils.toastShort(mContext,"已取消关注");
+            Utils.toastShort(mContext, "已取消关注");
             onRefresh();
-        }else
-        {
-            Utils.toastShort(mContext,result.optString("msg"));
+        } else {
+            Utils.toastShort(mContext, result.optString("msg"));
         }
     }
-
-
-
-
 
 
     protected void onFailure(String result, int where) {
@@ -178,6 +173,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
     @Override
     public void onPause() {
         super.onPause();

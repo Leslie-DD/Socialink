@@ -11,9 +11,12 @@ public class ClassifyPickerBean {
     private String category;
     private int id;
 
-    public ClassifyPickerBean(){ }
-    public ClassifyPickerBean(String category, int id){
-        this.category = category;;
+    public ClassifyPickerBean() {
+    }
+
+    public ClassifyPickerBean(String category, int id) {
+        this.category = category;
+        ;
         this.id = id;
 
     }
@@ -34,8 +37,8 @@ public class ClassifyPickerBean {
         this.category = category;
     }
 
-    public String toString(){
-        return "category: "+category+"; id: "+id;
+    public String toString() {
+        return "category: " + category + "; id: " + id;
     }
 
 }

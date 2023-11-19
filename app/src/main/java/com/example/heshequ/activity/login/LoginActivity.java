@@ -12,13 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.EventBean;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UTrack;
@@ -54,10 +54,10 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
         etPwd = (EditText) findViewById(R.id.etPwd);
         btLogin = (Button) findViewById(R.id.btLogin);
         tvForget = (TextView) findViewById(R.id.tvForget);
-        studentIDLogin = (TextView)findViewById(R.id.studentidlogin);
+        studentIDLogin = (TextView) findViewById(R.id.studentidlogin);
         studentIDLogin.setVisibility(View.VISIBLE);
-        main = (LinearLayout)findViewById(R.id.main);
-        outsideLayer = (RelativeLayout)findViewById(R.id.outside_layer);
+        main = (LinearLayout) findViewById(R.id.main);
+        outsideLayer = (RelativeLayout) findViewById(R.id.outside_layer);
         EventBus.getDefault().register(this);
 
     }
@@ -77,7 +77,7 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        Intent intent=null;
+        Intent intent = null;
         Intent intent1 = null;
         int ret = result.optInt("code");
         if (ret == 0) {
@@ -101,14 +101,14 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
 //            FriendSet.id=uid;
 //            startActivity(intent1);
 
-            sp.edit().putString("phone",Phone).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
+            sp.edit().putString("phone", Phone).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
             PushAgent mPushAgent = PushAgent.getInstance(this);
-            mPushAgent.addAlias(""+uid, "uid", new UTrack.ICallBack() {
+            mPushAgent.addAlias("" + uid, "uid", new UTrack.ICallBack() {
                 @Override
                 public void onMessage(boolean b, String s) {
-                    Log.e("DDQ","b == "+b+", s = "+s);
-                    if (b){
-                        sp.edit().putBoolean("alias",true).apply();
+                    Log.e("DDQ", "b == " + b + ", s = " + s);
+                    if (b) {
+                        sp.edit().putBoolean("alias", true).apply();
                     }
                 }
             });
@@ -116,10 +116,10 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
             startActivity(new Intent(mContext, MainActivity.class));
 
             //WenConstans.id = uid;
-            Utils.toastShort(mContext, "登录成功；用户id："+Constants.uid);
+            Utils.toastShort(mContext, "登录成功；用户id：" + Constants.uid);
 
-            MobclickAgent.onProfileSignIn(""+uid);
-            MobclickAgent.onEvent(mContext,"event_userLog");
+            MobclickAgent.onProfileSignIn("" + uid);
+            MobclickAgent.onEvent(mContext, "event_userLog");
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
         }
@@ -143,7 +143,7 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
                 startActivity(new Intent(mContext, StudentIdLoginActivity.class));
                 break;
             case R.id.tvForget:
-                startActivity(new Intent(mContext, ForgetPwdActivity.class).putExtra("type",1));
+                startActivity(new Intent(mContext, ForgetPwdActivity.class).putExtra("type", 1));
                 break;
             case R.id.btLogin:
                 Phone = etUser.getText().toString();
@@ -161,7 +161,7 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
                 sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
                 break;
             case R.id.tvSign:
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_goRegist");
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_goRegist");
                 startActivity(new Intent(mContext, SignActivity.class));
                 break;
         }

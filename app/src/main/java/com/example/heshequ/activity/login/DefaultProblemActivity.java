@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultProblemActivity extends NetWorkActivity implements View.OnClickListener {
-    private TextView tvQuestion1, tvQuestion2, tvQuestion3, tvTitle, tvSkip,tvHint;
+    private TextView tvQuestion1, tvQuestion2, tvQuestion3, tvTitle, tvSkip, tvHint;
     private EditText etAnswer1, etAnswer2, etAnswer3;
     private Button btSub;
     private final int getCode = 100;
@@ -57,7 +57,7 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
     }
 
     private void init() {
-        type = getIntent().getIntExtra("type",0);
+        type = getIntent().getIntExtra("type", 0);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("预设问题");
         tvQuestion1 = (TextView) findViewById(R.id.tvQuestion1);
@@ -72,23 +72,23 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
         if (type == 2) {
             initIsQ();
             tvSkip.setText("跳过");
-        }else if (type == 1){
+        } else if (type == 1) {
             getQ();
         }
 
     }
 
     private void initIsQ() {
-        sendPost(Constants.base_url+"/api/user/myQuestion.do",myQuestion,Constants.token);
+        sendPost(Constants.base_url + "/api/user/myQuestion.do", myQuestion, Constants.token);
     }
 
     private void getQ() {
-            setBodyParams(new String[]{"type"}, new String[]{"question1"});
-            sendPost(Constants.base_url + "/api/pub/category/list.do", getCode, Constants.token);
-            setBodyParams(new String[]{"type"}, new String[]{"question2"});
-            sendPost(Constants.base_url + "/api/pub/category/list.do", getCode2, Constants.token);
-            setBodyParams(new String[]{"type"}, new String[]{"question3"});
-            sendPost(Constants.base_url + "/api/pub/category/list.do", getCode3, Constants.token);
+        setBodyParams(new String[]{"type"}, new String[]{"question1"});
+        sendPost(Constants.base_url + "/api/pub/category/list.do", getCode, Constants.token);
+        setBodyParams(new String[]{"type"}, new String[]{"question2"});
+        sendPost(Constants.base_url + "/api/pub/category/list.do", getCode2, Constants.token);
+        setBodyParams(new String[]{"type"}, new String[]{"question3"});
+        sendPost(Constants.base_url + "/api/pub/category/list.do", getCode3, Constants.token);
     }
 
     private void event() {
@@ -208,26 +208,27 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
                     Utils.toastShort(mContext, "设置成功");
                     if (type == 2) {
                         finish();
-                    }else if (type == 1){
+                    } else if (type == 1) {
                         //进标签选择
-                        startActivity(new Intent(this,LabelSelectionActivity.class)
-                                .putExtra("type",1)
-                                .putExtra("phone",getIntent().getStringExtra("phone"))
-                                .putExtra("pwd",getIntent().getStringExtra("pwd"))
+                        startActivity(new Intent(this, LabelSelectionActivity.class)
+                                .putExtra("type", 1)
+                                .putExtra("phone", getIntent().getStringExtra("phone"))
+                                .putExtra("pwd", getIntent().getStringExtra("pwd"))
                         );
                     }
-                }else{
+                } else {
                     Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
             case myQuestion:
-                if (result.optInt("code") == 0){
-                    qd =  gson.fromJson(result.optString("data"),new TypeToken<ArrayList<QuestionBean>>(){}.getType());
-                    if (qd!= null&&qd.size()>0){
-                        if (type == 2){
+                if (result.optInt("code") == 0) {
+                    qd = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<QuestionBean>>() {
+                    }.getType());
+                    if (qd != null && qd.size() > 0) {
+                        if (type == 2) {
 
-                            for (int i = 0;i< qd.size();i++){
-                                switch (i){
+                            for (int i = 0; i < qd.size(); i++) {
+                                switch (i) {
                                     case 0:
                                         tvQuestion1.setText(qd.get(0).getContent());
                                         break;
@@ -252,10 +253,10 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
                             tvSkip.setVisibility(View.INVISIBLE);
                             tvHint.setText("预设问题已设置");
                         }
-                    }else{
+                    } else {
                         getQ();
                     }
-                }else{
+                } else {
                     Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
@@ -321,11 +322,11 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
             case R.id.tvSkip:
                 if (type == 2) {
                     this.finish();
-                }else{
-                    startActivity(new Intent(this,LabelSelectionActivity.class)
-                            .putExtra("type",1)
-                            .putExtra("phone",getIntent().getStringExtra("phone"))
-                            .putExtra("pwd",getIntent().getStringExtra("pwd"))
+                } else {
+                    startActivity(new Intent(this, LabelSelectionActivity.class)
+                            .putExtra("type", 1)
+                            .putExtra("phone", getIntent().getStringExtra("phone"))
+                            .putExtra("pwd", getIntent().getStringExtra("pwd"))
                     );
                 }
                 break;
@@ -338,6 +339,7 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

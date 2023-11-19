@@ -7,11 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.fragment.MyAnswerFragment;
 import com.example.heshequ.fragment.MyQAQFragment;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;

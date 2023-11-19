@@ -11,9 +11,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -35,29 +35,31 @@ public class ConsTants {
     public static String uid;
     public static String token;
     public static String phone;
-    public static int homeItem=1;
-    public static SharedPreferences initSp(Context context){
-        SharedPreferences sp=context.getSharedPreferences("meetting",Context.MODE_PRIVATE);
+    public static int homeItem = 1;
+
+    public static SharedPreferences initSp(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("meetting", Context.MODE_PRIVATE);
         return sp;
     }
-    public static boolean fail(Context context,JSONObject result){
-        if (result.has("ret")){
+
+    public static boolean fail(Context context, JSONObject result) {
+        if (result.has("ret")) {
             try {
-                int ret=result.getInt("ret");
-                if (ret!=0){
-                    if (result.has("msg")){
-                        String msg=result.getString("msg");
-                        if (!TextUtils.isEmpty(msg)){
-                            if (!msg.equals("未找到记录")){
-                                if (msg.equals("Token验证错误")){
-                                    Utils.toastShort(context,"用户信息过期，请重新登录");
-                                }else{
-                                    Utils.toastShort(context,msg);
+                int ret = result.getInt("ret");
+                if (ret != 0) {
+                    if (result.has("msg")) {
+                        String msg = result.getString("msg");
+                        if (!TextUtils.isEmpty(msg)) {
+                            if (!msg.equals("未找到记录")) {
+                                if (msg.equals("Token验证错误")) {
+                                    Utils.toastShort(context, "用户信息过期，请重新登录");
+                                } else {
+                                    Utils.toastShort(context, msg);
                                 }
                             }
                         }
-                    }else{
-                        Utils.toastShort(context,"后台错误");
+                    } else {
+                        Utils.toastShort(context, "后台错误");
                     }
                     return true;
                 }
@@ -67,12 +69,13 @@ public class ConsTants {
         }
         return false;
     }
+
     public static void initXrecycleView(Context context, boolean loadmore, boolean refresh,
-                                        XRecyclerView xRecyclerView){
-        LinearLayoutManager manager=new LinearLayoutManager(context);
+                                        XRecyclerView xRecyclerView) {
+        LinearLayoutManager manager = new LinearLayoutManager(context);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         xRecyclerView.setLayoutManager(manager);
-        if (refresh){
+        if (refresh) {
             xRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
             xRecyclerView.setArrowImageView(R.drawable.iconfont_downgrey);
             xRecyclerView
@@ -80,15 +83,15 @@ public class ConsTants {
                     .setRefreshTimeVisible(true);
             xRecyclerView.getDefaultRefreshHeaderView().mMeasuredHeight =
                     Utils.dip2px(context, 68);
-        }else{
+        } else {
             xRecyclerView.setPullRefreshEnabled(false);
         }
-        if (loadmore){
+        if (loadmore) {
             xRecyclerView.setLoadingMoreEnabled(true);
             xRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
             xRecyclerView.getDefaultFootView().setLoadingHint("加载中");
             xRecyclerView.getDefaultFootView().setNoMoreHint("加载完成");
-        }else{
+        } else {
             xRecyclerView.setLoadingMoreEnabled(false);
         }
         xRecyclerView.setLimitNumberToCallLoadMore(2);
@@ -98,7 +101,8 @@ public class ConsTants {
         SimpleDateFormat fat = new SimpleDateFormat("yyyyMMdd_hhmmss");
         return fat.format(new Date()) + ".jpg";
     }
-    public static void showFileChooser(int file_code,NetWorkActivity context) {
+
+    public static void showFileChooser(int file_code, NetWorkActivity context) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         try {
@@ -120,6 +124,7 @@ public class ConsTants {
         context.startActivityForResult(intent, 200);
         return path;
     }
+
     public static String getPath() {
         String path = Environment.getExternalStorageDirectory() + "/" + "douzisocket/";
         File f = new File(path);

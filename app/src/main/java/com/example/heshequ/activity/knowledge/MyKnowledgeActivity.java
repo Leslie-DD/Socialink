@@ -1,17 +1,17 @@
 package com.example.heshequ.activity.knowledge;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.fragment.knowledge.MyArticleFragment;
 import com.example.heshequ.fragment.knowledge.MyColumnFragment;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -47,16 +47,17 @@ public class MyKnowledgeActivity extends NetWorkActivity implements View.OnClick
         tvArticle = findViewById(R.id.tvRecommend);
         tvColumn = findViewById(R.id.tvSubscription);
         myArticleFragment = new MyArticleFragment();
-        myColoumnFragment =new MyColumnFragment();
+        myColoumnFragment = new MyColumnFragment();
 
         list.add(myArticleFragment);
         list.add(myColoumnFragment);
         vp = (ViewPager) findViewById(R.id.vp);
-        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),list);
+        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);
         vp.setCurrentItem(0);
         setTvBg(0);
     }
+
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
 
@@ -86,6 +87,7 @@ public class MyKnowledgeActivity extends NetWorkActivity implements View.OnClick
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
     }
+
     public void setTvBg(int status) {
         if (this.status == status) {
             return;
@@ -100,6 +102,7 @@ public class MyKnowledgeActivity extends NetWorkActivity implements View.OnClick
             vp.setCurrentItem(status);
         }
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -114,6 +117,7 @@ public class MyKnowledgeActivity extends NetWorkActivity implements View.OnClick
                 break;
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

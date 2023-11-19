@@ -2,6 +2,7 @@ package com.example.heshequ.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +38,7 @@ public class UrlToBitmapUtil {
         this.listener = listener;
         new Thread(new Runnable() {
             Bitmap bitmap = null;
+
             @Override
             public void run() {
                 URL url = null;

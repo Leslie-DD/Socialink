@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.adapter.recycleview.CommentTeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -14,11 +16,8 @@ import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -31,7 +30,7 @@ import java.util.ArrayList;
  * Hulk_Zhang on 2018/1/10 17:50
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class ChildFragment1 extends NetWorkFragment implements  CommentTeamAdapter.OnItemClickListener{
+public class ChildFragment1 extends NetWorkFragment implements CommentTeamAdapter.OnItemClickListener {
     private View view;
     public XRecyclerView rv;
     public CommentTeamAdapter adapter;
@@ -71,70 +70,61 @@ public class ChildFragment1 extends NetWorkFragment implements  CommentTeamAdapt
         getData(pn, type);
     }
 
-    private void getData(int pn,int type) {
-        switch (type){
+    private void getData(int pn, int type) {
+        switch (type) {
             case 0:
-                setBodyParams(new String[]{"type","pn","ps"},
-                        new String[]{""+1,""+pn,""+ Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url+"/api/club/base/pglist.do",
-                        GETDATA,sp.getString("token",""));
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", GETDATA, sp.getString("token", ""));
                 break;
             case 1:
-                setBodyParams(new String[]{"type","pn","ps"},
-                        new String[]{""+1,""+pn,""+Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url+"/api/club/base/pglist.do",
-                        REFDATA,sp.getString("token",""));
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", REFDATA, sp.getString("token", ""));
                 break;
             case 2:
-                setBodyParams(new String[]{"type","pn","ps"},
-                        new String[]{""+1,""+pn,""+Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url+"/api/club/base/pglist.do",
-                        LOADATA,sp.getString("token",""));
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", LOADATA, sp.getString("token", ""));
                 break;
         }
     }
 
-   public void refData(){
-       pn = 1;
-       type = 1;
-       getData(pn,type);
-   }
+    public void refData() {
+        pn = 1;
+        type = 1;
+        getData(pn, type);
+    }
 
-   public void loaData(){
-       if (pn<ps) {
-           pn++;
-           type = 2;
-           getData(pn, type);
-       }else{
-           new Handler().postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   Intent intent1=new Intent();
-                   intent1.setAction("fragment.listener");
-                   intent1.putExtra("item",1);
-                   getActivity().sendBroadcast(intent1);
-               }
-           },2000);
-       }
+    public void loaData() {
+        if (pn < ps) {
+            pn++;
+            type = 2;
+            getData(pn, type);
+        } else {
+            new Handler().postDelayed(() -> {
+                Intent intent1 = new Intent();
+                intent1.setAction("fragment.listener");
+                intent1.putExtra("item", 1);
+                getActivity().sendBroadcast(intent1);
+            }, 2000);
+        }
 
-   }
+    }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
         //Log.e(TAG,""+result);
         int resultType = result.optInt("code");
-        switch (where){
+        switch (where) {
             case GETDATA:
-                switch (resultType){
+                switch (resultType) {
                     case 0:
                         if (!result.optString("data").isEmpty()) {
                             try {
                                 ps = result.optJSONObject("data").optInt("totalPage");
                                 list = new ArrayList<>();
                                 jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
-                                if (jsonArray.length()>0) {
+                                if (jsonArray.length() > 0) {
                                     for (int i = 0; i < jsonArray.length(); i++) {
-                                        teamBean = gson.fromJson(jsonArray.getString(i),TeamBean.class);
+                                        teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
                                         teamBean.setItemType(1);
                                         list.add(teamBean);
                                     }
@@ -151,24 +141,24 @@ public class ChildFragment1 extends NetWorkFragment implements  CommentTeamAdapt
                         }
                         break;
                     default:
-                        Utils.toastShort(getActivity(),result.optString("msg"));
+                        Utils.toastShort(getActivity(), result.optString("msg"));
                 }
                 break;
             case REFDATA:
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setAction("fragment.listener");
-                intent.putExtra("item",3);
+                intent.putExtra("item", 3);
                 getActivity().sendBroadcast(intent);
-                switch (resultType){
+                switch (resultType) {
                     case 0:
                         if (!result.optString("data").isEmpty()) {
                             try {
                                 ps = result.optJSONObject("data").optInt("totalPage");
                                 list = new ArrayList<>();
                                 jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
-                                if (jsonArray.length()>0) {
+                                if (jsonArray.length() > 0) {
                                     for (int i = 0; i < jsonArray.length(); i++) {
-                                        teamBean = gson.fromJson(jsonArray.getString(i),TeamBean.class);
+                                        teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
                                         teamBean.setItemType(1);
                                         list.add(teamBean);
                                     }
@@ -184,23 +174,23 @@ public class ChildFragment1 extends NetWorkFragment implements  CommentTeamAdapt
                         }
                         break;
                     default:
-                        Utils.toastShort(getActivity(),result.optString("msg"));
+                        Utils.toastShort(getActivity(), result.optString("msg"));
                 }
                 break;
             case LOADATA:
-                Intent intent1=new Intent();
+                Intent intent1 = new Intent();
                 intent1.setAction("fragment.listener");
-                intent1.putExtra("item",1);
+                intent1.putExtra("item", 1);
                 getActivity().sendBroadcast(intent1);
-                switch (resultType){
+                switch (resultType) {
                     case 0:
                         if (!result.optString("data").isEmpty()) {
                             try {
                                 ps = result.optJSONObject("data").optInt("totalPage");
                                 jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
-                                if (jsonArray.length()>0) {
+                                if (jsonArray.length() > 0) {
                                     for (int i = 0; i < jsonArray.length(); i++) {
-                                        teamBean = gson.fromJson(jsonArray.getString(i),TeamBean.class);
+                                        teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
                                         teamBean.setItemType(1);
                                         list.add(teamBean);
                                     }
@@ -212,7 +202,7 @@ public class ChildFragment1 extends NetWorkFragment implements  CommentTeamAdapt
                         }
                         break;
                     default:
-                        Utils.toastShort(getActivity(),result.optString("msg"));
+                        Utils.toastShort(getActivity(), result.optString("msg"));
                 }
                 break;
         }
@@ -220,11 +210,11 @@ public class ChildFragment1 extends NetWorkFragment implements  CommentTeamAdapt
 
     @Override
     protected void onFailure(String result, int where) {
-        Utils.toastShort(getActivity(),"网络异常");
+        Utils.toastShort(getActivity(), "网络异常");
     }
 
     public void setData(ArrayList<TeamBean> list) {
-        if (list != null&&list.size()>0) {
+        if (list != null && list.size() > 0) {
             tvTips.setVisibility(View.GONE);
 
             adapter.setData(list);
@@ -235,10 +225,9 @@ public class ChildFragment1 extends NetWorkFragment implements  CommentTeamAdapt
     }
 
 
-
     @Override
     public void OnItemClick(int position) {
-        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotTeam");
+        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotTeam");
         Intent intent = new Intent(mContext, TeamDetailActivity2.class);
         intent.putExtra("id", adapter.getData().get(position).getId());
         startActivity(intent);

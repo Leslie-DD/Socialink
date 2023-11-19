@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.Tj_Adapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
@@ -17,7 +18,6 @@ import com.example.heshequ.entity.BuildingBean;
 import com.example.heshequ.entity.RefTjEvent;
 import com.example.heshequ.utils.SpaceItemDecoration;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -74,7 +74,7 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
         tvTitle.setText("全部团建");
         ivAdd = (ImageView) findViewById(R.id.ivRight);
         ivAdd.setImageResource(R.mipmap.kj2);
-        if (!Constants.isAdmin){
+        if (!Constants.isAdmin) {
             ivAdd.setVisibility(View.GONE);
         }
         pn = 1;
@@ -91,7 +91,7 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
                 switch (viewType) {
                     case 1:
                         //编辑
-                        startActivity(new Intent(mContext, AddTjActivity.class).putExtra("bean", rvData.get(position)).putExtra("type",2));
+                        startActivity(new Intent(mContext, AddTjActivity.class).putExtra("bean", rvData.get(position)).putExtra("type", 2));
                         break;
                     case 2:
                         //Utils.toastShort(PartyBuildingActivity.this,"删除");
@@ -102,11 +102,11 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
                         //Utils.toastShort(PartyBuildingActivity.this,"推荐到大厅");
                         recommendPosition = position;
                         recommend = rvData.get(position).getRecommend();
-                        if (recommend == 0){
-                            setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" +1});
+                        if (recommend == 0) {
+                            setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 1});
                             sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
-                        }else if (recommend == 1){
-                            setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" +0});
+                        } else if (recommend == 1) {
+                            setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 0});
                             sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
                         }
                         break;
@@ -196,14 +196,14 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
                     Utils.toastShort(this, "您没有该功能操作权限");
                     break;
             }
-        }else if (where == hallCode){
+        } else if (where == hallCode) {
             switch (result.optInt("code")) {
                 case 0:
                     //刷新
-                    if (recommend == 0){
-                        tjAdapter.changetjdt(recommendPosition,1);
-                    }else{
-                        tjAdapter.changetjdt(recommendPosition,0);
+                    if (recommend == 0) {
+                        tjAdapter.changetjdt(recommendPosition, 1);
+                    } else {
+                        tjAdapter.changetjdt(recommendPosition, 0);
                     }
                     EventBus.getDefault().post(new RefTjEvent());
                     break;
@@ -235,7 +235,7 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
 
                 break;
             case R.id.ivRight:
-                startActivity(new Intent(mContext, AddTjActivity.class).putExtra("teamid", teamid).putExtra("type",1));
+                startActivity(new Intent(mContext, AddTjActivity.class).putExtra("teamid", teamid).putExtra("type", 1));
                 break;
         }
     }
@@ -289,6 +289,7 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

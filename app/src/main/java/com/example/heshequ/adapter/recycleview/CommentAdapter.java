@@ -11,18 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.CommentBean;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class CommentAdapter extends RecyclerView.Adapter {
@@ -45,7 +45,7 @@ public class CommentAdapter extends RecyclerView.Adapter {
         this.notifyDataSetChanged();
     }
 
-    public void setData2(ArrayList<CommentBean> data){
+    public void setData2(ArrayList<CommentBean> data) {
         this.data.addAll(data);
         this.notifyDataSetChanged();
     }
@@ -57,7 +57,7 @@ public class CommentAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder,final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.setData(position);
     }
@@ -86,15 +86,15 @@ public class CommentAdapter extends RecyclerView.Adapter {
             CommentBean bean = data.get(position);
             tvName.setText(bean.getPresentorName());
             tvTime.setText(bean.getTime());
-            tvComment.setText(Utils.getEmoji(context,bean.getContent()));
-            if (bean.getHeader()!=null && !bean.getHeader().isEmpty()){
-                Glide.with(context).load(Constants.base_url+bean.getHeader()).asBitmap().into(ivHead);
+            tvComment.setText(Utils.getEmoji(context, bean.getContent()));
+            if (bean.getHeader() != null && !bean.getHeader().isEmpty()) {
+                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(ivHead);
             } else {
                 Glide.with(context).load(R.mipmap.head3).asBitmap().into(ivHead);
             }
-            if (Constants.isAdmin || bean.getPresentor() == Constants.uid){
+            if (Constants.isAdmin || bean.getPresentor() == Constants.uid) {
                 tvDel.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 tvDel.setVisibility(View.GONE);
             }
 
@@ -115,12 +115,13 @@ public class CommentAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public interface DelListener{
+    public interface DelListener {
         void onDelListener(int id);
+
         void onHeadClick(int uid);
     }
 
-    public void setDelListener(DelListener delListener){
+    public void setDelListener(DelListener delListener) {
         this.delListener = delListener;
     }
 }

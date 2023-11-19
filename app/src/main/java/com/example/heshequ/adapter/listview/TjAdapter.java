@@ -9,9 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.heshequ.entity.TestBean;
 import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
+import com.example.heshequ.entity.TestBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +23,12 @@ import java.util.List;
  */
 public class TjAdapter extends BaseAdapter {
     private Context context;
-    private List<TestBean> data=new ArrayList<>();
+    private List<TestBean> data = new ArrayList<>();
+
     public TjAdapter(Context context) {
-        this.context=context;
+        this.context = context;
     }
+
     public void setData(List<TestBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -50,33 +52,33 @@ public class TjAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
-        TestBean bean=data.get(position);
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.tj_item,null);
+        TestBean bean = data.get(position);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.tj_item, null);
             viewHolder = new ViewHolder();
-            viewHolder.ivPic= (ImageView) view.findViewById(R.id.ivPic);
-            viewHolder.tvDay= (TextView) view.findViewById(R.id.tvDay);
-            viewHolder.tvMonth= (TextView) view.findViewById(R.id.tvMonth);
-            viewHolder.tvName= (TextView) view.findViewById(R.id.tvName);
+            viewHolder.ivPic = (ImageView) view.findViewById(R.id.ivPic);
+            viewHolder.tvDay = (TextView) view.findViewById(R.id.tvDay);
+            viewHolder.tvMonth = (TextView) view.findViewById(R.id.tvMonth);
+            viewHolder.tvName = (TextView) view.findViewById(R.id.tvName);
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.tvDay.setText(bean.getDay()+"");
-        viewHolder.tvMonth.setText(bean.getMonth()+"月");
-        viewHolder.tvName.setText(bean.getName()+"");
-        if(TextUtils.isEmpty(bean.getUrl()))
-        {
+        viewHolder.tvDay.setText(bean.getDay() + "");
+        viewHolder.tvMonth.setText(bean.getMonth() + "月");
+        viewHolder.tvName.setText(bean.getName() + "");
+        if (TextUtils.isEmpty(bean.getUrl())) {
             Glide.with(context).load(bean.getUrl()).centerCrop().into(viewHolder.ivPic);
             viewHolder.ivPic.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             viewHolder.ivPic.setVisibility(View.GONE);
         }
 
         return view;
     }
-    public class ViewHolder{
+
+    public class ViewHolder {
         private ImageView ivPic;
-        private TextView tvDay,tvMonth,tvName;
+        private TextView tvDay, tvMonth, tvName;
     }
 }

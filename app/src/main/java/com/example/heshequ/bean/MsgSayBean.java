@@ -71,8 +71,8 @@ public class MsgSayBean {
         private String header;
         private String clubName;
         private String senderNickname;
-        private  int objectId;
-        private  String objectNickname;
+        private int objectId;
+        private String objectNickname;
 
         public void setObjectNickname(String objectNickname) {
             this.objectNickname = objectNickname;

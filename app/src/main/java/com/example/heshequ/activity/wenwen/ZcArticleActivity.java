@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.ZcAnswerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
@@ -27,8 +29,6 @@ import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.NoScrollWebView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;

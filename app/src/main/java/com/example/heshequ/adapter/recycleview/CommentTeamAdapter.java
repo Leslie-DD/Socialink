@@ -18,6 +18,7 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
@@ -32,7 +33,6 @@ import com.example.heshequ.constans.P;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jude.rollviewpager.RollPagerView;
@@ -51,7 +51,7 @@ import okhttp3.Response;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class CommentTeamAdapter extends RecyclerView.Adapter {
@@ -159,7 +159,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
         private GridView gw;
         private CircleView ivHead;
         // type1 layout-view
-        private TextView tvName, tvDesc, tvTz, tvNum,tvCollege;
+        private TextView tvName, tvDesc, tvTz, tvNum, tvCollege;
 
         private RollPagerView rollPagerView;
         private LinearLayout llTeam;
@@ -279,7 +279,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 imgs = new ArrayList<>();
-                                if (data.get(position).getSpeak()!=null && data.get(position).getSpeak().getPhotos()!=null) {
+                                if (data.get(position).getSpeak() != null && data.get(position).getSpeak().getPhotos() != null) {
                                     for (int j = 0; j < data.get(position).getSpeak().getPhotos().size(); j++) {
                                         imgs.add(Constants.base_url + data.get(position).getSpeak().getPhotos().get(j).getPhotoId());
                                     }
@@ -292,7 +292,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                                 context.startActivity(intent);
                             }
                         });
-                    }else{
+                    } else {
                         gw.setVisibility(View.GONE);
                     }
                     break;
@@ -301,20 +301,20 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                     if (bean.getLogoImage().isEmpty()) {
                         ivHead.setImageResource(R.mipmap.head2);
                     } else {
-                        if (ivHead!=null) {
+                        if (ivHead != null) {
                             Glide.with(context).load(Constants.base_url + bean.getLogoImage()).asBitmap().into(ivHead);
                         }
                     }
-                    if (tvName!=null) {
+                    if (tvName != null) {
                         tvName.setText(bean.getName());
                     }
-                    if (tvCollege!=null){
+                    if (tvCollege != null) {
                         tvCollege.setText(bean.getCollege());
                     }
-                    if (tvNum!=null) {
+                    if (tvNum != null) {
                         tvNum.setText(bean.getMemberNumber() + "人");
                     }
-                    if (tvTz!=null) {
+                    if (tvTz != null) {
                         tvTz.setText(bean.getCreatorName());
                     }
                     if (!bean.getActivity().getApplyDeadline().isEmpty()) {
@@ -323,11 +323,11 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                         }
                     }
                     if (!bean.getActivity().getTitle().isEmpty())
-                        if (tvActivity!=null) {
+                        if (tvActivity != null) {
                             tvActivity.setText(bean.getActivity().getTitle());
                         }
                     if (!bean.getActivity().getPresentorName().isEmpty())
-                        if (tvInitiator!=null) {
+                        if (tvInitiator != null) {
                             tvInitiator.setText(bean.getActivity().getPresentorName());
                         }
                     /*if (!bean.getActivity().getGmtCreate().isEmpty())
@@ -336,7 +336,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                         }*/
                     if (bean.getActivity().getPhotos() != null && bean.getActivity().getPhotos().size() > 0) {
                         gw.setVisibility(View.VISIBLE);
-                        if (gw!=null) {
+                        if (gw != null) {
                             imgs = new ArrayList<>();
                             for (TeamBean.ActivityBean.PhotosBeanX photosBeanX : data.get(position).getActivity().getPhotos()) {
                                 imgs.add(Constants.base_url + photosBeanX.getPhotoId());
@@ -373,7 +373,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                                 }
                             });
                         }
-                    }else{
+                    } else {
                         gw.setVisibility(View.GONE);
                     }
                     break;
@@ -385,7 +385,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                             bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
-                                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_hotTeamBanner");
+                                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_hotTeamBanner");
                                     context.startActivity(new Intent(context, WebActivity.class)
                                             .putExtra("url", imgsData.get(position).getLinkUrl()));
                                 }
@@ -430,9 +430,9 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                                         }
 
                                     }
-                                    if (imgs.size()>0) {
+                                    if (imgs.size() > 0) {
                                         bannerAdapter.setData(imgs);
-                                    }else{
+                                    } else {
                                         CommentTeamAdapter.this.data.remove(position);
                                         CommentTeamAdapter.this.notifyDataSetChanged();
                                     }

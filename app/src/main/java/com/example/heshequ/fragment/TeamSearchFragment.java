@@ -5,13 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.SearchTeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.SearchTeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -25,59 +25,59 @@ import java.util.List;
  * Hulk_Zhang on 2018/6/19 11:07
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView.LoadingListener
-{
+public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
 
     private View view;
     private XRecyclerView rv;
     private TextView tvTips;
-    private int pn=1;
-    private int ps=10;
+    private int pn = 1;
+    private int ps = 10;
     private boolean hasRefresh;
     private int totalPage;
     private String content;
-    private List<SearchTeamBean> newList,moreList;
+    private List<SearchTeamBean> newList, moreList;
     private SearchTeamAdapter adapter;
     private boolean islabel = false;
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        if (ResultUtils.isFail(result,getActivity())){
+        if (ResultUtils.isFail(result, getActivity())) {
             return;
         }
         try {
-            Gson gson=new Gson();
-            if (where==100){
-                if (hasRefresh){
-                    hasRefresh=false;
+            Gson gson = new Gson();
+            if (where == 100) {
+                if (hasRefresh) {
+                    hasRefresh = false;
                     rv.refreshComplete();
                 }
-                if (result.has("data")){
-                    JSONObject data=result.getJSONObject("data");
-                    if (data!=null&&data.has("list")){
+                if (result.has("data")) {
+                    JSONObject data = result.getJSONObject("data");
+                    if (data != null && data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<SearchTeamBean>>(){}.getType());
-                        if (newList==null||newList.size()==0){
-                            newList=new ArrayList<>();
+                                new TypeToken<List<SearchTeamBean>>() {
+                                }.getType());
+                        if (newList == null || newList.size() == 0) {
+                            newList = new ArrayList<>();
                         }
-                        if (data.has("totalPage")){
-                            totalPage=data.getInt("totalPage");
+                        if (data.has("totalPage")) {
+                            totalPage = data.getInt("totalPage");
                         }
-                    }else{
-                        newList=new ArrayList<>();
+                    } else {
+                        newList = new ArrayList<>();
                     }
-                }else{
-                    newList=new ArrayList<>();
+                } else {
+                    newList = new ArrayList<>();
                 }
-                if (newList.size()==0){
+                if (newList.size() == 0) {
                     tvTips.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     tvTips.setVisibility(View.GONE);
                 }
                 setList(newList);
-            }else if(where==101){
-                if (hasRefresh){
-                    hasRefresh=false;
+            } else if (where == 101) {
+                if (hasRefresh) {
+                    hasRefresh = false;
                     rv.refreshComplete();
                 }
                 rv.loadMoreComplete();
@@ -93,18 +93,18 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
                     } else {
                         moreList = new ArrayList<>();
                     }
-                }else{
+                } else {
                     moreList = new ArrayList<>();
                 }
                 newList.addAll(moreList);
-                if (newList.size()==0){
+                if (newList.size() == 0) {
                     tvTips.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     tvTips.setVisibility(View.GONE);
                 }
                 setList(newList);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -120,9 +120,9 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_only_recycleview,null);
+        view = inflater.inflate(R.layout.fragment_only_recycleview, null);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(),true,true,rv);
+        ConsTants.initXrecycleView(getActivity(), true, true, rv);
         adapter = new SearchTeamAdapter(getActivity());
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
@@ -132,7 +132,7 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
     }
 
     public void getData(String s) {
-        pn=1;
+        pn = 1;
         content = s;
         if (!islabel) {
             if (TextUtils.isEmpty(s)) {
@@ -142,14 +142,15 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
                 setBodyParams(new String[]{"type", "pn", "ps", "keyword"},
                         new String[]{"1", pn + "", ps + "", s});
             }
-            sendPost(Constants.base_url + "/api/club/base/pglist.do", 100, Constants.token);
-        }else{
-            setBodyParams(new String[]{"pn","ps","label"},
-                    new String[]{pn+"",ps+"",content});
-            sendPost(Constants.base_url + "/api/club/base/labelList.do",101, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", 100, Constants.token);
+        } else {
+            setBodyParams(new String[]{"pn", "ps", "label"},
+                    new String[]{pn + "", ps + "", content});
+            sendPostConnection(Constants.base_url + "/api/club/base/labelList.do", 101, Constants.token);
         }
     }
-    private void getMore(){
+
+    private void getMore() {
         if (!islabel) {
             if (TextUtils.isEmpty(content)) {
                 setBodyParams(new String[]{"type", "pn", "ps"},
@@ -158,27 +159,26 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
                 setBodyParams(new String[]{"type", "pn", "ps", "keyword"},
                         new String[]{"1", pn + "", ps + "", content});
             }
-            sendPost(Constants.base_url + "/api/club/base/pglist.do", 101, Constants.token);
-        }else{
-            setBodyParams(new String[]{"pn","ps","label"},
-                    new String[]{pn+"",ps+"",content});
-            sendPost(Constants.base_url + "/api/club/base/labelList.do",101, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", 101, Constants.token);
+        } else {
+            setBodyParams(new String[]{"pn", "ps", "label"},
+                    new String[]{pn + "", ps + "", content});
+            sendPostConnection(Constants.base_url + "/api/club/base/labelList.do", 101, Constants.token);
         }
     }
 
     public void getLableTeamData(String content) {
         islabel = true;
-        pn=1;
+        pn = 1;
         this.content = content;
-        setBodyParams(new String[]{"pn","ps","label"},
-                new String[]{pn+"",ps+"",content});
-        sendPost(Constants.base_url + "/api/club/base/labelList.do",100, Constants.token);
+        setBodyParams(new String[]{"pn", "ps", "label"},
+                new String[]{pn + "", ps + "", content});
+        sendPostConnection(Constants.base_url + "/api/club/base/labelList.do", 100, Constants.token);
     }
 
-    public void setIslabel(boolean islabel){
+    public void setIslabel(boolean islabel) {
         this.islabel = islabel;
     }
-
 
 
     @Override
@@ -205,7 +205,6 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
         }*/
         getMore();
     }
-
 
 
 }

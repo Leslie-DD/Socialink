@@ -9,14 +9,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.TeamSearchActivity;
 import com.example.heshequ.activity.flowview.TeamActivity;
 import com.example.heshequ.activity.team.AddTeamActivity;
 import com.example.heshequ.adapter.MytPagersAdapter;
 import com.example.heshequ.base.NetWorkFragment;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.view.NoScrollViewPager;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
@@ -58,7 +58,7 @@ public class TimsFragment extends NetWorkFragment implements View.OnClickListene
 
     private void init() {
 //        MainActivity activity = (MainActivity) getActivity();
-        TeamActivity activity = (TeamActivity)getActivity();
+        TeamActivity activity = (TeamActivity) getActivity();
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new TeamChildFragment1());
         fragments.add(new TeamChildFragment2());
@@ -134,7 +134,7 @@ public class TimsFragment extends NetWorkFragment implements View.OnClickListene
                 startActivity(new Intent(mContext, TeamSearchActivity.class));
                 break;
             case R.id.ivAdd:
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myTeamAddNewTeam");
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myTeamAddNewTeam");
                 startActivity(new Intent(mContext, AddTeamActivity.class));
                 break;
             case R.id.tvMine:

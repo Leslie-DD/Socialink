@@ -6,7 +6,7 @@ package com.example.heshequ.entity;
  */
 
 public class RefHotActivityEvent {
-    int type ;   // 1  =刷新  2  = 加载
+    int type;   // 1  =刷新  2  = 加载
 
     public RefHotActivityEvent(int type) {
         this.type = type;

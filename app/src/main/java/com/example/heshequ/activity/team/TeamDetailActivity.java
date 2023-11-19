@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.OtherSayAdapter;
 import com.example.heshequ.adapter.recycleview.Tj_Adapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -13,7 +14,6 @@ import com.example.heshequ.entity.TestBean;
 import com.example.heshequ.utils.SpaceItemDecoration;
 import com.example.heshequ.view.MyLv;
 import com.example.heshequ.view.MyRecyclerview;
-import com.example.heshequ.R;
 import com.tencent.mm.opensdk.utils.Log;
 import com.umeng.analytics.MobclickAgent;
 
@@ -143,11 +143,12 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
-        Log.e("this.getClass().getSimpleName()",this.getClass().getSimpleName());
+        Log.e("this.getClass().getSimpleName()", this.getClass().getSimpleName());
         MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
 }

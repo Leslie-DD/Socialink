@@ -10,7 +10,7 @@ public class AttentionBean implements Serializable {
     private int id;
     private int follower;
     private int concerned;
-    private  String nickname;
+    private String nickname;
     private String header;
     private int Cancel;
 

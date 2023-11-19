@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.FriendNewAdapter;
 import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -20,7 +21,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -37,7 +37,7 @@ import java.util.List;
  * Created by dell on 2020/5/10.
  */
 
-public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener{
+public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener {
     private View view;
     private XRecyclerView rv;
     private FriendNewAdapter adapter;
@@ -54,8 +54,8 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
     @Override
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
-        Bundle bundle=getArguments();
-        hisid=Integer.parseInt(bundle.getString("hisid"));
+        Bundle bundle = getArguments();
+        hisid = Integer.parseInt(bundle.getString("hisid"));
         init();
         getData(100);
         setFragmentListener();
@@ -73,8 +73,8 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
     }
 
     private void getData(int where) {
-        setBodyParams(new String[]{"pn","ps","uid"}, new String[]{""+pn, "" + Constants.default_PS,""+hisid});
-        sendPost(WenConstans.GetonesDynamic, where, WenConstans.token);
+        setBodyParams(new String[]{"pn", "ps", "uid"}, new String[]{"" + pn, "" + Constants.default_PS, "" + hisid});
+        sendPostConnection(WenConstans.GetonesDynamic, where, WenConstans.token);
     }
 
     @Override
@@ -85,7 +85,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
 
         Gson gson = new Gson();
         if (where == 100) {
-            Log.e("s","ssssssssssssssssssssssssssssssssssssssssss2");
+            Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss2");
             allList = new ArrayList<>();
             if (hasRefresh) {
                 hasRefresh = false;
@@ -94,14 +94,14 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
             if (result.has("data")) {
 
 
-                Log.e("s","ssssssssssssssssssssssssssssssssssssssssss1");
+                Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss1");
                 JSONArray data = result.getJSONArray("data");
 
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendNewBean>>() {
                             }.getType());
-                    Log.e("s","ssssssssssssssssssssssssssssssssssssssssss");
+                    Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss");
                     if (allList == null || allList.size() == 0) {
                         allList = new ArrayList<>();
                     }
@@ -116,7 +116,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONArray("data");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendNewBean>>() {
                             }.getType());
@@ -138,7 +138,6 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
             adapter.setData(allList);
         }
     }
-
 
 
     @Override
@@ -177,22 +176,22 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData(100);
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -201,7 +200,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }
@@ -211,6 +210,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

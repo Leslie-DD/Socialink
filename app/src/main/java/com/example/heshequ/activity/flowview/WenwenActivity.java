@@ -2,8 +2,8 @@ package com.example.heshequ.activity.flowview;
 
 import android.os.Bundle;
 
-import com.example.heshequ.base.BaseActivity;
 import com.example.heshequ.R;
+import com.example.heshequ.base.BaseActivity;
 
 /**
  * Created by 佳佳 on 2019/9/4.

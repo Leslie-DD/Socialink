@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.TeamAndWenwenAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -16,13 +18,14 @@ import com.example.heshequ.bean.WenwenBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.umeng.analytics.MobclickAgent;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,33 +67,33 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
     }
 
     private void getData(int where) {
-        setBodyParams(new String[]{"pn", "ps","type"}, new String[]{pn + "", ps + "","1"});
-        sendPost(WenConstans.MySaves, where, WenConstans.token);
+        setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{pn + "", ps + "", "1"});
+        sendPostConnection(WenConstans.MySaves, where, WenConstans.token);
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        if (ResultUtils.isFail(result,getActivity())){
+        if (ResultUtils.isFail(result, getActivity())) {
             return;
         }
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         if (where == 100) {
-            if (hasRefresh){
-                hasRefresh=false;
+            if (hasRefresh) {
+                hasRefresh = false;
                 rv.refreshComplete();
             }
-            allList=new ArrayList<>();
-            if (result.has("data")){
-                JSONObject data=result.getJSONObject("data");
-                if (data!=null&&data.has("list")){
-                    JSONArray array=data.getJSONArray("list");
-                    if (array!=null&&array.length()>0){
+            allList = new ArrayList<>();
+            if (result.has("data")) {
+                JSONObject data = result.getJSONObject("data");
+                if (data != null && data.has("list")) {
+                    JSONArray array = data.getJSONArray("list");
+                    if (array != null && array.length() > 0) {
                         for (int i = 0; i < array.length(); i++) {
-                            JSONObject oo=array.getJSONObject(i);
-                            if (oo!=null){
-                                WenwenBean bean=gson.fromJson(oo
+                            JSONObject oo = array.getJSONObject(i);
+                            if (oo != null) {
+                                WenwenBean bean = gson.fromJson(oo
                                         .getJSONObject("obj").toString(), WenwenBean.class);
-                                bean.category=oo.getInt("category");
+                                bean.category = oo.getInt("category");
                                 allList.add(bean);
                             }
                         }
@@ -100,31 +103,31 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
 //                    if (allList==null||allList.size()==0){
 //                        allList=new ArrayList<>();
 //                    }
-                    if (data.has("totalPage")){
-                        totalPage=data.getInt("totalPage");
+                    if (data.has("totalPage")) {
+                        totalPage = data.getInt("totalPage");
                     }
                 }
             }
-            if (allList.size()==0){
+            if (allList.size() == 0) {
                 tvTips.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 tvTips.setVisibility(View.GONE);
             }
             adapter.setData(allList);
         } else if (where == 101) {
             rv.loadMoreComplete();
-            moreList=new ArrayList<>();
-            if (result.has("data")){
-                JSONObject data=result.getJSONObject("data");
-                if (data!=null&&data.has("list")){
-                    JSONArray array=data.getJSONArray("list");
-                    if (array!=null&&array.length()>0){
+            moreList = new ArrayList<>();
+            if (result.has("data")) {
+                JSONObject data = result.getJSONObject("data");
+                if (data != null && data.has("list")) {
+                    JSONArray array = data.getJSONArray("list");
+                    if (array != null && array.length() > 0) {
                         for (int i = 0; i < array.length(); i++) {
-                            JSONObject oo=array.getJSONObject(i);
-                            if (oo!=null){
-                                WenwenBean bean=gson.fromJson(oo
+                            JSONObject oo = array.getJSONObject(i);
+                            if (oo != null) {
+                                WenwenBean bean = gson.fromJson(oo
                                         .getJSONObject("obj").toString(), WenwenBean.class);
-                                bean.category=oo.getInt("category");
+                                bean.category = oo.getInt("category");
                                 moreList.add(bean);
                             }
                         }
@@ -137,9 +140,9 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
                 }
             }
             allList.addAll(moreList);
-            if (allList.size()==0){
+            if (allList.size() == 0) {
                 tvTips.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 tvTips.setVisibility(View.GONE);
             }
             adapter.setData(allList);
@@ -191,26 +194,26 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+        sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData(100);
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -219,7 +222,7 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }
@@ -229,6 +232,7 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

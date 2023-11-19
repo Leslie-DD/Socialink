@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
@@ -17,7 +18,6 @@ import com.example.heshequ.fragment.FriendFragment;
 import com.example.heshequ.fragment.NearFragment;
 import com.example.heshequ.fragment.NewFragment;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -36,18 +36,18 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
     private ViewPager vp;
     private double longtitude;
     private double latitude;
-    private TextView tvnear, tvnew,tvfriend;
-    private String longtitude1,latitude1;
+    private TextView tvnear, tvnew, tvfriend;
+    private String longtitude1, latitude1;
     private ArrayList<Fragment> list;
-    private LinearLayout FriendFiltrate,FriendSet,FriendSearch;
+    private LinearLayout FriendFiltrate, FriendSet, FriendSearch;
     private LinearLayout llInvis;
     private NearFragment nearFragment;
     private NewFragment newFragment;
     private FriendFragment friendFragment;
 
     private MyFragmentPagerAdapter adapter;
-    private static double longtitude2,latitude2;
-    private int status =-1;
+    private static double longtitude2, latitude2;
+    private int status = -1;
 
 
     @Override
@@ -60,8 +60,8 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
         DecimalFormat df = new DecimalFormat("#.000000");
         longtitude = Double.parseDouble(longtitude1);
         latitude = Double.parseDouble(latitude1);
-        Log.e("jingduya",""+longtitude);
-        Log.e("weiduya",""+latitude);
+        Log.e("jingduya", "" + longtitude);
+        Log.e("weiduya", "" + latitude);
         init();
         event();
     }
@@ -76,24 +76,25 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
         FriendSet = (LinearLayout) findViewById(R.id.FriendSet);
         tvnear = (TextView) findViewById(R.id.tvNear);
         tvnew = (TextView) findViewById(R.id.tvNew);
-        tvfriend =(TextView) findViewById(R.id.tvFriend);
+        tvfriend = (TextView) findViewById(R.id.tvFriend);
         getData();
         nearFragment = new NearFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("jingdu",longtitude+"");
-        bundle.putString("weidu",""+latitude);
+        bundle.putString("jingdu", longtitude + "");
+        bundle.putString("weidu", "" + latitude);
         nearFragment.setArguments(bundle);
-        newFragment =new NewFragment();
+        newFragment = new NewFragment();
         friendFragment = new FriendFragment();
         list.add(nearFragment);
         list.add(newFragment);
         list.add(friendFragment);
         vp = (ViewPager) findViewById(R.id.vp);
-        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),list);
+        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);
         vp.setCurrentItem(0);
         setTvBg(2);
     }
+
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         FriendFiltrate.setOnClickListener(this);
@@ -117,23 +118,27 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
             }
         });
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         int ret = result.optInt("code");
         if (ret == 0) {
-           // Utils.toastShort(mContext, result.optString("msg"));
+            // Utils.toastShort(mContext, result.optString("msg"));
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
         }
     }
+
     private void getData() {
-        setBodyParams(new String[]{"longitude","latitude"}, new String[]{""+longtitude,""+latitude});
-        sendPost(Constants.base_url+"/api/social/updatePosition.do", 100, WenConstans.token);
+        setBodyParams(new String[]{"longitude", "latitude"}, new String[]{"" + longtitude, "" + latitude});
+        sendPost(Constants.base_url + "/api/social/updatePosition.do", 100, WenConstans.token);
     }
+
     public void setTvBg(int status) {
         if (this.status == status) {
             return;
@@ -149,6 +154,7 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
             vp.setCurrentItem(status);
         }
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -156,13 +162,13 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.FriendSearch:
-                Log.e("sea","ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-                startActivity(new Intent(mContext,FriendSearch.class));
+                Log.e("sea", "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+                startActivity(new Intent(mContext, FriendSearch.class));
                 break;
             case R.id.FriendSet:
-                Intent intent2=new Intent();
-                intent2.putExtra("longtitude",longtitude1+"");
-                intent2.putExtra("latitude",""+latitude1);
+                Intent intent2 = new Intent();
+                intent2.putExtra("longtitude", longtitude1 + "");
+                intent2.putExtra("latitude", "" + latitude1);
                 intent2.setClass(FriendActivity3.this, FriendSet.class);
                 startActivity(intent2);
                 break;
@@ -178,9 +184,9 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
             case R.id.tvNew:
                 setTvBg(1);
                 Intent intent3 = new Intent();
-                intent3.putExtra("longtitude",""+longtitude);
-                intent3.putExtra("latitude",""+latitude);
-                intent3.setClass(FriendActivity3.this,FriendActivity2.class);
+                intent3.putExtra("longtitude", "" + longtitude);
+                intent3.putExtra("latitude", "" + latitude);
+                intent3.setClass(FriendActivity3.this, FriendActivity2.class);
                 startActivity(intent3);
                 overridePendingTransition(0, 0);
                 finish();
@@ -190,6 +196,7 @@ public class FriendActivity3 extends NetWorkActivity implements View.OnClickList
                 break;
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

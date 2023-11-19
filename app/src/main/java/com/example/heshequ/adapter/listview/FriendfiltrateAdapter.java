@@ -17,11 +17,13 @@ import java.util.ArrayList;
 
 public class FriendfiltrateAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<FriendBean> data=new ArrayList<>();
-    public FriendfiltrateAdapter(Context context,ArrayList<FriendBean> data) {
-        this.data=data;
-        this.context=context;
+    private ArrayList<FriendBean> data = new ArrayList<>();
+
+    public FriendfiltrateAdapter(Context context, ArrayList<FriendBean> data) {
+        this.data = data;
+        this.context = context;
     }
+
     public void setData(ArrayList<FriendBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -44,14 +46,15 @@ public class FriendfiltrateAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-        FriendBean bean=data.get(position);
+        FriendBean bean = data.get(position);
         ViewHolder viewHolder;
 
         return view;
     }
-    public class ViewHolder{
+
+    public class ViewHolder {
         ImageView ivIcon;
-        TextView tvName,tvTip;
-        View v1,v2;
+        TextView tvName, tvTip;
+        View v1, v2;
     }
 }

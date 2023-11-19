@@ -6,8 +6,8 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.example.heshequ.utils.Utils;
 import com.bumptech.glide.Glide;
+import com.example.heshequ.utils.Utils;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class NineGridTestLayout extends NineGridLayout {
     private OnItemPictureClickListener listener;
 
     public NineGridTestLayout(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public NineGridTestLayout(Context context, AttributeSet attrs) {
@@ -32,17 +32,17 @@ public class NineGridTestLayout extends NineGridLayout {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
-    protected void displayImage(int position,RatioImageView imageView, String url) {
-        if(context!=null){
+    protected void displayImage(int position, RatioImageView imageView, String url) {
+        if (context != null) {
             Glide.with(context).load(url).into(imageView);
-            imageView.setTag(Utils.getNameByPosition(itemPosition,position));
-            imageView.setTransitionName(Utils.getNameByPosition(itemPosition,position));
+            imageView.setTag(Utils.getNameByPosition(itemPosition, position));
+            imageView.setTransitionName(Utils.getNameByPosition(itemPosition, position));
         }
     }
 
     @Override
     protected void onClickImage(int imageIndex, String url, List<String> urlList, ImageView imageView) {
-        listener.onItemPictureClick(itemPosition,imageIndex,url,urlList,imageView);
+        listener.onItemPictureClick(itemPosition, imageIndex, url, urlList, imageView);
     }
 
 

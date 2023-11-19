@@ -1,5 +1,7 @@
 package com.example.heshequ.utils;
 
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -8,11 +10,13 @@ import android.os.Build;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.example.heshequ.MeetApplication;
 import com.lzy.okhttputils.utils.OkLogger;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,13 +33,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-
 
 /**
  * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
- *
- *  需要在Application中注册，为了要在程序启动器就监控整个程序。
+ * <p>
+ * 需要在Application中注册，为了要在程序启动器就监控整个程序。
  */
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
@@ -55,10 +57,15 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     @SuppressLint("SimpleDateFormat")
     private DateFormat formatter = new SimpleDateFormat("yyyyMMdd_HHmmss");
 
-    /** 保证只有一个CrashHandler实例 */
-    private CrashHandler() {}
+    /**
+     * 保证只有一个CrashHandler实例
+     */
+    private CrashHandler() {
+    }
 
-    /** 获取CrashHandler实例 ,单例模式 */
+    /**
+     * 获取CrashHandler实例 ,单例模式
+     */
     public static CrashHandler getInstance() {
         if (instance == null) {
             synchronized (CrashHandler.class) {
@@ -133,6 +140,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     /**
      * 收集设备参数信息
+     *
      * @param context
      */
     public void collectDeviceInfo(Context context) {
@@ -164,7 +172,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * 保存错误信息到文件中
      *
      * @param ex
-     * @return  返回文件名称,便于将文件传送到服务器
+     * @return 返回文件名称, 便于将文件传送到服务器
      */
     private String saveCatchInfo2File(Throwable ex) {
 
@@ -190,7 +198,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             long timestamp = System.currentTimeMillis();
             String time = formatter.format(new Date());
             String fileName = "crash-" + time + "-" + timestamp + ".log";
-            if (!PermissionUtils.isGranted(WRITE_EXTERNAL_STORAGE)){
+            if (!PermissionUtils.isGranted(WRITE_EXTERNAL_STORAGE)) {
                 return "";
             }
             if (SDCardUtils.isSDCardEnableByEnvironment()) {
@@ -203,7 +211,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 FileOutputStream fos = new FileOutputStream(path + fileName);
                 fos.write(sb.toString().getBytes());
                 //发送给开发人员
-                sendCrashLog2PM(path+fileName);
+                sendCrashLog2PM(path + fileName);
                 fos.close();
             }
             return fileName;
@@ -215,11 +223,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
     /**
      * 将捕获的导致崩溃的错误信息发送给开发人员
-     *
+     * <p>
      * 目前只将log日志保存在sdcard 和输出到LogCat中，并未发送给后台。
      */
-    private void sendCrashLog2PM(String fileName){
-        if(!new File(fileName).exists()){
+    private void sendCrashLog2PM(String fileName) {
+        if (!new File(fileName).exists()) {
             Toast.makeText(mContext, "日志文件不存在！", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -229,16 +237,16 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         try {
             fis = new FileInputStream(fileName);
             reader = new BufferedReader(new InputStreamReader(fis, "GBK"));
-            while(true){
+            while (true) {
                 s = reader.readLine();
-                if(s == null) break;
+                if (s == null) break;
                 //由于目前尚未确定以何种方式发送，所以先打出log日志。
                 Log.i("info", s);
 
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{   // 关闭流
+        } finally {   // 关闭流
             try {
                 if (reader != null) {
                     reader.close();

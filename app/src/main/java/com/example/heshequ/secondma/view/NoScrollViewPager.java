@@ -48,6 +48,6 @@ public class NoScrollViewPager extends ViewPager {
     @Override
     public void setCurrentItem(int item) {
         //false 去除滚动效果
-        super.setCurrentItem(item,false);
+        super.setCurrentItem(item, false);
     }
 }

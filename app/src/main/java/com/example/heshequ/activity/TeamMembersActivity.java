@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.SearchMembersActivity;
 import com.example.heshequ.adapter.listview.TeamMemberAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -14,7 +15,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefMembers;
 import com.example.heshequ.entity.TeamMemberBean;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.umeng.analytics.MobclickAgent;
@@ -51,7 +51,7 @@ public class TeamMembersActivity extends NetWorkActivity implements View.OnClick
     }
 
     private void init() {
-        teamId = getIntent().getIntExtra("id",0);
+        teamId = getIntent().getIntExtra("id", 0);
         lv = (ListView) findViewById(R.id.lv);
         etSearch = (EditText) findViewById(R.id.etSearch);
         etSearch.setFocusable(false);
@@ -67,27 +67,28 @@ public class TeamMembersActivity extends NetWorkActivity implements View.OnClick
         etSearch.setOnClickListener(this);
         adapter.setOnItemEditorNameListener(new TeamMemberAdapter.OnItemEditorNameListener() {
             @Override
-            public void ItemEditor(int position,String mark) {
+            public void ItemEditor(int position, String mark) {
                 editorPosition = position;
                 editorName = mark;
-                setBodyParams(new String[]{"id","nickname"},new String[]{""+pData.get(position).getId(),""+mark});
-                sendPost(Constants.base_url+"/api/club/member/update.do",EditorName,Constants.token);
+                setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + pData.get(position).getId(), "" + mark});
+                sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
             }
         });
 
     }
 
     private void getData() {
-        setBodyParams(new String[]{"clubId"},new String[]{""+teamId});
-        sendPost(Constants.base_url+"/api/club/member/pglist.do",getData, Constants.token);
+        setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
+        sendPost(Constants.base_url + "/api/club/member/pglist.do", getData, Constants.token);
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        if (where == getData){
-            switch (result.optInt("code")){
+        if (where == getData) {
+            switch (result.optInt("code")) {
                 case 0:
-                    pData = gson.fromJson(result.optString("data"),new TypeToken<List<TeamMemberBean>>() {}.getType());
+                    pData = gson.fromJson(result.optString("data"), new TypeToken<List<TeamMemberBean>>() {
+                    }.getType());
                     pData = Utils.getSortData(pData);
                     adapter.setData(pData);
                     break;
@@ -102,12 +103,12 @@ public class TeamMembersActivity extends NetWorkActivity implements View.OnClick
                     break;
 
             }
-        }else if (where == EditorName){
-            switch (result.optInt("code")){
+        } else if (where == EditorName) {
+            switch (result.optInt("code")) {
                 case 0:
                     pData.get(editorPosition).setStatus(0);
                     pData.get(editorPosition).setNickname(editorName);
-                    pData=Utils.getSortData((ArrayList<TeamMemberBean>) pData);
+                    pData = Utils.getSortData((ArrayList<TeamMemberBean>) pData);
                     adapter.setData(pData);
 
                     break;
@@ -124,14 +125,14 @@ public class TeamMembersActivity extends NetWorkActivity implements View.OnClick
         }
     }
 
-    @Subscribe (threadMode = ThreadMode.MAIN)
-    public void refMembers(RefMembers refMembers){
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refMembers(RefMembers refMembers) {
         getData();
     }
 
     @Override
     protected void onFailure(String result, int where) {
-        Utils.toastShort(mContext,"网络异常");
+        Utils.toastShort(mContext, "网络异常");
     }
 
     @Override
@@ -141,10 +142,10 @@ public class TeamMembersActivity extends NetWorkActivity implements View.OnClick
                 this.finish();
                 break;
             case R.id.ivSearch:
-                startActivity(new Intent(this, SearchMembersActivity.class).putExtra("teamid",teamId));
+                startActivity(new Intent(this, SearchMembersActivity.class).putExtra("teamid", teamId));
                 break;
             case R.id.etSearch:
-                startActivity(new Intent(this, SearchMembersActivity.class).putExtra("teamid",teamId));
+                startActivity(new Intent(this, SearchMembersActivity.class).putExtra("teamid", teamId));
                 break;
         }
     }

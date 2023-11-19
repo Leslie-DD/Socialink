@@ -1,5 +1,7 @@
 package com.example.heshequ.activity.oldsecond;
 
+import static com.example.heshequ.MeetApplication.mTencent;
+
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -18,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.ReportActivity;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.adapter.listview.GoodDisscussAdapter;
@@ -36,8 +40,6 @@ import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyLv;
 import com.example.heshequ.view.XialaPop;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -56,10 +58,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.heshequ.MeetApplication.mTencent;
 
-
-public class GoodDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener,WbShareCallback , Serializable{
+public class GoodDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener, WbShareCallback, Serializable {
     private int type = 0;
     private CircleView ivHead;
     private EditText etContent;
@@ -96,10 +96,12 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
     private boolean isQQShare;
     private boolean isWBShare;
     private WbShareHandler wbShareHandler;
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (ResultUtils.isFail(result, this)) {
@@ -109,14 +111,14 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
             Utils.toastShort(mContext, result.getString("msg") + "");
 
             int zan = secondhandgoodBean.likeAmount;
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
             if (TextUtils.isEmpty(secondhandgoodBean.userLike)) {
                 secondhandgoodBean.userLike = "1";
@@ -243,7 +245,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
                 Utils.toastShort(mContext, result.optString("msg"));
             }
         } else if (where == 10010) {
-            Utils.toastShort(mContext, "删除 "+result.toString());
+            Utils.toastShort(mContext, "删除 " + result.toString());
             if (result.optInt("code") == 0) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
@@ -271,6 +273,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         init();
         getDisscuss(100);
     }
+
     @SuppressLint("SetTextI18n")
     private void init() {
         setTitleAndBack("商品详情");
@@ -317,7 +320,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
                 tvName.setText("匿名用户");
                 ivHead.setImageResource(R.mipmap.head3);
             }
-           // tvTitles.setText(secondhandgoodBean.title + "");
+            // tvTitles.setText(secondhandgoodBean.title + "");
             tvContent.setText(secondhandgoodBean.content + "");
             tvTime.setText(secondhandgoodBean.price + "");
             tvLoves.setText(secondhandgoodBean.likeAmount + "");
@@ -365,6 +368,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         wbShareHandler.registerApp();
 
     }
+
     private void initDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setCancelable(false);
@@ -396,7 +400,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
      * 而是通过调用二手商品首页pglist接口中取出来传到商品详情页面的
      * 但是需要调用一次goodsInfo接口，给后台的“推荐”接口提供数据，获取用户推荐
      */
-    private void sendClickGoods(){
+    private void sendClickGoods() {
         setBodyParams(new String[]{"goodsid"}, new String[]{secondhandgoodBean.id + ""});
         sendPost(WenConstans.SecondhandGoodsInfo, 123, WenConstans.token);
     }
@@ -410,22 +414,26 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         sendPost(WenConstans.SecondgooddiscussFirst, where, WenConstans.token);
 
     }
+
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{secondhandgoodBean.id + "", 1 + "", content});
         sendPost(WenConstans.Secondgooddiscuss, 102, WenConstans.token);
 
     }
+
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}
                 , new String[]{secondhandgoodBean.id + "", type});
         sendPost(WenConstans.Secondgoodcollect, 104, WenConstans.token);
 
     }
+
     private void jbWw() {
         startActivity(new Intent(this, ReportActivity.class).putExtra("type", 1).putExtra("id", secondhandgoodBean.id));
 
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -452,7 +460,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
                 sendDisscuss(content);
                 break;
             case R.id.ivRight:
-                XialaPop.showSelectPop(this, save, secondhandgoodBean.uid.equals(Constants.uid + ""),true, new XialaPop.TextListener() {
+                XialaPop.showSelectPop(this, save, secondhandgoodBean.uid.equals(Constants.uid + ""), true, new XialaPop.TextListener() {
                     @Override
                     public void selectPosition(int num) {
                         if (num == 0) {    //收藏相关
@@ -465,7 +473,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
                             jbWw();
                         } else if (num == 2) {
                             DelWw();
-                        }else if (num == 3){
+                        } else if (num == 3) {
                             //ToastUtils.showShort("分享");
                             showShare();
                         }
@@ -480,6 +488,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         }
 
     }
+
     private void DelWw() {
         deldialog.show();
     }
@@ -490,12 +499,14 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         pn = 1;
         getDisscuss(100);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refData(GoodsdiscussBean bean) {
         hasRefresh = true;
         pn = 1;
         getDisscuss(100);
     }
+
     @Override
     public void onLoadMore() {
         pn++;
@@ -517,7 +528,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         clickPosition = position;
         setBodyParams(new String[]{"id"}
                 , new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.SecondgooddiscussDing, 103,WenConstans.token);
+        sendPost(WenConstans.SecondgooddiscussDing, 103, WenConstans.token);
     }
 
     public void doSecond(int position) {
@@ -527,7 +538,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         bundle.putSerializable("bean", newList.get(position));
         intent.putExtra("save", save);
         intent.putExtras(bundle);
-       startActivityForResult(intent, 100);
+        startActivityForResult(intent, 100);
     }
 
     private void setListener() {
@@ -543,6 +554,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         EventBus.getDefault().unregister(this);
         unregisterReceiver(brodcast);
     }
+
     private class RefreshBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -569,6 +581,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         }
         shareFragment.show(getSupportFragmentManager(), "Dialog");
     }
+
     @Override
     public void clickPosition(int position) {
         ShareBean shareBean = shareFragment.getGvData().get(position);
@@ -577,20 +590,20 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
                 Utils.toastShort(mContext, "您还未安装微信客户端");
                 return;
             }
-            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, Constants.base_url + secondhandgoodBean.header, Constants.base_url + "AskInfo.html?id=" + secondhandgoodBean.id,secondhandgoodBean.content,secondhandgoodBean.content);
+            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, Constants.base_url + secondhandgoodBean.header, Constants.base_url + "AskInfo.html?id=" + secondhandgoodBean.id, secondhandgoodBean.content, secondhandgoodBean.content);
         } else if (shareBean.getName().equals("朋友圈")) {
             if (!Utils.isWeChatAppInstalled(this)) {
                 Utils.toastShort(mContext, "您还未安装微信客户端");
                 return;
             }
-            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, Constants.base_url + secondhandgoodBean.header, Constants.base_url + "AskInfo.html?id=" + secondhandgoodBean.id,secondhandgoodBean.content,secondhandgoodBean.content);
+            Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, Constants.base_url + secondhandgoodBean.header, Constants.base_url + "AskInfo.html?id=" + secondhandgoodBean.id, secondhandgoodBean.content, secondhandgoodBean.content);
         } else if (shareBean.getName().equals("微博")) {
             if (!Utils.isWeiboInstalled(this)) {
                 Utils.toastShort(mContext, "您还未安新浪微博客户端");
                 return;
             }
             isWBShare = true;
-            Utils.shareToWeibo(wbShareHandler, Constants.base_url + secondhandgoodBean.header,  secondhandgoodBean.content, secondhandgoodBean.content + Constants.base_url + "AskInfo.html?id=" +secondhandgoodBean.id);
+            Utils.shareToWeibo(wbShareHandler, Constants.base_url + secondhandgoodBean.header, secondhandgoodBean.content, secondhandgoodBean.content + Constants.base_url + "AskInfo.html?id=" + secondhandgoodBean.id);
             //ssoHandler.authorize(new SelfWbAuthListener(this));
         } else if (shareBean.getName().equals("QQ")) {
             if (!Utils.isQQClientInstalled(this)) {
@@ -621,6 +634,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
     public void onWbShareFail() {
         Utils.toastShort(mContext, "微博分享失败");
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (null != mTencent) {
@@ -634,6 +648,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
             isWBShare = false;
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

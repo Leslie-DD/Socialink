@@ -11,7 +11,7 @@ public class PullTheBlackBean implements Serializable {
     private int follower;
     private int concerned;
     private String blackname;
-    private  String nickname;
+    private String nickname;
     private boolean black;
     private String header;
     private int Cancel;
@@ -62,7 +62,6 @@ public class PullTheBlackBean implements Serializable {
     public void setBlackname(String blackname) {
         this.blackname = blackname;
     }
-
 
 
     public void setId(int id) {

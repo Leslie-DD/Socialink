@@ -23,6 +23,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.AddVoteAdapter;
 import com.example.heshequ.adapter.listview.VoteAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -33,7 +34,6 @@ import com.example.heshequ.entity.VoteBean;
 import com.example.heshequ.entity.VoteJsonBean;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.MyLv;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
@@ -256,7 +256,6 @@ public class PublishVoteActivity extends NetWorkActivity implements View.OnClick
         });
 
     }
-
 
 
     @Override

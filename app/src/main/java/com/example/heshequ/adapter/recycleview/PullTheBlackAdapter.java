@@ -12,14 +12,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.bean.PullTheBlackBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 
@@ -31,13 +31,13 @@ import okhttp3.Response;
 /**
  * Created by 佳佳 on 2018/11/26.
  */
-public class PullTheBlackAdapter extends RecyclerView.Adapter
-{
+public class PullTheBlackAdapter extends RecyclerView.Adapter {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<PullTheBlackBean> datas = new ArrayList<>();
-    private Boolean deleteornot[]=new Boolean[1000];
-    private int po=0;
+    private Boolean deleteornot[] = new Boolean[1000];
+    private int po = 0;
+
     //初始化
     public PullTheBlackAdapter(Context context, ArrayList<PullTheBlackBean> data) {
         super();
@@ -45,11 +45,13 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter
         this.datas = data;
         this.inflater = LayoutInflater.from(context);
     }
+
     //数据设置
     public void setData(ArrayList<PullTheBlackBean> data) {
         this.datas = data;
         this.notifyDataSetChanged();
     }
+
     @Override
     //布局文件设置
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -57,6 +59,7 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter
         View view = LayoutInflater.from(context).inflate(R.layout.pulltheblack_item, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
@@ -71,8 +74,7 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter
     //item控件设置
 
 
-    class ViewHolder extends RecyclerView.ViewHolder
-    {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private TextView nickname;
         private ImageView delete;
         private CircleView header;
@@ -81,22 +83,20 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter
 
         public ViewHolder(View view) {
             super(view);
-            header=(CircleView) view.findViewById(R.id.mypullbalckphoto);
-            nickname=(TextView)view.findViewById(R.id.mypullbalckname);
-            delete=(ImageView) view.findViewById(R.id.mypulltheblackdelete);
-            pullblackHome = (LinearLayout)view.findViewById(R.id.pullbalckHome);
+            header = (CircleView) view.findViewById(R.id.mypullbalckphoto);
+            nickname = (TextView) view.findViewById(R.id.mypullbalckname);
+            delete = (ImageView) view.findViewById(R.id.mypulltheblackdelete);
+            pullblackHome = (LinearLayout) view.findViewById(R.id.pullbalckHome);
         }
 
-        public void setData(final int position)
-        {
-            po=position;
+        public void setData(final int position) {
+            po = position;
             final PullTheBlackBean bean = datas.get(position);
             //nickname.setText(bean.getNickname());
             nickname.setText(bean.getBlacknickname());
-            if(!TextUtils.isEmpty(bean.getHeader()))
-            {
-                Glide.with(context).load(Constants.base_url+bean.getHeader()).asBitmap().into(header);
-            }else {
+            if (!TextUtils.isEmpty(bean.getHeader())) {
+                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(header);
+            } else {
                 header.setImageResource(R.mipmap.head3);
             }
             //设置监听器，点击按钮，取消关注
@@ -107,17 +107,17 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter
                     OkHttpUtils.post(WenConstans.DeletePullTheBlack)
                             .tag(context)
                             .headers(Constants.Token_Header, Constants.token)
-                            .params("black",""+datas.get(position).getBlackId())
+                            .params("black", "" + datas.get(position).getBlackId())
                             .execute(new StringCallback() {
                                 @Override
 
-                                public void onSuccess(String s, Call call, Response response)
-                                {
-                                    Utils.toastShort(context,"拉黑");
+                                public void onSuccess(String s, Call call, Response response) {
+                                    Utils.toastShort(context, "拉黑");
 //                                    context.startActivity(new Intent(context, MyAttentiion.class));
                                     datas.remove(position);
                                     PullTheBlackAdapter.this.notifyDataSetChanged();
-                                }});
+                                }
+                            });
 
 //                    data.clear();
                 }
@@ -129,17 +129,17 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(context,PersonalInformationActivity.class);
-                            intent.putExtra("uid",bean.getBlackId());
-                            ((Activity)context).startActivityForResult(intent,1);
+                            Intent intent = new Intent(context, PersonalInformationActivity.class);
+                            intent.putExtra("uid", bean.getBlackId());
+                            ((Activity) context).startActivityForResult(intent, 1);
                         }
                     });
             pullblackHome.setOnClickListener(
-                    new View.OnClickListener(){
+                    new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent=new Intent(context,PersonalInformationActivity.class);
-                            intent.putExtra("uid",bean.getBlackId());
+                            Intent intent = new Intent(context, PersonalInformationActivity.class);
+                            intent.putExtra("uid", bean.getBlackId());
                             context.startActivity(intent);
                         }
                     }
@@ -148,10 +148,7 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter
         }
 
 
-
-
     }
-
 
 
 }

@@ -26,9 +26,9 @@ import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.flowview.TeamActivity;
 import com.example.heshequ.activity.flowview.WenwenActivity;
 import com.example.heshequ.activity.friend.GPSActivity;
+import com.example.heshequ.activity.newsencond.SecondHandActivity;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.activity.timetable.TimetableCheckin;
-import com.example.heshequ.activity.newsencond.SecondHandActivity;
 import com.example.heshequ.adapter.MyBannerAdapter;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.adapter.recycleview.RecycleAdapter;
@@ -179,11 +179,11 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         // 设置指示器（顺序依次）
         rollPagerView.setHintView(new ColorPointHintView(getActivity(), Color.parseColor("#00bbff"), Color.WHITE));
 
-        team = (LinearLayout)headView.findViewById(R.id.team);
-        wenwen = (LinearLayout)headView.findViewById(R.id.wenwen);
-        secondHand = (LinearLayout)headView.findViewById(R.id.secondhand);
-        scheduleCard = (LinearLayout)headView.findViewById(R.id.schedulecard);
-        makeFriends = (LinearLayout)headView.findViewById(R.id.makefriends);
+        team = (LinearLayout) headView.findViewById(R.id.team);
+        wenwen = (LinearLayout) headView.findViewById(R.id.wenwen);
+        secondHand = (LinearLayout) headView.findViewById(R.id.secondhand);
+        scheduleCard = (LinearLayout) headView.findViewById(R.id.schedulecard);
+        makeFriends = (LinearLayout) headView.findViewById(R.id.makefriends);
 
         team.setOnClickListener(this);
         wenwen.setOnClickListener(this);
@@ -198,7 +198,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         tv5.setOnClickListener(this);
         tv6 = (TextView) headView.findViewById(R.id.tv6);
         tv6.setOnClickListener(this);
-
 
 
         llVis = (LinearLayout) headView.findViewById(R.id.llVis);
@@ -259,7 +258,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     //获取首页轮播图
     private void getImgs() {
         setBodyParams(new String[]{"category"}, new String[]{"" + 1});
-        sendPost(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
+        sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
     }
 
     @Override

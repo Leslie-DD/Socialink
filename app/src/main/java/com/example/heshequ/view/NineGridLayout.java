@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
 import com.example.heshequ.R;
 
 import java.util.ArrayList;
@@ -15,10 +14,10 @@ import java.util.List;
 import java.util.TimerTask;
 
 /**
- * @Description:  九宫格布局显示图片
- *                1    显示1张图片的时候可以按照自适应或者长宽比
- *                2    显示2张及2张以上都是正方形
- *                3    4张图片显示排列方式是 2*2
+ * @Description: 九宫格布局显示图片
+ * 1    显示1张图片的时候可以按照自适应或者长宽比
+ * 2    显示2张及2张以上都是正方形
+ * 3    4张图片显示排列方式是 2*2
  * @Author: Liangchaojie
  * @Create On 2018/3/29 18:22
  */
@@ -48,7 +47,7 @@ public abstract class NineGridLayout extends ViewGroup {
         mSpacing = typedArray.getDimension(R.styleable.NineGridLayout_sapcing, DEFUALT_SPACING);
         oneImageWidth = (int) typedArray.getDimension(R.styleable.NineGridLayout_oneImageWidth, 0);
         oneImageHeight = (int) typedArray.getDimension(R.styleable.NineGridLayout_oneImageHeight, 0);
-        image_ratio =   typedArray.getFloat(R.styleable.NineGridLayout_image_ratio, image_ratio);
+        image_ratio = typedArray.getFloat(R.styleable.NineGridLayout_image_ratio, image_ratio);
         typedArray.recycle();
         init(context);
     }
@@ -57,11 +56,10 @@ public abstract class NineGridLayout extends ViewGroup {
         mContext = context;
         if (getListSize(mUrlList) == 0) {
             setVisibility(GONE);
-        }else {
+        } else {
             setVisibility(VISIBLE);
         }
     }
-
 
 
     @Override
@@ -135,7 +133,7 @@ public abstract class NineGridLayout extends ViewGroup {
             params.height = oneImageHeight;
             setLayoutParams(params);
             addView(imageView);
-            displayImage(0,imageView, url);
+            displayImage(0, imageView, url);
             return;
         }
 
@@ -150,11 +148,11 @@ public abstract class NineGridLayout extends ViewGroup {
     }
 
     private void getRealOneImageSize() {
-        if(oneImageWidth==0){
+        if (oneImageWidth == 0) {
             oneImageWidth = mSingleWidth;
         }
 
-        if(oneImageHeight==0){
+        if (oneImageHeight == 0) {
             oneImageHeight = (int) (oneImageWidth * image_ratio);
         }
     }
@@ -174,7 +172,7 @@ public abstract class NineGridLayout extends ViewGroup {
         imageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickImage(i, url, mUrlList,imageView);
+                onClickImage(i, url, mUrlList, imageView);
             }
         });
         return imageView;
@@ -196,7 +194,7 @@ public abstract class NineGridLayout extends ViewGroup {
 
         imageView.layout(left, top, right, bottom);
         addView(imageView);
-        displayImage(i,imageView, url);
+        displayImage(i, imageView, url);
     }
 
     private int[] findPosition(int childNum) {
@@ -251,8 +249,7 @@ public abstract class NineGridLayout extends ViewGroup {
     }
 
 
+    protected abstract void displayImage(int position, RatioImageView imageView, String url);
 
-    protected abstract void displayImage(int position,RatioImageView imageView, String url);
-
-    protected abstract void onClickImage(int position, String url, List<String> urlList,ImageView imageView);
+    protected abstract void onClickImage(int position, String url, List<String> urlList, ImageView imageView);
 }

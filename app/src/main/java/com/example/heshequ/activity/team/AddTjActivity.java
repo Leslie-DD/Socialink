@@ -20,6 +20,7 @@ import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
@@ -29,7 +30,6 @@ import com.example.heshequ.entity.DelEvent;
 import com.example.heshequ.entity.RefTjEvent;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.umeng.analytics.MobclickAgent;

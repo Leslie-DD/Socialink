@@ -22,7 +22,6 @@ import java.util.List;
 
 /**
  * 左侧菜单ListView的适配器
- *
  */
 public class MenuAdapter extends BaseAdapter {
 

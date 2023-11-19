@@ -44,6 +44,7 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
     private TextView tvTips;
     private int clickPosition;
     private FragmentBrodcast brodcast;
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
         if (ResultUtils.isFail(result, getActivity())) {
@@ -60,11 +61,11 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
                     if (data != null && data.has("list")) {
-                        JSONArray array=data.getJSONArray("list");
-                        if (array!=null&&array.length()>0){
+                        JSONArray array = data.getJSONArray("list");
+                        if (array != null && array.length() > 0) {
                             for (int i = 0; i < array.length(); i++) {
-                                WenwenBean bean=gson.fromJson(array.getJSONObject(i)
-                                        .getJSONObject("obj").toString(),WenwenBean.class);
+                                WenwenBean bean = gson.fromJson(array.getJSONObject(i)
+                                        .getJSONObject("obj").toString(), WenwenBean.class);
                                 allList.add(bean);
                             }
                         }
@@ -87,15 +88,15 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
                 adapter.setData(allList);
             } else if (where == 101) {
                 rv.loadMoreComplete();
-                moreList=new ArrayList<>();
+                moreList = new ArrayList<>();
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
                     if (data != null && data.has("list")) {
-                        JSONArray array=data.getJSONArray("list");
-                        if (array!=null&&array.length()>0){
+                        JSONArray array = data.getJSONArray("list");
+                        if (array != null && array.length() > 0) {
                             for (int i = 0; i < array.length(); i++) {
-                                WenwenBean bean=gson.fromJson(array.getJSONObject(i)
-                                        .getJSONObject("obj").toString(),WenwenBean.class);
+                                WenwenBean bean = gson.fromJson(array.getJSONObject(i)
+                                        .getJSONObject("obj").toString(), WenwenBean.class);
                                 moreList.add(bean);
                             }
                         }
@@ -117,22 +118,22 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
                     tvTips.setVisibility(View.GONE);
                 }
                 adapter.setData(allList);
-            }else if (where==1000){
-                Utils.toastShort(mContext,result.getString("msg")+"");
-                int zan=allList.get(clickPosition).likeAmount;
-                if (TextUtils.isEmpty(allList.get(clickPosition).userLike)){
-                    allList.get(clickPosition).userLike="1";
-                    zan=zan+1;
-                    allList.get(clickPosition).likeAmount=zan;
-                }else{
-                    allList.get(clickPosition).userLike="";
-                    zan=zan-1;
-                    allList.get(clickPosition).likeAmount=zan;
+            } else if (where == 1000) {
+                Utils.toastShort(mContext, result.getString("msg") + "");
+                int zan = allList.get(clickPosition).likeAmount;
+                if (TextUtils.isEmpty(allList.get(clickPosition).userLike)) {
+                    allList.get(clickPosition).userLike = "1";
+                    zan = zan + 1;
+                    allList.get(clickPosition).likeAmount = zan;
+                } else {
+                    allList.get(clickPosition).userLike = "";
+                    zan = zan - 1;
+                    allList.get(clickPosition).likeAmount = zan;
                 }
                 adapter.setData(allList);
             }
-        }catch (Exception e){
-            Log.e("ying",e.toString());
+        } catch (Exception e) {
+            Log.e("ying", e.toString());
         }
     }
 
@@ -143,11 +144,11 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view=inflater.inflate(R.layout.only_rv_item,null);
-        adapter=new HotWenwenAdapter(mContext);
-        rv= (XRecyclerView) view.findViewById(R.id.rv);
-        tvTips= (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext,true,true,rv);
+        view = inflater.inflate(R.layout.only_rv_item, null);
+        adapter = new HotWenwenAdapter(mContext);
+        rv = (XRecyclerView) view.findViewById(R.id.rv);
+        tvTips = (TextView) view.findViewById(R.id.tvTips);
+        ConsTants.initXrecycleView(mContext, true, true, rv);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
         adapter.DoSaveListener(this);
@@ -157,17 +158,17 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     @Override
     public void doSave(int position) {
         clickPosition = position;
-        setBodyParams(new String[]{"id"},new String[]{allList.get(position).id+""});
-        sendPost(WenConstans.WwLike,1000,WenConstans.token);
+        setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
+        sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
     }
 
     @Override
@@ -195,13 +196,13 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData(100);
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -209,13 +210,13 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
 
     private void getData(int where) {
         setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", pn + "", ps + ""});
-        sendPost(WenConstans.MyFoots, where, WenConstans.token);
+        sendPostConnection(WenConstans.MyFoots, where, WenConstans.token);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }

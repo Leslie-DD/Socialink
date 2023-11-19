@@ -25,6 +25,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -33,7 +34,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
@@ -41,18 +41,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
-import java.util.Date;
-import java.text.*;
+
 /**
  * Created by dell on 2020/3/27.
  */
 
-public class SendNew extends NetWorkActivity implements View.OnClickListener{
+public class SendNew extends NetWorkActivity implements View.OnClickListener {
     private TextView tvCancle;
     private TextView tvTitle;
     private TextView tvSave;
@@ -73,11 +74,11 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
     //展示图片
     private ImageView ivNm;
     //last
-    private int niming=0;
+    private int niming = 0;
     //用户id
     private FriendUserId bean;
     // 地点
-    private String location="";
+    private String location = "";
     //时间
     private Date date;
     //图片字符串
@@ -98,6 +99,7 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
             }
         }
     }
+
     private void setTvBg(TextView view, int status) {
         if (status == 0) {
             for (int i = 0; i < stringList.size(); i++) {
@@ -112,10 +114,12 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
         String color = status == 0 ? "#999999" : "#ffffff";
         view.setTextColor(Color.parseColor(color));
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,18 +127,19 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
         init();
         initPop();
     }
-    private void init(){
+
+    private void init() {
 
 
 //        id = WenConstans.id;
         id = Constants.uid;
-        String ids = id+"";
-        Log.e("ids",ids+"");
-        if(ids.equals("0")){
-            Intent intents  = new Intent(SendNew.this, LoginActivity.class);
+        String ids = id + "";
+        Log.e("ids", ids + "");
+        if (ids.equals("0")) {
+            Intent intents = new Intent(SendNew.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_SHORT ).show();
+            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_SHORT).show();
         }
         bean = new FriendUserId();
         fileList = new ArrayList<>();
@@ -150,7 +155,7 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
         tvSave = (TextView) findViewById(R.id.tvSave);
         tvSave.setOnClickListener(this);
 
-        NewDescribe=(EditText) findViewById(R.id.NewDescribe);
+        NewDescribe = (EditText) findViewById(R.id.NewDescribe);
 
         ivNm = (ImageView) findViewById(R.id.ivNm);
         gw = (GridView) findViewById(R.id.gw);
@@ -193,19 +198,21 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.e("动态发布长度<",s.length()+">");
+                Log.e("动态发布长度<", s.length() + ">");
                 if (s.length() >= 1024) {
                     Utils.toastShort(mContext, "已达最长字符，无法继续输入");
                 }
             }
         });
     }
+
     private void showPop() {
         layoutParams.alpha = 0.5f;
         getWindow().setAttributes(layoutParams);
         pop.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
     }
-    private void initPop(){
+
+    private void initPop() {
         pop = new PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         layoutParams = getWindow().getAttributes();
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
@@ -229,12 +236,14 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
         // 设置所在布局
         pop.setContentView(pv);
     }
+
     @Override
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvCancel:
@@ -243,7 +252,7 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
             case R.id.tvSave:
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date date = new Date(System.currentTimeMillis());
-                Log.e("thisisdate",""+simpleDateFormat.format(date));
+                Log.e("thisisdate", "" + simpleDateFormat.format(date));
                 String time = simpleDateFormat.format(date);
                 String content = NewDescribe.getText().toString();
 
@@ -260,9 +269,9 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
                     return;
                 }
 
-                Log.e("showid",id+"ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-                setBodyParams(new String[]{"uid", "content","location","photoList"}, new String[]{id+"",content+"",location+"",photoList});
-                sendPost(WenConstans.SendNew, 100,WenConstans.token);
+                Log.e("showid", id + "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+                setBodyParams(new String[]{"uid", "content", "location", "photoList"}, new String[]{id + "", content + "", location + "", photoList});
+                sendPost(WenConstans.SendNew, 100, WenConstans.token);
 //                OkHttpUtils.post(WenConstans.SendNew)
 //                        .tag(this)
 //                        .headers(Constants.Token_Header, WenConstans.token)
@@ -358,11 +367,10 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener{
 
                     @Override
                     public void onSuccess(File file) {
-                        if(file.exists()) {
+                        if (file.exists()) {
                             fileList.add(file);
-                        }
-                        else{
-                            Log.e("ss","andoahdpajpdjaspodas[ojagpoagingp[nap[inaphnpahpajhpjash[");
+                        } else {
+                            Log.e("ss", "andoahdpajpdjaspodas[ojagpoagingp[nap[inaphnpahpajhpjash[");
                         }
                     }
 

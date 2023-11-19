@@ -54,23 +54,23 @@ public class MeetApplication extends Application {
         Fresco.initialize(this);
         Log.e("THIS = ", this.toString());
         instance = this;
-        UMConfigure.init(this, null,null, UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.init(this, null, null, UMConfigure.DEVICE_TYPE_PHONE, "");
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
-        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_appLaunch");
+        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_appLaunch");
         regTowx();
         if (mTencent == null) {
             mTencent = Tencent.createInstance("1107493816", this.getApplicationContext());
         }
         AuthInfo mAuthInfo = new AuthInfo(this, Constants.APP_KEY_WB, Constants.REDIRECT_URL, Constants.SCOPE);
-        WbSdk.install(this,mAuthInfo);
+        WbSdk.install(this, mAuthInfo);
         //注册你的ShareHandler：
         initUm();
         CrashHandler.getInstance().init(this);
         initActivityLifecycleCallbacks();
     }
 
-    private void regTowx(){
-        Constants.api = WXAPIFactory.createWXAPI(getApplicationContext(), Constants.APP_AD_WX,true);
+    private void regTowx() {
+        Constants.api = WXAPIFactory.createWXAPI(getApplicationContext(), Constants.APP_AD_WX, true);
         Constants.api.registerApp(Constants.APP_AD_WX);
     }
 
@@ -127,10 +127,10 @@ public class MeetApplication extends Application {
         System.gc();
     }
 
-    public Activity currentActivity(){
+    public Activity currentActivity() {
         Activity activity = null;
-        if (!activityList.isEmpty()){
-            activity = activityList.get(activityList.size()-1);
+        if (!activityList.isEmpty()) {
+            activity = activityList.get(activityList.size() - 1);
         }
         return activity;
     }
@@ -146,20 +146,20 @@ public class MeetApplication extends Application {
             mPushAgent.setMessageHandler(new UmengMessageHandler() {
                 @Override
                 public Notification getNotification(Context context, UMessage uMessage) {
-                    Log.e("ying","getNotification");
-                    RefreshBean refreshBean=new RefreshBean();
+                    Log.e("ying", "getNotification");
+                    RefreshBean refreshBean = new RefreshBean();
                     if (uMessage.extra != null) {
                         if (uMessage.extra.containsKey("type")) {
                             typeId = uMessage.extra.get("type");
-                            Log.e("ying","uMessage.extra:"+typeId);
+                            Log.e("ying", "uMessage.extra:" + typeId);
                         } else {
-                            typeId="0";
+                            typeId = "0";
                         }
-                    }else{
-                        typeId="0";
+                    } else {
+                        typeId = "0";
                     }
-                    Log.e("ying","uMessage.extra:"+typeId);
-                    refreshBean.type=typeId;
+                    Log.e("ying", "uMessage.extra:" + typeId);
+                    refreshBean.type = typeId;
                     EventBus.getDefault().post(refreshBean);
 
                     if (Build.VERSION.SDK_INT >= 26) {
@@ -176,7 +176,7 @@ public class MeetApplication extends Application {
                                 .setContentText(uMessage.text)
                                 .setAutoCancel(true);
                         return builder.build();
-                    }else{
+                    } else {
                         NotificationCompat.Builder mBuilder
                                 = new NotificationCompat.Builder(context)
                                 .setSmallIcon(R.mipmap.launcher_icon)
@@ -216,9 +216,9 @@ public class MeetApplication extends Application {
             public void onActivityStarted(Activity activity) {
                 mFinalCount++;
                 //如果mFinalCount ==1，说明是从后台到前台
-                if (mFinalCount == 1){
+                if (mFinalCount == 1) {
                     //说明从后台回到了前台
-                    Log.e("DDQ-->","应用从后台回到了前台");
+                    Log.e("DDQ-->", "应用从后台回到了前台");
                 }
             }
 
@@ -236,10 +236,10 @@ public class MeetApplication extends Application {
             public void onActivityStopped(Activity activity) {
                 mFinalCount--;
                 //如果mFinalCount ==0，说明是前台到后台
-                Log.e("onActivityStopped", mFinalCount +"");
-                if (mFinalCount == 0){
+                Log.e("onActivityStopped", mFinalCount + "");
+                if (mFinalCount == 0) {
                     //说明从前台回到了后台
-                    Log.e("DDQ-->","应用从从前台回到了后台");
+                    Log.e("DDQ-->", "应用从从前台回到了后台");
                     /**
                      * 没明白下面的代码到底是修复什么补丁才要求重启
                      * 先注释掉，不然上传图片容易关闭进程

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.Label;
 import com.example.heshequ.bean.TeamBean;
@@ -15,7 +16,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefTeamDetailEvent;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.FlowLayout;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.umeng.analytics.MobclickAgent;
@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnClickListener{
+public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnClickListener {
     private TextView tvTitle;
     private ImageView ivBack;
     private ArrayList<TeamBean.LabelsBean> ls;
@@ -48,9 +48,9 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
     }
 
     private void inits() {
-        id = getIntent().getIntExtra("id",0);
+        id = getIntent().getIntExtra("id", 0);
         name = getIntent().getStringExtra("name");
-        ls = (ArrayList<TeamBean.LabelsBean>)getIntent().getSerializableExtra("labels");
+        ls = (ArrayList<TeamBean.LabelsBean>) getIntent().getSerializableExtra("labels");
         tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("设置团队标签");
         ivBack = findViewById(R.id.ivBack);
@@ -69,13 +69,13 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ivBack:
                 this.finish();
                 break;
             case R.id.btSave:
                 if (labels == null) {
-                    Utils.toastShort(mContext,"标签获取失败，请保持网络正常再尝试");
+                    Utils.toastShort(mContext, "标签获取失败，请保持网络正常再尝试");
                     return;
                 }
                 String label = "";
@@ -93,7 +93,7 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
                     Utils.toastShort(mContext, "请先选择团队的标签");
                     return;
                 }
-                setBodyParams(new String[]{"id","name","labels"}, new String[]{""+id,name,label});
+                setBodyParams(new String[]{"id", "name", "labels"}, new String[]{"" + id, name, label});
                 sendPost(Constants.base_url + "/api/club/base/updatebase.do", editCode, Constants.token);
                 break;
         }
@@ -112,11 +112,12 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
         switch (where) {
             case getLabelCode:
                 if (code == 0) {
-                    labels = gs.fromJson(result.optString("data"), new TypeToken<List<Label>>() {}.getType());
+                    labels = gs.fromJson(result.optString("data"), new TypeToken<List<Label>>() {
+                    }.getType());
 
 
                     if (labels != null) {
-                        if (ls!=null && ls.size()>0) {
+                        if (ls != null && ls.size() > 0) {
                             for (int i = 0; i < labels.size(); i++) {
                                 for (int j = 0; j < ls.size(); j++) {
                                     if (labels.get(i).getValue().equals(ls.get(j).getName())) {
@@ -129,7 +130,7 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
                         for (int i = 0; i < labels.size(); i++) {
                             final TextView view = new TextView(this);
                             view.setText(labels.get(i).getValue());
-                            setTvBg(view,labels.get(i).getStatus());
+                            setTvBg(view, labels.get(i).getStatus());
                             view.setHeight(Utils.dip2px(context, 34));
                             view.setPadding(Utils.dip2px(context, 17), 0, Utils.dip2px(context, 17), 0);
                             view.setGravity(Gravity.CENTER);
@@ -155,16 +156,16 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
                             flowLayout.addView(view);
                         }
                     }
-                }else {
+                } else {
                     Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
             case editCode:
                 if (code == 0) {
-                    Utils.toastShort(mContext,"设置标签成功");
+                    Utils.toastShort(mContext, "设置标签成功");
                     EventBus.getDefault().post(new RefTeamDetailEvent());
                     this.finish();
-                }else {
+                } else {
                     Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
@@ -182,6 +183,7 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

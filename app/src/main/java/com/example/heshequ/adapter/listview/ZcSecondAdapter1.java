@@ -8,11 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.wenwen.ZcArticleActivity;
 import com.example.heshequ.bean.ZcSecondBean;
 import com.example.heshequ.constans.Constants;
-import com.example.heshequ.R;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +23,14 @@ import java.util.List;
  */
 public class ZcSecondAdapter1 extends BaseAdapter {
     private ZcArticleActivity context;
-    private List<ZcSecondBean> data=new ArrayList<>();
+    private List<ZcSecondBean> data = new ArrayList<>();
     private int clum;
+
     public ZcSecondAdapter1(ZcArticleActivity context, int clum) {
-        this.context=context;
-        this.clum=clum;
+        this.context = context;
+        this.clum = clum;
     }
+
     public void setData(List<ZcSecondBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -53,50 +54,50 @@ public class ZcSecondAdapter1 extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_zc_second,null);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.item_zc_second, null);
             viewHolder = new ViewHolder();
-            viewHolder.tvName= (TextView) view.findViewById(R.id.tvName);
-            viewHolder.tvDelete= (TextView) view.findViewById(R.id.tvdelete);
-            viewHolder.tvContent= (TextView) view.findViewById(R.id.tvContent);
+            viewHolder.tvName = (TextView) view.findViewById(R.id.tvName);
+            viewHolder.tvDelete = (TextView) view.findViewById(R.id.tvdelete);
+            viewHolder.tvContent = (TextView) view.findViewById(R.id.tvContent);
             viewHolder.ivZj = (ImageView) view.findViewById(R.id.ivZj);
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        ZcSecondBean bean=data.get(position);
+        ZcSecondBean bean = data.get(position);
         viewHolder.tvDelete.setTag(position);
-        if (bean!=null){
-            Log.e("ying","position:"+clum+"second"+position+"uid:"+bean.uid);
-            viewHolder.tvContent.setText(bean.content+"");
-            if (bean.uid!=null) {
+        if (bean != null) {
+            Log.e("ying", "position:" + clum + "second" + position + "uid:" + bean.uid);
+            viewHolder.tvContent.setText(bean.content + "");
+            if (bean.uid != null) {
                 if (bean.uid.equals(Constants.uid + "")) {
                     viewHolder.tvDelete.setVisibility(View.VISIBLE);
                 } else {
                     viewHolder.tvDelete.setVisibility(View.GONE);
                 }
             }
-            if (bean.anonymity==0){
-                viewHolder.tvName.setText(bean.nn+"");
-            }else{
+            if (bean.anonymity == 0) {
+                viewHolder.tvName.setText(bean.nn + "");
+            } else {
                 viewHolder.tvName.setText("匿名用户");
             }
 
-            if (bean.roleId!=null) {
+            if (bean.roleId != null) {
                 try {
                     if (bean.anonymity == 0) {
                         if (Integer.parseInt(bean.roleId) == 20) {
                             viewHolder.ivZj.setVisibility(View.VISIBLE);
-                        } else{
+                        } else {
                             viewHolder.ivZj.setVisibility(View.GONE);
                         }
-                    }else{
+                    } else {
                         viewHolder.ivZj.setVisibility(View.GONE);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }else{
+            } else {
                 viewHolder.ivZj.setVisibility(View.GONE);
             }
 
@@ -104,16 +105,17 @@ public class ZcSecondAdapter1 extends BaseAdapter {
         viewHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int item= (int) v.getTag();
-                context.doDelete(data.get(item).id+"",clum,item);
+                int item = (int) v.getTag();
+                context.doDelete(data.get(item).id + "", clum, item);
 //                data.remove(item);
 //                notifyDataSetChanged();
             }
         });
         return view;
     }
-    public class ViewHolder{
-        TextView tvName,tvDelete,tvContent;
+
+    public class ViewHolder {
+        TextView tvName, tvDelete, tvContent;
         ImageView ivZj;
     }
 }

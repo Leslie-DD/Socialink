@@ -69,7 +69,6 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
     /*************************** 横向分类RecyclerView ************************************************/
     private List<ClassifySecondaryBean> classifySecondaryBeanList = new ArrayList<>();
     private int position = 0;
-    /*************************************************************************************************/
 
     /*************************** 商品部分参数 ********************************************************/
     private int category1Id;
@@ -97,7 +96,6 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
 
         adapter.setSearchDataList(mSearchList);
         adapter.setPicDataList(mPicList);
-/*****************************************************************************************************/
 
         xRefreshView = (XRefreshView) findViewById(R.id.xrefreshview);
         xRefreshView.setPinnedTime(1000);
@@ -109,12 +107,6 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
 
             @Override
             public void onRefresh(boolean isPullDown) {
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        xRefreshView.stopRefresh();
-//                    }
-//                }, 1000);
                 category2Id = 0;
                 adapter.setPosi(0);
                 xRefreshView.stopRefresh();
@@ -128,11 +120,9 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
             public void onLoadMore(boolean isSilence) {
                 pn++;
                 if (pn > totalPage) {
-                    new Handler().postDelayed(new Runnable() {
-                        public void run() {
-                            xRefreshView.setLoadComplete(true);
+                    new Handler().postDelayed(() -> {
+                        xRefreshView.setLoadComplete(true);
 //                            xRefreshView.stopLoadMore();
-                        }
                     }, 1000);
                 } else {
                     getData(103);

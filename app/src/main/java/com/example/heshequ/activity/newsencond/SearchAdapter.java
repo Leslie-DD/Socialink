@@ -1,5 +1,7 @@
 package com.example.heshequ.activity.newsencond;
 
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,8 +21,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.blankj.utilcode.util.ActivityUtils.startActivity;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
 
@@ -53,7 +53,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                 MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstSearch");
                 Intent intent = new Intent(mContext, SearchGoodActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putInt("type",0);
+                bundle.putInt("type", 0);
 //                bundle.putInt("category2_id", 0);
                 intent.putExtras(bundle);
                 startActivity(intent);

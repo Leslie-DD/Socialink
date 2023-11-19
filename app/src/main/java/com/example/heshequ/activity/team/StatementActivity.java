@@ -19,6 +19,7 @@ import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
@@ -27,7 +28,6 @@ import com.example.heshequ.entity.DelEvent;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.umeng.analytics.MobclickAgent;
@@ -190,7 +190,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
                                     switch (result.optInt("code")) {
                                         case 0:
                                             if (result.optString("msg").contains("发表成功")) {
-                                                Utils.toastShort(mContext,"发表成功");
+                                                Utils.toastShort(mContext, "发表成功");
                                                 StatementActivity.this.finish();
                                                 //发送团言刷新EventBus
                                                 EventBus.getDefault().post(new RefStatementEvent());
@@ -313,6 +313,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

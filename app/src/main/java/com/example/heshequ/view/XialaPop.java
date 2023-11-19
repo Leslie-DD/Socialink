@@ -10,10 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 
 /**
  * Hulk_Zhang on 2017/12/12 09:33
@@ -29,7 +29,7 @@ public class XialaPop {
                                      final TextListener mTextListener) {
         layoutParams = context.getWindow().getAttributes();
         v = LayoutInflater.from(context).inflate(R.layout.tippopitem, null);
-        peoType = new PopupWindow(v, ConsTants.screenW*10/30, ViewGroup.LayoutParams.WRAP_CONTENT);
+        peoType = new PopupWindow(v, ConsTants.screenW * 10 / 30, ViewGroup.LayoutParams.WRAP_CONTENT);
         peoType.setBackgroundDrawable(new BitmapDrawable());
 //        peoType.setAnimationStyle(R.style.MyPopwindow_anim_style);
         peoType.update();
@@ -46,7 +46,7 @@ public class XialaPop {
         v.findViewById(R.id.llShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextListener!=null){
+                if (mTextListener != null) {
                     mTextListener.selectPosition(0);
                 }
                 peoType.dismiss();
@@ -55,7 +55,7 @@ public class XialaPop {
         v.findViewById(R.id.llJuBao).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextListener!=null){
+                if (mTextListener != null) {
                     mTextListener.selectPosition(1);
                 }
                 peoType.dismiss();
@@ -68,23 +68,23 @@ public class XialaPop {
         peoType.showAtLocation(v, Gravity.RIGHT | Gravity.TOP, Utils.dip2px(context, 10), Utils.dip2px(context, 70));
     }
 
-    public static void showSelectPop(final NetWorkActivity context,String text,boolean isDel,boolean isSharp,
+    public static void showSelectPop(final NetWorkActivity context, String text, boolean isDel, boolean isSharp,
                                      final TextListener mTextListener) {
         layoutParams = context.getWindow().getAttributes();
         v = LayoutInflater.from(context).inflate(R.layout.tippopitem, null);
-        TextView tvStatu=  (TextView) v.findViewById(R.id.tvStatu);
+        TextView tvStatu = (TextView) v.findViewById(R.id.tvStatu);
         tvStatu.setText(text);
         LinearLayout llDel = v.findViewById(R.id.llDel);
         LinearLayout llJuBao = v.findViewById(R.id.llJuBao);
         LinearLayout llSharp = v.findViewById(R.id.llSharp);
-        if (isDel){
+        if (isDel) {
             llDel.setVisibility(View.VISIBLE);
             llJuBao.setVisibility(View.GONE);
         }
-        if (isSharp){
+        if (isSharp) {
             llSharp.setVisibility(View.VISIBLE);
         }
-        peoType = new PopupWindow(v, ConsTants.screenW*10/30, ViewGroup.LayoutParams.WRAP_CONTENT);
+        peoType = new PopupWindow(v, ConsTants.screenW * 10 / 30, ViewGroup.LayoutParams.WRAP_CONTENT);
         peoType.setBackgroundDrawable(new BitmapDrawable());
 //        peoType.setAnimationStyle(R.style.MyPopwindow_anim_style);
         peoType.update();
@@ -101,7 +101,7 @@ public class XialaPop {
         v.findViewById(R.id.llShare).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextListener!=null){
+                if (mTextListener != null) {
                     mTextListener.selectPosition(0);
                 }
                 peoType.dismiss();
@@ -110,7 +110,7 @@ public class XialaPop {
         v.findViewById(R.id.llJuBao).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextListener!=null){
+                if (mTextListener != null) {
                     mTextListener.selectPosition(1);
                 }
                 peoType.dismiss();
@@ -119,7 +119,7 @@ public class XialaPop {
         llDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextListener!=null){
+                if (mTextListener != null) {
                     mTextListener.selectPosition(2);
                 }
                 peoType.dismiss();
@@ -128,7 +128,7 @@ public class XialaPop {
         v.findViewById(R.id.llSharp).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextListener!=null){
+                if (mTextListener != null) {
                     mTextListener.selectPosition(3);
                 }
                 peoType.dismiss();

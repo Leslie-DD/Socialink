@@ -5,7 +5,7 @@ package com.example.heshequ.bean;
  */
 public class Label {
     private int id;
-    private String value,category;
+    private String value, category;
     private int status;
 
     public int getStatus() {

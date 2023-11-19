@@ -18,12 +18,13 @@ import java.util.List;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class MyBannerAdapter extends LoopPagerAdapter {
-    private List<String> data=new ArrayList<>();
+    private List<String> data = new ArrayList<>();
     private Context context;
     private onBanneritemClickListener listener;
+
     public MyBannerAdapter(RollPagerView viewPager, Context context) {
         super(viewPager);
-        this.context=context;
+        this.context = context;
     }
 
     public void setData(List<String> data) {
@@ -31,7 +32,7 @@ public class MyBannerAdapter extends LoopPagerAdapter {
         this.notifyDataSetChanged();
     }
 
-    public void setonBanneritemClickListener(onBanneritemClickListener listener){
+    public void setonBanneritemClickListener(onBanneritemClickListener listener) {
         this.listener = listener;
     }
 
@@ -39,14 +40,14 @@ public class MyBannerAdapter extends LoopPagerAdapter {
     public View getView(ViewGroup container, final int position) {
         ImageView view = new ImageView(container.getContext());
 //        view.setTag(position);
-        Glide.with(context).load(data.get(position)+"").asBitmap().centerCrop().error(R.mipmap.banner).into(view);
+        Glide.with(context).load(data.get(position) + "").asBitmap().centerCrop().error(R.mipmap.banner).into(view);
         view.setScaleType(ImageView.ScaleType.FIT_XY);
         //view.setImageResource(R.mipmap.ic_launcher);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Log.e("ying","点击的是第"+position+"张图片");
-                if (listener!=null){
+                if (listener != null) {
                     listener.onItemClick(position);
                 }
             }
@@ -61,7 +62,7 @@ public class MyBannerAdapter extends LoopPagerAdapter {
         return data.size();
     }
 
-    public interface onBanneritemClickListener{
+    public interface onBanneritemClickListener {
         void onItemClick(int position);
     }
 }

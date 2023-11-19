@@ -16,12 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.ImagePreviewAdapter;
 import com.example.heshequ.base.BaseActivity;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.entity.DelEvent;
 import com.example.heshequ.view.CustomViewPager2;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -166,9 +166,9 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
             rlDel.setVisibility(View.GONE);
         }
 
-        if (isdel2){
+        if (isdel2) {
             ivDel.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             ivDel.setVisibility(View.GONE);
         }
 
@@ -195,7 +195,7 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
             imageList = getIntent().getStringArrayListExtra("imageList");
             Log.e("YSF", imageList + "&&" + mCurrentPosition + "&&" + itemPosition);
             isDel = getIntent().getBooleanExtra("del", false);
-            isdel2 = getIntent().getBooleanExtra("isdel2",true);
+            isdel2 = getIntent().getBooleanExtra("isdel2", true);
         }
     }
 
@@ -271,6 +271,7 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

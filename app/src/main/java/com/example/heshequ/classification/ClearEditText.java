@@ -98,6 +98,7 @@ public class ClearEditText extends android.support.v7.widget.AppCompatEditText i
 
     /**
      * 设置清除图标的显示与隐藏，调用setCompoundDrawables为EditText绘制上去
+     *
      * @param visible
      */
     protected void setClearIconVisible(boolean visible) {
@@ -112,7 +113,7 @@ public class ClearEditText extends android.support.v7.widget.AppCompatEditText i
     @Override
     public void onTextChanged(CharSequence s, int start, int count,
                               int after) {
-        if(hasFoucs){
+        if (hasFoucs) {
             setClearIconVisible(s.length() > 0);
         }
     }

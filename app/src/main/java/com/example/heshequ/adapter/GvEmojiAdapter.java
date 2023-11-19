@@ -19,7 +19,7 @@ public class GvEmojiAdapter extends BaseAdapter {
     private Context context;
     private String[] datas;
 
-    public GvEmojiAdapter(Context context,String[] datas){
+    public GvEmojiAdapter(Context context, String[] datas) {
         this.context = context;
         this.datas = datas;
     }
@@ -43,19 +43,19 @@ public class GvEmojiAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         ViewHolder viewHolder;
 
-            if(view==null){
-                view = LayoutInflater.from(context).inflate(R.layout.item_gvemoji,null);
-                viewHolder = new ViewHolder();
-                viewHolder.tvEmoji = (TextView) view.findViewById(R.id.tvEmoji);
-                view.setTag(viewHolder);
-            }else{
-                viewHolder = (ViewHolder) view.getTag();
-            }
-            viewHolder.tvEmoji.setText(Utils.getEmoji(context,datas[position]));
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.item_gvemoji, null);
+            viewHolder = new ViewHolder();
+            viewHolder.tvEmoji = (TextView) view.findViewById(R.id.tvEmoji);
+            view.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        viewHolder.tvEmoji.setText(Utils.getEmoji(context, datas[position]));
         return view;
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         TextView tvEmoji;
     }
 }

@@ -30,11 +30,14 @@ public class SecondhandgoodBean implements Serializable {
     public List<SecondhandphotoBean> photos;
 
     public List<SecondhandlabelsBean> labels;
+
     public String getCollege() {
         return college;
     }
 
-    public int getType(){return type;}
+    public int getType() {
+        return type;
+    }
 
     public void setCollege(String college) {
         this.college = college;
@@ -52,7 +55,9 @@ public class SecondhandgoodBean implements Serializable {
         return id;
     }
 
-    public String getHeader(){return header;}
+    public String getHeader() {
+        return header;
+    }
 
 
     public int getSettingVisible() {

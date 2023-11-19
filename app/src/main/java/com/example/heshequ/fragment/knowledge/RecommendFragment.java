@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.knowledge.RecommendAdapter;
 import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -14,11 +15,9 @@ import com.example.heshequ.bean.knowledge.RecommendItemBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -28,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener{
+public class RecommendFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener {
     private View view;
     private XRecyclerView rv;
     private RecommendAdapter adapter;
@@ -44,7 +43,7 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
         init();
-        getData(pn,ps);
+        getData(pn, ps);
         return view;
     }
 
@@ -57,9 +56,9 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
         rv.setLoadingListener(this);
     }
 
-    private void getData(int pn,int ps) {
-        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getKnowledgeRecommend +"?pageSize="+ps +"&pageNum=" +pn,100,WenConstans.token);
-        Log.e("userid",""+WenConstans.id);
+    private void getData(int pn, int ps) {
+        sendGetConnection(WenConstans.getKnowledgeRecommend + "?pageSize=" + ps + "&pageNum=" + pn, 100, WenConstans.token);
+        Log.e("userid", "" + WenConstans.id);
     }
 
     @Override
@@ -76,12 +75,12 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
                 rv.refreshComplete();
             }
             totalPage = result.getJSONObject("data").getInt("totalPage");
-            Log.e("RecommendFragment","totalPage: "+totalPage);
+            Log.e("RecommendFragment", "totalPage: " + totalPage);
             if (result.has("data")) {
 
                 JSONArray data = result.getJSONObject("data").getJSONArray("list");
 
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<RecommendItemBean>>() {
                             }.getType());
@@ -100,7 +99,7 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONObject("data").getJSONArray("list");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<RecommendItemBean>>() {
                             }.getType());
@@ -124,7 +123,6 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
     }
 
 
-
     @Override
     protected void onFailure(String result, int where) {
 
@@ -134,7 +132,7 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
     public void onRefresh() {
         hasRefresh = true;
         pn = 1;
-        getData(pn,ps);
+        getData(pn, ps);
     }
 
     @Override
@@ -148,7 +146,7 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
                 }
             }, 1000);
         } else {
-            getData(pn,ps);
+            getData(pn, ps);
         }
     }
 
@@ -166,6 +164,7 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

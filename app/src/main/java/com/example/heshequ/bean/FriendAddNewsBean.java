@@ -13,11 +13,12 @@ public class FriendAddNewsBean implements Serializable {
     private int bizId;
     private String content;
     private String gmtCreate;
-    private  int status;
+    private int status;
     private String time;
     private String nickName;
     private String header;
     private String clubName;
+
     public void setnickName(String nickName) {
         this.nickName = nickName;
     }

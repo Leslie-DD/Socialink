@@ -11,14 +11,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.bean.AttentionBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 
@@ -30,11 +30,11 @@ import okhttp3.Response;
 /**
  * Created by 佳佳 on 2018/11/26.
  */
-public class AttentionAdapter extends RecyclerView.Adapter
-{
+public class AttentionAdapter extends RecyclerView.Adapter {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<AttentionBean> data = new ArrayList<>();
+
     //初始化
     public AttentionAdapter(Context context, ArrayList<AttentionBean> data) {
         super();
@@ -42,11 +42,13 @@ public class AttentionAdapter extends RecyclerView.Adapter
         this.data = data;
         this.inflater = LayoutInflater.from(context);
     }
+
     //数据设置
     public void setData(ArrayList<AttentionBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
+
     @Override
     //布局文件设置
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,6 +56,7 @@ public class AttentionAdapter extends RecyclerView.Adapter
         View view = LayoutInflater.from(context).inflate(R.layout.attention_item, parent, false);
         return new ViewHolder(view);
     }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
@@ -65,33 +68,31 @@ public class AttentionAdapter extends RecyclerView.Adapter
     public int getItemCount() {
         return data.size();
     }
+
     //item控件设置
-    class ViewHolder extends RecyclerView.ViewHolder
-    {
+    class ViewHolder extends RecyclerView.ViewHolder {
         private TextView nickname;
         private CircleView header;
         private ImageView sex;
         private LinearLayout noticeHome;
-        public int cansee=0;
+        public int cansee = 0;
         private ImageView notice;
 
 
         public ViewHolder(View view) {
             super(view);
-            header=(CircleView) view.findViewById(R.id.mynoticephoto);
-            nickname=(TextView)view.findViewById(R.id.mynoticename);
-            notice=(ImageView) view.findViewById(R.id.mynoticedeletes);
-            noticeHome = (LinearLayout)view.findViewById(R.id.noticeHome);
+            header = (CircleView) view.findViewById(R.id.mynoticephoto);
+            nickname = (TextView) view.findViewById(R.id.mynoticename);
+            notice = (ImageView) view.findViewById(R.id.mynoticedeletes);
+            noticeHome = (LinearLayout) view.findViewById(R.id.noticeHome);
         }
 
-        public void setData(final int position)
-        {
+        public void setData(final int position) {
             final AttentionBean bean = data.get(position);
             nickname.setText(bean.getNickname());
-            if(!TextUtils.isEmpty(bean.getHeader()))
-            {
-                Glide.with(context).load(Constants.base_url+bean.getHeader()).asBitmap().into(header);
-            }else {
+            if (!TextUtils.isEmpty(bean.getHeader())) {
+                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(header);
+            } else {
                 header.setImageResource(R.mipmap.head3);
             }
             //设置监听器，点击按钮，取消关注
@@ -102,15 +103,15 @@ public class AttentionAdapter extends RecyclerView.Adapter
                     OkHttpUtils.post(WenConstans.DelecteAttention)
                             .tag(context)
                             .headers(Constants.Token_Header, Constants.token)
-                            .params("concerned",""+data.get(position).getConcerned())
+                            .params("concerned", "" + data.get(position).getConcerned())
                             .execute(new StringCallback() {
                                 @Override
-                                public void onSuccess(String s, Call call, Response response)
-                                {
-                                    Utils.toastShort(context,"已取消关注");
+                                public void onSuccess(String s, Call call, Response response) {
+                                    Utils.toastShort(context, "已取消关注");
                                     data.remove(position);
                                     AttentionAdapter.this.notifyDataSetChanged();
-                                }});
+                                }
+                            });
                 }
             });
             //点击头像条状视图
@@ -118,20 +119,19 @@ public class AttentionAdapter extends RecyclerView.Adapter
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid",bean.getConcerned()));
+                            context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", bean.getConcerned()));
                         }
                     });
             noticeHome.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid",bean.getConcerned()));
+                            context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", bean.getConcerned()));
                         }
                     }
             );
         }
     }
-
 
 
 }

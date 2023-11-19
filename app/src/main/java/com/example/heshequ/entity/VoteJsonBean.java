@@ -36,7 +36,7 @@ public class VoteJsonBean {
         this.options = options;
     }
 
-    public static class Option{
+    public static class Option {
         private String content;
 
         public String getContent() {

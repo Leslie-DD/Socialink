@@ -1,4 +1,3 @@
-
 package com.example.heshequ.secondma.view;
 
 
@@ -14,9 +13,10 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.heshequ.secondma.camera.CameraManager;
 import com.example.heshequ.R;
+import com.example.heshequ.secondma.camera.CameraManager;
 import com.google.zxing.ResultPoint;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +37,6 @@ public final class ViewfinderView extends View {
     private final int statusColor; // 提示文字颜色
 
 
-
-
-
-
     private List<ResultPoint> possibleResultPoints;
     private List<ResultPoint> lastPossibleResultPoints;
     // 扫描线移动的y
@@ -57,7 +53,6 @@ public final class ViewfinderView extends View {
         super(context, attrs);
 
 
-
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         Resources resources = getResources();
 
@@ -65,7 +60,6 @@ public final class ViewfinderView extends View {
         resultColor = resources.getColor(R.color.result_view);
         resultPointColor = resources.getColor(R.color.possible_result_points);
         statusColor = resources.getColor(R.color.status_text);
-
 
 
         possibleResultPoints = new ArrayList<ResultPoint>(10);
@@ -118,7 +112,7 @@ public final class ViewfinderView extends View {
             drawFrameBounds(canvas, frame);
 
             /*绘制提示文字*/
-              drawStatusText(canvas, frame, width);
+            drawStatusText(canvas, frame, width);
             /*绘制扫描线*/
             drawScanLight(canvas, frame);
 
@@ -201,7 +195,7 @@ public final class ViewfinderView extends View {
 //            corWidth = 15;
 //        }
 
-        corWidth=corWidth>15?15:corWidth;
+        corWidth = corWidth > 15 ? 15 : corWidth;
 
 
         /*角在线外*/
@@ -239,11 +233,11 @@ public final class ViewfinderView extends View {
         // Log.i("绘制提示文字", "width:" + width);
 
         String statusText1 = "请将二维码对准扫描中心";
-        String statusText2 ="绘制提示文字2";
+        String statusText2 = "绘制提示文字2";
 
         int statusTextSize;
 
-         /*低分辨率处理*/
+        /*低分辨率处理*/
         if (width >= 480 && width <= 600) {
             statusTextSize = 22;
         } else if (width > 600 && width <= 720) {
@@ -259,7 +253,7 @@ public final class ViewfinderView extends View {
 
         int textWidth1 = (int) paint.measureText(statusText1);
         canvas.drawText(statusText1, (width - textWidth1) / 2, frame.bottom
-                + statusPaddingTop/2, paint);
+                + statusPaddingTop / 2, paint);
 
 //        int textWidth2 = (int) paint.measureText(statusText2);
 //        canvas.drawText(statusText2, (width - textWidth2) / 2, frame.bottom

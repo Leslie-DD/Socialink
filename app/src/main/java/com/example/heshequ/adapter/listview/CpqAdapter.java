@@ -19,10 +19,10 @@ import java.util.ArrayList;
 
 public class CpqAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<QuestionBean> data=new ArrayList<>();
+    private ArrayList<QuestionBean> data = new ArrayList<>();
 
     public CpqAdapter(Context context) {
-        this.context=context;
+        this.context = context;
     }
 
     public void setData(ArrayList<QuestionBean> data) {
@@ -48,19 +48,19 @@ public class CpqAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.cpq_list_item,null);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.cpq_list_item, null);
             viewHolder = new ViewHolder();
             viewHolder.tvContent = view.findViewById(R.id.tvContent);
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.tvContent.setText(data.get(position).getContent());
         return view;
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         TextView tvContent;
     }
 

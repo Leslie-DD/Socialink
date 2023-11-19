@@ -18,13 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.adapter.listview.FriendPictureAdapter;
 import com.example.heshequ.adapter.listview.NewDisscussAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
-
 import com.example.heshequ.bean.DynamicComment;
 import com.example.heshequ.bean.FriendNewBean;
 import com.example.heshequ.constans.Constants;
@@ -34,8 +35,6 @@ import com.example.heshequ.fragment.BottomShareFragment;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyLv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -96,18 +95,19 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
     private RefreshBrodcast brodcast;
     private AlertDialog deldialog;
     private int uid;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_newdetail);
         //EventBus.getDefault().register(this);
         uid = WenConstans.id;
-        String ids = uid+"";
-        if(ids.equals("0")){
-            Intent intents  = new Intent(NewDetail.this, LoginActivity.class);
+        String ids = uid + "";
+        if (ids.equals("0")) {
+            Intent intents = new Intent(NewDetail.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG).show();
         }
         friendNewBean = new FriendNewBean();
         friendNewBean = (FriendNewBean) getIntent().getSerializableExtra("FriendNew");
@@ -116,6 +116,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         event();
         getDisscuss(100);
     }
+
     private void init() {
         setTitleAndBack("动态详情");
         View headview = getLayoutInflater().inflate(R.layout.head_newdetail, null);
@@ -151,19 +152,19 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         //lvDisscuss.setLoadingListener(this);
         if (friendNewBean != null) {
 
-                tvName.setText(friendNewBean.name == null ? "" : friendNewBean.name);
+            tvName.setText(friendNewBean.name == null ? "" : friendNewBean.name);
             if (TextUtils.isEmpty(friendNewBean.headImg)) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId="+friendNewBean.headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showheadimg",""+Constants.base_url +"/info/file/pub.do?fileId="+ friendNewBean.headImg);
+                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + friendNewBean.headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("showheadimg", "" + Constants.base_url + "/info/file/pub.do?fileId=" + friendNewBean.headImg);
             }
 
             // tvTitles.setText(secondhandgoodBean.title + "");
             tvContent.setText(friendNewBean.content + "");
             tvTime.setText(friendNewBean.date + "");
             tvLoves.setText(friendNewBean.likeamount + "");
-           // tvNum.setText( "");
+            // tvNum.setText( "");
 
             if (!friendNewBean.islike) {
                 ivImg.setImageResource(R.mipmap.sc);
@@ -176,7 +177,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
             if (friendNewBean.photos != null && friendNewBean.photos.size() > 0) {
                 ArrayList<String> list = new ArrayList<>();
                 for (int i = 0; i < friendNewBean.photos.size(); i++) {
-                   // list.add(WenConstans.BaseUrl + friendNewBean.photos.get(i).photoId);
+                    // list.add(WenConstans.BaseUrl + friendNewBean.photos.get(i).photoId);
                 }
                 lvPicture.setVisibility(View.VISIBLE);
                 pictureAdapter.setData(list);
@@ -191,6 +192,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         wbShareHandler.registerApp();
 
     }
+
     private void initDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setCancelable(false);
@@ -200,7 +202,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除接口还没开始写
-                setBodyParams(new String[]{"dynamic_id"}, new String[]{friendNewBean.dtid+""});
+                setBodyParams(new String[]{"dynamic_id"}, new String[]{friendNewBean.dtid + ""});
                 sendPost(Constants.base_url + "/api/social/deleteDynamic.do", 10010, WenConstans.token);
                 deldialog.dismiss();
             }
@@ -217,9 +219,11 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         deldialog.setCancelable(false);
 
     }
-    private void event(){
+
+    private void event() {
 
     }
+
     private void getDisscuss(int where) {
         if (where == 100) {
             pn = 1;
@@ -229,6 +233,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         sendPost(WenConstans.GetSingleDynamic, where, WenConstans.token);
 
     }
+
     private class RefreshBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -245,10 +250,12 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
             }
         }
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (ResultUtils.isFail(result, this)) {
@@ -258,14 +265,14 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
             Utils.toastShort(mContext, result.getString("msg") + "");
 
             int zan = friendNewBean.likeamount;
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-            System.out.println(zan+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(zan + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
             if (!friendNewBean.islike) {
                 friendNewBean.islike = true;
@@ -274,7 +281,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
                 ivImg.setImageResource(R.mipmap.saved);
                 tvLoves.setTextColor(Color.parseColor("#00bbff"));
             } else {
-                friendNewBean.islike =false;
+                friendNewBean.islike = false;
                 zan = zan - 1;
                 friendNewBean.likeamount = zan;
                 ivImg.setImageResource(R.mipmap.sc);
@@ -295,16 +302,16 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
             Gson gson = new Gson();
             if (result.has("data")) {
                 JSONObject obj = result.getJSONObject("data");
-                Log.e("pinglingliebiao",""+obj.toString());
+                Log.e("pinglingliebiao", "" + obj.toString());
                 totalPage = obj.getInt("totalPage");
                 if (obj != null && obj.has("dynamicCommentList")) {
                     newList = gson.fromJson(obj.getJSONArray("dynamicCommentList").toString(),
                             new TypeToken<List<DynamicComment>>() {
                             }.getType());
-                    Log.e("newlist",newList+"");
+                    Log.e("newlist", newList + "");
                     if (newList == null) {
                         newList = new ArrayList<>();
-                        Log.e("newlist",newList+"");
+                        Log.e("newlist", newList + "");
                     }
                 } else {
                     newList = new ArrayList<>();
@@ -376,7 +383,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         } else if (where == 10086) {
             if (result.optInt("code") == 0) {
                 Gson gson = new Gson();
-                friendNewBean = gson.fromJson(result.optString("data"),FriendNewBean.class);
+                friendNewBean = gson.fromJson(result.optString("data"), FriendNewBean.class);
                 dz = friendNewBean.likeamount;
                 setListener();
                 init();
@@ -397,21 +404,24 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
             }
         }
     }
+
     private void setListener() {
         brodcast = new RefreshBrodcast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("refresh.data");
         registerReceiver(brodcast, intentFilter);
     }
+
     private void sendDisscuss(String content) {
-        setBodyParams(new String[]{"dynamic_id", "type", "content","presentor"}
-                , new String[]{friendNewBean.dtid + "", 1 + "", content,""+friendNewBean.user_id});
+        setBodyParams(new String[]{"dynamic_id", "type", "content", "presentor"}
+                , new String[]{friendNewBean.dtid + "", 1 + "", content, "" + friendNewBean.user_id});
         sendPost(WenConstans.FriendDiscuss, 102, WenConstans.token);
 
     }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ivHead:
                 startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", friendNewBean.user_id));
                 break;
@@ -431,14 +441,15 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
                 sendDisscuss(content);
                 break;
             case R.id.llSave:
-                Log.e("NewDetail.java Wen.id",""+WenConstans.id);
-                setBodyParams(new String[]{"user_id","dynamic_id"}, new String[]{WenConstans.id+ "",""+friendNewBean.dtid});
+                Log.e("NewDetail.java Wen.id", "" + WenConstans.id);
+                setBodyParams(new String[]{"user_id", "dynamic_id"}, new String[]{WenConstans.id + "", "" + friendNewBean.dtid});
                 // 修改用Constants.uid而不用WenConstans.id，不然返回
 //                setBodyParams(new String[]{"user_id","dynamic_id"}, new String[]{Constants.uid+ "",""+friendNewBean.dtid});
                 sendPost(WenConstans.FriendNewZan, 1000, WenConstans.token);
         }
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -455,6 +466,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         intent.putExtras(bundle);
         startActivityForResult(intent, 100);
     }
+
     @Override
     public void onPause() {
         super.onPause();

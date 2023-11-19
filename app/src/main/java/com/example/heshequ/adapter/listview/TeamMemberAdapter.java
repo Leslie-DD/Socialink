@@ -13,13 +13,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.TeamMemberBean;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 
 import java.util.ArrayList;
 
@@ -31,19 +31,17 @@ import java.util.ArrayList;
 public class TeamMemberAdapter extends BaseAdapter {
     private Context context;
     private NetWorkActivity activity;
-    private ArrayList<TeamMemberBean> data=new ArrayList<>();
+    private ArrayList<TeamMemberBean> data = new ArrayList<>();
     private OnItemEditorNameListener onItemEditorNameListener;
     private int teamid;
     // edit pop
 
 
-
-    public TeamMemberAdapter(Context context,ArrayList<TeamMemberBean> data) {
-        this.context=context;
+    public TeamMemberAdapter(Context context, ArrayList<TeamMemberBean> data) {
+        this.context = context;
         activity = (NetWorkActivity) context;
-        this.data=data;
+        this.data = data;
     }
-
 
 
     public void setData(ArrayList<TeamMemberBean> data) {
@@ -69,58 +67,54 @@ public class TeamMemberAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
         final ViewHolder viewHolder;
-        final TeamMemberBean bean=data.get(position);
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.teammemberitem,null);
+        final TeamMemberBean bean = data.get(position);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.teammemberitem, null);
             viewHolder = new ViewHolder();
-            viewHolder.ivHead= (CircleView) view.findViewById(R.id.ivHead);
-            viewHolder.llHead= (LinearLayout) view.findViewById(R.id.llHead);
-            viewHolder.llBg= (LinearLayout) view.findViewById(R.id.llBg);
-            viewHolder.tvName= (TextView) view.findViewById(R.id.tvName);
-            viewHolder.tvLevel= (TextView) view.findViewById(R.id.tvLevel);
-            viewHolder.tvType= (TextView) view.findViewById(R.id.tvType);
-            viewHolder.tvTop= (TextView) view.findViewById(R.id.tvTop);
-            viewHolder.tvEditor= (TextView) view.findViewById(R.id.tvEditor);
-            viewHolder.btsave= (Button) view.findViewById(R.id.btSave);
-            viewHolder.etMark= (EditText) view.findViewById(R.id.etMark);
+            viewHolder.ivHead = (CircleView) view.findViewById(R.id.ivHead);
+            viewHolder.llHead = (LinearLayout) view.findViewById(R.id.llHead);
+            viewHolder.llBg = (LinearLayout) view.findViewById(R.id.llBg);
+            viewHolder.tvName = (TextView) view.findViewById(R.id.tvName);
+            viewHolder.tvLevel = (TextView) view.findViewById(R.id.tvLevel);
+            viewHolder.tvType = (TextView) view.findViewById(R.id.tvType);
+            viewHolder.tvTop = (TextView) view.findViewById(R.id.tvTop);
+            viewHolder.tvEditor = (TextView) view.findViewById(R.id.tvEditor);
+            viewHolder.btsave = (Button) view.findViewById(R.id.btSave);
+            viewHolder.etMark = (EditText) view.findViewById(R.id.etMark);
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
         viewHolder.tvName.setText(bean.getNickname());
-        if(position==0||!bean.getInitialLetter().equals(data.get(position-1).getInitialLetter()))
-        {
+        if (position == 0 || !bean.getInitialLetter().equals(data.get(position - 1).getInitialLetter())) {
             viewHolder.llHead.setVisibility(View.VISIBLE);
-            viewHolder.tvTop.setText(bean.getInitialLetter()+"("+bean.getCount()+"人)");
-        }else {
+            viewHolder.tvTop.setText(bean.getInitialLetter() + "(" + bean.getCount() + "人)");
+        } else {
             viewHolder.llHead.setVisibility(View.GONE);
         }
-        if(!TextUtils.isEmpty(bean.getHeader()))
-        {
-            Glide.with(context).load(Constants.base_url+bean.getHeader()).asBitmap().into(viewHolder.ivHead);
-        }else {
+        if (!TextUtils.isEmpty(bean.getHeader())) {
+            Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(viewHolder.ivHead);
+        } else {
             viewHolder.ivHead.setImageResource(R.mipmap.head3);
         }
 
-        viewHolder.tvLevel.setText("LV"+data.get(position).getGrade());
+        viewHolder.tvLevel.setText("LV" + data.get(position).getGrade());
 
-        if(bean.getRole()==1||bean.getRole()==2)
-        {
+        if (bean.getRole() == 1 || bean.getRole() == 2) {
             viewHolder.tvType.setVisibility(View.VISIBLE);
-            viewHolder.tvType.setText(bean.getRole()==1?"团长":"副团长");
-            viewHolder.tvType.setBackgroundResource(bean.getRole()==1?R.drawable.fe8888_10:
-            R.drawable.bg_7bd8fa_10);
-        }else {
+            viewHolder.tvType.setText(bean.getRole() == 1 ? "团长" : "副团长");
+            viewHolder.tvType.setBackgroundResource(bean.getRole() == 1 ? R.drawable.fe8888_10 :
+                    R.drawable.bg_7bd8fa_10);
+        } else {
             viewHolder.tvType.setVisibility(View.GONE);
         }
 
-        if(bean.getStatus()==0)
-        {
+        if (bean.getStatus() == 0) {
             viewHolder.etMark.setVisibility(View.INVISIBLE);
             viewHolder.btsave.setVisibility(View.GONE);
             viewHolder.llBg.setBackgroundColor(Color.parseColor("#ffffff"));
-        }else {
+        } else {
             viewHolder.etMark.setVisibility(View.VISIBLE);
             viewHolder.etMark.clearComposingText();
             viewHolder.btsave.setVisibility(View.VISIBLE);
@@ -135,16 +129,15 @@ public class TeamMemberAdapter extends BaseAdapter {
         });
 
 
-
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 context.startActivity(
-                        new Intent(context,PersonalInformationActivity.class)
-                        .putExtra("uid",data.get(position).getMemberId())
-                        .putExtra("role",data.get(position).getRole())
-                        .putExtra("id",data.get(position).getId())
-                        .putExtra("teamid",teamid)
+                        new Intent(context, PersonalInformationActivity.class)
+                                .putExtra("uid", data.get(position).getMemberId())
+                                .putExtra("role", data.get(position).getRole())
+                                .putExtra("id", data.get(position).getId())
+                                .putExtra("teamid", teamid)
                 );
 
             }
@@ -156,19 +149,19 @@ public class TeamMemberAdapter extends BaseAdapter {
         this.teamid = teamId;
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         private CircleView ivHead;
-        private LinearLayout llHead,llBg;
-        private TextView tvName,tvLevel,tvType,tvEditor,tvTop;
+        private LinearLayout llHead, llBg;
+        private TextView tvName, tvLevel, tvType, tvEditor, tvTop;
         private Button btsave;
         private EditText etMark;
     }
 
-    public void setOnItemEditorNameListener(OnItemEditorNameListener itemEditorNameListener){
+    public void setOnItemEditorNameListener(OnItemEditorNameListener itemEditorNameListener) {
         this.onItemEditorNameListener = itemEditorNameListener;
     }
 
-    public interface OnItemEditorNameListener{
-         void ItemEditor(int position, String mark);
+    public interface OnItemEditorNameListener {
+        void ItemEditor(int position, String mark);
     }
 }

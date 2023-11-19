@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.R;
+import com.example.heshequ.activity.team.TeamDetailActivity2;
 
 
 /**
@@ -27,7 +27,7 @@ public class PayPasswordView extends LinearLayout implements View.OnClickListene
     public String pwd = "";
     private TeamDetailActivity2 context;
 
-    public void setActivity( TeamDetailActivity2 teamDetailActivity2) {
+    public void setActivity(TeamDetailActivity2 teamDetailActivity2) {
         this.context = teamDetailActivity2;
     }
 
@@ -91,14 +91,13 @@ public class PayPasswordView extends LinearLayout implements View.OnClickListene
             context.changeSecret();
         }
 
-        Toast.makeText(context,context.getNewSecret(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getNewSecret(), Toast.LENGTH_SHORT).show();
         this.context = null;//解除掉与TeamDetailActivity2之间的链接，让PayPasswordView可以被垃圾回收
     }
 
-    public String getPwd () {
+    public String getPwd() {
         return pwd;
     }
-
 
 
 }

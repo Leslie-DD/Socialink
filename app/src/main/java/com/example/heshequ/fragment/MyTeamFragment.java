@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.StatementDetailActivity;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
@@ -18,10 +19,8 @@ import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -101,12 +100,12 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            if (list==null){
-                                list=new ArrayList<>();
+                            if (list == null) {
+                                list = new ArrayList<>();
                             }
-                            if (list.size()==0){
+                            if (list.size() == 0) {
                                 tvTips.setVisibility(View.VISIBLE);
-                            }else{
+                            } else {
                                 tvTips.setVisibility(View.GONE);
                             }
                             setData(list);
@@ -168,12 +167,12 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            if (list==null){
-                                list=new ArrayList<>();
+                            if (list == null) {
+                                list = new ArrayList<>();
                             }
-                            if (list.size()==0){
+                            if (list.size() == 0) {
                                 tvTips.setVisibility(View.VISIBLE);
-                            }else{
+                            } else {
                                 tvTips.setVisibility(View.GONE);
                             }
                             setData(list);
@@ -259,7 +258,7 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
         view = inflater.inflate(R.layout.only_rv_item, null);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
         sp = MeetApplication.getInstance().getSharedPreferences();
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         adapter = new CommentTeamAdapter(mContext, list);
         adapter.setListener(this);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
@@ -305,19 +304,19 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
             case 0:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, WenConstans.MyFoots,
+                sendPostConnection(WenConstans.MyFoots,
                         GETDATA, sp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, WenConstans.MyFoots,
+                sendPostConnection(WenConstans.MyFoots,
                         REFDATA, sp.getString("token", ""));
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
-                sendConnection(HttpRequest.HttpMethod.POST, WenConstans.MyFoots,
+                sendPostConnection(WenConstans.MyFoots,
                         LOADATA, sp.getString("token", ""));
                 break;
         }
@@ -342,13 +341,13 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
                 break;
             case 2:
                 //Utils.toastShort(getActivity(),"团言详情");
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
                 Intent intent1 = new Intent(mContext, StatementDetailActivity.class);
-                intent1.putExtra("bean",adapter.getData().get(position));
+                intent1.putExtra("bean", adapter.getData().get(position));
                 startActivity(intent1);
                 break;
             case 3:
-                Utils.toastShort(getActivity(),"活动详情");
+                Utils.toastShort(getActivity(), "活动详情");
                 break;
         }
     }

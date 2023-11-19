@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.AddTeamActivity;
 import com.example.heshequ.adapter.recycleview.MyTeamAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -27,8 +29,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefTeamChild1;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.umeng.analytics.MobclickAgent;

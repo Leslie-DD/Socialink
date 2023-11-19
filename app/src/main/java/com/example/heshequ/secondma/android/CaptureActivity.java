@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.heshequ.R;
 import com.example.heshequ.base.BaseActivity;
 import com.example.heshequ.entity.ScanResultEvent;
 import com.example.heshequ.secondma.bean.ZxingConfig;
@@ -25,7 +27,6 @@ import com.example.heshequ.secondma.decode.DecodeImgCallback;
 import com.example.heshequ.secondma.decode.DecodeImgThread;
 import com.example.heshequ.secondma.decode.ImageUtil;
 import com.example.heshequ.secondma.view.ViewfinderView;
-import com.example.heshequ.R;
 import com.google.zxing.Result;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,7 +54,6 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     private CaptureActivityHandler handler;
     private SurfaceHolder surfaceHolder;
     private String rawText;
-
 
 
     public ViewfinderView getViewfinderView() {
@@ -100,8 +100,6 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
         }
 
 
-
-
         initView();
 
         hasSurface = false;
@@ -111,8 +109,6 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
         beepManager.setPlayBeep(config.isPlayBeep());
         beepManager.setVibrate(config.isShake());
     }
-
-
 
 
     private void initView() {

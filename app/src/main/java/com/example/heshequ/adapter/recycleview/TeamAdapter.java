@@ -16,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.statement.BullertinDetailActivity;
 import com.example.heshequ.activity.statement.VoteDetailActivity;
 import com.example.heshequ.activity.team.ActivityDateilActivity;
@@ -25,9 +27,7 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.entity.TeamTestBean;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.view.MyGv;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import java.text.ParseException;
@@ -36,7 +36,7 @@ import java.util.List;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class TeamAdapter extends RecyclerView.Adapter {
@@ -59,11 +59,11 @@ public class TeamAdapter extends RecyclerView.Adapter {
         this.notifyDataSetChanged();
     }
 
-    public void setOnDelListener(OnDelListener listener){
+    public void setOnDelListener(OnDelListener listener) {
         onDelListener = listener;
     }
 
-    public void setOnapplyListener(OnapplyListener listener){
+    public void setOnapplyListener(OnapplyListener listener) {
         onapplyListener = listener;
     }
 
@@ -133,10 +133,10 @@ public class TeamAdapter extends RecyclerView.Adapter {
                     });
                     if (bean.getObj() != null) {
                         try {
-                            if (Utils.isPastDue(bean.getObj().getDeadline(),"yyyy-MM-dd HH:mm")){
+                            if (Utils.isPastDue(bean.getObj().getDeadline(), "yyyy-MM-dd HH:mm")) {
                                 btStatus.setText("进行中");
                                 btStatus.setBackgroundResource(R.drawable.ing_bg);
-                            }else{
+                            } else {
                                 btStatus.setText("已结束");
                                 btStatus.setBackgroundResource(R.drawable.end_bg);
                             }
@@ -153,8 +153,8 @@ public class TeamAdapter extends RecyclerView.Adapter {
                         public void onClick(View v) {
                             //投票详情
                             context.startActivity(new Intent(context, VoteDetailActivity.class)
-                                    .putExtra("id",bean.getObj().getId())
-                                    .putExtra("bean",bean.getObj())
+                                    .putExtra("id", bean.getObj().getId())
+                                    .putExtra("bean", bean.getObj())
                             );
                         }
                     });
@@ -162,10 +162,10 @@ public class TeamAdapter extends RecyclerView.Adapter {
                 case 3:
                     color = "#F05252";
                     content = "[公告]";
-                    final String title = bean.getObj() == null? "":bean.getObj().getTitle();
-                    final String content2 = bean.getObj() == null? "":bean.getObj().getContent();
-                    final int id = bean.getObj() == null? 0:bean.getObj().getId();
-                    final int clubId = bean.getObj() == null? 0:bean.getId();
+                    final String title = bean.getObj() == null ? "" : bean.getObj().getTitle();
+                    final String content2 = bean.getObj() == null ? "" : bean.getObj().getContent();
+                    final int id = bean.getObj() == null ? 0 : bean.getObj().getId();
+                    final int clubId = bean.getObj() == null ? 0 : bean.getId();
                     btStatus.setVisibility(View.GONE);
 
                     if (bean.getObj() != null) {
@@ -178,12 +178,12 @@ public class TeamAdapter extends RecyclerView.Adapter {
                         public void onClick(View v) {
                             //公告详情
                             context.startActivity(new Intent(context, BullertinDetailActivity.class)
-                                    .putExtra("title",title)
-                                    .putExtra("content",content2)
-                                    .putExtra("id",id)
-                                    .putExtra("clubId",clubId)
-                                    .putExtra("initiator",bean.getObj().getPresentorName())
-                                    .putExtra("time",bean.getObj().getTime())
+                                    .putExtra("title", title)
+                                    .putExtra("content", content2)
+                                    .putExtra("id", id)
+                                    .putExtra("clubId", clubId)
+                                    .putExtra("initiator", bean.getObj().getPresentorName())
+                                    .putExtra("time", bean.getObj().getTime())
                             );
                         }
                     });
@@ -191,7 +191,6 @@ public class TeamAdapter extends RecyclerView.Adapter {
             }
             tvType.setText(content);
             tvType.setTextColor(Color.parseColor(color));
-
 
 
         }
@@ -230,11 +229,11 @@ public class TeamAdapter extends RecyclerView.Adapter {
                 btStatus.setTextColor(Color.parseColor("#ffffff"));
                 btStatus.setBackgroundResource(R.drawable.bg_00bbff_solid_13);*/
                 try {
-                    if (Utils.isPastDue(bean.getObj().getApplyDeadline(),"yyyy-MM-dd HH:mm")){
+                    if (Utils.isPastDue(bean.getObj().getApplyDeadline(), "yyyy-MM-dd HH:mm")) {
                         btStatus.setText("我要报名");
                         btStatus.setTextColor(Color.parseColor("#ffffff"));
                         btStatus.setBackgroundResource(R.drawable.bg_00bbff_solid_13);
-                    }else{
+                    } else {
                         btStatus.setText("我要报名");
                         btStatus.setTextColor(Color.parseColor("#ffffff"));
                         btStatus.setBackgroundResource(R.drawable.end_bg);
@@ -278,20 +277,20 @@ public class TeamAdapter extends RecyclerView.Adapter {
                         intent.putStringArrayListExtra("imageList", bean.getImgs());
                         intent.putExtra(P.START_ITEM_POSITION, i);
                         intent.putExtra(P.START_IAMGE_POSITION, i);
-                        intent.putExtra("isdel2",false);
+                        intent.putExtra("isdel2", false);
                         context.startActivity(intent);
                     }
                 });
             }
 
-            if (bean.getObj().getPresentor() != Constants.uid){
+            if (bean.getObj().getPresentor() != Constants.uid) {
                 tvDel.setVisibility(View.GONE);
             }
 
             tvDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onDelListener.del(position,bean.getObj().getId());
+                    onDelListener.del(position, bean.getObj().getId());
                 }
             });
 
@@ -299,10 +298,10 @@ public class TeamAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     try {
-                        if (Utils.isPastDue(bean.getObj().getApplyDeadline(),"yyyy-MM-dd HH:mm")){
-                            onapplyListener.apply(position,bean.getObj().getId(),bean.getObj().getStatus());
-                        }else{
-                            Utils.toastShort(context,"活动已截止报名");
+                        if (Utils.isPastDue(bean.getObj().getApplyDeadline(), "yyyy-MM-dd HH:mm")) {
+                            onapplyListener.apply(position, bean.getObj().getId(), bean.getObj().getStatus());
+                        } else {
+                            Utils.toastShort(context, "活动已截止报名");
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -314,22 +313,22 @@ public class TeamAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
                     //进入详情
                     context.startActivity(
                             new Intent(context, ActivityDateilActivity.class)
-                            .putExtra("id",bean.getObj().getId())
+                                    .putExtra("id", bean.getObj().getId())
                     );
                 }
             });
         }
     }
 
-    public interface OnDelListener{
+    public interface OnDelListener {
         void del(int position, int id);
     }
 
-    public interface OnapplyListener{
+    public interface OnapplyListener {
         void apply(int position, int id, int status);
     }
 }

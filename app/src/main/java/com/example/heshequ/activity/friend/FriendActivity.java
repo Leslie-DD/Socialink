@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
@@ -17,11 +18,11 @@ import com.example.heshequ.fragment.FriendFragment;
 import com.example.heshequ.fragment.NearFragment;
 import com.example.heshequ.fragment.NewFragment;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -30,16 +31,16 @@ import java.util.ArrayList;
  * 交友activity——附近fragment
  */
 
-public class FriendActivity extends NetWorkActivity  implements View.OnClickListener {
+public class FriendActivity extends NetWorkActivity implements View.OnClickListener {
     private View view;
     private ViewPager vp;
     private static double longtitude;
     private static double latitude;
-    private static double longtitude2,latitude2;
-    private TextView tvnear, tvnew,tvfriend;
-    private String longtitude1,latitude1;
+    private static double longtitude2, latitude2;
+    private TextView tvnear, tvnew, tvfriend;
+    private String longtitude1, latitude1;
     private ArrayList<Fragment> list;
-    private LinearLayout FriendFiltrate,FriendSet,FriendSearch;
+    private LinearLayout FriendFiltrate, FriendSet, FriendSearch;
     private LinearLayout llInvis;
     private NearFragment nearFragment;
     private NewFragment newFragment;
@@ -60,15 +61,15 @@ public class FriendActivity extends NetWorkActivity  implements View.OnClickList
         DecimalFormat df = new DecimalFormat("#.000000");
         longtitude = Double.parseDouble(longtitude1);
         latitude = Double.parseDouble(latitude1);
-        Log.e("FriendActivity 经度",""+longtitude);
-        Log.e("FriendActivity 纬度",""+latitude);
+        Log.e("FriendActivity 经度", "" + longtitude);
+        Log.e("FriendActivity 纬度", "" + latitude);
         init();
         event();
     }
 
 
     private void init() {
-      //  View view = getLayoutInflater().inflate(R.layout.activity_menu_friend, null);
+        //  View view = getLayoutInflater().inflate(R.layout.activity_menu_friend, null);
         setText("交友");
         FriendSearch = (LinearLayout) findViewById(R.id.FriendSearch);
 
@@ -77,25 +78,26 @@ public class FriendActivity extends NetWorkActivity  implements View.OnClickList
         FriendSet = (LinearLayout) findViewById(R.id.FriendSet);    //点击此处进入交友设置界面
         tvnear = (TextView) findViewById(R.id.tvNear);
         tvnew = (TextView) findViewById(R.id.tvNew);
-        tvfriend =(TextView) findViewById(R.id.tvFriend);
+        tvfriend = (TextView) findViewById(R.id.tvFriend);
         getData();
         nearFragment = new NearFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("jingdu",longtitude+"");
-        bundle.putString("weidu",""+latitude);
+        bundle.putString("jingdu", longtitude + "");
+        bundle.putString("weidu", "" + latitude);
         nearFragment.setArguments(bundle);
-        newFragment =new NewFragment();
+        newFragment = new NewFragment();
 
         friendFragment = new FriendFragment();
         list.add(nearFragment);
         list.add(newFragment);
         list.add(friendFragment);
         vp = (ViewPager) findViewById(R.id.vp);
-        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),list);
+        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);
         vp.setCurrentItem(0);
         setTvBg(0);
     }
+
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         FriendFiltrate.setOnClickListener(this);
@@ -151,12 +153,13 @@ public class FriendActivity extends NetWorkActivity  implements View.OnClickList
             Utils.toastShort(mContext, result.optString("msg"));
         }
     }
+
     private void getData() {
-        Log.e("FriendActivity","setBodyParams 经度纬度");
-        setBodyParams(new String[]{"longitude","latitude"}, new String[]{""+longtitude,""+latitude});
+        Log.e("FriendActivity", "setBodyParams 经度纬度");
+        setBodyParams(new String[]{"longitude", "latitude"}, new String[]{"" + longtitude, "" + latitude});
         Log.e("WenConstans.token", WenConstans.token);
-        Log.e("Constants.token",Constants.token);
-        sendPost(Constants.base_url+"/api/social/updatePosition.do", 100, WenConstans.token);
+        Log.e("Constants.token", Constants.token);
+        sendPost(Constants.base_url + "/api/social/updatePosition.do", 100, WenConstans.token);
     }
 
     @Override
@@ -166,18 +169,18 @@ public class FriendActivity extends NetWorkActivity  implements View.OnClickList
                 finish();
                 break;
             case R.id.FriendSearch:
-                Log.e("sea","ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-                startActivity(new Intent(mContext,FriendSearch.class));
+                Log.e("sea", "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+                startActivity(new Intent(mContext, FriendSearch.class));
                 break;
             case R.id.FriendSet:
-                Intent intent2=new Intent();
-                intent2.putExtra("longtitude",longtitude1+"");
-                intent2.putExtra("latitude",""+latitude1);
+                Intent intent2 = new Intent();
+                intent2.putExtra("longtitude", longtitude1 + "");
+                intent2.putExtra("latitude", "" + latitude1);
                 intent2.setClass(FriendActivity.this, FriendSet.class);
                 startActivity(intent2);
                 break;
             case R.id.FriendFiltrate:
-               // MobclickAgent.onEvent(MeetApplication.getInstance(),"event_askEnterNewAsk");
+                // MobclickAgent.onEvent(MeetApplication.getInstance(),"event_askEnterNewAsk");
                 Intent intent1 = new Intent(FriendActivity.this, FriendFiltrate.class);
                 startActivity(intent1);
                 break;
@@ -186,9 +189,9 @@ public class FriendActivity extends NetWorkActivity  implements View.OnClickList
                 break;
             case R.id.tvNew:
                 Intent intent3 = new Intent();
-                intent3.putExtra("longtitude",""+longtitude);
-                intent3.putExtra("latitude",""+latitude);
-                intent3.setClass(FriendActivity.this,FriendActivity2.class);
+                intent3.putExtra("longtitude", "" + longtitude);
+                intent3.putExtra("latitude", "" + latitude);
+                intent3.setClass(FriendActivity.this, FriendActivity2.class);
                 startActivity(intent3);
                 overridePendingTransition(0, 0);
                 finish();

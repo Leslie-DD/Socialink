@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.knowledge.ArticleDetialActivity;
 import com.example.heshequ.bean.knowledge.ArticleSimpleBean;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
@@ -30,7 +30,7 @@ public class ColumnDetailAdapter extends RecyclerView.Adapter {
 
     private View views;
 
-    public void setData(List<ArticleSimpleBean> data){
+    public void setData(List<ArticleSimpleBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -55,11 +55,12 @@ public class ColumnDetailAdapter extends RecyclerView.Adapter {
         viewHolder.setData(position);
 
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvApprove,tvTitle, tvComment, tvTime;
+        private TextView tvApprove, tvTitle, tvComment, tvTime;
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
                 tvApprove = (TextView) view.findViewById(R.id.agree);
@@ -71,18 +72,18 @@ public class ColumnDetailAdapter extends RecyclerView.Adapter {
 
         public void setData(final int position) {
 
-            tvApprove.setText(""+data.get(position).likeNum);
+            tvApprove.setText("" + data.get(position).likeNum);
 
             tvTitle.setText(data.get(position).title == null ? "" : data.get(position).title);
-            tvComment.setText(""+data.get(position).commentNum);
-            tvTime.setText(""+data.get(position).createTime);
+            tvComment.setText("" + data.get(position).commentNum);
+            tvTime.setText("" + data.get(position).createTime);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotAsk");
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                     Intent intent = new Intent(context, ArticleDetialActivity.class);
                     Bundle bundle = new Bundle();

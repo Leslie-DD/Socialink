@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -34,7 +35,6 @@ import com.example.heshequ.entity.TestBean;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.FlowLayout;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -207,13 +207,17 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
 
         etTitle.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
             @Override
             public void afterTextChanged(Editable s) {
-                Log.e("SendQuestionActivity长度<",s.length()+">");
-                if (s.length() >=100) {
+                Log.e("SendQuestionActivity长度<", s.length() + ">");
+                if (s.length() >= 100) {
                     Utils.toastShort(mContext, "已达最长字符，无法继续输入");
                 }
             }
@@ -232,8 +236,8 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.e("SendQuestionActivity长度<",s.length()+">");
-                if (s.length() >=2000) {
+                Log.e("SendQuestionActivity长度<", s.length() + ">");
+                if (s.length() >= 2000) {
                     Utils.toastShort(mContext, "已达最长字符，无法继续输入");
                 }
             }
@@ -443,6 +447,7 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

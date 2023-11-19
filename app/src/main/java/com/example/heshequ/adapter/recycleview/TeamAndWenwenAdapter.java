@@ -18,7 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.constans.Constants;
+import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
@@ -27,11 +27,11 @@ import com.example.heshequ.activity.wenwen.WenwenDetailActivity;
 import com.example.heshequ.adapter.Adapter_GridView;
 import com.example.heshequ.bean.WenwenBean;
 import com.example.heshequ.bean.WwPhotoBean;
+import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ import java.util.List;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
@@ -139,7 +139,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
                         if (TextUtils.isEmpty(bean.header)) {
                             ivHead.setImageResource(R.mipmap.head3);
                         } else {
-                            Glide.with(context).load(Constants.base_url+bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                            Glide.with(context).load(Constants.base_url + bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                         }
                     } else {
                         tvName.setText("匿名用户");
@@ -206,7 +206,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
                                 intent.putStringArrayListExtra("imageList", list);
                                 intent.putExtra(P.START_ITEM_POSITION, i);
                                 intent.putExtra(P.START_IAMGE_POSITION, i);
-                                intent.putExtra("isdel2",false);
+                                intent.putExtra("isdel2", false);
                                 context.startActivity(intent);
                             }
                         });
@@ -239,17 +239,17 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (type == 1) {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_collectionEnterQuestion");
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_collectionEnterQuestion");
                         Intent intent = new Intent(context, WenwenDetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("wenwen", data.get(position));
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                     } else {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_collectionEnterHall");
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_collectionEnterHall");
                         Intent intent = new Intent(context, TeamDetailActivity2.class);
-                        intent.putExtra("id",Integer.parseInt(data.get(position).id));
+                        intent.putExtra("id", Integer.parseInt(data.get(position).id));
                         context.startActivity(intent);
                     }
                 }

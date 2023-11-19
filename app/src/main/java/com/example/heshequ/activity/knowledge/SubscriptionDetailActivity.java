@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.knowledge.ColumnDetailAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
@@ -15,11 +16,9 @@ import com.example.heshequ.bean.knowledge.Author;
 import com.example.heshequ.bean.knowledge.SubscriptionBean;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -29,9 +28,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubscriptionDetailActivity extends NetWorkActivity implements View.OnClickListener , XRecyclerView.LoadingListener {
+public class SubscriptionDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
 
-    private TextView tvTitle,tvName,tvSummary,tvRead;
+    private TextView tvTitle, tvName, tvSummary, tvRead;
     private CircleView ivHead;
     private Button btnUnsubscribe;
     private int subscriptionId;
@@ -51,6 +50,7 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
         init();
         event();
     }
+
     private void init() {
         setText("专栏");
         ivHead = (CircleView) findViewById(R.id.ivHeadSubscription);
@@ -67,19 +67,22 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
         getData();
 
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         btnUnsubscribe.setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (where == 100) {
             int ret = result.optInt("code");
-            Log.e("SubscriptionDetail", "ret" + result );
+            Log.e("SubscriptionDetail", "ret" + result);
 
             if (ret == 0) {
                 JSONObject object = new JSONObject(result.optString("data"));
@@ -99,12 +102,12 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
                 subscriptionBean.author.header = object.getJSONObject("author").getString("header");
                 subscriptionBean.author.nickname = object.getJSONObject("author").getString("nickname");
 
-                Log.e("SubscriptionDetail", "subscriptionBean.name" + subscriptionBean.name );
-                Log.e("SubscriptionDetail", "subscriptionBean.author.nickname" + subscriptionBean.author.nickname );
+                Log.e("SubscriptionDetail", "subscriptionBean.name" + subscriptionBean.name);
+                Log.e("SubscriptionDetail", "subscriptionBean.author.nickname" + subscriptionBean.author.nickname);
                 tvTitle.setText(subscriptionBean.name == null ? "" : subscriptionBean.name);
                 tvName.setText(subscriptionBean.author.nickname == null ? "" : subscriptionBean.author.nickname);
                 tvSummary.setText(subscriptionBean.summary == null ? "" : subscriptionBean.summary);
-                tvRead.setText(""+subscriptionBean.subscriptionNum);
+                tvRead.setText("" + subscriptionBean.subscriptionNum);
 
                 if (subscriptionBean.author.header != null) {
                     // 完善协议完善协议
@@ -115,7 +118,7 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
                 Gson gson = new Gson();
                 JSONArray data = result.getJSONObject("data").getJSONArray("passages");
                 allList = new ArrayList<>();
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<ArticleSimpleBean>>() {
                             }.getType());
@@ -127,25 +130,27 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
                 adapter.setData(allList);
             }
         } else if (where == 200) {
-            Toast.makeText(mContext,"退订成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "退订成功", Toast.LENGTH_SHORT).show();
         }
 
     }
+
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
             case R.id.unsubscribe:
-                sendConnection(HttpRequest.HttpMethod.POST,WenConstans.unsubscribe + "?id=" +subscriptionId,new String[]{},new String[]{},200, false, WenConstans.token);
+                sendPostConnection(WenConstans.unsubscribe + "?id=" + subscriptionId, new String[]{}, new String[]{}, 200, WenConstans.token);
                 break;
         }
     }
-    private void getData(){
-        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getColumnDetail + "?id=" +subscriptionId,new String[]{},new String[]{},100, false, WenConstans.token);
 
+    private void getData() {
+        sendGetConnection(WenConstans.getColumnDetail + "?id=" + subscriptionId, new String[]{}, new String[]{}, 100, WenConstans.token);
     }
+
     @Override
     public void onResume() {
         super.onResume();

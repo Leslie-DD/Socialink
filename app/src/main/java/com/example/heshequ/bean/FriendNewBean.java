@@ -22,10 +22,12 @@ public class FriendNewBean implements Serializable {
     public int likeamount;
     public boolean islike = false;
     public List<DynamicComment> dynamicCommentlist;
+
     public String getCollege() {
         return college;
     }
-    public int getType(){
+
+    public int getType() {
         return type;
     }
 }

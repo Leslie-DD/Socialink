@@ -12,14 +12,14 @@ import org.json.JSONObject;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class ResultUtils {
-    public static boolean isFail(JSONObject result, Context context){
-        if (result.has("code")){
+    public static boolean isFail(JSONObject result, Context context) {
+        if (result.has("code")) {
             int resultType = result.optInt("code");
-            if (resultType==0){
+            if (resultType == 0) {
                 return false;
-            }else{
+            } else {
                 try {
-                    Utils.toastShort(context,result.getString("msg")+"");
+                    Utils.toastShort(context, result.getString("msg") + "");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

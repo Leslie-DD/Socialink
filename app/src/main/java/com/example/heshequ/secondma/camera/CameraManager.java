@@ -28,6 +28,7 @@ import android.view.SurfaceHolder;
 import com.example.heshequ.secondma.android.CaptureActivityHandler;
 import com.example.heshequ.secondma.common.Constant;
 import com.google.zxing.PlanarYUVLuminanceSource;
+
 import java.io.IOException;
 
 /**
@@ -174,7 +175,6 @@ public final class CameraManager {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 
             msg.what = Constant.FLASH_CLOSE;
-
 
 
         } else {
@@ -350,8 +350,9 @@ public final class CameraManager {
 //        return new PlanarYUVLuminanceSource(data, width, height, rect.left,
 //                rect.top, rect.width(), rect.height(), false);
         return new PlanarYUVLuminanceSource(data, width, height, 0,
-               0, width, height, false);
+                0, width, height, false);
     }
+
     public static CameraManager get() {
         return cameraManager;
     }

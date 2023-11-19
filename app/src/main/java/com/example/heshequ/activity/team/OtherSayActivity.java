@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.OtherSayAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
@@ -11,7 +13,6 @@ import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -22,6 +23,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class OtherSayActivity extends NetWorkActivity implements View.OnClickLis
         tvTitle.setText("他们说");
         getData(1);
         testData = new ArrayList<>();
-        adapter = new OtherSayAdapter(mContext, testData,2);
+        adapter = new OtherSayAdapter(mContext, testData, 2);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
     }
@@ -100,7 +102,7 @@ public class OtherSayActivity extends NetWorkActivity implements View.OnClickLis
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (pn<allpn){
+                if (pn < allpn) {
                     pn++;
                     isref = false;
                     getData(pn);
@@ -161,6 +163,7 @@ public class OtherSayActivity extends NetWorkActivity implements View.OnClickLis
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

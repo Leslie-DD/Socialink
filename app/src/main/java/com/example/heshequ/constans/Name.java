@@ -9,5 +9,5 @@ public interface Name {
     String IMAGE_6 = "5";
     String IMAGE_7 = "6";
     String IMAGE_8 = "7";
-    String IMAGE_9=  "8";
+    String IMAGE_9 = "8";
 }

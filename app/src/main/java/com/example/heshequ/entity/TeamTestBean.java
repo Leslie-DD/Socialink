@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/5/16.
  */
-public class TeamTestBean implements Serializable{
+public class TeamTestBean implements Serializable {
 
     /**
      * id : 9
@@ -29,14 +29,16 @@ public class TeamTestBean implements Serializable{
     public void setImgs(ArrayList<String> imgs) {
         this.imgs = imgs;
     }
+
     public void setImgs() {
-        if(obj.getPhotos()!=null) {
-            imgs=new ArrayList<>();
-            for (int i = 0; i <obj.getPhotos().size() ; i++) {
-                imgs.add(Constants.base_url+obj.getPhotos().get(i).getPhotoId());
+        if (obj.getPhotos() != null) {
+            imgs = new ArrayList<>();
+            for (int i = 0; i < obj.getPhotos().size(); i++) {
+                imgs.add(Constants.base_url + obj.getPhotos().get(i).getPhotoId());
             }
         }
     }
+
     /**
      * id : 6
      * clubId : 3
@@ -89,7 +91,7 @@ public class TeamTestBean implements Serializable{
         this.obj = obj;
     }
 
-    public static class ObjBean implements Serializable{
+    public static class ObjBean implements Serializable {
         private int id;
         private int clubId;
         private String gmtCreate;
@@ -104,10 +106,10 @@ public class TeamTestBean implements Serializable{
         private int commentAmount;
         private int isLike;
         private String time;
-        private int status,isVote,category;
+        private int status, isVote, category;
         private String name;
         private String deadline;
-        private String header,introduction;
+        private String header, introduction;
         private ClubInfo clubInfo;
 
         public ClubInfo getClubInfo() {
@@ -118,7 +120,7 @@ public class TeamTestBean implements Serializable{
             this.clubInfo = clubInfo;
         }
 
-        public static class ClubInfo implements Serializable{
+        public static class ClubInfo implements Serializable {
             private String name;
             private int isJoin;
             private boolean admin;
@@ -348,8 +350,7 @@ public class TeamTestBean implements Serializable{
         }
 
 
-
-        public static class LikesBean implements Serializable{
+        public static class LikesBean implements Serializable {
             private int uid;
             private int bzId;
             private String header;

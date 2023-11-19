@@ -25,7 +25,6 @@ import android.media.MediaPlayer;
 import android.os.Vibrator;
 import android.util.Log;
 
-
 import com.example.heshequ.R;
 
 import java.io.Closeable;
@@ -72,7 +71,6 @@ public final class BeepManager implements MediaPlayer.OnCompletionListener,
     }
 
     public synchronized void updatePrefs() {
-
 
 
         if (playBeep && mediaPlayer == null) {

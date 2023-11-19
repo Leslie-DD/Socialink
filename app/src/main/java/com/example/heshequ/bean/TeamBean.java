@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Hulk_Zhang on 2018/5/9 11:37
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class TeamBean implements Serializable{
+public class TeamBean implements Serializable {
 
 
     /**
@@ -39,7 +39,6 @@ public class TeamBean implements Serializable{
     public void setSettingSpeakComment(int settingSpeakComment) {
         this.settingSpeakComment = settingSpeakComment;
     }
-
 
 
     private int status;
@@ -290,7 +289,7 @@ public class TeamBean implements Serializable{
     }
 
 
-    public static class SpeakBean implements Serializable{
+    public static class SpeakBean implements Serializable {
         /**
          * id : 5
          * clubId : 1
@@ -323,7 +322,7 @@ public class TeamBean implements Serializable{
         private ArrayList<LikesBean> likes;
         private String clubName;
 
-        private ArrayList<String> imgs=new ArrayList<>();
+        private ArrayList<String> imgs = new ArrayList<>();
 
 
         public ArrayList<String> getImgs() {
@@ -335,10 +334,10 @@ public class TeamBean implements Serializable{
         }
 
         public void setImgs() {
-            if(photos!=null) {
-                imgs=new ArrayList<>();
-                for (int i = 0; i <photos.size() ; i++) {
-                    imgs.add(Constants.base_url+photos.get(i).getPhotoId());
+            if (photos != null) {
+                imgs = new ArrayList<>();
+                for (int i = 0; i < photos.size(); i++) {
+                    imgs.add(Constants.base_url + photos.get(i).getPhotoId());
                 }
             }
         }
@@ -463,7 +462,7 @@ public class TeamBean implements Serializable{
             this.photos = photos;
         }
 
-        public static class PhotosBean implements Serializable{
+        public static class PhotosBean implements Serializable {
             /**
              * photoId : /info/file/pub.do?fileId=speak/20180529/1_20180529191753_292.jpg
              * bzId : 5
@@ -489,7 +488,7 @@ public class TeamBean implements Serializable{
             }
         }
 
-        public static class LikesBean implements Serializable{
+        public static class LikesBean implements Serializable {
             private int uid;
             private String presentorName;
             private int bzId;
@@ -520,7 +519,7 @@ public class TeamBean implements Serializable{
         }
     }
 
-    public static class ActivityBean implements Serializable{
+    public static class ActivityBean implements Serializable {
         /**
          * id : 5
          * clubId : 3
@@ -645,7 +644,7 @@ public class TeamBean implements Serializable{
             this.photos = photos;
         }
 
-        public static class PhotosBeanX implements Serializable{
+        public static class PhotosBeanX implements Serializable {
             /**
              * id : 3
              * photoId : /info/file/pub.do?fileId=activity/20180602/2_20180602174201_71.png
@@ -682,7 +681,7 @@ public class TeamBean implements Serializable{
         }
     }
 
-    public static class LabelsBean implements Serializable{
+    public static class LabelsBean implements Serializable {
         /**
          * id : 1
          * clubId : 1
@@ -717,7 +716,8 @@ public class TeamBean implements Serializable{
             this.name = name;
         }
     }
-    public static class UsersBean implements Serializable{
+
+    public static class UsersBean implements Serializable {
         private int memberId;
         private String nickname;
         private int role;
@@ -756,7 +756,7 @@ public class TeamBean implements Serializable{
         }
     }
 
-    public static class NoticeBean implements Serializable{
+    public static class NoticeBean implements Serializable {
         private int id;
         private String title;
 

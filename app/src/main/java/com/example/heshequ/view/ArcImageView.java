@@ -31,7 +31,7 @@ public class ArcImageView extends ImageView {
 
     public ArcImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.context=context;
+        this.context = context;
 //        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ArcImageView);
 //        mArcHeight = typedArray.getDimensionPixelSize(R.styleable.ArcImageView_arcHeight, 0);
     }
@@ -40,10 +40,10 @@ public class ArcImageView extends ImageView {
     protected void onDraw(Canvas canvas) {
         Path path = new Path();
         path.moveTo(0, 0);
-        int th=Utils.dip2px(context,270);
-        int h150=Utils.dip2px(context,200);
+        int th = Utils.dip2px(context, 270);
+        int h150 = Utils.dip2px(context, 200);
         path.lineTo(0, h150);
-        path.quadTo(getWidth() / 2, th , getWidth(), h150);
+        path.quadTo(getWidth() / 2, th, getWidth(), h150);
         path.lineTo(getWidth(), 0);
         path.close();
         canvas.clipPath(path);

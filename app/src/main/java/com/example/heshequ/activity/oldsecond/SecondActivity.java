@@ -2,8 +2,8 @@ package com.example.heshequ.activity.oldsecond;
 
 import android.os.Bundle;
 
-import com.example.heshequ.base.BaseActivity;
 import com.example.heshequ.R;
+import com.example.heshequ.base.BaseActivity;
 
 /**
  * FileName: SecondActivity

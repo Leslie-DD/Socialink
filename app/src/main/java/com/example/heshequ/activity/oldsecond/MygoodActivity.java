@@ -7,12 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.adapter.recycleview.LableAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.GoodLabel;
 import com.example.heshequ.fragment.MygoodFragment;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class MygoodActivity extends NetWorkActivity implements View.OnClickListener {
     private ViewPager vp;
-    private List<GoodLabel> labelList  =  new ArrayList<>();
+    private List<GoodLabel> labelList = new ArrayList<>();
     private ArrayList<android.support.v4.app.Fragment> list;
     private MygoodFragment mygoodfragment;
 
@@ -34,21 +34,20 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
     private LableAdapter lableadapter;
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mygood);
 
 
-        lableadapter = new LableAdapter(labelList,context);
+        lableadapter = new LableAdapter(labelList, context);
 
         init();
         event();
 
 
-
     }
+
     private void init() {
         setText("我的商品");
 
@@ -65,6 +64,7 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
         setTvBg(0);
 
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -74,6 +74,7 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
         }
 
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -85,10 +86,12 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
     }
+
     public void setTvBg(int status) {
         if (this.status == status) {
             return;
@@ -103,6 +106,7 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
             vp.setCurrentItem(status);
         }
     }
+
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
 
@@ -121,6 +125,7 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
             }
         });
     }
+
     @Override
     protected void onFailure(String result, int where) {
 

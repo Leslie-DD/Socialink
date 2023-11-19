@@ -3,8 +3,8 @@ package com.example.heshequ.activity.friend;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.R;
+import com.example.heshequ.base.NetWorkActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -23,24 +23,30 @@ public class MyFriendDetail extends NetWorkActivity implements View.OnClickListe
         init();
         event();
     }
+
     private void init() {
 
     }
-    private void event(){
+
+    private void event() {
 
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
     }
+
     @Override
     public void onClick(View view) {
 
     }
+
     @Override
     public void onResume() {
         super.onResume();

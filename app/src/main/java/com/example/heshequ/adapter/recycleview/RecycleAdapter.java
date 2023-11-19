@@ -3,13 +3,13 @@
  */
 
 package com.example.heshequ.adapter.recycleview;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 
 import com.example.heshequ.R;
 
@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class RecycleAdapter extends RecyclerView.Adapter {
@@ -59,10 +59,12 @@ public class RecycleAdapter extends RecyclerView.Adapter {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvKey;
+
         public ViewHolder(View view) {
             super(view);
-            tvKey= (TextView) view.findViewById(R.id.tv_jiage1);
+            tvKey = (TextView) view.findViewById(R.id.tv_jiage1);
         }
+
         public void setData(final int position) {
             tvKey.setText(data.get(position));
         }

@@ -14,12 +14,13 @@ import java.util.Map;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class CustomViewPager extends ViewPager {
-    private Map<Integer,Integer> map=new HashMap<>(4);
+    private Map<Integer, Integer> map = new HashMap<>(4);
     private int currentPage;
     private int max;
     private boolean noScroll = true;
-    public void setCanScroll(boolean canScroll){
-        this.noScroll=!canScroll;
+
+    public void setCanScroll(boolean canScroll) {
+        this.noScroll = !canScroll;
     }
 
     public CustomViewPager(Context context) {
@@ -37,33 +38,34 @@ public class CustomViewPager extends ViewPager {
             View child = getChildAt(i);
             child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
             int h = child.getMeasuredHeight();
-            addHeight(i,h);
-            if (h > height)height = h;
+            addHeight(i, h);
+            if (h > height) height = h;
             max = height;
-            if(map.size()>0 && map.containsKey(currentPage)){
-                height=map.get(currentPage);
+            if (map.size() > 0 && map.containsKey(currentPage)) {
+                height = map.get(currentPage);
             }
         }
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
         //Log.e("ysf","height"+height+"&&"+widthMeasureSpec+"&&"+heightMeasureSpec+"&&"+currentPage);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
-    public void resetHeight(int current){
-       // Log.e("YSF","我是resrtHeait"+current);
-        this.currentPage=current;
-        MarginLayoutParams params= (MarginLayoutParams) getLayoutParams();
-        if(map.size()>0 && map.containsKey(currentPage)){
-            if (current==0){
-                if(params==null){
-                    params=new MarginLayoutParams(LayoutParams.MATCH_PARENT,map.get(current));
-                }else {
-                    params.height=map.get(current);
+
+    public void resetHeight(int current) {
+        // Log.e("YSF","我是resrtHeait"+current);
+        this.currentPage = current;
+        MarginLayoutParams params = (MarginLayoutParams) getLayoutParams();
+        if (map.size() > 0 && map.containsKey(currentPage)) {
+            if (current == 0) {
+                if (params == null) {
+                    params = new MarginLayoutParams(LayoutParams.MATCH_PARENT, map.get(current));
+                } else {
+                    params.height = map.get(current);
                 }
-            }else{
-                if(params==null){
-                    params=new MarginLayoutParams(LayoutParams.MATCH_PARENT,map.get(current));
-                }else {
-                    params.height=map.get(current);
+            } else {
+                if (params == null) {
+                    params = new MarginLayoutParams(LayoutParams.MATCH_PARENT, map.get(current));
+                } else {
+                    params.height = map.get(current);
                 }
             }
             setLayoutParams(params);
@@ -72,15 +74,18 @@ public class CustomViewPager extends ViewPager {
 
     /**
      * 获取、存储每一个tab的高度，在需要的时候显示存储的高度
-     * @param current  tab的position
-     * @param height   当前tab的高度
+     *
+     * @param current tab的position
+     * @param height  当前tab的高度
      */
-    public void addHeight(int current,int height){
-        map.put(current,height);
+    public void addHeight(int current, int height) {
+        map.put(current, height);
     }
-    public Map<Integer,Integer> getMap(){
+
+    public Map<Integer, Integer> getMap() {
         return map;
     }
+
     @Override
     public void scrollTo(int x, int y) {
         super.scrollTo(x, y);
@@ -104,6 +109,6 @@ public class CustomViewPager extends ViewPager {
     @Override
     public void setCurrentItem(int item) {
         //false 去除滚动效果
-        super.setCurrentItem(item,false);
+        super.setCurrentItem(item, false);
     }
 }

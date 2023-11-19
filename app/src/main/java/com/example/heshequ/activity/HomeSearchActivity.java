@@ -40,7 +40,7 @@ import java.util.List;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnTabSelectedListener, TextWatcher, View.OnClickListener {
-    private LinearLayout llBack,llData,llFl;
+    private LinearLayout llBack, llData, llFl;
     private EditText etContent;
     private TabLayout tab;
     private NoScrollViewPager vp;
@@ -54,18 +54,19 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        switch (where){
+        switch (where) {
             case 10086:
-                if (result.optInt("code") == 0){
-                    datas = gson.fromJson(result.optString("data"),new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>(){}.getType());
-                    if (datas!=null && datas.size()>0){
-                        for (LabelSelectionActivity.LableBean b:datas){
+                if (result.optInt("code") == 0) {
+                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    }.getType());
+                    if (datas != null && datas.size() > 0) {
+                        for (LabelSelectionActivity.LableBean b : datas) {
                             // 循环添加TextView到容器
                             TestBean bean = new TestBean();
                             bean.setName(b.getValue());
                             testData.add(bean);
                             final TextView view = new TextView(this);
-                            view.setText("#"+b.getValue()+"#");
+                            view.setText("#" + b.getValue() + "#");
                             view.setTextColor(Color.parseColor("#999999"));
                             view.setHeight(Utils.dip2px(this, 34));
                             view.setPadding(Utils.dip2px(this, 17), 0, Utils.dip2px(this, 17), 0);
@@ -89,15 +90,15 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
                                         }
                                     }
                                     isLable = true;
-                                    etContent.setText(text.replace("#",""));
+                                    etContent.setText(text.replace("#", ""));
                                     etContent.setSelection(etContent.getText().toString().trim().length());
                                 }
                             });
                             flowLayout.addView(view);
                         }
                     }
-                }else{
-                    Utils.toastShort(mContext,result.optString("msg"));
+                } else {
+                    Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
         }
@@ -135,7 +136,7 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
         vp.setCurrentItem(0);
         tab.setOnTabSelectedListener(this);
         etContent.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            public boolean onEditorAction(TextView v, int actionId,KeyEvent event)  {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     // 先隐藏键盘
                     Utils.hideSoftInput(etContent);
@@ -150,8 +151,8 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
     }
 
     private void getLableData() {
-        setBodyParams(new String[]{"type"},new String[]{"label"});
-        sendPost(Constants.base_url+"/api/pub/category/list.do",10086,Constants.token);
+        setBodyParams(new String[]{"type"}, new String[]{"label"});
+        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
 
@@ -187,17 +188,17 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
         if (s == null) {
             return;
         }
-        if (s.length() == 0){
+        if (s.length() == 0) {
             llFl.setVisibility(View.VISIBLE);
             llData.setVisibility(View.GONE);
-        }else{
+        } else {
             llFl.setVisibility(View.GONE);
             llData.setVisibility(View.VISIBLE);
         }
         String content = s.toString();
         TeamSearchFragment f1 = (TeamSearchFragment) pagerAdapter.getItem(0);
         WwSearchFragment f2 = (WwSearchFragment) pagerAdapter.getItem(1);
-        if (s.length()!=2) {
+        if (s.length() != 2) {
             isLable = false;
             if (f1 != null) {
                 f1.setIslabel(isLable);
@@ -208,17 +209,17 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
         }
 
         if (f1 != null) {
-            if (isLable){
+            if (isLable) {
                 f1.getLableTeamData(content);
-            }else{
+            } else {
                 f1.getData(content);
             }
 
         }
         if (f2 != null) {
-            if (isLable){
+            if (isLable) {
                 f2.getLableWwData(content);
-            }else{
+            } else {
                 f2.getData(content);
             }
         }
@@ -226,7 +227,7 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.llBack:
                 finish();
                 break;

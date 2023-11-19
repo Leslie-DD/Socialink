@@ -26,26 +26,36 @@ public class FriendListBean implements Serializable {
     public String getCollege() {
         return college;
     }
-    public String getNickname(){return nickname;}
+
+    public String getNickname() {
+        return nickname;
+    }
+
     public int getAge() {
         return age;
     }
+
     public int getSex() {
         return sex;
     }
-    public int getDistance(){return distance;}
+
+    public int getDistance() {
+        return distance;
+    }
+
     public String getUrl() {
         return url;
     }
-    public int getType(){
+
+    public int getType() {
         return type;
     }
 
-    public String toString(){
-        return "user_id:"+user_id+", "+
-                "age:"+age+", "+
-                "sex:"+sex+", "+
-                "nick_name:"+nickname;
+    public String toString() {
+        return "user_id:" + user_id + ", " +
+                "age:" + age + ", " +
+                "sex:" + sex + ", " +
+                "nick_name:" + nickname;
     }
 
 }

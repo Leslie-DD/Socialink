@@ -12,52 +12,52 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 /**
  * Created by dev06 on 2018/6/8.
  */
-public class MyXRecyclerView extends XRecyclerView  {
+public class MyXRecyclerView extends XRecyclerView {
     boolean canLoad;
-    private int startY,endY;
+    private int startY, endY;
     private Context mContext;
+
     public MyXRecyclerView(Context context) {
         super(context);
-        mContext=context;
+        mContext = context;
     }
 
     public MyXRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext=context;
+        mContext = context;
     }
 
     public MyXRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mContext=context;
+        mContext = context;
     }
 
-//    @Override
+    //    @Override
 //    public boolean onTouchEvent(MotionEvent ev) {
 //        return super.onTouchEvent(ev);
 //    }
-        @Override
+    @Override
     public boolean onTouchEvent(MotionEvent ev) {
-       switch(ev.getAction()) {
-           case MotionEvent.ACTION_DOWN:
-               startY= (int) ev.getY();
-               canLoad=false;
-               break;
-           case MotionEvent.ACTION_UP:
-               endY= (int) ev.getY();
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                startY = (int) ev.getY();
+                canLoad = false;
+                break;
+            case MotionEvent.ACTION_UP:
+                endY = (int) ev.getY();
 
-               LinearLayoutManager manager= (LinearLayoutManager) getLayoutManager();
-               int lastPisiton=manager.findLastVisibleItemPosition();
-               View view=manager.findViewByPosition(lastPisiton);
+                LinearLayoutManager manager = (LinearLayoutManager) getLayoutManager();
+                int lastPisiton = manager.findLastVisibleItemPosition();
+                View view = manager.findViewByPosition(lastPisiton);
 
-               if((startY-endY)> Utils.dip2px(mContext,80)&&lastPisiton>=getAdapter().getItemCount())
-               {
-                   canLoad=true;
-               }else {
-                   canLoad=false;
-               }
-               break;
+                if ((startY - endY) > Utils.dip2px(mContext, 80) && lastPisiton >= getAdapter().getItemCount()) {
+                    canLoad = true;
+                } else {
+                    canLoad = false;
+                }
+                break;
         }
-            return super.onTouchEvent(ev);
+        return super.onTouchEvent(ev);
     }
 
     public boolean isCanLoad() {

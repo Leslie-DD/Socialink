@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 
-import com.example.heshequ.utils.Utils;
 import com.example.heshequ.R;
+import com.example.heshequ.utils.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,9 +38,9 @@ public class DateView {
                 int year = dp.getYear();
                 String str = year + "-" + (month < 10 ? "0" + month : month)
                         + "-" + (date < 10 ? "0" + date : date);
-                String today=new SimpleDateFormat("yyyyMMdd").format(new Date());
-                if (Integer.parseInt(str.replace("-",""))>Integer.parseInt(today)){
-                    Utils.toastShort(context,"所选日期不能超过今天");
+                String today = new SimpleDateFormat("yyyyMMdd").format(new Date());
+                if (Integer.parseInt(str.replace("-", "")) > Integer.parseInt(today)) {
+                    Utils.toastShort(context, "所选日期不能超过今天");
                     return;
                 }
                 doThings.data(str);
@@ -49,7 +49,8 @@ public class DateView {
         dialog = bui.create();
         dialog.show();
     }
-    public interface DoThings{
+
+    public interface DoThings {
         void data(String date);
     }
 }

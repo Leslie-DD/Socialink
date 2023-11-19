@@ -24,7 +24,6 @@ public class ZxingConfig implements Serializable {
     private boolean isShowAlbum = true;
 
 
-
     public boolean isPlayBeep() {
         return isPlayBeep;
     }

@@ -13,15 +13,14 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.CategoryBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -62,8 +61,7 @@ public class FeedBackActivity extends NetWorkActivity implements View.OnClickLis
         tvSave.setText("提交");
         //获取反馈类型
         setBodyParams(new String[]{"type"}, new String[]{"feedback"});
-        sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/pub/category/list.do",
-                new String[]{}, new String[]{}, getCode, false, Constants.token);
+        sendPostConnection(Constants.base_url + "/api/pub/category/list.do", new String[]{}, new String[]{}, getCode, Constants.token);
     }
 
     private void event() {

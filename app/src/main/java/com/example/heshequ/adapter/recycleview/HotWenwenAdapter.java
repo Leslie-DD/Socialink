@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
@@ -35,7 +36,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jude.rollviewpager.RollPagerView;
@@ -56,7 +56,7 @@ import okhttp3.Response;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class HotWenwenAdapter extends RecyclerView.Adapter {
@@ -89,7 +89,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             views = LayoutInflater.from(context).inflate(R.layout.item_hot_ww, parent, false);
-        }else if (viewType == 1){
+        } else if (viewType == 1) {
             views = LayoutInflater.from(context).inflate(R.layout.myteam_team_banner, parent, false);
         }
         return new ViewHolder(views, viewType);
@@ -117,7 +117,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
         private RollPagerView rollPagerView;
         private LinearLayout ll;
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
                 ivImg = (ImageView) view.findViewById(R.id.ivImg);
@@ -130,7 +130,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                 tvLoves = (TextView) view.findViewById(R.id.tvLoves);
                 gv = (MyGv) view.findViewById(R.id.gv);
                 llSave = (LinearLayout) view.findViewById(R.id.llSave);
-            }else if (type == 1){
+            } else if (type == 1) {
                 ll = view.findViewById(R.id.ll);
                 rollPagerView = (RollPagerView) view.findViewById(R.id.rp);
                 ViewGroup.LayoutParams params = rollPagerView.getLayoutParams();
@@ -230,12 +230,12 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (data.get(position).type!=1) {
-                            MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotAsk");
-                            if (Objects.equals(data.get(position).uid, Constants.uid + "")){
-                                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myQuestionClick");
+                        if (data.get(position).type != 1) {
+                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
+                            if (Objects.equals(data.get(position).uid, Constants.uid + "")) {
+                                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
                             }
-                            MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                             Intent intent = new Intent(context, WenwenDetailActivity.class);
                             Bundle bundle = new Bundle();
@@ -252,27 +252,27 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
 //                        Utils.toastShort(context,"你已经收藏过了");
 //                        return;
 //                    }
-                        if (data.get(position).type!=1) {
+                        if (data.get(position).type != 1) {
                             if (mDoSaveListener != null) {
                                 mDoSaveListener.doSave(position);
                             }
                         }
                     }
                 });
-            }else if (data.get(position).type == 1){
+            } else if (data.get(position).type == 1) {
                 //LogUtils.e("DDQ --> "+ bannerFlag);
-                    if (bannerFlag == 0) {
-                        bannerFlag++;
-                        getImgs(position);
-                        bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
-                            @Override
-                            public void onItemClick(int position) {
-                                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_askCenterBanner");
-                                context.startActivity(new Intent(context, WebActivity.class)
-                                        .putExtra("url", imgsData.get(position).getLinkUrl()));
-                            }
-                        });
-                    }
+                if (bannerFlag == 0) {
+                    bannerFlag++;
+                    getImgs(position);
+                    bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askCenterBanner");
+                            context.startActivity(new Intent(context, WebActivity.class)
+                                    .putExtra("url", imgsData.get(position).getLinkUrl()));
+                        }
+                    });
+                }
             }
         }
     }
@@ -298,9 +298,9 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                                         }
 
                                     }
-                                    if (imgs.size()>0) {
+                                    if (imgs.size() > 0) {
                                         bannerAdapter.setData(imgs);
-                                    }else{
+                                    } else {
                                         HotWenwenAdapter.this.data.remove(position);
                                         HotWenwenAdapter.this.notifyDataSetChanged();
                                     }
@@ -316,11 +316,14 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                 });
 
     }
+
     private DoSaveListener mDoSaveListener;
-    public interface DoSaveListener{
+
+    public interface DoSaveListener {
         void doSave(int position);
     }
-    public void DoSaveListener(DoSaveListener mDoSaveListener){
-        this.mDoSaveListener=mDoSaveListener;
+
+    public void DoSaveListener(DoSaveListener mDoSaveListener) {
+        this.mDoSaveListener = mDoSaveListener;
     }
 }

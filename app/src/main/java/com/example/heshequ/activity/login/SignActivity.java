@@ -19,13 +19,13 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.EncryptUtils;
 import com.example.heshequ.utils.MatcherUtils;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.umeng.analytics.MobclickAgent;
@@ -159,7 +159,8 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
                 break;
             case 10086:
                 if (result.optInt("code") == 0) {
-                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {}.getType());
+                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    }.getType());
                     final ArrayList<String> data = new ArrayList<>();
                     for (int i = 0; i < datas.size(); i++) {
                         data.add(datas.get(i).getValue());

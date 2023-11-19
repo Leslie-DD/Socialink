@@ -5,13 +5,15 @@ package com.example.heshequ.bean;
  */
 
 public class GoodLabel {
-    private	String	name;
-    public GoodLabel(String	name) {
-        this.name	=	name;
+    private String name;
+
+    public GoodLabel(String name) {
+        this.name = name;
 
     }
-    public	String	getName()	{
-        return	name;
+
+    public String getName() {
+        return name;
     }
 
 }

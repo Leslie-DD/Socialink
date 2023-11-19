@@ -6,9 +6,9 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/5/15.
  */
-public class TestBean implements Serializable{
+public class TestBean implements Serializable {
     private ArrayList<String> imgs;
-    private int day,month;
+    private int day, month;
     private String url;
     private String name;
     private int status;

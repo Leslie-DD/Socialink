@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
-
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.OtherSayAdapter;
 import com.example.heshequ.base.NetWorkActivity;

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.FriendNearAdapter;
 import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -19,7 +20,6 @@ import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -36,7 +36,7 @@ import java.util.List;
  * Created by dell on 2020/3/6.
  */
 
-public class FriendFritrateFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener{
+public class FriendFritrateFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener {
     private static int distance;
     private static int age;
     private static String college;
@@ -53,18 +53,18 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
     private int clickPosition;
     private TextView tvTips;
     private FragmentBrodcast brodcast;
-    double longtitude=39.92;//维度
-    double latitude=116.46;//经度
+    double longtitude = 39.92;//维度
+    double latitude = 116.46;//经度
 
 
     @Override
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
-        Bundle bundle=getArguments();
-        distance=Integer.parseInt(bundle.getString("juli"));
-        age =Integer.parseInt(bundle.getString("nianling"));
+        Bundle bundle = getArguments();
+        distance = Integer.parseInt(bundle.getString("juli"));
+        age = Integer.parseInt(bundle.getString("nianling"));
         college = bundle.getString("daxue");
-        interest=bundle.getString("xingqu");
+        interest = bundle.getString("xingqu");
         sex = bundle.getString("xingbie");
         init();
         getData();
@@ -83,8 +83,8 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
     }
 
     private void getData() {
-        setBodyParams(new String[]{"age","sex","college", "distance","interest"}, new String[]{""+age,""+sex,"" + college, ""+distance,""+interest});
-        sendPost(WenConstans.FriendFritrate, 100,WenConstans.token);
+        setBodyParams(new String[]{"age", "sex", "college", "distance", "interest"}, new String[]{"" + age, "" + sex, "" + college, "" + distance, "" + interest});
+        sendPostConnection(WenConstans.FriendFritrate, 100, WenConstans.token);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
 
         Gson gson = new Gson();
         if (where == 100) {
-            Log.e("where ","= 100");
+            Log.e("where ", "= 100");
             allList = new ArrayList<>();
             if (hasRefresh) {
                 hasRefresh = false;
@@ -104,21 +104,21 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
             if (result.has("data")) {
 
 
-                Log.e("result","has data");
+                Log.e("result", "has data");
                 JSONArray data = result.getJSONArray("data");
 
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendListBean>>() {
                             }.getType());
-                    Log.e("data ","!= null");
+                    Log.e("data ", "!= null");
                     if (allList == null || allList.size() == 0) {
                         allList = new ArrayList<>();
                     }
 
                 }
             }
-            Log.e("allList.size",allList.size()+"");
+            Log.e("allList.size", allList.size() + "");
             adapter.setData(allList);
         } else if (where == 101) {
 
@@ -126,7 +126,7 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONArray("data");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendListBean>>() {
                             }.getType());
@@ -148,7 +148,6 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
             adapter.setData(allList);
         }
     }
-
 
 
     @Override
@@ -187,22 +186,22 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData();
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -211,7 +210,7 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }
@@ -221,6 +220,7 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

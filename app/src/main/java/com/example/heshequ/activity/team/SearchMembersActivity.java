@@ -8,13 +8,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.TeamMemberAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefMembers;
 import com.example.heshequ.entity.TeamMemberBean;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.umeng.analytics.MobclickAgent;
@@ -52,7 +52,7 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
     }
 
     private void init() {
-        teamId = getIntent().getIntExtra("teamid",0);
+        teamId = getIntent().getIntExtra("teamid", 0);
         ivBack = (ImageView) findViewById(R.id.ivBack);
         ivSearch = (ImageView) findViewById(R.id.ivSearch);
         etSearch = (EditText) findViewById(R.id.etSearch);
@@ -74,9 +74,9 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
                 if (keyCode == event.KEYCODE_ENTER) {
                     // do some your things
                     searchName = etSearch.getText().toString().trim();
-                    if (searchName.isEmpty()){
-                        Utils.toastShort(SearchMembersActivity.this,"搜索内容不能为空");
-                    }else {
+                    if (searchName.isEmpty()) {
+                        Utils.toastShort(SearchMembersActivity.this, "搜索内容不能为空");
+                    } else {
                         setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
                         sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
                     }
@@ -87,11 +87,11 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
 
         adapter.setOnItemEditorNameListener(new TeamMemberAdapter.OnItemEditorNameListener() {
             @Override
-            public void ItemEditor(int position,String mark) {
+            public void ItemEditor(int position, String mark) {
                 editorPosition = position;
                 editorName = mark;
-                setBodyParams(new String[]{"id","nickname"},new String[]{""+Data.get(position).getId(),""+mark});
-                sendPost(Constants.base_url+"/api/club/member/update.do",EditorName,Constants.token);
+                setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + Data.get(position).getId(), "" + mark});
+                sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
 
             }
         });
@@ -105,34 +105,35 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
                 break;
             case R.id.ivSearch:
                 searchName = etSearch.getText().toString().trim();
-                if (searchName.isEmpty()){
-                    Utils.toastShort(this,"搜索内容不能为空");
+                if (searchName.isEmpty()) {
+                    Utils.toastShort(this, "搜索内容不能为空");
                     return;
                 }
-                setBodyParams(new String[]{"clubId"},new String[]{""+teamId});
-                sendPost(Constants.base_url+"/api/club/member/pglist.do",searchData,Constants.token);
+                setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
+                sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
                 break;
         }
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        if (where == searchData){
-            switch (result.optInt("code")){
+        if (where == searchData) {
+            switch (result.optInt("code")) {
                 case 0:
                     Data = new ArrayList<>();
-                    pData = gson.fromJson(result.optString("data"),new TypeToken<List<TeamMemberBean>>() {}.getType());
-                    if (pData!=null && pData.size() > 0){
-                        for (int i = 0;i<pData.size();i++){
-                            if (pData.get(i).getNickname().contains(searchName)){
+                    pData = gson.fromJson(result.optString("data"), new TypeToken<List<TeamMemberBean>>() {
+                    }.getType());
+                    if (pData != null && pData.size() > 0) {
+                        for (int i = 0; i < pData.size(); i++) {
+                            if (pData.get(i).getNickname().contains(searchName)) {
                                 Data.add(pData.get(i));
                             }
                         }
                     }
                     Data = Utils.getSortData(Data);
-                    if (Data.size()>0){
+                    if (Data.size() > 0) {
                         tvNotFind.setVisibility(View.GONE);
-                    }else{
+                    } else {
                         tvNotFind.setVisibility(View.VISIBLE);
                     }
                     adapter.setData(Data);
@@ -148,12 +149,12 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
                     break;
 
             }
-        }else if (where == EditorName){
-            switch (result.optInt("code")){
+        } else if (where == EditorName) {
+            switch (result.optInt("code")) {
                 case 0:
                     Data.get(editorPosition).setStatus(0);
                     Data.get(editorPosition).setNickname(editorName);
-                    Data=Utils.getSortData((ArrayList<TeamMemberBean>) Data);
+                    Data = Utils.getSortData((ArrayList<TeamMemberBean>) Data);
                     adapter.setData(Data);
                     EventBus.getDefault().post(new RefMembers());
                     break;
@@ -172,7 +173,7 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
 
     @Override
     protected void onFailure(String result, int where) {
-        Utils.toastShort(this,"网络异常");
+        Utils.toastShort(this, "网络异常");
     }
 
     @Override
@@ -181,6 +182,7 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

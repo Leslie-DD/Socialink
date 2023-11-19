@@ -13,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.friend.NewDetail;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.adapter.Adapter_GridView;
@@ -23,8 +25,6 @@ import com.example.heshequ.constans.P;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
@@ -96,7 +96,7 @@ public class FriendNewAdapter extends RecyclerView.Adapter {
                 ivImg = (ImageView) view.findViewById(R.id.ivImg);
                 ivHead = (CircleView) view.findViewById(R.id.ivHead);
                 tvName = (TextView) view.findViewById(R.id.tvName);
-                tvNum =(TextView) view.findViewById(R.id.tvNum);
+                tvNum = (TextView) view.findViewById(R.id.tvNum);
                 tvCollegeName = (TextView) view.findViewById(R.id.tvCollegeName);
                 tvTitle = (TextView) view.findViewById(R.id.tvTitle);
                 tvTime = (TextView) view.findViewById(R.id.tvTime);
@@ -119,8 +119,8 @@ public class FriendNewAdapter extends RecyclerView.Adapter {
             if (TextUtils.isEmpty(data.get(position).headImg)) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId="+data.get(position).headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showheadimg",""+Constants.base_url +"/info/file/pub.do?fileId="+ data.get(position).headImg);
+                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("showheadimg", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).headImg);
             }
 
 
@@ -174,14 +174,14 @@ public class FriendNewAdapter extends RecyclerView.Adapter {
                         ArrayList<String> list = new ArrayList<String>();
                         if (photoList != null && photoList.size() > 0) {
                             for (int j = 0; j < photoList.size(); j++) {
-                                list.add(WenConstans.BaseUrl +photoList.get(j));
+                                list.add(WenConstans.BaseUrl + photoList.get(j));
                             }
                         }
                         Intent intent = new Intent(context, ImagePreviewActivity.class);
                         intent.putStringArrayListExtra("imageList", list);
                         intent.putExtra(P.START_ITEM_POSITION, i);
                         intent.putExtra(P.START_IAMGE_POSITION, i);
-                        intent.putExtra("isdel2",false);
+                        intent.putExtra("isdel2", false);
                         context.startActivity(intent);
                     }
                 });
@@ -218,6 +218,7 @@ public class FriendNewAdapter extends RecyclerView.Adapter {
             }
         }
     }
+
     @Override
     public int getItemCount() {
         return data.size();

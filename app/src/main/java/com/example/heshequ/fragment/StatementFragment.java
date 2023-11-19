@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.adapter.recycleview.OtherSayAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -14,11 +15,9 @@ import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,11 +55,12 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
                 JSONObject jsonObject = new JSONObject(result.optString("data"));
                 if (data != null) {
                     totalPage = jsonObject.optInt("totalPage");
-                    Log.e("StatementFragment",totalPage+"页");
-                    data = new Gson().fromJson(jsonObject.optString("list"), new TypeToken<List<TeamBean.SpeakBean>>() {}.getType());
-                    if (isfresh){
+                    Log.e("StatementFragment", totalPage + "页");
+                    data = new Gson().fromJson(jsonObject.optString("list"), new TypeToken<List<TeamBean.SpeakBean>>() {
+                    }.getType());
+                    if (isfresh) {
                         adapter.setData(data);
-                    }else{
+                    } else {
                         adapter.setData2(data);
                     }
                 }
@@ -68,19 +68,19 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
                 e.printStackTrace();
             }
             if (isfresh) {
-                if (mActivity!=null){
+                if (mActivity != null) {
                     mActivity.setFinish(0);
                 }
 //                rv.refreshComplete();
             }
-            if (loadmore){
-                loadmore=false;
-                if (mActivity!=null){
+            if (loadmore) {
+                loadmore = false;
+                if (mActivity != null) {
                     mActivity.setFinish(1);
                 }
             }
-            tvTips.setVisibility(data.size()>0?View.GONE:View.VISIBLE);
-        }else if (where == delSpeak){
+            tvTips.setVisibility(data.size() > 0 ? View.GONE : View.VISIBLE);
+        } else if (where == delSpeak) {
             switch (result.optInt("code")) {
                 case 0:
                     Utils.toastShort(getActivity(), result.optString("msg"));
@@ -106,11 +106,11 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
     protected void onFailure(String result, int where) {
         if (where == getCode) {
             if (isfresh) {
-                if (mActivity!=null){
+                if (mActivity != null) {
                     mActivity.setFinish(0);
                 }
             } else {
-                if (mActivity!=null){
+                if (mActivity != null) {
                     mActivity.setFinish(1);
                 }
             }
@@ -130,7 +130,7 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
         if (mActivity.id != 0) {
             setBodyParams(new String[]{"type", "id", "pn", "ps"}, new String[]{"1", mActivity.id + ""
                     , index + "", Constants.default_PS + ""});
-            sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/speak/pglist.do", getCode, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/club/speak/pglist.do", getCode, Constants.token);
         }
     }
 
@@ -142,7 +142,7 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
         mActivity = (TeamDetailActivity2) getActivity();
         getData();
         data = new ArrayList<>();
-        adapter = new OtherSayAdapter(mContext, data,1);
+        adapter = new OtherSayAdapter(mContext, data, 1);
         rv.setAdapter(adapter);
         setBg(0);
     }
@@ -153,7 +153,7 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
             @Override
             public void onDel(int position) {
                 setBodyParams(new String[]{"speakId"}, new String[]{"" + data.get(position).getId()});
-                sendPost(Constants.base_url + "/api/club/speak/delete.do", delSpeak, Constants.token);
+                sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", delSpeak, Constants.token);
             }
         });
     }
@@ -175,8 +175,8 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
     }
 
 
-    @Subscribe (threadMode = ThreadMode.MAIN)
-    public void addRefresh(RefStatementEvent event){
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void addRefresh(RefStatementEvent event) {
         isfresh = true;
         index = 1;
         getData();
@@ -194,20 +194,20 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
         getData();
     }
 
-    public void loadmoreData(){
+    public void loadmoreData() {
         isfresh = false;
         loadmore = true;
         if (index < totalPage) {
             index++;
             getData();
         } else {
-            if (mActivity!=null){
+            if (mActivity != null) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mActivity.setFinish(1);
                     }
-                },800);
+                }, 800);
             }
         }
     }

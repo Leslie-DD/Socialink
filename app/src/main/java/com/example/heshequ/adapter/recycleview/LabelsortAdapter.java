@@ -13,15 +13,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.oldsecond.GoodDetailActivity;
 import com.example.heshequ.bean.SecondhandgoodBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -129,7 +129,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                         if (TextUtils.isEmpty(bean.header)) {
                             ivHead.setImageResource(R.mipmap.head3);
                         } else {
-                            Glide.with(context).load(Constants.base_url+bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                            Glide.with(context).load(Constants.base_url + bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                         }
                     } else {
                         tvName.setText("匿名用户");
@@ -209,15 +209,15 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                      * 给商品展示图赋值
                      * 选取商品图片的第一张
                      */
-                     if (bean.photos == null || bean.photos.size() == 0) {
-                         ivImage.setImageResource(R.drawable.noimg);
+                    if (bean.photos == null || bean.photos.size() == 0) {
+                        ivImage.setImageResource(R.drawable.noimg);
                     } else {
-                         Glide
-                                 .with(context)
-                                 .load(WenConstans.BaseUrl + bean.photos.get(0).photoId)
-                                 .placeholder(R.drawable.noimg)//图片加载中显示
-                                 .into(ivImage);
-                     }
+                        Glide
+                                .with(context)
+                                .load(WenConstans.BaseUrl + bean.photos.get(0).photoId)
+                                .placeholder(R.drawable.noimg)//图片加载中显示
+                                .into(ivImage);
+                    }
 
                     llSave.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -246,8 +246,8 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (type == 1) {
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_collectionEnterQuestion");
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_collectionEnterQuestion");
                         Intent intent = new Intent(context, GoodDetailActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("Secondhandgood", data.get(position));

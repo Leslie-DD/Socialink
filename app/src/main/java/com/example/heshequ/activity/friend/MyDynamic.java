@@ -6,10 +6,10 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.fragment.MyDynamicFragment;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -36,24 +36,28 @@ public class MyDynamic extends NetWorkActivity implements View.OnClickListener {
         init();
         event();
     }
+
     private void init() {
         setText("我的动态");
         list = new ArrayList<>();
-        MDfragment  = new MyDynamicFragment();
+        MDfragment = new MyDynamicFragment();
         list.add(MDfragment);
         vp = (ViewPager) findViewById(R.id.vp);
-        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),list);
+        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);
         vp.setCurrentItem(0);
         setTvBg(0);
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     public void setTvBg(int status) {
         if (this.status == status) {
             return;
@@ -66,16 +70,18 @@ public class MyDynamic extends NetWorkActivity implements View.OnClickListener {
             vp.setCurrentItem(status);
         }
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
     }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-        case R.id.ivBack:
-            finish();
-            break;
+        switch (view.getId()) {
+            case R.id.ivBack:
+                finish();
+                break;
         }
     }
 

@@ -15,13 +15,11 @@ public class CustomViewPager2 extends ViewPager {
     }
 
 
-
     public CustomViewPager2(Context context, AttributeSet attrs) {
 
         super(context, attrs);
 
     }
-
 
 
     @Override

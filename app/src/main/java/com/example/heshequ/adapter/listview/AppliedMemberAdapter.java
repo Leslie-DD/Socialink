@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.bean.AppliedMemberBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 
 import java.util.ArrayList;
 
@@ -67,24 +67,24 @@ public class AppliedMemberAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        if (!TextUtils.isEmpty(data.get(position).getHeader())){
-            Glide.with(context).load(Constants.base_url+data.get(position).getHeader()).asBitmap().into(viewHolder.ivHead);
-        }else{
-            viewHolder.ivHead.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.head3));
+        if (!TextUtils.isEmpty(data.get(position).getHeader())) {
+            Glide.with(context).load(Constants.base_url + data.get(position).getHeader()).asBitmap().into(viewHolder.ivHead);
+        } else {
+            viewHolder.ivHead.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.head3));
         }
         viewHolder.tvName.setText(data.get(position).getNickname());
-        if (data.get(position).getRole() == 1){
+        if (data.get(position).getRole() == 1) {
             viewHolder.tvRole.setText("团长");
-        }else if (data.get(position).getRole() == 2){
+        } else if (data.get(position).getRole() == 2) {
             viewHolder.tvRole.setText("副团长");
-        }else if (data.get(position).getRole() == 3){
+        } else if (data.get(position).getRole() == 3) {
             viewHolder.tvRole.setText("成员");
         }
 
         viewHolder.ivHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid",data.get(position).getUid()));
+                context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", data.get(position).getUid()));
             }
         });
 
@@ -93,6 +93,6 @@ public class AppliedMemberAdapter extends BaseAdapter {
 
     public class ViewHolder {
         private CircleView ivHead;
-        private TextView tvName,tvRole;
+        private TextView tvName, tvRole;
     }
 }

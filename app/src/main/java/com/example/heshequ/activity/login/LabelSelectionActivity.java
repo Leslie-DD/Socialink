@@ -11,18 +11,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.heshequ.bean.UserInfoBean;
-import com.example.heshequ.entity.RefUserInfo;
-import com.example.heshequ.utils.EncryptUtils;
+import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.base.NetWorkActivity;
+import com.example.heshequ.bean.UserInfoBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
+import com.example.heshequ.entity.RefUserInfo;
 import com.example.heshequ.entity.TestBean;
+import com.example.heshequ.utils.EncryptUtils;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.FlowLayout;
-import com.example.heshequ.MeetApplication;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.umeng.analytics.MobclickAgent;
@@ -90,8 +90,8 @@ public class LabelSelectionActivity extends NetWorkActivity implements View.OnCl
 
             btStart.setText("确定");
             tvSkip.setVisibility(View.GONE);
-            userLabelsBeans = (ArrayList<UserInfoBean.UserLabelsBean>)getIntent().getSerializableExtra("userLabelsBeans");
-            if (userLabelsBeans!=null && userLabelsBeans.size()>0) {
+            userLabelsBeans = (ArrayList<UserInfoBean.UserLabelsBean>) getIntent().getSerializableExtra("userLabelsBeans");
+            if (userLabelsBeans != null && userLabelsBeans.size() > 0) {
                 for (int i = 0; i < userLabelsBeans.size(); i++) {
                     stringList.add(userLabelsBeans.get(i).getLabel());
                 }
@@ -158,10 +158,10 @@ public class LabelSelectionActivity extends NetWorkActivity implements View.OnCl
                     for (LableBean b : datas) {
                         // 循环添加TextView到容器
                         TestBean bean = new TestBean();
-                        if (type == 2){
-                            if (userLabelsBeans!=null && userLabelsBeans.size()>0){
-                                for (int j = 0;j<userLabelsBeans.size();j++){
-                                    if (b.getValue().equals(userLabelsBeans.get(j).getLabel())){
+                        if (type == 2) {
+                            if (userLabelsBeans != null && userLabelsBeans.size() > 0) {
+                                for (int j = 0; j < userLabelsBeans.size(); j++) {
+                                    if (b.getValue().equals(userLabelsBeans.get(j).getLabel())) {
                                         bean.setStatus(1);
                                     }
                                 }
@@ -323,6 +323,7 @@ public class LabelSelectionActivity extends NetWorkActivity implements View.OnCl
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

@@ -1,5 +1,12 @@
 package com.example.heshequ.utils;
 
+import static android.content.Context.APP_OPS_SERVICE;
+import static com.tencent.open.SocialConstants.PARAM_APP_SOURCE;
+import static com.tencent.open.SocialConstants.PARAM_IMAGE_URL;
+import static com.tencent.open.SocialConstants.PARAM_SUMMARY;
+import static com.tencent.open.SocialConstants.PARAM_TARGET_URL;
+import static com.tencent.open.SocialConstants.PARAM_TITLE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AppOpsManager;
@@ -46,14 +53,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.Name;
 import com.example.heshequ.entity.TeamMemberBean;
 import com.example.heshequ.interfaces.BaseUiListener;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
@@ -103,13 +110,6 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static android.content.Context.APP_OPS_SERVICE;
-import static com.tencent.open.SocialConstants.PARAM_APP_SOURCE;
-import static com.tencent.open.SocialConstants.PARAM_IMAGE_URL;
-import static com.tencent.open.SocialConstants.PARAM_SUMMARY;
-import static com.tencent.open.SocialConstants.PARAM_TARGET_URL;
-import static com.tencent.open.SocialConstants.PARAM_TITLE;
 
 public class Utils {
 
@@ -1562,7 +1562,7 @@ public class Utils {
         int uid = appInfo.uid;
 
         Class appOpsClass = null;
-    /* Context.APP_OPS_MANAGER */
+        /* Context.APP_OPS_MANAGER */
         try {
             appOpsClass = Class.forName(AppOpsManager.class.getName());
             Method checkOpNoThrowMethod = appOpsClass.getMethod(CHECK_OP_NO_THROW, Integer.TYPE, Integer.TYPE,

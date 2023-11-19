@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
  */
 
-public class UserInfoBean implements Serializable{
+public class UserInfoBean implements Serializable {
     /**
      * id : 4
      * sex : 1
@@ -152,7 +152,7 @@ public class UserInfoBean implements Serializable{
         this.userLabels = userLabels;
     }
 
-    public static class UserLabelsBean implements Serializable{
+    public static class UserLabelsBean implements Serializable {
         /**
          * id : 26
          * userId : 28

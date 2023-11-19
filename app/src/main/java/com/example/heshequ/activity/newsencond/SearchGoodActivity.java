@@ -59,15 +59,16 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
         initView();
 
         Bundle bundle = this.getIntent().getExtras();
-        beforeType = bundle.getInt("type",0);
+        beforeType = bundle.getInt("type", 0);
 //        Utils.toastShort(context, beforeType==CLASS_TYPE?"beforeType: CLASS_TYPE":"beforeType: INDEX_TYPE");
-        if(beforeType == CLASS_TYPE){
+        if (beforeType == CLASS_TYPE) {
             category2Id = bundle.getInt("category2_id", 0);
             getClassifyData();
         }
 
     }
-    private void initView(){
+
+    private void initView() {
 
         xRefreshView = findViewById(R.id.search_good_xrv);
         xRefreshView.setPinnedTime(1000);
@@ -90,9 +91,9 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
                 xRefreshView.setLoadComplete(false);
                 secondhandgoodBeanList.clear();
                 goodAdapter.notifyDataSetChanged();
-                if(beforeType == CLASS_TYPE){
+                if (beforeType == CLASS_TYPE) {
                     getClassifyData();
-                }else{
+                } else {
                     content = etContent.getText().toString();
                     getSearchData();
                 }
@@ -110,9 +111,9 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
                         }
                     }, 1000);
                 } else {
-                    if(beforeType == CLASS_TYPE){
+                    if (beforeType == CLASS_TYPE) {
                         getMoreClassifyData();
-                    }else{
+                    } else {
                         content = etContent.getText().toString();
                         getMoreData();
                     }
@@ -129,16 +130,19 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
         setBodyParams(new String[]{"pn", "ps", "keyword"}, new String[]{"" + pn, "" + ps, "" + content});
         sendPost(Constants.base_url + "/api/goods/base/search.do", 100, Constants.token);
     }
+
     private void getClassifyData() {
 //        Utils.toastShort(context, "分类搜索 category2Id=" + category2Id);
         setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});
         sendPost(WenConstans.Secondhand, 100, WenConstans.token);
     }
+
     private void getMoreData() {
 //        Utils.toastShort(context, "更多搜索商品" + category2Id);
         setBodyParams(new String[]{"pn", "ps", "keyword"}, new String[]{"" + pn, "" + ps, "" + content});
         sendPost(Constants.base_url + "/api/goods/base/search.do", 102, Constants.token);
     }
+
     private void getMoreClassifyData() {
 //        Utils.toastShort(context, "更多分类商品 category2Id=" + category2Id);
         setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});
@@ -155,7 +159,7 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
                 content = etContent.getText().toString();
                 category2Id = 0;
                 beforeType = INDEX_TYPE;
-                pn=1;
+                pn = 1;
                 getSearchData();
                 break;
         }
@@ -183,7 +187,7 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
                         }
                     }
                 }
-                goodAdapter = new GoodAdapter(this,secondhandgoodBeanList);
+                goodAdapter = new GoodAdapter(this, secondhandgoodBeanList);
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(goodAdapter);

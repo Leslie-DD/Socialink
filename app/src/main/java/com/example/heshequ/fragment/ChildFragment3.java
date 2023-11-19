@@ -1,9 +1,11 @@
 package com.example.heshequ.fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.HotActiveAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -11,10 +13,8 @@ import com.example.heshequ.bean.HotAvtivityBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefHotActivityEvent;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.util.LogUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -41,18 +41,19 @@ public class ChildFragment3 extends NetWorkFragment {
     private HotAvtivityBean hotAvtivityBean;
     private Gson gson = new Gson();
     private ArrayList<HotAvtivityBean.HotBean> data;
+
     @Override
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_tim, null);
         EventBus.getDefault().register(this);
         mRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(getActivity(),false,false,mRecyclerView);
+        ConsTants.initXrecycleView(getActivity(), false, false, mRecyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
 
         pn = 1;
         type = 1;
-        getData(pn,type);
+        getData(pn, type);
 
         adapter = new HotActiveAdapter(getActivity());
         mRecyclerView.setAdapter(adapter);
@@ -63,66 +64,66 @@ public class ChildFragment3 extends NetWorkFragment {
     private void getData(int pn, int type) {
         if (type == 1) {
             setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, Constants.default_PS + ""});
-            sendPost(Constants.base_url + "/api/club/activity/hotlist.do", GetData, Constants.token);
-        }else if (type == 2){
+            sendPostConnection(Constants.base_url + "/api/club/activity/hotlist.do", GetData, Constants.token);
+        } else if (type == 2) {
             setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, Constants.default_PS + ""});
-            sendPost(Constants.base_url + "/api/club/activity/hotlist.do", LoaMore, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/club/activity/hotlist.do", LoaMore, Constants.token);
         }
     }
 
-    @Subscribe (threadMode = ThreadMode.MAIN)
-    public void refload(RefHotActivityEvent event){
-        if (event.getType() == 1){
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refload(RefHotActivityEvent event) {
+        if (event.getType() == 1) {
             pn = 1;
             type = 1;
-            getData(pn,type);
-        }else if(event.getType() == 2){
-            if (pn<totalPage){
+            getData(pn, type);
+        } else if (event.getType() == 2) {
+            if (pn < totalPage) {
                 pn++;
                 type = 2;
-                getData(pn,type);
+                getData(pn, type);
             }
         }
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        LogUtils.e("DDQ:-》"+result.toString());
-        switch (where){
+        Log.e("[ChildFragment3]", "onSuccess: " + result.toString());
+        switch (where) {
             case GetData:
-                if (result.optInt("code") == 0){
-                    hotAvtivityBean = gson.fromJson(result.optString("data"),HotAvtivityBean.class);
+                if (result.optInt("code") == 0) {
+                    hotAvtivityBean = gson.fromJson(result.optString("data"), HotAvtivityBean.class);
                     totalPage = hotAvtivityBean.getTotalPage();
-                    if (hotAvtivityBean.getData() != null){
-                        if (hotAvtivityBean.getData().size()>0){
+                    if (hotAvtivityBean.getData() != null) {
+                        if (hotAvtivityBean.getData().size() > 0) {
                             tvTips.setVisibility(View.GONE);
                             data = hotAvtivityBean.getData();
                             adapter.setData(data);
-                        }else {
+                        } else {
                             tvTips.setVisibility(View.VISIBLE);
                             data = new ArrayList<>();
                             adapter.setData(data);
                         }
                     }
-                }else{
-                    Utils.toastShort(mContext,result.optString("msg"));
+                } else {
+                    Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
             case LoaMore:
-                if (result.optInt("code") == 0){
-                    hotAvtivityBean = gson.fromJson(result.optString("data"),HotAvtivityBean.class);
+                if (result.optInt("code") == 0) {
+                    hotAvtivityBean = gson.fromJson(result.optString("data"), HotAvtivityBean.class);
                     totalPage = hotAvtivityBean.getTotalPage();
-                    if (hotAvtivityBean.getData() != null){
-                        if (hotAvtivityBean.getData().size()>0){
+                    if (hotAvtivityBean.getData() != null) {
+                        if (hotAvtivityBean.getData().size() > 0) {
                             data = hotAvtivityBean.getData();
                             adapter.setData2(data);
-                        }else {
+                        } else {
                             data = new ArrayList<>();
                             adapter.setData2(data);
                         }
                     }
-                }else{
-                    Utils.toastShort(mContext,result.optString("msg"));
+                } else {
+                    Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
         }
@@ -130,7 +131,7 @@ public class ChildFragment3 extends NetWorkFragment {
 
     @Override
     protected void onFailure(String result, int where) {
-        Utils.toastShort(mContext,"网络异常");
+        Utils.toastShort(mContext, "网络异常");
     }
 
 

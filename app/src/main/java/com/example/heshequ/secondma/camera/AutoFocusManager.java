@@ -27,8 +27,8 @@ import java.util.concurrent.RejectedExecutionException;
 
 
 /*
-* 聚焦管理
-* */
+ * 聚焦管理
+ * */
 final class AutoFocusManager implements Camera.AutoFocusCallback {
 
     private static final String TAG = AutoFocusManager.class.getSimpleName();

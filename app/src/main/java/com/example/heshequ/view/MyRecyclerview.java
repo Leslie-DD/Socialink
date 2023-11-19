@@ -12,6 +12,7 @@ public class MyRecyclerview extends RecyclerView {
         super(context, attrs);
         // TODO Auto-generated constructor stub
     }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,

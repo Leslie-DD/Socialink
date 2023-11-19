@@ -10,12 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +29,7 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
     private View view;
     private ArrayList<Fragment> list;
     private ViewPager vp;
-    private TextView tvClear, tvTeam, tvSay, tvQuestion,tvMessage,tvFriend;
+    private TextView tvClear, tvTeam, tvSay, tvQuestion, tvMessage, tvFriend;
     private ImageView back;
     private News_TeamFragment teamFragment;
     private News_SayFragment sayFragment;
@@ -41,6 +41,7 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
     private int status = -1;
     private final int delAll = 1000;
     private AlertDialog deldialog;
+
     @Override
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_msg, null);
@@ -55,14 +56,14 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
         tvQuestion = (TextView) view.findViewById(R.id.tvQuestion);
         tvSay = (TextView) view.findViewById(R.id.tvSay);
         tvTeam = (TextView) view.findViewById(R.id.tvTeam);
-        tvMessage=(TextView)view.findViewById(R.id.tvMessage);
-        tvFriend = (TextView)view.findViewById(R.id.tvFriend);
+        tvMessage = (TextView) view.findViewById(R.id.tvMessage);
+        tvFriend = (TextView) view.findViewById(R.id.tvFriend);
         vp = (ViewPager) view.findViewById(R.id.vp);
         list = new ArrayList<>();
         teamFragment = new News_TeamFragment();
         sayFragment = new News_SayFragment();
         questionFragment = new News_QuestionFragment();
-        messageFragment=new News_MessageFragment();
+        messageFragment = new News_MessageFragment();
         friendFragment = new News_FriendFragment();
         list.add(teamFragment);
         list.add(sayFragment);
@@ -89,13 +90,13 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
                 //删除
                 if (cp == 0) {
                     setBodyParams(new String[]{"type"}, new String[]{"" + 2});
-                    sendPost(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
+                    sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
                 } else if (cp == 1) {
                     setBodyParams(new String[]{"type"}, new String[]{"" + 1});
-                    sendPost(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
+                    sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
                 } else if (cp == 2) {
                     setBodyParams(new String[]{"type"}, new String[]{"" + 3});
-                    sendPost(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
+                    sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
                 }
                 deldialog.dismiss();
             }
@@ -150,8 +151,8 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
         tvTeam.setSelected(status == 0 ? true : false);
         tvSay.setSelected(status == 1 ? true : false);
         tvQuestion.setSelected(status == 2 ? true : false);
-        tvMessage.setSelected(status ==3 ? true:false);
-        tvFriend.setSelected(status ==4 ? true:false);
+        tvMessage.setSelected(status == 3 ? true : false);
+        tvFriend.setSelected(status == 4 ? true : false);
         if (tvMessage.isSelected()) {
             tvClear.setVisibility(View.GONE);
         } else {
@@ -199,9 +200,9 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        if (where == delAll){
-            if (result.optInt("code") == 0){
-                switch (cp){
+        if (where == delAll) {
+            if (result.optInt("code") == 0) {
+                switch (cp) {
                     case 0:
                         teamFragment.refData();
                         break;
@@ -220,8 +221,8 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
                         friendFragment.refData();
                         break;
                 }
-            }else{
-                Utils.toastShort(mContext,""+result.optString("msg"));
+            } else {
+                Utils.toastShort(mContext, "" + result.optString("msg"));
             }
         }
     }
@@ -230,32 +231,33 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
     protected void onFailure(String result, int where) {
 
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void RefreshData(RefreshBean refreshBean){
-        News_TeamFragment t1= (News_TeamFragment) adapter.getItem(0);
-        News_SayFragment t2= (News_SayFragment) adapter.getItem(1);
-        News_QuestionFragment t3= (News_QuestionFragment) adapter.getItem(2);
+    public void RefreshData(RefreshBean refreshBean) {
+        News_TeamFragment t1 = (News_TeamFragment) adapter.getItem(0);
+        News_SayFragment t2 = (News_SayFragment) adapter.getItem(1);
+        News_QuestionFragment t3 = (News_QuestionFragment) adapter.getItem(2);
 //        News_QuestionFragment2 t4=(News_QuestionFragment2) adapter.getItem(3);
-        News_MessageFragment t4= (News_MessageFragment) adapter.getItem(3);
+        News_MessageFragment t4 = (News_MessageFragment) adapter.getItem(3);
         News_FriendFragment t5 = (News_FriendFragment) adapter.getItem(4);
-        if (refreshBean.type.equals("1")){
-            if (t1!=null){
+        if (refreshBean.type.equals("1")) {
+            if (t1 != null) {
                 t1.refData();
             }
-        }else if (refreshBean.type.equals("2")){
-            if (t2!=null){
+        } else if (refreshBean.type.equals("2")) {
+            if (t2 != null) {
                 t2.refData();
             }
-        }else if (refreshBean.type.equals("3")){
-            if (t3!=null){
+        } else if (refreshBean.type.equals("3")) {
+            if (t3 != null) {
                 t3.refData();
             }
-        }else if(refreshBean.type.equals("4")){
-            if(t4!=null){
+        } else if (refreshBean.type.equals("4")) {
+            if (t4 != null) {
                 t4.refData();
             }
-        }else if(refreshBean.type.equals("5")){
-            if(t5!=null){
+        } else if (refreshBean.type.equals("5")) {
+            if (t5 != null) {
                 t5.refData();
             }
         }

@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.Adapter_GridView;
 import com.example.heshequ.adapter.recycleview.CommentAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -23,8 +25,6 @@ import com.example.heshequ.entity.CommentBean;
 import com.example.heshequ.entity.StatementBean;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -76,7 +76,7 @@ public class SayDetailActivity extends NetWorkActivity implements View.OnClickLi
         ivBq = (ImageView) findViewById(R.id.ivBq);
         ivSend = (ImageView) findViewById(R.id.ivSend);
         etComment = (EditText) findViewById(R.id.etComment);
-        if (!Constants.isJoin){
+        if (!Constants.isJoin) {
             llComment.setVisibility(View.GONE);
         }
     }
@@ -111,7 +111,7 @@ public class SayDetailActivity extends NetWorkActivity implements View.OnClickLi
         if (TextUtils.isEmpty(bean.getHeader())) {
             ivHead.setImageResource(R.mipmap.head3);
         } else {
-            Glide.with(context).load(Constants.base_url+bean.getHeader()).asBitmap().into(ivHead);
+            Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(ivHead);
         }
 
         if (bean.getImgs() == null || bean.getImgs().size() == 0) {
@@ -199,6 +199,7 @@ public class SayDetailActivity extends NetWorkActivity implements View.OnClickLi
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

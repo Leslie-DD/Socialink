@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.statement.EditorialBulletinActivity;
 import com.example.heshequ.activity.statement.PublishVoteActivity;
 import com.example.heshequ.activity.statement.ReleaseActivitiesActivity;
 import com.example.heshequ.base.NetWorkActivity;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 public class NewAddActivity extends NetWorkActivity implements View.OnClickListener {
     private TextView tvTitle;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

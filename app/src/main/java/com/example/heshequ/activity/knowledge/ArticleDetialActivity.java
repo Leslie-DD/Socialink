@@ -7,15 +7,14 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.knowledge.ArticleBean;
 import com.example.heshequ.bean.knowledge.Author;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -23,7 +22,7 @@ import org.json.JSONObject;
 
 public class ArticleDetialActivity extends NetWorkActivity implements View.OnClickListener {
 
-    private TextView tvTitle,tvName,tvColumn;
+    private TextView tvTitle, tvName, tvColumn;
     private CircleView ivHead;
     private WebView webView;
     private int articleId = 0;
@@ -31,6 +30,7 @@ public class ArticleDetialActivity extends NetWorkActivity implements View.OnCli
     public static String title;
     public static String name;
     public static String avatar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +39,7 @@ public class ArticleDetialActivity extends NetWorkActivity implements View.OnCli
         init();
         event();
     }
+
     private void init() {
         setText("文章");
         ivHead = (CircleView) findViewById(R.id.ivHead);
@@ -49,15 +50,18 @@ public class ArticleDetialActivity extends NetWorkActivity implements View.OnCli
         getData(articleId);
 
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         tvColumn.setOnClickListener(this);
 
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         int ret = result.optInt("code");
@@ -85,7 +89,7 @@ public class ArticleDetialActivity extends NetWorkActivity implements View.OnCli
             article.author.id = object.getJSONObject("author").getInt("id");
             article.author.header = object.getJSONObject("author").getString("header");
             article.author.nickname = object.getJSONObject("author").getString("nickname");
-            Log.e("ArticleDetialActivity","article.title: "+(article.title == null));
+            Log.e("ArticleDetialActivity", "article.title: " + (article.title == null));
             columnId = article.specialColumnId;
             tvTitle.setText(article.title == null ? "" : article.title);
             tvName.setText(article.author.nickname == null ? "" : article.author.nickname);
@@ -97,13 +101,14 @@ public class ArticleDetialActivity extends NetWorkActivity implements View.OnCli
                 ivHead.setImageResource(R.mipmap.head3);
             }
 
-            webView.loadData(article.content,"text/html", "UTF-8");
+            webView.loadData(article.content, "text/html", "UTF-8");
 
         }
     }
+
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
@@ -116,9 +121,11 @@ public class ArticleDetialActivity extends NetWorkActivity implements View.OnCli
                 break;
         }
     }
-    private void getData(int id){
-        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getArticleDetail + "?id=" +id,new String[]{},new String[]{},100, false, WenConstans.token);
+
+    private void getData(int id) {
+        sendGetConnection(WenConstans.getArticleDetail + "?id=" + id, new String[]{}, new String[]{}, 100, WenConstans.token);
     }
+
     @Override
     public void onResume() {
         super.onResume();

@@ -6,24 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.example.heshequ.base.NetWorkActivity;
-import com.example.heshequ.bean.SchoolBean;
-import com.example.heshequ.constans.Constants;
-import com.example.heshequ.constans.WenConstans;
-import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
-import com.umeng.analytics.MobclickAgent;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -31,6 +13,23 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.example.heshequ.R;
+import com.example.heshequ.base.NetWorkActivity;
+import com.example.heshequ.bean.SchoolBean;
+import com.example.heshequ.constans.Constants;
+import com.example.heshequ.constans.WenConstans;
+import com.example.heshequ.utils.Utils;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +100,7 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
         mHead = (SimpleDraweeView) findViewById(R.id.head);
         mHead0 = (SimpleDraweeView) findViewById(R.id.head0);
         mLlSchool = (LinearLayout) findViewById(R.id.llSchool);
-        mEtSchool = (TextView)findViewById(R.id.etSchool);
+        mEtSchool = (TextView) findViewById(R.id.etSchool);
         mEtUser = (EditText) findViewById(R.id.etUser);
         mEtPwd = (EditText) findViewById(R.id.etPwd);
         mEtVerificationcode = (EditText) findViewById(R.id.etVerificationcode);
@@ -113,25 +112,25 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
     /**
      * 初始化学校列表
      */
-    private void initSchools () {
+    private void initSchools() {
         SchoolBean schoolBean = new SchoolBean();
         schoolBean.setSchool("湖南大学");
         schoolBean.setType(0);
         schools.add(schoolBean);
 
-        Log.e("ddq",schools.get(0).getSchool());
+        Log.e("ddq", schools.get(0).getSchool());
 
         schoolBean = new SchoolBean();
         schoolBean.setSchool("中南大学");
         schoolBean.setType(1);
         schools.add(schoolBean);
-        Log.e("ddq",schools.get(1).getSchool());
+        Log.e("ddq", schools.get(1).getSchool());
 
         schoolBean = new SchoolBean();
         schoolBean.setSchool("湖南师范大学");
         schoolBean.setType(2);
         schools.add(schoolBean);
-        Log.e("ddq",schools.get(2).getSchool());
+        Log.e("ddq", schools.get(2).getSchool());
 
 
     }
@@ -139,11 +138,11 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
     /**
      * 初始化学校选择器
      */
-    private void initSchoolChooseHelper () {
+    private void initSchoolChooseHelper() {
         schoolChooseHelper = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                Log.e("ddq","-------weizhi--"+options1);
+                Log.e("ddq", "-------weizhi--" + options1);
                 school.setSchool(schools.get(options1).getSchool());
                 school.setType(schools.get(options1).getType());
                 mEtSchool.setText(school.getSchool());
@@ -166,7 +165,7 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
                 .build();
 
         List<String> results = new ArrayList<>();
-        for (int i=0; i<schools.size(); i++) {
+        for (int i = 0; i < schools.size(); i++) {
             results.add(schools.get(i).getSchool());
         }
 
@@ -177,7 +176,7 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
     /**
      * 事件监听
      */
-    private void event () {
+    private void event() {
         mHead.setOnClickListener(this);
         mLlSchool.setOnClickListener(this);
         mBtLogin.setOnClickListener(this);
@@ -187,15 +186,15 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
     /**
      * 登陆申请
      */
-    private void applyForLogin (int type) {
+    private void applyForLogin(int type) {
         switch (type) {
             case APPLY_FOR_LOGIN://申请登陆
                 setBodyParams(new String[]{"studentId", "pwd", "type"}, new String[]{studentId, studentPwd, code});
                 sendPost(Constants.base_url + "/api/account/highLogin.do", APPLY_FOR_LOGIN, null);
                 break;
             case APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE://验证码申请登陆
-                setBodyParams(new String[]{"key", "verification","studentId", "pwd", "type"}, new String[]{key, verification,studentId, studentPwd, code});
-                sendPost(Constants.base_url + "/api/account/verification.do",APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE , null);
+                setBodyParams(new String[]{"key", "verification", "studentId", "pwd", "type"}, new String[]{key, verification, studentId, studentPwd, code});
+                sendPost(Constants.base_url + "/api/account/verification.do", APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE, null);
                 break;
         }
 
@@ -204,7 +203,7 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
     /**
      * 登陆验证
      */
-    private void checkMessage () {
+    private void checkMessage() {
         String studentId = mEtUser.getText().toString();
         String studentPwd = mEtPwd.getText().toString();
         if (school.getSchool() == null || school.getSchool().isEmpty()) {
@@ -218,34 +217,35 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
             return;
         }
         if (code.equals("1")) {
-           String schoolname  = "csu";
+            String schoolname = "csu";
             Intent intent1 = new Intent();
             intent1.setClass(TimetableCheckin.this, TimetableSelect.class);
-            TimetableSelect.studentId=studentId;
-            TimetableSelect.pwd=studentPwd;
-            TimetableSelect.schoolname=schoolname;
+            TimetableSelect.studentId = studentId;
+            TimetableSelect.pwd = studentPwd;
+            TimetableSelect.schoolname = schoolname;
             startActivity(intent1);
             this.finish();
         } else {
             applyForLogin(APPLY_FOR_LOGIN);
         }
     }
+
     /**
-     *  验证码输入为空检查
+     * 验证码输入为空检查
      */
-    private void checkMessageCode (){
+    private void checkMessageCode() {
         if ((verification = mEtVerificationcode.getText().toString()) != null && mEtVerificationcode.getText().toString().length() != 0) {
             applyForLogin(APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE);
             return;
         } else {
-            Toast.makeText(this, "验证码不能为空",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
      * 登陆
      */
-    private void login () {
+    private void login() {
         switch (landingMode) {
             case APPLY_FOR_LOGIN://申请登录
                 keepStudentMessage();
@@ -260,14 +260,15 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
     /**
      * 保持学生信息
      */
-    private void keepStudentMessage () {
+    private void keepStudentMessage() {
         studentId = mEtUser.getText().toString();
         studentPwd = mEtPwd.getText().toString();
-        code = school.getType()+"";
+        code = school.getType() + "";
     }
 
     /**
      * 点击事件监听
+     *
      * @param v 点击的view
      */
     @Override
@@ -296,7 +297,7 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
         }
     }
 
-    public void viewChanged () {
+    public void viewChanged() {
         mEtPwd.setVisibility(View.GONE);
         mEtUser.setVisibility(View.GONE);
         mLlSchool.setVisibility(View.GONE);
@@ -305,33 +306,32 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
 
     /**
      * 登陆成功时用户信息的存取以及友盟的加载
-     * @param result  后台返回信息
+     *
+     * @param result 后台返回信息
      * @throws JSONException
      */
-    private void successLogin (JSONObject result) throws JSONException{
+    private void successLogin(JSONObject result) throws JSONException {
         int ret = result.optInt("code");
         if (ret == 0) {
             JSONObject dd = new JSONObject(result.optString("data"));
             String token = dd.optString("token");
             int uid = dd.optInt("uid");
-            WenConstans.Timetableid=uid;
-            WenConstans.Timetabletoken =token;
+            WenConstans.Timetableid = uid;
+            WenConstans.Timetabletoken = token;
             this.finish();
-            String schoolname ="";
-            if (code.equals("0")){
-                schoolname  = "hnu";
-            }
-            else if(code.equals("1")){
-                schoolname ="csu";
-            }
-            else{
-                schoolname="hunnu";
+            String schoolname = "";
+            if (code.equals("0")) {
+                schoolname = "hnu";
+            } else if (code.equals("1")) {
+                schoolname = "csu";
+            } else {
+                schoolname = "hunnu";
             }
             Intent intent1 = new Intent();
             intent1.setClass(TimetableCheckin.this, TimetableSelect.class);
-            TimetableSelect.studentId=studentId;
-            TimetableSelect.pwd=studentPwd;
-            TimetableSelect.schoolname=schoolname;
+            TimetableSelect.studentId = studentId;
+            TimetableSelect.pwd = studentPwd;
+            TimetableSelect.schoolname = schoolname;
             startActivity(intent1);
             this.finish();
         } else {
@@ -341,8 +341,9 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
 
     /**
      * 网络请求成功
-     * @param result 返回结果
-     * @param where 发送的请求码
+     *
+     * @param result    返回结果
+     * @param where     发送的请求码
      * @param fromCache
      * @throws JSONException
      */
@@ -354,13 +355,13 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
                 JSONObject dd = new JSONObject(result.optString("data"));
                 String url = dd.optString("URL");
                 key = dd.optString("key");
-                if (url == null || url.length() ==0) {
+                if (url == null || url.length() == 0) {
                     successLogin(result);
                     return;
-                }else {
+                } else {
                     viewChanged();
                     Animation animation = AnimationUtils.loadAnimation(this, R.anim.bigger);
-                    Uri uri=Uri.parse(WenConstans.BaseUrl+url);
+                    Uri uri = Uri.parse(WenConstans.BaseUrl + url);
                     DraweeController controller = Fresco.newDraweeControllerBuilder()
                             .setUri(uri)
                             //动画支持，
@@ -376,20 +377,21 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
                 break;
             case APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE://验证码申请登录
                 successLogin(result);
-                Log.e("ddq",result.getString("data")+"");
+                Log.e("ddq", result.getString("data") + "");
                 break;
         }
     }
 
     /**
      * 网络请求失败
+     *
      * @param result 返回结果
      * @param where
      */
     @Override
     protected void onFailure(String result, int where) {
         Log.e("ddq--", result);
-        Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT ).show();
+        Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT).show();
     }
 
     @Override

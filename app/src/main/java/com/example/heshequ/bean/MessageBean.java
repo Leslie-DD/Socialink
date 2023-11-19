@@ -7,15 +7,15 @@ import java.io.Serializable;
  */
 
 public class MessageBean implements Serializable {
-    private int id=1;
+    private int id = 1;
     private int sender;
     private int receiver;
     private String content;
     private String header;
     private String gmtCreate;
     private String time;
-    private int type=0;
-    private int sor=0;
+    private int type = 0;
+    private int sor = 0;
     private boolean isRead;
     private int indexofpicture;
 
@@ -104,12 +104,17 @@ public class MessageBean implements Serializable {
     }
     // public Date Gmtcreate=12-12-12;
 
-    public  void setcontent(String str)
-    {
-        this.content=str;
+    public void setcontent(String str) {
+        this.content = str;
     }
-    public String   getcontent(){return content;}
-    public long getId(){return id;}
+
+    public String getcontent() {
+        return content;
+    }
+
+    public long getId() {
+        return id;
+    }
 
     public String getHeader() {
         return header;

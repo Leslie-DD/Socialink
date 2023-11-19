@@ -11,8 +11,10 @@ public class AgeBean {
     private String nianling;
     private int age;
 
-    public AgeBean(){}
-    public AgeBean(String nianling, int age){
+    public AgeBean() {
+    }
+
+    public AgeBean(String nianling, int age) {
         this.nianling = nianling;
         this.age = age;
     }

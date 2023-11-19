@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.adapter.recycleview.HotWenwenAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -30,8 +32,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.entity.TestBean;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.FlowLayout;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;

@@ -1,5 +1,7 @@
 package com.example.heshequ.activity.team;
 
+import static com.example.heshequ.MeetApplication.mTencent;
+
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -38,6 +40,9 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.ReportActivity;
 import com.example.heshequ.activity.TeamMembersActivity;
 import com.example.heshequ.activity.statement.EditorialBulletinActivity;
@@ -66,11 +71,8 @@ import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.CustomViewPager;
 import com.example.heshequ.view.DragImageView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.view.MyXRecyclerView;
 import com.example.heshequ.view.PayPasswordView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -93,9 +95,7 @@ import java.util.Map;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-import static com.example.heshequ.MeetApplication.mTencent;
-
-public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener, WbShareCallback{
+public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener, WbShareCallback {
     private ImageView ivAdd2, ivAdd3, ivAdd4, ivAdd5, ivAddBj;
     private boolean LockMenu = false;
     private DragImageView ivAdd;
@@ -135,7 +135,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     private int teamId = 0;
     private ImageView ivMore;
     private PopupWindow settingPop;
-    private LinearLayout ll_share, ll_collect, ll_invisible, ll_joins, ll_editor, ll_label, ll_jb,ll_st, ll_st_o,ll_st_c,ll_st_join;
+    private LinearLayout ll_share, ll_collect, ll_invisible, ll_joins, ll_editor, ll_label, ll_jb, ll_st, ll_st_o, ll_st_c, ll_st_join;
     private ImageView ivCollect, ivInvisible, ivJoin;
     private TextView tvCollect, tvInvisible, tvJoin;
     private boolean isFavorite, isVisible, isJoin;
@@ -182,18 +182,19 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     public int customer = 0;//用户
 
 
-    private  PayPasswordView payPasswordView ;//= new PayPasswordView(this);
-       // payPasswordView.setActivity(this);
-    private  BottomSheetDialog bottomSheetDialog;
+    private PayPasswordView payPasswordView;//= new PayPasswordView(this);
+    // payPasswordView.setActivity(this);
+    private BottomSheetDialog bottomSheetDialog;
 
     private final int DELETEJOINSECRET = 1101;
     private final int CHECKJOINSECRET = 1102;
     private final int SETJOINSECRET = 1103;
-    private final int TEAMJOINSECRET =1104;
+    private final int TEAMJOINSECRET = 1104;
     private final int SEARCHJOINSECRET = 1105;
     private final int CLOSESECRET = 1106;
     private final int CHECKJOINSECRET2 = 1107;
     private final int CHECKJOINSECRET3 = 1108;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -207,7 +208,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         setTvBg(0);
     }
 
-    public Context getThis () {
+    public Context getThis() {
         return this;
     }
 
@@ -425,12 +426,12 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     }
 
     private void openPayPasswordDialog() {
-        if (changingSecret!= null) {
+        if (changingSecret != null) {
             changingSecret.dismiss();
         }
-       if (secret != null) {
-           secret.dismiss();
-       }
+        if (secret != null) {
+            secret.dismiss();
+        }
         payPasswordView = new PayPasswordView(this);
         payPasswordView.setActivity(this);
         bottomSheetDialog = new BottomSheetDialog(this);
@@ -486,7 +487,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
      * 更改团队密码
      * 关闭密码加团
      */
-    private void initChangeSecret () {
+    private void initChangeSecret() {
         changingSecret = new PopupWindow(settingSecret, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         changingSecretView = LayoutInflater.from(context).inflate(R.layout.editor_set_team_secret, null);
         changeSecret = changingSecretView.findViewById(R.id.changeSecret);
@@ -581,7 +582,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     }
 
     public void showSpvPop() {
-        if (IDENTIFY != 3){//团长或管理员打开菜单栏 检索密码
+        if (IDENTIFY != 3) {//团长或管理员打开菜单栏 检索密码
             checkSecret();
         } else {
 
@@ -591,7 +592,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         settingPop.showAsDropDown(ivMore, Gravity.RIGHT, 0, 0);
 
     }
-
 
 
     private void showEditorPop() {
@@ -613,7 +613,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         searchSecret();//检索密码
         changeSecretLayoutParams.alpha = 0.5f;
         getWindow().setAttributes(changeSecretLayoutParams);
-        changingSecret.showAtLocation(ivMore, Gravity.CENTER,0,0);
+        changingSecret.showAtLocation(ivMore, Gravity.CENTER, 0, 0);
     }
 
     public void showShare() {
@@ -673,7 +673,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 //    }
 
 
-
     @Subscribe
     public void canAdd(ShowBean bean) {
         Log.e("YSF", "canadd" + bean.isShow());
@@ -704,14 +703,14 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         ivMore.setOnClickListener(this);
     }
 
-    private void checkSecret () {
+    private void checkSecret() {
         //团长或管理员检测是否有设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
         sendPost(WenConstans.CHECKJOINSECRET, CHECKJOINSECRET, Constants.token);
     }
 
     private void checkSecret2() {
-    //检测是否有设置团队密码
+        //检测是否有设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
         sendPost(WenConstans.CHECKJOINSECRET, CHECKJOINSECRET2, Constants.token);
     }
@@ -724,11 +723,11 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     public void joinWithSecret() {
         //检测是否有设置团队密码
-        setBodyParams(new String[]{"id","pwd"}, new String[]{id + "",getNewSecret()});
+        setBodyParams(new String[]{"id", "pwd"}, new String[]{id + "", getNewSecret()});
         sendPost(WenConstans.TEAMJOINSECRET, 2019, Constants.token);
     }
 
-    private void searchSecret () {
+    private void searchSecret() {
         //检测是否有设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
         sendPost(WenConstans.CHECKJOINSECRET, SEARCHJOINSECRET, Constants.token);
@@ -736,9 +735,10 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     public void changeSecret() {
         //设置团队密码
-        setBodyParams(new String[]{"id","pwd"}, new String[]{id + "",getNewSecret()});
+        setBodyParams(new String[]{"id", "pwd"}, new String[]{id + "", getNewSecret()});
         sendPost(WenConstans.SETJOINSECRET, SETJOINSECRET, Constants.token);
     }
+
     public void joinTeam() {
         //设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
@@ -753,24 +753,24 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         switch (where) {
             case 2019:
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已加团",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "已加团", Toast.LENGTH_SHORT).show();
                     refData();
                 } else {
-                    Toast.makeText(context, "加团失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "加团失败", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case 2018:
-                if (result.optInt("code") ==0) {
-                    Toast.makeText(context, "已加团",Toast.LENGTH_SHORT).show();
+                if (result.optInt("code") == 0) {
+                    Toast.makeText(context, "已加团", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "操作异常",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "操作异常", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case CHECKJOINSECRET3:
                 settingPop.dismiss();
-                if (result.optInt("code") ==0) {
+                if (result.optInt("code") == 0) {
                     if (result.optJSONObject("data").optInt("pwdflag") != 1) {
-                        Toast.makeText(context, "操作异常",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "操作异常", Toast.LENGTH_SHORT).show();
                         break;
                     } else {
                         if (result.optJSONObject("data").optInt("pwd") == -1) {
@@ -792,32 +792,31 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
             case SETJOINSECRET:
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已重置密码为"+getNewSecret(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "已重置密码为" + getNewSecret(), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "操作失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case CLOSESECRET:
                 changingSecret.dismiss();
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已关闭密码加团",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "已关闭密码加团", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "操作失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
             case SEARCHJOINSECRET:
                 if (result.optInt("code") == 0) {
-                    int pwdflag =result.optJSONObject("data").optInt("pwdflag");
+                    int pwdflag = result.optJSONObject("data").optInt("pwdflag");
                     ll_st_c.setVisibility(View.GONE);
                     if (pwdflag == 0) {
-                        Toast.makeText(context, "抱歉，密码加团已关闭",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "抱歉，密码加团已关闭", Toast.LENGTH_SHORT).show();
                     } else {
                         String pwd = result.optJSONObject("data").getString("pwd");
                         if (pwd == null) {//什么也不做
                             break;
-                        }
-                        else if (pwd.equals("-1")) {
+                        } else if (pwd.equals("-1")) {
                             teamSecret.setText("无密码");
                         } else {
                             teamSecret.setText(pwd);
@@ -825,14 +824,14 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
                     }
                 } else {
-                    Toast.makeText(context, "操作失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
 
             case CHECKJOINSECRET:
                 if (result.optInt("code") == 0) {
-                    int pwdflag =result.optJSONObject("data").optInt("pwdflag");
+                    int pwdflag = result.optJSONObject("data").optInt("pwdflag");
                     ll_st_c.setVisibility(View.GONE);
                     if (pwdflag == 0) {
                         ll_st.setVisibility(View.VISIBLE);
@@ -842,16 +841,16 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                         ll_st.setVisibility(View.GONE);
                     }
                 } else {
-                  Toast.makeText(context, "操作失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case DELETEJOINSECRET:
-                if  (result.optInt("code") == 0) {
-                        Toast.makeText(context, "已删除密码", Toast.LENGTH_SHORT).show();
-                        secret.dismiss();
+                if (result.optInt("code") == 0) {
+                    Toast.makeText(context, "已删除密码", Toast.LENGTH_SHORT).show();
+                    secret.dismiss();
                 } else {
-                    Toast.makeText(context, "操作失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
                     secret.dismiss();
                 }
                 break;
@@ -872,7 +871,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                                     initSetSecret();
                                     initChangeSecret();
                                 }
-                                if (cBean!=null) {
+                                if (cBean != null) {
                                     hallfragment.setBean(cBean);
                                 }
 //                                statementFragment.setBean(cBean);
@@ -885,7 +884,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                                         managerFragment = new ManagerFragment();
                                         fragmentList.add(managerFragment);
                                     }
-                                    if (cBean!=null) {
+                                    if (cBean != null) {
                                         managerFragment.setBean(cBean);
                                     }
                                 } else {
@@ -1143,7 +1142,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 settingPop.dismiss();
                 checkSecret3();
                 break;
-            case R.id.ll_st ://开启密码加团
+            case R.id.ll_st://开启密码加团
                 settingPop.dismiss();
                 showSecretPop();
                 break;
@@ -1281,7 +1280,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                     sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
                 } else {
                     setBodyParams(new String[]{"id", "name"}, new String[]{"" + cBean.getId(), "" + name});
-                    setBodyParams(new String[]{"file"}, new File[]{editorFile});
+                    setFileBodyParams(new String[]{"file"}, new File[]{editorFile});
                     sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
                 }
                 break;
@@ -1316,6 +1315,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
         }
     }
+
     public void setTvBg(int status) {
         rv.smoothScrollToPosition(0);
         if (this.status == status) {
@@ -1419,7 +1419,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                                     hallfragment.setivPic(path);
                                 }
                                 setBodyParams(new String[]{"id"}, new String[]{"" + id});
-                                setBodyParams(new String[]{"file"}, new File[]{file});
+                                setFileBodyParams(new String[]{"file"}, new File[]{file});
                                 sendPost(Constants.base_url + "/api/club/base/update.do", uptdfm, Constants.token);
                             }
                         }).launch();
@@ -1524,6 +1524,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
         sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
     }
+
     @Override
     public void onPause() {
         super.onPause();

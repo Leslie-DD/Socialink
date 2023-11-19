@@ -1,5 +1,7 @@
 package com.example.heshequ.activity.newsencond;
 
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -20,8 +22,6 @@ import com.example.heshequ.classification.ClassifySecondaryBean;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.blankj.utilcode.util.ActivityUtils.startActivity;
 
 public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

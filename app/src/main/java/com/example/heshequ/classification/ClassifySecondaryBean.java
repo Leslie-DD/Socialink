@@ -13,9 +13,10 @@ public class ClassifySecondaryBean {
     private int category1Id;
     private int category2Id;
 
-    public ClassifySecondaryBean() { }
+    public ClassifySecondaryBean() {
+    }
 
-    public ClassifySecondaryBean(String category1Name,String category2Name, int category1Id, int category2Id) {
+    public ClassifySecondaryBean(String category1Name, String category2Name, int category1Id, int category2Id) {
         this.category1Name = category1Name;
         this.category2Name = category2Name;
         this.category1Id = category1Id;
@@ -55,7 +56,7 @@ public class ClassifySecondaryBean {
         this.category2Id = category2Id;
     }
 
-    public String toString(){
+    public String toString() {
         return "category1Name: " + getCategory1Name()
                 + "; category1Id: " + getCategory1Id()
                 + "; category2Name: " + getCategory2Name()

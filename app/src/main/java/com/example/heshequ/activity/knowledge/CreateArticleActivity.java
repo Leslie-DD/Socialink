@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,14 +15,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.knowledge.ArticleBean;
 import com.example.heshequ.bean.knowledge.Author;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.scrat.app.richtext.RichEditText;
@@ -44,6 +43,7 @@ public class CreateArticleActivity extends NetWorkActivity {
     private int specialColumnId = -1;
     ArticleBean mArticle = new ArticleBean();
     private Context context;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,14 +77,14 @@ public class CreateArticleActivity extends NetWorkActivity {
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(String s, Call call, Response response) {
-                                    Utils.toastShort(context,"新增成功");
+                                    Utils.toastShort(context, "新增成功");
                                     CreateArticleActivity.this.finish();
                                 }
 
                                 @Override
                                 public void onError(Call call, Response response, Exception e) {
                                     super.onError(call, response, e);
-                                    Utils.toastShort(context,"新增失败");
+                                    Utils.toastShort(context, "新增失败");
                                 }
                             });
                 } else {
@@ -112,14 +112,14 @@ public class CreateArticleActivity extends NetWorkActivity {
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(String s, Call call, Response response) {
-                                    Utils.toastShort(context,"修改成功");
+                                    Utils.toastShort(context, "修改成功");
                                     CreateArticleActivity.this.finish();
                                 }
 
                                 @Override
                                 public void onError(Call call, Response response, Exception e) {
                                     super.onError(call, response, e);
-                                    Utils.toastShort(context,"修改失败");
+                                    Utils.toastShort(context, "修改失败");
                                 }
                             });
                 }
@@ -178,12 +178,8 @@ public class CreateArticleActivity extends NetWorkActivity {
 
     }
 
-    private void getData(int id){
-        sendConnection(HttpRequest.HttpMethod.GET, WenConstans.getMyArticleDetail + "?id=" +id,new String[]{},new String[]{},100, false, WenConstans.token);
-    }
-
-    private void ModifyArticle(int id){
-        sendConnection(HttpRequest.HttpMethod.PUT, WenConstans.midifyArticle,new String[]{},new String[]{},100, false, WenConstans.token);
+    private void getData(int id) {
+        sendGetConnection(WenConstans.getMyArticleDetail + "?id=" + id, new String[]{}, new String[]{}, 100, WenConstans.token);
     }
 
     @Override

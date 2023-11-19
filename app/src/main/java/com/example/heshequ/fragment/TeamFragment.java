@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.adapter.recycleview.TeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -19,10 +20,8 @@ import com.example.heshequ.entity.RefTDteamEvent;
 import com.example.heshequ.entity.TeamTestBean;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.MyXRecyclerView;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.lidroid.xutils.http.client.HttpRequest;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -90,14 +89,14 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
                 return;
             }
             if (isrefresh) {
-                if (mActivity!=null){
+                if (mActivity != null) {
                     mActivity.setFinish(0);
                 }
 //                lv.refreshComplete();
             } else {
-                if (loadmore){
-                    loadmore=false;
-                    if (mActivity!=null){
+                if (loadmore) {
+                    loadmore = false;
+                    if (mActivity != null) {
                         mActivity.setFinish(1);
                     }
                 }
@@ -171,7 +170,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
 
             if (where == status) {
                 adapter.setData(datas.get(where));
-                tvTips.setVisibility(datas.get(where).size()>0?View.GONE:View.VISIBLE);
+                tvTips.setVisibility(datas.get(where).size() > 0 ? View.GONE : View.VISIBLE);
             }
         }
 
@@ -180,14 +179,14 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
     @Override
     protected void onFailure(String result, int where) {
         if (isrefresh) {
-            if (mActivity!=null){
+            if (mActivity != null) {
                 mActivity.setFinish(0);
             }
 //                lv.refreshComplete();
         } else {
-            if (loadmore){
-                loadmore=false;
-                if (mActivity!=null){
+            if (loadmore) {
+                loadmore = false;
+                if (mActivity != null) {
                     mActivity.setFinish(1);
                 }
             }
@@ -261,22 +260,22 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
         switch (status) {
             case 0:
                 setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", 2 + ""});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/release/pglist.do"
+                sendPostConnection(Constants.base_url + "/api/club/release/pglist.do"
                         , status, Constants.token);
                 break;
             case 1:
                 setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.default_PS + ""});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/vote/pglist.do"
+                sendPostConnection(Constants.base_url + "/api/club/vote/pglist.do"
                         , status, Constants.token);
                 break;
             case 2:
                 setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.default_PS + ""});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/activity/pglist.do"
+                sendPostConnection(Constants.base_url + "/api/club/activity/pglist.do"
                         , status, Constants.token);
                 break;
             case 3:
                 setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.default_PS + ""});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/notice/pglist.do"
+                sendPostConnection(Constants.base_url + "/api/club/notice/pglist.do"
                         , status, Constants.token);
                 break;
         }
@@ -290,7 +289,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
             public void del(int position, int id) {
                 // 活动删除
                 setBodyParams(new String[]{"id"}, new String[]{"" + id});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/activity/delete.do",
+                sendPostConnection(Constants.base_url + "/api/club/activity/delete.do",
                         DelCode, Constants.token);
             }
         });
@@ -300,7 +299,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
             public void apply(int position, int id, int status) {
                 // 报名 或者 取消
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 1});
-                sendConnection(HttpRequest.HttpMethod.POST, Constants.base_url + "/api/club/activity/apply.do",
+                sendPostConnection(Constants.base_url + "/api/club/activity/apply.do",
                         ApplyCode, Constants.token);
             }
         });
@@ -347,7 +346,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
         }
         if (adapter != null) {
             adapter.setData(datas.get(status));
-            tvTips.setVisibility(datas.get(status).size()>0?View.GONE:View.VISIBLE);
+            tvTips.setVisibility(datas.get(status).size() > 0 ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -389,17 +388,17 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
         getData(status);
     }
 
-    public void loadmoreData(){
+    public void loadmoreData() {
         if (lv.isCanLoad() && Utils.isSlideToBottom(lv)) {
 
         } else {
-            if (mActivity!=null){
+            if (mActivity != null) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mActivity.setFinish(1);
                     }
-                },800);
+                }, 800);
             }
 //            lv.loadMoreComplete();
             return;
@@ -410,13 +409,13 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
             indexs.set(status, indexs.get(status) + 1);
             getData(status);
         } else {
-            if (mActivity!=null){
+            if (mActivity != null) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         mActivity.setFinish(1);
                     }
-                },800);
+                }, 800);
             }
         }
     }

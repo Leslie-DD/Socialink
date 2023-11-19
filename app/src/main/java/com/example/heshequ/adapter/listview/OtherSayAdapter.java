@@ -11,17 +11,18 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.heshequ.bean.TeamBean;
+
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.activity.team.StatementDetailActivity;
 import com.example.heshequ.adapter.Adapter_GridView;
+import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class OtherSayAdapter extends BaseAdapter {
         this.data = data;
     }
 
-    public void setData(int type ,List<TeamBean.SpeakBean> data) {
+    public void setData(int type, List<TeamBean.SpeakBean> data) {
         if (type == 1) { //大厅他们说
             this.data.clear();
             for (int i = 0; i < data.size(); i++) {
@@ -51,7 +52,7 @@ public class OtherSayAdapter extends BaseAdapter {
                     this.data.add(data.get(i));
                 }
             }
-        }else if (type == 2){// 更多他们说
+        } else if (type == 2) {// 更多他们说
             this.data = data;
         }
         this.notifyDataSetChanged();
@@ -92,10 +93,10 @@ public class OtherSayAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        if (!TextUtils.isEmpty(bean.getHeader())){
-            Glide.with(context).load(Constants.base_url+bean.getHeader()).asBitmap().into(viewHolder.ivHead);
-        }else{
-            viewHolder.ivHead.setImageDrawable(ContextCompat.getDrawable(context,R.mipmap.head3));
+        if (!TextUtils.isEmpty(bean.getHeader())) {
+            Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(viewHolder.ivHead);
+        } else {
+            viewHolder.ivHead.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.head3));
         }
 
         viewHolder.tvName.setText(bean.getPresentorName());
@@ -103,9 +104,9 @@ public class OtherSayAdapter extends BaseAdapter {
         viewHolder.tvContent.setText(bean.getContent());
         viewHolder.tvFabulousCount.setText(bean.getLikeAmount() + "");
         viewHolder.tvCommentCount.setText(bean.getCommentAmount() + "");
-        if (bean.getIsLike() == 0){
+        if (bean.getIsLike() == 0) {
             Glide.with(context).load(R.mipmap.zan).asBitmap().into(viewHolder.ivZan);
-        }else{
+        } else {
             Glide.with(context).load(R.mipmap.zan2).asBitmap().into(viewHolder.ivZan);
         }
         if (bean.getPhotos() == null || bean.getPhotos().size() == 0) {
@@ -136,7 +137,7 @@ public class OtherSayAdapter extends BaseAdapter {
                     intent.putStringArrayListExtra("imageList", bean.getImgs());
                     intent.putExtra(P.START_ITEM_POSITION, i);
                     intent.putExtra(P.START_IAMGE_POSITION, i);
-                    intent.putExtra("isdel2",false);
+                    intent.putExtra("isdel2", false);
                     context.startActivity(intent);
                 }
             });
@@ -152,12 +153,12 @@ public class OtherSayAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
                 Intent intent = new Intent(context, StatementDetailActivity.class);
                 teamBean = new TeamBean();
                 teamBean.setSpeak(data.get(position));
-                intent.putExtra("bean",teamBean);
-                intent.putExtra("type",2);
+                intent.putExtra("bean", teamBean);
+                intent.putExtra("type", 2);
                 context.startActivity(intent);
             }
         });
@@ -168,15 +169,15 @@ public class OtherSayAdapter extends BaseAdapter {
         private MyGv gv;
         private CircleView ivHead;
         private ImageView ivZan;
-        private TextView tvName, tvContent, tvTime, tvFabulousCount, tvCommentCount,tvDel;
+        private TextView tvName, tvContent, tvTime, tvFabulousCount, tvCommentCount, tvDel;
 
     }
 
-    public interface DelItemListener{
+    public interface DelItemListener {
         void onDel(int position);
     }
 
-    public void setDelItemListener(DelItemListener listener){
+    public void setDelItemListener(DelItemListener listener) {
         this.listener = listener;
     }
 }

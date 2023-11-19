@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.friend.FriendShowAnswers;
 import com.example.heshequ.bean.FriendAddNewsBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 
@@ -45,7 +45,7 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
 //        map.put(labelName, data);
 //        this.notifyDataSetChanged();
 //    }
-    public void setData(List<FriendAddNewsBean> data){
+    public void setData(List<FriendAddNewsBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -57,15 +57,11 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             views = LayoutInflater.from(context).inflate(R.layout.item_friendaddnew, parent, false);
-        }
-        else{
+        } else {
 
         }
         return new ViewHolder(views, viewType);
@@ -77,26 +73,26 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
         viewHolder.setData(position);
 
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
-        private  TextView tvTime;
+        private TextView tvTime;
         private CircleView ivHead;
-        private TextView tvName,tvDesc ;
+        private TextView tvName, tvDesc;
 
         private LinearLayout mainadd;
         private RollPagerView rollPagerView;
         private LinearLayout ll;
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
 
                 ivHead = (CircleView) view.findViewById(R.id.ivHead);
                 tvName = (TextView) view.findViewById(R.id.tvName);
-                mainadd =(LinearLayout) view.findViewById(R.id.mainadd);
-                tvDesc =(TextView) view.findViewById(R.id.tvDesc);
-                tvTime =(TextView) view.findViewById(R.id.tvTime);
-            }
-            else{
+                mainadd = (LinearLayout) view.findViewById(R.id.mainadd);
+                tvDesc = (TextView) view.findViewById(R.id.tvDesc);
+                tvTime = (TextView) view.findViewById(R.id.tvTime);
+            } else {
 
             }
         }
@@ -107,11 +103,11 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
             tvTime.setText(data.get(position).getTime() == null ? "" : data.get(position).getTime());
             tvName.setText(data.get(position).getnickName() == null ? "" : data.get(position).getnickName());
             if (TextUtils.isEmpty(data.get(position).getHeader())) {
-                Log.e("shownearnull",""+ Constants.base_url +"/info/file/pub.do?fileId="+ data.get(position).getHeader());
+                Log.e("shownearnull", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).getHeader());
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url +data.get(position).getHeader()).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("shownear",""+Constants.base_url +"/info/file/pub.do?fileId="+ data.get(position).getHeader());
+                Glide.with(context).load(Constants.base_url + data.get(position).getHeader()).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("shownear", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).getHeader());
             }
 
 
@@ -122,7 +118,6 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
 //                    ivImg.setImageResource(R.mipmap.saved);
 //                    tvLoves.setTextColor(Color.parseColor("#00bbff"));
 //                }
-
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -149,20 +144,19 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
     }
 
 
-
     @Override
     public int getItemCount() {
         return data.size();
     }
 
 
-
-
     private SecondhandgoodAdapter.DoSaveListener mDoSaveListener;
-    public interface DoSaveListener{
+
+    public interface DoSaveListener {
         void doSave(int position);
     }
-    public void DoSaveListener(SecondhandgoodAdapter.DoSaveListener mDoSaveListener){
-        this.mDoSaveListener=mDoSaveListener;
+
+    public void DoSaveListener(SecondhandgoodAdapter.DoSaveListener mDoSaveListener) {
+        this.mDoSaveListener = mDoSaveListener;
     }
 }

@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.knowledge.ColumnDetailAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
@@ -17,11 +18,9 @@ import com.example.heshequ.bean.knowledge.SubscriptionBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -31,9 +30,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnClickListener,XRecyclerView.LoadingListener {
+public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
 
-    private TextView tvTitle,tvName,tvSummary,tvRead;
+    private TextView tvTitle, tvName, tvSummary, tvRead;
     private CircleView ivHead;
     private WebView webView;
     private TextView btnEdit;
@@ -46,17 +45,19 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
 
     private ColumnDetailAdapter adapter;
     private XRecyclerView rv;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_coloumn_detail);
 
         columnId = (int) getIntent().getSerializableExtra("columnId");
-        Log.e("MyColoumnDetailActivity", ""+columnId);
+        Log.e("MyColoumnDetailActivity", "" + columnId);
 
         init();
         event();
     }
+
     private void init() {
         setText("专栏");
         ivHead = (CircleView) findViewById(R.id.ivHeadSubscriptionS);
@@ -74,18 +75,21 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
         getData(columnId);
 
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         btnEdit.setOnClickListener(this);
         linearLayout.setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        Log.e("MyColoumnDetailActivity", "请求数据成功"+result);
+        Log.e("MyColoumnDetailActivity", "请求数据成功" + result);
 
         int ret = result.optInt("code");
         if (ret == 0) {
@@ -109,7 +113,7 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
             tvTitle.setText(subscriptionBean.name == null ? "" : subscriptionBean.name);
             tvName.setText(subscriptionBean.author.nickname == null ? "" : subscriptionBean.author.nickname);
             tvSummary.setText(subscriptionBean.summary == null ? "" : subscriptionBean.summary);
-            tvRead.setText(""+subscriptionBean.subscriptionNum);
+            tvRead.setText("" + subscriptionBean.subscriptionNum);
             if (subscriptionBean.author.header != null) {
                 // 完善协议完善协议
                 //Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + subscriptionBean.author.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
@@ -121,7 +125,7 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
             Gson gson = new Gson();
             JSONArray data = result.getJSONObject("data").getJSONArray("passages");
             allList = new ArrayList<>();
-            if (data != null ) {
+            if (data != null) {
                 allList = gson.fromJson(data.toString(),
                         new TypeToken<List<ArticleSimpleBean>>() {
                         }.getType());
@@ -133,9 +137,10 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
             adapter.setData(allList);
         }
     }
+
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
@@ -150,10 +155,11 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
                 break;
         }
     }
-    private void getData(int id){
-        sendConnection(HttpRequest.HttpMethod.GET, WenConstans.getColumnDetail + "?id=" +id,new String[]{},new String[]{},100, false, WenConstans.token);
 
+    private void getData(int id) {
+        sendGetConnection(WenConstans.getColumnDetail + "?id=" + id, new String[]{}, new String[]{}, 100, WenConstans.token);
     }
+
     @Override
     public void onResume() {
         super.onResume();

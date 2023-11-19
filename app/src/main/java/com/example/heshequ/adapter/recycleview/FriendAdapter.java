@@ -14,13 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.friend.FriendDetail;
 import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 import com.umeng.analytics.MobclickAgent;
@@ -50,7 +50,7 @@ public class FriendAdapter extends RecyclerView.Adapter {
 //        map.put(labelName, data);
 //        this.notifyDataSetChanged();
 //    }
-    public void setData(List<FriendListBean> data){
+    public void setData(List<FriendListBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -62,15 +62,11 @@ public class FriendAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             views = LayoutInflater.from(context).inflate(R.layout.item_friend, parent, false);
-        }
-        else{
+        } else {
 
         }
         return new ViewHolder(views, viewType);
@@ -82,26 +78,26 @@ public class FriendAdapter extends RecyclerView.Adapter {
         viewHolder.setData(position);
 
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivImg;
 
-        private CircleView ivHead,FriendSex;
-        private TextView tvName,tvCollege ,tvSay;
+        private CircleView ivHead, FriendSex;
+        private TextView tvName, tvCollege, tvSay;
         private RollPagerView rollPagerView;
         private LinearLayout ll;
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
                 ivImg = (ImageView) view.findViewById(R.id.ivImg);
                 ivHead = (CircleView) view.findViewById(R.id.ivHead);
                 tvName = (TextView) view.findViewById(R.id.tvName);
-                FriendSex= (CircleView) view.findViewById(R.id.FriendSex);
+                FriendSex = (CircleView) view.findViewById(R.id.FriendSex);
                 tvCollege = (TextView) view.findViewById(R.id.tvCollege);
                 tvSay = (TextView) view.findViewById(R.id.tvSay);
-            }
-            else{
+            } else {
 
             }
         }
@@ -117,8 +113,8 @@ public class FriendAdapter extends RecyclerView.Adapter {
             if (TextUtils.isEmpty(data.get(position).header)) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId="+data.get(position).header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showfriend111",""+Constants.base_url +"/info/file/pub.do?fileId="+ data.get(position).header);
+                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("showfriend111", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).header);
             }
 
 
@@ -129,7 +125,7 @@ public class FriendAdapter extends RecyclerView.Adapter {
 //                    ivImg.setImageResource(R.mipmap.saved);
 //                    tvLoves.setTextColor(Color.parseColor("#00bbff"));
 //                }
-            if (data.get(position).descroption != null ) {
+            if (data.get(position).descroption != null) {
 
                 tvSay.setText(data.get(position).descroption);
             } else {
@@ -137,24 +133,23 @@ public class FriendAdapter extends RecyclerView.Adapter {
             }
 
 
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @SuppressLint("LongLogTag")
                 @Override
                 public void onClick(View v) {
 
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotAsk");
-                    if (Objects.equals(data.get(position).user_id, Constants.uid + "")){
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myQuestionClick");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
+                    if (Objects.equals(data.get(position).user_id, Constants.uid + "")) {
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
                     }
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                     Intent intent = new Intent(context, FriendDetail.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("Friend", data.get(position));
-                    Log.e("FriendAdapter, data.size",data.size()+"");
-                    Log.e("FriendAdapter, position",position+"");
-                    Log.e("FriendAdapter",data.get(position).toString()+"");
+                    Log.e("FriendAdapter, data.size", data.size() + "");
+                    Log.e("FriendAdapter, position", position + "");
+                    Log.e("FriendAdapter", data.get(position).toString() + "");
                     intent.putExtras(bundle);
                     context.startActivity(intent);
 
@@ -170,10 +165,12 @@ public class FriendAdapter extends RecyclerView.Adapter {
 
 
     private SecondhandgoodAdapter.DoSaveListener mDoSaveListener;
-    public interface DoSaveListener{
+
+    public interface DoSaveListener {
         void doSave(int position);
     }
-    public void DoSaveListener(SecondhandgoodAdapter.DoSaveListener mDoSaveListener){
-        this.mDoSaveListener=mDoSaveListener;
+
+    public void DoSaveListener(SecondhandgoodAdapter.DoSaveListener mDoSaveListener) {
+        this.mDoSaveListener = mDoSaveListener;
     }
 }

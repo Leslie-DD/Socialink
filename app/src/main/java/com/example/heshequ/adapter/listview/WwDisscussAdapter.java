@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.wenwen.WenwenDetailActivity;
 import com.example.heshequ.bean.WwDisscussBean;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +25,13 @@ import java.util.List;
  */
 public class WwDisscussAdapter extends RecyclerView.Adapter {
     private WenwenDetailActivity context;
-    private List<WwDisscussBean> data=new ArrayList<>();
+    private List<WwDisscussBean> data = new ArrayList<>();
     private View views;
+
     public WwDisscussAdapter(WenwenDetailActivity context) {
-        this.context=context;
+        this.context = context;
     }
+
     public void setData(List<WwDisscussBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -56,30 +58,31 @@ public class WwDisscussAdapter extends RecyclerView.Adapter {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private CircleView ivHead;
-        TextView tvName,tvTime,tvDing,tvContent,tvResult;
+        TextView tvName, tvTime, tvDing, tvContent, tvResult;
 
         public ViewHolder(View view) {
             super(view);
-            ivHead= (CircleView) view.findViewById(R.id.ivHead);
-            tvName= (TextView) view.findViewById(R.id.tvName);
-            tvTime= (TextView) view.findViewById(R.id.tvTime);
-            tvDing= (TextView) view.findViewById(R.id.tvDing);
-            tvContent= (TextView) view.findViewById(R.id.tvContent);
-            tvResult= (TextView) view.findViewById(R.id.tvResult);
+            ivHead = (CircleView) view.findViewById(R.id.ivHead);
+            tvName = (TextView) view.findViewById(R.id.tvName);
+            tvTime = (TextView) view.findViewById(R.id.tvTime);
+            tvDing = (TextView) view.findViewById(R.id.tvDing);
+            tvContent = (TextView) view.findViewById(R.id.tvContent);
+            tvResult = (TextView) view.findViewById(R.id.tvResult);
         }
+
         public void setData(final int position) {
-            WwDisscussBean bean=data.get(position);
-            if (bean!=null){
-                Glide.with(context).load(WenConstans.BaseUrl+bean.header).asBitmap()
+            WwDisscussBean bean = data.get(position);
+            if (bean != null) {
+                Glide.with(context).load(WenConstans.BaseUrl + bean.header).asBitmap()
                         .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                tvName.setText(bean.nn+"");
-                tvTime.setText(bean.time+"");
-                tvContent.setText(bean.content+"");
-                tvResult.setText("回复 ("+bean.commentAmount+")");
-                tvDing.setText(bean.likeAmount+"顶");
-                if (TextUtils.isEmpty(bean.isTop)){
+                tvName.setText(bean.nn + "");
+                tvTime.setText(bean.time + "");
+                tvContent.setText(bean.content + "");
+                tvResult.setText("回复 (" + bean.commentAmount + ")");
+                tvDing.setText(bean.likeAmount + "顶");
+                if (TextUtils.isEmpty(bean.isTop)) {
                     tvDing.setTextColor(Color.parseColor("#939393"));
-                }else{
+                } else {
                     tvDing.setTextColor(Color.parseColor("#05bcff"));
                 }
             }

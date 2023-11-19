@@ -20,13 +20,13 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefUserInfo;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.umeng.analytics.MobclickAgent;
@@ -71,7 +71,6 @@ public class AuthenticationActivity extends NetWorkActivity implements View.OnCl
         setUi();
         initPop();
     }
-
 
 
     private void init() {
@@ -292,6 +291,7 @@ public class AuthenticationActivity extends NetWorkActivity implements View.OnCl
                     public void onError(Throwable e) {
                         files.set(type, new File(path));
                     }
+
                     @Override
                     public void onSuccess(File file) {
                         files.set(type, file);

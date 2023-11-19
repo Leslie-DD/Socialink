@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/6/5.
  */
-public class VoteAdapter extends BaseExpandableListAdapter{
+public class VoteAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;
     private ArrayList<VoteBean.VoteItem> data;
@@ -39,7 +39,7 @@ public class VoteAdapter extends BaseExpandableListAdapter{
     public VoteAdapter(Context mContext, ArrayList<VoteBean.VoteItem> data) {
         this.data = data;
         this.mContext = mContext;
-        inflater=LayoutInflater.from(mContext);
+        inflater = LayoutInflater.from(mContext);
     }
 
     public ArrayList<VoteBean.VoteItem> getData() {
@@ -87,76 +87,72 @@ public class VoteAdapter extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        ViewHolder holder=null;
-        if(view==null)
-        {
-            view=inflater.inflate(R.layout.vote_item,null);
-            holder=new ViewHolder();
-            holder.tvTheme= (TextView) view.findViewById(R.id.tvTheme);
-            holder.tvType= (TextView) view.findViewById(R.id.tvType);
+        ViewHolder holder = null;
+        if (view == null) {
+            view = inflater.inflate(R.layout.vote_item, null);
+            holder = new ViewHolder();
+            holder.tvTheme = (TextView) view.findViewById(R.id.tvTheme);
+            holder.tvType = (TextView) view.findViewById(R.id.tvType);
             view.setTag(holder);
-        }else {
-          holder= (ViewHolder) view.getTag();
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
-        VoteBean.VoteItem item=data.get(i);
-        holder.tvTheme.setText(i+1+"、"+item.getTheme());
-        holder.tvType.setText(item.getType()==0?"[单选]":"[多选]");
+        VoteBean.VoteItem item = data.get(i);
+        holder.tvTheme.setText(i + 1 + "、" + item.getTheme());
+        holder.tvType.setText(item.getType() == 0 ? "[单选]" : "[多选]");
         return view;
     }
 
     @Override
     public View getChildView(final int i, final int i1, boolean b, View view, ViewGroup viewGroup) {
-        ViewCHolder holder=null;
-        final Item item=data.get(i).getData().get(i1);
-        final VoteBean.VoteItem voteItem=data.get(i);
-        if(view==null)
-        {
-            view=inflater.inflate(R.layout.vote_citem,null);
-            holder=new ViewCHolder();
-            holder.tvName= (TextView) view.findViewById(R.id.tvName);
-            holder.tvCount= (TextView) view.findViewById(R.id.tvCount);
-            holder.ivBg=view.findViewById(R.id.ivBg);
+        ViewCHolder holder = null;
+        final Item item = data.get(i).getData().get(i1);
+        final VoteBean.VoteItem voteItem = data.get(i);
+        if (view == null) {
+            view = inflater.inflate(R.layout.vote_citem, null);
+            holder = new ViewCHolder();
+            holder.tvName = (TextView) view.findViewById(R.id.tvName);
+            holder.tvCount = (TextView) view.findViewById(R.id.tvCount);
+            holder.ivBg = view.findViewById(R.id.ivBg);
             view.setTag(holder);
-        }else {
-            holder= (ViewCHolder) view.getTag();
+        } else {
+            holder = (ViewCHolder) view.getTag();
         }
         holder.tvName.setText(item.getName());
-        if(type==1) //正在投票状态
+        if (type == 1) //正在投票状态
         {
             holder.ivBg.setVisibility(View.GONE);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                          if(voteItem.getType()==0)
-                          {
-                              for (int j = 0; j <voteItem.getData().size() ; j++) {
-                                  Item im=voteItem.getData().get(j);
-                                  if(j==i1)
-                                  {
-                                      im.setStatus(Math.abs(item.getStatus()-1));
-                                  }else {
-                                      im.setStatus(0);
-                                  }
-                              }
-                          }else {
-                              item.setStatus(Math.abs(item.getStatus()-1));
+                    if (voteItem.getType() == 0) {
+                        for (int j = 0; j < voteItem.getData().size(); j++) {
+                            Item im = voteItem.getData().get(j);
+                            if (j == i1) {
+                                im.setStatus(Math.abs(item.getStatus() - 1));
+                            } else {
+                                im.setStatus(0);
+                            }
+                        }
+                    } else {
+                        item.setStatus(Math.abs(item.getStatus() - 1));
 
-                          }
+                    }
                     notifyDataSetChanged();
                 }
             });
-            view.setBackgroundColor(Color.parseColor(item.getStatus()==0?"#E6F3FA":"#C8E9FA"));
-        }else if(type==2)  //查看投票
+            view.setBackgroundColor(Color.parseColor(item.getStatus() == 0 ? "#E6F3FA" : "#C8E9FA"));
+        } else if (type == 2)  //查看投票
         {
             holder.ivBg.setVisibility(View.VISIBLE);
             view.setBackgroundColor(Color.parseColor("#E6F3FA"));
-                holder.tvCount.setText(item.getCount()+"票");
-           RelativeLayout.LayoutParams lp= (RelativeLayout.LayoutParams) holder.ivBg.getLayoutParams();
+            holder.tvCount.setText(item.getCount() + "票");
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) holder.ivBg.getLayoutParams();
 
-            lp.width= (int) (Constants.screenW*(item.getCount()*1f/item.getTotal()));
+            lp.width = (int) (Constants.screenW * (item.getCount() * 1f / item.getTotal()));
             holder.ivBg.setLayoutParams(lp);
-            Log.e("YSF","我是计算的"+Constants.screenW+"&&"+item.getCount()+"&&"+item.getTotal()+"*&*"+lp.width);
+            Log.e("YSF", "我是计算的" + Constants.screenW + "&&" + item.getCount() + "&&" + item.getTotal() + "*&*" + lp.width);
         }
 
         return view;
@@ -167,8 +163,8 @@ public class VoteAdapter extends BaseExpandableListAdapter{
         return false;
     }
 
-    private class  ViewHolder{
-         private TextView tvTheme,tvType;
+    private class ViewHolder {
+        private TextView tvTheme, tvType;
 
         public TextView getTvTheme() {
             return tvTheme;
@@ -187,18 +183,18 @@ public class VoteAdapter extends BaseExpandableListAdapter{
         }
     }
 
-    private class  ViewCHolder{
-        private TextView tvName,tvCount;
+    private class ViewCHolder {
+        private TextView tvName, tvCount;
         private View ivBg;
     }
 
     //单选接口
-    public interface SingleSelectionCheckListener{
+    public interface SingleSelectionCheckListener {
         void check(int parentP, int childP);
     }
 
     //多选接口
-    public interface MultipleSelectionCheckListener{
+    public interface MultipleSelectionCheckListener {
         void check(int parentP, int childP);
     }
 }

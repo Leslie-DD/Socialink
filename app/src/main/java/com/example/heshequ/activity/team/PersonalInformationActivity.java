@@ -1,5 +1,7 @@
 package com.example.heshequ.activity.team;
 
+import static android.view.View.GONE;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -53,8 +55,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.view.View.GONE;
-
 public class PersonalInformationActivity extends NetWorkActivity implements View.OnClickListener,
         XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener, HotWenwenAdapter.DoSaveListener {
     private final int getUserCode = 1000;
@@ -68,12 +68,12 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private final int GETDATA_G = 1020;
     private final int REFDATA_G = 1021;
     private final int LOADATA_G = 1022;
-    private final int CHECKATTENTION=1102;
-    private final int SETATTENTION=1103;
-    private final int DELETEATTENTION=1104;
-    private final int SETPULLTHEBLACK=1105;
-    private final int DELETETHEBLACK=1106;
-    private final int CHECKPULLTHEBLACK=1107;
+    private final int CHECKATTENTION = 1102;
+    private final int SETATTENTION = 1103;
+    private final int DELETEATTENTION = 1104;
+    private final int SETPULLTHEBLACK = 1105;
+    private final int DELETETHEBLACK = 1106;
+    private final int CHECKPULLTHEBLACK = 1107;
     private final int dosave = 1007;
     private final int changeName = 1011;
     private final int setAdministrator = 1008;
@@ -81,14 +81,14 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private final int delCode = 1010;
     private String header;
     private MessageBean messageBean;
-    private String hisnickname=null;
-    private TextView tvName, tvDetail, tvLevel, tvSet, tvQu, tvTeam,tvDyn,tvPhoto,tvgood, tvTipContent, current,tvSchool,tvUserNikeName;
+    private String hisnickname = null;
+    private TextView tvName, tvDetail, tvLevel, tvSet, tvQu, tvTeam, tvDyn, tvPhoto, tvgood, tvTipContent, current, tvSchool, tvUserNikeName;
     private LinearLayout ll;
-    private  ImageView messages;
+    private ImageView messages;
     private ImageView guanzhu;
     private TextView attention;
     private TextView pulltheblack;
-    private XRecyclerView rv, rvQu,rvGood;
+    private XRecyclerView rv, rvQu, rvGood;
     private ImageView ivSex, ivMore;
     private CircleView ivHead;
     private View currentView;
@@ -109,7 +109,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private UserInfoBean userInfoBean;
     private int settingClub = -1; //团队可见性
     private int settingAsk = -1;  //问题可见性
-    private int settingGood = 0 ; // 二手商品可见性 ，先设置可见
+    private int settingGood = 0; // 二手商品可见性 ，先设置可见
     private int role;  // 团员身份
     //我的团队
     private int teamType;  // 0 -> 初始化加载 ； 1 ->刷新；  2 -> 加载
@@ -134,7 +134,6 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private int g_id;
 
 
-
     //备注pop
     private PopupWindow pop;
     private View popView;
@@ -143,8 +142,8 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private EditText etName;
     //三点pop
     private PopupWindow settingPop;
-    private LinearLayout llEditor, llDel,llBlack,llBlack1;
-    private int deleteornot=1;
+    private LinearLayout llEditor, llDel, llBlack, llBlack1;
+    private int deleteornot = 1;
 
 
     private RelativeLayout.LayoutParams lp;
@@ -170,19 +169,19 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         tvLevel = (TextView) findViewById(R.id.tvLevel);
         tvSchool = findViewById(R.id.tvSchool);
 
-        attention=(TextView) findViewById(R.id.attentions);
-        messages=(ImageView)findViewById(R.id.messages);
-        pulltheblack=(TextView)findViewById(R.id.pulltheblack);
+        attention = (TextView) findViewById(R.id.attentions);
+        messages = (ImageView) findViewById(R.id.messages);
+        pulltheblack = (TextView) findViewById(R.id.pulltheblack);
 
-        guanzhu=(ImageView)findViewById(R.id.guanzhu);
+        guanzhu = (ImageView) findViewById(R.id.guanzhu);
         ll = findViewById(R.id.ll);
         tvUserNikeName = findViewById(R.id.tvUserNikeName);
         tvSet = (TextView) findViewById(R.id.tvSet);
         tvQu = (TextView) findViewById(R.id.tvQu);
         tvTeam = (TextView) findViewById(R.id.tvTeam);
         tvDyn = (TextView) findViewById(R.id.tvDyn);
-        tvgood =(TextView) findViewById(R.id.tvgood);
-        tvPhoto =  (TextView) findViewById(R.id.tvPhoto);
+        tvgood = (TextView) findViewById(R.id.tvgood);
+        tvPhoto = (TextView) findViewById(R.id.tvPhoto);
         llTip = (LinearLayout) findViewById(R.id.llTip);
         ivSex = (ImageView) findViewById(R.id.ivSex);
         current = findViewById(R.id.current);
@@ -242,6 +241,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
 
         initSPPop();
     }
+
     //关注设置。
 //    private void setattention()
 //    {
@@ -286,7 +286,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         pop = new PopupWindow(popView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
         btConfirm = popView.findViewById(R.id.btConfirm);
         etName = popView.findViewById(R.id.etName);
-        if (userInfoBean!=null) {
+        if (userInfoBean != null) {
             etName.setText(userInfoBean.getNickname());
             etName.setSelection(etName.getText().toString().trim().length());
         }
@@ -301,7 +301,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
             public void onDismiss() {
                 layoutParams.alpha = 1f;
                 getWindow().setAttributes(layoutParams);
-                if (userInfoBean!=null) {
+                if (userInfoBean != null) {
                     setStarLine(current, userInfoBean.getNeedExperience(), userInfoBean.getTotalExperience(), userInfoBean.getExperience());
                 }
             }
@@ -317,12 +317,12 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                     Utils.toastShort(context, "请先输入备注名！");
                     return;
                 }
-                if (userInfoBean == null){
+                if (userInfoBean == null) {
                     Utils.toastShort(context, "获取用户信息失败！");
                     return;
                 }
-                setBodyParams(new String[]{"friendId","aliasName"},new String[]{""+userInfoBean.getId(),mark});
-                sendPost(Constants.base_url+"/api/user/updateRemark.do",changeName,MeetApplication.getInstance().getSharedPreferences().getString("token",""));
+                setBodyParams(new String[]{"friendId", "aliasName"}, new String[]{"" + userInfoBean.getId(), mark});
+                sendPost(Constants.base_url + "/api/user/updateRemark.do", changeName, MeetApplication.getInstance().getSharedPreferences().getString("token", ""));
                 pop.dismiss();
                 //onItemEditorNameListener.ItemEditor(position,mark);
             }
@@ -341,8 +341,8 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         //ll_share = (LinearLayout) spv.findViewById(R.id.ll_share);
         llEditor = (LinearLayout) spv.findViewById(R.id.llEditor);
         llDel = (LinearLayout) spv.findViewById(R.id.llDel);
-        llBlack = (LinearLayout)spv.findViewById(R.id.llBlack);
-        llBlack1 =(LinearLayout)spv.findViewById(R.id.llBlack1);
+        llBlack = (LinearLayout) spv.findViewById(R.id.llBlack);
+        llBlack1 = (LinearLayout) spv.findViewById(R.id.llBlack1);
 
 //        if (isblack) {//已拉黑
 //            llBlack1.setVisibility(View.VISIBLE);
@@ -401,7 +401,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
             public void onDismiss() {
                 layoutParams.alpha = 1f;
                 getWindow().setAttributes(layoutParams);
-                if (userInfoBean!=null) {
+                if (userInfoBean != null) {
                     setStarLine(current, userInfoBean.getNeedExperience(), userInfoBean.getTotalExperience(), userInfoBean.getExperience());
                 }
             }
@@ -473,6 +473,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         }
 
     }
+
     private void getGoodData(int png, int goodType) {
         int type = 0; // 1 - 我的  2 - 别人的
         if (userInfoBean.getNickname().equals(MeetApplication.getInstance().getSharedPreferences().getString("user", ""))) {
@@ -635,10 +636,10 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
             public void run() {
                 RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) tv.getLayoutParams();
                 int maxLength = Utils.dip2px(mContext, 130);  //总长度
-                int width = (int) (maxLength * (((e-t)*1.0F)/n));
-                if (width>0 && width<10){
-                    lp.width = width+10;
-                }else {
+                int width = (int) (maxLength * (((e - t) * 1.0F) / n));
+                if (width > 0 && width < 10) {
+                    lp.width = width + 10;
+                } else {
                     lp.width = width;
                 }
                 tv.setLayoutParams(lp);
@@ -651,53 +652,48 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         int resultType = result.optInt("code");
         switch (where) {
             case CHECKPULLTHEBLACK:
-                PullTheBlackBean pullTheBlackBean=gson.fromJson(result.optString("data"),PullTheBlackBean.class);
-                if(pullTheBlackBean.isCheck())
-                {
-                    isblack=true;
-                        llBlack1.setVisibility(View.VISIBLE);
-                        llBlack.setVisibility(GONE);
-                }
-                else
-                {
+                PullTheBlackBean pullTheBlackBean = gson.fromJson(result.optString("data"), PullTheBlackBean.class);
+                if (pullTheBlackBean.isCheck()) {
+                    isblack = true;
+                    llBlack1.setVisibility(View.VISIBLE);
+                    llBlack.setVisibility(GONE);
+                } else {
                     llBlack.setVisibility(View.VISIBLE);
                     llBlack1.setVisibility(GONE);
-                    isblack=false;
+                    isblack = false;
                 }
                 break;
             case SETPULLTHEBLACK:
-                isblack=true;
-                Utils.toastShort(this,"已拉黑");
+                isblack = true;
+                Utils.toastShort(this, "已拉黑");
                 llBlack1.setVisibility(View.VISIBLE);
                 llBlack.setVisibility(GONE);
                 break;
             case DELETETHEBLACK:
-                isblack=false;
-                Utils.toastShort(this,"已取消拉黑");
+                isblack = false;
+                Utils.toastShort(this, "已取消拉黑");
                 llBlack.setVisibility(View.VISIBLE);
                 llBlack1.setVisibility(GONE);
                 break;
             case CHECKATTENTION:
-                NoticeBean noticeBean=gson.fromJson(result.optString("data"),NoticeBean.class);
-                if(noticeBean.isCheck())
-                {
-                    isattention=true;
+                NoticeBean noticeBean = gson.fromJson(result.optString("data"), NoticeBean.class);
+                if (noticeBean.isCheck()) {
+                    isattention = true;
                     guanzhu.setImageResource(R.mipmap.yiguanzhu);
-                }
-                else {
-                    isattention=false;
+                } else {
+                    isattention = false;
                     guanzhu.setImageResource(R.mipmap.guanzhu);
                 }
                 break;
             case SETATTENTION:
-                isattention=true;
+                isattention = true;
                 guanzhu.setImageResource(R.mipmap.yiguanzhu);
-                Utils.toastShort(this,"已关注");
+                Utils.toastShort(this, "已关注");
                 break;
             case DELETEATTENTION:
-                isattention=false;
+                isattention = false;
                 guanzhu.setImageResource(R.mipmap.guanzhu);
-                Utils.toastShort(this,"已取消关注");
+                Utils.toastShort(this, "已取消关注");
                 break;
             case getUserCode: //用户信息
                 switch (result.optInt("code")) {
@@ -707,28 +703,27 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                             if (userInfoBean != null) {
                                 initDialog();
                                 initEditPop();
-                                header=userInfoBean.getHeader();
-                                if(userInfoBean.getId()!=Constants.uid)
-                                {
+                                header = userInfoBean.getHeader();
+                                if (userInfoBean.getId() != Constants.uid) {
                                     messages.setVisibility(View.VISIBLE);
                                     guanzhu.setVisibility(View.VISIBLE);
                                 }
 
-                                hisnickname=userInfoBean.getNickname();
+                                hisnickname = userInfoBean.getNickname();
                                 tvName.setText(userInfoBean.getNickname());
                                 tvSchool.setText(userInfoBean.getCollege());
-                                if (userInfoBean.getUserNickName()==null ){
+                                if (userInfoBean.getUserNickName() == null) {
                                     tvUserNikeName.setVisibility(GONE);
-                                    lp.setMargins(Utils.dip2px(mContext,170), Utils.dip2px(mContext,20), 0, 0);
+                                    lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 20), 0, 0);
                                     tvSet.setLayoutParams(lp);
-                                }else {
-                                    if (userInfoBean.getUserNickName().equals(userInfoBean.getNickname())){
+                                } else {
+                                    if (userInfoBean.getUserNickName().equals(userInfoBean.getNickname())) {
                                         tvUserNikeName.setVisibility(GONE);
-                                        lp.setMargins(Utils.dip2px(mContext,170), Utils.dip2px(mContext,20), 0, 0);
+                                        lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 20), 0, 0);
                                         tvSet.setLayoutParams(lp);
-                                    }else {
+                                    } else {
                                         tvUserNikeName.setText("昵称：" + userInfoBean.getUserNickName());
-                                        lp.setMargins(Utils.dip2px(mContext,170), Utils.dip2px(mContext,30), 0, 0);
+                                        lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 30), 0, 0);
                                         tvSet.setLayoutParams(lp);
                                     }
                                 }
@@ -738,7 +733,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                                     Glide.with(this).load(R.mipmap.head3).asBitmap().error(R.mipmap.head3).into(ivHead);
                                 }
                                 tvLevel.setText("LV " + userInfoBean.getGrade());
-                                tvDetail.setText("经验值：" + (userInfoBean.getExperience() - userInfoBean.getTotalExperience())+"/" + userInfoBean.getNeedExperience());
+                                tvDetail.setText("经验值：" + (userInfoBean.getExperience() - userInfoBean.getTotalExperience()) + "/" + userInfoBean.getNeedExperience());
                                 setStarLine(current, userInfoBean.getNeedExperience(), userInfoBean.getTotalExperience(), userInfoBean.getExperience());
                                 settingClub = userInfoBean.getSettingClub();
                                 settingAsk = userInfoBean.getSettingAsk();
@@ -777,15 +772,15 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                                         }
 
                                     }
-                                }else{
+                                } else {
                                     llDel.setVisibility(GONE);
-                                    if (userInfoBean.getId() == Constants.uid){
+                                    if (userInfoBean.getId() == Constants.uid) {
                                         ivMore.setVisibility(GONE);
                                         llDel.setVisibility(GONE);
                                     }
                                 }
 
-                                if (role == 0 && id == 0 && teamid == 0){
+                                if (role == 0 && id == 0 && teamid == 0) {
                                     llDel.setVisibility(GONE);
                                     tvSet.setVisibility(GONE);
                                 }
@@ -1053,30 +1048,27 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         switch (view.getId()) {
             case R.id.messages:
                 Intent intent = new Intent();
-                intent.setClass(PersonalInformationActivity.this,MessageActivity.class);
-                intent.putExtra("hisid",userInfoBean.getId());
-                intent.putExtra("nickname",hisnickname);
-                intent.putExtra("myid",Constants.uid);
-                intent.putExtra("myname",Constants.userName);
-                intent.putExtra("myheader",header);
+                intent.setClass(PersonalInformationActivity.this, MessageActivity.class);
+                intent.putExtra("hisid", userInfoBean.getId());
+                intent.putExtra("nickname", hisnickname);
+                intent.putExtra("myid", Constants.uid);
+                intent.putExtra("myname", Constants.userName);
+                intent.putExtra("myheader", header);
                 startActivity(intent);
                 break;
             case R.id.guanzhu:
-                if(!isattention)
-                {
+                if (!isattention) {
                     setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
                     sendPost(WenConstans.SetAttention, SETATTENTION, Constants.token);
-                }
-                else
-                {
+                } else {
                     setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
-                    sendPost(WenConstans.DelecteAttention,DELETEATTENTION, Constants.token);
+                    sendPost(WenConstans.DelecteAttention, DELETEATTENTION, Constants.token);
                 }
                 break;
             case R.id.ivBack:
                 Intent intents = new Intent();
-                intents.putExtra("back_return",pulltheblack.getText().toString());
-                intents.putExtra("attention_return",attention.getText().toString());
+                intents.putExtra("back_return", pulltheblack.getText().toString());
+                intents.putExtra("attention_return", attention.getText().toString());
                 setResult(1, intents);
                 this.finish();
                 break;
@@ -1201,7 +1193,6 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         super.onResume();
         MobclickAgent.onResume(this);
     }
-
 
 
     @Override

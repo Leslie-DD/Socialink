@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.EventBean;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TeamIntroduceActivity extends NetWorkActivity implements View.OnClickListener {
+    private static final String TAG = "[TeamIntroduceActivity]";
     private TextView tvCancel, tvSave, tvTitle;
     private EditText etIntroduce;
     private String content;
@@ -35,7 +36,7 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
     }
 
     private void init() {
-        teamId = getIntent().getIntExtra("teamId",0);
+        teamId = getIntent().getIntExtra("teamId", 0);
         tvCancel = (TextView) findViewById(R.id.tvCancel);
         tvSave = (TextView) findViewById(R.id.tvSave);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
@@ -45,7 +46,7 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
         if (!introduce.contains("该团队很懒")) {
             etIntroduce.setText(introduce);
             etIntroduce.setSelection(introduce.length());
-        }else{
+        } else {
             etIntroduce.setHint(introduce);
         }
     }
@@ -67,17 +68,17 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
                     Utils.toastShort(mContext, "请先输入团队介绍");
                     return;
                 }
-                setBodyParams(new String[]{"id","introduction"} ,new String[]{""+teamId,""+content});
-                sendPost(Constants.base_url+"/api/club/base/update.do",upcode,Constants.token);
+                setBodyParams(new String[]{"id", "introduction"}, new String[]{"" + teamId, "" + content});
+                sendPost(Constants.base_url + "/api/club/base/update.do", upcode, Constants.token);
                 break;
         }
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        Log.e(TAG,""+result);
-        if (where == upcode){
-            switch (result.optInt("code")){
+        Log.e(TAG, "" + result);
+        if (where == upcode) {
+            switch (result.optInt("code")) {
                 case 0:
                     EventBean bean = new EventBean();
                     bean.setIntroduce(content);
@@ -101,7 +102,7 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
 
     @Override
     protected void onFailure(String result, int where) {
-        Utils.toastShort(mContext,"网络异常");
+        Utils.toastShort(mContext, "网络异常");
     }
 
     @Override
@@ -110,6 +111,7 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

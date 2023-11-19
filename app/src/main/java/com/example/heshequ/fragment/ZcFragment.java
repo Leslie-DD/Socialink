@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.wenwen.ZcArticleActivity;
 import com.example.heshequ.activity.wenwen.ZcQusetionActivity;
 import com.example.heshequ.adapter.listview.ZcWwAdapter;
@@ -21,8 +23,6 @@ import com.example.heshequ.bean.ZcBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -64,7 +64,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
     private Intent intent;
     private int pn = 1;
     private int ps = 20;
-    private int totalPage, totalPage1=1, totalPage2=1, totalPage3=1, totalPage4=1;
+    private int totalPage, totalPage1 = 1, totalPage2 = 1, totalPage3 = 1, totalPage4 = 1;
     private int pn1 = 1, pn2 = 1, pn3 = 1, pn4 = 1;
     private boolean hasRefresh;
     private TextView tvTip;
@@ -172,7 +172,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
 
     private int setData(JSONObject result) {
         Gson gson = new Gson();
-        List<ZcBean> list=new ArrayList<>();
+        List<ZcBean> list = new ArrayList<>();
         if (result.has("data")) {
             try {
                 JSONObject data = result.getJSONObject("data");
@@ -195,24 +195,24 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
         }
         adapter.setType(item);
         adapter.setData(list);
-        if (list.size()==0){
-            Log.e("ying","显示");
+        if (list.size() == 0) {
+            Log.e("ying", "显示");
             tvTip.setVisibility(View.VISIBLE);
-        }else{
-            Log.e("ying","隐藏");
+        } else {
+            Log.e("ying", "隐藏");
             tvTip.setVisibility(View.GONE);
         }
-        if (item==0){
-            zcList1=new ArrayList<>();
+        if (item == 0) {
+            zcList1 = new ArrayList<>();
             zcList1.addAll(list);
-        }else if (item==1){
-            zcList2=new ArrayList<>();
+        } else if (item == 1) {
+            zcList2 = new ArrayList<>();
             zcList2.addAll(list);
-        }else if (item==2){
-            zcList4=new ArrayList<>();
+        } else if (item == 2) {
+            zcList4 = new ArrayList<>();
             zcList4.addAll(list);
-        }else if (item==3){
-            zcList3=new ArrayList<>();
+        } else if (item == 3) {
+            zcList3 = new ArrayList<>();
             zcList3.addAll(list);
         }
         return totalPage;
@@ -254,7 +254,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
         v3 = view.findViewById(R.id.iv3);
         v4 = view.findViewById(R.id.iv4);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(),false,false,rv);
+        ConsTants.initXrecycleView(getActivity(), false, false, rv);
         rv.setNestedScrollingEnabled(false);
         adapter = new ZcWwAdapter(getActivity());
         rv.setAdapter(adapter);
@@ -263,48 +263,48 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
             public void doSave(int position) {
                 switch (item) {
                     case 0:
-                        if (zcList1.size()<=position){
-                            Utils.toastShort(mContext,"网络请求较慢，请稍后重试");
+                        if (zcList1.size() <= position) {
+                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
                             return;
                         }
                         intent = new Intent(mContext, ZcQusetionActivity.class);
-                        bundle=new Bundle();
-                        bundle.putSerializable("beans",zcList1.get(position));
+                        bundle = new Bundle();
+                        bundle.putSerializable("beans", zcList1.get(position));
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
                     case 1:
-                        if (zcList2.size()<=position){
-                            Utils.toastShort(mContext,"网络请求较慢，请稍后重试");
+                        if (zcList2.size() <= position) {
+                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
                             return;
                         }
                         intent = new Intent(mContext, ZcQusetionActivity.class);
-                        bundle=new Bundle();
-                        bundle.putSerializable("beans",zcList2.get(position));
+                        bundle = new Bundle();
+                        bundle.putSerializable("beans", zcList2.get(position));
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
                     case 3:
-                        if (zcList3.size()<=position){
-                            Utils.toastShort(mContext,"网络请求较慢，请稍后重试");
+                        if (zcList3.size() <= position) {
+                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
                             return;
                         }
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_askSpecailRunning");
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askSpecailRunning");
                         intent = new Intent(mContext, ZcArticleActivity.class);
                         bundle = new Bundle();
-                        bundle.putSerializable("beans",zcList3.get(position));
+                        bundle.putSerializable("beans", zcList3.get(position));
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
                     case 2:
-                        if (zcList4.size()<=position){
-                            Utils.toastShort(mContext,"网络请求较慢，请稍后重试");
+                        if (zcList4.size() <= position) {
+                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
                             return;
                         }
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_askArticleEnter");
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_askArticleEnter");
                         intent = new Intent(mContext, ZcQusetionActivity.class);
-                        bundle=new Bundle();
-                        bundle.putSerializable("beans",zcList4.get(position));
+                        bundle = new Bundle();
+                        bundle.putSerializable("beans", zcList4.get(position));
                         intent.putExtras(bundle);
                         startActivity(intent);
                         break;
@@ -313,9 +313,9 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
         });
         getData(1);
         brodCast = new ChangeBrodCast();
-        IntentFilter intentFilter=new IntentFilter();
+        IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("zcRefresh");
-        getActivity().registerReceiver(brodCast,intentFilter);
+        getActivity().registerReceiver(brodCast, intentFilter);
     }
 
     @Override
@@ -328,11 +328,11 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                 item = 0;
                 clearAllBg();
                 tv1.setSelected(true);
-                if (zcList1.size()>0){
+                if (zcList1.size() > 0) {
                     tvTip.setVisibility(View.GONE);
                     adapter.setType(item);
                     adapter.setData(zcList1);
-                }else{
+                } else {
                     adapter.setType(item);
                     adapter.setData(zcList1);
                     getData(pn1);
@@ -345,11 +345,11 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                 item = 1;
                 clearAllBg();
                 tv2.setSelected(true);
-                if (zcList2.size()>0){
+                if (zcList2.size() > 0) {
                     tvTip.setVisibility(View.GONE);
                     adapter.setType(item);
                     adapter.setData(zcList2);
-                }else{
+                } else {
                     adapter.setType(item);
                     adapter.setData(zcList2);
                     getData(pn2);
@@ -362,11 +362,11 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                 item = 3;
                 clearAllBg();
                 tv3.setSelected(true);
-                if (zcList3.size()>0){
+                if (zcList3.size() > 0) {
                     tvTip.setVisibility(View.GONE);
                     adapter.setType(item);
                     adapter.setData(zcList3);
-                }else{
+                } else {
                     adapter.setType(item);
                     adapter.setData(zcList3);
                     getData(pn3);
@@ -379,11 +379,11 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                 item = 2;
                 clearAllBg();
                 tv4.setSelected(true);
-                if (zcList4.size()>0){
+                if (zcList4.size() > 0) {
                     tvTip.setVisibility(View.GONE);
                     adapter.setType(item);
                     adapter.setData(zcList4);
-                }else{
+                } else {
                     adapter.setType(item);
                     adapter.setData(zcList4);
                     getData(pn4);
@@ -402,9 +402,9 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
     private void getData(int page) {
         setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{page + "", ps + "", item + 1 + ""});
         if (page > 1) {
-            sendPost(WenConstans.ZcList, 100, WenConstans.token);
+            sendPostConnection(WenConstans.ZcList, 100, WenConstans.token);
         } else {
-            sendPost(WenConstans.ZcList, item + 1, WenConstans.token);
+            sendPostConnection(WenConstans.ZcList, item + 1, WenConstans.token);
         }
     }
 
@@ -417,7 +417,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                     pn1++;
                 }
                 pn = pn1;
-                loadmore = pn>totalPage1;
+                loadmore = pn > totalPage1;
                 break;
             case 1:
                 if (isRefresh) {
@@ -426,7 +426,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                     pn2++;
                 }
                 pn = pn2;
-                loadmore = pn>totalPage2;
+                loadmore = pn > totalPage2;
                 break;
             case 2:
                 if (isRefresh) {
@@ -435,7 +435,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                     pn3++;
                 }
                 pn = pn3;
-                loadmore = pn>totalPage4;
+                loadmore = pn > totalPage4;
                 break;
             case 3:
                 if (isRefresh) {
@@ -444,7 +444,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
                     pn4++;
                 }
                 pn = pn4;
-                loadmore = pn>totalPage3;
+                loadmore = pn > totalPage3;
                 break;
         }
         setDatas(isRefresh);
@@ -471,12 +471,12 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
         }
     }
 
-    private class ChangeBrodCast extends BroadcastReceiver{
+    private class ChangeBrodCast extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent!=null){
-                if (intent.getBooleanExtra("refresh",true)){
+            if (intent != null) {
+                if (intent.getBooleanExtra("refresh", true)) {
                     getData(true);
                 }
             }

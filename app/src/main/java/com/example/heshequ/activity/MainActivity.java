@@ -295,7 +295,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
     }
 
     public void showPop() {
-        if(Constants.uid == 1) {
+        if (Constants.uid == 1) {
             tvExit.setText("去登陆");
         }
         layoutParams.alpha = 0.5f;
@@ -343,7 +343,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
             case R.id.tvUp:  // 退出登录/登录
                 MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myLogOut");
                 pop.dismiss();
-                sp.edit().putString("phone","").putString("token","").putInt("uid",1).putBoolean("isLogin", false).apply();
+                sp.edit().putString("phone", "").putString("token", "").putInt("uid", 1).putBoolean("isLogin", false).apply();
                 sp.edit().putBoolean("isLogin", false).apply();
                 Constants.uid = 1;
                 PushAgent mPushAgent = PushAgent.getInstance(this);

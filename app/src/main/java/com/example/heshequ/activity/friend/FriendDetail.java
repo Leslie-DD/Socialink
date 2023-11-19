@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;
 import com.example.heshequ.activity.team.MessageActivity;
 import com.example.heshequ.base.NetWorkActivity;
@@ -17,8 +19,6 @@ import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.umeng.analytics.MobclickAgent;
@@ -33,18 +33,18 @@ import okhttp3.Response;
  * Created by dell on 2020/3/29.
  */
 
-public class FriendDetail extends NetWorkActivity implements View.OnClickListener{
+public class FriendDetail extends NetWorkActivity implements View.OnClickListener {
     private CircleView ivHead;
     private ImageView xingbie;
-    private TextView nicknametext,gexingqianming;
-    private TextView friendsetTip3,friendsetTip4,friendsetTip5,friendsetTip6,friendsetTip7,friendsetTip9,friendsetTip10;
-    private Button deletefriend,sendmessage;
+    private TextView nicknametext, gexingqianming;
+    private TextView friendsetTip3, friendsetTip4, friendsetTip5, friendsetTip6, friendsetTip7, friendsetTip9, friendsetTip10;
+    private Button deletefriend, sendmessage;
     private static int hisid;
     private static int uid;
-    private  FriendListBean friendListBean;
+    private FriendListBean friendListBean;
     private String myheader;
     private LinearLayout dongtai;
-    public static int sex ;
+    public static int sex;
     public static String nianji1;
     public static String zhuanye1;
     public static String nicheng1;
@@ -55,6 +55,7 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
     public static String daxue1;
     public static String shengri1;
     public static String xueyuan1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,19 +64,19 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
         uid = Constants.uid;
         friendListBean = new FriendListBean();
         friendListBean = (FriendListBean) getIntent().getSerializableExtra("Friend");
-        String ids = uid+"";
-        if(ids.equals("0")){
-            Intent intents  = new Intent(FriendDetail.this, LoginActivity.class);
+        String ids = uid + "";
+        if (ids.equals("0")) {
+            Intent intents = new Intent(FriendDetail.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG).show();
         }
         hisid = friendListBean.user_id;
-        Log.e("得到hisid",hisid+"");
+        Log.e("得到hisid", hisid + "");
         OkHttpUtils.post(WenConstans.UserInfo)
                 .tag(this)
                 .headers(Constants.Token_Header, WenConstans.token)
-                .params("id", uid+"")
+                .params("id", uid + "")
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -104,6 +105,7 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
         init();
         event();
     }
+
     private void init() {
         setText("好友详情");
         friendsetTip3 = (TextView) findViewById(R.id.friendsetTip3);
@@ -114,24 +116,27 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
         friendsetTip9 = (TextView) findViewById(R.id.friendsetTip9);
         friendsetTip10 = (TextView) findViewById(R.id.friendsetTip10);
         deletefriend = (Button) findViewById(R.id.deletefriend);
-        sendmessage =(Button) findViewById(R.id.sendmessage);
+        sendmessage = (Button) findViewById(R.id.sendmessage);
         dongtai = (LinearLayout) findViewById(R.id.dongtai);
         ivHead = (CircleView) findViewById(R.id.ivHead);
-        xingbie =(ImageView) findViewById(R.id.xingbie);
-        nicknametext =(TextView) findViewById(R.id.nicknametext);
-        gexingqianming= (TextView) findViewById(R.id.gexingqianming);
+        xingbie = (ImageView) findViewById(R.id.xingbie);
+        nicknametext = (TextView) findViewById(R.id.nicknametext);
+        gexingqianming = (TextView) findViewById(R.id.gexingqianming);
         getData();
     }
-    private void event(){
+
+    private void event() {
         deletefriend.setOnClickListener(this);
         sendmessage.setOnClickListener(this);
         findViewById(R.id.ivBack).setOnClickListener(this);
         dongtai.setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         Log.e("好友详情返回结果", result.toString());
@@ -196,23 +201,24 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
             }
         }
     }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
             case R.id.dongtai:
                 Intent intent1 = new Intent();
-                intent1.putExtra("uid",""+hisid);
-                intent1.setClass(FriendDetail.this,OthersDynamic.class);
+                intent1.putExtra("uid", "" + hisid);
+                intent1.setClass(FriendDetail.this, OthersDynamic.class);
                 startActivity(intent1);
                 break;
             case R.id.sendmessage:
                 Intent intent3 = new Intent();
-                intent3.putExtra("hisid",hisid);
-                intent3.putExtra("nickname",""+nicheng1);
-                intent3.putExtra("myheader",myheader);
+                intent3.putExtra("hisid", hisid);
+                intent3.putExtra("nickname", "" + nicheng1);
+                intent3.putExtra("myheader", myheader);
                 intent3.setClass(FriendDetail.this, MessageActivity.class);
                 startActivity(intent3);
                 break;
@@ -220,7 +226,7 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
                 OkHttpUtils.post(WenConstans.DeleteFriend)
                         .tag(this)
                         .headers(Constants.Token_Header, WenConstans.token)
-                        .params("user_id", hisid+"")
+                        .params("user_id", hisid + "")
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
@@ -229,13 +235,12 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
                                 try {
                                     JSONObject result = new JSONObject(s);
                                     int ret = result.getInt("code");
-                                    if(ret==0) {
+                                    if (ret == 0) {
                                         //String msg = result.getString("setQues");
                                         //Log.e("shanchufanhuixinxi", "" + msg);
 
                                         Toast.makeText(FriendDetail.this, "删除成功", Toast.LENGTH_LONG).show();
-                                    }
-                                    else{
+                                    } else {
                                         Toast.makeText(FriendDetail.this, "删除失败", Toast.LENGTH_LONG).show();
                                     }
                                 } catch (JSONException e) {
@@ -255,11 +260,13 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
                 break;
         }
     }
-    private void getData(){
-        Log.e("uid: "+uid,"hisid: "+hisid);
-        setBodyParams(new String[]{"uid", "hisid"}, new String[]{""+uid,""+hisid});
-        sendPost(WenConstans.FriendInfo, 1,WenConstans.token);
+
+    private void getData() {
+        Log.e("uid: " + uid, "hisid: " + hisid);
+        setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + uid, "" + hisid});
+        sendPost(WenConstans.FriendInfo, 1, WenConstans.token);
     }
+
     @Override
     public void onResume() {
         super.onResume();

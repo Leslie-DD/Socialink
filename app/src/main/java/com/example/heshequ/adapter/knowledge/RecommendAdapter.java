@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.knowledge.ArticleDetialActivity;
 import com.example.heshequ.bean.knowledge.RecommendItemBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
@@ -35,7 +35,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     private View views;
 
-    public void setData(List<RecommendItemBean> data){
+    public void setData(List<RecommendItemBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -50,8 +50,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 0) {
             views = LayoutInflater.from(context).inflate(R.layout.item_article, parent, false);
-        }
-        else{
+        } else {
 
         }
         return new ViewHolder(views, viewType);
@@ -63,12 +62,13 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         viewHolder.setData(position);
 
     }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private CircleView ivHead;
-        private TextView tvName,tvTitle,tvContent,tvAgree,tvComment;
+        private TextView tvName, tvTitle, tvContent, tvAgree, tvComment;
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
                 ivHead = (CircleView) view.findViewById(R.id.ivHead);
@@ -97,18 +97,18 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
             tvTitle.setText(data.get(position).title == null ? "" : data.get(position).title);
             tvContent.setText(data.get(position).content == null ? "" : data.get(position).content);
-            tvAgree.setText(""+data.get(position).likeNum);
-            tvComment.setText(""+data.get(position).commentNum);
+            tvAgree.setText("" + data.get(position).likeNum);
+            tvComment.setText("" + data.get(position).commentNum);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotAsk");
-                    if (Objects.equals(data.get(position).author.id, Constants.uid + "")){
-                        MobclickAgent.onEvent(MeetApplication.getInstance(),"event_myQuestionClick");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotAsk");
+                    if (Objects.equals(data.get(position).author.id, Constants.uid + "")) {
+                        MobclickAgent.onEvent(MeetApplication.getInstance(), "event_myQuestionClick");
                     }
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_commentController");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_commentController");
 
                     Intent intent = new Intent(context, ArticleDetialActivity.class);
                     Bundle bundle = new Bundle();

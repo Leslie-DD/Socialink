@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.FriendAdapter;
 import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -18,7 +19,6 @@ import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -35,7 +35,7 @@ import java.util.List;
  * Created by dell on 2020/3/6.
  */
 
-public class FriendFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener{
+public class FriendFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, LabelsortAdapter.DoSaveListener {
     private View view;
     private XRecyclerView rv;
     private FriendAdapter adapter;
@@ -69,7 +69,7 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
     private void getData() {
-        sendPost(WenConstans.FriendShow, 100,WenConstans.token);
+        sendPostConnection(WenConstans.FriendShow, 100, WenConstans.token);
     }
 
     @Override
@@ -80,20 +80,20 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
 
         Gson gson = new Gson();
         if (where == 100) {
-            Log.e("s","ssssssssssssssssssssssssssssssssssssssssss2");
+            Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss2");
             allList = new ArrayList<>();
             if (hasRefresh) {
                 hasRefresh = false;
                 rv.refreshComplete();
             }
             if (result.has("data")) {
-                Log.e("showfriends",""+result.getString("data") + "");
+                Log.e("showfriends", "" + result.getString("data") + "");
                 JSONArray data = result.getJSONArray("data");
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendListBean>>() {
                             }.getType());
-                    Log.e("s","ssssssssssssssssssssssssssssssssssssssssss");
+                    Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss");
                     if (allList == null || allList.size() == 0) {
                         allList = new ArrayList<>();
                     }
@@ -107,7 +107,7 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONArray("data");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendListBean>>() {
                             }.getType());
@@ -129,7 +129,6 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
             adapter.setData(allList);
         }
     }
-
 
 
     @Override
@@ -168,22 +167,22 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData();
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -192,7 +191,7 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }
@@ -202,6 +201,7 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

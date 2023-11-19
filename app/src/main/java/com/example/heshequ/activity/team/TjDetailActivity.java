@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.Adapter_GridView;
 import com.example.heshequ.adapter.GvEmojiAdapter;
 import com.example.heshequ.adapter.recycleview.CommentAdapter;
@@ -31,10 +34,7 @@ import com.example.heshequ.entity.CommentBean;
 import com.example.heshequ.entity.RefTjEvent;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -51,11 +51,11 @@ import java.util.TimerTask;
 public class TjDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
     private CircleView ivHead;
     private ImageView ivBack;
-    private TextView tvTitle, tvName, tvContent, tvDel, tvDate, tvZan, tvPl, tvLikes,tvTitle2;
+    private TextView tvTitle, tvName, tvContent, tvDel, tvDate, tvZan, tvPl, tvLikes, tvTitle2;
     private BuildingBean bean;
     private int speakId;
     private View headView;
-    private LinearLayout llLikes,llComment;
+    private LinearLayout llLikes, llComment;
     private ArrayList<BuildingBean.LikesBean> likesBeans;
     private MyGv gv;
     private ArrayList<String> imgs;
@@ -138,7 +138,7 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
         gvEmojiAdapter = new GvEmojiAdapter(this, Constants.emojis);
         gvEmoji.setAdapter(gvEmojiAdapter);
         initDialog();
-        if (!Constants.isJoin){
+        if (!Constants.isJoin) {
             llComment.setVisibility(View.GONE);
         }
 
@@ -172,11 +172,11 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
     }
 
     private void setUi() {
-        if (!Constants.isAdmin){
+        if (!Constants.isAdmin) {
             tvDel.setVisibility(View.GONE);
         }
         if (bean.getHeader() != null && !bean.getHeader().isEmpty()) {
-            Glide.with(this).load(Constants.base_url+bean.getHeader()).asBitmap().into(ivHead);
+            Glide.with(this).load(Constants.base_url + bean.getHeader()).asBitmap().into(ivHead);
         } else {
             ivHead.setImageResource(R.mipmap.head3);
         }
@@ -320,7 +320,7 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
 
             @Override
             public void onHeadClick(int uid) {
-                startActivity(new Intent(context,PersonalInformationActivity.class).putExtra("uid",uid));
+                startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", uid));
             }
         });
     }
@@ -388,8 +388,8 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
                     Utils.toastShort(this, "评论内容不能为空");
                     return;
                 }
-                setBodyParams(new String[]{"tbId","content"},new String[]{""+bean.getId(),""+comment});
-                sendPost(Constants.base_url+"/api/club/tb/comment.do",sendComment,Constants.token);
+                setBodyParams(new String[]{"tbId", "content"}, new String[]{"" + bean.getId(), "" + comment});
+                sendPost(Constants.base_url + "/api/club/tb/comment.do", sendComment, Constants.token);
                 break;
         }
     }
@@ -550,7 +550,7 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
                 }
                 break;
             case sendComment:
-                MobclickAgent.onEvent(mContext,"event_postComment");
+                MobclickAgent.onEvent(mContext, "event_postComment");
                 switch (result.optInt("code")) {
                     case 0:
                         //Utils.toastShort(this, result.optString("msg"));
@@ -642,12 +642,14 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
     protected void onFailure(String result, int where) {
         Utils.toastShort(this, "网络异常");
     }
+
     @Override
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

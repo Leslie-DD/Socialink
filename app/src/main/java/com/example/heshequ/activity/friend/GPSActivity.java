@@ -28,16 +28,17 @@ public class GPSActivity extends AppCompatActivity {
     private String locationProvider = null;
     private static double longtitude;
     private static double latitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLocation();
-        Log.e("GPSActivity 经度",""+longtitude);
-        Log.e("GPSActivity 纬度",""+latitude);
+        Log.e("GPSActivity 经度", "" + longtitude);
+        Log.e("GPSActivity 纬度", "" + latitude);
         Intent intent1 = new Intent();
-        intent1.putExtra("longtitude",""+longtitude);
-        intent1.putExtra("latitude",""+latitude);
-        intent1.setClass(GPSActivity.this,FriendActivity.class);
+        intent1.putExtra("longtitude", "" + longtitude);
+        intent1.putExtra("latitude", "" + latitude);
+        intent1.setClass(GPSActivity.this, FriendActivity.class);
         startActivity(intent1);
         finish();
     }

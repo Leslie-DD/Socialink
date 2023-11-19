@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.knowledge.MyColoumnAdapter;
 import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -13,11 +14,9 @@ import com.example.heshequ.bean.knowledge.SubscriptionItemBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONArray;
@@ -44,7 +43,7 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
         init();
-        getData(pn,ps);
+        getData(pn, ps);
         return view;
     }
 
@@ -57,8 +56,8 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
         rv.setLoadingListener(this);
     }
 
-    private void getData(int pn,int ps) {
-        sendConnection(HttpRequest.HttpMethod.GET,WenConstans.getMyColumnList +"?pageSize="+ps +"&pageNum=" +pn,100,WenConstans.token);
+    private void getData(int pn, int ps) {
+        sendGetConnection(WenConstans.getMyColumnList + "?pageSize=" + ps + "&pageNum=" + pn, 100, WenConstans.token);
 
     }
 
@@ -80,7 +79,7 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
 
                 JSONArray data = result.getJSONObject("data").getJSONArray("list");
 
-                if (data != null ) {
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<SubscriptionItemBean>>() {
                             }.getType());
@@ -98,7 +97,7 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONObject("data").getJSONArray("list");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<SubscriptionItemBean>>() {
                             }.getType());
@@ -122,7 +121,6 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
     }
 
 
-
     @Override
     protected void onFailure(String result, int where) {
 
@@ -132,7 +130,7 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
     public void onRefresh() {
         hasRefresh = true;
         pn = 1;
-        getData(1,1000);
+        getData(1, 1000);
     }
 
     @Override
@@ -146,7 +144,7 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
                 }
             }, 1000);
         } else {
-            getData(1,1000);
+            getData(1, 1000);
         }
     }
 
@@ -160,6 +158,7 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

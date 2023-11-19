@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-
 import com.example.heshequ.R;
 
 import java.util.ArrayList;
@@ -19,10 +18,12 @@ import java.util.List;
  */
 public class ListViewAdapter extends BaseAdapter {
     private Context context;
-    private List<String> data=new ArrayList<>();
+    private List<String> data = new ArrayList<>();
+
     public ListViewAdapter(Context context) {
-        this.context=context;
+        this.context = context;
     }
+
     public void setData(List<String> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -46,16 +47,17 @@ public class ListViewAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_info,null);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.item_info, null);
             viewHolder = new ViewHolder();
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
         return view;
     }
-    public class ViewHolder{
+
+    public class ViewHolder {
 
     }
 }

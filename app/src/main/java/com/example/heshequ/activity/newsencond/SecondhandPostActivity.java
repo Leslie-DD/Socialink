@@ -18,7 +18,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -29,6 +28,7 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -40,7 +40,6 @@ import com.example.heshequ.entity.TestBean;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.FlowLayout;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
@@ -59,7 +58,7 @@ import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class SecondhandPostActivity extends NetWorkActivity implements View.OnClickListener{
+public class SecondhandPostActivity extends NetWorkActivity implements View.OnClickListener {
     private TextView tvCancel;
     private TextView tvTitle;
     private TextView tvSave;
@@ -100,7 +99,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
     private ImageView ivNm;
 
     //last
-    private int niming=0;
+    private int niming = 0;
     private LinearLayout llSelect;
     private ArrayList<LabelSelectionActivity.LableBean> datas;
     private Gson gson;
@@ -115,15 +114,15 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
-        if(where == 10086){
+        if (where == 10086) {
             String json2 = result.toString();
             classificationBean = com.alibaba.fastjson.JSONObject.parseObject(json2, ClassificationBean.class);
-            for(int i = 0; i < classificationBean.getData().size(); i++){
+            for (int i = 0; i < classificationBean.getData().size(); i++) {
                 String category1Name = classificationBean.getData().get(i).getCategory1Name();
                 options1ItemsString.add(category1Name);
                 ArrayList<ClassifyPickerBean> category2List = new ArrayList<>();
                 ArrayList<String> category2ListString = new ArrayList<>();
-                for(int j = 0; j < classificationBean.getData().get(i).getCategory2List().size(); j++){
+                for (int j = 0; j < classificationBean.getData().get(i).getCategory2List().size(); j++) {
                     String category2Name = classificationBean.getData().get(i).getCategory2List().get(j).getCategory2Name();
                     category2ListString.add(category2Name);
                 }
@@ -136,7 +135,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
             initPickerView();
 
         } else {
-                Utils.toastShort(mContext, result.optString("msg"));
+            Utils.toastShort(mContext, result.optString("msg"));
         }
 
     }
@@ -145,6 +144,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,7 +152,8 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
         init();
         initPop();
     }
-    private void init(){
+
+    private void init() {
         fileList = new ArrayList<>();
         strings = new ArrayList<>();
         bqList = new ArrayList<>();
@@ -173,7 +174,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
         tvSave = (TextView) findViewById(R.id.tvSave);
         tvSave.setOnClickListener(this);
 //        tvBelong = (TextView) findViewById(R.id.tvBelong);
-        gooddescribe=(EditText) findViewById(R.id.gooddescribe);
+        gooddescribe = (EditText) findViewById(R.id.gooddescribe);
         goodprice = (EditText) findViewById(R.id.goodprice);
         flow_layout = findViewById(R.id.flow_layout);
         ivNm = (ImageView) findViewById(R.id.ivNm);
@@ -181,24 +182,16 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
         gwPictureAdapter = new GwPictureAdapter(this);
         gw.setAdapter(gwPictureAdapter);
         gwPictureAdapter.setData(strings);
-        gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == strings.size() - 1) {
-                    if (strings.size() == 10) {
-                        Utils.toastShort(mContext, "最多添加9张图片");
-                        return;
-                    }
-                    showPop();
+        gw.setOnItemClickListener((parent, view, position, id) -> {
+            if (position == strings.size() - 1) {
+                if (strings.size() == 10) {
+                    Utils.toastShort(mContext, "最多添加9张图片");
+                    return;
                 }
+                showPop();
             }
         });
-        gw.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return false;
-            }
-        });
+        gw.setOnItemLongClickListener((parent, view, position, id) -> false);
 
         gooddescribe.addTextChangedListener(new TextWatcher() {
             @Override
@@ -211,7 +204,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.e("商品发布长度<",s.length()+">");
+                Log.e("商品发布长度<", s.length() + ">");
                 if (s.length() >= 32) {
                     Utils.toastShort(mContext, "已达最长字符，无法继续输入");
                 }
@@ -222,19 +215,23 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
         getCategory();
 
     }
+
     private void getLabel() {
         setBodyParams(new String[]{"type"}, new String[]{"goodslabel"});
         sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
     }
-    private void getCategory(){
+
+    private void getCategory() {
         sendPost(WenConstans.SecondhandClassify, 10086, Constants.token);
     }
+
     private void showPop() {
         layoutParams.alpha = 0.5f;
         getWindow().setAttributes(layoutParams);
         pop.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
     }
-    private void initPop(){
+
+    private void initPop() {
         pop = new PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         layoutParams = getWindow().getAttributes();
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
@@ -258,6 +255,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
         // 设置所在布局
         pop.setContentView(pv);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -297,6 +295,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
         pvOptions.setPicker(options1ItemsString, options2ItemsString);
 
     }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvCancel:
@@ -318,11 +317,11 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
 //                    Utils.toastShort(mContext, "标签不能为空");
 //                    return;
 //                }
-                if (fileList.size()<=0){
+                if (fileList.size() <= 0) {
                     Utils.toastShort(mContext, "图片不能为空");
                     return;
                 }
-                if(temp.equals(null)||temp.equals("")){
+                if (temp.equals(null) || temp.equals("")) {
                     Utils.toastShort(mContext, "请填写价格");
                     return;
                 }
@@ -345,8 +344,8 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
                         .params("content", content + "")
 //                        .params("labels", biaoqain + "")
                         .params("anonymity", niming + "")
-                        .params("category1Id",categoryId1)
-                        .params("category2Id",categoryId2)
+                        .params("category1Id", categoryId1)
+                        .params("category2Id", categoryId2)
                         .addFileParams("files", fileList)
                         .execute(new StringCallback() {
                             @Override
@@ -396,7 +395,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
                 break;
         }
 
-        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -442,7 +441,7 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
 
                     @Override
                     public void onSuccess(File file) {
-                        if(file.exists()) {
+                        if (file.exists()) {
                             fileList.add(file);
                         }
 

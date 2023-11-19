@@ -1,5 +1,8 @@
 package com.example.heshequ.activity.newsencond;
 
+import static com.blankj.utilcode.util.ActivityUtils.startActivity;
+import static com.taobao.accs.AccsClientConfig.getContext;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,9 +25,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.blankj.utilcode.util.ActivityUtils.startActivity;
-import static com.taobao.accs.AccsClientConfig.getContext;
 
 public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
 
@@ -74,7 +74,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "你点击的是Banner" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "你点击的是Banner", Toast.LENGTH_SHORT).show();
             }
         });
     }

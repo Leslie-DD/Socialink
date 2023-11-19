@@ -16,12 +16,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TjDetailActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.BuildingBean;
 import com.example.heshequ.utils.Utils;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -31,10 +31,10 @@ import java.util.List;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
-public class Tj_Adapter extends RecyclerView.Adapter{
+public class Tj_Adapter extends RecyclerView.Adapter {
 
     private Context context;
     private LayoutInflater inflater;
@@ -86,7 +86,7 @@ public class Tj_Adapter extends RecyclerView.Adapter{
         } else {
             view = LayoutInflater.from(context).inflate(R.layout.tj_item2, parent, false);
         }
-        return new ViewHolder(view,type);
+        return new ViewHolder(view, type);
     }
 
     @SuppressLint("SetTextI18n")
@@ -94,7 +94,7 @@ public class Tj_Adapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         BuildingBean bean = data.get(position);
-        if (type == 1){
+        if (type == 1) {
             setTime(viewHolder, bean);
 
             viewHolder.tvName.setText(bean.getTitle() + "");
@@ -104,10 +104,10 @@ public class Tj_Adapter extends RecyclerView.Adapter{
             } else {
                 viewHolder.ivPic.setImageResource(R.mipmap.mrtp);
             }
-        }else if (type == 2){
+        } else if (type == 2) {
             setTime(viewHolder, bean);
 
-            viewHolder.tvName.setText(bean.getTitle()+"");
+            viewHolder.tvName.setText(bean.getTitle() + "");
 
             if (bean.getPhotos() != null && bean.getPhotos().size() != 0) {
                 Glide.with(context).load(Constants.base_url + bean.getPhotos().get(0).getPhotoId()).centerCrop().into(viewHolder.ivPic);
@@ -115,22 +115,23 @@ public class Tj_Adapter extends RecyclerView.Adapter{
                 viewHolder.ivPic.setImageResource(R.mipmap.mrtp);
             }
 
-            if (bean.getRecommend()==1){
-                viewHolder.tvRecommended.setBackground(ContextCompat.getDrawable(context,R.drawable.bg_99999_rectangle));
+            if (bean.getRecommend() == 1) {
+                viewHolder.tvRecommended.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_99999_rectangle));
                 viewHolder.tvRecommended.setTextColor(Color.parseColor("#999999"));
                 viewHolder.tvRecommended.setText("从大厅团建中撤销");
-            }if (bean.getRecommend() == 0){
-                viewHolder.tvRecommended.setBackground(ContextCompat.getDrawable(context,R.drawable.bg_00bbff_15));
+            }
+            if (bean.getRecommend() == 0) {
+                viewHolder.tvRecommended.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_00bbff_15));
                 viewHolder.tvRecommended.setTextColor(Color.parseColor("#00bbff"));
                 viewHolder.tvRecommended.setText("推荐到大厅");
             }
 
-            if (Constants.isAdmin){
+            if (Constants.isAdmin) {
                 //Log.e("ddq","Presentor = "+bean.getPresentor()+",uid = "+Constants.uid);
                 viewHolder.tvEditor.setVisibility(View.VISIBLE);
                 viewHolder.tvDel.setVisibility(View.VISIBLE);
                 viewHolder.tvRecommended.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 viewHolder.tvEditor.setVisibility(View.GONE);
                 viewHolder.tvDel.setVisibility(View.GONE);
                 viewHolder.tvRecommended.setVisibility(View.GONE);
@@ -139,21 +140,21 @@ public class Tj_Adapter extends RecyclerView.Adapter{
             viewHolder.tvEditor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemViewclick.viewClick(1,position);
+                    onItemViewclick.viewClick(1, position);
                 }
             });
 
             viewHolder.tvDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemViewclick.viewClick(2,position);
+                    onItemViewclick.viewClick(2, position);
                 }
             });
 
             viewHolder.tvRecommended.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onItemViewclick.viewClick(3,position);
+                    onItemViewclick.viewClick(3, position);
                 }
             });
         }
@@ -163,20 +164,20 @@ public class Tj_Adapter extends RecyclerView.Adapter{
             public void onClick(View v) {
                 //Utils.toastShort(context,"position = "+position);
                 Intent intent = new Intent(context, TjDetailActivity.class);
-                intent.putExtra("bean",data.get(position));
+                intent.putExtra("bean", data.get(position));
                 context.startActivity(intent);
             }
         });
 
     }
 
-    public void setOnItemViewclick(OnItemViewclick onItemViewclick){
+    public void setOnItemViewclick(OnItemViewclick onItemViewclick) {
         this.onItemViewclick = onItemViewclick;
     }
 
     private void setTime(ViewHolder viewHolder, BuildingBean bean) {
         try {
-            Date date = Utils.parseString(bean.getGmtCreate(),"yyyy-MM-dd HH:mm");
+            Date date = Utils.parseString(bean.getGmtCreate(), "yyyy-MM-dd HH:mm");
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             viewHolder.tvDay.setText(calendar.get(Calendar.DAY_OF_MONTH) + "");
@@ -191,25 +192,24 @@ public class Tj_Adapter extends RecyclerView.Adapter{
         return data.size();
     }
 
-    public void changetjdt(int position,int i){
+    public void changetjdt(int position, int i) {
         data.get(position).setRecommend(i);
         notifyDataSetChanged();
     }
 
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivPic;
-        private TextView tvDay, tvMonth, tvName,tvEditor,tvDel,tvRecommended;
+        private TextView tvDay, tvMonth, tvName, tvEditor, tvDel, tvRecommended;
 
-        public ViewHolder(View view,int type) {
+        public ViewHolder(View view, int type) {
             super(view);
             if (type == 1) {
                 ivPic = (ImageView) view.findViewById(R.id.ivPic);
                 tvDay = (TextView) view.findViewById(R.id.tvDay);
                 tvMonth = (TextView) view.findViewById(R.id.tvMonth);
                 tvName = (TextView) view.findViewById(R.id.tvName);
-            }else if (type == 2){
+            } else if (type == 2) {
                 ivPic = (ImageView) view.findViewById(R.id.ivPic);
                 tvDay = (TextView) view.findViewById(R.id.tvDay);
                 tvMonth = (TextView) view.findViewById(R.id.tvMonth);
@@ -222,7 +222,7 @@ public class Tj_Adapter extends RecyclerView.Adapter{
 
     }
 
-    public interface OnItemViewclick{
+    public interface OnItemViewclick {
         void viewClick(int viewType, int position);
     }
 }

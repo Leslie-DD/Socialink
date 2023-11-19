@@ -20,6 +20,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.Adapter_GridView;
 import com.example.heshequ.adapter.GvEmojiAdapter;
 import com.example.heshequ.adapter.recycleview.CommentAdapter;
@@ -32,10 +36,7 @@ import com.example.heshequ.entity.CommentBean;
 import com.example.heshequ.entity.RefStatementEvent;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -44,6 +45,7 @@ import com.umeng.analytics.MobclickAgent;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,11 +54,11 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
     private int type = 0;
     private CircleView ivHead;
     private ImageView ivBack;
-    private TextView tvTitle, tvName, tvContent, tvDel, tvDate, tvZan, tvPl,llRecommend_tv,tvClubName,tvLikes;
+    private TextView tvTitle, tvName, tvContent, tvDel, tvDate, tvZan, tvPl, llRecommend_tv, tvClubName, tvLikes;
     private TeamBean bean;
     private int speakId;
     private View headView;
-    private LinearLayout llRecommend,llLikes,llComment;
+    private LinearLayout llRecommend, llLikes, llComment;
     private ArrayList<TeamBean.SpeakBean.LikesBean> likesBeans;
     private int itsaidFlag;
     private MyGv gv;
@@ -87,7 +89,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
     private final int like = 1004;
     private final int sendComment = 1005;
     private final int delComment = 1006;
-    private  final int getbean = 1007;
+    private final int getbean = 1007;
     private final int getheadCode = 1008;
     private final int ISCOMMENTABLE = 1009;
     private AlertDialog deldialog;
@@ -137,15 +139,15 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
         data = new ArrayList<>();
         commentAdapter = new CommentAdapter(mContext, data);
         rv.setAdapter(commentAdapter);
-        gvEmojiAdapter = new GvEmojiAdapter(this,Constants.emojis);
+        gvEmojiAdapter = new GvEmojiAdapter(this, Constants.emojis);
         gvEmoji.setAdapter(gvEmojiAdapter);
-        type = getIntent().getIntExtra("type",0);
-        if (type ==1 || type == 3){
+        type = getIntent().getIntExtra("type", 0);
+        if (type == 1 || type == 3) {
             tvTitle.setText("团言详情");
-        }else if (type == 2){
+        } else if (type == 2) {
             tvTitle.setText("他们说");
         }
-        if (!Constants.isJoin){
+        if (!Constants.isJoin) {
             llComment.setVisibility(View.GONE);
         }
         bean = (TeamBean) getIntent().getSerializableExtra("bean");
@@ -162,7 +164,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
         sendPost(Constants.base_url + "/api/club/speak/detail.do", getheadCode, Constants.token);
     }
 
-    public void isCommentAble () {
+    public void isCommentAble() {
         setBodyParams(new String[]{"id"}, new String[]{"" + Constants.clubId});
         sendPost(Constants.base_url + "/api/club/speak/commentjudge.do", ISCOMMENTABLE, Constants.token);
     }
@@ -194,7 +196,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
     private void setDataToHeadUi(TeamBean.SpeakBean bean) {
         speakId = bean.getId();
         if (bean.getHeader() != null && !bean.getHeader().isEmpty()) {
-            Glide.with(this).load(Constants.base_url+bean.getHeader())
+            Glide.with(this).load(Constants.base_url + bean.getHeader())
                     .asBitmap().error(R.mipmap.head3).into(ivHead);
         } else {
             ivHead.setImageResource(R.mipmap.head3);
@@ -253,35 +255,35 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
         // 这一步必须要做,否则不会显示.
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         tvZan.setCompoundDrawables(drawable, null, null, null);
-        if (!Constants.isAdmin){
+        if (!Constants.isAdmin) {
             llRecommend.setVisibility(View.GONE);
         }
-        if (bean.getPresentor() == Constants.uid || Constants.isAdmin){
+        if (bean.getPresentor() == Constants.uid || Constants.isAdmin) {
             tvDel.setVisibility(View.VISIBLE);
         }
-        if (bean.getItsaidFlag() == 0){ //他们说
+        if (bean.getItsaidFlag() == 0) { //他们说
             itsaidFlag = 0;
-            llRecommend.setBackground(ContextCompat.getDrawable(this,R.drawable.ll_bj_05bcff));
+            llRecommend.setBackground(ContextCompat.getDrawable(this, R.drawable.ll_bj_05bcff));
             llRecommend_tv.setText("推荐为他们说");
             llRecommend_tv.setTextColor(Color.parseColor("#05bcff"));
-        }else if (bean.getItsaidFlag() == 1){
-            llRecommend.setBackground(ContextCompat.getDrawable(this,R.drawable.ll_bj_999999));
+        } else if (bean.getItsaidFlag() == 1) {
+            llRecommend.setBackground(ContextCompat.getDrawable(this, R.drawable.ll_bj_999999));
             llRecommend_tv.setText("取消设置为他们说");
             llRecommend_tv.setTextColor(Color.parseColor("#999999"));
             itsaidFlag = 1;
         }
         likesBeans = bean.getLikes();
-        if (likesBeans!=null&&likesBeans.size()>0){
+        if (likesBeans != null && likesBeans.size() > 0) {
             StringBuilder s = new StringBuilder();
-            for (int i = 0;i<likesBeans.size();i++){
-                if (i == 0){
+            for (int i = 0; i < likesBeans.size(); i++) {
+                if (i == 0) {
                     s = new StringBuilder(likesBeans.get(i).getPresentorName());
-                }else{
+                } else {
                     s.append("、").append(likesBeans.get(i).getPresentorName());
                 }
             }
             tvLikes.setText(s.toString());
-        }else{
+        } else {
             llLikes.setVisibility(View.GONE);
         }
     }
@@ -294,7 +296,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Log.e("DDQ","shanchu  ");
+                Log.e("DDQ", "shanchu  ");
                 //删除
                 setBodyParams(new String[]{"speakId"}, new String[]{"" + speakId});
                 sendPost(Constants.base_url + "/api/club/speak/delete.do", delSpeak, Constants.token);
@@ -338,8 +340,8 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
             @SuppressLint("SetTextI18n")
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                etComment.setText(etComment.getText().toString().trim()+
-                        Utils.getEmoji(StatementDetailActivity.this,gvEmojiAdapter.getItem(position).toString()));
+                etComment.setText(etComment.getText().toString().trim() +
+                        Utils.getEmoji(StatementDetailActivity.this, gvEmojiAdapter.getItem(position).toString()));
                 etComment.setSelection(etComment.getText().toString().trim().length());
             }
         });
@@ -352,7 +354,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
 
             @Override
             public void onHeadClick(int uid) {
-                startActivity(new Intent(context,PersonalInformationActivity.class).putExtra("uid",uid));
+                startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", uid));
             }
         });
     }
@@ -402,7 +404,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                             }
                         });
                     }
-                },100);
+                }, 100);
                 break;
             case R.id.ivBq:
                 Utils.hideSoftInput(this);
@@ -412,7 +414,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                 }
                 //显示表情布局
                 LinearLayout.LayoutParams Params = (LinearLayout.LayoutParams) flEmoji.getLayoutParams();
-                Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight",450);
+                Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight", 450);
                 flEmoji.setLayoutParams(Params);
                 flEmoji.setVisibility(View.VISIBLE);
                 isEmojiShow = true;
@@ -424,11 +426,11 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                     Utils.toastShort(this, "评论内容不能为空");
                     return;
                 }
-                setBodyParams(new String[]{"speakId","content"},new String[]{""+speakId,""+comment});
-                sendPost(Constants.base_url+"/api/club/speak/comment.do",sendComment,Constants.token);
+                setBodyParams(new String[]{"speakId", "content"}, new String[]{"" + speakId, "" + comment});
+                sendPost(Constants.base_url + "/api/club/speak/comment.do", sendComment, Constants.token);
                 break;
             case R.id.ivHead:
-                startActivity(new Intent(this,PersonalInformationActivity.class).putExtra("uid",bean.getSpeak().getPresentor()));
+                startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", bean.getSpeak().getPresentor()));
                 break;
         }
     }
@@ -467,16 +469,16 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
         switch (where) {
 
             case ISCOMMENTABLE:
-                Log.e("DDQ",""+Constants.clubId);
+                Log.e("DDQ", "" + Constants.clubId);
                 int isJoin = 0;
 
-            int settingSpeakComment =1;
-            isJoin = result.optJSONObject("data").optInt("isJoin");
-            settingSpeakComment = result.optJSONObject("data").optInt("settingSpeakComment");
-                if (isJoin ==0 && settingSpeakComment == 1) {
+                int settingSpeakComment = 1;
+                isJoin = result.optJSONObject("data").optInt("isJoin");
+                settingSpeakComment = result.optJSONObject("data").optInt("settingSpeakComment");
+                if (isJoin == 0 && settingSpeakComment == 1) {
                     llComment.setVisibility(View.GONE);
                 } else {
-                  llComment.setVisibility(View.VISIBLE);
+                    llComment.setVisibility(View.VISIBLE);
                 }
                 break;
 
@@ -552,13 +554,13 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                 switch (result.optInt("code")) {
                     case 0:
                         Utils.toastShort(this, result.optString("msg"));
-                        if (itsaidFlag==0){
-                            llRecommend.setBackground(ContextCompat.getDrawable(this,R.drawable.ll_bj_999999));
+                        if (itsaidFlag == 0) {
+                            llRecommend.setBackground(ContextCompat.getDrawable(this, R.drawable.ll_bj_999999));
                             llRecommend_tv.setText("取消设置为'他们说'");
                             llRecommend_tv.setTextColor(Color.parseColor("#999999"));
                             itsaidFlag = 1;
-                        }else if (itsaidFlag ==1){
-                            llRecommend.setBackground(ContextCompat.getDrawable(this,R.drawable.ll_bj_05bcff));
+                        } else if (itsaidFlag == 1) {
+                            llRecommend.setBackground(ContextCompat.getDrawable(this, R.drawable.ll_bj_05bcff));
                             llRecommend_tv.setText("推荐为'他们说'");
                             llRecommend_tv.setTextColor(Color.parseColor("#05bcff"));
                             itsaidFlag = 0;
@@ -580,7 +582,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
             case like:
                 switch (result.optInt("code")) {
                     case 0:
-                        String username = MeetApplication.getInstance().getSharedPreferences().getString("user","");
+                        String username = MeetApplication.getInstance().getSharedPreferences().getString("user", "");
                         if (isZan) {
                             likeAmount = likeAmount - 1;
                             tvZan.setText("" + likeAmount);
@@ -591,26 +593,26 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                                     }
                                 }
                             }
-                            if (likesBeans!=null&&likesBeans.size()>0){
+                            if (likesBeans != null && likesBeans.size() > 0) {
                                 StringBuilder s = new StringBuilder();
-                                for (int i = 0;i<likesBeans.size();i++){
-                                    if (i == 0){
+                                for (int i = 0; i < likesBeans.size(); i++) {
+                                    if (i == 0) {
                                         s = new StringBuilder(likesBeans.get(i).getPresentorName());
-                                    }else{
+                                    } else {
                                         s.append("、").append(likesBeans.get(i).getPresentorName());
                                     }
                                 }
                                 tvLikes.setText(s.toString());
-                            }else{
+                            } else {
                                 tvLikes.setText("");
                                 llLikes.setVisibility(View.GONE);
                             }
                         } else {
                             likeAmount = likeAmount + 1;
                             tvZan.setText("" + likeAmount);
-                            if (likesBeans!=null&&likesBeans.size()>0) {
+                            if (likesBeans != null && likesBeans.size() > 0) {
                                 tvLikes.setText(tvLikes.getText().toString().trim() + "、" + username);
-                            }else{
+                            } else {
                                 tvLikes.setText(tvLikes.getText().toString().trim() + username);
                             }
                             llLikes.setVisibility(View.VISIBLE);
@@ -630,7 +632,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                 }
                 break;
             case sendComment:
-                MobclickAgent.onEvent(mContext,"event_postComment");
+                MobclickAgent.onEvent(mContext, "event_postComment");
                 switch (result.optInt("code")) {
                     case 0:
                         //Utils.toastShort(this, result.optString("msg"));
@@ -640,7 +642,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                         EventBus.getDefault().post(new RefStatementEvent());
                         etComment.setText("");
                         commentAmount++;
-                        tvPl.setText(commentAmount+"");
+                        tvPl.setText(commentAmount + "");
                         break;
                     case 1:
                         Utils.toastShort(this, "您还没有登录或登录已过期，请重新登录");
@@ -767,6 +769,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

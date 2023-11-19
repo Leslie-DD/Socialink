@@ -17,6 +17,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.ActivityDateilActivity;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.adapter.Adapter_GridView;
@@ -25,9 +28,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.P;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import java.util.List;
 
 /**
  * @author dev06
- *         2016年7月4日
+ * 2016年7月4日
  */
 
 public class HotActiveAdapter extends RecyclerView.Adapter {
@@ -83,7 +83,7 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
         private ImageView ivImg;
 
         private CircleView ivHead;
-        private TextView tvName, tvTitle, tvTz, tvNum, tvFqr, tvTime ,tvCollege;
+        private TextView tvName, tvTitle, tvTz, tvNum, tvFqr, tvTime, tvCollege;
         private GridView gw;
 
         public ViewHolder(View view) {
@@ -103,16 +103,16 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
         public void setData(final int position) {
             final HotAvtivityBean.HotBean hotBean = data.get(position);
 
-            if (!TextUtils.isEmpty(hotBean.getClubInfo().getLogoImage())){
-                Glide.with(context).load(Constants.base_url+hotBean.getClubInfo().getLogoImage()).asBitmap().into(ivHead);
-            }else{
+            if (!TextUtils.isEmpty(hotBean.getClubInfo().getLogoImage())) {
+                Glide.with(context).load(Constants.base_url + hotBean.getClubInfo().getLogoImage()).asBitmap().into(ivHead);
+            } else {
                 Glide.with(context).load(R.mipmap.head3).asBitmap().into(ivHead);
             }
-            tvName.setText(""+hotBean.getClubInfo().getName());
-            tvCollege.setText(""+hotBean.getClubInfo().getCollege());
+            tvName.setText("" + hotBean.getClubInfo().getName());
+            tvCollege.setText("" + hotBean.getClubInfo().getCollege());
             tvTitle.setText(hotBean.getTitle());
             tvFqr.setText(hotBean.getPresentorName());
-            if (hotBean.getPhotos() != null && hotBean.getPhotos().size()>0 ){
+            if (hotBean.getPhotos() != null && hotBean.getPhotos().size() > 0) {
                 gw.setVisibility(View.VISIBLE);
                 switch (hotBean.getPhotos().size()) {
                     case 1:
@@ -128,35 +128,35 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
                         gw.setNumColumns(3);
                         break;
                 }
-                ArrayList<String> strings=new ArrayList<>();
+                ArrayList<String> strings = new ArrayList<>();
                 for (int i = 0; i < hotBean.getPhotos().size(); i++) {
-                    strings.add(WenConstans.BaseUrl+hotBean.getPhotos().get(i).getPhotoId());
+                    strings.add(WenConstans.BaseUrl + hotBean.getPhotos().get(i).getPhotoId());
                 }
                 gw.setAdapter(new Adapter_GridView(context, strings));
                 gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        List<HotAvtivityBean.HotBean.PhotosBean> photoList=data.get(position).getPhotos();
-                        ArrayList<String> list=new ArrayList<String>();
-                        if (photoList!=null&&photoList.size()>0){
+                        List<HotAvtivityBean.HotBean.PhotosBean> photoList = data.get(position).getPhotos();
+                        ArrayList<String> list = new ArrayList<String>();
+                        if (photoList != null && photoList.size() > 0) {
                             for (int j = 0; j < photoList.size(); j++) {
-                                list.add(WenConstans.BaseUrl+photoList.get(j).getPhotoId());
+                                list.add(WenConstans.BaseUrl + photoList.get(j).getPhotoId());
                             }
                         }
                         Intent intent = new Intent(context, ImagePreviewActivity.class);
                         intent.putStringArrayListExtra("imageList", list);
                         intent.putExtra(P.START_ITEM_POSITION, i);
                         intent.putExtra(P.START_IAMGE_POSITION, i);
-                        intent.putExtra("isdel2",false);
+                        intent.putExtra("isdel2", false);
                         context.startActivity(intent);
                     }
                 });
-            }else{
+            } else {
                 gw.setVisibility(View.GONE);
             }
-            tvTime.setText("报名截止时间:"+hotBean.getApplyDeadline());
-            if (hotBean.getClubInfo()!=null) {
-                if (hotBean.getClubInfo().getCreatorName()!=null) {
+            tvTime.setText("报名截止时间:" + hotBean.getApplyDeadline());
+            if (hotBean.getClubInfo() != null) {
+                if (hotBean.getClubInfo().getCreatorName() != null) {
                     tvTz.setText(hotBean.getClubInfo().getCreatorName() + "");
                 }
 
@@ -167,10 +167,10 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MobclickAgent.onEvent(MeetApplication.getInstance(),"event_firstHotActivity");
+                    MobclickAgent.onEvent(MeetApplication.getInstance(), "event_firstHotActivity");
                     context.startActivity(
                             new Intent(context, ActivityDateilActivity.class)
-                                    .putExtra("id",hotBean.getId())
+                                    .putExtra("id", hotBean.getId())
                     );
                 }
             });

@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.wenwen.ZcQusetionActivity;
 import com.example.heshequ.bean.ZcQuestionBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.MyLv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 
 import java.util.ArrayList;
 import java.util.List;

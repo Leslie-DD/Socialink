@@ -122,6 +122,7 @@ public class MyFootprintActivity extends NetWorkActivity implements View.OnClick
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

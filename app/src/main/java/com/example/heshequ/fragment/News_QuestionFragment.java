@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/5/29.
  */
-public class News_QuestionFragment extends NetWorkFragment implements XRecyclerView.LoadingListener{
+public class News_QuestionFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
     private View view;
     private ArrayList<MsgSayBean.SayBean> data;
     private SayNewsAdapter adapter;
@@ -37,7 +37,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
     private final int LoadMore = 1001;
     private final int DelMsg = 1002;
     private int type;   // 1 - 刷新  2 加载
-    private int pn ;    //当前页数
+    private int pn;    //当前页数
     private int totalPage = 0;   //总页数
     private Gson gson = new Gson();
     private MsgSayBean msgSayBean;
@@ -48,21 +48,21 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view=inflater.inflate(R.layout.only_rv_item,null);
+        view = inflater.inflate(R.layout.only_rv_item, null);
         init();
         event();
         return view;
     }
 
     private void init() {
-        rv= (XRecyclerView) view.findViewById(R.id.rv);
+        rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext,true,true,rv);
+        ConsTants.initXrecycleView(mContext, true, true, rv);
         pn = 1;
         type = 1;
-        getData(pn,type);
-        data=new ArrayList<>();
-        adapter=new SayNewsAdapter(mContext,data,2);
+        getData(pn, type);
+        data = new ArrayList<>();
+        adapter = new SayNewsAdapter(mContext, data, 2);
         rv.setAdapter(adapter);
         initDialog();
     }
@@ -76,8 +76,8 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
-                setBodyParams(new String[]{"id"},new String[]{""+data.get(delp).getId()});
-                sendPost(Constants.base_url+"/api/user/news/clearNews.do",DelMsg,Constants.token);
+                setBodyParams(new String[]{"id"}, new String[]{"" + data.get(delp).getId()});
+                sendPostConnection(Constants.base_url + "/api/user/news/clearNews.do", DelMsg, Constants.token);
                 deldialog.dismiss();
             }
 
@@ -94,12 +94,12 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
     }
 
     private void getData(int pn, int type) {
-        if (type == 1){
-            setBodyParams(new String[]{"pn","ps","type"},new String[]{""+pn,""+Constants.default_PS,""+3});
-            sendPost(Constants.base_url+"/api/user/news/pglist.do",GetCode,Constants.token);
-        }else if (type == 2){
-            setBodyParams(new String[]{"pn","ps","type"},new String[]{""+pn,""+Constants.default_PS,""+3});
-            sendPost(Constants.base_url+"/api/user/news/pglist.do",LoadMore,Constants.token);
+        if (type == 1) {
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
+            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", GetCode, Constants.token);
+        } else if (type == 2) {
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
+            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", LoadMore, Constants.token);
         }
     }
 
@@ -110,19 +110,19 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
             public void run() {
                 type = 1;
                 pn = 1;
-                getData(pn,type);
+                getData(pn, type);
                 rv.refreshComplete();
             }
-        },1000);
+        }, 1000);
     }
 
-    public void refData(){
-        if (view==null){
+    public void refData() {
+        if (view == null) {
             return;
         }
         type = 1;
         pn = 1;
-        getData(pn,type);
+        getData(pn, type);
     }
 
     @Override
@@ -137,7 +137,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
                 }
                 rv.loadMoreComplete();
             }
-        },1000);
+        }, 1000);
     }
 
     private void event() {
@@ -155,41 +155,41 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        Log.e("ddq",result.toString());
-        switch (where){
+        Log.e("ddq", result.toString());
+        switch (where) {
             case GetCode:
                 if (result.optInt("code") == 0) {
                     msgSayBean = gson.fromJson(result.optString("data"), MsgSayBean.class);
-                    if (msgSayBean!=null) {
+                    if (msgSayBean != null) {
                         totalPage = msgSayBean.getTotalPage();
                         data = msgSayBean.getData();
                         adapter.setData(data);
-                        tvTips.setVisibility(data.size()>0?View.GONE:View.VISIBLE);
+                        tvTips.setVisibility(data.size() > 0 ? View.GONE : View.VISIBLE);
                     }
-                }else{
-                    Utils.toastShort(mContext,result.optString("msg"));
+                } else {
+                    Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
             case LoadMore:
                 if (result.optInt("code") == 0) {
                     msgSayBean = gson.fromJson(result.optString("data"), MsgSayBean.class);
-                    if (msgSayBean!=null) {
+                    if (msgSayBean != null) {
                         totalPage = msgSayBean.getTotalPage();
                         data = msgSayBean.getData();
                         adapter.setData2(data);
                     }
-                }else{
-                    Utils.toastShort(mContext,result.optString("msg"));
+                } else {
+                    Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
             case DelMsg:
                 if (result.optInt("code") == 0) {
                     type = 1;
                     pn = 1;
-                    getData(pn,type);
-                    Utils.toastShort(mContext,"删除成功");
-                }else{
-                    Utils.toastShort(mContext,result.optString("msg"));
+                    getData(pn, type);
+                    Utils.toastShort(mContext, "删除成功");
+                } else {
+                    Utils.toastShort(mContext, result.optString("msg"));
                 }
                 break;
         }
@@ -197,7 +197,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
 
     @Override
     protected void onFailure(String result, int where) {
-        Utils.toastShort(mContext,"网络异常");
+        Utils.toastShort(mContext, "网络异常");
     }
 
 }

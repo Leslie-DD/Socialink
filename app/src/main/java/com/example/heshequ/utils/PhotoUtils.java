@@ -25,7 +25,8 @@ public class PhotoUtils {
         SimpleDateFormat fat = new SimpleDateFormat("yyyyMMdd_hhmmss");
         return fat.format(new Date()) + ".jpg";
     }
-    public static void showFileChooser(int file_code,NetWorkActivity context) {
+
+    public static void showFileChooser(int file_code, NetWorkActivity context) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         try {
@@ -52,6 +53,7 @@ public class PhotoUtils {
         context.startActivityForResult(intent, 200);
         return path;
     }
+
     public static String getPath() {
         String path = Environment.getExternalStorageDirectory() + "/" + "douzisocket/";
         File f = new File(path);

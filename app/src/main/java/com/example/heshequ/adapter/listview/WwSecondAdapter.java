@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.bean.WwDisscussBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +28,14 @@ public class WwSecondAdapter extends RecyclerView.Adapter {
     private Context context;
 
 
-
-    private List<WwDisscussBean> data=new ArrayList<>();
+    private List<WwDisscussBean> data = new ArrayList<>();
     private View views;
     private DelListener listener;
+
     public WwSecondAdapter(Context context) {
-        this.context=context;
+        this.context = context;
     }
+
     public void setData(List<WwDisscussBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -68,40 +69,41 @@ public class WwSecondAdapter extends RecyclerView.Adapter {
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private CircleView ivHead;
-        TextView tvName,tvTime,tvContent,tvDel;
+        TextView tvName, tvTime, tvContent, tvDel;
 
         public ViewHolder(View view) {
             super(view);
-            ivHead= (CircleView) view.findViewById(R.id.ivHead);
-            tvName= (TextView) view.findViewById(R.id.tvName);
-            tvTime= (TextView) view.findViewById(R.id.tvTime);
-            tvContent= (TextView) view.findViewById(R.id.tvContent);
+            ivHead = (CircleView) view.findViewById(R.id.ivHead);
+            tvName = (TextView) view.findViewById(R.id.tvName);
+            tvTime = (TextView) view.findViewById(R.id.tvTime);
+            tvContent = (TextView) view.findViewById(R.id.tvContent);
             tvDel = view.findViewById(R.id.tvDel);
         }
+
         public void setData(final int position) {
-            final WwDisscussBean bean=data.get(position);
-            if (bean!=null){
-                Glide.with(context).load(WenConstans.BaseUrl+bean.header).asBitmap()
+            final WwDisscussBean bean = data.get(position);
+            if (bean != null) {
+                Glide.with(context).load(WenConstans.BaseUrl + bean.header).asBitmap()
                         .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                tvName.setText(bean.nn+"");
-                tvTime.setText(bean.time+"");
-                tvContent.setText(bean.content+"");
-                if (bean.uid.equals(Constants.uid+"")){
+                tvName.setText(bean.nn + "");
+                tvTime.setText(bean.time + "");
+                tvContent.setText(bean.content + "");
+                if (bean.uid.equals(Constants.uid + "")) {
                     tvDel.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     tvDel.setVisibility(View.GONE);
                 }
             }
             ivHead.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(context,PersonalInformationActivity.class).putExtra("uid",Integer.parseInt(bean.uid)));
+                    context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", Integer.parseInt(bean.uid)));
                 }
             });
             tvDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listener!=null){
+                    if (listener != null) {
                         listener.OnDel(position);
                     }
                 }
@@ -109,7 +111,7 @@ public class WwSecondAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public interface DelListener{
+    public interface DelListener {
         void OnDel(int position);
     }
 }

@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.team.PersonalInformationActivity;
 import com.example.heshequ.adapter.listview.GoodsecondAdapter;
 import com.example.heshequ.base.NetWorkActivity;
@@ -23,8 +25,6 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.example.heshequ.view.XialaPop;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -38,8 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GoodsecondActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener
-{
+public class GoodsecondActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
     private TextView tvName;
     private TextView tvTime;
     private TextView tvDing;
@@ -192,6 +191,7 @@ public class GoodsecondActivity extends NetWorkActivity implements View.OnClickL
             }
         }
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
@@ -206,6 +206,7 @@ public class GoodsecondActivity extends NetWorkActivity implements View.OnClickL
         init();
         getDisscuss(100);
     }
+
     private void init() {
         setTitleAndBack("评论");
         View headview = getLayoutInflater().inflate(R.layout.head_ww_second, null);
@@ -254,6 +255,7 @@ public class GoodsecondActivity extends NetWorkActivity implements View.OnClickL
             }
         });
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -279,7 +281,7 @@ public class GoodsecondActivity extends NetWorkActivity implements View.OnClickL
                 sendDisscuss(content);
                 break;
             case R.id.ivRight:
-                XialaPop.showSelectPop(this, save, bean.uid.equals(Constants.uid + ""),false, new XialaPop.TextListener() {
+                XialaPop.showSelectPop(this, save, bean.uid.equals(Constants.uid + ""), false, new XialaPop.TextListener() {
                     @Override
                     public void selectPosition(int num) {
                         if (num == 0) {    //收藏相关

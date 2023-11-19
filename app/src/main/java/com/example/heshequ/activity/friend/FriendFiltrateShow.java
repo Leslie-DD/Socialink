@@ -7,10 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.fragment.FriendFritrateFragment;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by dell on 2020/5/6.
  */
 
-public class FriendFiltrateShow extends NetWorkActivity implements View.OnClickListener  {
+public class FriendFiltrateShow extends NetWorkActivity implements View.OnClickListener {
     private View view;
     private ViewPager vp;
     private ArrayList<Fragment> list;
@@ -32,8 +32,9 @@ public class FriendFiltrateShow extends NetWorkActivity implements View.OnClickL
     private static int age;
     private static String college;
     private static String sex;
-    private static String interest="false";
+    private static String interest = "false";
     private int status = -1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,28 +44,30 @@ public class FriendFiltrateShow extends NetWorkActivity implements View.OnClickL
         college = intent.getStringExtra("college");
         sex = intent.getStringExtra("sex");
         age = Integer.parseInt(intent.getStringExtra("age"));
-        Log.e("get Bundle",distance+" "+college+" "+sex+" "+age+" "+interest);
+        Log.e("get Bundle", distance + " " + college + " " + sex + " " + age + " " + interest);
         init();
         event();
     }
+
     private void init() {
         list = new ArrayList<>();
         ffFragment = new FriendFritrateFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("juli",distance+"");
-        bundle.putString("nianling",""+age+"");
-        bundle.putString("daxue",""+college+"");
-        bundle.putString("xingbie",""+sex+"");
-        bundle.putString("xingqu",interest+"");
+        bundle.putString("juli", distance + "");
+        bundle.putString("nianling", "" + age + "");
+        bundle.putString("daxue", "" + college + "");
+        bundle.putString("xingbie", "" + sex + "");
+        bundle.putString("xingqu", interest + "");
         ffFragment.setArguments(bundle);
         list.add(ffFragment);
         vp = (ViewPager) findViewById(R.id.vp);
-        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),list);
+        adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);
         vp.setCurrentItem(0);
         setTvBg(0);
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -104,6 +107,7 @@ public class FriendFiltrateShow extends NetWorkActivity implements View.OnClickL
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -112,6 +116,7 @@ public class FriendFiltrateShow extends NetWorkActivity implements View.OnClickL
                 break;
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

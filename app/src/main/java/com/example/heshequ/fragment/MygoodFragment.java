@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -17,7 +18,6 @@ import com.example.heshequ.bean.SecondhandgoodBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -66,13 +66,13 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
     private void getData(int where) {
-        setBodyParams(new String[]{"pn", "ps","type"}, new String[]{pn + "", ps + "","1"});
-        sendPost(WenConstans.Mygood, where, WenConstans.token);
+        setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{pn + "", ps + "", "1"});
+        sendPostConnection(WenConstans.Mygood, where, WenConstans.token);
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        if (ResultUtils.isFail(result,getActivity())){
+        if (ResultUtils.isFail(result, getActivity())) {
             return;
         }
         Gson gson = new Gson();
@@ -139,7 +139,6 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
 
-
     @Override
     protected void onFailure(String result, int where) {
 
@@ -171,14 +170,14 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+        sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     /**
@@ -188,13 +187,13 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData(100);
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -203,7 +202,7 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }
@@ -213,6 +212,7 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

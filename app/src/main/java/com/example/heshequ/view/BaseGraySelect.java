@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 
-import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.R;
+import com.example.heshequ.base.NetWorkActivity;
 
 import java.util.List;
 
@@ -53,8 +53,8 @@ public class BaseGraySelect {
         v.findViewById(R.id.tv02).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mTextListener!=null){
-                    String text=pickerView.getText();
+                if (mTextListener != null) {
+                    String text = pickerView.getText();
                     mTextListener.getShowText(text);
                 }
                 peoType.dismiss();
@@ -63,7 +63,7 @@ public class BaseGraySelect {
         layoutParams.alpha = 0.5f;
         context.getWindow().setAttributes(layoutParams);
         context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-        peoType.showAtLocation(v, Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+        peoType.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
     public interface TextListener {

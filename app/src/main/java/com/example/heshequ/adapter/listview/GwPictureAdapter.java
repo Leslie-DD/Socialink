@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
 import com.example.heshequ.bean.ConsTants;
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +21,12 @@ import java.util.List;
  */
 public class GwPictureAdapter extends BaseAdapter {
     private Context context;
-    private List<String> data=new ArrayList<>();
+    private List<String> data = new ArrayList<>();
+
     public GwPictureAdapter(Context context) {
-        this.context=context;
+        this.context = context;
     }
+
     public void setData(List<String> data) {
         this.data = data;
         this.notifyDataSetChanged();
@@ -48,21 +50,22 @@ public class GwPictureAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
-        if(view==null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_picture,null);
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.item_picture, null);
             viewHolder = new ViewHolder();
-            viewHolder.ivPicture= (ImageView) view.findViewById(R.id.ivPicture);
+            viewHolder.ivPicture = (ImageView) view.findViewById(R.id.ivPicture);
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        ViewGroup.LayoutParams p=viewHolder.ivPicture.getLayoutParams();
-        p.height= ConsTants.screenW*22/100;
-        Glide.with(context).load(data.get(position)+"").asBitmap().fitCenter()
+        ViewGroup.LayoutParams p = viewHolder.ivPicture.getLayoutParams();
+        p.height = ConsTants.screenW * 22 / 100;
+        Glide.with(context).load(data.get(position) + "").asBitmap().fitCenter()
                 .placeholder(R.mipmap.tjtp).into(viewHolder.ivPicture);
         return view;
     }
-    public class ViewHolder{
+
+    public class ViewHolder {
         ImageView ivPicture;
     }
 }

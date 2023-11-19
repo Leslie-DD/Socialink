@@ -7,12 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.fragment.CollectTeamFragment;
 import com.example.heshequ.fragment.CollectgoodFragment;
 import com.example.heshequ.fragment.TeamChildFragment4;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 public class MyCollectActivity extends NetWorkActivity implements View.OnClickListener {
     private ViewPager vp;
-    private TextView tvTeam, tvWw,tvgood;
+    private TextView tvTeam, tvWw, tvgood;
     private ArrayList<Fragment> list;
     private TeamChildFragment4 teamFragment;
     private CollectTeamFragment wenwenFragment;
@@ -45,7 +45,7 @@ public class MyCollectActivity extends NetWorkActivity implements View.OnClickLi
         setText("我的收藏");
         tvTeam = (TextView) findViewById(R.id.tvTeam);
         tvWw = (TextView) findViewById(R.id.tvWw);
-        tvgood =(TextView) findViewById(R.id.tvgood);
+        tvgood = (TextView) findViewById(R.id.tvgood);
         list = new ArrayList<>();
         wenwenFragment = new CollectTeamFragment();
         teamFragment = new TeamChildFragment4();

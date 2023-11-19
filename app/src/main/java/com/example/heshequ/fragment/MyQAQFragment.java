@@ -18,11 +18,11 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/5/31.
  */
-public class MyQAQFragment extends NetWorkFragment  {
+public class MyQAQFragment extends NetWorkFragment {
     private View view;
     private XRecyclerView xRecyclerView;
     private HotWenwenAdapter adapter;
-    private ArrayList<WenwenBean>  data;
+    private ArrayList<WenwenBean> data;
     private TextView tvTips;
 
     @Override
@@ -37,11 +37,11 @@ public class MyQAQFragment extends NetWorkFragment  {
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view=inflater.inflate(R.layout.only_rv_item,null);
-        xRecyclerView= (XRecyclerView) view.findViewById(R.id.rv);
+        view = inflater.inflate(R.layout.only_rv_item, null);
+        xRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext,true,true,xRecyclerView);
-        adapter=new HotWenwenAdapter(mContext);
+        ConsTants.initXrecycleView(mContext, true, true, xRecyclerView);
+        adapter = new HotWenwenAdapter(mContext);
         xRecyclerView.setAdapter(adapter);
         return view;
     }

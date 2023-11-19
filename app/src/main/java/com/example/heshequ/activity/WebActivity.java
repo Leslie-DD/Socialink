@@ -15,9 +15,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.blankj.utilcode.util.SizeUtils;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.view.ProgressView;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -73,13 +73,13 @@ public class WebActivity extends NetWorkActivity {
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         mWebView.getSettings().setLoadsImagesAutomatically(true);
         mWebView.loadUrl(url);
-        mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView wv, String url) {
-                if(url == null) return false;
+                if (url == null) return false;
 
                 try {
-                    if(url.startsWith("weixin://") //微信
+                    if (url.startsWith("weixin://") //微信
                             || url.startsWith("alipays://") //支付宝
                             || url.startsWith("mailto://") //邮件
                             || url.startsWith("tel://")//电话
@@ -87,7 +87,7 @@ public class WebActivity extends NetWorkActivity {
                             || url.startsWith("baiduboxlite://")
                             || url.startsWith("baidumap://")
                         //其他自定义的scheme
-                            ) {
+                    ) {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         startActivity(intent);
                         return true;

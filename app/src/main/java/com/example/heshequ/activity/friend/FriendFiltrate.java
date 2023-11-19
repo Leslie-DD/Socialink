@@ -12,11 +12,11 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.AgeBean;
 import com.example.heshequ.bean.knowledge.DistanceBean;
 import com.example.heshequ.constans.Constants;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -55,7 +55,7 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
     private String theCollege = new String();  // 选择的大学
     private ArrayList<String> collegeList = new ArrayList<>();   // 大学列表
 
-//    private RadioGroup nRg1,nRg2,nRg3,nRg4;
+    //    private RadioGroup nRg1,nRg2,nRg3,nRg4;
 //    private static String juli = "";    // 先赋初值，不然如果用户不选择radiobutton，会导致juli为空，.equals()函数出错
 //    private static int distance;
 //    private static String college = "不限";
@@ -66,7 +66,7 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
 //    private ArrayList<FriendBean> data;
 //    private FriendfiltrateAdapter adapter;
 //    private View view;
-    private static String interest ="false";
+    private static String interest = "false";
     private Button button1;
 
     @Override
@@ -116,7 +116,7 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
         event();
     }
 
-    private void init(){
+    private void init() {
         //View view = getLayoutInflater().inflate(R.layout.activity_filtrate, null);
         setText("筛选信息");
         button1 = (Button) findViewById(R.id.button1);
@@ -124,38 +124,38 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
         mTvDistance = (TextView) findViewById(R.id.tvDistance);
         mTvAge = (TextView) findViewById(R.id.tvAge);
         mTvSex = (TextView) findViewById(R.id.tvSex);
-        mTvSchool= (TextView) findViewById(R.id.tvSchool);
+        mTvSchool = (TextView) findViewById(R.id.tvSchool);
 
         mLlDistance = (LinearLayout) findViewById(R.id.llDistance);
         mLlAge = (LinearLayout) findViewById(R.id.llAge);
         mLlSex = (LinearLayout) findViewById(R.id.llSex);
         mLlSchool = (LinearLayout) findViewById(R.id.llSchool);
 
-        theDistance = new DistanceBean("不限距离",0);
-        theAge = new AgeBean("不限",0);
+        theDistance = new DistanceBean("不限距离", 0);
+        theAge = new AgeBean("不限", 0);
         theSex = "不限";
         theCollege = "不限";
     }
 
     private void initList() {
-        DistanceBean distanceBean = new DistanceBean("不限距离",0);
+        DistanceBean distanceBean = new DistanceBean("不限距离", 0);
         distanceList.add(distanceBean);
-        distanceBean = new DistanceBean("0-1km",1);
+        distanceBean = new DistanceBean("0-1km", 1);
         distanceList.add(distanceBean);
-        distanceBean = new DistanceBean("1-2km",2);
+        distanceBean = new DistanceBean("1-2km", 2);
         distanceList.add(distanceBean);
-        distanceBean = new DistanceBean("2-3km",3);
+        distanceBean = new DistanceBean("2-3km", 3);
         distanceList.add(distanceBean);
-        distanceBean = new DistanceBean("3km以上",0);
+        distanceBean = new DistanceBean("3km以上", 0);
         distanceList.add(distanceBean);
 
-        AgeBean ageBean = new AgeBean("不限",0);
+        AgeBean ageBean = new AgeBean("不限", 0);
         ageList.add(ageBean);
-        ageBean = new AgeBean("10-20岁",1);
+        ageBean = new AgeBean("10-20岁", 1);
         ageList.add(ageBean);
-        ageBean = new AgeBean("21-25岁",2);
+        ageBean = new AgeBean("21-25岁", 2);
         ageList.add(ageBean);
-        ageBean = new AgeBean("26-30岁",3);
+        ageBean = new AgeBean("26-30岁", 3);
         ageList.add(ageBean);
 
         sexList.add("不限");
@@ -179,7 +179,7 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
 //                Log.e("选择距离", "-------position-------" + options1);
 //                theDistance.setJuli(distanceList.get(options1).getJuli());
 //                theDistance.setDistance(distanceList.get(options1).getDistance());
-                theDistance = new DistanceBean(distanceList.get(options1).getJuli(),distanceList.get(options1).getDistance());
+                theDistance = new DistanceBean(distanceList.get(options1).getJuli(), distanceList.get(options1).getDistance());
                 mTvDistance.setText(theDistance.getJuli());
             }
         }).setSubmitText("确定")  // 确定按钮文字
@@ -297,8 +297,7 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
     }
 
 
-
-    private void event(){
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
 
         mLlDistance.setOnClickListener(this);
@@ -308,6 +307,7 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
 
         button1.setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
     }
@@ -315,6 +315,7 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -365,34 +366,38 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
 //                intent1.putExtra("age",age+"");
 //                intent1.putExtra("sex",sex+"");
 //                intent1.putExtra("interest",interest);
-                Intent intent1=new Intent();
-                intent1.putExtra("distance",theDistance.getDistance()+"");
-                intent1.putExtra("college",theCollege+"");
-                intent1.putExtra("age",theAge.getAge()+"");
-                intent1.putExtra("sex",theSex+"");
-                intent1.putExtra("interest",interest);
-                intent1.setClass(FriendFiltrate.this,FriendFiltrateShow.class);
+                Intent intent1 = new Intent();
+                intent1.putExtra("distance", theDistance.getDistance() + "");
+                intent1.putExtra("college", theCollege + "");
+                intent1.putExtra("age", theAge.getAge() + "");
+                intent1.putExtra("sex", theSex + "");
+                intent1.putExtra("interest", interest);
+                intent1.setClass(FriendFiltrate.this, FriendFiltrateShow.class);
                 startActivity(intent1);
                 finish();
                 break;
 
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
         MobclickAgent.onPageEnd(this.getClass().getSimpleName());
     }
-    private void getFiltrateData(){
+
+    private void getFiltrateData() {
         sendPost(Constants.base_url + " /api/social/getScreen.do", 10086, Constants.token);
     }
+
     private void getData() {
 
     }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.FriendAddNewsAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -18,7 +19,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -35,7 +35,7 @@ import java.util.List;
  * Created by dell on 2020/5/11.
  */
 
-public class News_FriendFragment extends NetWorkFragment implements XRecyclerView.LoadingListener{
+public class News_FriendFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
     private View view;
     private XRecyclerView rv;
     private FriendAddNewsAdapter adapter;
@@ -47,7 +47,6 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
     private int clickPosition;
     private TextView tvTips;
     private FragmentBrodcast brodcast;
-
 
 
     @Override
@@ -70,10 +69,10 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
     }
 
     private void getData(int pn) {
-        setBodyParams(new String[]{"pn","ps","type"}, new String[]{""+ pn,""+Constants.default_PS,""+4});
-        sendPost(WenConstans.ShowFriendAdd, 100,WenConstans.token);
-        Log.e("token",""+WenConstans.token);
-        Log.e("userid",""+WenConstans.id);
+        setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 4});
+        sendPostConnection(WenConstans.ShowFriendAdd, 100, WenConstans.token);
+        Log.e("token", "" + WenConstans.token);
+        Log.e("userid", "" + WenConstans.id);
     }
 
     @Override
@@ -84,7 +83,7 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
 
         Gson gson = new Gson();
         if (where == 100) {
-            Log.e("s","ssssssssssssssssssssssssssssssssssssssssss2");
+            Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss2");
             allList = new ArrayList<>();
             if (hasRefresh) {
                 hasRefresh = false;
@@ -93,15 +92,15 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
             if (result.has("data")) {
 
 
-                Log.e("s","ssssssssssssssssssssssssssssssssssssssssss1");
+                Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss1");
                 JSONObject data1 = result.getJSONObject("data");
                 JSONArray data = data1.getJSONArray("list");
-                Log.e("friendadd",""+data.toString());
-                if (data != null ) {
+                Log.e("friendadd", "" + data.toString());
+                if (data != null) {
                     allList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendAddNewsBean>>() {
                             }.getType());
-                    Log.e("s","ssssssssssssssssssssssssssssssssssssssssss");
+                    Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss");
                     if (allList == null || allList.size() == 0) {
                         allList = new ArrayList<>();
                     }
@@ -117,7 +116,7 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
             if (result.has("data")) {
                 JSONObject data1 = result.getJSONObject("data");
                 JSONArray data = data1.getJSONArray("list");
-                if (data != null ) {
+                if (data != null) {
                     moreList = gson.fromJson(data.toString(),
                             new TypeToken<List<FriendAddNewsBean>>() {
                             }.getType());
@@ -139,7 +138,6 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
             adapter.setData(allList);
         }
     }
-
 
 
     @Override
@@ -168,8 +166,9 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
             getData(pn++);
         }
     }
-    public void refData(){
-        if (view==null){
+
+    public void refData() {
+        if (view == null) {
             return;
         }
 
@@ -178,22 +177,22 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
     }
 
     private void setFragmentListener() {
-        IntentFilter filter=new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast,filter);
+        getActivity().registerReceiver(brodcast, filter);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int items=intent.getIntExtra("item",0);
+            int items = intent.getIntExtra("item", 0);
 
-            if (items==1){    //加载
+            if (items == 1) {    //加载
 
-            }else if (items==2){
+            } else if (items == 2) {
                 getData(pn);
-            }else if (items==3){   //刷新
+            } else if (items == 3) {   //刷新
 
             }
         }
@@ -202,7 +201,7 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (brodcast!=null){
+        if (brodcast != null) {
             getActivity().unregisterReceiver(brodcast);
         }
     }
@@ -212,6 +211,7 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
         super.onResume();
         MobclickAgent.onResume(getActivity());
     }
+
     @Override
     public void onPause() {
         super.onPause();

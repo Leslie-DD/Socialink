@@ -65,9 +65,9 @@ public class DragImageView extends android.support.v7.widget.AppCompatImageView 
                 // 获取最后View在窗体的位置
                 endX = (int) event.getRawX();
                 endY = (int) event.getRawY();
-                Log.e(TAG,"lasty:"+endX+" ; "+"lastx:"+endY);
+                Log.e(TAG, "lasty:" + endX + " ; " + "lastx:" + endY);
                 //移动范围大于5px则屏蔽点击事件
-                if (Math.abs(fristX-endX)>5||Math.abs(fristY-endY)>5){
+                if (Math.abs(fristX - endX) > 5 || Math.abs(fristY - endY) > 5) {
                     return true;
                 }
                 break;

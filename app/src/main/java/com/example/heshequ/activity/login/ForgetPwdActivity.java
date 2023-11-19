@@ -12,13 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.utils.EncryptUtils;
 import com.example.heshequ.utils.MatcherUtils;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.MeetApplication;
-import com.example.heshequ.R;
 import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONException;
@@ -27,10 +27,10 @@ import org.json.JSONObject;
 public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickListener {
     private int type = 1;
     private TextView tvTitle, tvCode;
-    private EditText etPhone, etCode, etPwd,etPwd2;
+    private EditText etPhone, etCode, etPwd, etPwd2;
     private Button btSave;
-    private ImageView ivSee,ivSee2;
-    private boolean canSee,canSee2;
+    private ImageView ivSee, ivSee2;
+    private boolean canSee, canSee2;
     private int count = 30;
     private String phone;
     private final int getCode = 1000;
@@ -61,11 +61,11 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
     }
 
     private void init() {
-        type= getIntent().getIntExtra("type",0);
+        type = getIntent().getIntExtra("type", 0);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         if (type == 1) {
             tvTitle.setText("忘记密码");
-        }else{
+        } else {
             tvTitle.setText("修改密码");
         }
         tvCode = (TextView) findViewById(R.id.tvCode);
@@ -90,7 +90,7 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         switch (where) {
             case getCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_getCode");
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_getCode");
                 if (result.optInt("code") == 0) {
                     new Thread(new Runnable() {
                         @Override
@@ -107,7 +107,7 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                             }
                         }
                     }).start();
-                }else{
+                } else {
                     getting = false;
                 }
                 String msg = result.optString("msg");
@@ -116,8 +116,8 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                 }
                 break;
             case resetPwdCode:
-                MobclickAgent.onEvent(MeetApplication.getInstance(),"event_changePwd");
-                if (result.optInt("code") == 0){
+                MobclickAgent.onEvent(MeetApplication.getInstance(), "event_changePwd");
+                if (result.optInt("code") == 0) {
                     this.finish();
                 }
                 Utils.toastShort(mContext, result.optString("msg"));
@@ -141,7 +141,7 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                     return;
                 }
                 phone = etPhone.getText().toString();
-                if(phone.isEmpty()){
+                if (phone.isEmpty()) {
                     Utils.toastShort(mContext, "手机号码不能为空");
                     return;
                 }
@@ -155,7 +155,7 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                         return;
                     }
                 }
-                setBodyParams(new String[]{"phone","forget"}, new String[]{phone,"forget"});
+                setBodyParams(new String[]{"phone", "forget"}, new String[]{phone, "forget"});
                 sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
                 break;
             case R.id.ivSee:
@@ -165,14 +165,14 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                 et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 //从密码可见模式变为密码不可见模式
                 et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());*/
-                etPwd.setTransformationMethod(canSee ? HideReturnsTransformationMethod.getInstance():PasswordTransformationMethod.getInstance());
+                etPwd.setTransformationMethod(canSee ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
 
                 etPwd.setSelection(etPwd.getText().toString().length());
                 break;
             case R.id.ivSee2:
                 canSee2 = !canSee2;
                 ivSee2.setImageResource(canSee2 ? R.mipmap.kj : R.mipmap.bkj);
-                etPwd2.setTransformationMethod(canSee2 ? HideReturnsTransformationMethod.getInstance():PasswordTransformationMethod.getInstance());
+                etPwd2.setTransformationMethod(canSee2 ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
                 etPwd2.setSelection(etPwd2.getText().toString().length());
                 break;
             case R.id.btSave:
@@ -180,7 +180,7 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                 String pwd = etPwd.getText().toString().trim();
                 String pwd2 = etPwd2.getText().toString().trim();
                 String code = etCode.getText().toString().trim();
-                if(phone.isEmpty()){
+                if (phone.isEmpty()) {
                     Utils.toastShort(mContext, "手机号码不能为空");
                     return;
                 }
@@ -194,16 +194,16 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                         return;
                     }
                 }
-                if (code.length() == 0){
+                if (code.length() == 0) {
                     Utils.toastShort(mContext, "验证码不能为空,请获取验证码后再填入验证码");
                     return;
                 }
-                if (pwd.isEmpty()){
+                if (pwd.isEmpty()) {
                     Utils.toastShort(mContext, "新密码不能为空！");
                     return;
                 }
 
-                if (!MatcherUtils.isPwd(pwd)){
+                if (!MatcherUtils.isPwd(pwd)) {
                     Utils.toastShort(mContext, "密码格式不正确！");
                     return;
                 }
@@ -215,12 +215,12 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                     Utils.toastShort(mContext, "‘确认密码’格式错误！");
                     return;
                 }
-                if (!pwd.equals(pwd2)){
+                if (!pwd.equals(pwd2)) {
                     Utils.toastShort(mContext, "二次密码不一致！");
                     return;
                 }
-                setBodyParams(new String[]{"phone","code","pwd"}, new String[]{phone,code, EncryptUtils.encryptMD5ToString(pwd)});
-                sendPost(Constants.base_url + "/api/account/resetpwd.do",resetPwdCode , null);
+                setBodyParams(new String[]{"phone", "code", "pwd"}, new String[]{phone, code, EncryptUtils.encryptMD5ToString(pwd)});
+                sendPost(Constants.base_url + "/api/account/resetpwd.do", resetPwdCode, null);
                 break;
         }
     }
@@ -231,6 +231,7 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
         MobclickAgent.onResume(this);
         MobclickAgent.onPageStart(this.getClass().getSimpleName());
     }
+
     @Override
     public void onPause() {
         super.onPause();

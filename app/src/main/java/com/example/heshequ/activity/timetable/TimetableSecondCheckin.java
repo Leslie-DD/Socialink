@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.umeng.analytics.MobclickAgent;
@@ -26,8 +26,8 @@ import okhttp3.Response;
  * Created by dell on 2020/5/9.
  */
 
-public class TimetableSecondCheckin extends NetWorkActivity implements View.OnClickListener{
-    private String year_1,year_2,term_1,today_1,week_1;
+public class TimetableSecondCheckin extends NetWorkActivity implements View.OnClickListener {
+    private String year_1, year_2, term_1, today_1, week_1;
     public static String studentId;
     public static String pwd;
     public static String schoolname;
@@ -37,40 +37,44 @@ public class TimetableSecondCheckin extends NetWorkActivity implements View.OnCl
     public static String key1;
     public EditText yanzheng;
     public ImageView yanzhengtupian;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timetablesecondcheckin);
         Intent intent = getIntent();
-        year_1=intent.getStringExtra("year1");
+        year_1 = intent.getStringExtra("year1");
         year_2 = intent.getStringExtra("year2");
         term_1 = intent.getStringExtra("term1");
         week_1 = intent.getStringExtra("week");
         today_1 = intent.getStringExtra("today");
         studentId = intent.getStringExtra("studentId");
-        schoolname =intent.getStringExtra("schoolname");
+        schoolname = intent.getStringExtra("schoolname");
         pwd = intent.getStringExtra("pwd");
         url = intent.getStringExtra("url");
-        key=intent.getStringExtra("key");
+        key = intent.getStringExtra("key");
         init();
         event();
     }
+
     private void init() {
         setText("中南验证码二次验证");
-        yanzheng =(EditText) findViewById(R.id.yanzheng);
-        yanzhengtupian=(ImageView) findViewById(R.id.yanzhengtupian);
-        if (url==null) {
-            Log.e("shownearnull",""+Constants.base_url + url);
+        yanzheng = (EditText) findViewById(R.id.yanzheng);
+        yanzhengtupian = (ImageView) findViewById(R.id.yanzhengtupian);
+        if (url == null) {
+            Log.e("shownearnull", "" + Constants.base_url + url);
             yanzhengtupian.setImageResource(R.mipmap.head3);
         } else {
             Glide.with(context).load(Constants.base_url + url).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(yanzhengtupian);
-            Log.e("shownear",""+Constants.base_url + url);
+            Log.e("shownear", "" + Constants.base_url + url);
         }
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.tvCancel).setOnClickListener(this);
         findViewById(R.id.tvSave).setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
@@ -100,20 +104,21 @@ public class TimetableSecondCheckin extends NetWorkActivity implements View.OnCl
 //            Utils.toastShort(mContext, result.optString("msg"));
 //        }
     }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tvCancel:
                 finish();
                 break;
             case R.id.tvSave:
                 verification = yanzheng.getText().toString();
-                Log.e("key",""+key);
-                Log.e("verification",""+verification);
+                Log.e("key", "" + key);
+                Log.e("verification", "" + verification);
                 OkHttpUtils.post(WenConstans.ZhongnanGetYanzheng)
                         .tag(this)
-                        .params("key", key+"")
-                        .params("verification",""+verification)
+                        .params("key", key + "")
+                        .params("verification", "" + verification)
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
@@ -122,18 +127,18 @@ public class TimetableSecondCheckin extends NetWorkActivity implements View.OnCl
                                     JSONObject result = new JSONObject(s);
 
                                     key1 = result.getString("data");
-                                    Log.e("key",key1+"");
+                                    Log.e("key", key1 + "");
                                     Intent intent1 = new Intent();
-                                    intent1.putExtra("key",key1+"");
-                                    intent1.putExtra("year1",""+year_1);
-                                    intent1.putExtra("year2",""+year_2);
-                                    intent1.putExtra("term1",""+term_1);
-                                    intent1.putExtra("week",""+week_1);
-                                    intent1.putExtra("today",""+today_1);
-                                    intent1.putExtra("pwd",pwd+"");
-                                    intent1.putExtra("studentId",studentId+"");
-                                    intent1.putExtra("schoolname",schoolname+"");
-                                    intent1.setClass(TimetableSecondCheckin.this,ZhongnanShow.class);
+                                    intent1.putExtra("key", key1 + "");
+                                    intent1.putExtra("year1", "" + year_1);
+                                    intent1.putExtra("year2", "" + year_2);
+                                    intent1.putExtra("term1", "" + term_1);
+                                    intent1.putExtra("week", "" + week_1);
+                                    intent1.putExtra("today", "" + today_1);
+                                    intent1.putExtra("pwd", pwd + "");
+                                    intent1.putExtra("studentId", studentId + "");
+                                    intent1.putExtra("schoolname", schoolname + "");
+                                    intent1.setClass(TimetableSecondCheckin.this, ZhongnanShow.class);
                                     startActivity(intent1);
                                     finish();
 
@@ -154,7 +159,8 @@ public class TimetableSecondCheckin extends NetWorkActivity implements View.OnCl
                 break;
         }
     }
-//    public void getData(){
+
+    //    public void getData(){
 //        setBodyParams(new String[]{"key", "verification"}, new String[]{key, verification});
 //        sendPost(WenConstans.ZhongnanGetYanzheng,1 , null);
 //    }

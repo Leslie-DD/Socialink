@@ -15,23 +15,24 @@ import com.tencent.tauth.UiError;
 public class BaseUiListener implements IUiListener {
     private Context context;
 
-    public BaseUiListener(Context context){
+    public BaseUiListener(Context context) {
         this.context = context;
     }
 
     @Override
     public void onCancel() {
-        Utils.toastShort(context,"取消了QQ分享");
+        Utils.toastShort(context, "取消了QQ分享");
     }
+
     @Override
     public void onComplete(Object response) {
-        Utils.toastShort(context,"QQ分享成功");
+        Utils.toastShort(context, "QQ分享成功");
     }
 
     @Override
     public void onError(UiError e) {
         Log.e("DDQ-->", String.valueOf(e));
-        Utils.toastShort(context,"QQ分享失败");
+        Utils.toastShort(context, "QQ分享失败");
     }
 
 }

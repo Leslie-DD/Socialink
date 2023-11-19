@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.FriendAddNewsBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
-import com.example.heshequ.R;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.umeng.analytics.MobclickAgent;
@@ -37,58 +37,63 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
     private String answer_3;
     private String answer_4;
     private String answer_5;
-    private TextView question1,question2,question3,question4,question5;
-    private TextView answer1,answer2,answer3,answer4,answer5;
+    private TextView question1, question2, question3, question4, question5;
+    private TextView answer1, answer2, answer3, answer4, answer5;
     private FriendAddNewsBean friendAddNewsBean;
-    private Button ivaccept,ivreject;
-    private String[] content={"","","","",""};
-    private String[] ans_content={"","","","",""};
-    private int ques_num=0;
+    private Button ivaccept, ivreject;
+    private String[] content = {"", "", "", "", ""};
+    private String[] ans_content = {"", "", "", "", ""};
+    private int ques_num = 0;
     private static int uid;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        uid = WenConstans.id;
         uid = Constants.uid;
-        String ids = uid+"";
-        if(ids.equals("0")){
-            Intent intents  = new Intent(FriendShowAnswers.this, LoginActivity.class);
+        String ids = uid + "";
+        if (ids.equals("0")) {
+            Intent intents = new Intent(FriendShowAnswers.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "查看好友回答页面，我们需要验证您的身份", Toast.LENGTH_LONG ).show();
+            Toast.makeText(this, "查看好友回答页面，我们需要验证您的身份", Toast.LENGTH_LONG).show();
         }
         setContentView(R.layout.activity_showanswer);
         friendAddNewsBean = new FriendAddNewsBean();
-        friendAddNewsBean= (FriendAddNewsBean) getIntent().getSerializableExtra("FriendAdd");
+        friendAddNewsBean = (FriendAddNewsBean) getIntent().getSerializableExtra("FriendAdd");
         user_id = friendAddNewsBean.getReplyId();
         init();
         event();
     }
+
     private void init() {
         setText("ta的试卷");
-        question1 = (TextView)findViewById(R.id.question1);
-        question2 =(TextView) findViewById(R.id.question2);
-        question3 = (TextView)findViewById(R.id.question3);
+        question1 = (TextView) findViewById(R.id.question1);
+        question2 = (TextView) findViewById(R.id.question2);
+        question3 = (TextView) findViewById(R.id.question3);
         question4 = (TextView) findViewById(R.id.question4);
-        question5=(TextView) findViewById(R.id.question5);
-        answer1 = (TextView)findViewById(R.id.answer1);
-        answer2 =(TextView) findViewById(R.id.answer2);
-        answer3 = (TextView)findViewById(R.id.answer3);
+        question5 = (TextView) findViewById(R.id.question5);
+        answer1 = (TextView) findViewById(R.id.answer1);
+        answer2 = (TextView) findViewById(R.id.answer2);
+        answer3 = (TextView) findViewById(R.id.answer3);
         answer4 = (TextView) findViewById(R.id.answer4);
-        answer5=(TextView) findViewById(R.id.answer5);
-        ivaccept = (Button)findViewById(R.id.ivaccept);
-        ivreject =(Button)findViewById(R.id.ivreject);
+        answer5 = (TextView) findViewById(R.id.answer5);
+        ivaccept = (Button) findViewById(R.id.ivaccept);
+        ivreject = (Button) findViewById(R.id.ivreject);
         getData();
     }
-    private void event(){
+
+    private void event() {
         findViewById(R.id.ivBack).setOnClickListener(this);
         ivreject.setOnClickListener(this);
         ivaccept.setOnClickListener(this);
     }
+
     @Override
     protected void onFailure(String result, int where) {
 
     }
+
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         int ret = result.optInt("code");
@@ -100,38 +105,39 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
                 content[i] = value.getString("ques_content");
                 ans_content[i] = value.getString("ans_content");
             }
-            if(content[0]!=null){
+            if (content[0] != null) {
                 question1.setText(content[0]);
                 answer1.setText(ans_content[0]);
-                ques_num=ques_num+1;
+                ques_num = ques_num + 1;
             }
-            if(content[1]!=null){
+            if (content[1] != null) {
                 question2.setText(content[1]);
                 answer2.setText(ans_content[1]);
-                ques_num=ques_num+1;
+                ques_num = ques_num + 1;
             }
-            if(content[2]!=null){
+            if (content[2] != null) {
                 question3.setText(content[2]);
                 answer3.setText(ans_content[2]);
-                ques_num=ques_num+1;
+                ques_num = ques_num + 1;
             }
-            if(content[3]!=null){
+            if (content[3] != null) {
                 question4.setText(content[3]);
                 answer4.setText(ans_content[4]);
-                ques_num=ques_num+1;
+                ques_num = ques_num + 1;
             }
-            if(content[4]!=null){
+            if (content[4] != null) {
                 question5.setText(content[4]);
                 answer5.setText(ans_content[4]);
-                ques_num=ques_num+1;
+                ques_num = ques_num + 1;
             }
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
         }
     }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ivBack:
                 finish();
                 break;
@@ -139,9 +145,9 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
                 OkHttpUtils.post(WenConstans.AcceptFriend)
                         .tag(this)
                         .headers(Constants.Token_Header, WenConstans.token)
-                        .params("user_id", user_id+"")
+                        .params("user_id", user_id + "")
 //                        .params("id",""+WenConstans.id)
-                        .params("id",""+Constants.uid)
+                        .params("id", "" + Constants.uid)
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
@@ -171,8 +177,8 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
                 OkHttpUtils.post(WenConstans.RejectFriend)
                         .tag(this)
                         .headers(Constants.Token_Header, WenConstans.token)
-                        .params("user_id", user_id+"")
-                        .params("id",""+WenConstans.id)
+                        .params("user_id", user_id + "")
+                        .params("id", "" + WenConstans.id)
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
@@ -243,9 +249,10 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
     }
 
     private void getData() {
-        setBodyParams(new String[]{"user_id"}, new String[]{""+user_id});
-        sendPost(Constants.base_url+"/api/social/getPaper.do", 100, WenConstans.token);
+        setBodyParams(new String[]{"user_id"}, new String[]{"" + user_id});
+        sendPost(Constants.base_url + "/api/social/getPaper.do", 100, WenConstans.token);
     }
+
     @Override
     public void onResume() {
         super.onResume();

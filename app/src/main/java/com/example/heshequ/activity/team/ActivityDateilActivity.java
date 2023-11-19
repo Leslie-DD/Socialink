@@ -1,5 +1,7 @@
 package com.example.heshequ.activity.team;
 
+import static com.example.heshequ.MeetApplication.mTencent;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -23,6 +25,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.heshequ.MeetApplication;
+import com.example.heshequ.R;
 import com.example.heshequ.activity.statement.ReleaseActivitiesActivity;
 import com.example.heshequ.adapter.GvEmojiAdapter;
 import com.example.heshequ.adapter.listview.ActiviteDateilAdapter;
@@ -41,10 +46,7 @@ import com.example.heshequ.fragment.BottomShareFragment;
 import com.example.heshequ.interfaces.BaseUiListener;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
-import com.example.heshequ.MeetApplication;
 import com.example.heshequ.view.MyGv;
-import com.bumptech.glide.Glide;
-import com.example.heshequ.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -63,8 +65,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.example.heshequ.MeetApplication.mTencent;
 
 public class ActivityDateilActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener, WbShareCallback {
     private int activityId;
@@ -86,11 +86,11 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
     private Gson gson;
     private View headView;
     private CircleView ivHead;
-    private TextView tvName, tvTime, tvTitle2, tvStatus, tvApplyDeadline, tvContent,tvClubName,tvBm;
+    private TextView tvName, tvTime, tvTitle2, tvStatus, tvApplyDeadline, tvContent, tvClubName, tvBm;
     private MyGv gv, gvMember;
     private ArrayList<String> imgs;
     private ArrayList<String> memberImgs;
-    private LinearLayout ll_teamMembers, llComment,llBm;
+    private LinearLayout ll_teamMembers, llComment, llBm;
     private TeamTestBean.ObjBean bean;
     //pop
     private PopupWindow pop;
@@ -132,7 +132,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("活动详情");
         rv = (XRecyclerView) findViewById(R.id.rv);
-        headView = LayoutInflater.from(this).inflate(R.layout.head_activity_detail, null,false);
+        headView = LayoutInflater.from(this).inflate(R.layout.head_activity_detail, null, false);
         //init event
         ivHead = (CircleView) headView.findViewById(R.id.ivHead);
         tvName = (TextView) headView.findViewById(R.id.tvName);
@@ -223,15 +223,15 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
             tvContent.setText(bean.getContent());
 
             try {
-                if (Utils.isPastDue(bean.getApplyDeadline(), "yyyy-MM-dd HH:mm")){
-                    if (bean.getIsLike() == 1){
+                if (Utils.isPastDue(bean.getApplyDeadline(), "yyyy-MM-dd HH:mm")) {
+                    if (bean.getIsLike() == 1) {
                         tvBm.setText("已报名");
                         tvBm.setBackground(ContextCompat.getDrawable(this, R.drawable.tv_bg_e6e6e6_6));
                         tvBm.setEnabled(false);
-                    }else{
+                    } else {
                         tvBm.setText("我要报名");
                     }
-                }else{
+                } else {
                     llBm.setVisibility(View.GONE);
                 }
             } catch (ParseException e) {
@@ -300,14 +300,14 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
 
             if (bean.getClubInfo() == null) {
                 Constants.isJoin = bean.getIsLike() == 1;
-            }else{
+            } else {
                 Constants.isJoin = bean.getClubInfo().getIsJoin() == 1;
             }
             if (!Constants.isJoin) {
                 llComment.setVisibility(View.GONE);
                 ivRight.setVisibility(View.GONE);
-            }else{
-                if (bean.getPresentor() != Constants.uid){
+            } else {
+                if (bean.getPresentor() != Constants.uid) {
                     ivRight.setVisibility(View.GONE);
                 }
             }
@@ -397,7 +397,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
 
             @Override
             public void onHeadClick(int uid) {
-                startActivity(new Intent(context,PersonalInformationActivity.class).putExtra("uid",uid));
+                startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", uid));
             }
         });
 
@@ -489,7 +489,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
                 break;
             case R.id.tvBm:
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + bean.getId(), "" + 1});
-                sendPost(Constants.base_url + "/api/club/activity/apply.do",ApplyCode,Constants.token);
+                sendPost(Constants.base_url + "/api/club/activity/apply.do", ApplyCode, Constants.token);
                 break;
 
         }
@@ -659,7 +659,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
                     tvBm.setText("已报名");
                     tvBm.setBackground(ContextCompat.getDrawable(this, R.drawable.tv_bg_e6e6e6_6));
                     tvBm.setEnabled(false);
-                    Utils.toastShort(mContext,"报名成功");
+                    Utils.toastShort(mContext, "报名成功");
                     getHeadData();
                 } else {
                     Utils.toastShort(mContext, result.optString("msg"));
@@ -719,36 +719,36 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
                 Utils.toastShort(mContext, "您还未安装微信客户端");
                 return;
             }
-            if (bean.getPhotos()!=null && bean.getPhotos().size()>0){
-                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, Constants.base_url+bean.getPhotos().get(0).getPhotoId(),
-                        Constants.base_url+"ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            }else {
+            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
+                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
+                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
+            } else {
                 Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneSession, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        Constants.base_url+"ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
+                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
             }
         } else if (shareBean.getName().equals("朋友圈")) {
             if (!Utils.isWeChatAppInstalled(this)) {
                 Utils.toastShort(mContext, "您还未安装微信客户端");
                 return;
             }
-            if (bean.getPhotos()!=null && bean.getPhotos().size()>0){
-                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, Constants.base_url+bean.getPhotos().get(0).getPhotoId(),
-                        Constants.base_url+"ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            }else {
+            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
+                Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
+                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
+            } else {
                 Utils.SendWeiXinShare(SendMessageToWX.Req.WXSceneTimeline, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        Constants.base_url+"ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
+                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
             }
         } else if (shareBean.getName().equals("微博")) {
             if (!Utils.isWeiboInstalled(this)) {
                 Utils.toastShort(mContext, "您还未安新浪微博客户端");
                 return;
             }
-            if (bean.getPhotos()!=null && bean.getPhotos().size()>0){
-                Utils.shareToWeibo(wbShareHandler, Constants.base_url+bean.getPhotos().get(0).getPhotoId(),
-                        bean.getTitle(), bean.getContent()+Constants.base_url+"ActiveInfo.html?id=" + bean.getId());
-            }else {
+            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
+                Utils.shareToWeibo(wbShareHandler, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
+                        bean.getTitle(), bean.getContent() + Constants.base_url + "ActiveInfo.html?id=" + bean.getId());
+            } else {
                 Utils.shareToWeibo(wbShareHandler, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        bean.getTitle(), bean.getContent()+Constants.base_url+"ActiveInfo.html?id=" + bean.getId());
+                        bean.getTitle(), bean.getContent() + Constants.base_url + "ActiveInfo.html?id=" + bean.getId());
             }
         } else if (shareBean.getName().equals("QQ")) {
             if (!Utils.isQQClientInstalled(this)) {
@@ -756,12 +756,12 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
                 return;
             }
             isQQShare = true;
-            if (bean.getPhotos()!=null && bean.getPhotos().size()>0){
-                Utils.sendQQShare(this,Constants.base_url+bean.getPhotos().get(0).getPhotoId(),
-                        Constants.base_url+"ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
-            }else {
+            if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
+                Utils.sendQQShare(this, Constants.base_url + bean.getPhotos().get(0).getPhotoId(),
+                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
+            } else {
                 Utils.sendQQShare(this, "http://a2.qpic.cn/psb?/V12Er5xC1wKTyd/tdPKOLz50TKAA1uXEFtPIR0ISrZ6q*4Cp*VFb9s*Ol8!/c/dDUBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAGQAZABkAERECc!&tl=3&vuin=1396141012&tm=1534924800&sce=60-2-2&rf=0-0",
-                        Constants.base_url+"ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
+                        Constants.base_url + "ActiveInfo.html?id=" + bean.getId(), bean.getTitle(), bean.getContent());
             }
         }
     }
@@ -772,7 +772,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
                 mTencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener(this));
                 isQQShare = false;
             } else {
-                if (data!=null) {
+                if (data != null) {
                     wbShareHandler.doResultIntent(data, this);
                 }
             }

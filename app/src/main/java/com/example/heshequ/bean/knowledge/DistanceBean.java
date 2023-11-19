@@ -11,12 +11,14 @@ public class DistanceBean {
     private String juli;
     private int distance;
 
-    public DistanceBean(){}
+    public DistanceBean() {
+    }
 
-    public DistanceBean(String juli, int distance){
+    public DistanceBean(String juli, int distance) {
         this.juli = juli;
         this.distance = distance;
     }
+
     public String getJuli() {
         return juli;
     }
@@ -33,7 +35,7 @@ public class DistanceBean {
         this.distance = distance;
     }
 
-    public String toString(){
-        return "juli: "+juli+"; distance: "+distance;
+    public String toString() {
+        return "juli: " + juli + "; distance: " + distance;
     }
 }

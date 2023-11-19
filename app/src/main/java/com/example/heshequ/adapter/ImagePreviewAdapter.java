@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.utils.Utils;
-import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.List;
@@ -25,6 +25,7 @@ public class ImagePreviewAdapter extends PagerAdapter {
     private List<String> imageList;
     private int itemPosition;
     private PhotoView photoView;
+
     public ImagePreviewAdapter(ImagePreviewActivity context, List<String> imageList, int itemPosition) {
         this.context = context;
         this.imageList = imageList;
@@ -33,12 +34,12 @@ public class ImagePreviewAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return imageList==null?0:imageList.size();
+        return imageList == null ? 0 : imageList.size();
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view==object;
+        return view == object;
     }
 
     @Override
@@ -68,8 +69,8 @@ public class ImagePreviewAdapter extends PagerAdapter {
     public void setPrimaryItem(ViewGroup container, int position, Object object) {
         super.setPrimaryItem(container, position, object);
         photoView = (PhotoView) object;
-        photoView.setTag(Utils.getNameByPosition(itemPosition,position));
-        photoView.setTransitionName(Utils.getNameByPosition(itemPosition,position));
+        photoView.setTag(Utils.getNameByPosition(itemPosition, position));
+        photoView.setTransitionName(Utils.getNameByPosition(itemPosition, position));
     }
 
 

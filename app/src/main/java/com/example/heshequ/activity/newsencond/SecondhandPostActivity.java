@@ -62,6 +62,8 @@ public class SecondhandPostActivity extends NetWorkActivity implements View.OnCl
     private TextView tvTitle;
     private TextView tvSave;
 
+
+
     // 商品类型选择
     int categoryId1;
     int categoryId2;

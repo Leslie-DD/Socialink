@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -31,11 +32,11 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 /**
- * 带有网络操作的activity
+ * 带有网络操作的 Activity
  */
 public abstract class NetWorkActivity extends BaseActivity {
-
     private static final String TAG = "[NetWorkActivity]";
+
     private CustomProgressDialog progressDialog;
     protected NetWorkActivity context;
     private Vector<Integer> vector;
@@ -149,12 +150,8 @@ public abstract class NetWorkActivity extends BaseActivity {
         }
         this.fileKey = fileKey;
         this.uploadFile = uploadFile;
-        StringBuilder bodyParam = new StringBuilder("bodyfile参数：");
-        for (int i = 0; i < fileKey.length; i++) {
-            bodyParam.append(fileKey[i]).append("=").append(uploadFile[i].getName()).append("&");
-        }
         existsFile = true;
-        Log.i(TAG, "(setFileBodyParams) 上传图片: " + bodyParam);
+        Log.i(TAG, "(setFileBodyParams) files: " + Arrays.toString(uploadFile));
     }
 
     public void sendPost(String url, int where, String token) {

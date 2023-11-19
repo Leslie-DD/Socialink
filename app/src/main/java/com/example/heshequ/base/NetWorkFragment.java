@@ -30,7 +30,7 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 /**
- * 基类Fragment 要联网操作的Fragment继承该类
+ * 要联网操作的 Fragment 继承该类
  */
 public abstract class NetWorkFragment extends Fragment {
     private static final String TAG = "[NetWorkFragment]";

@@ -2,7 +2,6 @@ package com.example.heshequ.utils;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -15,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Hulk_Zhang on 2018/6/1 10:07
@@ -22,7 +22,7 @@ import java.util.Date;
  */
 public class PhotoUtils {
     public static String getPicName() {
-        SimpleDateFormat fat = new SimpleDateFormat("yyyyMMdd_hhmmss");
+        SimpleDateFormat fat = new SimpleDateFormat("yyyyMMdd_hhmmss", Locale.CHINA);
         return fat.format(new Date()) + ".jpg";
     }
 
@@ -44,10 +44,8 @@ public class PhotoUtils {
         }
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // 判断版本大于等于7.0
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-            StrictMode.setVmPolicy(builder.build());
-        }
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
         Uri uri = Uri.fromFile(new File(path));
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         context.startActivityForResult(intent, 200);

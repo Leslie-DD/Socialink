@@ -19,17 +19,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
@@ -77,13 +74,10 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     private WindowManager.LayoutParams layoutParams;
     private PopupWindow modifyPop;
     private TextView tvTip;
-    private Button btSave;
     private EditText etContent;
     private int popStatus;
-    private ImageView ivClose;
     private UserInfoBean userInfoBean;
     private String path;
-    private Uri photoUri;
     private final int upHead = 1000;
     private final int upName = 1001;
     private String name;
@@ -94,8 +88,7 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     private SharedPreferences sp;
     private Gson gson;
     private OptionsPickerView pvOptions;
-    private ArrayList<LabelSelectionActivity.LableBean> datas;
-    private Uri uritempFile;
+    private Uri uriTempFile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,13 +104,13 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         sp = MeetApplication.getInstance().getSharedPreferences();
         userInfoBean = (UserInfoBean) getIntent().getSerializableExtra("userinfobean");
 
-        ivHead = (CircleView) findViewById(R.id.ivHead);
-        llHead = (LinearLayout) findViewById(R.id.llHead);
+        ivHead = findViewById(R.id.ivHead);
+        llHead = findViewById(R.id.llHead);
         Glide.with(mContext).load(Constants.url5).asBitmap().into(ivHead);
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("基本资料");
         getData();
-        lv = (ListView) findViewById(R.id.lv);
+        lv = findViewById(R.id.lv);
         adapter = new ItemAdapter(mContext, data);
         lv.setAdapter(adapter);
         if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
@@ -133,8 +126,8 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         pop = new PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         layoutParams = getWindow().getAttributes();
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
-        tvPic = (TextView) pv.findViewById(R.id.tvPic);
-        tvUp = (TextView) pv.findViewById(R.id.tvUp);
+        tvPic = pv.findViewById(R.id.tvPic);
+        tvUp = pv.findViewById(R.id.tvUp);
         tvPic.setOnClickListener(this);
         tvUp.setOnClickListener(this);
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
@@ -143,23 +136,19 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
         modifyPop = new PopupWindow(Constants.screenW - Utils.dip2px(mContext, 80), WindowManager.LayoutParams.WRAP_CONTENT);
         View v = LayoutInflater.from(mContext).inflate(R.layout.tklayout, null);
         v.findViewById(R.id.ivHead).setVisibility(View.GONE);
-        tvTip = (TextView) v.findViewById(R.id.tvTip);
-        btSave = (Button) v.findViewById(R.id.btSave);
-        etContent = (EditText) v.findViewById(R.id.etContent);
-        ivClose = (ImageView) v.findViewById(R.id.ivClose);
-        ivClose.setOnClickListener(this);
+        tvTip = v.findViewById(R.id.tvTip);
+        Button btSave = v.findViewById(R.id.btSave);
+        etContent = v.findViewById(R.id.etContent);
+        v.findViewById(R.id.ivClose).setOnClickListener(view -> modifyPop.dismiss());
         btSave.setOnClickListener(this);
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         modifyPop.setBackgroundDrawable(new BitmapDrawable());
@@ -167,12 +156,9 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         modifyPop.setOutsideTouchable(true);
         // 设置焦点
         modifyPop.setFocusable(true);
-        modifyPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        modifyPop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         etContent.addTextChangedListener(new TextWatcher() {
             @Override
@@ -220,29 +206,26 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        llHead.setOnClickListener(this);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i) {
-                    case 0:
-                        showModifyPop(0);
-                        break;
-                    case 1:
-                        showPop(1);
-                        break;
-                    case 2:
-                        if (!TextUtils.isEmpty(userInfoBean.getCollege())) {
-                            return;
-                        }
-                        if (pvOptions == null) {
-                            Utils.toastShort(mContext, "数据获取中~~~");
-                            return;
-                        }
-                        pvOptions.show();
-                        break;
-                }
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        llHead.setOnClickListener(v -> showPop(0));
+        lv.setOnItemClickListener((adapterView, view, i, l) -> {
+            switch (i) {
+                case 0:
+                    showModifyPop(0);
+                    break;
+                case 1:
+                    showPop(1);
+                    break;
+                case 2:
+                    if (!TextUtils.isEmpty(userInfoBean.getCollege())) {
+                        return;
+                    }
+                    if (pvOptions == null) {
+                        Utils.toastShort(mContext, "数据获取中~~~");
+                        return;
+                    }
+                    pvOptions.show();
+                    break;
             }
         });
     }
@@ -251,15 +234,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivClose:
-                modifyPop.dismiss();
-                break;
-            case R.id.llHead:
-                showPop(0);
-                break;
             case R.id.tvUp:
                 if (status == 0)//相册选择
                 {
@@ -272,10 +246,10 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 pop.dismiss();
                 break;
             case R.id.tvPic:
-                if (status == 0)//拍照
-                {
+                // 拍照
+                if (status == 0) {
                     path = PhotoUtils.startPhoto(this);
-                } else {  //选择女
+                } else {  // 选择女
                     sex = 2;
                     setBodyParams(new String[]{"sex"}, new String[]{"" + 2});
                     sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
@@ -304,6 +278,7 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 modifyPop.dismiss();
                 break;
         }
+
     }
 
     private void showPop(int status) {
@@ -343,23 +318,21 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 break;
             case 202:
                 if (data != null) {
-                    photoUri = null;
-                    photoUri = data.getData();
+                    Uri photoUri = data.getData();
                     crop(photoUri);
                 }
                 break;
             case PHOTO_REQUEST_CUT:
                 if (data != null) {
-                    setPicToView(data);
+                    setPicToView();
                 }
                 break;
         }
 
-
         if (requestCode == PHOTO_REQUEST_CUT) {
             Luban.with(this).load(new File(path)).
                     setCompressListener(new OnCompressListener() {
-                        //                    @Override
+                        @Override
                         public void onStart() {
                         }
 
@@ -372,12 +345,11 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                             setFileBodyParams(new String[]{"file"}, new File[]{file});
                             sendPost(Constants.base_url + "/api/user/update.do", upHead, Constants.token);
                         }
-
                     }).launch();
         }
     }
 
-    /*
+    /**
      * 剪切图片
      */
     private void crop(Uri uri) {
@@ -398,8 +370,8 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         intent.putExtra("outputX", Utils.dip2px(this, 75));
         intent.putExtra("outputY", Utils.dip2px(this, 75));
         //裁剪后的图片Uri路径，uritempFile为Uri类变量
-        uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "XiangYuIcon.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
+        uriTempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "XiangYuIcon.jpg");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uriTempFile);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
         startActivityForResult(intent, PHOTO_REQUEST_CUT);
@@ -407,12 +379,10 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
 
     /**
      * 保存裁剪之后的图片数据
-     *
-     * @param picdata
      */
-    private void setPicToView(Intent picdata) {
+    private void setPicToView() {
         try {
-            Bitmap photo = BitmapFactory.decodeStream(getContentResolver().openInputStream(uritempFile));
+            Bitmap photo = BitmapFactory.decodeStream(getContentResolver().openInputStream(uriTempFile));
             path = FileUtilcll.saveFile(BaseInfoActivity.this, "temphead.jpg", photo);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -457,19 +427,16 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 break;
             case 10086:
                 if (result.optInt("code") == 0) {
-                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    ArrayList<LabelSelectionActivity.LableBean> datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
                     }.getType());
                     final ArrayList<String> data = new ArrayList<>();
                     for (int i = 0; i < datas.size(); i++) {
                         data.add(datas.get(i).getValue());
                     }
-                    pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-                        @Override
-                        public void onOptionsSelect(int options1, int option2, int options3, View v) {
-                            school = data.get(options1);
-                            setBodyParams(new String[]{"college"}, new String[]{school});
-                            sendPost(Constants.base_url + "/api/user/update.do", upSchool, Constants.token);
-                        }
+                    pvOptions = new OptionsPickerBuilder(this, (options1, option2, options3, v) -> {
+                        school = data.get(options1);
+                        setBodyParams(new String[]{"college"}, new String[]{school});
+                        sendPost(Constants.base_url + "/api/user/update.do", upSchool, Constants.token);
                     }).setSubmitText("确定")//确定按钮文字
                             .setCancelText("取消")//取消按钮文字
                             .setTitleText("选择学校")//标题
@@ -486,7 +453,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                             .isDialog(false)//是否显示为对话框样式
                             .isRestoreItem(true)//切换时是否还原，设置默认选中第一项。
                             .build();
-
                     pvOptions.setPicker(data);//添加数据源
                 } else {
                     Utils.toastShort(this, result.optString("msg"));

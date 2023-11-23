@@ -170,7 +170,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
             @Override
             public void onClick(View v) {
                 window.dismiss();
-                PhotoUtils.showFileChooser(203, MessageActivity.this);
+                PhotoUtils.choosePhoto(203, MessageActivity.this);
             }
         });
         window.setOnDismissListener(new PopupWindow.OnDismissListener() {

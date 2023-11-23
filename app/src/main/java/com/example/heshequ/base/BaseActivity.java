@@ -1,6 +1,5 @@
 package com.example.heshequ.base;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -36,6 +35,14 @@ public abstract class BaseActivity extends FragmentActivity {
     protected Context mContext;
     private int REQUEST_CODE_PERMISSION = 99;
 
+    protected interface IPermissionsRequestListener {
+        void onAllow();
+
+        void onReject();
+    }
+
+    private IPermissionsRequestListener permissionsRequestListener;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.e("class Name : ", TAG);
@@ -49,20 +56,31 @@ public abstract class BaseActivity extends FragmentActivity {
         setWindowStatusBarColor(this);
     }
 
+    public void requestPermission(List<String> permissions, int requestCode) {
+        requestPermission(permissions, requestCode, null);
+    }
+
     /**
      * 请求权限
      *
      * @param permissions 请求的权限
      * @param requestCode 请求权限的请求码
      */
-    public void requestPermission(List<String> permissions, int requestCode) {
-        this.REQUEST_CODE_PERMISSION = requestCode;
+    public void requestPermission(List<String> permissions, int requestCode, IPermissionsRequestListener listener) {
+        REQUEST_CODE_PERMISSION = requestCode;
+        permissionsRequestListener = listener;
         if (checkPermissions(permissions)) {
             permissionSuccess(REQUEST_CODE_PERMISSION);
+            if (listener != null) {
+                listener.onAllow();
+            }
         } else {
             List<String> needPermissions = getDeniedPermissions(permissions);
-            ActivityCompat.requestPermissions(this, needPermissions.toArray(new String[needPermissions.size()]),
-                    REQUEST_CODE_PERMISSION);
+            ActivityCompat.requestPermissions(
+                    this,
+                    needPermissions.toArray(new String[needPermissions.size()]),
+                    REQUEST_CODE_PERMISSION
+            );
         }
     }
 
@@ -119,7 +137,6 @@ public abstract class BaseActivity extends FragmentActivity {
      * @param permissions
      * @param grantResults
      */
-    @TargetApi(23)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -127,9 +144,14 @@ public abstract class BaseActivity extends FragmentActivity {
         if (requestCode == REQUEST_CODE_PERMISSION) {
             if (verifyPermissions(grantResults)) {
                 permissionSuccess(REQUEST_CODE_PERMISSION);
+                if (permissionsRequestListener != null) {
+                    permissionsRequestListener.onAllow();
+                }
             } else {
                 permissionFail(REQUEST_CODE_PERMISSION);
-                // showTipsDialog();
+                if (permissionsRequestListener != null) {
+                    permissionsRequestListener.onReject();
+                }
             }
         }
     }

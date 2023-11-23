@@ -229,7 +229,7 @@ public class AuthenticationActivity extends NetWorkActivity implements View.OnCl
                 showPop(1);
                 break;
             case R.id.tvUp:
-                PhotoUtils.showFileChooser(202, this);
+                PhotoUtils.choosePhoto(202, this);
                 pop.dismiss();
                 break;
             case R.id.tvPic:

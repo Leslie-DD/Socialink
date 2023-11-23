@@ -305,7 +305,7 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
                 SendNew.this.finish();
                 break;
             case R.id.tvUp:
-                PhotoUtils.showFileChooser(202, this);
+                PhotoUtils.choosePhoto(202, this);
                 pop.dismiss();
                 break;
             case R.id.tvPic:

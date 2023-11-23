@@ -220,7 +220,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
                         });
                 break;
             case R.id.tvUp:
-                PhotoUtils.showFileChooser(202, this);
+                PhotoUtils.choosePhoto(202, this);
                 pop.dismiss();
                 break;
             case R.id.tvPic:

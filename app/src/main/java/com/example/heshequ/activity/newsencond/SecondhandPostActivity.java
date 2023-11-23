@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
-import com.example.heshequ.base.NetWorkActivity;
+import com.example.heshequ.base.PhotoBaseActivity;
 import com.example.heshequ.classification.ClassificationBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
@@ -49,7 +50,8 @@ import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class SecondhandPostActivity extends NetWorkActivity {
+public class SecondhandPostActivity extends PhotoBaseActivity {
+    private static final String TAG = "[SecondhandPostActivity]";
     private TextView tvTitle;
 
     // 商品类型选择
@@ -196,9 +198,9 @@ public class SecondhandPostActivity extends NetWorkActivity {
             path = PhotoUtils.startPhoto(this);
             popView.dismiss();
         });
-        //上传照片时选项中的文字
+        // 上传照片时选项中的文字
         pv.findViewById(R.id.tvUp).setOnClickListener(v -> {
-            PhotoUtils.showFileChooser(202, this);
+            PhotoUtils.choosePhoto(202, this);
             popView.dismiss();
         });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
@@ -267,8 +269,7 @@ public class SecondhandPostActivity extends NetWorkActivity {
         }
         promptDialog = new PromptDialog(this);
         promptDialog.showLoading("正在发布");
-        OkHttpUtils.post(WenConstans.Sendgoods)
-                .tag(this)
+        OkHttpUtils.post(WenConstans.Sendgoods).tag(this)
                 .headers(Constants.Token_Header, WenConstans.token)
                 .params("price", temp + "")
                 .params("content", content + "")
@@ -295,7 +296,6 @@ public class SecondhandPostActivity extends NetWorkActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                     @Override
@@ -314,26 +314,13 @@ public class SecondhandPostActivity extends NetWorkActivity {
             case 200:
                 break;
             case 202:
-                if (data != null) {
-                    Uri photoUri;
-                    try {
-                        ContentResolver resolver = this.getContentResolver();
-                        Uri originalUri = data.getData(); // 获得图片的uri
-                        photoUri = originalUri;
-                        String[] proj = {MediaStore.Images.Media.DATA};
-                        Cursor cursor = resolver.query(originalUri, proj, null, null, null);
-                        if (cursor == null) {
-                            this.path = photoUri.getPath();
-
-                        } else {
-                            if (cursor.moveToFirst()) {
-                                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                                this.path = cursor.getString(column_index);
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                if (data == null) {
+                    break;
+                }
+                Uri originalUri = data.getData();
+                if (originalUri != null) {
+                    path = PhotoUtils.getRealPathFromUri(SecondhandPostActivity.this, originalUri);
+                    Log.i(TAG, "onActivityResult 202 path: " + path);
                 }
                 break;
         }
@@ -343,7 +330,6 @@ public class SecondhandPostActivity extends NetWorkActivity {
                 setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
-
                     }
 
                     @Override
@@ -351,12 +337,10 @@ public class SecondhandPostActivity extends NetWorkActivity {
                         if (file.exists()) {
                             fileList.add(file);
                         }
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
                     }
                 }).launch();
     }

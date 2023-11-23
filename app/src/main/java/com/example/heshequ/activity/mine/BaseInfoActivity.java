@@ -1,20 +1,15 @@
 package com.example.heshequ.activity.mine;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,12 +28,11 @@ import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.adapter.listview.ItemAdapter;
-import com.example.heshequ.base.NetWorkActivity;
+import com.example.heshequ.base.PhotoBaseActivity;
 import com.example.heshequ.bean.ItemBean;
 import com.example.heshequ.bean.UserInfoBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefUserInfo;
-import com.example.heshequ.utils.FileUtilcll;
 import com.example.heshequ.utils.PhotoUtils;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
@@ -50,18 +44,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
 
 /**
  * 个人基本资料页面
  */
 
-public class BaseInfoActivity extends NetWorkActivity implements View.OnClickListener {
-    private final int PHOTO_REQUEST_CUT = 300;
+public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickListener {
+    private static final String TAG = "[BaseInfoActivity]";
+
+    private final static int UPLOAD_HEAD = 1000;
+    private final static int UPLOAD_NAME = 1001;
+
     private ArrayList<ItemBean> data;
     private ItemAdapter adapter;
     private ListView lv;
@@ -77,9 +71,8 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     private EditText etContent;
     private int popStatus;
     private UserInfoBean userInfoBean;
+    private Uri takePhotoUri;
     private String path;
-    private final int upHead = 1000;
-    private final int upName = 1001;
     private String name;
     private final int upSex = 1002;
     private final int upSchool = 1003;
@@ -87,7 +80,7 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     private int sex;
     private SharedPreferences sp;
     private Gson gson;
-    private OptionsPickerView pvOptions;
+    private OptionsPickerView<String> pvOptions;
     private Uri uriTempFile;
 
     @Override
@@ -98,7 +91,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         event();
         initPop();
     }
-
 
     private void init() {
         sp = MeetApplication.getInstance().getSharedPreferences();
@@ -176,7 +168,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 }
             }
         });
-        // 设置所在布局
         modifyPop.setContentView(v);
     }
 
@@ -208,8 +199,8 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         llHead.setOnClickListener(v -> showPop(0));
-        lv.setOnItemClickListener((adapterView, view, i, l) -> {
-            switch (i) {
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            switch (position) {
                 case 0:
                     showModifyPop(0);
                     break;
@@ -230,15 +221,15 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
         });
     }
 
-
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tvUp:
-                if (status == 0)//相册选择
-                {
-                    PhotoUtils.showFileChooser(202, this);
-                } else {  //选择男
+                // 相册选择
+                if (status == 0) {
+                    choosePhoto();
+                } else {  // 选择男
                     sex = 1;
                     setBodyParams(new String[]{"sex"}, new String[]{"" + 1});
                     sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
@@ -248,7 +239,7 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
             case R.id.tvPic:
                 // 拍照
                 if (status == 0) {
-                    path = PhotoUtils.startPhoto(this);
+                    takePhoto();
                 } else {  // 选择女
                     sex = 2;
                     setBodyParams(new String[]{"sex"}, new String[]{"" + 2});
@@ -262,13 +253,13 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                     Utils.toastShort(mContext, "请先输入信息!");
                     return;
                 }
-                //修改名字
+                // 修改名字
                 if (popStatus == 0) {
                     name = content;
                     setBodyParams(new String[]{"nickname"}, new String[]{content});
-                    sendPost(Constants.base_url + "/api/user/update.do", upName, Constants.token);
+                    sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_NAME, Constants.token);
                 }
-                //修改学校
+                // 修改学校
                 if (popStatus == 1) {
                     name = content;
                     sp.edit().putString(Constants.uid + "school", name).apply();
@@ -278,7 +269,6 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
                 modifyPop.dismiss();
                 break;
         }
-
     }
 
     private void showPop(int status) {
@@ -306,102 +296,41 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK) {
-            return;
-        }
-        switch (requestCode) {
-            case 200:
-                //拍照  path
-                File temp = new File(path);
-                crop(Uri.fromFile(temp));
-                break;
-            case 202:
-                if (data != null) {
-                    Uri photoUri = data.getData();
-                    crop(photoUri);
-                }
-                break;
-            case PHOTO_REQUEST_CUT:
-                if (data != null) {
-                    setPicToView();
-                }
-                break;
-        }
-
-        if (requestCode == PHOTO_REQUEST_CUT) {
-            Luban.with(this).load(new File(path)).
-                    setCompressListener(new OnCompressListener() {
-                        @Override
-                        public void onStart() {
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                        }
-
-                        @Override
-                        public void onSuccess(File file) {
-                            setFileBodyParams(new String[]{"file"}, new File[]{file});
-                            sendPost(Constants.base_url + "/api/user/update.do", upHead, Constants.token);
-                        }
-                    }).launch();
-        }
+    protected void onPicCropSuccess(Uri uri) {
+        String filePath = PhotoUtils.getRealPathFromUri(this, uri);
+        File uploadFile = new File(filePath);
+        setFileBodyParams(new String[]{"file"}, new File[]{uploadFile});
+        sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_HEAD, Constants.token);
     }
-
-    /**
-     * 剪切图片
-     */
-    private void crop(Uri uri) {
-        // 裁剪图片意图
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("scale", true);// 去黑边
-        intent.putExtra("scaleUpIfNeeded", true);// 去黑边
-        if (Build.MANUFACTURER.equals("HUAWEI")) {
-            intent.putExtra("aspectX", 9998);
-            intent.putExtra("aspectY", 9999);
-        } else {
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-        }
-        // 裁剪后输出图片的尺寸大小
-        intent.putExtra("outputX", Utils.dip2px(this, 75));
-        intent.putExtra("outputY", Utils.dip2px(this, 75));
-        //裁剪后的图片Uri路径，uritempFile为Uri类变量
-        uriTempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "XiangYuIcon.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uriTempFile);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
-        startActivityForResult(intent, PHOTO_REQUEST_CUT);
-    }
-
-    /**
-     * 保存裁剪之后的图片数据
-     */
-    private void setPicToView() {
-        try {
-            Bitmap photo = BitmapFactory.decodeStream(getContentResolver().openInputStream(uriTempFile));
-            path = FileUtilcll.saveFile(BaseInfoActivity.this, "temphead.jpg", photo);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
+        Log.d(TAG, String.format("http request %d onSuccess %s", where, result));
         switch (where) {
-            case upHead:
-                if (result.optInt("code") == 0) {
-                    Glide.with(this).load(path).asBitmap().into(ivHead);
-                    EventBus.getDefault().post(new RefUserInfo());
-                } else {
+            case UPLOAD_HEAD:
+                if (result.optInt("code") != 0) {
                     Utils.toastShort(this, result.optString("msg"));
+                    break;
                 }
+                String userHead;
+                try {
+                    JSONObject data = result.getJSONObject("data");
+                    userHead = data.getString("head");
+                } catch (JSONException e) {
+                    Log.e(TAG, "UPLOAD_HEAD success get data failed, " + e.getMessage());
+                    e.printStackTrace();
+                    break;
+                }
+                if (TextUtils.isEmpty(userHead)) {
+                    Utils.toastShort(this, "更新头像失败");
+                    break;
+                }
+
+                Log.i(TAG, "UPLOAD_HEAD success " + Constants.base_url + userHead);
+                Glide.with(this).load(Constants.base_url + userHead).asBitmap().into(ivHead);
+                EventBus.getDefault().post(new RefUserInfo());
                 break;
-            case upName:
+            case UPLOAD_NAME:
                 if (result.optInt("code") == 0) {
                     if (popStatus == 0) {
                         data.get(0).setTip(name);
@@ -469,6 +398,7 @@ public class BaseInfoActivity extends NetWorkActivity implements View.OnClickLis
 
                 break;
         }
+
     }
 
     @Override

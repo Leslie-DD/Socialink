@@ -1157,7 +1157,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 this.finish();
                 break;
             case R.id.tvUp:
-                PhotoUtils.showFileChooser(202, this);
+                PhotoUtils.choosePhoto(202, this);
                 pop.dismiss();
                 break;
             case R.id.tvPic:
@@ -1248,7 +1248,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
             case R.id.cvHead:
                 iseditor = true;
-                PhotoUtils.showFileChooser(202, this);
+                PhotoUtils.choosePhoto(202, this);
                 break;
             case R.id.btConfirm:
                 editorPop.dismiss();

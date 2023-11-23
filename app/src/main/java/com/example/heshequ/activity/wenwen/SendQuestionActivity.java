@@ -347,7 +347,7 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
                         });
                 break;
             case R.id.tvUp:
-                PhotoUtils.showFileChooser(202, this);
+                PhotoUtils.choosePhoto(202, this);
                 pop.dismiss();
                 break;
             case R.id.tvPic:

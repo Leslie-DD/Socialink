@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 用于读取手机当前的状态 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 用于写入缓存数据到扩展存储卡 -->
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />

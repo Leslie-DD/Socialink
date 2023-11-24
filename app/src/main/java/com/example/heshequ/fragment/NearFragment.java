@@ -17,10 +17,8 @@ import com.example.heshequ.adapter.recycleview.LabelsortAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.FriendListBean;
-import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
-import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -48,7 +46,7 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
     private int clickPosition;
     private TextView tvTips;
     private FragmentBrodcast brodcast;
-    double longtitude;  // 纬度
+    double longitude;  // 纬度
     double latitude;    // 经度
 
 
@@ -56,10 +54,10 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
         Bundle bundle = getArguments();
-        longtitude = Double.parseDouble(bundle.getString("jingdu"));
-        latitude = Double.parseDouble(bundle.getString("weidu"));
+        longitude = bundle.getDouble("longitude");
+        latitude = bundle.getDouble("latitude");
         init();
-        getData(longtitude, latitude, 1, 1000);
+        getData(longitude, latitude, 1, 1000);
         setFragmentListener();
         return view;
     }
@@ -77,60 +75,40 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
     private void getData(double longtitude, double latitude, int pn, int ps) {
         setBodyParams(new String[]{"longtitude", "latitude", "pn", "ps"}, new String[]{"" + longtitude, "" + latitude, "" + pn, "" + ps});
         sendPostConnection(WenConstans.FriendNear, 100, WenConstans.token);
-        Log.e("NearFragment", "");
-        Log.e("WenConstans.token", "" + WenConstans.token);
-        Log.e("WenConstans.id", "" + WenConstans.id);
-        Log.e("Constants.token", "" + Constants.token);
-        Log.e("Constants.uid", "" + Constants.uid);
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
+        Log.d("NearFragment", "onSuccess " + where + " " + result.toString());
         if (ResultUtils.isFail(result, getActivity())) {
             return;
         }
 
         Gson gson = new Gson();
         if (where == 100) {
-            Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss2");
             allList = new ArrayList<>();
             if (hasRefresh) {
                 hasRefresh = false;
                 rv.refreshComplete();
             }
             if (result.has("data")) {
-
-
-                Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss1");
                 JSONArray data = result.getJSONArray("data");
-
-                if (data != null) {
-                    allList = gson.fromJson(data.toString(),
-                            new TypeToken<List<FriendListBean>>() {
-                            }.getType());
-                    Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss");
-                    if (allList == null || allList.size() == 0) {
-                        allList = new ArrayList<>();
-                    }
-
+                allList = gson.fromJson(data.toString(), new TypeToken<List<FriendListBean>>() {}.getType());
+                if (allList == null || allList.size() == 0) {
+                    allList = new ArrayList<>();
                 }
             }
-
             adapter.setData(allList);
         } else if (where == 101) {
-
             rv.loadMoreComplete();
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONArray("data");
-                if (data != null) {
-                    moreList = gson.fromJson(data.toString(),
-                            new TypeToken<List<FriendListBean>>() {
-                            }.getType());
-                    if (moreList == null || moreList.size() == 0) {
-                        moreList = new ArrayList<>();
-                    }
-
+                moreList = gson.fromJson(data.toString(),
+                        new TypeToken<List<FriendListBean>>() {
+                        }.getType());
+                if (moreList == null || moreList.size() == 0) {
+                    moreList = new ArrayList<>();
                 }
             }
             allList.addAll(moreList);
@@ -139,9 +117,6 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
             } else {
                 tvTips.setVisibility(View.GONE);
             }
-            adapter.setData(allList);
-        } else if (where == 1000) {
-            Utils.toastShort(mContext, result.getString("msg") + "");
             adapter.setData(allList);
         }
     }
@@ -156,30 +131,22 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
     public void onRefresh() {
         hasRefresh = true;
         pn = 1;
-        getData(longtitude, latitude, 1, 1000);
+        getData(longitude, latitude, 1, 1000);
     }
 
     @Override
     public void onLoadMore() {
         pn++;
         if (pn > totalPage) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    rv.loadMoreComplete();
-                }
-            }, 1000);
+            new Handler().postDelayed(() -> rv.loadMoreComplete(), 1000);
         } else {
-            getData(longtitude, latitude, 1, 1000);
+            getData(longitude, latitude, 1, 1000);
         }
     }
 
     @Override
     public void doSave(int position) {
-//        clickPosition = position;
-//        setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-//        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
-        //暂时还没写交友的关注功能
+        // TODO: implement
     }
 
     private void setFragmentListener() {
@@ -197,7 +164,7 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
             if (items == 1) {    //加载
 
             } else if (items == 2) {
-                getData(longtitude, latitude, 1, 1000);
+                getData(longitude, latitude, 1, 1000);
             } else if (items == 3) {   //刷新
 
             }

@@ -74,8 +74,8 @@ public class FriendSet extends NetWorkActivity implements View.OnClickListener {
     public static String daxue1;
     public static String shengri1;
     public static String xueyuan1;
-    private static String longtitude;
-    private static String latitude;
+    private static Double longitude;
+    private static Double latitude;
     //    public static String nicheng1,shengri1,xuehao1,xueyuan1,zhuanye1,nianji1,gexing1,jiaxiang1;
 //    public static int sex1,qingan1;
     private static Handler handler = new Handler();
@@ -88,9 +88,8 @@ public class FriendSet extends NetWorkActivity implements View.OnClickListener {
         Intent intentt = getIntent();
 //        id = WenConstans.id;  //这里取不到正确的用户id  导致会跳转到登陆界面
         id = Constants.uid;
-        Toast.makeText(this, "Start FriendSet, id:" + id, Toast.LENGTH_LONG).show();
-        longtitude = intentt.getStringExtra("longtitude");
-        latitude = intentt.getStringExtra("latitude");
+        longitude = intentt.getDoubleExtra("longitude", 0);
+        latitude = intentt.getDoubleExtra("latitude", 0);
         String ids = id + "";
         Log.e("ids", ids + "");
         if (ids.equals("0")) {
@@ -98,7 +97,7 @@ public class FriendSet extends NetWorkActivity implements View.OnClickListener {
             startActivity(intents);
             Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG).show();
         }
-        Log.e("经纬度", "" + latitude + "+" + longtitude);
+        Log.e("经纬度", "" + latitude + "+" + longitude);
         init();
         event();
     }

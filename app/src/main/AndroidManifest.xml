@@ -140,8 +140,6 @@
         <activity android:name="com.example.heshequ.activity.friend.FriendFiltrate" />
         <activity android:name="com.example.heshequ.activity.friend.FriendSet" />
         <activity android:name="com.example.heshequ.activity.friend.FriendSearch" />
-        <activity android:name="com.example.heshequ.activity.friend.FriendActivity2" />
-        <activity android:name="com.example.heshequ.activity.friend.FriendActivity3" />
         <activity android:name="com.example.heshequ.activity.friend.SendNew" />
         <activity android:name="com.example.heshequ.activity.timetable.TimetableCheckin" />
         <activity android:name="com.example.heshequ.activity.timetable.TimetableSelect" />

@@ -18,7 +18,6 @@ import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.FriendNewBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
-import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -69,61 +68,49 @@ public class NewFragment extends NetWorkFragment implements XRecyclerView.Loadin
     private void getData(int where) {
         setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, "" + 20});
         sendPostConnection(WenConstans.GetFriendDynamic, where, WenConstans.token);
-        Log.e("showtoken", WenConstans.token + "");
+        Log.i("NewFragment", "WenConstants.Token: " + WenConstans.token);
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
+        Log.d("NewFragment", "onSuccess " + where + ", result: " + result.toString());
         if (ResultUtils.isFail(result, getActivity())) {
             return;
         }
 
         Gson gson = new Gson();
         if (where == 100) {
-            Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss2");
             allList = new ArrayList<>();
             if (hasRefresh) {
                 hasRefresh = false;
                 rv.refreshComplete();
             }
             if (result.has("data")) {
-
-
-                Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss1");
                 JSONArray data = result.getJSONArray("data");
-                Log.e("showdataarray", "" + data.toString());
                 for (int i = 0; i < data.length(); i++) {
                     JSONObject value = data.getJSONObject(i);
                     Log.e("data" + i, value + "");
                 }
-                if (data != null) {
-                    allList = gson.fromJson(data.toString(),
-                            new TypeToken<List<FriendNewBean>>() {
-                            }.getType());
-                    Log.e("s", "ssssssssssssssssssssssssssssssssssssssssss");
-                    if (allList == null || allList.size() == 0) {
-                        allList = new ArrayList<>();
-                    }
-
+                allList = gson.fromJson(data.toString(),
+                        new TypeToken<List<FriendNewBean>>() {
+                        }.getType());
+                if (allList == null || allList.size() == 0) {
+                    allList = new ArrayList<>();
                 }
             }
-
             adapter.setData(allList);
         } else if (where == 101) {
-
             rv.loadMoreComplete();
             moreList = new ArrayList<>();
             if (result.has("data")) {
                 JSONArray data = result.getJSONArray("data");
-                if (data != null) {
-                    moreList = gson.fromJson(data.toString(),
-                            new TypeToken<List<FriendNewBean>>() {
-                            }.getType());
-                    if (moreList == null || moreList.size() == 0) {
-                        moreList = new ArrayList<>();
-                    }
-
+                moreList = gson.fromJson(data.toString(),
+                        new TypeToken<List<FriendNewBean>>() {
+                        }.getType());
+                if (moreList == null || moreList.size() == 0) {
+                    moreList = new ArrayList<>();
                 }
+
             }
             allList.addAll(moreList);
             if (allList.size() == 0) {
@@ -131,9 +118,6 @@ public class NewFragment extends NetWorkFragment implements XRecyclerView.Loadin
             } else {
                 tvTips.setVisibility(View.GONE);
             }
-            adapter.setData(allList);
-        } else if (where == 1000) {
-            Utils.toastShort(mContext, result.getString("msg") + "");
             adapter.setData(allList);
         }
     }
@@ -155,12 +139,7 @@ public class NewFragment extends NetWorkFragment implements XRecyclerView.Loadin
     public void onLoadMore() {
         pn++;
         if (pn > totalPage) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    rv.loadMoreComplete();
-                }
-            }, 1000);
+            new Handler().postDelayed(() -> rv.loadMoreComplete(), 1000);
         } else {
             getData(101);
         }
@@ -168,10 +147,7 @@ public class NewFragment extends NetWorkFragment implements XRecyclerView.Loadin
 
     @Override
     public void doSave(int position) {
-//        clickPosition = position;
-//        setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-//        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
-        //暂时还没写交友的关注功能
+        // TODO: implement
     }
 
     private void setFragmentListener() {

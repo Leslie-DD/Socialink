@@ -136,11 +136,11 @@ public abstract class NetWorkFragment extends Fragment {
             public void onSuccess(String s, Call call, Response response) {
                 try {
                     JSONObject json = new JSONObject(s);
-                    Log.i(TAG, tag + "onSuccess url: " + url + ", json: " + json);
+                    Log.i(TAG, tag + " onSuccess url: " + url + ", json: " + json);
                     NetWorkFragment.this.onSuccess(json, where, false);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.e(TAG, tag + "onFailure url: " + url + ", exception: " + e);
+                    Log.e(TAG, tag + " onFailure url: " + url + ", exception: " + e);
                     NetWorkFragment.this.onFailure(e.getMessage(), where);
                 }
             }
@@ -148,7 +148,7 @@ public abstract class NetWorkFragment extends Fragment {
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                Log.e(TAG, tag + "onFailure url: " + url + ", exception: " + e.toString());
+                Log.e(TAG, tag + " onFailure url: " + url + ", exception: " + e.toString());
                 NetWorkFragment.this.onFailure(e.getMessage(), where);
             }
         });

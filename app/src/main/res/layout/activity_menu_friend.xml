@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/base_color_white"
     android:layout_height="match_parent"
+    android:background="@color/base_color_white"
     android:focusable="true"
-    android:orientation="vertical"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
     <LinearLayout
-
-        android:orientation="vertical"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/new_title_bar2"/>
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include layout="@layout/new_title_bar2" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:layout_marginEnd="0dp"
+            android:layout_marginHorizontal="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            android:gravity="center_vertical">
             <LinearLayout
-                android:layout_width="33dp"
+                android:id="@+id/FriendSet"
+                android:layout_width="32dp"
                 android:layout_height="32dp"
-
-                android:id="@+id/FriendSet">
-
+                android:padding="2dp">
 
                 <ImageView
-
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
                     android:layout_weight="1"
-                    android:src="@mipmap/setting" />
+                    android:src="@drawable/set_up" />
             </LinearLayout>
 
             <LinearLayout
-
                 android:id="@+id/FriendSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -49,17 +43,14 @@
                 android:background="@drawable/gray_search">
 
                 <TextView
-
-                    android:layout_width="match_parent"
+                    android:id="@+id/search_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_weight="1"
-                    android:drawableLeft="@mipmap/innquire"
-                    android:drawablePadding="5dp"
                     android:gravity="center_vertical"
-                    android:hint="搜索相关"
+                    android:hint=" 搜索相关"
                     android:textColor="@color/text66"
                     android:textColorHint="@color/text9"
                     android:textSize="14sp" />
@@ -67,65 +58,60 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="33dp"
+                android:id="@+id/FriendFiltrate"
+                android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:gravity="center_vertical"
-                android:id="@+id/FriendFiltrate">
+                android:padding="2dp">
 
                 <ImageView
-
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
-                    android:layout_weight="1"
-                    android:src="@mipmap/sizerimg" />
+                    android:src="@drawable/filter" />
             </LinearLayout>
 
         </LinearLayout>
 
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:paddingTop="15dp"
-            android:background="#ffffff"
             android:id="@+id/llfenlan"
-            android:paddingBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
             android:paddingLeft="12dp"
+            android:paddingTop="15dp"
             android:paddingRight="12dp"
-            android:layout_height="match_parent">
+            android:paddingBottom="15dp">
+
             <TextView
-                style="@style/tv_style"
                 android:id="@+id/tvNear"
-                android:text="附近"
-                />
-            <TextView
                 style="@style/tv_style"
+                android:text="附近" />
+
+            <TextView
                 android:id="@+id/tvNew"
-                android:text="动态"
-                />
-            <TextView
                 style="@style/tv_style"
+                android:text="动态" />
+
+            <TextView
                 android:id="@+id/tvFriend"
-                android:text="好友"
-                />
+                style="@style/tv_style"
+                android:text="好友" />
         </LinearLayout>
     </LinearLayout>
 
 
-
     <androidx.viewpager.widget.ViewPager
-        android:layout_marginTop="150dp"
-        android:layout_width="match_parent"
         android:id="@+id/vp"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="150dp">
 
     </androidx.viewpager.widget.ViewPager>
     <!--<com.jcodecraeer.xrecyclerview.XRecyclerView-->
-        <!--android:layout_below="@+id/ll"-->
-        <!--android:id="@+id/rv"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <!--android:layout_below="@+id/ll"-->
+    <!--android:id="@+id/rv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
     <!--</com.jcodecraeer.xrecyclerview.XRecyclerView>-->
 
 </RelativeLayout>

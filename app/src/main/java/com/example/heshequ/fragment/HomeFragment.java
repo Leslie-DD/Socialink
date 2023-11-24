@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -150,8 +149,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         ConsTants.initXrecycleView(getActivity(), true, true, rv);
         initHeadView();
-
-
     }
 
     private void initHeadView() {
@@ -253,7 +250,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
 
     }
 
-    //获取首页轮播图
+    // 获取首页轮播图
     private void getImgs() {
         setBodyParams(new String[]{"category"}, new String[]{"" + 1});
         sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
@@ -275,7 +272,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
                 startActivity(new Intent(mContext, TimetableCheckin.class));
                 break;
             case R.id.makefriends:
-                Toast.makeText(getActivity(), "将要跳转到GPSActivity", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(mContext, GPSActivity.class));
                 break;
             case R.id.llSearch:

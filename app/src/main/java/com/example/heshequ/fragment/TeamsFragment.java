@@ -27,7 +27,7 @@ import java.util.List;
  * Hulk_Zhang on 2018/5/8 14:12
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class TimsFragment extends NetWorkFragment implements View.OnClickListener {
+public class TeamsFragment extends NetWorkFragment implements View.OnClickListener {
 
     private View view;
     private LinearLayout llSearch;
@@ -49,7 +49,7 @@ public class TimsFragment extends NetWorkFragment implements View.OnClickListene
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_tims, null);
+        view = inflater.inflate(R.layout.fragment_teams, null);
         init();
         event();
         return view;

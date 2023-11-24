@@ -1,11 +1,11 @@
 package com.example.heshequ.base;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -14,9 +14,9 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
@@ -30,12 +30,14 @@ import java.util.List;
  *
  * @date 2013-12-12
  */
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     protected final String TAG = getClass().getSimpleName();
     protected Context mContext;
     private int REQUEST_CODE_PERMISSION = 99;
 
     protected interface IPermissionsRequestListener {
+
+        @SuppressLint("MissingPermission")
         void onAllow();
 
         void onReject();
@@ -45,14 +47,13 @@ public abstract class BaseActivity extends FragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.e("class Name : ", TAG);
+        Log.d("[ActivityCreate]", "(onCreate) " + TAG);
         super.onCreate(savedInstanceState);
         MeetApplication.getInstance().addActivity(this);
         WindowManager wm = this.getWindowManager();
         ConsTants.screenW = wm.getDefaultDisplay().getWidth();
         ConsTants.screenH = wm.getDefaultDisplay().getHeight();
         mContext = this;
-        Log.e("YSF", Build.VERSION.SDK_INT + "&&" + Build.VERSION_CODES.LOLLIPOP);
         setWindowStatusBarColor(this);
     }
 
@@ -126,6 +127,7 @@ public abstract class BaseActivity extends FragmentActivity {
             Window window = activity.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         } catch (Exception e) {
+            Log.w(TAG, "(setWindowStatusBarColor) failed, " + e.getMessage());
             e.printStackTrace();
         }
     }

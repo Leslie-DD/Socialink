@@ -4,7 +4,6 @@ package com.example.heshequ.activity.oldsecond;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -31,7 +30,6 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
 
     private MyFragmentPagerAdapter adapter;
     private int status = -1;
-    private ImageView ivRight;
     private LableAdapter lableadapter;
 
 
@@ -40,13 +38,9 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mygood);
 
-
-        lableadapter = new LableAdapter(labelList, context);
-
+        lableadapter = new LableAdapter(labelList);
         init();
         event();
-
-
     }
 
     private void init() {

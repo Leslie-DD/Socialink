@@ -8,7 +8,6 @@ import com.example.heshequ.base.BaseActivity;
 /**
  * Created by 佳佳 on 2019/9/4.
  */
-
 public class WenwenActivity extends BaseActivity {
 
     public void onCreate(Bundle savedInstanceState) {

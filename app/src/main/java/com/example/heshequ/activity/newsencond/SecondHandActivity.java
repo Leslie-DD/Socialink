@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -32,53 +33,36 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/**
- * @FileName: XRefreshViewTestActivity
- * @Author: Ding Yifan
- * @CreateDate: 2021/1/3
- * @CreateTime: 19:45
- * @UpdateUser: 更新者
- * @UpdateDate: 2021/1/3
- * @UpdateTime: 19:45
- * @UpdateRemark: 更新说明
- * @Description:
- */
 public class SecondHandActivity extends NetWorkActivity implements View.OnClickListener {
 
-    /************** 广播 *****************************************************************************/
-    private IntentFilter intentFilter;
-    private LocalReceiver localReceiver;
-    private LocalBroadcastManager localBroadcastManager;
     public static final String LOCAL_BROADCAST = "ClassifyPosition";
-    /*************************************************************************************************/
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
-    private List<Integer> mTypeList = new ArrayList<>();
+    private final List<Integer> mTypeList = new ArrayList<>();
 
-    private List<String> mSearchList = new ArrayList<>();
-    private List<String> mPicList = new ArrayList<>();
+    private final List<String> mSearchList = new ArrayList<>();
+    private final List<String> mPicList = new ArrayList<>();
     private List<SecondhandgoodBean> mGoodList = new ArrayList<>();
-    private ArrayList<HomeBannerImgsBean> imgsData;
-    private List<String> imgs = new ArrayList<>();
+    private final List<String> images = new ArrayList<>();
     private SecondHandAdapter adapter;
 
     private XRefreshView xRefreshView;
-    private int mLoadCount = 0;
 
-    /*************************** 横向分类RecyclerView ************************************************/
-    private List<ClassifySecondaryBean> classifySecondaryBeanList = new ArrayList<>();
-    private int position = 0;
+    /**
+     * 横向分类RecyclerView
+     */
+    private final List<ClassifySecondaryBean> classifySecondaryBeanList = new ArrayList<>();
 
-    /*************************** 商品部分参数 ********************************************************/
+    /**
+     * 商品部分参数
+     */
     private int category1Id;
     private int category2Id;
     private int pn = 1;
     private int ps = 8;
     private int totalPage = 1;
 
-    /*************************************************************************************************/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,7 +89,6 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
         xRefreshView.setAutoLoadMore(true);         //滑动到底部自动加载更多
 
         xRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
-
             @Override
             public void onRefresh(boolean isPullDown) {
                 category2Id = 0;
@@ -121,10 +104,7 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
             public void onLoadMore(boolean isSilence) {
                 pn++;
                 if (pn > totalPage) {
-                    new Handler().postDelayed(() -> {
-                        xRefreshView.setLoadComplete(true);
-//                            xRefreshView.stopLoadMore();
-                    }, 1000);
+                    new Handler().postDelayed(() -> xRefreshView.setLoadComplete(true), 1000);
                 } else {
                     getData(103);
                 }
@@ -132,17 +112,13 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
             }
         });
 
-
-        /**
-         * 注册广播
-         */
-        localBroadcastManager = LocalBroadcastManager.getInstance(this);
-        localReceiver = new LocalReceiver();
-        intentFilter = new IntentFilter();
+        LocalBroadcastManager localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        LocalReceiver localReceiver = new LocalReceiver();
+        IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(LOCAL_BROADCAST);   //添加action
         localBroadcastManager.registerReceiver(localReceiver, intentFilter);   //注册本地广播
 
-        getImgs();
+        getBannerImages();
         getCategory();
     }
 
@@ -155,17 +131,17 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
             case 1000:  // 获取轮播图数据
                 if (result.optInt("code") == 0) {
                     if (result.has("data") && !result.optString("data").isEmpty()) {
-                        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+                        ArrayList<HomeBannerImgsBean> imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
                         }.getType());
                         if (imgsData != null && imgsData.size() > 0) {
                             for (HomeBannerImgsBean bannerImgsBean : imgsData) {
                                 String img = Constants.base_url + bannerImgsBean.getCoverImage();
-                                imgs.add(img);
+                                images.add(img);
                             }
 
                         } else {
                         }
-                        adapter.setBannerDataList(imgs, imgsData);
+                        adapter.setBannerDataList(images, imgsData);
                     }
                 } else {
                     Utils.toastShort(mContext, result.optString("msg"));
@@ -195,7 +171,7 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
                 mGoodList.clear();
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
+                    if (data.has("list")) {
                         mGoodList = gson.fromJson(data.getJSONArray("list").toString(),
                                 new TypeToken<List<SecondhandgoodBean>>() {
                                 }.getType());
@@ -212,7 +188,7 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
             case 101:   // 获取其他分类的商品
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
+                    if (data.has("list")) {
                         mGoodList = gson.fromJson(data.getJSONArray("list").toString(),
                                 new TypeToken<List<SecondhandgoodBean>>() {
                                 }.getType());
@@ -231,7 +207,7 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
                 mGoodList.clear();
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
+                    if (data.has("list")) {
                         mGoodList = gson.fromJson(data.getJSONArray("list").toString(),
                                 new TypeToken<List<SecondhandgoodBean>>() {
                                 }.getType());
@@ -254,8 +230,8 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
 
     }
 
-    //获取首页轮播图
-    private void getImgs() {
+    // 获取首页轮播图
+    private void getBannerImages() {
         setBodyParams(new String[]{"category"}, new String[]{"" + 1});
         sendPost(Constants.base_url + "/api/pub/category/advertisement.do", 1000, Constants.token);
     }
@@ -302,11 +278,9 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(LOCAL_BROADCAST)) {
+            if (TextUtils.equals(action, LOCAL_BROADCAST)) {
                 category2Id = intent.getIntExtra("category2Id", 0);
-                position = intent.getIntExtra("position", 0);
-
-                adapter.setPosi(position);
+                adapter.setPosi(intent.getIntExtra("position", 0));
 
                 pn = 1;
                 xRefreshView.setLoadComplete(false);

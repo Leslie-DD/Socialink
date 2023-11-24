@@ -1,24 +1,19 @@
 package com.example.heshequ.base;
 
 
-import android.Manifest;
+import static com.example.heshequ.utils.PermissionHelper.getPhotoPermissions;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
-
-import androidx.annotation.RequiresApi;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.example.heshequ.utils.PhotoUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * 实现图片选择、拍照和裁剪功能
@@ -34,29 +29,6 @@ public class PhotoBaseActivity extends NetWorkActivity {
 
     private Uri takePhotoUri;
     private Uri cropPhotoUri;
-
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-    protected static final String[] PERMISSIONS_CAMERA_TIRAMISU = {
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_VIDEO,
-    };
-
-    protected static final String[] PERMISSIONS_CAMERA = {
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
-    private List<String> getPhotoPermissions() {
-        List<String> permissionsRequest;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissionsRequest = Arrays.asList(PERMISSIONS_CAMERA_TIRAMISU);
-        } else {
-            permissionsRequest = Arrays.asList(PERMISSIONS_CAMERA);
-        }
-        return permissionsRequest;
-    }
 
     protected void choosePhoto() {
         requestPermission(getPhotoPermissions(), PHOTO_PERMISSIONS_REQUEST, new IPermissionsRequestListener() {

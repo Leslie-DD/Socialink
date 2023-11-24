@@ -218,12 +218,9 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                                 .into(ivImage);
                     }
 
-                    llSave.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (mDoSaveListener != null) {
-                                mDoSaveListener.doSave(position);
-                            }
+                    llSave.setOnClickListener(v -> {
+                        if (mDoSaveListener != null) {
+                            mDoSaveListener.doSave(position);
                         }
                     });
 

@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context = "com.example.heshequ.activity.flowview.TeamActivity"
-    >
+    tools:context = "com.example.heshequ.activity.flowview.TeamActivity">
 
     <fragment
         android:id="@+id/my_team"
-        android:name="com.example.heshequ.fragment.TimsFragment"
+        android:name="com.example.heshequ.fragment.TeamsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </fragment>

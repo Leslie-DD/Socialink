@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,10 +107,6 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
                             for (HomeBannerImgsBean bannerImgsBean : imgsData) {
                                 imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
                             }
-
-                        } else {
-                            /*imgs.add(Constants.url);
-                            imgs.add(Constants.url2);*/
                         }
                         bannerAdapter.setData(imgs);
                     }
@@ -119,7 +116,6 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
                 break;
             case 102:
                 String json = result.toString();
-//                Log.e("strJSON",json);
                 ClassificationBean classificationBean = com.alibaba.fastjson.JSONObject.parseObject(json, ClassificationBean.class);
                 ClassifySecondaryBean classifySecondaryBean = new ClassifySecondaryBean("", "推荐", 0, 0);
                 classifySecondaryBeanList.add(classifySecondaryBean);
@@ -142,17 +138,10 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
                     list.add(fragments[i]);
                 }
 
-
                 adapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(), list);
                 vp.setAdapter(adapter);
-//                vp.setOffscreenPageLimit(0);
                 vp.setCurrentItem(0);
                 setTvBg(0);
-
-//                Utils.toastShort(mContext, "重新计算高度 "+position);
-//                vp.resetHeight(position);
-
-
                 event();
 
         }
@@ -160,23 +149,21 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
 
     @Override
     protected void onFailure(String result, int where) {
-
     }
 
     @Override
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_second, null);
-        /**
-         * second_head_view 包含轮播图和分类框部分
-         */
+
+        // second_head_view 包含轮播图和分类框部分
         headView = getActivity().getLayoutInflater().inflate(R.layout.second_head_view, null);
 
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         localReceiver = new LocalReceiver();
         intentFilter = new IntentFilter();
-        intentFilter.addAction(LOCAL_BROADCAST);   //添加action
-        intentFilter.addAction(HEIGHT_BROADCAST);  //添加action
-        localBroadcastManager.registerReceiver(localReceiver, intentFilter);   //注册本地广播
+        intentFilter.addAction(LOCAL_BROADCAST);
+        intentFilter.addAction(HEIGHT_BROADCAST);
+        localBroadcastManager.registerReceiver(localReceiver, intentFilter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -188,42 +175,24 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
     }
 
     private void init() {
-
         ivRight = view.findViewById(R.id.ivRight);
         ivRight.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.kj2));
         llSearch = view.findViewById(R.id.llSearch);
         llSearch.setOnClickListener(this);
 
-        ivRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext, SecondhandPostActivity.class));
-            }
-        });
+        ivRight.setOnClickListener(v -> startActivity(new Intent(mContext, SecondhandPostActivity.class)));
 
         rv = (XRecyclerView) view.findViewById(R.id.rv);    // rv是除搜索框外的其他部件范围
         ConsTants.initXrecycleView(getActivity(), true, true, rv);
 
         rv.setAdapter(new RecycleAdapter(getActivity()));
         rv.setLoadingListener(this);
-//        rv.setOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                if (getScollYDistance()+llVis.getTop()<0){
-//                    llInvis.setVisibility(View.VISIBLE);
-//                }else{
-//                    llInvis.setVisibility(View.GONE);
-//                }
-//            }
-//        });
 
         rv.addHeaderView(headView);
         vp = (CustomViewPager) headView.findViewById(R.id.vp);    // CustomViewPage  自定义viewpage
 
         list = new ArrayList<>();
         initHeadView();
-
     }
 
     private void initHeadView() {
@@ -239,25 +208,15 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         rollPagerView.setPlayDelay(3000);
         rollPagerView.setAnimationDurtion(500);
         rollPagerView.setHintView(new ColorPointHintView(getContext(), Color.parseColor("#00bbff"), Color.WHITE));
-        bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
-            @Override
-            public void onItemClick(int position) {
+        bannerAdapter.setonBanneritemClickListener(position ->
                 startActivity(new Intent(getContext(), WebActivity.class)
-                        .putExtra("url", imgsData.get(position).getLinkUrl()));
-            }
-        });
+                        .putExtra("url", imgsData.get(position).getLinkUrl())
+                ));
 
         llVis = (LinearLayout) headView.findViewById(R.id.llVis);
 
         ib_classifacation = (ImageButton) headView.findViewById(R.id.second_classifation);
         ib_classifacation.setOnClickListener(this);
-    }
-
-    public int getScollYDistance() {
-        LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
-        int position = layoutManager.findFirstVisibleItemPosition();
-        View firstVisiableChildView = layoutManager.findViewByPosition(position);
-        return firstVisiableChildView.getTop();
     }
 
     //获取首页轮播图
@@ -291,14 +250,6 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
     }
 
     public void setTvBg(int status) {
-        /**
-         * vp是点击一个默认加载点击的一个左右两个共三个page，
-         * 这三个page的高度是固定的，导致这三个page的高度一样，
-         * 需要调用下面代码每次点击跳转一个page都重新计算这个page高度
-         */
-//        Utils.toastShort(mContext, "setTvBg() 重新计算高度 "+status);
-//        vp.resetHeight(status);
-
         if (this.status == status) {
             return;
         }
@@ -318,9 +269,6 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-
-                Utils.toastShort(mContext, "vp.setOnPageChangeListener, setTvBg " + position);
-//                setTvBg(position);
                 vp.resetHeight(position);
             }
 
@@ -337,39 +285,26 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(LOCAL_BROADCAST)) {
+            if (TextUtils.equals(action, LOCAL_BROADCAST)) {
                 position = intent.getIntExtra("position", 0);
                 classifyRecyclerView.setBackgroundColor(getResources().getColor(R.color.white));
                 setTvBg(position);
-            } else if (action.equals(HEIGHT_BROADCAST)) {
-//                int category2ID = intent.getIntExtra("category2ID",0);
-//                if(category2ID!=0){
-//                    Utils.toastShort(mContext, "接收广播category2ID="+category2ID+"，重新计算高度 "+position);
-//                    vp.resetHeight(position);
-//                }
+            } else if (TextUtils.equals(action, HEIGHT_BROADCAST)) {
             }
         }
     }
 
     @Override
     public void onRefresh() {
-//        init();
     }
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Utils.toastShort(mContext, "父Fragment通知子Fragment加载更多");
-                fragments[position].loadMore();
-                rv.loadMoreComplete();
-            }
+        new Handler().postDelayed(() -> {
+            Utils.toastShort(mContext, "父Fragment通知子Fragment加载更多");
+            fragments[position].loadMore();
+            rv.loadMoreComplete();
         }, 2000);
-//        sleep(2000);
-//        Utils.toastShort(mContext, "重新计算高度 "+status);
-//        vp.resetHeight(status);
-
     }
 
     @Override

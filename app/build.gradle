@@ -23,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -30,7 +31,7 @@ android {
 
     android.applicationVariants.configureEach { variant ->
         variant.outputs.configureEach { output ->
-            def fileName = "Meeting_" +
+            def fileName = "GXLM_" +
                     "v${defaultConfig.versionCode}" +
                     ".${defaultConfig.versionName}" +
                     "_${releaseTime()}" + ".apk"

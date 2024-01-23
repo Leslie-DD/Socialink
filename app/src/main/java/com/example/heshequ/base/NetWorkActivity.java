@@ -112,7 +112,8 @@ public abstract class NetWorkActivity extends BaseActivity {
     }
 
     private <REQUEST extends BaseRequest<REQUEST>> void executeRequest(String tag, String url, int where, BaseRequest<REQUEST> request) {
-        Log.d(TAG, tag + " executeRequest, url: " + url);
+        Log.d(TAG, tag + " executeRequest, url: " + url + ", params: " + request.getParams().toString());
+
         request.execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {

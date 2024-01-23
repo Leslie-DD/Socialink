@@ -12,10 +12,11 @@ public class Constants {
     public static String url4 = "http://img4.duitang.com/uploads/item/201509/26/20150926014223_BW8EG.jpeg";
     public static String url5 = "http://mvimg10.meitudata.com/569b9090af0526344.jpg";
 
+//    public static String base_url = "http://182.92.84.79:8081/xiangyu";
+//    public static String base_url_tmp = "http://182.92.84.79:8081/xiangyu";
 
-    public static String base_url = "http://182.92.84.79:8081/xiangyu";
-    public static String base_url_tmp = "http://182.92.84.79:8081/xiangyu";
-
+    public static String base_url = "http://8.138.85.81:6000/xiangyu";
+    public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
 
     public static final String APP_AD_WX = "wx78748a644eb7d5f7";
 

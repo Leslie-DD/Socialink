@@ -191,7 +191,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - currentTime > 2000) {
-                Toast.makeText(mContext, "再按一次退出湘遇", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "再按一次退出高校联盟", Toast.LENGTH_SHORT).show();
                 currentTime = System.currentTimeMillis();
                 return true;
             }
@@ -293,7 +293,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
             Log.e("DDQ", "Notification ok ");
         } else {
             Log.e("DDQ", "Notification noOpen ");
-            Utils.toastLong(mContext, "检测到您没有打开\"湘遇\"通知权限，请前往应用管理页面打开通知权限，以接收更多新消息");
+            Utils.toastLong(mContext, "检测到您没有打开\"高校联盟\"通知权限，请前往应用管理页面打开通知权限，以接收更多新消息");
         }
     }
 

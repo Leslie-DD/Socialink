@@ -2,6 +2,7 @@ package com.example.heshequ.activity.login;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
@@ -32,12 +35,12 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
     private boolean canSee, canSee2;
     private int count = 30;
     private String phone;
-    private final int getCode = 1000;
-    private final int resetPwdCode = 1001;
+    private final int S_CODE_CODE = 1000;
+    private final int RESET_PWD_CODE = 1001;
 
-    private Handler handler = new Handler() {
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NonNull Message msg) {
             count--;
             if (count <= 0) {
                 count = 60;
@@ -88,20 +91,17 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         switch (where) {
-            case getCode:
+            case S_CODE_CODE:
                 if (result.optInt("code") == 0) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            count = 30;
-                            getting = true;
-                            while (getting) {
-                                handler.sendEmptyMessage(1);
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                    new Thread(() -> {
+                        count = 30;
+                        getting = true;
+                        while (getting) {
+                            handler.sendEmptyMessage(1);
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
                         }
                     }).start();
@@ -113,7 +113,7 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                     Utils.toastShort(mContext, msg);
                 }
                 break;
-            case resetPwdCode:
+            case RESET_PWD_CODE:
                 if (result.optInt("code") == 0) {
                     this.finish();
                 }
@@ -153,15 +153,17 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                     }
                 }
                 setBodyParams(new String[]{"phone", "forget"}, new String[]{phone, "forget"});
-                sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
+                sendPost(Constants.base_url + "/api/account/scode.do", S_CODE_CODE, null);
                 break;
             case R.id.ivSee:
                 canSee = !canSee;
                 ivSee.setImageResource(canSee ? R.mipmap.kj : R.mipmap.bkj);
-                /*//从密码不可见模式变为密码可见模式
+                /*
+                //从密码不可见模式变为密码可见模式
                 et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                 //从密码可见模式变为密码不可见模式
-                et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());*/
+                et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                */
                 etPwd.setTransformationMethod(canSee ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
 
                 etPwd.setSelection(etPwd.getText().toString().length());
@@ -216,8 +218,8 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
                     Utils.toastShort(mContext, "二次密码不一致！");
                     return;
                 }
-                setBodyParams(new String[]{"phone", "code", "pwd"}, new String[]{phone, code, EncryptUtils.encryptMD5ToString(pwd)});
-                sendPost(Constants.base_url + "/api/account/resetpwd.do", resetPwdCode, null);
+                setBodyParams(new String[]{"phone", "code", "pwd"}, new String[]{phone, code, pwd /*EncryptUtils.encryptMD5ToString(pwd)*/});
+                sendPost(Constants.base_url + "/api/account/resetpwd.do", RESET_PWD_CODE, null);
                 break;
         }
     }

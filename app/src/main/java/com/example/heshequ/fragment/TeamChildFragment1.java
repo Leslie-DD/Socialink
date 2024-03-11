@@ -285,7 +285,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
 
     @Override
     protected void onFailure(String result, int where) {
-        Toast.makeText(getActivity(), "网络异常", Toast.LENGTH_SHORT).show();
+        Utils.toastShort(getActivity(), "网络异常");
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

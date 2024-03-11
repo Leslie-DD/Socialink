@@ -16,6 +16,7 @@ import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
+import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
@@ -64,7 +65,7 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
             Intent intents = new Intent(FriendNearDetail.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "用户详情页面，我们需要验证您的身份", Toast.LENGTH_LONG).show();
+            Utils.toastShort(this, "用户详情页面，我们需要验证您的身份");
         }
         hisid = friendListBean.user_id;
         init();
@@ -193,7 +194,7 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
                                         startActivity(intent1);
 
                                     } else {
-                                        Toast.makeText(FriendNearDetail.this, "这位用户没有设置试卷，您不能加他为好友", Toast.LENGTH_LONG).show();
+                                        Utils.toastShort(FriendNearDetail.this, "这位用户没有设置试卷，您不能加他为好友");
                                     }
                                 } catch (JSONException e) {
                                     Log.e("gerenxinxi", "JSONException: " + e.toString());

@@ -43,7 +43,7 @@ public class FriendQinganSet extends NetWorkActivity implements View.OnClickList
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = radioGroup.findViewById(i);
                 qingancontent = radioButton.getText().toString();
-                Toast.makeText(FriendQinganSet.this, radioButton.getText(), Toast.LENGTH_SHORT).show();
+                Utils.toastShort(FriendQinganSet.this, qingancontent);
             }
         });
         Intent intent1 = getIntent();

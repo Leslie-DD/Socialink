@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -95,6 +96,9 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (ResultUtils.isFail(result, this)) {
+            if (result.has("msg")) {
+                Utils.toastShort(context, result.getString("msg"));
+            }
             return;
         }
         if (where == 1000) {

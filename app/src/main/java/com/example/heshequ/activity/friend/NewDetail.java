@@ -105,7 +105,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
             Intent intents = new Intent(NewDetail.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG).show();
+            Utils.toastShort(this, "我们需要验证您的身份");
         }
         friendNewBean = new FriendNewBean();
         friendNewBean = (FriendNewBean) getIntent().getSerializableExtra("FriendNew");

@@ -72,23 +72,13 @@ public class News_TeamFragment extends NetWorkFragment implements XRecyclerView.
         builder.setCancelable(false);
         builder.setTitle("提示");
         builder.setMessage("确定要删除这条消息吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //删除
-                setBodyParams(new String[]{"id"}, new String[]{"" + data.get(delp).getId()});
-                sendPostConnection(Constants.base_url + "/api/user/news/clearNews.do", DelMsg, Constants.token);
-                deldialog.dismiss();
-            }
-
-
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            //删除
+            setBodyParams(new String[]{"id"}, new String[]{"" + data.get(delp).getId()});
+            sendPostConnection(Constants.base_url + "/api/user/news/clearNews.do", DelMsg, Constants.token);
+            deldialog.dismiss();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deldialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
         deldialog = builder.create();
         deldialog.setCancelable(false);
     }

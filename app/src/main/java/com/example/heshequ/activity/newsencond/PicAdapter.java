@@ -16,6 +16,7 @@ import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.adapter.MyBannerAdapter;
 import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.HomeBannerImgsBean;
+import com.example.heshequ.utils.Utils;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 
@@ -61,7 +62,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
                 mContext.startActivity(new Intent(mContext, WebActivity.class).putExtra("url", mList3.get(position1).getLinkUrl()))
         );
 
-        holder.itemView.setOnClickListener(v -> Toast.makeText(mContext, "你点击的是Banner", Toast.LENGTH_SHORT).show());
+        holder.itemView.setOnClickListener(v -> Utils.toastShort(mContext, "你点击的是Banner"));
     }
 
     @Override

@@ -95,7 +95,7 @@ public class FriendSet extends NetWorkActivity implements View.OnClickListener {
         if (ids.equals("0")) {
             Intent intents = new Intent(FriendSet.this, LoginActivity.class);
             startActivity(intents);
-            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG).show();
+            Utils.toastShort(this, "我们需要验证您的身份");
         }
         Log.e("经纬度", "" + latitude + "+" + longitude);
         init();

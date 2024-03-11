@@ -45,6 +45,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.util.Pair;
 
 import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
@@ -176,35 +177,30 @@ public class Utils {
         return name;
     }
 
-    /**
-     * 返回时间
-     *
-     * @return
-     */
-    public static String getTimeTip() {
-        SimpleDateFormat fat = new SimpleDateFormat("HHmm");
+    private static Pair<String, Long> lastToast = null;
 
-        return fat.format(new Date());
+    private static boolean forbidShow(String info, long duration) {
+        return lastToast != null
+                && !TextUtils.isEmpty(lastToast.first)
+                && lastToast.second != null
+                && TextUtils.equals(lastToast.first, info)
+                && System.currentTimeMillis() - lastToast.second < duration;
     }
 
     public static void toastLong(Context context, String info) {
+        if (forbidShow(info, 5000)) {
+            return;
+        }
         Toast.makeText(context, info, Toast.LENGTH_LONG).show();
+        lastToast = new Pair<>(info, System.currentTimeMillis());
     }
 
-    public static void toastShort(Context context, String info) {
+    public synchronized static void toastShort(Context context, String info) {
+        if (forbidShow(info, 3000)) {
+            return;
+        }
         Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
-    }
-
-    public static void showLog(String info) {
-        Log.e("ying", info);
-    }
-
-    public static double getFloat(double f) {
-        BigDecimal b = new BigDecimal(f);
-        double f1 = b.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
-        Log.e("YSF", "f:" + f + "&&" + "f1:" + f1);
-        return f1;
-
+        lastToast = new Pair<>(info, System.currentTimeMillis());
     }
 
     public static ArrayList<TeamMemberBean> getSortData(ArrayList<TeamMemberBean> pData) {

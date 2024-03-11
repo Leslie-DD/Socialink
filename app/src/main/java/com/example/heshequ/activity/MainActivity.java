@@ -192,7 +192,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - currentTime > 2000) {
-                Toast.makeText(mContext, "再按一次退出高校联盟", Toast.LENGTH_SHORT).show();
+                Utils.toastShort(mContext, "再按一次退出高校联盟");
                 currentTime = System.currentTimeMillis();
                 return true;
             }

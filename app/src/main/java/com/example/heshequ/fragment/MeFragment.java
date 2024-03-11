@@ -128,12 +128,6 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
         initUserinfo();
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        initUserinfo();
-    }
-
     private void event() {
         ivEditor.setOnClickListener(this);
         llSay.setOnClickListener(this);
@@ -337,7 +331,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                     xiangyuMoney.setText(money + "");
                 } else {
                     String msg = result.optString("msg");
-                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(getContext(), msg);
                 }
                 break;
 
@@ -376,6 +370,8 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                                 break;
                         }
                         adapter.notifyDataSetChanged();
+
+                        getXiangyuMoney();
                     }
                 } else {
                     Utils.toastShort(mContext, result.optString("msg"));
@@ -386,7 +382,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
 
     @Override
     protected void onFailure(String result, int where) {
-        //Toast.makeText(getContext(), "网络状态错误", Toast.LENGTH_SHORT).show();
+        //Utils.toastShort(getContext(), "网络状态错误", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -395,9 +391,4 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getXiangyuMoney();
-    }
 }

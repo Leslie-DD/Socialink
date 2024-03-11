@@ -44,7 +44,7 @@ public class Friendxingbieset extends NetWorkActivity implements View.OnClickLis
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = radioGroup.findViewById(i);
                 sexcontent = radioButton.getText().toString();
-                Toast.makeText(Friendxingbieset.this, radioButton.getText(), Toast.LENGTH_SHORT).show();
+                Utils.toastShort(Friendxingbieset.this, sexcontent);
             }
         });
         Intent intent2 = getIntent();

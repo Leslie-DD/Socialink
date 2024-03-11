@@ -129,7 +129,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             public void run() {
                 Looper.prepare();
                 //待扩展成对话框提示 提交bug/关闭程序
-                Toast.makeText(mContext, "很抱歉,程序出现异常,即将退出.", Toast.LENGTH_SHORT).show();
+                Utils.toastShort(mContext, "很抱歉,程序出现异常,即将退出.");
                 Looper.loop();
             }
         }.start();
@@ -228,7 +228,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     private void sendCrashLog2PM(String fileName) {
         if (!new File(fileName).exists()) {
-            Toast.makeText(mContext, "日志文件不存在！", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(mContext, "日志文件不存在！");
             return;
         }
         FileInputStream fis = null;

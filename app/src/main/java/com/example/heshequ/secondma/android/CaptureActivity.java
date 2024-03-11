@@ -28,6 +28,7 @@ import com.example.heshequ.secondma.decode.DecodeImgCallback;
 import com.example.heshequ.secondma.decode.DecodeImgThread;
 import com.example.heshequ.secondma.decode.ImageUtil;
 import com.example.heshequ.secondma.view.ViewfinderView;
+import com.example.heshequ.utils.Utils;
 import com.google.zxing.Result;
 
 import org.greenrobot.eventbus.EventBus;
@@ -303,7 +304,7 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
 
                 @Override
                 public void onImageDecodeFailed() {
-                    Toast.makeText(CaptureActivity.this, "抱歉，解析失败,换个图片试试.", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(CaptureActivity.this, "抱歉，解析失败,换个图片试试.");
                 }
             }).run();
         }

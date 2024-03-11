@@ -503,7 +503,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 setBodyParams(new String[]{"id",}, new String[]{id + ""});
                 sendPost(WenConstans.CLOSEJOINSECRET, CLOSESECRET, Constants.token);
 
-                Toast.makeText(context, "你点击了关闭密码按钮", Toast.LENGTH_SHORT).show();
+                Utils.toastShort(context, "你点击了关闭密码按钮");
             }
         });
         changingSecret.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -741,24 +741,24 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         switch (where) {
             case 2019:
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已加团", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "已加团");
                     refData();
                 } else {
-                    Toast.makeText(context, "加团失败", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "加团失败");
                 }
                 break;
             case 2018:
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已加团", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "已加团");
                 } else {
-                    Toast.makeText(context, "操作异常", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "操作异常");
                 }
                 break;
             case CHECKJOINSECRET3:
                 settingPop.dismiss();
                 if (result.optInt("code") == 0) {
                     if (result.optJSONObject("data").optInt("pwdflag") != 1) {
-                        Toast.makeText(context, "操作异常", Toast.LENGTH_SHORT).show();
+                        Utils.toastShort(context, "操作异常");
                         break;
                     } else {
                         if (result.optJSONObject("data").optInt("pwd") == -1) {
@@ -780,17 +780,17 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
             case SETJOINSECRET:
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已重置密码为" + getNewSecret(), Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "已重置密码为" + getNewSecret());
                 } else {
-                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "操作失败");
                 }
                 break;
             case CLOSESECRET:
                 changingSecret.dismiss();
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已关闭密码加团", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "已关闭密码加团");
                 } else {
-                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "操作失败");
                 }
 
                 break;
@@ -799,7 +799,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                     int pwdflag = result.optJSONObject("data").optInt("pwdflag");
                     ll_st_c.setVisibility(View.GONE);
                     if (pwdflag == 0) {
-                        Toast.makeText(context, "抱歉，密码加团已关闭", Toast.LENGTH_SHORT).show();
+                        Utils.toastShort(context, "抱歉，密码加团已关闭");
                     } else {
                         String pwd = result.optJSONObject("data").getString("pwd");
                         if (pwd == null) {//什么也不做
@@ -812,7 +812,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
                     }
                 } else {
-                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "操作失败");
                 }
 
                 break;
@@ -829,16 +829,16 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                         ll_st.setVisibility(View.GONE);
                     }
                 } else {
-                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "操作失败");
                 }
                 break;
 
             case DELETEJOINSECRET:
                 if (result.optInt("code") == 0) {
-                    Toast.makeText(context, "已删除密码", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "已删除密码");
                     secret.dismiss();
                 } else {
-                    Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();
+                    Utils.toastShort(context, "操作失败");
                     secret.dismiss();
                 }
                 break;
@@ -1079,7 +1079,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     @Override
     protected void onFailure(String result, int where) {
-        Toast.makeText(context, "操作异常", Toast.LENGTH_SHORT).show();
+        Utils.toastShort(context, "操作异常");
     }
 
     @Override

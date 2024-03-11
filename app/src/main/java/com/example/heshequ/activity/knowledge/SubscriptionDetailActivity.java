@@ -15,6 +15,7 @@ import com.example.heshequ.bean.knowledge.ArticleSimpleBean;
 import com.example.heshequ.bean.knowledge.Author;
 import com.example.heshequ.bean.knowledge.SubscriptionBean;
 import com.example.heshequ.constans.WenConstans;
+import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -129,7 +130,7 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
                 adapter.setData(allList);
             }
         } else if (where == 200) {
-            Toast.makeText(mContext, "退订成功", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(mContext, "退订成功");
         }
 
     }

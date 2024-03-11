@@ -138,7 +138,7 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
             Intent intents = new Intent(SendNew.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(this, "我们需要验证您的身份");
         }
         bean = new FriendUserId();
         fileList = new ArrayList<>();

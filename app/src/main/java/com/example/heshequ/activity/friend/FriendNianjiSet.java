@@ -41,7 +41,7 @@ public class FriendNianjiSet extends NetWorkActivity implements View.OnClickList
         jiaxiang = intent1.getStringExtra("jiaxiang");
 //        id = WenConstans.id;
         id = Constants.uid;
-        Toast.makeText(this, "用户 id:" + id, Toast.LENGTH_LONG).show();
+        Utils.toastShort(this, "用户 id:" + id);
 
         /**
          * 定义未修改年级时返回的数据

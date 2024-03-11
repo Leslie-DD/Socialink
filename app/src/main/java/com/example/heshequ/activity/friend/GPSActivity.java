@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.heshequ.base.BaseActivity;
 import com.example.heshequ.utils.PermissionHelper;
+import com.example.heshequ.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +55,7 @@ public class GPSActivity extends BaseActivity {
 
         @Override
         public void onReject() {
-            Toast.makeText(GPSActivity.this, "缺少权限", Toast.LENGTH_LONG).show();
+            Utils.toastShort(GPSActivity.this, "缺少权限");
             finish();
         }
     };

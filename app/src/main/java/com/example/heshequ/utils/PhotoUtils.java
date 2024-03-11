@@ -57,7 +57,7 @@ public class PhotoUtils {
         try {
             context.startActivityForResult(intent, file_code);
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(context, "Please install a File Manager.", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(context, "Please install a File Manager.");
         }
     }
 

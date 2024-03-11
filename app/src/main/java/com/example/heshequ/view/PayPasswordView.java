@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.utils.Utils;
 
 
 /**
@@ -92,7 +93,7 @@ public class PayPasswordView extends LinearLayout implements View.OnClickListene
             context.changeSecret();
         }
 
-        Toast.makeText(context, context.getNewSecret(), Toast.LENGTH_SHORT).show();
+        Utils.toastShort(context, context.getNewSecret());
         this.context = null;//解除掉与TeamDetailActivity2之间的链接，让PayPasswordView可以被垃圾回收
     }
 

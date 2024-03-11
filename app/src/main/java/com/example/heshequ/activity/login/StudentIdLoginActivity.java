@@ -216,13 +216,13 @@ public class StudentIdLoginActivity extends NetWorkActivity implements View.OnCl
         String studentId = mEtUser.getText().toString();
         String studentPwd = mEtPwd.getText().toString();
         if (school.getSchool() == null || school.getSchool().isEmpty()) {
-            Toast.makeText(this, "请选择学校", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(this, "请选择学校");
             return;
         } else if (studentId == null || studentId.isEmpty()) {
-            Toast.makeText(this, "学生账号不能为空", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(this, "学生账号不能为空");
             return;
         } else if (studentId == null || studentPwd.isEmpty()) {
-            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(this, "密码不能为空");
             return;
         }
         applyForLogin(APPLY_FOR_LOGIN);
@@ -234,9 +234,8 @@ public class StudentIdLoginActivity extends NetWorkActivity implements View.OnCl
     private void checkMessageCode() {
         if ((verification = mEtVerificationcode.getText().toString()) != null && mEtVerificationcode.getText().toString().length() != 0) {
             applyForLogin(APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE);
-            return;
         } else {
-            Toast.makeText(this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+            Utils.toastShort(this, "验证码不能为空");
         }
     }
 
@@ -379,7 +378,7 @@ public class StudentIdLoginActivity extends NetWorkActivity implements View.OnCl
     @Override
     protected void onFailure(String result, int where) {
         Log.e("ddq--", result);
-        Toast.makeText(this, "账号或密码错误", Toast.LENGTH_SHORT).show();
+        Utils.toastShort(this, "账号或密码错误");
     }
 
 

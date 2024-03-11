@@ -150,7 +150,7 @@ public class FriendAnswerQues extends NetWorkActivity implements View.OnClickLis
                                     JSONObject result = new JSONObject(s);
 
                                     String msg = result.getString("msg");
-                                    Toast.makeText(FriendAnswerQues.this, "" + msg, Toast.LENGTH_LONG).show();
+                                    Utils.toastShort(FriendAnswerQues.this, msg);
                                 } catch (JSONException e) {
                                     Log.e("gerenxinxi", "JSONException: " + e.toString());
                                     e.printStackTrace();

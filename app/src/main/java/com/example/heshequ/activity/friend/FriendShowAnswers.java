@@ -55,7 +55,7 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
             Intent intents = new Intent(FriendShowAnswers.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "查看好友回答页面，我们需要验证您的身份", Toast.LENGTH_LONG).show();
+            Utils.toastShort(this, "查看好友回答页面，我们需要验证您的身份");
         }
         setContentView(R.layout.activity_showanswer);
         friendAddNewsBean = new FriendAddNewsBean();

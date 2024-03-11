@@ -18,6 +18,7 @@ import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.FriendListBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
+import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
@@ -68,7 +69,7 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
             Intent intents = new Intent(FriendDetail.this, LoginActivity.class);
 
             startActivity(intents);
-            Toast.makeText(this, "我们需要验证您的身份", Toast.LENGTH_LONG).show();
+            Utils.toastShort(this, "我们需要验证您的身份");
         }
         hisid = friendListBean.user_id;
         Log.e("得到hisid", hisid + "");
@@ -238,9 +239,9 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
                                         //String msg = result.getString("setQues");
                                         //Log.e("shanchufanhuixinxi", "" + msg);
 
-                                        Toast.makeText(FriendDetail.this, "删除成功", Toast.LENGTH_LONG).show();
+                                        Utils.toastShort(FriendDetail.this, "删除成功");
                                     } else {
-                                        Toast.makeText(FriendDetail.this, "删除失败", Toast.LENGTH_LONG).show();
+                                        Utils.toastShort(FriendDetail.this, "删除失败");
                                     }
                                 } catch (JSONException e) {
                                     Log.e("shanchufanhuixinxii", "JSONException: " + e.toString());

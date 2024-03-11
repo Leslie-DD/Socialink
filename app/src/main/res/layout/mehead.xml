@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rlHead"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#f8f8fd"
-    android:paddingBottom="10dp"
-    android:layout_height="wrap_content">
+    android:paddingBottom="10dp">
 
     <com.example.heshequ.view.ArcImageView
         android:id="@+id/ivBg"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="240dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@color/base_blue" />
@@ -32,204 +30,214 @@
         android:layout_alignTop="@+id/imageView"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/imageView"
-        android:textColor="@color/base_color_white"
-        android:text="0" />
+        android:text="0"
+        android:textColor="@color/base_color_white" />
 
     <ImageView
+        android:id="@+id/ivEditor"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:scaleType="center"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="30dp"
-        android:id="@+id/ivEditor"
-        android:src="@mipmap/bianji"
-        android:padding="10dp"
         android:background="@drawable/yuanquanbeijing"
-        />
+        android:padding="10dp"
+        android:scaleType="center"
+        android:src="@mipmap/bianji" />
+
     <com.example.heshequ.view.CircleView
-        android:layout_width="75dp"
-        android:layout_below="@id/ivEditor"
-        android:src="@mipmap/head3"
         android:id="@+id/ivHead"
-        android:layout_centerHorizontal="true"
+        android:layout_width="75dp"
         android:layout_height="75dp"
-        />
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:minWidth="200dp"
-        android:layout_marginTop="8dp"
+        android:layout_below="@id/ivEditor"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/ivHead"
+        android:src="@mipmap/head3" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout">
+        android:layout_below="@id/ivHead"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:minWidth="200dp">
+
         <LinearLayout
             android:id="@+id/ll"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:textSize="15sp"
-                android:textColor="#ffffff"
-                android:id="@+id/tvName"
-                android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal">
 
             <TextView
+                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
-                android:textSize="12sp"
-                android:textColor="#f6f6f6"
-                android:layout_marginStart="10dp"
-                android:maxLines="1"
-                android:ellipsize="end"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="15sp" />
+
+            <TextView
                 android:id="@+id/tvSchool"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#f6f6f6"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
 
         <TextView
-            android:layout_marginTop="8dp"
-            android:layout_width="130dp"
-            android:layout_centerInParent="true"
             android:id="@+id/all"
+            android:layout_width="130dp"
+            android:layout_height="10dp"
             android:layout_below="@id/ll"
-            android:background="@drawable/bar_all_tm"
-            android:layout_height="10dp"/>
+            android:layout_centerInParent="true"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bar_all_tm" />
 
         <TextView
-            android:layout_marginTop="8dp"
-            android:layout_width="10dp"
             android:id="@+id/current"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_below="@id/ll"
             android:layout_alignLeft="@id/all"
-            android:background="@drawable/bar_current"
-            android:layout_height="10dp"/>
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bar_current" />
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textColor="#ffffff"
-            android:textSize="12sp"
             android:id="@+id/tvLevel"
-            android:text="LV1"
-            android:layout_below="@id/ll"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/all"
-            android:layout_height="wrap_content" />
-        <TextView
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/all"
+            android:text="LV1"
             android:textColor="#ffffff"
-            android:layout_centerHorizontal="true"
-            android:textSize="12sp"
-            android:layout_marginTop="10dp"
+            android:textSize="12sp" />
+
+        <TextView
             android:id="@+id/tvDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/current"
-            android:layout_height="wrap_content" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@drawable/new_bg"
+        android:layout_height="55dp"
 
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_height="55dp">
+        android:layout_below="@id/ivBg"
+        android:background="@drawable/new_bg">
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:id="@+id/llSay"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
             <ImageView
                 android:layout_width="wrap_content"
-                android:src="@mipmap/msg2"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@mipmap/msg2" />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="13sp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:textColor="#000000"
                 android:text="我的团言"
-                android:layout_height="wrap_content" />
+                android:textColor="#000000"
+                android:textSize="13sp" />
         </LinearLayout>
+
         <View
             android:layout_width="1dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:background="#e6e6e6"
-            android:layout_height="30dp"/>
+            android:background="#e6e6e6" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:id="@+id/llQuestion"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
             <ImageView
                 android:layout_width="wrap_content"
-                android:src="@mipmap/msg3"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@mipmap/msg3" />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="13sp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:textColor="#000000"
                 android:text="我的问题"
-                android:layout_height="wrap_content" />
+                android:textColor="#000000"
+                android:textSize="13sp" />
         </LinearLayout>
 
         <View
             android:layout_width="1dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:background="#e6e6e6"
-            android:layout_height="30dp"/>
+            android:background="#e6e6e6" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:id="@+id/llnotice"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
             <ImageView
                 android:layout_width="wrap_content"
-                android:src="@mipmap/msg1"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@mipmap/msg1" />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="13sp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:textColor="#000000"
                 android:text="我的关注"
-                android:layout_height="wrap_content" />
+                android:textColor="#000000"
+                android:textSize="13sp" />
         </LinearLayout>
+
         <View
             android:layout_width="1dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:background="#e6e6e6"
-            android:layout_height="30dp"/>
+            android:background="#e6e6e6" />
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
             android:id="@+id/llSecondhand"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
             <ImageView
                 android:layout_width="wrap_content"
-                android:src="@mipmap/secondhand3"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:src="@mipmap/secondhand3" />
+
             <TextView
                 android:layout_width="wrap_content"
-                android:textSize="13sp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:textColor="#000000"
                 android:text="我的二手"
-                android:layout_height="wrap_content" />
+                android:textColor="#000000"
+                android:textSize="13sp" />
         </LinearLayout>
-
-
     </LinearLayout>
-
-
 </RelativeLayout>

@@ -68,7 +68,7 @@ dependencies {
 
     implementation 'com.alibaba:fastjson:1.2.79'
 
-    implementation 'com.jcodecraeer:xrecyclerview:1.5.8'
+    implementation 'com.jcodecraeer:xrecyclerview:1.6.0'
     implementation 'top.zibin:Luban:1.1.2'
     implementation 'com.jude:rollviewpager:1.2.9'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
@@ -111,6 +111,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'io.reactivex:rxjava:1.2.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 
     testImplementation 'junit:junit:4.13.2'

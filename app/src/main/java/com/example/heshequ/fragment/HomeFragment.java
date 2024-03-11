@@ -1,11 +1,13 @@
 package com.example.heshequ.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -60,6 +64,8 @@ import java.util.List;
  */
 public class HomeFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
 
+    private static final String TAG = "HomeFragment";
+
     private View view;
     private ImageView ivSecondMa;
     private XRecyclerView rv;
@@ -80,7 +86,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     private RollPagerView rollPagerView;
     private MyBannerAdapter bannerAdapter;
     private List<Fragment> fragmentList;
-    private FragmentBrodcast brodcast;
+    private FragmentBroadcast brodcast = new FragmentBroadcast();
     private final int getimgsCode = 1000;
     private ArrayList<HomeBannerImgsBean> imgsData;
     private Gson gson = new Gson();
@@ -94,28 +100,21 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        switch (where) {
-            case getimgsCode:
-                if (result.optInt("code") == 0) {
-                    if (result.has("data") && !result.optString("data").isEmpty()) {
-                        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
-                        }.getType());
-                        if (imgsData != null && imgsData.size() > 0) {
-                            for (HomeBannerImgsBean bannerImgsBean : imgsData) {
-                                imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
-                            }
-
-                        } else {
-                            /*imgs.add(Constants.url);
-                            imgs.add(Constants.url2);*/
-                        }
-                        bannerAdapter.setData(imgs);
-                    }
-                } else {
-                    Utils.toastShort(mContext, result.optString("msg"));
-                }
-                break;
-
+        if (where == getimgsCode) {
+            if (result.optInt("code") != 0) {
+                Utils.toastShort(mContext, result.optString("msg"));
+                return;
+            }
+            if (!result.has("data") || result.optString("data").isEmpty()) {
+                return;
+            }
+            imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {}.getType());
+            if (imgsData != null && imgsData.size() > 0) {
+                imgsData.forEach(bannerImgsBean -> {
+                    imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
+                });
+            }
+            bannerAdapter.setData(imgs);
         }
     }
 
@@ -152,7 +151,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     }
 
     private void initHeadView() {
-        MainActivity activity = (MainActivity) getActivity();
         fragmentList = new ArrayList<>();
         ChildFragment2 fragment2 = new ChildFragment2();
         fragment2.setType(3);
@@ -204,10 +202,10 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         rv.setLoadingListener(this);
         rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (llVis != null) {
-                    if (getScollYDistance() + llVis.getTop() < 0) {
+                    if (getScrollYDistance() + llVis.getTop() < 0) {
                         llInvis.setVisibility(View.VISIBLE);
                     } else {
                         llInvis.setVisibility(View.GONE);
@@ -218,7 +216,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
 
         vp = (CustomViewPager) headView.findViewById(R.id.vp);
         vp.setCanScroll(true);
-        pagerAdapter = new MyFragmentPagerAdapter(activity.getSupportFragmentManager(), fragmentList);
+        pagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList);
         rv.addHeaderView(headView);
         vp.setAdapter(pagerAdapter);
         vp.setOffscreenPageLimit(2);
@@ -226,7 +224,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -238,18 +235,13 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
 
-        bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), WebActivity.class)
-                        .putExtra("url", imgsData.get(position).getLinkUrl()));
-            }
+        bannerAdapter.setonBanneritemClickListener(position -> {
+            Intent intent = new Intent(getActivity(), WebActivity.class).putExtra("url", imgsData.get(position).getLinkUrl());
+            startActivity(intent);
         });
-
     }
 
     // 获取首页轮播图
@@ -258,6 +250,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -285,26 +278,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
                 startActivity(new Intent(mContext, CaptureActivity.class));
                 break;
             case R.id.tv1:
-                if (item == 1) {
-                    return;
-                }
-                item = 1;
-                setTextBg(item);
-                break;
-            case R.id.tv2:
-                if (item == 2) {
-                    return;
-                }
-                item = 2;
-                setTextBg(item);
-                break;
-            case R.id.tv3:
-                if (item == 3) {
-                    return;
-                }
-                item = 3;
-                setTextBg(item);
-                break;
             case R.id.tv4:
                 if (item == 1) {
                     return;
@@ -312,6 +285,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
                 item = 1;
                 setTextBg(item);
                 break;
+            case R.id.tv2:
             case R.id.tv5:
                 if (item == 2) {
                     return;
@@ -319,6 +293,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
                 item = 2;
                 setTextBg(item);
                 break;
+            case R.id.tv3:
             case R.id.tv6:
                 if (item == 3) {
                     return;
@@ -328,7 +303,6 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
                 break;
         }
     }
-
 
     private void setTextBg(int item) {
         clearAllBg();
@@ -354,7 +328,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         tv6.setSelected(false);
     }
 
-    public int getScollYDistance() {
+    public int getScrollYDistance() {
         LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
         int position = layoutManager.findFirstVisibleItemPosition();
         View firstVisiableChildView = layoutManager.findViewByPosition(position);
@@ -363,60 +337,44 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
 
     @Override
     public void onRefresh() {
+        Log.d(TAG, "onRefresh: " + item);
         if (item == 1) {
             ChildFragment1 fragment1 = (ChildFragment1) pagerAdapter.getItem(0);
-            if (fragment1 != null) {
-                fragment1.refData();
-            }
+            fragment1.refData();
         } else if (item == 2) {
             ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);
-            if (fragment2 != null) {
-                fragment2.getData(true);
-            }
+            fragment2.getData(true);
         } else if (item == 3) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    //
-                    EventBus.getDefault().post(new RefHotActivityEvent(1));
-                    rv.refreshComplete();
-                }
+            new Handler().postDelayed(() -> {
+                EventBus.getDefault().post(new RefHotActivityEvent(1));
+                rv.refreshComplete();
             }, 1000);
         }
     }
 
     @Override
     public void onLoadMore() {
+        Log.d(TAG, "onLoadMore: " + item);
         if (item == 1) {
             ChildFragment1 fragment1 = (ChildFragment1) pagerAdapter.getItem(0);
-            if (fragment1 != null) {
-                fragment1.loaData();
-            }
+            fragment1.loaData();
         } else if (item == 2) {
             ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);
-            if (fragment2 != null) {
-                fragment2.getData(false);
-            }
+            fragment2.getData(false);
         } else if (item == 3) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    EventBus.getDefault().post(new RefHotActivityEvent(2));
-                    rv.loadMoreComplete();
-                }
+            new Handler().postDelayed(() -> {
+                EventBus.getDefault().post(new RefHotActivityEvent(2));
+                rv.loadMoreComplete();
             }, 1000);
         }
     }
 
     private void setFragmentListener() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("fragment.listener");
-        brodcast = new FragmentBrodcast();
+        IntentFilter filter = new IntentFilter("fragment.listener");
         getActivity().registerReceiver(brodcast, filter);
     }
 
-    private class FragmentBrodcast extends BroadcastReceiver {
+    private class FragmentBroadcast extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             int items = intent.getIntExtra("item", 0);
@@ -426,9 +384,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
                 }
             } else if (items == 2) {
                 ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);
-                if (fragment2 != null) {
-                    fragment2.getData(true);
-                }
+                fragment2.getData(true);
             } else if (items == 3) {   //刷新
                 if (rv != null) {
                     rv.refreshComplete();
@@ -438,40 +394,33 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void scanREsult(ScanResultEvent event) {
-        if (event.getResult() != null) {
-            try {
-                /*int id = Integer.parseInt(event.getResult());
-                startActivity(new Intent(getActivity(),ApplyJoinTDActivity.class).putExtra("id",id));*/
-                if (event.getResult().contains("XYTeam_")) {
-                    int id = Integer.parseInt(event.getResult().replace("XYTeam_", ""));
-                    startActivity(new Intent(getActivity(), TeamDetailActivity2.class).putExtra("id", id));
-                } else {
-                    Utils.toastShort(mContext, "请扫描高校联盟团队的二维码");
-                }
-            } catch (Exception e) {
-                Utils.toastShort(mContext, "二维码不合法，识别失败");
-            }
-
+    public void scanResultEvent(ScanResultEvent event) {
+        if (event.getResult() == null) {
+            return;
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
+        try {
+            /*int id = Integer.parseInt(event.getResult());
+            startActivity(new Intent(getActivity(),ApplyJoinTDActivity.class).putExtra("id",id));*/
+            if (event.getResult().contains("XYTeam_")) {
+                int id = Integer.parseInt(event.getResult().replace("XYTeam_", ""));
+                startActivity(new Intent(getActivity(), TeamDetailActivity2.class).putExtra("id", id));
+            } else {
+                Utils.toastShort(mContext, "请扫描高校联盟团队的二维码");
+            }
+        } catch (Exception e) {
+            Utils.toastShort(mContext, "二维码不合法，识别失败");
+        }
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         if (brodcast != null) {
-            getActivity().unregisterReceiver(brodcast);
+            FragmentActivity fragmentActivity = getActivity();
+            if (fragmentActivity != null) {
+                fragmentActivity.unregisterReceiver(brodcast);
+            }
         }
         EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

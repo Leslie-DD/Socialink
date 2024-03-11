@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -21,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.bean.ConsTants;
+import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +57,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         ConsTants.screenH = wm.getDefaultDisplay().getHeight();
         mContext = this;
         setWindowStatusBarColor(this);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
     }
 
     public void requestPermission(List<String> permissions, int requestCode) {

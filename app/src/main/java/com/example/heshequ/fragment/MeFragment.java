@@ -1,18 +1,17 @@
 package com.example.heshequ.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -112,13 +111,13 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
     }
 
     private void initUserinfo() {
-        setBodyParams(new String[]{"uid"}, new String[]{"" + Constants.uid});
+        setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
         sendPostConnection(Constants.base_url + "/api/user/info.do",
                 initUserInfo, Constants.token);
     }
 
     private void getXiangyuMoney() {
-        setBodyParams(new String[]{"uid"}, new String[]{"" + Constants.uid});
+        setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
         sendPostConnection(Constants.base_url + "/api/user/cornAmount.do", XIANGYU_MONEY, Constants.token);
     }
 
@@ -134,54 +133,51 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
         llQuestion.setOnClickListener(this);
         llNotice.setOnClickListener(this);
         llSecondhand.setOnClickListener(this);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("YSF", "当前的位置：" + i);
-                i = i - 1;
-                switch (i) {
-                    case 0://我的团队
-                        startActivity(new Intent(mContext, MyTeamActivity.class));
-                        break;
-                    case 1://我的创作
-                        startActivity(new Intent(mContext, MyKnowledgeActivity.class));
-                        break;
-                    case 2:  //我的收藏
-                        startActivity(new Intent(mContext, MyCollectActivity.class));
-                        break;
-                    case 3: //我的足迹
-                        startActivity(new Intent(mContext, MyFootprintActivity.class));
-                        break;
-                    case 4://我的拉黑
-                        startActivity(new Intent(mContext, MyPullTheBlackActivity.class));
-                        break;
-                    case 5://实名认证
-                        if (certFlag == -1) {
-                            return;
-                        }
-                        startActivity(new Intent(mContext, AuthenticationActivity.class).putExtra("certFlag", certFlag));
-                        break;
-                    case 6://意见反馈
-                        startActivity(new Intent(mContext, FeedBackActivity.class));
-                        break;
-                    case 7://修改密码
-                        startActivity(new Intent(mContext, ForgetPwdActivity.class));
-                        break;
-                    case 8://设置
-                        startActivity(new Intent(mContext, SettingActivity.class)
-                                        .putExtra("settingAsk", settingAsk)
-                                        .putExtra("settingClub", settingClub)
-                                //.putExtra("userLabelsBeans",userInfoBean.getUserLabels())
-                                //暂时不知道为什么会报空指针，先注释
-                        );
-                        break;
-                    case 9:// 退出登录/登录
-                        if (mainActivity != null) {
-                            mainActivity.showPop();
-                        }
-                        break;
+        lv.setOnItemClickListener((adapterView, view, i, l) -> {
+            Log.e("YSF", "当前的位置：" + i);
+            i = i - 1;
+            switch (i) {
+                case 0://我的团队
+                    startActivity(new Intent(mContext, MyTeamActivity.class));
+                    break;
+                case 1://我的创作
+                    startActivity(new Intent(mContext, MyKnowledgeActivity.class));
+                    break;
+                case 2:  //我的收藏
+                    startActivity(new Intent(mContext, MyCollectActivity.class));
+                    break;
+                case 3: //我的足迹
+                    startActivity(new Intent(mContext, MyFootprintActivity.class));
+                    break;
+                case 4://我的拉黑
+                    startActivity(new Intent(mContext, MyPullTheBlackActivity.class));
+                    break;
+                case 5://实名认证
+                    if (certFlag == -1) {
+                        return;
+                    }
+                    startActivity(new Intent(mContext, AuthenticationActivity.class).putExtra("certFlag", certFlag));
+                    break;
+                case 6://意见反馈
+                    startActivity(new Intent(mContext, FeedBackActivity.class));
+                    break;
+                case 7://修改密码
+                    startActivity(new Intent(mContext, ForgetPwdActivity.class));
+                    break;
+                case 8://设置
+                    startActivity(new Intent(mContext, SettingActivity.class)
+                                    .putExtra("settingAsk", settingAsk)
+                                    .putExtra("settingClub", settingClub)
+                            //.putExtra("userLabelsBeans",userInfoBean.getUserLabels())
+                            //暂时不知道为什么会报空指针，先注释
+                    );
+                    break;
+                case 9:// 退出登录/登录
+                    if (mainActivity != null) {
+                        mainActivity.showPop();
+                    }
+                    break;
 
-                }
             }
         });
     }
@@ -273,7 +269,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
     }
 
 
-    private SimpleTarget target = new SimpleTarget<Bitmap>() {
+    private final SimpleTarget<Bitmap> target = new SimpleTarget<Bitmap>() {
         @Override
         public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
             //这里我们拿到回掉回来的bitmap，可以加载到我们想使用到的地方
@@ -293,6 +289,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
     };
 
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -323,12 +320,12 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        Log.e("DDQ", "" + result);
+        Log.e(TAG, result.toString());
         switch (where) {
             case XIANGYU_MONEY:
                 if (result.optInt("code") == 0) {
                     int money = result.optInt("data");
-                    xiangyuMoney.setText(money + "");
+                    xiangyuMoney.setText(String.valueOf(money));
                 } else {
                     String msg = result.optString("msg");
                     Utils.toastShort(getContext(), msg);

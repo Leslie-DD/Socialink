@@ -72,12 +72,6 @@ public abstract class NetWorkActivity extends BaseActivity {
         dialog = new CustomDialog(context);
     }
 
-    @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        setupData();
-    }
-
     public void sendGetConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         GetRequest getRequest = OkHttpUtils.get(url).tag(this);
         if (token != null && !token.equals("")) {
@@ -162,13 +156,6 @@ public abstract class NetWorkActivity extends BaseActivity {
     protected abstract void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException;
 
     protected abstract void onFailure(String result, int where);
-
-    /**
-     * 可以在此方法中配置一些基本数据
-     */
-    protected void setupData() {
-        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
-    }
 
     @Override
     protected void onDestroy() {

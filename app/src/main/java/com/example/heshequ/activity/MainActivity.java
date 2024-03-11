@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -18,14 +17,12 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;
@@ -101,10 +98,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         aar.add(Manifest.permission.READ_CONTACTS);
         aar.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         aar.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-//            aar.add(Manifest.permission.READ_MEDIA_VIDEO);
-//            aar.add(Manifest.permission.READ_MEDIA_IMAGES);
-//        }
+
         try {
             requestPermission(aar, 100);
         } catch (Exception e) {

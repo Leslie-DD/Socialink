@@ -122,7 +122,7 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_only_recycleview, null);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(), true, true, rv);
+        ConsTants.initXRecycleView(getActivity(), true, true, rv);
         adapter = new SearchTeamAdapter(getActivity());
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

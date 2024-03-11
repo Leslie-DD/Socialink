@@ -217,7 +217,7 @@ public class ZcArticleActivity extends NetWorkActivity implements View.OnClickLi
         ivSelect.setOnClickListener(this);
         ivSend.setOnClickListener(this);
         lv = (XRecyclerView) findViewById(R.id.lv);
-        ConsTants.initXrecycleView(this, true, true, lv);
+        ConsTants.initXRecycleView(this, true, true, lv);
         adapter = new ZcAnswerAdapter(this);
         lv.setAdapter(adapter);
         lv.addHeaderView(headview);

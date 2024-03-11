@@ -143,7 +143,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         llBm = headView.findViewById(R.id.llBm);
         tvBm = headView.findViewById(R.id.tvBm);
         getHeadData();
-        ConsTants.initXrecycleView(context, true, true, rv);
+        ConsTants.initXRecycleView(context, true, true, rv);
         rv.setLoadingListener(this);
         rv.addHeaderView(headView);
         pn = 1;

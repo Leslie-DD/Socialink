@@ -129,7 +129,7 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
         tv3.setOnClickListener(this);
         llInvis = (LinearLayout) view.findViewById(R.id.llInVis);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(), true, true, rv);
+        ConsTants.initXRecycleView(getActivity(), true, true, rv);
         initHeadView();
         rv.setAdapter(new RecycleAdapter(getActivity()));
         rv.setLoadingListener(this);

@@ -79,7 +79,7 @@ public class GoodsearchActivity extends NetWorkActivity implements View.OnClickL
 
     private void init() {
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(this, true, true, rv);
+        ConsTants.initXRecycleView(this, true, true, rv);
         adapter = new SecondhandgoodAdapter(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

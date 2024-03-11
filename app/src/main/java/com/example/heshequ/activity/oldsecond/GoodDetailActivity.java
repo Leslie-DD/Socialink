@@ -296,7 +296,7 @@ public class GoodDetailActivity extends NetWorkActivity implements View.OnClickL
         pictureAdapter = new PictureAdapter(this);
         lvPicture.setAdapter(pictureAdapter);
         lvDisscuss = (XRecyclerView) findViewById(R.id.lvDisscuss);
-        ConsTants.initXrecycleView(this, true, true, lvDisscuss);
+        ConsTants.initXRecycleView(this, true, true, lvDisscuss);
         goodDisscussAdapter = new GoodDisscussAdapter(this);
         lvDisscuss.setAdapter(goodDisscussAdapter);
         lvDisscuss.addHeaderView(headview);

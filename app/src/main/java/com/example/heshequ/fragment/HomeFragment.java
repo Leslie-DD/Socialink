@@ -24,7 +24,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.activity.HomeSearchActivity;
-import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.flowview.TeamActivity;
 import com.example.heshequ.activity.flowview.WenwenActivity;
@@ -146,7 +145,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         tv3.setOnClickListener(this);
         llInvis = (LinearLayout) view.findViewById(R.id.llInVis);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(), true, true, rv);
+        ConsTants.initXRecycleView(getActivity(), true, true, rv);
         initHeadView();
     }
 
@@ -181,6 +180,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         makeFriends.setVisibility(View.GONE);
         secondHand.setVisibility(View.GONE);
         scheduleCard.setVisibility(View.GONE);
+
         team.setOnClickListener(this);
         wenwen.setOnClickListener(this);
         secondHand.setOnClickListener(this);
@@ -354,7 +354,25 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
 
     @Override
     public void onLoadMore() {
-        Log.d(TAG, "onLoadMore: " + item);
+//        LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
+//        if (layoutManager == null) {
+//            return;
+//        }
+//        boolean atBottom = false;
+//
+//        // 在滚动时检查是否滚动到底部
+//        int visibleItemCount = layoutManager.getChildCount();
+//        int totalItemCount = layoutManager.getItemCount();
+//        int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+//        atBottom = pastVisibleItems + visibleItemCount >= totalItemCount;
+//
+//        Log.d(TAG, String.format("onLoadMore: %d, visibleItemCount: %d, total: %d, first position: %d", item, visibleItemCount, totalItemCount, pastVisibleItems));
+//        if (!atBottom) {
+//            Log.d(TAG, "onLoadMore: not bottom");
+//            return;
+//        }
+
+        Log.d(TAG, "onLoadMore item: " + item);
         if (item == 1) {
             ChildFragment1 fragment1 = (ChildFragment1) pagerAdapter.getItem(0);
             fragment1.loaData();

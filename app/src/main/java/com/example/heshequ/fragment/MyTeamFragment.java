@@ -261,7 +261,7 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
         adapter = new CommentTeamAdapter(mContext, list);
         adapter.setListener(this);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
         getData(pn, 0);

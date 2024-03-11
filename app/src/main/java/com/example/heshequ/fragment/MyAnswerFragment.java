@@ -125,7 +125,7 @@ public class MyAnswerFragment extends NetWorkFragment implements HotWenwenAdapte
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
         xRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(mContext, true, true, xRecyclerView);
+        ConsTants.initXRecycleView(mContext, true, true, xRecyclerView);
         adapter = new HotWenwenAdapter(mContext);
         adapter.DoSaveListener(this);
         xRecyclerView.setAdapter(adapter);

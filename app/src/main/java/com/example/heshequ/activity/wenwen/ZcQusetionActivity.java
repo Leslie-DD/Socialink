@@ -201,7 +201,7 @@ public class ZcQusetionActivity extends NetWorkActivity implements View.OnClickL
         ivSelect.setOnClickListener(this);
         ivSend.setOnClickListener(this);
         lv = (XRecyclerView) findViewById(R.id.lv);
-        ConsTants.initXrecycleView(this, true, true, lv);
+        ConsTants.initXRecycleView(this, true, true, lv);
         adapter = new ZcDisscussAdapter(this);
         lv.setAdapter(adapter);
         lv.addHeaderView(headview);

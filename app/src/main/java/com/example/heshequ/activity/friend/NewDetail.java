@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -143,7 +142,7 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         pictureAdapter = new FriendPictureAdapter(this);
         lvPicture.setAdapter(pictureAdapter);
         lvDisscuss = (XRecyclerView) findViewById(R.id.lvDisscuss);
-        ConsTants.initXrecycleView(this, true, true, lvDisscuss);
+        ConsTants.initXRecycleView(this, true, true, lvDisscuss);
         newDisscussAdapter = new NewDisscussAdapter(this);
         lvDisscuss.setAdapter(newDisscussAdapter);
         lvDisscuss.addHeaderView(headview);

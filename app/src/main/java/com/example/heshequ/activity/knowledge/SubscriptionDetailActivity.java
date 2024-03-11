@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.knowledge.ColumnDetailAdapter;
@@ -60,7 +59,7 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
         tvRead = findViewById(R.id.tvRead);
         btnUnsubscribe = findViewById(R.id.unsubscribe);
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         adapter = new ColumnDetailAdapter(mContext);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

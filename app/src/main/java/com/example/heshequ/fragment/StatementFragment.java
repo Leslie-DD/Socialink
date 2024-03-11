@@ -137,7 +137,7 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
     private void init() {
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext, false, false, rv);
+        ConsTants.initXRecycleView(mContext, false, false, rv);
         rv.setNestedScrollingEnabled(false);
         mActivity = (TeamDetailActivity2) getActivity();
         getData();

@@ -76,7 +76,7 @@ public class MyPullTheBlackActivity extends NetWorkActivity implements XRecycler
         setText("我的黑名单");
         rv = (XRecyclerView) findViewById(R.id.rv);
         tvNoData = findViewById(R.id.attentionData);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         testData = new ArrayList<>();
         adapter = new PullTheBlackAdapter(mContext, testData);
         rv.setAdapter(adapter);

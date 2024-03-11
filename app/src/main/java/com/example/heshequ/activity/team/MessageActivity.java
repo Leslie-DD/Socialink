@@ -132,7 +132,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
         rv.setLayoutManager(layoutManager);
         adapter = new MessageAdapter(new ArrayList<MessageBean>(), mContext);
         //刷新，加载设置
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         rv.setAdapter(adapter);
         pn = 0;
         imageView.setOnClickListener(this);

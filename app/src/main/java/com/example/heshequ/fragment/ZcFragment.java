@@ -252,7 +252,7 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
         v3 = view.findViewById(R.id.iv3);
         v4 = view.findViewById(R.id.iv4);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(), false, false, rv);
+        ConsTants.initXRecycleView(getActivity(), false, false, rv);
         rv.setNestedScrollingEnabled(false);
         adapter = new ZcWwAdapter(getActivity());
         rv.setAdapter(adapter);

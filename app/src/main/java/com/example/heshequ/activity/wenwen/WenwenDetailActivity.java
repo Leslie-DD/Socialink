@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -290,7 +289,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
         pictureAdapter = new PictureAdapter(this);
         lvPicture.setAdapter(pictureAdapter);
         lvDisscuss = (XRecyclerView) findViewById(R.id.lvDisscuss);
-        ConsTants.initXrecycleView(this, true, true, lvDisscuss);
+        ConsTants.initXRecycleView(this, true, true, lvDisscuss);
         wwDisscussAdapter = new WwDisscussAdapter(this);
         lvDisscuss.setAdapter(wwDisscussAdapter);
         lvDisscuss.addHeaderView(headview);

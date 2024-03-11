@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.HotWenwenAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -14,6 +17,7 @@ import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.WenwenBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
+import com.example.heshequ.utils.IChildFragment;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,10 +32,10 @@ import java.util.List;
  * Hulk_Zhang on 2018/1/10 17:50
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class ChildFragment2 extends NetWorkFragment implements HotWenwenAdapter.DoSaveListener {
+public class ChildFragment2 extends NetWorkFragment implements HotWenwenAdapter.DoSaveListener, IChildFragment {
 
     private View view;
-    private XRecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private HotWenwenAdapter adapter;
     private int pn = 1;
     private int ps = 20;
@@ -138,8 +142,9 @@ public class ChildFragment2 extends NetWorkFragment implements HotWenwenAdapter.
         view = inflater.inflate(R.layout.fragment_tim, null);
 //        setFragmentListener();
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        mRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(), false, false, mRecyclerView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        ConsTants.initXRecycleView(getActivity(), false, false, mRecyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
         adapter = new HotWenwenAdapter(getActivity());
         mRecyclerView.setAdapter(adapter);
@@ -189,6 +194,18 @@ public class ChildFragment2 extends NetWorkFragment implements HotWenwenAdapter.
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id + ""});
         sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
+    }
+
+    @Override
+    public boolean atBottom() {
+        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+        if (layoutManager == null) {
+            return false;
+        }
+        int visibleItemCount = layoutManager.getChildCount();
+        int totalItemCount = layoutManager.getItemCount();
+        int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+        return pastVisibleItems + visibleItemCount >= totalItemCount;
     }
 
 //    private void setFragmentListener() {

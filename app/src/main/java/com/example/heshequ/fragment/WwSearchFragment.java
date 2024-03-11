@@ -145,7 +145,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         view = inflater.inflate(R.layout.fragment_only_recycleview, null);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(getActivity(), true, true, rv);
+        ConsTants.initXRecycleView(getActivity(), true, true, rv);
         adapter = new HotWenwenAdapter(getActivity());
         adapter.DoSaveListener(this);
         rv.setAdapter(adapter);

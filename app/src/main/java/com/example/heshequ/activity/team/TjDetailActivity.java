@@ -120,7 +120,7 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
             setUi();
         }
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(context, true, true, rv);
+        ConsTants.initXRecycleView(context, true, true, rv);
         rv.setLoadingListener(this);
         rv.addHeaderView(headView);
         pn = 1;

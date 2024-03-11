@@ -148,7 +148,7 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
         adapter = new HotWenwenAdapter(mContext);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
         adapter.DoSaveListener(this);

@@ -196,7 +196,7 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
 
         rv.setLayoutManager(layoutManager);
         adapter = new MessageAdapter(new ArrayList<MessageBean>(), mContext);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
 
         rv.setAdapter(adapter);
         ruler_height = (RulerView) findViewById(R.id.ruler_height);

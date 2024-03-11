@@ -66,7 +66,7 @@ public class SayDetailActivity extends NetWorkActivity implements View.OnClickLi
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("他们说");
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(context, true, true, rv);
+        ConsTants.initXRecycleView(context, true, true, rv);
         rv.setLoadingListener(this);
         rv.addHeaderView(headView);
         getData();

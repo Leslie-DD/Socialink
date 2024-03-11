@@ -30,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -204,7 +203,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     private void init() {
         rv = findViewById(R.id.rv);
-        ConsTants.initXrecycleView(this, true, true, rv);
+        ConsTants.initXRecycleView(this, true, true, rv);
         rv.setLoadingListener(this);
         map = new HashMap();
         map.put(0, false);

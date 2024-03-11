@@ -199,7 +199,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
         etContent = (EditText) findViewById(R.id.etContent);
         tvTips = (TextView) findViewById(R.id.tvTips);
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(this, true, true, rv);
+        ConsTants.initXRecycleView(this, true, true, rv);
         adapter = new SearchTeamAdapter(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

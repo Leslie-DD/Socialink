@@ -231,7 +231,7 @@ public class WwSecondActivity extends NetWorkActivity implements View.OnClickLis
         ivBq.setOnClickListener(this);
         ivSend.setOnClickListener(this);
         lv = (XRecyclerView) findViewById(R.id.lv);
-        ConsTants.initXrecycleView(this, false, false, lv);
+        ConsTants.initXRecycleView(this, false, false, lv);
         adapter = new WwSecondAdapter(this);
         lv.setAdapter(adapter);
         lv.addHeaderView(headview);

@@ -45,7 +45,7 @@ public class MySayActivity extends NetWorkActivity implements XRecyclerView.Load
         setText("我的团言");
         rv = (XRecyclerView) findViewById(R.id.rv);
         tvNoData = findViewById(R.id.tvNoData);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         testData = new ArrayList<>();
         adapter = new OtherSayAdapter(mContext, testData, 1);
         rv.setAdapter(adapter);

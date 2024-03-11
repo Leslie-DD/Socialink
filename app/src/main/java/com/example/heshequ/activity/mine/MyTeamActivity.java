@@ -82,7 +82,7 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
         sp = MeetApplication.getInstance().getSharedPreferences();
         rv = (XRecyclerView) findViewById(R.id.rv);
         tvNoData = findViewById(R.id.tvNoData);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         data = new ArrayList<>();
         adapter = new MyTeamAdapter(mContext, data);
         rv.setAdapter(adapter);

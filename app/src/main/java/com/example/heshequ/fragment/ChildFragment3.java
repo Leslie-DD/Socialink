@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.HotActiveAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -29,7 +32,7 @@ import java.util.ArrayList;
  */
 public class ChildFragment3 extends NetWorkFragment {
     private View view;
-    private XRecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private HotActiveAdapter adapter;
     private TextView tvTips;
     private final int GetData = 1000;
@@ -46,9 +49,10 @@ public class ChildFragment3 extends NetWorkFragment {
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_tim, null);
         EventBus.getDefault().register(this);
-        mRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(getActivity(), false, false, mRecyclerView);
+//        ConsTants.initXRecycleView(getActivity(), false, false, mRecyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
 
         pn = 1;

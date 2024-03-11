@@ -64,7 +64,7 @@ public class News_MessageFragment extends NetWorkFragment implements XRecyclerVi
     private void init() {
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         pn = 1;
         type = 1;
         getData(pn, type);

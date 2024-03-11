@@ -72,7 +72,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
         setText("我的关注");
         rv = (XRecyclerView) findViewById(R.id.rv);
         tvNoData = findViewById(R.id.attentionData);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         testData = new ArrayList<>();
         adapter = new AttentionAdapter(mContext, testData);
         rv.setAdapter(adapter);

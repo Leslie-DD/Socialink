@@ -210,7 +210,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
     private void init() {
         lv = (MyXRecyclerView) view.findViewById(R.id.lv);
         tvTips = view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(getActivity(), false, false, lv);
+        ConsTants.initXRecycleView(getActivity(), false, false, lv);
         lv.setNestedScrollingEnabled(false);
         tvNew = (TextView) view.findViewById(R.id.tvNew);
         tvVote = (TextView) view.findViewById(R.id.tvVote);

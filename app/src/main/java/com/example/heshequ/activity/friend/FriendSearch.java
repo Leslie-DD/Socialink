@@ -64,7 +64,7 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
 
     private void init() {
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(this, true, true, rv);
+        ConsTants.initXRecycleView(this, true, true, rv);
         adapter = new FriendSearchAdapter(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

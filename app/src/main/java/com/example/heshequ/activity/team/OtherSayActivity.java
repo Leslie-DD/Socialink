@@ -50,7 +50,7 @@ public class OtherSayActivity extends NetWorkActivity implements View.OnClickLis
     private void init() {
         rv = (XRecyclerView) findViewById(R.id.lv);
         //lv = (ListView) findViewById(R.id.lv);
-        ConsTants.initXrecycleView(this, true, true, rv);
+        ConsTants.initXRecycleView(this, true, true, rv);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("他们说");
         getData(1);

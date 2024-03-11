@@ -74,7 +74,7 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
     private void init() {
         tvTips = (TextView) view.findViewById(R.id.tvTips);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         adapter = new FriendNearAdapter(mContext);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

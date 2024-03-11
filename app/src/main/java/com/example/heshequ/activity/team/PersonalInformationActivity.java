@@ -227,9 +227,9 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         pnQ = 1;
         getQuData(pnQ,quType);*/
 
-        ConsTants.initXrecycleView(mContext, true, true, rv);
-        ConsTants.initXrecycleView(mContext, true, true, rvQu);
-        ConsTants.initXrecycleView(mContext, true, true, rvGood);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rvQu);
+        ConsTants.initXRecycleView(mContext, true, true, rvGood);
         rv.setLoadingListener(this);
         rvQu.setLoadingListener(this);
         rvGood.setLoadingListener(this);

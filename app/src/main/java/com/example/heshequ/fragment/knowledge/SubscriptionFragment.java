@@ -48,7 +48,7 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
     private void init() {
         tvTips = (TextView) view.findViewById(R.id.tvTips);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         adapter = new SubscriptionAdapter(mContext);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

@@ -227,7 +227,7 @@ public class GoodsecondActivity extends NetWorkActivity implements View.OnClickL
         ivBq.setOnClickListener(this);
         ivSend.setOnClickListener(this);
         lv = (XRecyclerView) findViewById(R.id.lv);
-        ConsTants.initXrecycleView(this, false, false, lv);
+        ConsTants.initXRecycleView(this, false, false, lv);
         adapter = new GoodsecondAdapter(this);
         lv.setAdapter(adapter);
         lv.addHeaderView(headview);

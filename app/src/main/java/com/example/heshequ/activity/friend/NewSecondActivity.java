@@ -214,7 +214,7 @@ public class NewSecondActivity extends NetWorkActivity implements View.OnClickLi
         ivBq.setOnClickListener(this);
         ivSend.setOnClickListener(this);
         lv = (XRecyclerView) findViewById(R.id.lv);
-        ConsTants.initXrecycleView(this, false, false, lv);
+        ConsTants.initXRecycleView(this, false, false, lv);
         adapter = new NewSecondAdapter(this);
         lv.setAdapter(adapter);
         lv.addHeaderView(headview);

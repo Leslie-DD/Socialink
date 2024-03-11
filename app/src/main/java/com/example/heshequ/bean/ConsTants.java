@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -72,19 +70,13 @@ public class ConsTants {
         return false;
     }
 
-    public static void initXrecycleView(Context context, boolean loadmore, boolean refresh,
-                                        XRecyclerView xRecyclerView) {
-        LinearLayoutManager manager = new LinearLayoutManager(context);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        xRecyclerView.setLayoutManager(manager);
+    public static void initXRecycleView(Context context, boolean loadmore, boolean refresh, XRecyclerView xRecyclerView) {
+        xRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         if (refresh) {
             xRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
             xRecyclerView.setArrowImageView(R.drawable.iconfont_downgrey);
-            xRecyclerView
-                    .getDefaultRefreshHeaderView()
-                    .setRefreshTimeVisible(true);
-            xRecyclerView.getDefaultRefreshHeaderView().mMeasuredHeight =
-                    Utils.dip2px(context, 68);
+            xRecyclerView.getDefaultRefreshHeaderView().setRefreshTimeVisible(true);
+            xRecyclerView.getDefaultRefreshHeaderView().mMeasuredHeight = Utils.dip2px(context, 68);
         } else {
             xRecyclerView.setPullRefreshEnabled(false);
         }
@@ -96,7 +88,7 @@ public class ConsTants {
         } else {
             xRecyclerView.setLoadingMoreEnabled(false);
         }
-        xRecyclerView.setLimitNumberToCallLoadMore(2);
+        xRecyclerView.setLimitNumberToCallLoadMore(0);
     }
 
     public static String getPicName() {

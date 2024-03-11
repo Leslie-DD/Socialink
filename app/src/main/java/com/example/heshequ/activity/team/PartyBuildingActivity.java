@@ -68,7 +68,7 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
     private void init() {
         teamid = getIntent().getIntExtra("teamid", 0);
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(this, true, true, rv);
+        ConsTants.initXRecycleView(this, true, true, rv);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("全部团建");
         ivAdd = (ImageView) findViewById(R.id.ivRight);

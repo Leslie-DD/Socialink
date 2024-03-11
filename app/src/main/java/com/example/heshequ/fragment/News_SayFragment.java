@@ -58,7 +58,7 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
     private void init() {
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         pn = 1;
         type = 1;
         getData(pn, type);

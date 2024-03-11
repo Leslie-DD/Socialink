@@ -3,21 +3,24 @@ package com.example.heshequ.fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.TeamDetailActivity2;
 import com.example.heshequ.adapter.recycleview.CommentTeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
-import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
+import com.example.heshequ.utils.IChildFragment;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,9 +32,9 @@ import java.util.ArrayList;
  * Hulk_Zhang on 2018/1/10 17:50
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
-public class ChildFragment1 extends NetWorkFragment implements CommentTeamAdapter.OnItemClickListener {
+public class ChildFragment1 extends NetWorkFragment implements CommentTeamAdapter.OnItemClickListener, IChildFragment {
     private View view;
-    public XRecyclerView rv;
+    public RecyclerView rv;
     public CommentTeamAdapter adapter;
     public ArrayList<TeamBean> list;
     private int pn = 1;
@@ -57,8 +60,9 @@ public class ChildFragment1 extends NetWorkFragment implements CommentTeamAdapte
     }
 
     private void init() {
-        rv = (XRecyclerView) view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(getActivity(), true, true, rv);
+        rv = (RecyclerView) view.findViewById(R.id.rv);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+//        ConsTants.initXRecycleView(getActivity(), true, true, rv);
         list = new ArrayList<>();
         adapter = new CommentTeamAdapter(getActivity(), list);
         adapter.setListener(this);
@@ -229,6 +233,20 @@ public class ChildFragment1 extends NetWorkFragment implements CommentTeamAdapte
         Intent intent = new Intent(mContext, TeamDetailActivity2.class);
         intent.putExtra("id", adapter.getData().get(position).getId());
         startActivity(intent);
+    }
+
+    @Override
+    public boolean atBottom() {
+        LinearLayoutManager layoutManager = (LinearLayoutManager) rv.getLayoutManager();
+        if (layoutManager == null) {
+            return false;
+        }
+        int visibleItemCount = layoutManager.getChildCount();
+        int totalItemCount = layoutManager.getItemCount();
+        int pastVisibleItems = layoutManager.findFirstVisibleItemPosition();
+        Log.d("ChildFragment1", String.format("onLoadMore, visibleItemCount: %d, total: %d, first position: %d", visibleItemCount, totalItemCount, pastVisibleItems));
+
+        return pastVisibleItems + visibleItemCount >= totalItemCount;
     }
 
 }

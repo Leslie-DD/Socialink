@@ -132,7 +132,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
         gvEmoji = (GridView) findViewById(R.id.gvEmoji);
         initDialog();
         tvTitle = (TextView) findViewById(R.id.tvTitle);
-        ConsTants.initXrecycleView(context, true, true, rv);
+        ConsTants.initXRecycleView(context, true, true, rv);
         rv.setLoadingListener(this);
         rv.addHeaderView(headView);
         pn = 1;

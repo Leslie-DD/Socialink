@@ -56,7 +56,7 @@ public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerV
     private void init() {
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvNoData = view.findViewById(R.id.tvNoData);
-        ConsTants.initXrecycleView(getActivity(), true, true, rv);
+        ConsTants.initXRecycleView(getActivity(), true, true, rv);
         list = new ArrayList<>();
         adapter = new CommentTeamAdapter(getActivity(), list);
         adapter.setListener(this);

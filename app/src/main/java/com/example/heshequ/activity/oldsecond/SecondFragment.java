@@ -183,7 +183,7 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         ivRight.setOnClickListener(v -> startActivity(new Intent(mContext, SecondhandPostActivity.class)));
 
         rv = (XRecyclerView) view.findViewById(R.id.rv);    // rv是除搜索框外的其他部件范围
-        ConsTants.initXrecycleView(getActivity(), true, true, rv);
+        ConsTants.initXRecycleView(getActivity(), true, true, rv);
 
         rv.setAdapter(new RecycleAdapter(getActivity()));
         rv.setLoadingListener(this);

@@ -60,11 +60,11 @@ public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter
                 }
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
+                    if (data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
                                 new TypeToken<List<WenwenBean>>() {
                                 }.getType());
-                        if (newList == null || newList.size() == 0) {
+                        if (newList == null || newList.isEmpty()) {
                             newList = new ArrayList<>();
                         }
                         if (data.has("totalPage")) {
@@ -76,7 +76,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter
                 } else {
                     newList = new ArrayList<>();
                 }
-                if (newList.size() == 0) {
+                if (newList.isEmpty()) {
                     tvTips.setVisibility(View.VISIBLE);
                 } else {
                     tvTips.setVisibility(View.GONE);
@@ -89,11 +89,11 @@ public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter
             } else if (where == 101) {
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
+                    if (data.has("list")) {
                         moreList = gson.fromJson(data.getJSONArray("list").toString(),
                                 new TypeToken<List<WenwenBean>>() {
                                 }.getType());
-                        if (moreList == null || moreList.size() == 0) {
+                        if (moreList == null || moreList.isEmpty()) {
                             moreList = new ArrayList<>();
                         }
                     } else {
@@ -103,7 +103,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter
                     moreList = new ArrayList<>();
                 }
                 newList.addAll(moreList);
-                if (newList.size() == 0) {
+                if (newList.isEmpty()) {
                     tvTips.setVisibility(View.VISIBLE);
                 } else {
                     tvTips.setVisibility(View.GONE);
@@ -143,10 +143,10 @@ public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_tim, null);
+        view = inflater.inflate(R.layout.fragment_child_ww, null);
         mRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(getActivity(), false, false, mRecyclerView);
+        ConsTants.initXRecycleView(getActivity(), false, false, mRecyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
         adapter = new HotWenwenAdapter(getActivity());
         mRecyclerView.setAdapter(adapter);
@@ -172,14 +172,11 @@ public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter
         } else {
             pn++;
             if (pn > totalPage) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent();
-                        intent.setAction("fragment.listener");
-                        intent.putExtra("item", 1);
-                        getActivity().sendBroadcast(intent);
-                    }
+                new Handler().postDelayed(() -> {
+                    Intent intent = new Intent();
+                    intent.setAction("fragment.listener");
+                    intent.putExtra("item", 1);
+                    getActivity().sendBroadcast(intent);
                 }, 700);
             } else {
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", pn + "", ps + ""});

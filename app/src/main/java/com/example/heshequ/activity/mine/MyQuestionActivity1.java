@@ -53,7 +53,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements View.OnClick
         setTitleAndBack("我的问题");
         tvTips = (TextView) findViewById(R.id.tvTips);
         rv = (XRecyclerView) findViewById(R.id.rv);
-        ConsTants.initXrecycleView(this, true, true, rv);
+        ConsTants.initXRecycleView(this, true, true, rv);
         adapter = new HotWenwenAdapter(this);
         rv.setAdapter(adapter);
         adapter.DoSaveListener(this);

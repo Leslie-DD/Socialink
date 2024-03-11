@@ -40,7 +40,7 @@ public class MyQAQFragment extends NetWorkFragment {
         view = inflater.inflate(R.layout.only_rv_item, null);
         xRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext, true, true, xRecyclerView);
+        ConsTants.initXRecycleView(mContext, true, true, xRecyclerView);
         adapter = new HotWenwenAdapter(mContext);
         xRecyclerView.setAdapter(adapter);
         return view;

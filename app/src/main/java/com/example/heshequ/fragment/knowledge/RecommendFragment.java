@@ -49,7 +49,7 @@ public class RecommendFragment extends NetWorkFragment implements XRecyclerView.
     private void init() {
         tvTips = view.findViewById(R.id.tvTips);
         rv = view.findViewById(R.id.rv);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         adapter = new RecommendAdapter(mContext);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

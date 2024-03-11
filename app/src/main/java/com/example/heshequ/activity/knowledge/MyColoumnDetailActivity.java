@@ -67,7 +67,7 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
         btnEdit = findViewById(R.id.btnEdit);
         linearLayout = findViewById(R.id.add);
         rv = (XRecyclerView) findViewById(R.id.rvS);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         adapter = new ColumnDetailAdapter(mContext);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

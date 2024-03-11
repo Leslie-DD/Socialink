@@ -1,6 +1,5 @@
 package com.example.heshequ.fragment;
 
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,7 +56,7 @@ public class News_TeamFragment extends NetWorkFragment implements XRecyclerView.
     private void init() {
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = view.findViewById(R.id.tvTips);
-        ConsTants.initXrecycleView(mContext, true, true, rv);
+        ConsTants.initXRecycleView(mContext, true, true, rv);
         pn = 1;
         type = 1;
         data = new ArrayList<>();

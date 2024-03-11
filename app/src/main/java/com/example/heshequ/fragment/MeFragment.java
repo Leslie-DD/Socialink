@@ -58,6 +58,8 @@ import java.util.ArrayList;
  */
 public class MeFragment extends NetWorkFragment implements View.OnClickListener {
 
+    private static final String TAG = "[MeFragment]";
+
     private View view;
     private ArcImageView ivBg;
     private CircleView ivHead;
@@ -122,6 +124,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refUserInfo(RefUserInfo refUserInfo) {
+        Log.d(TAG, "onReceive: RefUserInfo");
         initUserinfo();
     }
 

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Environment;
 
+import com.example.heshequ.MeetApplication;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,7 +42,14 @@ public class FileUtilcll {
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         return baos.toByteArray();
     }
-
+    /**
+     * 获取公共目录
+     *
+     * @return
+     */
+    public static String getPublicDir() {
+        return MeetApplication.getInstance().getExternalFilesDir("").getAbsolutePath();
+    }
     public static String saveFile(Context c, String filePath, String fileName, byte[] bytes) {
         String fileFullName = "";
         FileOutputStream fos = null;
@@ -49,7 +58,8 @@ public class FileUtilcll {
         try {
             String suffix = "";
             if (filePath == null || filePath.trim().length() == 0) {
-                filePath = Environment.getExternalStorageDirectory() + "/Xiangyu/" + dateFolder + "/";
+//                filePath = Environment.getExternalStorageDirectory() + "/Xiangyu/" + dateFolder + "/";
+                filePath = FileUtilcll.getPublicDir() + "/Xiangyu/" + dateFolder + "/";
             }
             File file = new File(filePath);
             if (!file.exists()) {

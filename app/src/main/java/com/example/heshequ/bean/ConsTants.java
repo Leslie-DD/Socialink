@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
+import com.example.heshequ.utils.FileUtilcll;
 import com.example.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -127,14 +128,16 @@ public class ConsTants {
     }
 
     public static String getPath() {
-        String path = Environment.getExternalStorageDirectory() + "/" + "douzisocket/";
+//        String path = Environment.getExternalStorageDirectory() + "/" + "douzisocket/";
+        String path = FileUtilcll.getPublicDir() + "/" + "douzisocket/";
+
         File f = new File(path);
         if (!f.exists()) {
             f.mkdirs();
         }
         path = path + getPicName();
         f = new File(path);
-        Log.e("YSF", "内存卡路径：" + Environment.getExternalStorageDirectory() + "当前路径：" + path);
+//        Log.e("YSF", "内存卡路径：" + Environment.getExternalStorageDirectory() + "当前路径：" + path);
         try {
             f.createNewFile();
             Log.e("YSF", "创建好了文件" + f);

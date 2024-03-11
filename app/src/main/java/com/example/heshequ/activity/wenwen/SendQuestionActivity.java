@@ -1,5 +1,6 @@
 package com.example.heshequ.activity.wenwen;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -25,6 +27,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+
+import com.blankj.utilcode.util.PermissionUtils;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
 import com.example.heshequ.adapter.listview.GwPictureAdapter;
@@ -48,6 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -158,6 +164,7 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         setContentView(R.layout.activity_send_question);
         init();
         initPop();
+        requestCAMERA();
     }
 
     private void init() {
@@ -351,6 +358,11 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
                 pop.dismiss();
                 break;
             case R.id.tvPic:
+                ActivityCompat.requestPermissions(
+                        context,
+                        new  String[]{Manifest.permission_group.CAMERA},
+                        100
+                );
                 path = PhotoUtils.startPhoto(this);
                 pop.dismiss();
                 break;
@@ -365,7 +377,21 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
                 break;
         }
     }
-
+    /**
+     * 请求相机权限
+     */
+    public void requestCAMERA(){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+        {
+            return;
+        }
+        if( PermissionUtils.isGranted(Manifest.permission.CAMERA) ){
+            return;
+        }
+        requestPermissions(new String[]{
+                Manifest.permission.CAMERA
+        },104);
+    }
     private void setTvBg(TextView view, int status) {
         if (status == 0) {
             for (int i = 0; i < stringList.size(); i++) {
@@ -382,9 +408,15 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
     }
 
     private void showPop() {
-        layoutParams.alpha = 0.5f;
-        getWindow().setAttributes(layoutParams);
-        pop.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M||PermissionUtils.isGranted(Manifest.permission.CAMERA) )
+        {
+            layoutParams.alpha = 0.5f;
+            getWindow().setAttributes(layoutParams);
+            pop.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
+        }else {
+            requestCAMERA();
+        }
     }
 
     @Override

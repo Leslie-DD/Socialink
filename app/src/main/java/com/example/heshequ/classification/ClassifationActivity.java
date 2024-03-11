@@ -75,17 +75,20 @@ public class ClassifationActivity extends NetWorkActivity implements View.OnClic
     protected void onSuccess(org.json.JSONObject result, int where, boolean fromCache) throws JSONException {
         String json2 = result.toString();
         ClassificationBean classificationBean = JSONObject.parseObject(json2, ClassificationBean.class);
-
+        if(classificationBean==null){
+            return;
+        }
         showTitle = new ArrayList<>();
 
-        for (int i = 0; i < classificationBean.getData().size(); i++) {
-            ClassificationBean.DataBean dataBean2 = classificationBean.getData().get(i);
-            menuList.add(dataBean2.getCategory1Name());    // 男装
-            showTitle.add(i);
-            homeList2.add(dataBean2);
+        if(classificationBean.getData()!=null&&classificationBean.getData().size()!=0){
+            for (int i = 0; i < classificationBean.getData().size(); i++) {
+                ClassificationBean.DataBean dataBean2 = classificationBean.getData().get(i);
+                menuList.add(dataBean2.getCategory1Name());    // 男装
+                showTitle.add(i);
+                homeList2.add(dataBean2);
+            }
+            tv_title.setText(classificationBean.getData().get(0).getCategory1Name());
         }
-        tv_title.setText(classificationBean.getData().get(0).getCategory1Name());
-
         menuAdapter.notifyDataSetChanged();
         homeAdapter.notifyDataSetChanged();
     }

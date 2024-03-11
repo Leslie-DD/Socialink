@@ -309,6 +309,8 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         layoutParams = getWindow().getAttributes();
         View spv = LayoutInflater.from(mContext).inflate(R.layout.popup_teamdetail, null);
         ll_share = (LinearLayout) spv.findViewById(R.id.ll_share);
+        //隐藏分享
+        ll_share.setVisibility(View.GONE);
         ll_collect = (LinearLayout) spv.findViewById(R.id.ll_collect);
         ivCollect = (ImageView) spv.findViewById(R.id.ivCollect);
         tvCollect = (TextView) spv.findViewById(R.id.tvCollect);
@@ -574,9 +576,12 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         } else {
 
         }
-        layoutParams.alpha = 0.5f;
-        getWindow().setAttributes(layoutParams);
-        settingPop.showAsDropDown(ivMore, Gravity.RIGHT, 0, 0);
+        if(settingPop!=null){
+            layoutParams.alpha = 0.5f;
+            getWindow().setAttributes(layoutParams);
+            settingPop.showAsDropDown(ivMore, Gravity.RIGHT, 0, 0);
+
+        }
 
     }
 
@@ -588,8 +593,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     }
 
     private void showSecretPop() {
-
-
         secretLayoutParams.alpha = 0.5f;
         getWindow().setAttributes(secretLayoutParams);
         secret.showAtLocation(ivMore, Gravity.CENTER, 0, 0);

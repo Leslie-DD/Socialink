@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import com.example.heshequ.utils.CrashHandler;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class MeetApplication extends Application {
         Fresco.initialize(this);
         sInstance = this;
         CrashHandler.getInstance().init(this);
+        CrashReport.initCrashReport(getApplicationContext(), "8c0feaed02", true);
     }
 
     public static MeetApplication getInstance() {

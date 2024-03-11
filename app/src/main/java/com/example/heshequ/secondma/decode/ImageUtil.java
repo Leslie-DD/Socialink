@@ -25,6 +25,8 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import com.example.heshequ.utils.FileUtilcll;
+
 /**
  * 获取图片的路径
  */
@@ -41,7 +43,8 @@ public class ImageUtil {
                 String[] split = docId.split(":");
                 String type = split[0];
                 if ("primary".equalsIgnoreCase(type)) {
-                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+//                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                    return FileUtilcll.getPublicDir() + "/" + split[1];
                 }
             } else if (isDownloadsDocument(imageUri)) {
                 String id = DocumentsContract.getDocumentId(imageUri);

@@ -70,7 +70,10 @@ public class SettingActivity extends NetWorkActivity implements View.OnClickList
         ivQuestion.setOnClickListener(this);
         llChangePhone.setOnClickListener(this);
         llSetQuestion.setOnClickListener(this);
+
         llLable.setOnClickListener(this);
+        //隐藏标签设置
+        llLable.setVisibility(View.GONE);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.example.heshequ.utils;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,9 +17,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 
+import com.blankj.utilcode.constant.PermissionConstants;
 import com.example.heshequ.base.NetWorkActivity;
 
 import java.io.BufferedOutputStream;
@@ -33,7 +38,7 @@ import java.util.Locale;
 public class PhotoUtils {
     private static final String TAG = "[PhotoUtils]";
 
-    private static final String AUTHORITY = "com.example.heshequ.FileProvider";
+    public static final String AUTHORITY = "com.example.heshequ.FileProvider";
 
     private static final String FILE_NAME_FORMAT = "yyyyMMdd_HHmmss";
     private static final String FILE_SUFFIX = ".jpg";
@@ -85,6 +90,10 @@ public class PhotoUtils {
      */
     @Deprecated
     public static String startPhoto(NetWorkActivity context, int requestCode) {
+//        if (ContextCompat.checkSelfPermission(context, Manifest.permission_group.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//
+//            return "";
+//        }
         File imageFile = PhotoUtils.createTempFile(context);
         if (imageFile == null) {
             Log.w(TAG, "(startPhoto) createTempFile error, null");

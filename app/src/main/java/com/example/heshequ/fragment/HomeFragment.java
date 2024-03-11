@@ -180,7 +180,9 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         secondHand = (LinearLayout) headView.findViewById(R.id.secondhand);
         scheduleCard = (LinearLayout) headView.findViewById(R.id.schedulecard);
         makeFriends = (LinearLayout) headView.findViewById(R.id.makefriends);
-
+        makeFriends.setVisibility(View.GONE);
+        secondHand.setVisibility(View.GONE);
+        scheduleCard.setVisibility(View.GONE);
         team.setOnClickListener(this);
         wenwen.setOnClickListener(this);
         secondHand.setOnClickListener(this);

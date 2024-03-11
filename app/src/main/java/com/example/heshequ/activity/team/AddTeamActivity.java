@@ -2,6 +2,8 @@ package com.example.heshequ.activity.team;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -21,9 +23,12 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.core.content.FileProvider;
+
 import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
+import com.example.heshequ.base.PhotoBaseActivity;
 import com.example.heshequ.bean.Label;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefTeamChild1;
@@ -205,13 +210,14 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
             case 200:
                 //拍照  path
                 File temp = new File(path);
-                crop(Uri.fromFile(temp));
+                Uri u=FileProvider.getUriForFile(context,PhotoUtils.AUTHORITY, temp);
+                crop(u);
                 break;
             case 202:
                 if (data != null) {
                     photoUri = null;
                     photoUri = data.getData();
-                    crop(photoUri);
+                    crop(PhotoUtils.generateUri(AddTeamActivity.this.getApplicationContext(), photoUri));
                 }
                 break;
             case PHOTO_REQUEST_CUT:
@@ -254,6 +260,9 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
         // 裁剪图片意图
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
         intent.putExtra("crop", "true");
         intent.putExtra("scale", true);// 去黑边
         intent.putExtra("scaleUpIfNeeded", true);// 去黑边
@@ -268,10 +277,21 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
         intent.putExtra("outputX", Utils.dip2px(this, 75));
         intent.putExtra("outputY", Utils.dip2px(this, 75));
         //裁剪后的图片Uri路径，uritempFile为Uri类变量
-        uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "XiangYuIcon.jpg");
+//        uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "XiangYuIcon.jpg");
+        File file=new File(FileUtilcll.getPublicDir()+"/XiangYuIcon.jpg");
+        uritempFile= FileProvider.getUriForFile(context,PhotoUtils.AUTHORITY, file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
+
+        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            context.grantUriPermission(packageName, uritempFile, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+        }
+
         startActivityForResult(intent, PHOTO_REQUEST_CUT);
     }
 

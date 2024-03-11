@@ -5,6 +5,8 @@ import static com.example.heshequ.utils.PermissionHelper.getPhotoPermissions;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -14,6 +16,8 @@ import com.example.heshequ.utils.PhotoUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * 实现图片选择、拍照和裁剪功能
@@ -60,6 +64,7 @@ public class PhotoBaseActivity extends NetWorkActivity {
 
     protected void crop(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, PhotoUtils.IMAGE_TYPE);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // 读写权限
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.putExtra("crop", "true");    // 可裁剪
@@ -68,12 +73,14 @@ public class PhotoBaseActivity extends NetWorkActivity {
         intent.putExtra("outputX", 400);    // 裁剪图片的宽
         intent.putExtra("outputY", 400);    // 裁剪图片的高
         intent.putExtra("circleCrop", true);
-        intent.putExtra("return-data", true);
-
-
-        intent.setDataAndType(uri, PhotoUtils.IMAGE_TYPE);
+//        intent.putExtra("return-data", true);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         cropPhotoUri = uri;
+        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            context.grantUriPermission(packageName, cropPhotoUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
         startActivityForResult(intent, PHOTO_REQUEST_CUT);
     }
 

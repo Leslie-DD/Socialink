@@ -121,6 +121,8 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         llComment = findViewById(R.id.llComment);
         ivBack = (ImageView) findViewById(R.id.ivBack);
         ivShare = (ImageView) findViewById(R.id.ivShare);
+        //隐藏分享
+        ivShare.setVisibility(View.GONE);
         ivRight = (ImageView) findViewById(R.id.ivRight);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("活动详情");

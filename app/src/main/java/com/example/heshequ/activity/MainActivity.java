@@ -25,6 +25,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;
@@ -100,10 +101,10 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         aar.add(Manifest.permission.READ_CONTACTS);
         aar.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         aar.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            aar.add(Manifest.permission.READ_MEDIA_VIDEO);
-            aar.add(Manifest.permission.READ_MEDIA_IMAGES);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            aar.add(Manifest.permission.READ_MEDIA_VIDEO);
+//            aar.add(Manifest.permission.READ_MEDIA_IMAGES);
+//        }
         try {
             requestPermission(aar, 100);
         } catch (Exception e) {

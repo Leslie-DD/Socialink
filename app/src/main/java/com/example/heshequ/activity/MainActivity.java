@@ -1,6 +1,8 @@
 package com.example.heshequ.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -35,9 +37,13 @@ import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.fragment.HomeFragment;
 import com.example.heshequ.fragment.MeFragment;
 import com.example.heshequ.fragment.MsgFragment;
+import com.example.heshequ.umeng.MyPreferences;
+import com.example.heshequ.umeng.PushHelper;
 import com.example.heshequ.utils.Utils;
 import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
+import com.umeng.message.PushAgent;
+import com.umeng.message.api.UPushRegisterCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -49,6 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends NetWorkActivity implements View.OnClickListener {
+    private static final String TAG = "[MainActivity]";
     private Fragment currentFragment;
 
     private HomeFragment homeFragment;
@@ -76,12 +83,58 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         decorView = getWindow().getDecorView();
         sp = getSharedPreferences("meet", 0);
 
-        Constants.uid = sp.getInt("uid", 1);
+        Log.i(TAG, "(onCreate) uid = " + sp.getInt("uid", 1));
         Constants.token = sp.getString("token", "");
         WenConstans.token = sp.getString("token", "");
         Constants.userName = sp.getString("user", "18274962484");
         init();
         initPop();
+
+        if (hasAgreedAgreement()) {
+            PushAgent.getInstance(this).onAppStart();
+        } else {
+            showAgreementDialog();
+        }
+    }
+
+    private boolean hasAgreedAgreement() {
+        return MyPreferences.getInstance(getApplicationContext()).hasAgreePrivacyAgreement();
+    }
+
+    private void showAgreementDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.agreement_title);
+        builder.setMessage(R.string.agreement_msg);
+        builder.setPositiveButton(R.string.agreement_ok, (dialog, which) -> {
+            dialog.dismiss();
+            //用户点击隐私协议同意按钮后，初始化PushSDK
+            MyPreferences.getInstance(getApplicationContext()).setAgreePrivacyAgreement(true);
+            MeetApplication.init(getApplicationContext());
+
+            UPushRegisterCallback callback = PushAgent.getInstance(getApplicationContext()).getRegisterCallback();
+            PushAgent.getInstance(getApplicationContext()).register(new UPushRegisterCallback() {
+                @Override
+                public void onSuccess(final String deviceToken) {
+                    Log.i(PushHelper.TAG, "agreed. deviceToken --> " + deviceToken);
+                    if (callback != null) {
+                        callback.onSuccess(deviceToken);
+                    }
+                }
+
+                @Override
+                public void onFailure(String code, String msg) {
+                    Log.e(PushHelper.TAG, "agreed. register failure：--> " + "code:" + code + ",desc:" + msg);
+                    if (callback != null) {
+                        callback.onFailure(code, msg);
+                    }
+                }
+            });
+        });
+        builder.setNegativeButton(R.string.agreement_cancel, (dialog, which) -> {
+            dialog.dismiss();
+            finish();
+        });
+        builder.create().show();
     }
 
     private void init() {
@@ -122,7 +175,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         f1.add(R.id.fl, currentFragment).commit();
 
         //请求用户信息
-        setBodyParams(new String[]{"uid"}, new String[]{"" + Constants.uid});
+        setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(sp.getInt("uid", 1))});
         sendPost(Constants.base_url + "/api/user/info.do", getUserinfo, Constants.token);
     }
 
@@ -313,6 +366,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
                 case 0:
                     if (!result.optString("data").isEmpty()) {
                         UserInfoBean userInfoBean = gson.fromJson(result.optString("data"), UserInfoBean.class);
+                        Constants.uid = userInfoBean.getId();
                         Constants.userName = userInfoBean.getNickname();
                         //存入用户名
                         MeetApplication.getInstance().getSharedPreferences().edit().putString("user", userInfoBean.getNickname()).apply();
@@ -329,11 +383,13 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
                     Utils.toastShort(this, "您没有该操作权限");
                     break;
             }
+            Log.i(TAG, "(onSuccess) Constants.uid = " + Constants.uid);
         }
     }
 
     @Override
     protected void onFailure(String result, int where) {
+        Log.w(TAG, "(onFailure) Constants.uid = " + Constants.uid);
     }
 
     @Override

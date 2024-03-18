@@ -8,35 +8,38 @@
     <!--<include layout="@layout/new_title_bar2"/>
     <include layout="@layout/only_rv_item"/>-->
 
-    <include layout="@layout/new_title_bar2"/>
+    <include layout="@layout/new_title_bar2" />
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:paddingTop="15dp"
-        android:background="#ffffff"
         android:id="@+id/llInVis"
-        android:paddingBottom="15dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/tv_style"
-            android:id="@+id/tvTeam"
-            android:text="团队"
-            />
-        <TextView
-            style="@style/tv_style"
-            android:id="@+id/tvWw"
-            android:text="问问"
-            />
-        <TextView
-            style="@style/tv_style"
-            android:id="@+id/tvgood"
-            android:text="商品"
-            />
-    </LinearLayout>
-    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingLeft="12dp"
+        android:paddingTop="15dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="15dp">
+
+        <TextView
+            android:id="@+id/tvTeam"
+            style="@style/tv_style"
+            android:text="团队" />
+
+        <TextView
+            android:id="@+id/tvWw"
+            style="@style/tv_style"
+            android:text="问问" />
+
+        <TextView
+            android:id="@+id/tvgood"
+            style="@style/tv_style"
+            android:text="商品"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </androidx.viewpager.widget.ViewPager>

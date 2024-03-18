@@ -473,7 +473,11 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                 int isJoin = 0;
 
                 int settingSpeakComment = 1;
-                isJoin = result.optJSONObject("data").optInt("isJoin");
+                JSONObject resultObject = result.optJSONObject("data");
+                if (resultObject == null) {
+                    break;
+                }
+                isJoin = resultObject.optInt("isJoin");
                 settingSpeakComment = result.optJSONObject("data").optInt("settingSpeakComment");
                 if (isJoin == 0 && settingSpeakComment == 1) {
                     llComment.setVisibility(View.GONE);

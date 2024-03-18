@@ -5,10 +5,12 @@ import static android.view.View.GONE;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.entity.RefMembers;
 import com.example.heshequ.utils.Utils;
 import com.example.heshequ.view.CircleView;
+import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -57,6 +60,9 @@ import java.util.List;
 
 public class PersonalInformationActivity extends NetWorkActivity implements View.OnClickListener,
         XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener, HotWenwenAdapter.DoSaveListener {
+
+    private static final String TAG = "[PersonalInformationActivity]";
+
     private final int getUserCode = 1000;
     private final int GETDATA_T = 1001;
     private final int REFDATA_T = 1002;
@@ -82,7 +88,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private String header;
     private MessageBean messageBean;
     private String hisnickname = null;
-    private TextView tvName, tvDetail, tvLevel, tvSet, tvQu, tvTeam, tvDyn, tvPhoto, tvgood, tvTipContent, current, tvSchool, tvUserNikeName;
+    private TextView tvName, tvDetail, tvLevel, tvSet, tvQu, tvTeam, /*tvDyn, tvPhoto, tvgood,*/ tvTipContent, current, tvSchool, tvUserNikeName;
     private LinearLayout ll;
     private ImageView messages;
     private ImageView guanzhu;
@@ -143,8 +149,6 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     //三点pop
     private PopupWindow settingPop;
     private LinearLayout llEditor, llDel, llBlack, llBlack1;
-    private int deleteornot = 1;
-
 
     private RelativeLayout.LayoutParams lp;
 
@@ -152,6 +156,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_information);
+        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#00BBFF"));
         init();
         event();
     }
@@ -179,9 +184,9 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         tvSet = (TextView) findViewById(R.id.tvSet);
         tvQu = (TextView) findViewById(R.id.tvQu);
         tvTeam = (TextView) findViewById(R.id.tvTeam);
-        tvDyn = (TextView) findViewById(R.id.tvDyn);
-        tvgood = (TextView) findViewById(R.id.tvgood);
-        tvPhoto = (TextView) findViewById(R.id.tvPhoto);
+//        tvDyn = (TextView) findViewById(R.id.tvDyn);
+//        tvgood = (TextView) findViewById(R.id.tvgood);
+//        tvPhoto = (TextView) findViewById(R.id.tvPhoto);
         llTip = (LinearLayout) findViewById(R.id.llTip);
         ivSex = (ImageView) findViewById(R.id.ivSex);
         current = findViewById(R.id.current);
@@ -531,9 +536,9 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private void event() {
         tvTeam.setOnClickListener(this);
         tvQu.setOnClickListener(this);
-        tvDyn.setOnClickListener(this);
-        tvPhoto.setOnClickListener(this);
-        tvgood.setOnClickListener(this);
+//        tvDyn.setOnClickListener(this);
+//        tvPhoto.setOnClickListener(this);
+//        tvgood.setOnClickListener(this);
         findViewById(R.id.ivBack).setOnClickListener(this);
         llDel.setOnClickListener(this);
         tvSet.setOnClickListener(this);
@@ -552,9 +557,9 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         this.status = status;
         tvTeam.setSelected(status == 0 ? true : false);
         tvQu.setSelected(status == 1 ? true : false);
-        tvDyn.setSelected(status == 2 ? true : false);
-        tvPhoto.setSelected(status == 3 ? true : false);
-        tvgood.setSelected(status == 4 ? true : false);
+//        tvDyn.setSelected(status == 2 ? true : false);
+//        tvPhoto.setSelected(status == 3 ? true : false);
+//        tvgood.setSelected(status == 4 ? true : false);
         if (status == 0 && teamAdapter != null) {
             if (rv.getAdapter() != teamAdapter) {
                 rv.setAdapter(teamAdapter);
@@ -631,19 +636,16 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
 
     //动态设置Textview长度
     private void setStarLine(final TextView tv, final int n, final int t, final int e) {
-        tv.post(new Runnable() {
-            @Override
-            public void run() {
-                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) tv.getLayoutParams();
-                int maxLength = Utils.dip2px(mContext, 130);  //总长度
-                int width = (int) (maxLength * (((e - t) * 1.0F) / n));
-                if (width > 0 && width < 10) {
-                    lp.width = width + 10;
-                } else {
-                    lp.width = width;
-                }
-                tv.setLayoutParams(lp);
+        tv.post(() -> {
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) tv.getLayoutParams();
+            int maxLength = Utils.dip2px(mContext, 130);  //总长度
+            int width = (int) (maxLength * (((e - t) * 1.0F) / n));
+            if (width > 0 && width < 10) {
+                lp.width = width + 10;
+            } else {
+                lp.width = width;
             }
+            tv.setLayoutParams(lp);
         });
     }
 
@@ -653,6 +655,10 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
         switch (where) {
             case CHECKPULLTHEBLACK:
                 PullTheBlackBean pullTheBlackBean = gson.fromJson(result.optString("data"), PullTheBlackBean.class);
+                if (pullTheBlackBean == null) {
+                    Log.w(TAG, "pullTheBlackBean null, data: " + result.optString("data"));
+                    break;
+                }
                 if (pullTheBlackBean.isCheck()) {
                     isblack = true;
                     llBlack1.setVisibility(View.VISIBLE);
@@ -677,6 +683,10 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                 break;
             case CHECKATTENTION:
                 NoticeBean noticeBean = gson.fromJson(result.optString("data"), NoticeBean.class);
+                if (noticeBean == null) {
+                    Log.w(TAG, "noticeBean null, data: " + result.optString("data"));
+                    break;
+                }
                 if (noticeBean.isCheck()) {
                     isattention = true;
                     guanzhu.setImageResource(R.mipmap.yiguanzhu);
@@ -711,7 +721,12 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
 
                                 hisnickname = userInfoBean.getNickname();
                                 tvName.setText(userInfoBean.getNickname());
-                                tvSchool.setText(userInfoBean.getCollege());
+                                String college = userInfoBean.getCollege();
+                                if (college == null) {
+                                    tvSchool.setText("学校未设置");
+                                } else {
+                                    tvSchool.setText(college);
+                                }
                                 if (userInfoBean.getUserNickName() == null) {
                                     tvUserNikeName.setVisibility(GONE);
                                     lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 20), 0, 0);
@@ -821,26 +836,6 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                 }
                 break;
             case GETDATA_T: //获取团队
-                if (resultType == 0) {
-                    if (!result.optString("data").isEmpty()) {
-                        try {
-                            psT = result.optJSONObject("data").optInt("totalPage");
-                            jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
-                            if (jsonArray.length() > 0) {
-                                teamData = new ArrayList<>();
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
-                                    teamBean.setItemType(1);
-                                    teamData.add(teamBean);
-                                }
-                                teamAdapter.setData(teamData);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-                break;
             case REFDATA_T: //刷新团队
                 if (resultType == 0) {
                     if (!result.optString("data").isEmpty()) {
@@ -883,22 +878,6 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                 }
                 break;
             case GETDATA_Q: //获取问问
-                if (result.has("data")) {
-                    JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
-                        quData = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
-                                }.getType());
-                        if (quData == null || quData.size() == 0) {
-                            quData = new ArrayList<>();
-                        }
-                        if (data.has("totalPage")) {
-                            psQ = data.getInt("totalPage");
-                        }
-                    }
-                }
-                quAdapter.setData(quData);
-                break;
             case REFDATA_Q: //刷新问问
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
@@ -935,22 +914,6 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                 quAdapter.setData(quData);
                 break;
             case GETDATA_G: //获取商品
-                if (result.has("data")) {
-                    JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
-                        goodData = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<SecondhandgoodBean>>() {
-                                }.getType());
-                        if (goodData == null || goodData.size() == 0) {
-                            goodData = new ArrayList<>();
-                        }
-                        if (data.has("totalPage")) {
-                            psg = data.getInt("totalPage");
-                        }
-                    }
-                }
-                goodAdapter.setData(goodData);
-                break;
             case REFDATA_G: //刷新商品
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
@@ -1078,15 +1041,15 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
             case R.id.tvQu:
                 setTvBg(1);
                 break;
-            case R.id.tvDyn:
-                setTvBg(2);
-                break;
-            case R.id.tvPhoto:
-                setTvBg(3);
-                break;
-            case R.id.tvgood:
-                setTvBg(4);
-                break;
+//            case R.id.tvDyn:
+//                setTvBg(2);
+//                break;
+//            case R.id.tvPhoto:
+//                setTvBg(3);
+//                break;
+//            case R.id.tvgood:
+//                setTvBg(4);
+//                break;
             case R.id.tvSet:
                 if (role == 2) { //取消管理员
                     setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 2});
@@ -1138,36 +1101,33 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (status == 0) {
-                    //团队
-                    if (pnT < psT) {
-                        pnT++;
-                        teamType = 2;
-                        getTeamData(pnT, teamType);
-                    }
-                    rv.loadMoreComplete();
-                } else if (status == 1) {
-                    //问题
-                    if (pnQ < psQ) {
-                        pnQ++;
-                        quType = 2;
-                        getQuData(pnQ, quType);
-                    }
-                    rvQu.loadMoreComplete();
-                } else if (status == 4) {
-                    //二手
-                    if (png < psg) {
-                        png++;
-                        goodtype = 2;
-                        getGoodData(png, goodtype);
-                    }
-                    rvGood.loadMoreComplete();
+        new Handler().postDelayed(() -> {
+            if (status == 0) {
+                //团队
+                if (pnT < psT) {
+                    pnT++;
+                    teamType = 2;
+                    getTeamData(pnT, teamType);
                 }
-
+                rv.loadMoreComplete();
+            } else if (status == 1) {
+                //问题
+                if (pnQ < psQ) {
+                    pnQ++;
+                    quType = 2;
+                    getQuData(pnQ, quType);
+                }
+                rvQu.loadMoreComplete();
+            } else if (status == 4) {
+                //二手
+                if (png < psg) {
+                    png++;
+                    goodtype = 2;
+                    getGoodData(png, goodtype);
+                }
+                rvGood.loadMoreComplete();
             }
+
         }, 1000);
     }
 

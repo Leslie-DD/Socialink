@@ -79,9 +79,9 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
     private final int initUserInfo = 1000;
     private int settingClub, settingAsk;
 
-
     @Override
     protected View createView(LayoutInflater inflater) {
+        Log.i(TAG, "(createView) uid = " + Constants.uid);
         view = inflater.inflate(R.layout.fragment_me, null);
         EventBus.getDefault().register(this);
         gson = new Gson();
@@ -112,8 +112,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
 
     private void initUserinfo() {
         setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
-        sendPostConnection(Constants.base_url + "/api/user/info.do",
-                initUserInfo, Constants.token);
+        sendPostConnection(Constants.base_url + "/api/user/info.do", initUserInfo, Constants.token);
     }
 
     private void getXiangyuMoney() {
@@ -140,31 +139,31 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                 case 0://我的团队
                     startActivity(new Intent(mContext, MyTeamActivity.class));
                     break;
-                case 1://我的创作
-                    startActivity(new Intent(mContext, MyKnowledgeActivity.class));
-                    break;
-                case 2:  //我的收藏
+//                case 1://我的创作
+//                    startActivity(new Intent(mContext, MyKnowledgeActivity.class));
+//                    break;
+                case 1:  //我的收藏
                     startActivity(new Intent(mContext, MyCollectActivity.class));
                     break;
-                case 3: //我的足迹
+                case 2: //我的足迹
                     startActivity(new Intent(mContext, MyFootprintActivity.class));
                     break;
-                case 4://我的拉黑
+                case 3://我的拉黑
                     startActivity(new Intent(mContext, MyPullTheBlackActivity.class));
                     break;
-                case 5://实名认证
+                case 4://实名认证
                     if (certFlag == -1) {
                         return;
                     }
                     startActivity(new Intent(mContext, AuthenticationActivity.class).putExtra("certFlag", certFlag));
                     break;
-                case 6://意见反馈
+                case 5://意见反馈
                     startActivity(new Intent(mContext, FeedBackActivity.class));
                     break;
-                case 7://修改密码
+                case 6://修改密码
                     startActivity(new Intent(mContext, ForgetPwdActivity.class));
                     break;
-                case 8://设置
+                case 7://设置
                     startActivity(new Intent(mContext, SettingActivity.class)
                                     .putExtra("settingAsk", settingAsk)
                                     .putExtra("settingClub", settingClub)
@@ -172,7 +171,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                             //暂时不知道为什么会报空指针，先注释
                     );
                     break;
-                case 9:// 退出登录/登录
+                case 8:// 退出登录/登录
                     if (mainActivity != null) {
                         mainActivity.showPop();
                     }
@@ -189,10 +188,10 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
         bean.setResId(R.mipmap.myteam);
         data.add(bean);
 
-        bean = new ItemBean();
-        bean.setName("我的创作");
-        bean.setResId(R.mipmap.myteam);
-        data.add(bean);
+//        bean = new ItemBean();
+//        bean.setName("我的创作");
+//        bean.setResId(R.mipmap.myteam);
+//        data.add(bean);
 
         bean = new ItemBean();
         bean.setName("我的收藏");
@@ -307,12 +306,10 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                 startActivity(new Intent(mContext, MyQuestionActivity1.class));
                 break;
             case R.id.llnotice:
-
                 startActivity(new Intent(mContext, AttentionActivity.class));
                 break;
 
             case R.id.llSecondhand:
-
                 startActivity(new Intent(mContext, MygoodActivity.class));
                 break;
         }

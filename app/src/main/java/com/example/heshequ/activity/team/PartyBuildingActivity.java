@@ -84,32 +84,29 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
         rv.setAdapter(tjAdapter);
         rv.addItemDecoration(new SpaceItemDecoration(mContext, 10, 1));
         rv.setLoadingListener(this);
-        tjAdapter.setOnItemViewclick(new Tj_Adapter.OnItemViewclick() {
-            @Override
-            public void viewClick(int viewType, int position) {
-                switch (viewType) {
-                    case 1:
-                        //编辑
-                        startActivity(new Intent(mContext, AddTjActivity.class).putExtra("bean", rvData.get(position)).putExtra("type", 2));
-                        break;
-                    case 2:
-                        //Utils.toastShort(PartyBuildingActivity.this,"删除");
-                        delPosition = position;
-                        delTjDialog.show();
-                        break;
-                    case 3:
-                        //Utils.toastShort(PartyBuildingActivity.this,"推荐到大厅");
-                        recommendPosition = position;
-                        recommend = rvData.get(position).getRecommend();
-                        if (recommend == 0) {
-                            setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 1});
-                            sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
-                        } else if (recommend == 1) {
-                            setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 0});
-                            sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
-                        }
-                        break;
-                }
+        tjAdapter.setOnItemViewclick((viewType, position) -> {
+            switch (viewType) {
+                case 1:
+                    //编辑
+                    startActivity(new Intent(mContext, AddTjActivity.class).putExtra("bean", rvData.get(position)).putExtra("type", 2));
+                    break;
+                case 2:
+                    //Utils.toastShort(PartyBuildingActivity.this,"删除");
+                    delPosition = position;
+                    delTjDialog.show();
+                    break;
+                case 3:
+                    //Utils.toastShort(PartyBuildingActivity.this,"推荐到大厅");
+                    recommendPosition = position;
+                    recommend = rvData.get(position).getRecommend();
+                    if (recommend == 0) {
+                        setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 1});
+                        sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
+                    } else if (recommend == 1) {
+                        setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 0});
+                        sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
+                    }
+                    break;
             }
         });
     }
@@ -119,21 +116,13 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
         builder.setCancelable(false);
         builder.setTitle("提示");
         builder.setMessage("要删除这条团建吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //删除
-                setBodyParams(new String[]{"tbId"}, new String[]{"" + rvData.get(delPosition).getId()});
-                sendPost(Constants.base_url + "/api/club/tb/delete.do", delTjCode, Constants.token);
-                delTjDialog.dismiss();
-            }
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            //删除
+            setBodyParams(new String[]{"tbId"}, new String[]{"" + rvData.get(delPosition).getId()});
+            sendPost(Constants.base_url + "/api/club/tb/delete.do", delTjCode, Constants.token);
+            delTjDialog.dismiss();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                delTjDialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> delTjDialog.dismiss());
         delTjDialog = builder.create();
         delTjDialog.setCancelable(false);
     }
@@ -144,7 +133,7 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
 
     private void getData(int pn) {
         //获取推荐团建
-        setBodyParams(new String[]{"type", "id", "pn", "pn"}, new String[]{"0", teamid + "", "" + pn, "" + Constants.default_PS});
+        setBodyParams(new String[]{"type", "id", "pn", "ps"}, new String[]{"0", teamid + "", "" + pn, "" + Constants.default_PS});
         sendPost(Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
     }
 

@@ -2,18 +2,16 @@ package com.example.heshequ.activity.team;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -87,6 +85,7 @@ import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
 public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
+    private static final String TAG = "[TeamDetailActivity2]";
     private ImageView ivAdd2, ivAdd3, ivAdd4, ivAdd5, ivAddBj;
     private boolean LockMenu = false;
     private DragImageView ivAdd;
@@ -111,7 +110,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     private final int out = 1007;
     private final int editor = 1008;
     private TeamBean cBean;
-    private boolean first;
     private TextView tvMInfo;
     private TextView tvName, tvContent;
     private HallFragment hallfragment;
@@ -190,15 +188,11 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         setContentView(R.layout.activity_team_detail2);
         StatusBarCompat.setStatusBarColor(this, Color.parseColor("#00BBFF"));
         id = getIntent().getIntExtra("id", 0);
-        Log.e("YSF", "我是获得" + id);
+        Log.e(TAG, "我是获得" + id);
         init();
         initPop();
         event();
         setTvBg(0);
-    }
-
-    public Context getThis() {
-        return this;
     }
 
     private void init() {
@@ -291,12 +285,9 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
@@ -355,7 +346,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         //身份处理
         for (int i = 0; i < cBean.getUsers().size(); i++) {
             if (cBean.getUsers().get(i).getMemberId() == Constants.uid) {
-                Log.e("TetlActivity2->token: ", WenConstans.token);
+                Log.e(TAG, "token: " + WenConstans.token);
                 if (cBean.getUsers().get(i).getRole() == 1) {//群主
                     IDENTIFY = 1;
                     ll_jb.setVisibility(View.GONE);
@@ -402,12 +393,9 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         settingPop.setOutsideTouchable(true);
         // 设置焦点
         settingPop.setFocusable(true);
-        settingPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        settingPop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         settingPop.setContentView(spv);
@@ -447,26 +435,15 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         secret.setTouchable(true);
         secret.setFocusable(true);
 
-        setNoSecret.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setBodyParams(new String[]{"id"}, new String[]{id + ""});
-                sendPost(WenConstans.DELETEJOINSECRET, DELETEJOINSECRET, Constants.token);
-            }
+        setNoSecret.setOnClickListener(v -> {
+            setBodyParams(new String[]{"id"}, new String[]{id + ""});
+            sendPost(WenConstans.DELETEJOINSECRET, DELETEJOINSECRET, Constants.token);
         });
 
-        setSecret.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPayPasswordDialog();
-            }
-        });
-        secret.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                secretLayoutParams.alpha = 1f;
-                getWindow().setAttributes(secretLayoutParams);
-            }
+        setSecret.setOnClickListener(v -> openPayPasswordDialog());
+        secret.setOnDismissListener(() -> {
+            secretLayoutParams.alpha = 1f;
+            getWindow().setAttributes(secretLayoutParams);
         });
         secret.setContentView(settingSecret);
     }
@@ -489,29 +466,17 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         changingSecret.setTouchable(true);
         changingSecret.setFocusable(true);
 
-        changeSecret.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPayPasswordDialog();
-            }
+        changeSecret.setOnClickListener(v -> openPayPasswordDialog());
+
+        closeSecret.setOnClickListener(v -> {//关闭团队密码
+            setBodyParams(new String[]{"id",}, new String[]{id + ""});
+            sendPost(WenConstans.CLOSEJOINSECRET, CLOSESECRET, Constants.token);
+
+            Utils.toastShort(context, "你点击了关闭密码按钮");
         });
-
-        closeSecret.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {//关闭团队密码
-                setBodyParams(new String[]{"id",}, new String[]{id + ""});
-                sendPost(WenConstans.CLOSEJOINSECRET, CLOSESECRET, Constants.token);
-
-                Utils.toastShort(context, "你点击了关闭密码按钮");
-            }
-        });
-        changingSecret.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                changeSecretLayoutParams.alpha = 1f;
-                getWindow().setAttributes(changeSecretLayoutParams);
-            }
-
+        changingSecret.setOnDismissListener(() -> {
+            changeSecretLayoutParams.alpha = 1f;
+            getWindow().setAttributes(changeSecretLayoutParams);
         });
         changingSecret.setContentView(changingSecretView);
     }
@@ -536,12 +501,9 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         editorPop.setOutsideTouchable(true);
         // 设置焦点
         editorPop.setFocusable(true);
-        editorPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        editorPop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
 
         etName.addTextChangedListener(new TextWatcher() {
@@ -572,18 +534,13 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     public void showSpvPop() {
         if (IDENTIFY != 3) {//团长或管理员打开菜单栏 检索密码
             checkSecret();
-        } else {
-
         }
-        if(settingPop!=null){
+        if (settingPop != null) {
             layoutParams.alpha = 0.5f;
             getWindow().setAttributes(layoutParams);
             settingPop.showAsDropDown(ivMore, Gravity.RIGHT, 0, 0);
-
         }
-
     }
-
 
     private void showEditorPop() {
         layoutParams.alpha = 0.5f;
@@ -662,7 +619,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     @Subscribe
     public void canAdd(ShowBean bean) {
-        Log.e("YSF", "canadd" + bean.isShow());
+        Log.e(TAG, "canadd" + bean.isShow());
     }
 
     @Subscribe
@@ -739,7 +696,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
         switch (where) {
             case 2019:
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     Utils.toastShort(context, "已加团");
                     refData();
                 } else {
@@ -747,7 +704,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 }
                 break;
             case 2018:
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     Utils.toastShort(context, "已加团");
                 } else {
                     Utils.toastShort(context, "操作异常");
@@ -755,7 +712,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
             case CHECKJOINSECRET3:
                 settingPop.dismiss();
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     if (result.optJSONObject("data").optInt("pwdflag") != 1) {
                         Utils.toastShort(context, "操作异常");
                         break;
@@ -771,14 +728,14 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
                 break;
             case CHECKJOINSECRET2:
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     if (result.optJSONObject("data").optInt("pwdflag") == 1) {//开启了密码加团
                         ll_st_join.setVisibility(View.VISIBLE);
                     }
                 }
                 break;
             case SETJOINSECRET:
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     Utils.toastShort(context, "已重置密码为" + getNewSecret());
                 } else {
                     Utils.toastShort(context, "操作失败");
@@ -794,7 +751,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
                 break;
             case SEARCHJOINSECRET:
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     int pwdflag = result.optJSONObject("data").optInt("pwdflag");
                     ll_st_c.setVisibility(View.GONE);
                     if (pwdflag == 0) {
@@ -817,7 +774,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
 
             case CHECKJOINSECRET:
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     int pwdflag = result.optJSONObject("data").optInt("pwdflag");
                     ll_st_c.setVisibility(View.GONE);
                     if (pwdflag == 0) {
@@ -833,7 +790,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
 
             case DELETEJOINSECRET:
-                if (result.optInt("code") == 0) {
+                if (code == 0) {
                     Utils.toastShort(context, "已删除密码");
                     secret.dismiss();
                 } else {
@@ -843,72 +800,71 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 break;
 
             case getCode:
-                switch (result.optInt("code")) {
+                Log.i(TAG, "detail.do response: " + result);
+                switch (code) {
                     case 0:
                         if (hasRefresh) {
                             rv.refreshComplete();
                         }
-                        if (result.optString("data") != null) {
-                            cBean = gs.fromJson(result.optString("data"), TeamBean.class);
+                        cBean = gs.fromJson(result.optString("data"), TeamBean.class);
+                        if (cBean != null) {
+                            setUi();
+                            if (!hasRefresh) {
+                                initSPPop();
+                                initEditorPop();
+                                initSetSecret();
+                                initChangeSecret();
+                            }
                             if (cBean != null) {
-                                setUi();
-                                if (!hasRefresh) {
-                                    initSPPop();
-                                    initEditorPop();
-                                    initSetSecret();
-                                    initChangeSecret();
-                                }
-                                if (cBean != null) {
-                                    hallfragment.setBean(cBean);
-                                }
+                                hallfragment.setBean(cBean);
+                            }
 //                                statementFragment.setBean(cBean);
 //                                teamFragment.setBean(cBean);
-                                teamId = cBean.getId();
-                                Constants.clubId = cBean.getId();
-                                Constants.isAdmin = cBean.isAdmin();
-                                if (Constants.isAdmin) {
-                                    if (!hasRefresh) {
-                                        managerFragment = new ManagerFragment();
-                                        fragmentList.add(managerFragment);
-                                    }
-                                    if (cBean != null) {
-                                        managerFragment.setBean(cBean);
-                                    }
-                                } else {
-                                    tvManager.setVisibility(View.GONE);
-                                    tvManager2.setVisibility(View.GONE);
-                                }
-                                EventBus.getDefault().post(new TeamBean());
-                                Constants.isJoin = cBean.getIsJoin() == 1;
-                                Constants.creatorId = cBean.getCreator();
+                            teamId = cBean.getId();
+                            Constants.clubId = cBean.getId();
+                            Constants.isAdmin = cBean.isAdmin();
+                            if (Constants.isAdmin) {
                                 if (!hasRefresh) {
-                                    pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
-                                    vp.setAdapter(pagerAdapter);
-                                    vp.setOffscreenPageLimit(3);
-                                    vp.setId(fragmentList.get(0).hashCode());
-                                    vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                                        @Override
-                                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                                        }
-
-                                        @Override
-                                        public void onPageSelected(int position) {
-                                            vp.resetHeight(position);
-                                            setTvBg(position);
-                                        }
-
-                                        @Override
-                                        public void onPageScrollStateChanged(int state) {
-                                        }
-                                    });
+                                    managerFragment = new ManagerFragment();
+                                    fragmentList.add(managerFragment);
                                 }
+                                if (cBean != null) {
+                                    managerFragment.setBean(cBean);
+                                }
+                            } else {
+                                tvManager.setVisibility(View.GONE);
+                                tvManager2.setVisibility(View.GONE);
+                            }
+                            EventBus.getDefault().post(new TeamBean());
+                            Constants.isJoin = cBean.getIsJoin() == 1;
+                            Constants.creatorId = cBean.getCreator();
+                            if (!hasRefresh) {
+                                pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
+                                vp.setAdapter(pagerAdapter);
+                                vp.setOffscreenPageLimit(3);
+                                vp.setId(fragmentList.get(0).hashCode());
+                                vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                                    @Override
+                                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                                    }
+
+                                    @Override
+                                    public void onPageSelected(int position) {
+                                        Log.d(TAG, "onPageSelected: " + position);
+                                        vp.resetHeight(position);
+                                        setTvBg(position);
+                                    }
+
+                                    @Override
+                                    public void onPageScrollStateChanged(int state) {
+                                    }
+                                });
                             }
                         }
                         hasRefresh = false;
                         initDialog();
                         break;
                     case 1:
-                        Utils.toastShort(this, "您还没有登录或登录已过期，请重新登录");
                         break;
                     case 2:
                         Utils.toastShort(this, result.optString("msg"));
@@ -1017,7 +973,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     //刷新团队详情数据
     private void refData() {
-        setBodyParams(new String[]{"id"}, new String[]{id + ""});
+        setBodyParams(new String[]{"id"}, new String[]{String.valueOf(id)});
         sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
     }
 
@@ -1087,41 +1043,23 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         EventBus.getDefault().unregister(this);
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        if (hasFocus) {
-            if (vp != null && !first) {
-                first = true;
-            }
-        }
-    }
-
     private void initDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setCancelable(false);
         builder.setTitle("提示");
         builder.setMessage("您确定要退出“" + cBean.getName() + "”团队吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //退出团队
-                setBodyParams(new String[]{"nid", "id", "op"}, new String[]{0 + "", "" + cBean.getId(), "" + 2});
-                sendPost(Constants.base_url + "/api/club/base/join.do", out, Constants.token);
-                deldialog.dismiss();
-            }
-
-
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            //退出团队
+            setBodyParams(new String[]{"nid", "id", "op"}, new String[]{0 + "", "" + cBean.getId(), "" + 2});
+            sendPost(Constants.base_url + "/api/club/base/join.do", out, Constants.token);
+            deldialog.dismiss();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deldialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
         deldialog = builder.create();
         deldialog.setCancelable(false);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -1141,13 +1079,11 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 startActivity(new Intent(this, StatementActivity.class).putExtra("teamId", teamId));
                 break;
             case R.id.ll_teamMembers:
-                Intent intent = new Intent(mContext, TeamMembersActivity.class);
+                Intent intent = new Intent(mContext, TeamMembersActivity.class).putExtra("id", id);
                 intent.putExtra("id", id);
                 startActivity(intent);
                 break;
-
             case R.id.ivEWM:
-
                 intent = new Intent(mContext, QRcodeActivity.class);
                 if (cBean != null) {
                     intent.putExtra("bean", cBean);
@@ -1225,7 +1161,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 if (isJoin) {
                     deldialog.show();
                 } else {
-                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                     startActivity(new Intent(this, ApplyJoinTDActivity.class).putExtra("id", id));
                 }
                 settingPop.dismiss();
@@ -1306,17 +1241,16 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         this.status = status;
         if (vp != null) {
             vp.setCurrentItem(status);
-            Log.e("YSF", "我是vp的设置item" + status);
         }
 //        llHead.setVisibility(status == 0 ? View.VISIBLE : View.GONE);
-        tvHall.setSelected(status == 0 ? true : false);
-        tvHall2.setSelected(status == 0 ? true : false);
-        tvStatement.setSelected(status == 1 ? true : false);
-        tvStatement2.setSelected(status == 1 ? true : false);
-        tvTeam.setSelected(status == 2 ? true : false);
-        tvTeam2.setSelected(status == 2 ? true : false);
-        tvManager.setSelected(status == 3 ? true : false);
-        tvManager2.setSelected(status == 3 ? true : false);
+        tvHall.setSelected(status == 0);
+        tvHall2.setSelected(status == 0);
+        tvStatement.setSelected(status == 1);
+        tvStatement2.setSelected(status == 1);
+        tvTeam.setSelected(status == 2);
+        tvTeam2.setSelected(status == 2);
+        tvManager.setSelected(status == 3);
+        tvManager2.setSelected(status == 3);
 
         if (status == 2) {
             if (Constants.isJoin) {
@@ -1342,6 +1276,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -1349,7 +1284,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
             case 200:
                 break;
             case 202:
-                if (resultCode == Activity.RESULT_OK && data != null) {
+                if (data != null) {
                     photoUri = null;
                     photoUri = data.getData();
                     try {
@@ -1372,7 +1307,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
                 }
                 Luban.with(this).load(new File(path)).
                         setCompressListener(new OnCompressListener() {
-                            //                    @Override
+                            @Override
                             public void onStart() {
                             }
 
@@ -1404,35 +1339,17 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
     public void onRefresh() {
         if (status == 0) {
             hasRefresh = true;
-            setBodyParams(new String[]{"id"}, new String[]{id + ""});
+            setBodyParams(new String[]{"id"}, new String[]{String.valueOf(id)});
             sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
         } else if (status == 1) {
             StatementFragment s1 = (StatementFragment) pagerAdapter.getItem(1);
-            if (s1 != null) {
-                s1.refreshData();
-            } else {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        rv.refreshComplete();
-                    }
-                }, 800);
-            }
+            s1.refreshData();
         } else if (status == 2) {
             TeamFragment t1 = (TeamFragment) pagerAdapter.getItem(2);
-            if (t1 != null) {
-                t1.refreshData();
-            } else {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        rv.refreshComplete();
-                    }
-                }, 800);
-            }
+            t1.refreshData();
         } else if (status == 3) {
             hasRefresh = true;
-            setBodyParams(new String[]{"id"}, new String[]{id + ""});
+            setBodyParams(new String[]{"id"}, new String[]{String.valueOf(id)});
             sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
         }
     }
@@ -1443,28 +1360,10 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
             rv.loadMoreComplete();
         } else if (status == 1) {
             StatementFragment s1 = (StatementFragment) pagerAdapter.getItem(1);
-            if (s1 != null) {
-                s1.loadmoreData();
-            } else {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        rv.loadMoreComplete();
-                    }
-                }, 800);
-            }
+            s1.loadmoreData();
         } else if (status == 2) {
             TeamFragment t1 = (TeamFragment) pagerAdapter.getItem(2);
-            if (t1 != null) {
-                t1.loadmoreData();
-            } else {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        rv.loadMoreComplete();
-                    }
-                }, 800);
-            }
+            t1.loadmoreData();
         } else if (status == 3) {
             rv.loadMoreComplete();
         }
@@ -1487,19 +1386,12 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        setBodyParams(new String[]{"id"}, new String[]{id + ""});
-        sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        setBodyParams(new String[]{"id"}, new String[]{String.valueOf(id)});
+//        sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
+//    }
 
     @Override
     public void clickPosition(int position) {
@@ -1548,7 +1440,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
             view.setVisibility(View.VISIBLE);
         }
         double angle = Math.toRadians(180) / (num - 1) * index;
-        Log.e("angle", angle + "");
+        Log.e("angle", String.valueOf(angle));
         int translationX = -(int) (radius * Math.cos(angle));
         int translationY = -(int) (radius * Math.sin(angle));
 

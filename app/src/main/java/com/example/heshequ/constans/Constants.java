@@ -30,7 +30,7 @@ public class Constants {
     public static String Token_Header = "XIANGYU-ACCESS-TOKEN";
     public static int default_PS = 10;
     public static String token;
-    public static int uid;
+    public static int uid = 1;
     public static int clubId; //当前团队id
     public static boolean isJoin; //是否加入该团队
     public static boolean isAdmin; //在当前团队是否管理员

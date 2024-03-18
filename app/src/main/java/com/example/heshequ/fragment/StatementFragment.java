@@ -42,7 +42,7 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
     private int index = 1;
     private final int getCode = 1000;
     private final int delSpeak = 1001;
-    private boolean isfresh;
+    private boolean isfresh = true;
     private int totalPage = 0;
     private boolean loadmore;
 

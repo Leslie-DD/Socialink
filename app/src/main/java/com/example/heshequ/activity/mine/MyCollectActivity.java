@@ -29,7 +29,7 @@ public class MyCollectActivity extends NetWorkActivity implements View.OnClickLi
     private ArrayList<Fragment> list;
     private TeamChildFragment4 teamFragment;
     private CollectTeamFragment wenwenFragment;
-    private CollectgoodFragment goodFragment;
+//    private CollectgoodFragment goodFragment;
     private MyFragmentPagerAdapter adapter;
     private int status = -1;
 
@@ -49,10 +49,10 @@ public class MyCollectActivity extends NetWorkActivity implements View.OnClickLi
         list = new ArrayList<>();
         wenwenFragment = new CollectTeamFragment();
         teamFragment = new TeamChildFragment4();
-        goodFragment = new CollectgoodFragment();
+//        goodFragment = new CollectgoodFragment();
         list.add(teamFragment);
         list.add(wenwenFragment);
-        list.add(goodFragment);
+//        list.add(goodFragment);
         vp = (ViewPager) findViewById(R.id.vp);
         adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), list);
         vp.setAdapter(adapter);

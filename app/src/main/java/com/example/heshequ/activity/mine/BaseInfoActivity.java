@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LabelSelectionActivity;
-import com.example.heshequ.adapter.listview.ItemAdapter;
+import com.example.heshequ.adapter.listview.BaseInfoItemAdapter;
 import com.example.heshequ.base.PhotoBaseActivity;
 import com.example.heshequ.bean.ItemBean;
 import com.example.heshequ.bean.UserInfoBean;
@@ -57,7 +57,7 @@ public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickL
     private final static int UPLOAD_NAME = 1001;
 
     private ArrayList<ItemBean> data;
-    private ItemAdapter adapter;
+    private BaseInfoItemAdapter adapter;
     private ListView lv;
     private CircleView ivHead;
     private TextView tvTitle;
@@ -103,7 +103,7 @@ public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickL
         tvTitle.setText("基本资料");
         getData();
         lv = findViewById(R.id.lv);
-        adapter = new ItemAdapter(mContext, data);
+        adapter = new BaseInfoItemAdapter(mContext, data);
         lv.setAdapter(adapter);
         if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
             Glide.with(mContext).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(ivHead);

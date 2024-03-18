@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.heshequ.R;
+import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.activity.TeamSearchActivity;
-import com.example.heshequ.activity.flowview.TeamActivity;
 import com.example.heshequ.activity.team.AddTeamActivity;
 import com.example.heshequ.adapter.MytPagersAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -56,14 +56,15 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
     }
 
     private void init() {
-//        MainActivity activity = (MainActivity) getActivity();
-        TeamActivity activity = (TeamActivity) getActivity();
+        MainActivity activity = (MainActivity) getActivity();
+//        TeamActivity activity = (TeamActivity) getActivity();
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new TeamChildFragment1());
         fragments.add(new TeamChildFragment2());
         fragments.add(new TeamChildFragment3());
         //fragments.add(new TeamChildFragment4());
-        llSearch = (LinearLayout) view.findViewById(R.id.llSearch);
+//        llSearch = (LinearLayout) view.findViewById(R.id.llSearch);
+//        llSearch.setOnClickListener(this);
         tvNew = (TextView) view.findViewById(R.id.tvNew);
         tvRecommended = (TextView) view.findViewById(R.id.tvRecommended);
         tvMine = (TextView) view.findViewById(R.id.tvMine);
@@ -96,7 +97,6 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
     }
 
     private void event() {
-        llSearch.setOnClickListener(this);
         ivAdd.setOnClickListener(this);
         tvMine.setOnClickListener(this);
         tvNew.setOnClickListener(this);
@@ -128,9 +128,9 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.ivBack:
                 break;
-            case R.id.llSearch:
-                startActivity(new Intent(mContext, TeamSearchActivity.class));
-                break;
+//            case R.id.llSearch:
+//                startActivity(new Intent(mContext, TeamSearchActivity.class));
+//                break;
             case R.id.ivAdd:
                 startActivity(new Intent(mContext, AddTeamActivity.class));
                 break;

@@ -2,7 +2,6 @@ package com.example.heshequ.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -37,6 +36,8 @@ import com.example.heshequ.entity.RefreshBean;
 import com.example.heshequ.fragment.HomeFragment;
 import com.example.heshequ.fragment.MeFragment;
 import com.example.heshequ.fragment.MsgFragment;
+import com.example.heshequ.fragment.TeamsFragment;
+import com.example.heshequ.fragment.WenwenFragment;
 import com.example.heshequ.umeng.MyPreferences;
 import com.example.heshequ.umeng.PushHelper;
 import com.example.heshequ.utils.Utils;
@@ -59,6 +60,8 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
     private Fragment currentFragment;
 
     private HomeFragment homeFragment;
+    private TeamsFragment teamFragment;
+    private WenwenFragment wenwenFragment;
     private MsgFragment msgFragment;
     private MeFragment meFragment;
 
@@ -71,7 +74,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
     private SharedPreferences sp;
     private View red;
     private int colum;
-    private TextView rb4, rb1, rb5;
+    private TextView rb1, rb2, rb3, rb4, rb5;
     private int oldSystemUiVisibility;
     private View decorView;
 
@@ -158,16 +161,25 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
             e.printStackTrace();
         }
         red = findViewById(R.id.red);
-        rb4 = findViewById(R.id.rb4);
+
         rb1 = findViewById(R.id.rb1);
+        rb2 = findViewById(R.id.rb2);
+        rb3 = findViewById(R.id.rb3);
+        rb4 = findViewById(R.id.rb4);
         rb5 = findViewById(R.id.rb5);
+
+        rb1.setOnClickListener(this);
+        rb2.setOnClickListener(this);
+        rb3.setOnClickListener(this);
+        findViewById(R.id.rls).setOnClickListener(this);
+        rb5.setOnClickListener(this);
+
         rb1.setSelected(true);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(red.getLayoutParams());
         lp.setMargins((int) ((Constants.screenW * 4 * 1.0 / 5) - (Constants.screenW * 1.0 / 15)), Utils.dip2px(mContext, 5F), 0, 0);
-        findViewById(R.id.rls).setOnClickListener(this);
-        findViewById(R.id.rb1).setOnClickListener(this);
-        findViewById(R.id.rb5).setOnClickListener(this);
         homeFragment = new HomeFragment();
+        teamFragment = new TeamsFragment();
+        wenwenFragment = new WenwenFragment();
         msgFragment = new MsgFragment();
         meFragment = new MeFragment();
         currentFragment = homeFragment;
@@ -279,11 +291,33 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
                 StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
                 switchFragment(homeFragment);
                 break;
-            case R.id.rls:  // 导航2 消息
+            case R.id.rb2:  // 导航2 团队
+                if (colum == 1) {
+                    return;
+                }
+                colum = 1;
+                clearAllSelect();
+                rb2.setSelected(true);
+                decorView.setSystemUiVisibility(oldSystemUiVisibility);
+                StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
+                switchFragment(teamFragment);
+                break;
+            case R.id.rb3:  // 导航3 问问
                 if (colum == 2) {
                     return;
                 }
                 colum = 2;
+                clearAllSelect();
+                rb3.setSelected(true);
+                decorView.setSystemUiVisibility(oldSystemUiVisibility);
+                StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
+                switchFragment(wenwenFragment);
+                break;
+            case R.id.rls:  // 导航4 消息
+                if (colum == 3) {
+                    return;
+                }
+                colum = 3;
                 redStatus(0);
                 clearAllSelect();
                 rb4.setSelected(true);
@@ -291,7 +325,7 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
                 StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
                 switchFragment(msgFragment);
                 break;
-            case R.id.rb5:  // 导航4 我的
+            case R.id.rb5:  // 导航5 我的
                 if (colum == 4) {
                     return;
                 }
@@ -312,6 +346,8 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
             redStatus(0);
         }
         rb1.setSelected(false);
+        rb2.setSelected(false);
+        rb3.setSelected(false);
         rb4.setSelected(false);
         rb5.setSelected(false);
     }

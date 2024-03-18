@@ -1,84 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <com.jude.rollviewpager.RollPagerView
         android:id="@+id/rp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_width="match_parent"
-        android:background="#f6f6f6"
-        android:layout_height="90dp">
-    </com.jude.rollviewpager.RollPagerView>
+        android:background="#f6f6f6"/>
+
     <LinearLayout
-        android:background="@color/base_color_white"
         android:id="@+id/llVis"
-        android:paddingTop="11dp"
-        android:paddingBottom="3dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/base_color_white"
+        android:paddingTop="11dp"
+        android:paddingBottom="3dp">
+
         <LinearLayout
-            android:gravity="center_horizontal"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:gravity="center_horizontal">
+
             <TextView
-                android:layout_marginLeft="23dp"
-                android:layout_marginRight="18dp"
                 android:id="@+id/tv4"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:textColor="@drawable/three_text_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                android:layout_marginEnd="18dp"
                 android:background="@drawable/bg_select"
                 android:gravity="center_horizontal"
-                android:textSize="15sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="7dp"
                 android:text="推荐"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textColor="@drawable/three_text_select"
+                android:textSize="15sp" />
         </LinearLayout>
+
         <LinearLayout
-            android:gravity="center_horizontal"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:gravity="center_horizontal">
+
             <TextView
+                android:id="@+id/tv5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginRight="18dp"
-                android:id="@+id/tv5"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:textColor="@drawable/three_text_select"
                 android:background="@drawable/bg_select"
                 android:gravity="center_horizontal"
-                android:textSize="15sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="7dp"
                 android:text="最新"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:gravity="center_horizontal"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="23dp"
-                android:id="@+id/tv6"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
                 android:textColor="@drawable/three_text_select"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="23dp"
                 android:background="@drawable/bg_select"
                 android:gravity="center_horizontal"
-                android:textSize="15sp"
+                android:paddingTop="6dp"
+                android:paddingBottom="7dp"
                 android:text="专场"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:textColor="@drawable/three_text_select"
+                android:textSize="15sp" />
         </LinearLayout>
     </LinearLayout>
+
     <com.example.heshequ.view.CustomViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </com.example.heshequ.view.CustomViewPager>
+        android:layout_height="wrap_content"/>
 </LinearLayout>

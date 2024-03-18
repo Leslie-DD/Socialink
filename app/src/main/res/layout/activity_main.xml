@@ -9,45 +9,52 @@
         android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></FrameLayout>
+        android:layout_weight="1" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#f2f2f2">
-    </View>
+        android:background="#f2f2f2" />
 
     <RadioGroup
         android:id="@+id/rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="3dp"
         android:paddingLeft="10dp"
+        android:paddingTop="5dp"
         android:paddingRight="10dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="3dp">
 
         <TextView
             android:id="@+id/rb1"
-            android:layout_weight="1"
+            style="@style/main_tab_bottom1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/main_tab_bottom1"
+            android:layout_weight="1"
             android:checked="true"
             android:drawableTop="@drawable/under_img_select1"
             android:text="首页" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/rb2"-->
-            <!--style="@style/main_tab_bottom1"-->
-            <!--android:drawableTop="@drawable/under_img_select2"-->
-            <!--android:text="团队" />-->
+        <TextView
+            android:id="@+id/rb2"
+            style="@style/main_tab_bottom1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:drawableTop="@drawable/under_img_select2"
+            android:text="团队" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/rb3"-->
-            <!--style="@style/main_tab_bottom1"-->
-            <!--android:drawableTop="@drawable/under_img_select3"-->
-            <!--android:text="问问" />-->
+        <TextView
+            android:id="@+id/rb3"
+            style="@style/main_tab_bottom1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:drawableTop="@drawable/under_img_select3"
+            android:text="问问" />
 
         <RelativeLayout
             android:id="@+id/rls"
@@ -63,40 +70,38 @@
                 android:text="消息" />
 
             <View
-                android:layout_toRightOf="@+id/rb4"
                 android:id="@+id/red"
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:layout_marginLeft="-2dp"
+                android:layout_toRightOf="@+id/rb4"
                 android:background="@drawable/ovel_shape"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
             <!--<View-->
-                <!--android:layout_toRightOf="@+id/rb4"-->
-                <!--android:id="@+id/red"-->
-                <!--android:layout_width="8dp"-->
-                <!--android:layout_height="8dp"-->
-                <!--android:layout_marginLeft="-2dp"-->
-                <!--android:background="@drawable/ovel_shape"-->
-                <!--android:visibility="gone"-->
-                <!--/>-->
+            <!--android:layout_toRightOf="@+id/rb4"-->
+            <!--android:id="@+id/red"-->
+            <!--android:layout_width="8dp"-->
+            <!--android:layout_height="8dp"-->
+            <!--android:layout_marginLeft="-2dp"-->
+            <!--android:background="@drawable/ovel_shape"-->
+            <!--android:visibility="gone"-->
+            <!--/>-->
         </RelativeLayout>
 
-<!--        <RelativeLayout-->
-<!--            android:id="@+id/knowledge"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1">-->
+        <!--        <RelativeLayout-->
+        <!--            android:id="@+id/knowledge"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1">-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/rb3"-->
-<!--                style="@style/main_tab_bottom1"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:drawableTop="@drawable/under_img_select4"-->
-<!--                android:text="知识" />-->
-
-<!--        </RelativeLayout>-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/rb3"-->
+        <!--                style="@style/main_tab_bottom1"-->
+        <!--                android:layout_centerHorizontal="true"-->
+        <!--                android:drawableTop="@drawable/under_img_select4"-->
+        <!--                android:text="知识" />-->
+        <!--        </RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/rlr"
@@ -110,15 +115,13 @@
                 android:layout_centerHorizontal="true"
                 android:drawableTop="@drawable/under_img_select5"
                 android:text="我的" />
-
-
         </RelativeLayout>
 
         <!--<TextView-->
-            <!--android:id="@+id/rb5"-->
-            <!--style="@style/main_tab_bottom1"-->
-            <!--android:drawableTop="@drawable/under_img_select5"-->
-            <!--android:text="我的" />-->
+        <!--android:id="@+id/rb5"-->
+        <!--style="@style/main_tab_bottom1"-->
+        <!--android:drawableTop="@drawable/under_img_select5"-->
+        <!--android:text="我的" />-->
     </RadioGroup>
 
     <View

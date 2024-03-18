@@ -1,114 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/base_color_white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/base_color_white">
+
     <LinearLayout
         android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:paddingTop="5dp"
         android:paddingRight="15dp"
-        android:paddingBottom="5dp"
-        android:gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:paddingBottom="5dp">
+
         <LinearLayout
-            android:layout_marginLeft="15dp"
             android:id="@+id/llSearch"
-            android:gravity="center_vertical"
-            android:background="@drawable/gray_search"
             android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="15dp"
             android:layout_weight="1"
-            android:layout_height="32dp">
+            android:background="@drawable/gray_search"
+            android:gravity="center_vertical">
+
             <TextView
-                android:layout_marginLeft="14dp"
-                android:drawablePadding="5dp"
-                android:hint="搜索相关"
-                android:drawableLeft="@mipmap/innquire"
-                android:layout_gravity="center_vertical"
-                android:textColorHint="@color/text9"
-                android:textColor="@color/text66"
-                android:textSize="14sp"
-                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:drawableLeft="@mipmap/innquire"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:hint="搜索相关"
+                android:textColor="@color/text66"
+                android:textColorHint="@color/text9"
+                android:textSize="14sp" />
         </LinearLayout>
+
         <ImageView
             android:id="@+id/ivSecondMa"
-            android:src="@mipmap/saomiao"
-            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/saomiao" />
     </LinearLayout>
+
     <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:layout_below="@+id/ll"
         android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll" />
+
     <LinearLayout
-        android:background="@color/base_color_white"
-        android:visibility="gone"
         android:id="@+id/llInVis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ll"
+        android:background="@color/base_color_white"
         android:paddingTop="11dp"
         android:paddingBottom="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:visibility="gone">
+
         <LinearLayout
-            android:gravity="center_horizontal"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:gravity="center_horizontal">
+
             <TextView
                 android:id="@+id/tv1"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textColor="@drawable/three_text_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_select"
                 android:gravity="center_horizontal"
-                android:textSize="14sp"
+                android:paddingLeft="15dp"
+                android:paddingTop="6dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="7dp"
                 android:text="热门团队"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="@drawable/three_text_select"
+                android:textSize="14sp" />
         </LinearLayout>
+
         <LinearLayout
-            android:gravity="center_horizontal"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:gravity="center_horizontal">
+
             <TextView
                 android:id="@+id/tv2"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textColor="@drawable/three_text_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_select"
                 android:gravity="center_horizontal"
-                android:textSize="14sp"
+                android:paddingLeft="15dp"
+                android:paddingTop="6dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="7dp"
                 android:text="热门问问"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="@drawable/three_text_select"
+                android:textSize="14sp" />
         </LinearLayout>
+
         <LinearLayout
-            android:gravity="center_horizontal"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:gravity="center_horizontal">
+
             <TextView
                 android:id="@+id/tv3"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:textColor="@drawable/three_text_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_select"
                 android:gravity="center_horizontal"
-                android:textSize="14sp"
+                android:paddingLeft="15dp"
+                android:paddingTop="6dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="7dp"
                 android:text="热门活动"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="@drawable/three_text_select"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

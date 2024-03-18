@@ -28,11 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Hulk_Zhang on 2018/1/10 17:50
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
-public class ChildFragment1 extends NetWorkFragment implements CommentTeamAdapter.OnItemClickListener, IChildFragment {
+public class HotTeamFragment extends NetWorkFragment implements CommentTeamAdapter.OnItemClickListener, IChildFragment {
     private View view;
     public RecyclerView rv;
     public CommentTeamAdapter adapter;

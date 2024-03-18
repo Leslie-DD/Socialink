@@ -20,9 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.heshequ.R;
+import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.activity.WebActivity;
-import com.example.heshequ.activity.WwSearchActivity;
-import com.example.heshequ.activity.flowview.WenwenActivity;
 import com.example.heshequ.activity.wenwen.SendQuestionActivity;
 import com.example.heshequ.adapter.MyBannerAdapter;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
@@ -51,9 +50,9 @@ import java.util.List;
  */
 public class WenwenFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
     private View view;
-    private ImageView ivSecondMa;
+    private ImageView addWenwen;
     private XRecyclerView rv;
-    private LinearLayout llSearch;
+//    private LinearLayout llSearch;
     private TextView tv1;
     private TextView tv2;
     private TextView tv3;
@@ -116,10 +115,10 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
     private void init() {
         gson = new Gson();
         setFragmentListener();
-        ivSecondMa = (ImageView) view.findViewById(R.id.ivSecondMa);
-        ivSecondMa.setOnClickListener(this);
-        llSearch = (LinearLayout) view.findViewById(R.id.llSearch);
-        llSearch.setOnClickListener(this);
+        addWenwen = (ImageView) view.findViewById(R.id.add_wenwen);
+        addWenwen.setOnClickListener(this);
+//        llSearch = (LinearLayout) view.findViewById(R.id.llSearch);
+//        llSearch.setOnClickListener(this);
         tv1 = (TextView) view.findViewById(R.id.tv1);
         tv1.setSelected(true);
         tv1.setOnClickListener(this);
@@ -152,8 +151,8 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
     }
 
     private void initHeadView() {
-//        MainActivity activity= (MainActivity) getActivity();
-        WenwenActivity activity = (WenwenActivity) getActivity();
+        MainActivity activity = (MainActivity) getActivity();
+//        WenwenActivity activity = (WenwenActivity) getActivity();
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new ChildWwFragment());
         fragmentList.add(new ChildFragment2());
@@ -233,11 +232,11 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.llSearch:
-                intentActivity = new Intent(getActivity(), WwSearchActivity.class);
-                startActivity(intentActivity);
-                break;
-            case R.id.ivSecondMa:
+//            case R.id.llSearch:
+//                intentActivity = new Intent(getActivity(), WwSearchActivity.class);
+//                startActivity(intentActivity);
+//                break;
+            case R.id.add_wenwen:
                 intentActivity = new Intent(getActivity(), SendQuestionActivity.class);
                 startActivity(intentActivity);
                 break;

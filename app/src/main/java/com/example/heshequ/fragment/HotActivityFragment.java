@@ -11,13 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.HotActiveAdapter;
 import com.example.heshequ.base.NetWorkFragment;
-import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.HotAvtivityBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.entity.RefHotActivityEvent;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -26,11 +24,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Hulk_Zhang on 2018/1/10 17:50
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
-public class ChildFragment3 extends NetWorkFragment {
+public class HotActivityFragment extends NetWorkFragment {
+
+    private static final String TAG = "[HotActivityFragment]";
     private View view;
     private RecyclerView mRecyclerView;
     private HotActiveAdapter adapter;
@@ -92,42 +88,40 @@ public class ChildFragment3 extends NetWorkFragment {
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        Log.e("[ChildFragment3]", "onSuccess: " + result.toString());
+        Log.d(TAG, "onSuccess: where: " + where + ", result: " + result.toString());
+        if (result.optInt("code") != 0) {
+            Utils.toastShort(mContext, result.optString("msg"));
+            return;
+        }
         switch (where) {
             case GetData:
-                if (result.optInt("code") == 0) {
-                    hotAvtivityBean = gson.fromJson(result.optString("data"), HotAvtivityBean.class);
-                    totalPage = hotAvtivityBean.getTotalPage();
-                    if (hotAvtivityBean.getData() != null) {
-                        if (hotAvtivityBean.getData().size() > 0) {
-                            tvTips.setVisibility(View.GONE);
-                            data = hotAvtivityBean.getData();
-                            adapter.setData(data);
-                        } else {
-                            tvTips.setVisibility(View.VISIBLE);
-                            data = new ArrayList<>();
-                            adapter.setData(data);
-                        }
-                    }
+                hotAvtivityBean = gson.fromJson(result.optString("data"), HotAvtivityBean.class);
+                totalPage = hotAvtivityBean.getTotalPage();
+                if (hotAvtivityBean.getData() == null) {
+                    return;
+                }
+                if (hotAvtivityBean.getData().size() > 0) {
+                    tvTips.setVisibility(View.GONE);
+                    data = hotAvtivityBean.getData();
+                    adapter.setData(data);
                 } else {
-                    Utils.toastShort(mContext, result.optString("msg"));
+                    tvTips.setVisibility(View.VISIBLE);
+                    data = new ArrayList<>();
+                    adapter.setData(data);
                 }
                 break;
             case LoaMore:
-                if (result.optInt("code") == 0) {
-                    hotAvtivityBean = gson.fromJson(result.optString("data"), HotAvtivityBean.class);
-                    totalPage = hotAvtivityBean.getTotalPage();
-                    if (hotAvtivityBean.getData() != null) {
-                        if (hotAvtivityBean.getData().size() > 0) {
-                            data = hotAvtivityBean.getData();
-                            adapter.setData2(data);
-                        } else {
-                            data = new ArrayList<>();
-                            adapter.setData2(data);
-                        }
-                    }
+                hotAvtivityBean = gson.fromJson(result.optString("data"), HotAvtivityBean.class);
+                totalPage = hotAvtivityBean.getTotalPage();
+                if (hotAvtivityBean.getData() == null) {
+                    return;
+                }
+                if (hotAvtivityBean.getData().size() > 0) {
+                    data = hotAvtivityBean.getData();
+                    adapter.setData2(data);
                 } else {
-                    Utils.toastShort(mContext, result.optString("msg"));
+                    data = new ArrayList<>();
+                    adapter.setData2(data);
                 }
                 break;
         }

@@ -153,9 +153,9 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         fragmentList = new ArrayList<>();
         ChildFragment2 fragment2 = new ChildFragment2();
         fragment2.setType(3);
-        fragmentList.add(new ChildFragment1());
+        fragmentList.add(new HotTeamFragment());
         fragmentList.add(fragment2);
-        fragmentList.add(new ChildFragment3());
+        fragmentList.add(new HotActivityFragment());
 
         headView = getActivity().getLayoutInflater().inflate(R.layout.home_head_view, null);
         rollPagerView = (RollPagerView) headView.findViewById(R.id.rp);
@@ -177,15 +177,15 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         secondHand = (LinearLayout) headView.findViewById(R.id.secondhand);
         scheduleCard = (LinearLayout) headView.findViewById(R.id.schedulecard);
         makeFriends = (LinearLayout) headView.findViewById(R.id.makefriends);
-        makeFriends.setVisibility(View.GONE);
-        secondHand.setVisibility(View.GONE);
-        scheduleCard.setVisibility(View.GONE);
 
         team.setOnClickListener(this);
         wenwen.setOnClickListener(this);
         secondHand.setOnClickListener(this);
         scheduleCard.setOnClickListener(this);
         makeFriends.setOnClickListener(this);
+
+        // 隐藏 menu
+        headView.findViewById(R.id.menu).setVisibility(View.GONE);
 
         tv4 = (TextView) headView.findViewById(R.id.tv4);
         tv4.setSelected(true);
@@ -339,7 +339,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     public void onRefresh() {
         Log.d(TAG, "onRefresh: " + item);
         if (item == 1) {
-            ChildFragment1 fragment1 = (ChildFragment1) pagerAdapter.getItem(0);
+            HotTeamFragment fragment1 = (HotTeamFragment) pagerAdapter.getItem(0);
             fragment1.refData();
         } else if (item == 2) {
             ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);
@@ -374,7 +374,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
 
         Log.d(TAG, "onLoadMore item: " + item);
         if (item == 1) {
-            ChildFragment1 fragment1 = (ChildFragment1) pagerAdapter.getItem(0);
+            HotTeamFragment fragment1 = (HotTeamFragment) pagerAdapter.getItem(0);
             fragment1.loaData();
         } else if (item == 2) {
             ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);

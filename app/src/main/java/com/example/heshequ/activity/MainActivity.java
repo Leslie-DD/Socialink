@@ -93,11 +93,11 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         init();
         initPop();
 
-        if (hasAgreedAgreement()) {
-            PushAgent.getInstance(this).onAppStart();
-        } else {
-            showAgreementDialog();
-        }
+//        if (hasAgreedAgreement()) {
+//            PushAgent.getInstance(this).onAppStart();
+//        } else {
+//            showAgreementDialog();
+//        }
     }
 
     private boolean hasAgreedAgreement() {

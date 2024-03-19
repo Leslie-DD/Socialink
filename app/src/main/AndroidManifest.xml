@@ -132,7 +132,8 @@
         <activity android:name="com.example.heshequ.activity.team.SearchMembersActivity" />
         <activity android:name="com.example.heshequ.activity.HomeSearchActivity" />
         <activity android:name="com.example.heshequ.activity.WwSearchActivity" />
-        <activity android:name="com.example.heshequ.activity.TeamSearchActivity" />
+        <activity android:name="com.example.heshequ.activity.TeamSearchActivity"
+            android:launchMode="singleTask"/>
         <activity android:name="com.example.heshequ.activity.statement.BullertinDetailActivity" />
         <activity
             android:name="com.example.heshequ.activity.team.ActivityDateilActivity"

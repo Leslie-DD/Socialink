@@ -62,12 +62,21 @@
 
         <ImageView
             android:id="@+id/add_wenwen"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginHorizontal="15dp"
-            android:src="@mipmap/increasdtp" />
+            android:layout_marginHorizontal="54dp"
+            android:src="@drawable/blue_add" />
+
+        <ImageView
+            android:id="@+id/llSearch"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/blue_search" />
     </RelativeLayout>
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
@@ -75,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title_layout"
-        android:layout_marginTop="0dp"/>
+        android:layout_marginTop="-1dp" />
 
     <LinearLayout
         android:id="@+id/llInVis"

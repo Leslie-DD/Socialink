@@ -38,17 +38,17 @@ public class MeetApplication extends Application {
         CrashHandler.getInstance().init(this);
         CrashReport.initCrashReport(getApplicationContext(), "8c0feaed02", true);
 
-        //友盟日志输出开关
-        UMConfigure.setLogEnabled(true);
-        //预初始化
-        UMConfigure.preInit(this, APP_KEY, CHANNEL);
-        //是否同意隐私政策
-        boolean agreed = MyPreferences.getInstance(this).hasAgreePrivacyAgreement();
-        if (!agreed) {
-            return;
-        }
-        //建议在子线程中初始化
-        new Thread(() -> init(getApplicationContext())).start();
+//        //友盟日志输出开关
+//        UMConfigure.setLogEnabled(true);
+//        //预初始化
+//        UMConfigure.preInit(this, APP_KEY, CHANNEL);
+//        //是否同意隐私政策
+//        boolean agreed = MyPreferences.getInstance(this).hasAgreePrivacyAgreement();
+//        if (!agreed) {
+//            return;
+//        }
+//        //建议在子线程中初始化
+//        new Thread(() -> init(getApplicationContext())).start();
     }
 
     public static MeetApplication getInstance() {

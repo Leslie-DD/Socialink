@@ -22,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.activity.WebActivity;
+import com.example.heshequ.activity.WwSearchActivity;
 import com.example.heshequ.activity.wenwen.SendQuestionActivity;
 import com.example.heshequ.adapter.MyBannerAdapter;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
@@ -49,10 +50,11 @@ import java.util.List;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class WenwenFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
+    private static final String TAG = "[WenwenFragment]";
     private View view;
     private ImageView addWenwen;
     private XRecyclerView rv;
-//    private LinearLayout llSearch;
+    private ImageView llSearch;
     private TextView tv1;
     private TextView tv2;
     private TextView tv3;
@@ -76,27 +78,28 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        switch (where) {
-            case getimgsCode:
-                if (result.optInt("code") == 0) {
-                    if (result.has("data") && !result.optString("data").isEmpty()) {
-                        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
-                        }.getType());
-                        Log.e("DDQ", "imgsData" + imgsData.size());
-                        if (imgsData != null && imgsData.size() > 0) {
-                            Log.e("DDQ", "imgsData" + imgsData.size());
-                            for (HomeBannerImgsBean bannerImgsBean : imgsData) {
-                                imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
-                            }
-
-                        }
-                        bannerAdapter.setData(imgs);
-                    }
-                } else {
-                    Utils.toastShort(mContext, result.optString("msg"));
-                }
-                break;
+        if (where != getimgsCode) {
+            return;
         }
+        if (result.optInt("code") != 0) {
+            Utils.toastShort(mContext, result.optString("msg"));
+            return;
+        }
+        if (!result.has("data") || result.optString("data").isEmpty()) {
+            return;
+        }
+        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+        }.getType());
+
+        Log.d(TAG, "imgsData" + imgsData.size());
+        if (imgsData != null && !imgsData.isEmpty()) {
+            Log.d(TAG, "imgsData" + imgsData.size());
+            for (HomeBannerImgsBean bannerImgsBean : imgsData) {
+                imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
+            }
+        }
+        bannerAdapter.setData(imgs);
+
     }
 
     @Override
@@ -117,8 +120,8 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
         setFragmentListener();
         addWenwen = (ImageView) view.findViewById(R.id.add_wenwen);
         addWenwen.setOnClickListener(this);
-//        llSearch = (LinearLayout) view.findViewById(R.id.llSearch);
-//        llSearch.setOnClickListener(this);
+        llSearch = (ImageView) view.findViewById(R.id.llSearch);
+        llSearch.setOnClickListener(this);
         tv1 = (TextView) view.findViewById(R.id.tv1);
         tv1.setSelected(true);
         tv1.setOnClickListener(this);
@@ -203,23 +206,17 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
 
             }
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                vp.setAdapter(pagerAdapter);
-                vp.setOffscreenPageLimit(2);
-                vp.setCurrentItem(0);
-            }
+        new Handler().postDelayed(() -> {
+            vp.setAdapter(pagerAdapter);
+            vp.setOffscreenPageLimit(2);
+            vp.setCurrentItem(0);
         }, 100);
 
         getImgs();
 
-        bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                startActivity(new Intent(getActivity(), WebActivity.class)
-                        .putExtra("url", imgsData.get(position).getLinkUrl()));
-            }
+        bannerAdapter.setonBanneritemClickListener(position -> {
+            startActivity(new Intent(getActivity(), WebActivity.class)
+                    .putExtra("url", imgsData.get(position).getLinkUrl()));
         });
     }
 
@@ -232,10 +229,10 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.llSearch:
-//                intentActivity = new Intent(getActivity(), WwSearchActivity.class);
-//                startActivity(intentActivity);
-//                break;
+            case R.id.llSearch:
+                intentActivity = new Intent(getActivity(), WwSearchActivity.class);
+                startActivity(intentActivity);
+                break;
             case R.id.add_wenwen:
                 intentActivity = new Intent(getActivity(), SendQuestionActivity.class);
                 startActivity(intentActivity);

@@ -30,7 +30,7 @@ import java.util.List;
 public class TeamsFragment extends NetWorkFragment implements View.OnClickListener {
 
     private View view;
-    private LinearLayout llSearch;
+    private ImageView llSearch;
     private NoScrollViewPager vp;
     private MytPagersAdapter pagerAdapter;
     private TextView tvMine, tvRecommended, tvNew, tvCollection;
@@ -63,8 +63,8 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
         fragments.add(new TeamChildFragment2());
         fragments.add(new TeamChildFragment3());
         //fragments.add(new TeamChildFragment4());
-//        llSearch = (LinearLayout) view.findViewById(R.id.llSearch);
-//        llSearch.setOnClickListener(this);
+        llSearch = (ImageView) view.findViewById(R.id.llSearch);
+        llSearch.setOnClickListener(this);
         tvNew = (TextView) view.findViewById(R.id.tvNew);
         tvRecommended = (TextView) view.findViewById(R.id.tvRecommended);
         tvMine = (TextView) view.findViewById(R.id.tvMine);
@@ -128,9 +128,9 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.ivBack:
                 break;
-//            case R.id.llSearch:
-//                startActivity(new Intent(mContext, TeamSearchActivity.class));
-//                break;
+            case R.id.llSearch:
+                startActivity(new Intent(mContext, TeamSearchActivity.class));
+                break;
             case R.id.ivAdd:
                 startActivity(new Intent(mContext, AddTeamActivity.class));
                 break;

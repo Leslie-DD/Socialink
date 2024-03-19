@@ -15,6 +15,7 @@ import com.example.heshequ.bean.FriendAddNewsBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.utils.Utils;
+import com.example.heshequ.view.QuestionAnswerItem;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 
@@ -31,13 +32,7 @@ import okhttp3.Response;
 
 public class FriendShowAnswers extends NetWorkActivity implements View.OnClickListener {
     private int user_id;
-    private String answer_1;
-    private String answer_2;
-    private String answer_3;
-    private String answer_4;
-    private String answer_5;
-    private TextView question1, question2, question3, question4, question5;
-    private TextView answer1, answer2, answer3, answer4, answer5;
+    private QuestionAnswerItem questionAnswerItem1, questionAnswerItem2, questionAnswerItem3, questionAnswerItem4, questionAnswerItem5;
     private FriendAddNewsBean friendAddNewsBean;
     private Button ivaccept, ivreject;
     private String[] content = {"", "", "", "", ""};
@@ -67,16 +62,11 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
 
     private void init() {
         setText("ta的试卷");
-        question1 = (TextView) findViewById(R.id.question1);
-        question2 = (TextView) findViewById(R.id.question2);
-        question3 = (TextView) findViewById(R.id.question3);
-        question4 = (TextView) findViewById(R.id.question4);
-        question5 = (TextView) findViewById(R.id.question5);
-        answer1 = (TextView) findViewById(R.id.answer1);
-        answer2 = (TextView) findViewById(R.id.answer2);
-        answer3 = (TextView) findViewById(R.id.answer3);
-        answer4 = (TextView) findViewById(R.id.answer4);
-        answer5 = (TextView) findViewById(R.id.answer5);
+        questionAnswerItem1 = findViewById(R.id.questionAnswerItem1);
+        questionAnswerItem2 = findViewById(R.id.questionAnswerItem2);
+        questionAnswerItem3 = findViewById(R.id.questionAnswerItem3);
+        questionAnswerItem4 = findViewById(R.id.questionAnswerItem4);
+        questionAnswerItem5 = findViewById(R.id.questionAnswerItem5);
         ivaccept = (Button) findViewById(R.id.ivaccept);
         ivreject = (Button) findViewById(R.id.ivreject);
         getData();
@@ -105,28 +95,28 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
                 ans_content[i] = value.getString("ans_content");
             }
             if (content[0] != null) {
-                question1.setText(content[0]);
-                answer1.setText(ans_content[0]);
+                questionAnswerItem1.setQuestion(content[0]);
+                questionAnswerItem1.setAnswer(ans_content[0]);
                 ques_num = ques_num + 1;
             }
             if (content[1] != null) {
-                question2.setText(content[1]);
-                answer2.setText(ans_content[1]);
+                questionAnswerItem2.setQuestion(content[1]);
+                questionAnswerItem2.setAnswer(content[1]);
                 ques_num = ques_num + 1;
             }
             if (content[2] != null) {
-                question3.setText(content[2]);
-                answer3.setText(ans_content[2]);
+                questionAnswerItem3.setQuestion(content[2]);
+                questionAnswerItem3.setAnswer(ans_content[2]);
                 ques_num = ques_num + 1;
             }
             if (content[3] != null) {
-                question4.setText(content[3]);
-                answer4.setText(ans_content[4]);
+                questionAnswerItem4.setQuestion(content[3]);
+                questionAnswerItem4.setAnswer(ans_content[4]);
                 ques_num = ques_num + 1;
             }
             if (content[4] != null) {
-                question5.setText(content[4]);
-                answer5.setText(ans_content[4]);
+                questionAnswerItem5.setQuestion(content[4]);
+                questionAnswerItem4.setAnswer(ans_content[4]);
                 ques_num = ques_num + 1;
             }
         } else {

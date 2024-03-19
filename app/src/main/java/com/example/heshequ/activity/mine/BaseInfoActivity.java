@@ -208,7 +208,8 @@ public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickL
                     showPop(1);
                     break;
                 case 2:
-                    if (!TextUtils.isEmpty(userInfoBean.getCollege())) {
+                    if (!TextUtils.isEmpty(userInfoBean.getCollege()) && !TextUtils.equals(userInfoBean.getCollege(), "null")) {
+                        Utils.toastShort(mContext, "请联系管理员修改");
                         return;
                     }
                     if (pvOptions == null) {

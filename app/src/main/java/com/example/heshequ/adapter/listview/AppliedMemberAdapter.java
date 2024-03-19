@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class AppliedMemberAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<AppliedMemberBean> data = new ArrayList<>();
+    public boolean isTeamOwner = false;
 
     public AppliedMemberAdapter(Context context, ArrayList<AppliedMemberBean> data) {
         this.context = context;
@@ -63,7 +64,10 @@ public class AppliedMemberAdapter extends BaseAdapter {
             //int
             viewHolder.ivHead = (CircleView) view.findViewById(R.id.ivHead);
             viewHolder.tvName = (TextView) view.findViewById(R.id.tvName);
-            viewHolder.tvRole = view.findViewById(R.id.tvRole);
+//            viewHolder.tvRole = view.findViewById(R.id.tvRole);
+            viewHolder.tvTelephone = view.findViewById(R.id.tvTelephone);
+            viewHolder.tvRealName = view.findViewById(R.id.tvRealName);
+            viewHolder.tvCollege = view.findViewById(R.id.tvCollege);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -73,20 +77,44 @@ public class AppliedMemberAdapter extends BaseAdapter {
         } else {
             viewHolder.ivHead.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.head3));
         }
-        viewHolder.tvName.setText(data.get(position).getNickname());
-        if (data.get(position).getRole() == 1) {
-            viewHolder.tvRole.setText("团长");
-        } else if (data.get(position).getRole() == 2) {
-            viewHolder.tvRole.setText("副团长");
-        } else if (data.get(position).getRole() == 3) {
-            viewHolder.tvRole.setText("成员");
+        AppliedMemberBean bean = data.get(position);
+        viewHolder.tvName.setText(bean.getNickname());
+
+//        if (bean.getRole() == 1) {
+//            viewHolder.tvRole.setText("团长");
+//        } else if (bean.getRole() == 2) {
+//            viewHolder.tvRole.setText("副团长");
+//        } else if (bean.getRole() == 3) {
+//            viewHolder.tvRole.setText("成员");
+//        } else {
+//            viewHolder.tvRole.setVisibility(View.GONE);
+//        }
+
+        if (isTeamOwner) {
+            if (bean.getTelephone() != null && !bean.getTelephone().equals("null") && !bean.getTelephone().isEmpty()) {
+                viewHolder.tvTelephone.setText(bean.getTelephone());
+                viewHolder.tvTelephone.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.tvTelephone.setVisibility(View.GONE);
+            }
+
+            if (bean.getName() != null) {
+                viewHolder.tvRealName.setVisibility(View.VISIBLE);
+                viewHolder.tvRealName.setText("（" + bean.getName() + "）");
+            } else {
+                viewHolder.tvRealName.setVisibility(View.GONE);
+            }
         }
 
-        viewHolder.ivHead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", data.get(position).getUid()));
-            }
+        if (bean.getCollege() != null && !bean.getCollege().equals("null") && !bean.getCollege().isEmpty()) {
+            viewHolder.tvCollege.setVisibility(View.VISIBLE);
+            viewHolder.tvCollege.setText(bean.getCollege());
+        } else {
+            viewHolder.tvCollege.setVisibility(View.GONE);
+        }
+
+        viewHolder.ivHead.setOnClickListener(v -> {
+            context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", bean.getUid()));
         });
 
         return view;
@@ -94,6 +122,6 @@ public class AppliedMemberAdapter extends BaseAdapter {
 
     public class ViewHolder {
         private CircleView ivHead;
-        private TextView tvName, tvRole;
+        private TextView tvName, /*tvRole,*/ tvRealName, tvCollege, tvTelephone;
     }
 }

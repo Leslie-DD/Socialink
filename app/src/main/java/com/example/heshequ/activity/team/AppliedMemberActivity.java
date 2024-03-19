@@ -21,7 +21,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class AppliedMemberActivity extends NetWorkActivity implements View.OnClickListener {
+public class AppliedMemberActivity extends NetWorkActivity {
+    private static final String TAG = "[AppliedMemberActivity]";
     private TextView tvTitle;
     private ImageView ivBack;
     private ListView lv;
@@ -47,6 +48,8 @@ public class AppliedMemberActivity extends NetWorkActivity implements View.OnCli
         lv = (ListView) findViewById(R.id.lv);
         data = new ArrayList<>();
         adapter = new AppliedMemberAdapter(this, data);
+        adapter.isTeamOwner = getIntent().getBooleanExtra("isTeamOwner", false);
+        Log.i(TAG, "isTeamOwner: " + adapter.isTeamOwner);
         lv.setAdapter(adapter);
         getData();
     }
@@ -57,32 +60,24 @@ public class AppliedMemberActivity extends NetWorkActivity implements View.OnCli
     }
 
     private void event() {
-        ivBack.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-        }
+        ivBack.setOnClickListener(v -> finish());
     }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        Log.e("ddq", result.toString());
-        if (where == getCode) {
-            if (result.optInt("code") == 0) {
-                data = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<AppliedMemberBean>>() {
-                }.getType());
-                if (data != null && data.size() > 0) {
-                    adapter.setData(data);
-                }
-            } else {
-                Utils.toastShort(context, result.optString("msg"));
-            }
+        Log.i(TAG, "onSuccess where: " + where + ", " + result.toString());
+        if (where != getCode) {
+            return;
+        }
+        if (result.optInt("code") != 0) {
+            Utils.toastShort(context, result.optString("msg"));
+            return;
+        }
+        data = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<AppliedMemberBean>>() {
+        }.getType());
+        Log.i(TAG, "List<AppliedMemberBean>: " + data.toString());
+        if (data != null && !data.isEmpty()) {
+            adapter.setData(data);
         }
     }
 

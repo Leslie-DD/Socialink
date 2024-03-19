@@ -269,16 +269,13 @@ public class TeamAdapter extends RecyclerView.Adapter {
                     bean.getImgs().remove(bean.getImgs().size() - 1);
                 }
                 gv.setAdapter(new Adapter_GridView(context, bean.getImgs()));
-                gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(context, ImagePreviewActivity.class);
-                        intent.putStringArrayListExtra("imageList", bean.getImgs());
-                        intent.putExtra(P.START_ITEM_POSITION, i);
-                        intent.putExtra(P.START_IAMGE_POSITION, i);
-                        intent.putExtra("isdel2", false);
-                        context.startActivity(intent);
-                    }
+                gv.setOnItemClickListener((adapterView, view, i, l) -> {
+                    Intent intent = new Intent(context, ImagePreviewActivity.class);
+                    intent.putStringArrayListExtra("imageList", bean.getImgs());
+                    intent.putExtra(P.START_ITEM_POSITION, i);
+                    intent.putExtra(P.START_IAMGE_POSITION, i);
+                    intent.putExtra("isdel2", false);
+                    context.startActivity(intent);
                 });
             }
 
@@ -286,38 +283,24 @@ public class TeamAdapter extends RecyclerView.Adapter {
                 tvDel.setVisibility(View.GONE);
             }
 
-            tvDel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onDelListener.del(position, bean.getObj().getId());
-                }
-            });
+            tvDel.setOnClickListener(v -> onDelListener.del(position, bean.getObj().getId()));
 
-            btStatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        if (Utils.isPastDue(bean.getObj().getApplyDeadline(), "yyyy-MM-dd HH:mm")) {
-                            onapplyListener.apply(position, bean.getObj().getId(), bean.getObj().getStatus());
-                        } else {
-                            Utils.toastShort(context, "活动已截止报名");
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+            btStatus.setOnClickListener(v -> {
+                try {
+                    if (Utils.isPastDue(bean.getObj().getApplyDeadline(), "yyyy-MM-dd HH:mm")) {
+                        onapplyListener.apply(position, bean.getObj().getId(), bean.getObj().getStatus());
+                    } else {
+                        Utils.toastShort(context, "活动已截止报名");
                     }
-
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
+
             });
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //进入详情
-                    context.startActivity(
-                            new Intent(context, ActivityDateilActivity.class)
-                                    .putExtra("id", bean.getObj().getId())
-                    );
-                }
+            itemView.setOnClickListener(v -> {
+                //进入详情
+                context.startActivity(new Intent(context, ActivityDateilActivity.class).putExtra("id", bean.getObj().getId()));
             });
         }
     }

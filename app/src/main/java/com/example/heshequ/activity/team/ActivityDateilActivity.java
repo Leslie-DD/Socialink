@@ -61,6 +61,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ActivityDateilActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
+    private static final String TAG = "[ActivityDateilActivity]";
     private int activityId;
     private ImageView ivBack, ivShare, ivRight;
     private TextView tvTitle;
@@ -102,6 +103,8 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
     private final int getheadCode = 1007;
     private final int DelCode = 1008;
     private final int ApplyCode = 1009;
+
+    private boolean isTeamOwner = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -167,23 +170,13 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         builder.setCancelable(false);
         builder.setTitle("提示");
         builder.setMessage("确定要删除这条回复吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //删除
-                setBodyParams(new String[]{"id"}, new String[]{"" + delid});
-                sendPost(Constants.base_url + "/api/club/activity/delcomment.do", delComment, Constants.token);
-                deldialog.dismiss();
-            }
-
-
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            //删除
+            setBodyParams(new String[]{"id"}, new String[]{"" + delid});
+            sendPost(Constants.base_url + "/api/club/activity/delcomment.do", delComment, Constants.token);
+            deldialog.dismiss();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deldialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
         deldialog = builder.create();
         deldialog.setCancelable(false);
     }
@@ -215,6 +208,8 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
             tvApplyDeadline.setText("截止时间：" + bean.getApplyDeadline());
             tvContent.setText(bean.getContent());
 
+            isTeamOwner = bean.getClubInfo() != null && bean.getClubInfo().isAdmin();
+
             try {
                 if (Utils.isPastDue(bean.getApplyDeadline(), "yyyy-MM-dd HH:mm")) {
                     if (bean.getIsLike() == 1) {
@@ -242,16 +237,13 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
 
                 gv.setNumColumns(1);
                 gv.setAdapter(new ActiviteDateilAdapter(context, imgs));
-                gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(context, ImagePreviewActivity.class);
-                        intent.putStringArrayListExtra("imageList", imgs);
-                        intent.putExtra(P.START_ITEM_POSITION, i);
-                        intent.putExtra(P.START_IAMGE_POSITION, i);
-                        intent.putExtra("isdel2", false);
-                        context.startActivity(intent);
-                    }
+                gv.setOnItemClickListener((adapterView, view, i, l) -> {
+                    Intent intent = new Intent(context, ImagePreviewActivity.class);
+                    intent.putStringArrayListExtra("imageList", imgs);
+                    intent.putExtra(P.START_ITEM_POSITION, i);
+                    intent.putExtra(P.START_IAMGE_POSITION, i);
+                    intent.putExtra("isdel2", false);
+                    context.startActivity(intent);
                 });
             }
             try {
@@ -394,12 +386,12 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
             }
         });
 
-        gvMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //查看参与人员列表
-                startActivity(new Intent(ActivityDateilActivity.this, AppliedMemberActivity.class).putExtra("id", bean.getId()));
-            }
+        gvMember.setOnItemClickListener((parent, view, position, id) -> {
+            //查看参与人员列表
+            startActivity(new Intent(ActivityDateilActivity.this,
+                    AppliedMemberActivity.class)
+                    .putExtra("id", bean.getId())
+                    .putExtra("isTeamOwner", isTeamOwner));
         });
 
     }
@@ -457,7 +449,8 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
                 break;
             case R.id.ll_teamMembers:
                 //查看参与人员列表
-                startActivity(new Intent(this, AppliedMemberActivity.class).putExtra("id", bean.getId()));
+                startActivity(new Intent(this, AppliedMemberActivity.class).putExtra("id", bean.getId())
+                        .putExtra("isTeamOwner", isTeamOwner));
                 break;
             case R.id.ivShare:
                 //分享
@@ -530,7 +523,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-        Log.e("DDQ", result + "");
+        Log.i(TAG, "onSuccess where: " + where + ", " + result.toString());
         switch (where) {
             case initData:
                 switch (result.optInt("code")) {

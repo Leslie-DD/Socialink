@@ -351,16 +351,16 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                         setStarLine(current, userInfoBean.getNeedExperience(), userInfoBean.getTotalExperience(), userInfoBean.getExperience());
                         switch (certFlag) {
                             case 0:
-                                data.get(5).setTip("未认证");
+                                data.get(4).setTip("未认证");
                                 break;
                             case 1:
-                                data.get(5).setTip("审核中");
+                                data.get(4).setTip("审核中");
                                 break;
                             case 2:
-                                data.get(5).setTip("验证未通过");
+                                data.get(4).setTip("验证未通过");
                                 break;
                             case 3:
-                                data.get(5).setTip("验证通过");
+                                data.get(4).setTip("验证通过");
                                 break;
                         }
                         adapter.notifyDataSetChanged();

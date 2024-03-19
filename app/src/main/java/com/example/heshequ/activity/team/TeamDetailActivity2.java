@@ -168,7 +168,6 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
 
     public int customer = 0;//用户
 
-
     private PayPasswordView payPasswordView;//= new PayPasswordView(this);
     // payPasswordView.setActivity(this);
     private BottomSheetDialog bottomSheetDialog;
@@ -348,6 +347,7 @@ public class TeamDetailActivity2 extends NetWorkActivity implements View.OnClick
             if (cBean.getUsers().get(i).getMemberId() == Constants.uid) {
                 Log.e(TAG, "token: " + WenConstans.token);
                 if (cBean.getUsers().get(i).getRole() == 1) {//群主
+                    Log.i(TAG, "团长 memberId: " +  cBean.getUsers().get(i).getMemberId() + "Constants.uid: " + Constants.uid);
                     IDENTIFY = 1;
                     ll_jb.setVisibility(View.GONE);
                     ll_joins.setVisibility(View.GONE);

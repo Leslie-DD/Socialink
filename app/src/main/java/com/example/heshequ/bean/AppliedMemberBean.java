@@ -18,6 +18,9 @@ public class AppliedMemberBean {
     private String nickname;
     private int role;
     private int grade;
+    private String telephone;
+    private String college;
+    private String name;
 
     public int getUid() {
         return uid;
@@ -57,5 +60,43 @@ public class AppliedMemberBean {
 
     public void setGrade(int grade) {
         this.grade = grade;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "[" +
+                "uid=" + uid +
+                ", header='" + header + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", role=" + role +
+                ", grade=" + grade +
+                ", telephone='" + telephone + '\'' +
+                ", college='" + college + '\'' +
+                ", name='" + name + '\'' +
+                ']';
     }
 }

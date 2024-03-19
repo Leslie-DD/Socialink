@@ -651,6 +651,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
+        Log.d(TAG, "onSuccess where: " + where + ", result: " + result.toString());
         int resultType = result.optInt("code");
         switch (where) {
             case CHECKPULLTHEBLACK:
@@ -727,21 +728,17 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                                 } else {
                                     tvSchool.setText(college);
                                 }
-                                if (userInfoBean.getUserNickName() == null) {
+                                if (userInfoBean.getUserNickName() == null || userInfoBean.getUserNickName().equals(userInfoBean.getNickname())) {
                                     tvUserNikeName.setVisibility(GONE);
                                     lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 20), 0, 0);
                                     tvSet.setLayoutParams(lp);
                                 } else {
-                                    if (userInfoBean.getUserNickName().equals(userInfoBean.getNickname())) {
-                                        tvUserNikeName.setVisibility(GONE);
-                                        lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 20), 0, 0);
-                                        tvSet.setLayoutParams(lp);
-                                    } else {
-                                        tvUserNikeName.setText("昵称：" + userInfoBean.getUserNickName());
-                                        lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 30), 0, 0);
-                                        tvSet.setLayoutParams(lp);
-                                    }
+                                    tvUserNikeName.setVisibility(View.VISIBLE);
+                                    tvUserNikeName.setText("昵称：" + userInfoBean.getUserNickName());
+                                    lp.setMargins(Utils.dip2px(mContext, 170), Utils.dip2px(mContext, 30), 0, 0);
+                                    tvSet.setLayoutParams(lp);
                                 }
+
                                 if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
                                     Glide.with(this).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().error(R.mipmap.head3).into(ivHead);
                                 } else {
@@ -990,10 +987,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
                 if (result.optInt("code") == 0) {
                     setBodyParams(new String[]{"uid"}, new String[]{"" + uid});
                     sendPost(Constants.base_url + "/api/user/info.do", getUserCode, Constants.token);
-
                     EventBus.getDefault().post(new RefMembers());
-
-
                 }
                 Utils.toastShort(this, result.optString("msg"));
                 break;

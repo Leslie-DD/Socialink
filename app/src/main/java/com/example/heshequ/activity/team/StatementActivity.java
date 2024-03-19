@@ -173,7 +173,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
                     Utils.toastShort(this, "请至少添加一张图片");
                     return;
                 }
-
+                tvSave.setClickable(false);
                 OkHttpUtils.post(Constants.base_url + "/api/club/speak/save.do")
                         .tag(this)
                         .headers(Constants.Token_Header, Constants.token)
@@ -184,6 +184,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
                                 isCommit = true;
+                                tvSave.setClickable(true);
                                 try {
                                     JSONObject result = new JSONObject(s);
                                     switch (result.optInt("code")) {
@@ -214,6 +215,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
                             @Override
                             public void onError(Call call, Response response, Exception e) {
                                 isCommit = true;
+                                tvSave.setClickable(true);
                                 super.onError(call, response, e);
                             }
 

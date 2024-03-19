@@ -101,6 +101,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
         ivBg = (ArcImageView) headView.findViewById(R.id.ivBg);
         ivHead = (CircleView) headView.findViewById(R.id.ivHead);
         tvName = (TextView) headView.findViewById(R.id.tvName);
+        tvName.setText("点击头像登录");
         tvSchool = headView.findViewById(R.id.tvSchool);
         tvDetail = (TextView) headView.findViewById(R.id.tvDetail);
         tvLevel = (TextView) headView.findViewById(R.id.tvLevel);
@@ -128,6 +129,7 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
 
     private void event() {
         ivEditor.setOnClickListener(this);
+        ivHead.setOnClickListener(this);
         llSay.setOnClickListener(this);
         llQuestion.setOnClickListener(this);
         llNotice.setOnClickListener(this);
@@ -298,6 +300,11 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
                     return;
                 }
                 startActivity(new Intent(mContext, BaseInfoActivity.class).putExtra("userinfobean", userInfoBean));
+                break;
+            case R.id.ivHead:
+                if (Constants.uid == 1 && mainActivity != null) {
+                    mainActivity.showPop();
+                }
                 break;
             case R.id.llSay:
                 startActivity(new Intent(mContext, MySayActivity.class));

@@ -135,12 +135,9 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
         editorPop.setOutsideTouchable(true);
         // 设置焦点
         editorPop.setFocusable(true);
-        editorPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        editorPop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         etName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -159,18 +156,15 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
             }
         });
 
-        btConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (etName.getText().toString().trim().isEmpty()) {
-                    Utils.toastShort(mContext, "团队名称不能为空");
-                    return;
-                }
-                String name = etName.getText().toString().trim();
-                setBodyParams(new String[]{"id", "name"}, new String[]{"" + adapter.getData().get(p).getId(), "" + name});
-                sendPost(Constants.base_url + "/api/club/base/updatebase.do", editorCode, Constants.token);
-                editorPop.dismiss();
+        btConfirm.setOnClickListener(v -> {
+            if (etName.getText().toString().trim().isEmpty()) {
+                Utils.toastShort(mContext, "团队名称不能为空");
+                return;
             }
+            String name = etName.getText().toString().trim();
+            setBodyParams(new String[]{"id", "name"}, new String[]{"" + adapter.getData().get(p).getId(), "" + name});
+            sendPost(Constants.base_url + "/api/club/base/updatebase.do", editorCode, Constants.token);
+            editorPop.dismiss();
         });
         editorPop.setContentView(editorview);
         showEditorPop();

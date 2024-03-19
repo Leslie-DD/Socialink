@@ -67,6 +67,7 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
                     Utils.toastShort(mContext, "请先输入团队介绍");
                     return;
                 }
+                tvSave.setClickable(false);
                 setBodyParams(new String[]{"id", "introduction"}, new String[]{"" + teamId, "" + content});
                 sendPost(Constants.base_url + "/api/club/base/update.do", upcode, Constants.token);
                 break;
@@ -77,6 +78,7 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         Log.e(TAG, "" + result);
         if (where == upcode) {
+            tvSave.setClickable(true);
             switch (result.optInt("code")) {
                 case 0:
                     EventBean bean = new EventBean();
@@ -102,6 +104,9 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
     @Override
     protected void onFailure(String result, int where) {
         Utils.toastShort(mContext, "网络异常");
+        if (where == upcode) {
+            tvSave.setClickable(true);
+        }
     }
 
 

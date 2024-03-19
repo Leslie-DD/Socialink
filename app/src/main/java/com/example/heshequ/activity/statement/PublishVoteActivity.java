@@ -87,6 +87,7 @@ public class PublishVoteActivity extends NetWorkActivity implements View.OnClick
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (where == postCode) {
+            tvSave.setClickable(true);
             if (result.optInt("code") == 0) {
                 this.finish();
                 EventBus.getDefault().post(new RefTDteamEvent(new int[]{0, 1}));
@@ -97,6 +98,9 @@ public class PublishVoteActivity extends NetWorkActivity implements View.OnClick
 
     @Override
     protected void onFailure(String result, int where) {
+        if (where == postCode) {
+            tvSave.setClickable(true);
+        }
     }
 
 
@@ -349,6 +353,7 @@ public class PublishVoteActivity extends NetWorkActivity implements View.OnClick
                     bean1.setOptions(options);
                     voteBeans.add(bean1);
                 }
+                tvSave.setClickable(false);
                 String content = new Gson().toJson(voteBeans);
                 setBodyParams(new String[]{"clubId", "name", "introduction", "deadline", "content"},
                         new String[]{"" + Constants.clubId, title, introduction, time, content});

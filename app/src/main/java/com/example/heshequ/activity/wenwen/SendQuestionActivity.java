@@ -19,7 +19,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -53,7 +52,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -63,6 +61,7 @@ import top.zibin.luban.OnCompressListener;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class SendQuestionActivity extends NetWorkActivity implements View.OnClickListener {
+    private static final String TAG = "[SendQuestionActivity]";
     private TextView tvCancle;
     private TextView tvTitle;
     private TextView tvSave;
@@ -192,24 +191,16 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         gwPictureAdapter = new GwPictureAdapter(this);
         gw.setAdapter(gwPictureAdapter);
         gwPictureAdapter.setData(strings);
-        gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == strings.size() - 1) {
-                    if (strings.size() == 10) {
-                        Utils.toastShort(mContext, "最多添加9张图片");
-                        return;
-                    }
-                    showPop();
+        gw.setOnItemClickListener((parent, view, position, id) -> {
+            if (position == strings.size() - 1) {
+                if (strings.size() == 10) {
+                    Utils.toastShort(mContext, "最多添加9张图片");
+                    return;
                 }
+                showPop();
             }
         });
-        gw.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return false;
-            }
-        });
+        gw.setOnItemLongClickListener((parent, view, position, id) -> false);
 
         etTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -270,12 +261,9 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
@@ -314,6 +302,7 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
                     biaoqain = biaoqain + bqList.get(i) + ",";
                 }
                 biaoqain.substring(0, biaoqain.length() - 1);
+                tvSave.setClickable(false);
                 OkHttpUtils.post(WenConstans.SendQuestion)
                         .tag(this)
                         .headers(Constants.Token_Header, WenConstans.token)
@@ -325,10 +314,11 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
                         .execute(new StringCallback() {
                             @Override
                             public void onSuccess(String s, Call call, Response response) {
-                                Log.e("ying", "sresult:" + s);
+                                Log.e(TAG, "sresult:" + s);
+                                tvSave.setClickable(false);
                                 try {
                                     JSONObject result = new JSONObject(s);
-                                    Log.e("ying", "code:" + result.optInt("code"));
+                                    Log.e(TAG, "code:" + result.optInt("code"));
                                     if (result.optInt("code") == 0) {
                                         Intent intent = new Intent();
                                         intent.putExtra("item", 2);
@@ -339,7 +329,7 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
                                         Utils.toastShort(mContext, result.optString("msg"));
                                     }
                                 } catch (JSONException e) {
-                                    Log.e("ying", "JSONException: " + e.toString());
+                                    Log.e(TAG, "JSONException: " + e.getMessage());
                                     e.printStackTrace();
                                 }
 
@@ -347,9 +337,10 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
 
                             @Override
                             public void onError(Call call, Response response, Exception e) {
+                                tvSave.setClickable(false);
                                 isCommit = true;
                                 super.onError(call, response, e);
-                                Log.e("ying", "onError Exception: " + e.toString());
+                                Log.e(TAG, "onError Exception: " + e.toString());
                             }
                         });
                 break;
@@ -360,7 +351,7 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
             case R.id.tvPic:
                 ActivityCompat.requestPermissions(
                         context,
-                        new  String[]{Manifest.permission_group.CAMERA},
+                        new String[]{Manifest.permission_group.CAMERA},
                         100
                 );
                 path = PhotoUtils.startPhoto(this);
@@ -377,21 +368,22 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
                 break;
         }
     }
+
     /**
      * 请求相机权限
      */
-    public void requestCAMERA(){
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-        {
+    public void requestCAMERA() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return;
         }
-        if( PermissionUtils.isGranted(Manifest.permission.CAMERA) ){
+        if (PermissionUtils.isGranted(Manifest.permission.CAMERA)) {
             return;
         }
         requestPermissions(new String[]{
                 Manifest.permission.CAMERA
-        },104);
+        }, 104);
     }
+
     private void setTvBg(TextView view, int status) {
         if (status == 0) {
             for (int i = 0; i < stringList.size(); i++) {
@@ -408,19 +400,18 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
     }
 
     private void showPop() {
-
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M||PermissionUtils.isGranted(Manifest.permission.CAMERA) )
-        {
+        if (PermissionUtils.isGranted(Manifest.permission.CAMERA)) {
             layoutParams.alpha = 0.5f;
             getWindow().setAttributes(layoutParams);
             pop.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
-        }else {
+        } else {
             requestCAMERA();
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -428,26 +419,27 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
             case 200:
                 break;
             case 202:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    photoUri = null;
-                    photoUri = data.getData();
-                    try {
-                        ContentResolver resolver = this.getContentResolver();
-                        Uri originalUri = data.getData(); // 获得图片的uri
-                        photoUri = originalUri;
-                        String[] proj = {MediaStore.Images.Media.DATA};
-                        Cursor cursor = resolver.query(originalUri, proj, null, null, null);
-                        if (cursor == null) {
-                            this.path = photoUri.getPath();
-                        } else {
-                            if (cursor.moveToFirst()) {
-                                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                                this.path = cursor.getString(column_index);
-                            }
+                if (data == null) {
+                    break;
+                }
+                photoUri = null;
+                photoUri = data.getData();
+                try {
+                    ContentResolver resolver = this.getContentResolver();
+                    Uri originalUri = data.getData(); // 获得图片的uri
+                    photoUri = originalUri;
+                    String[] proj = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = resolver.query(originalUri, proj, null, null, null);
+                    if (cursor == null) {
+                        this.path = photoUri.getPath();
+                    } else {
+                        if (cursor.moveToFirst()) {
+                            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                            this.path = cursor.getString(column_index);
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 break;
         }
@@ -455,7 +447,7 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         gwPictureAdapter.setData(strings);
         Luban.with(this).load(new File(path)).
                 setCompressListener(new OnCompressListener() {
-                    //                    @Override
+                    @Override
                     public void onStart() {
 
                     }

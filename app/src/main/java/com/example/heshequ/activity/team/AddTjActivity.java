@@ -216,6 +216,7 @@ public class AddTjActivity extends NetWorkActivity implements View.OnClickListen
                         return;
                     }
                     if (type == 1) {
+                        tvSave.setClickable(false);
                         OkHttpUtils.post(Constants.base_url + "/api/club/tb/save.do")
                                 .tag(this)
                                 .headers(Constants.Token_Header, Constants.token)
@@ -227,6 +228,7 @@ public class AddTjActivity extends NetWorkActivity implements View.OnClickListen
                                     @Override
                                     public void onSuccess(String s, Call call, Response response) {
                                         Log.e("DDQ", s);
+                                        tvSave.setClickable(true);
                                         try {
                                             JSONObject result = new JSONObject(s);
                                             switch (result.optInt("code")) {
@@ -257,6 +259,7 @@ public class AddTjActivity extends NetWorkActivity implements View.OnClickListen
                                     @Override
                                     public void onError(Call call, Response response, Exception e) {
                                         isCommit = true;
+                                        tvSave.setClickable(true);
                                         e.printStackTrace();
                                         super.onError(call, response, e);
                                     }

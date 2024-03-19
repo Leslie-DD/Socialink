@@ -78,6 +78,7 @@ public class EditorialBulletinActivity extends NetWorkActivity implements View.O
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (where == 1000) {
+            tvSave.setClickable(true);
             if (result.optInt("code") == 0) {
                 if (type == 1) {
                     this.finish();
@@ -99,6 +100,9 @@ public class EditorialBulletinActivity extends NetWorkActivity implements View.O
 
     @Override
     protected void onFailure(String result, int where) {
+        if (where == 1000) {
+            tvSave.setClickable(true);
+        }
     }
 
     @Override
@@ -119,6 +123,7 @@ public class EditorialBulletinActivity extends NetWorkActivity implements View.O
                         Utils.toastShort(mContext, "内容不能为空");
                         return;
                     }
+                    tvSave.setClickable(false);
                     setBodyParams(new String[]{"clubId", "title", "content"}, new String[]{"" + Constants.clubId, title, content});
                     sendPost(Constants.base_url + "/api/club/notice/save.do", 1000, Constants.token);
                 } else if (type == 2) {
@@ -132,6 +137,7 @@ public class EditorialBulletinActivity extends NetWorkActivity implements View.O
                         Utils.toastShort(mContext, "内容不能为空");
                         return;
                     }
+                    tvSave.setClickable(false);
                     setBodyParams(new String[]{"id", "clubId", "title", "content"}, new String[]{"" + id, "" + Constants.clubId, title, content});
                     sendPost(Constants.base_url + "/api/club/notice/update.do", 1000, Constants.token);
                 }

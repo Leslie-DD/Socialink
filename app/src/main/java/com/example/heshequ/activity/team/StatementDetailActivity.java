@@ -426,6 +426,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                     Utils.toastShort(this, "评论内容不能为空");
                     return;
                 }
+                ivSend.setClickable(false);
                 setBodyParams(new String[]{"speakId", "content"}, new String[]{"" + speakId, "" + comment});
                 sendPost(Constants.base_url + "/api/club/speak/comment.do", sendComment, Constants.token);
                 break;
@@ -636,6 +637,7 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
                 }
                 break;
             case sendComment:
+                ivSend.setClickable(true);
                 switch (result.optInt("code")) {
                     case 0:
                         //Utils.toastShort(this, result.optString("msg"));
@@ -763,6 +765,9 @@ public class StatementDetailActivity extends NetWorkActivity implements View.OnC
 
     @Override
     protected void onFailure(String result, int where) {
+        if (where == sendComment) {
+            ivSend.setClickable(true);
+        }
         Utils.toastShort(this, "网络异常");
     }
 

@@ -340,6 +340,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                     return;
                 }
                 if (type == 1) {
+                    tvSave.setClickable(false);
                     OkHttpUtils.post(Constants.base_url + "/api/club/activity/save.do")
                             .tag(this)
                             .headers(Constants.Token_Header, Constants.token)
@@ -353,6 +354,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                             .execute(new StringCallback() {
                                 @Override
                                 public void onSuccess(String s, Call call, Response response) {
+                                    tvSave.setClickable(true);
                                     try {
                                         JSONObject result = new JSONObject(s);
                                         switch (result.optInt("code")) {
@@ -379,6 +381,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
 
                                 @Override
                                 public void onError(Call call, Response response, Exception e) {
+                                    tvSave.setClickable(true);
                                     isCommit = true;
                                     super.onError(call, response, e);
                                 }

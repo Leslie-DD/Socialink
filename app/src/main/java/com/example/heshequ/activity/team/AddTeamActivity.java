@@ -106,12 +106,9 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
@@ -178,6 +175,7 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
                 }
                 break;
             case addCode:
+                btSave.setClickable(true);
                 code = result.optInt("code");
                 if (code == 0) {
                                  /*int id=result.optJSONObject("data").optInt("id");
@@ -311,7 +309,9 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
 
     @Override
     protected void onFailure(String result, int where) {
-
+        if (where == addCode) {
+            btSave.setClickable(true);
+        }
     }
 
     @Override
@@ -359,6 +359,7 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
                     Utils.toastShort(mContext, "请先选择团队的标签");
                     return;
                 }
+                btSave.setClickable(false);
                 setFileBodyParams(new String[]{"file"}, new File[]{fileList.get(0)});
                 setBodyParams(new String[]{"name", "labels"}, new String[]{name, label});
                 sendPost(Constants.base_url + "/api/club/base/save.do", addCode, Constants.token);

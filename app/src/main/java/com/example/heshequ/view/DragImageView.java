@@ -7,12 +7,6 @@ import android.view.MotionEvent;
 
 import androidx.annotation.Nullable;
 
-/**
- * 可拖动的ImageView
- * Created by Dengdongqi on 2018/4/20.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
-
 public class DragImageView extends androidx.appcompat.widget.AppCompatImageView {
     private static final String TAG = "DragImageView";
     private int sx;

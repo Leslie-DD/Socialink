@@ -8,7 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.heshequ.base.BaseActivity;
 import com.example.heshequ.utils.PermissionHelper;

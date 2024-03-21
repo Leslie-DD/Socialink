@@ -93,7 +93,8 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
             }
             if (result.has("data")) {
                 JSONArray data = result.getJSONArray("data");
-                allList = gson.fromJson(data.toString(), new TypeToken<List<FriendListBean>>() {}.getType());
+                allList = gson.fromJson(data.toString(), new TypeToken<List<FriendListBean>>() {
+                }.getType());
                 if (allList == null || allList.size() == 0) {
                     allList = new ArrayList<>();
                 }

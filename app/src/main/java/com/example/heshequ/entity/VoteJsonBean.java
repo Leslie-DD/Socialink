@@ -2,10 +2,7 @@ package com.example.heshequ.entity;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dengdongqi on 2018/7/7.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public class VoteJsonBean {
     private int category;

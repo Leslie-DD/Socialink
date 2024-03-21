@@ -1,9 +1,6 @@
 package com.example.heshequ.constans;
 
-/**
- * Hulk_Zhang on 2018/6/11 18:50
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class WenConstans {
     public static String BaseUrl = Constants.base_url;
     //    public static String BaseUrl="http://rxcpe2.natappfree.cc";

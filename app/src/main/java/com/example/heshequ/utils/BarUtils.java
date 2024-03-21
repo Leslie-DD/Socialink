@@ -31,10 +31,6 @@ import com.example.heshequ.MeetApplication;
 
 import java.lang.reflect.Method;
 
-/**
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
-
 public final class BarUtils {
 
     ///////////////////////////////////////////////////////////////////////////

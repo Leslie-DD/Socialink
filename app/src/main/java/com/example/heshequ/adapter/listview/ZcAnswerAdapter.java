@@ -20,10 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Hulk_Zhang on 2017/6/30 11:26
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class ZcAnswerAdapter extends RecyclerView.Adapter {
     private ZcArticleActivity context;
     private List<ZcAnswerBean> data = new ArrayList<>();

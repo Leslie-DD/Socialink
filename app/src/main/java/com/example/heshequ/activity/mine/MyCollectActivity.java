@@ -12,7 +12,6 @@ import com.example.heshequ.R;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.fragment.CollectTeamFragment;
-import com.example.heshequ.fragment.CollectgoodFragment;
 import com.example.heshequ.fragment.TeamChildFragment4;
 
 import org.json.JSONException;
@@ -29,7 +28,7 @@ public class MyCollectActivity extends NetWorkActivity implements View.OnClickLi
     private ArrayList<Fragment> list;
     private TeamChildFragment4 teamFragment;
     private CollectTeamFragment wenwenFragment;
-//    private CollectgoodFragment goodFragment;
+    //    private CollectgoodFragment goodFragment;
     private MyFragmentPagerAdapter adapter;
     private int status = -1;
 

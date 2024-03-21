@@ -60,7 +60,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/zz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp">
@@ -194,14 +193,12 @@
                 android:textColor="@color/base_color_white">
 
                 <TextView
-                    android:id="@+id/age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="年龄"
                     android:textColor="@color/base_color_white" />
 
                 <TextView
-                    android:id="@+id/xz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -209,7 +206,6 @@
                     android:textColor="@color/base_color_white" />
 
                 <TextView
-                    android:id="@+id/rd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -230,7 +226,6 @@
         android:paddingVertical="10dp">
 
         <TextView
-            android:id="@+id/gr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
@@ -240,7 +235,6 @@
             android:textColor="@color/base_color_white" />
 
         <TextView
-            android:id="@+id/textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="6dp"
@@ -293,7 +287,6 @@
         android:layout_marginTop="15dp">
 
         <TextView
-            android:id="@+id/tv_leading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

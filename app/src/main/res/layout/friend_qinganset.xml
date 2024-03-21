@@ -13,7 +13,7 @@
             android:text="请选择您的情感状态:"
             android:textSize="20dp"
 
-            android:id="@+id/nothing"/>
+            />
         <RadioGroup
             android:id="@+id/rg_1"
             android:layout_width="wrap_content"
@@ -40,7 +40,6 @@
                 android:textSize="18sp" />
 
             <RadioButton
-                android:id="@+id/rb_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rb_2"

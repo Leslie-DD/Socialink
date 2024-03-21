@@ -13,10 +13,7 @@ import com.example.heshequ.utils.Utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Hulk_Zhang on 2017/11/7 17:55
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class DateView {
 
     private static DatePicker dp;

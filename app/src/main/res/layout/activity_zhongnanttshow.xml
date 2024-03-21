@@ -101,7 +101,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/kecheng"
         android:layout_below="@id/riqi"
         android:orientation="horizontal">
         <LinearLayout

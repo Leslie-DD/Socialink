@@ -1,6 +1,4 @@
-/**
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 package com.example.heshequ.adapter.recycleview;
 
@@ -17,21 +15,14 @@ import com.example.heshequ.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author dev06
- * 2016年7月4日
- */
-
 public class RecycleAdapter extends RecyclerView.Adapter {
 
-    private Context context;
-    private LayoutInflater inflater;
+    private final Context context;
     private List<String> data = new ArrayList<>();
 
     public RecycleAdapter(Context context) {
         super();
         this.context = context;
-        this.inflater = LayoutInflater.from(context);
     }
 
     public void setData(List<String> data) {
@@ -49,8 +40,6 @@ public class RecycleAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.setData(position);
-
-
     }
 
     @Override
@@ -59,11 +48,11 @@ public class RecycleAdapter extends RecyclerView.Adapter {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvKey;
+        private final TextView tvKey;
 
         public ViewHolder(View view) {
             super(view);
-            tvKey = (TextView) view.findViewById(R.id.tv_jiage1);
+            tvKey = view.findViewById(R.id.tv_jiage1);
         }
 
         public void setData(final int position) {

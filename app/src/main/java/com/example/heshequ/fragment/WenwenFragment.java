@@ -24,7 +24,7 @@ import com.example.heshequ.activity.MainActivity;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.WwSearchActivity;
 import com.example.heshequ.activity.wenwen.SendQuestionActivity;
-import com.example.heshequ.adapter.MyBannerAdapter;
+import com.example.heshequ.adapter.BannerAdapter;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.adapter.recycleview.RecycleAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -45,10 +45,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/5/8 14:12
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class WenwenFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
     private static final String TAG = "[WenwenFragment]";
     private View view;
@@ -68,7 +65,7 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
     private CustomViewPager vp;
     private MyFragmentPagerAdapter pagerAdapter;
     private RollPagerView rollPagerView;
-    private MyBannerAdapter bannerAdapter;
+    private BannerAdapter bannerAdapter;
     private FragmentBrodcast brodcast;
     private Intent intentActivity;
     private final int getimgsCode = 1000;
@@ -164,7 +161,7 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
         rollPagerView = (RollPagerView) headView.findViewById(R.id.rp);
         ViewGroup.LayoutParams params = rollPagerView.getLayoutParams();
         params.height = ConsTants.screenW * 10 / 22;
-        bannerAdapter = new MyBannerAdapter(rollPagerView, getActivity());
+        bannerAdapter = new BannerAdapter(rollPagerView, getActivity());
         imgs = new ArrayList<>();
         rollPagerView.setAdapter(bannerAdapter);
         // 设置播放时间间隔
@@ -214,7 +211,7 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
 
         getImgs();
 
-        bannerAdapter.setonBanneritemClickListener(position -> {
+        bannerAdapter.setonBannerItemClickListener(position -> {
             startActivity(new Intent(getActivity(), WebActivity.class)
                     .putExtra("url", imgsData.get(position).getLinkUrl()));
         });

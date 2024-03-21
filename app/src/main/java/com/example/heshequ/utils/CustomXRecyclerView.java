@@ -23,7 +23,6 @@ public class CustomXRecyclerView extends XRecyclerView {
     private boolean atBottom = false;
 
 
-
     @Override
     public void onScrollStateChanged(int screenState) {
         super.onScreenStateChanged(screenState);

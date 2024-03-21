@@ -3,7 +3,6 @@ package com.example.heshequ.activity.wenwen;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -52,10 +51,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/5/30 09:58
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class WenwenDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
     private int type = 0;
     private CircleView ivHead;

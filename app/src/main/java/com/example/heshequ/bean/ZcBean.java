@@ -2,10 +2,7 @@ package com.example.heshequ.bean;
 
 import java.io.Serializable;
 
-/**
- * Hulk_Zhang on 2018/5/29 16:19
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class ZcBean implements Serializable {
     public String title;
     public String time;

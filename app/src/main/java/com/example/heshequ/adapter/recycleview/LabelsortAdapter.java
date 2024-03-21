@@ -248,7 +248,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                     } else {
-//                        //                        Intent intent = new Intent(context, TeamDetailActivity2.class);
+//                        //                        Intent intent = new Intent(context, TeamDetailActivity.class);
 //                        intent.putExtra("id",Integer.parseInt(data.get(position).id));
 //                        context.startActivity(intent);
                     }

@@ -2,10 +2,7 @@ package com.example.heshequ.utils;
 
 import java.security.MessageDigest;
 
-/**
- * Created by Dengdongqi on 2018/8/10.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public final class EncryptUtils {
 

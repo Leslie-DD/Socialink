@@ -25,7 +25,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.newsencond.SecondhandPostActivity;
-import com.example.heshequ.adapter.MyBannerAdapter;
+import com.example.heshequ.adapter.BannerAdapter;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.adapter.recycleview.RecycleAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -86,7 +86,7 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
     private SecondClassifyFragment[] fragments; // 各个二级分类
 
     private RollPagerView rollPagerView;    // 轮播图
-    private MyBannerAdapter bannerAdapter;
+    private BannerAdapter bannerAdapter;
     private final int getimgsCode = 1000;
     private ArrayList<HomeBannerImgsBean> imgsData;
     private Gson gson = new Gson();
@@ -199,7 +199,7 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         rollPagerView = headView.findViewById(R.id.rp);
         ViewGroup.LayoutParams params = rollPagerView.getLayoutParams();
         params.height = ConsTants.screenW * 10 / 22;
-        bannerAdapter = new MyBannerAdapter(rollPagerView, getContext());
+        bannerAdapter = new BannerAdapter(rollPagerView, getContext());
         imgs = new ArrayList<>();
         rollPagerView.setAdapter(bannerAdapter);
         getImgs();
@@ -208,7 +208,7 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         rollPagerView.setPlayDelay(3000);
         rollPagerView.setAnimationDurtion(500);
         rollPagerView.setHintView(new ColorPointHintView(getContext(), Color.parseColor("#00bbff"), Color.WHITE));
-        bannerAdapter.setonBanneritemClickListener(position ->
+        bannerAdapter.setonBannerItemClickListener(position ->
                 startActivity(new Intent(getContext(), WebActivity.class)
                         .putExtra("url", imgsData.get(position).getLinkUrl())
                 ));

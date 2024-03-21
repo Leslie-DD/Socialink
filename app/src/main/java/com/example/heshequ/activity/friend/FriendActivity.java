@@ -69,8 +69,8 @@ public class FriendActivity extends NetWorkActivity implements View.OnClickListe
         int paddingStart = Utils.dip2px(this, 2);
         int paddingEnd = Utils.dip2px(this, 6);
         int heightWidth = Utils.dip2px(this, 24);
-        drawable.setBounds(paddingStart,paddingStart,heightWidth,heightWidth);
-        searchContent.setCompoundDrawables(drawable,null,null,null); // 左上右下
+        drawable.setBounds(paddingStart, paddingStart, heightWidth, heightWidth);
+        searchContent.setCompoundDrawables(drawable, null, null, null); // 左上右下
 
         list = new ArrayList<>();
         FriendFiltrate = (LinearLayout) findViewById(R.id.FriendFiltrate);

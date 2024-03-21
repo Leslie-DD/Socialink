@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.OtherSayActivity;
 import com.example.heshequ.activity.team.PartyBuildingActivity;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.activity.team.TeamIntroduceActivity;
 import com.example.heshequ.adapter.listview.OtherSayAdapter;
 import com.example.heshequ.adapter.recycleview.Tj_Adapter;
@@ -56,7 +56,7 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
     private TextView tvOtherMore;
     private TextView tvPicEditor, tvTeamEditor;
     private TextView tvIntroduction, tvTjMore;
-    private TeamDetailActivity2 mActivity;
+    private TeamDetailActivity mActivity;
     public int types;
     private TeamBean cBean;
     private final int getSayCode = 1000;
@@ -141,7 +141,7 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
         recyclerview.addItemDecoration(new SpaceItemDecoration(mContext, 10));
 
         EventBus.getDefault().register(this);
-        mActivity = (TeamDetailActivity2) getActivity();
+        mActivity = (TeamDetailActivity) getActivity();
         if (mActivity.id != 0) {
             //获取他们说
             setBodyParams(new String[]{"type", "id"}, new String[]{"3", mActivity.id + ""});

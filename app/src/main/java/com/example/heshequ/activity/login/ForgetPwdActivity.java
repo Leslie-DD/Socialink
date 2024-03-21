@@ -19,7 +19,6 @@ import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.constans.Constants;
-import com.example.heshequ.utils.EncryptUtils;
 import com.example.heshequ.utils.MatcherUtils;
 import com.example.heshequ.utils.Utils;
 

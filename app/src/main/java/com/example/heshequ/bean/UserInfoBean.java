@@ -3,12 +3,6 @@ package com.example.heshequ.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * 用户信息类
- * Created by Dengdongqi on 2018/6/13.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
-
 public class UserInfoBean implements Serializable {
     /**
      * id : 4

@@ -1,6 +1,4 @@
-/**
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 package com.example.heshequ.adapter.recycleview;
 
@@ -24,7 +22,7 @@ import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
 import com.example.heshequ.activity.team.ImagePreviewActivity;
 import com.example.heshequ.adapter.Adapter_GridView;
-import com.example.heshequ.adapter.MyBannerAdapter;
+import com.example.heshequ.adapter.BannerAdapter;
 import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.HomeBannerImgsBean;
 import com.example.heshequ.bean.TeamBean;
@@ -65,7 +63,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
     private ArrayList<String> imgs;
 
     private Gson gson = new Gson();
-    private MyBannerAdapter bannerAdapter;
+    private BannerAdapter bannerAdapter;
     private ArrayList<HomeBannerImgsBean> imgsData;
     private int bannerFlag = 0;
 
@@ -209,7 +207,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                     rollPagerView = (RollPagerView) view.findViewById(R.id.rp);
                     ViewGroup.LayoutParams params = rollPagerView.getLayoutParams();
                     params.height = ConsTants.screenW * 10 / 22;
-                    bannerAdapter = new MyBannerAdapter(rollPagerView, context);
+                    bannerAdapter = new BannerAdapter(rollPagerView, context);
                     imgs = new ArrayList<>();
                     rollPagerView.setAdapter(bannerAdapter);
                     // 设置播放时间间隔
@@ -381,7 +379,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                         if (bannerFlag == 0) {
                             bannerFlag++;
                             getImgs(position);
-                            bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
+                            bannerAdapter.setonBannerItemClickListener(new BannerAdapter.onBanneritemClickListener() {
                                 @Override
                                 public void onItemClick(int position) {
                                     context.startActivity(new Intent(context, WebActivity.class)

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.heshequ.R;
 import com.example.heshequ.adapter.recycleview.HotWenwenAdapter;
 import com.example.heshequ.base.NetWorkFragment;
-import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.WenwenBean;
 import com.example.heshequ.constans.ResultUtils;
 import com.example.heshequ.constans.WenConstans;
@@ -21,17 +20,12 @@ import com.example.heshequ.utils.IChildFragment;
 import com.example.heshequ.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/1/10 17:50
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
 public class ChildFragment2 extends NetWorkFragment implements HotWenwenAdapter.DoSaveListener, IChildFragment {
 
     private View view;

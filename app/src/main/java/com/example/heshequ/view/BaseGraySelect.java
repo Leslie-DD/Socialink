@@ -13,10 +13,7 @@ import com.example.heshequ.base.NetWorkActivity;
 
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2017/12/12 09:33
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class BaseGraySelect {
 
     private static WindowManager.LayoutParams layoutParams;

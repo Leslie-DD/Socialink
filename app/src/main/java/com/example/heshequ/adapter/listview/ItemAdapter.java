@@ -14,10 +14,7 @@ import com.example.heshequ.bean.ItemBean;
 import java.util.ArrayList;
 
 
-/**
- * Hulk_Zhang on 2017/6/30 11:26
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class ItemAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ItemBean> data = new ArrayList<>();

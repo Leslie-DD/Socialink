@@ -35,10 +35,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/6/19 10:32
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
 public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnTabSelectedListener, TextWatcher, View.OnClickListener {
     private LinearLayout llBack, llData, llFl;
     private EditText etContent;

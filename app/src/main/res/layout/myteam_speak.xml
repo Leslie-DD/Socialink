@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
         <com.example.heshequ.view.CircleView
             android:id="@+id/ivHead"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/cjtp"
             android:layout_width="35dp"
             android:layout_height="35dp" />
         <LinearLayout

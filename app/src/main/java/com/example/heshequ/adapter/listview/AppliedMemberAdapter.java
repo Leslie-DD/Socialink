@@ -21,10 +21,7 @@ import com.example.heshequ.view.CircleView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dengdongqi on 2018/7/9.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public class AppliedMemberAdapter extends BaseAdapter {
     private Context context;
@@ -134,7 +131,8 @@ public class AppliedMemberAdapter extends BaseAdapter {
 
     public class ViewHolder {
         private CircleView ivHead;
-        private TextView tvName, /*tvRole,*/ tvRealName, tvCollege, tvTelephone;
+        private TextView tvName, /*tvRole,*/
+                tvRealName, tvCollege, tvTelephone;
         private ImageView ivSex;
     }
 }

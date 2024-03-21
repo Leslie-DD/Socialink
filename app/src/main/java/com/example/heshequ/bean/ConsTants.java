@@ -25,10 +25,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Hulk_Zhang on 2017/9/12 15:22
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class ConsTants {
     public static int screenH;
     public static int screenW;

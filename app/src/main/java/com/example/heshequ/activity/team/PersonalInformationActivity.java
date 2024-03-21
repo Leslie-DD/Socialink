@@ -88,7 +88,8 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     private String header;
     private MessageBean messageBean;
     private String hisnickname = null;
-    private TextView tvName, tvDetail, tvLevel, tvSet, tvQu, tvTeam, /*tvDyn, tvPhoto, tvgood,*/ tvTipContent, current, tvSchool, tvUserNikeName;
+    private TextView tvName, tvDetail, tvLevel, tvSet, tvQu, tvTeam, /*tvDyn, tvPhoto, tvgood,*/
+            tvTipContent, current, tvSchool, tvUserNikeName;
     private LinearLayout ll;
     private ImageView messages;
     private ImageView guanzhu;
@@ -1129,7 +1130,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     public void OnItemClick(int position) {
         int type = teamAdapter.getData().get(position).getItemType();
         if (type == 1) {
-            Intent intent = new Intent(mContext, TeamDetailActivity2.class);
+            Intent intent = new Intent(mContext, TeamDetailActivity.class);
             intent.putExtra("id", teamAdapter.getData().get(position).getId());
             startActivity(intent);
         }

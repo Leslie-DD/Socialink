@@ -3,7 +3,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="#ffffff"
-    android:id="@+id/sv"
     android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
@@ -140,7 +139,7 @@
                     <!--android:paddingLeft="25dp"-->
                     <!--android:textColor="#FCC032"-->
                     <!--android:textSize="12sp"-->
-                    <!--android:text="公告：欢迎大家来相遇社区，一起happy！！"-->
+                    <!--android:text="公告：欢迎大家来高校联盟，一起happy！！"-->
                     <!--android:layout_height="wrap_content"-->
                     <!--android:id="@+id/tvContent" />-->
                 <!--<View-->
@@ -300,7 +299,6 @@
                 android:text="编辑"
                 android:visibility="gone"
                 android:layout_marginLeft="15dp"
-                android:id="@+id/tvTjEditor"
                 android:layout_marginRight="15dp"
                 android:layout_height="wrap_content" />
             <TextView

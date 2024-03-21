@@ -23,7 +23,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.heshequ.R;
 import com.example.heshequ.activity.login.LoginActivity;

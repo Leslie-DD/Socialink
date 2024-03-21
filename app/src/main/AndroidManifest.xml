@@ -130,7 +130,7 @@
         <activity android:name="com.example.heshequ.activity.team.ApplyJoinTDActivity" />
         <activity android:name="com.example.heshequ.activity.team.AppliedMemberActivity" />
         <activity android:name="com.example.heshequ.activity.ScanActivity" />
-        <activity android:name="com.example.heshequ.activity.team.TeamDetailActivity2" />
+        <activity android:name="com.example.heshequ.activity.team.TeamDetailActivity" />
         <activity android:name="com.example.heshequ.secondma.android.CaptureActivity" />
         <activity android:name="com.example.heshequ.activity.ReportActivity" />
         <activity android:name="com.example.heshequ.activity.team.ChooseTeamLableActivity" />

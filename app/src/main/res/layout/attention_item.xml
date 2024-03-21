@@ -30,7 +30,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/mynoticeup"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="5dp"

@@ -43,10 +43,10 @@
                 android:textColorHint="#999999"
                 android:textSize="15sp" />
 
-            <TextView android:id="@+id/spinnerText"
+            <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"></TextView>
-            <Spinner android:id="@+id/Spinner01"
+            <Spinner
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"></Spinner>
 

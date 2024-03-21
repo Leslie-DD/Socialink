@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.heshequ.R;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.adapter.recycleview.OtherSayAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -38,7 +38,7 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
     private OtherSayAdapter adapter;
     private ArrayList<TeamBean.SpeakBean> data;
     private View view;
-    private TeamDetailActivity2 mActivity;
+    private TeamDetailActivity mActivity;
     private int index = 1;
     private final int getCode = 1000;
     private final int delSpeak = 1001;
@@ -139,7 +139,7 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
         tvTips = view.findViewById(R.id.tvTips);
         ConsTants.initXRecycleView(mContext, false, false, rv);
         rv.setNestedScrollingEnabled(false);
-        mActivity = (TeamDetailActivity2) getActivity();
+        mActivity = (TeamDetailActivity) getActivity();
         getData();
         data = new ArrayList<>();
         adapter = new OtherSayAdapter(mContext, data, 1);

@@ -3,10 +3,7 @@ package com.example.heshequ.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/5/29 16:55
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class WenwenBean implements Serializable {
     public int type = 0;
     public String userLike;

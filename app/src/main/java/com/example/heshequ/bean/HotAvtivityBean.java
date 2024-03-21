@@ -3,10 +3,7 @@ package com.example.heshequ.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Dengdongqi on 2018/7/9.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public class HotAvtivityBean {
 

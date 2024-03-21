@@ -37,10 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/6/19 14:44
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, TextWatcher {
     private static final String TAG = "[TeamSearchActivity]";
 
@@ -243,7 +240,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
 //            if (TextUtils.isEmpty(s)) {
 //                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", pn + "", ps + ""});
 //            } else {
-                setBodyParams(new String[]{"type", "pn", "ps", "keyword"}, new String[]{"1", pn + "", ps + "", s});
+            setBodyParams(new String[]{"type", "pn", "ps", "keyword"}, new String[]{"1", pn + "", ps + "", s});
 //            }
             sendPost(Constants.base_url + "/api/club/base/pglist.do", 100, Constants.token);
         } else {

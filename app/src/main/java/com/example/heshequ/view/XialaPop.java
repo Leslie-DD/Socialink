@@ -15,10 +15,7 @@ import com.example.heshequ.base.NetWorkActivity;
 import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.utils.Utils;
 
-/**
- * Hulk_Zhang on 2017/12/12 09:33
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class XialaPop {
 
     private static WindowManager.LayoutParams layoutParams;

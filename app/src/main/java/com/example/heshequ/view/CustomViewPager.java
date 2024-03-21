@@ -10,10 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Hulk_Zhang on 2017/12/15 12:01
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class CustomViewPager extends ViewPager {
     private Map<Integer, Integer> map = new HashMap<>(4);
     private int currentPage;

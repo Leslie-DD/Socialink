@@ -6,14 +6,13 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.heshequ.R;
 import com.example.heshequ.activity.WebActivity;
-import com.example.heshequ.adapter.MyBannerAdapter;
+import com.example.heshequ.adapter.BannerAdapter;
 import com.example.heshequ.bean.ConsTants;
 import com.example.heshequ.bean.HomeBannerImgsBean;
 import com.example.heshequ.utils.Utils;
@@ -33,7 +32,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
     private List<String> mList2 = new ArrayList<>();    // 轮播图
     private List<HomeBannerImgsBean> mList3 = new ArrayList<>();    // 轮播图2
 
-    private MyBannerAdapter bannerAdapter;
+    private BannerAdapter bannerAdapter;
 
     public PicAdapter(Context context, List<String> list, List<String> list2, List<HomeBannerImgsBean> list3) {
         mContext = context;
@@ -52,13 +51,13 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PicAdapter.PicViewHolder holder, int position) {
 
-        bannerAdapter = new MyBannerAdapter(holder.rpSliderBanner, mContext);
+        bannerAdapter = new BannerAdapter(holder.rpSliderBanner, mContext);
         holder.rpSliderBanner.setAdapter(bannerAdapter);
         bannerAdapter.setData(mList2);
         holder.rpSliderBanner.setPlayDelay(3000);
         holder.rpSliderBanner.setAnimationDurtion(500);
         holder.rpSliderBanner.setHintView(new ColorPointHintView(mContext, Color.parseColor("#00bbff"), Color.WHITE));
-        bannerAdapter.setonBanneritemClickListener(position1 ->
+        bannerAdapter.setonBannerItemClickListener(position1 ->
                 mContext.startActivity(new Intent(mContext, WebActivity.class).putExtra("url", mList3.get(position1).getLinkUrl()))
         );
 

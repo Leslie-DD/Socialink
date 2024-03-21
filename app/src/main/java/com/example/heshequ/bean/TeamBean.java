@@ -5,10 +5,6 @@ import com.example.heshequ.constans.Constants;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Hulk_Zhang on 2018/5/9 11:37
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
 public class TeamBean implements Serializable {
 
 

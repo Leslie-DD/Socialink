@@ -18,7 +18,6 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.MainActivity;
-import com.example.heshequ.activity.knowledge.MyKnowledgeActivity;
 import com.example.heshequ.activity.login.ForgetPwdActivity;
 import com.example.heshequ.activity.mine.AttentionActivity;
 import com.example.heshequ.activity.mine.AuthenticationActivity;
@@ -51,10 +50,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Hulk_Zhang on 2018/5/8 14:12
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class MeFragment extends NetWorkFragment implements View.OnClickListener {
 
     private static final String TAG = "[MeFragment]";

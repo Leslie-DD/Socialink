@@ -1,6 +1,4 @@
-/**
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 package com.example.heshequ.adapter.recycleview;
 
@@ -15,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.bean.SearchTeamBean;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CircleView;
@@ -96,7 +94,7 @@ public class SearchTeamAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, TeamDetailActivity2.class);
+                    Intent intent = new Intent(context, TeamDetailActivity.class);
                     intent.putExtra("id", Integer.parseInt(data.get(position).id));
                     context.startActivity(intent);
                 }

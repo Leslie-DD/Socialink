@@ -136,7 +136,6 @@
                     android:visibility="gone" />
 
                 <ImageView
-                    android:id="@+id/lahei"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_alignParentTop="true"
@@ -192,7 +191,6 @@
                 android:layout_height="60dp">
 
                 <com.example.heshequ.view.CircleView
-                    android:id="@+id/takecat"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentStart="true"

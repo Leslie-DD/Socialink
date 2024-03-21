@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:paddingTop="15dp"
         android:background="#ffffff"
-        android:id="@+id/llfenlan"
         android:paddingLeft="12dp"
         android:paddingRight="12dp">
         <TextView

@@ -56,10 +56,7 @@ import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-/**
- * Hulk_Zhang on 2018/5/31 11:12
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class SendQuestionActivity extends NetWorkActivity implements View.OnClickListener {
     private static final String TAG = "[SendQuestionActivity]";
     private TextView tvCancle;

@@ -13,16 +13,12 @@ import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/5/8 16:48
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
-public class MyBannerAdapter extends LoopPagerAdapter {
+public class BannerAdapter extends LoopPagerAdapter {
     private List<String> data = new ArrayList<>();
-    private Context context;
+    private final Context context;
     private onBanneritemClickListener listener;
 
-    public MyBannerAdapter(RollPagerView viewPager, Context context) {
+    public BannerAdapter(RollPagerView viewPager, Context context) {
         super(viewPager);
         this.context = context;
     }
@@ -32,7 +28,7 @@ public class MyBannerAdapter extends LoopPagerAdapter {
         this.notifyDataSetChanged();
     }
 
-    public void setonBanneritemClickListener(onBanneritemClickListener listener) {
+    public void setonBannerItemClickListener(onBanneritemClickListener listener) {
         this.listener = listener;
     }
 
@@ -42,18 +38,12 @@ public class MyBannerAdapter extends LoopPagerAdapter {
 //        view.setTag(position);
         Glide.with(context).load(data.get(position) + "").asBitmap().centerCrop().error(R.mipmap.banner).into(view);
         view.setScaleType(ImageView.ScaleType.FIT_XY);
-        //view.setImageResource(R.mipmap.ic_launcher);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.e("ying","点击的是第"+position+"张图片");
-                if (listener != null) {
-                    listener.onItemClick(position);
-                }
+        view.setOnClickListener(view1 -> {
+            if (listener != null) {
+                listener.onItemClick(position);
             }
         });
-        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         return view;
     }
 

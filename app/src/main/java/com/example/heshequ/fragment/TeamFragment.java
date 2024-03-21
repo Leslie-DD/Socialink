@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.heshequ.R;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.adapter.recycleview.TeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -45,7 +45,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
     private ArrayList<Integer> indexs;
     private ArrayList<Integer> totalPages;
     private ArrayList<ArrayList<TeamTestBean>> datas;
-    private TeamDetailActivity2 mActivity;
+    private TeamDetailActivity mActivity;
     private int startY, endY;
     private int status = -1;
     private TeamAdapter adapter;
@@ -199,7 +199,7 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
     @Override
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.teamfragment, null);
-        mActivity = (TeamDetailActivity2) getActivity();
+        mActivity = (TeamDetailActivity) getActivity();
         EventBus.getDefault().register(this);
         init();
         event();

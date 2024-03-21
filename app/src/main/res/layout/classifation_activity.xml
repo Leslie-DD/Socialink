@@ -7,7 +7,6 @@
     tools:context="com.example.heshequ.classification.ClassifationActivity">
 
     <LinearLayout
-        android:id="@+id/ll_word_find_activity_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F8F8F8"

@@ -1,10 +1,8 @@
 package com.example.heshequ.utils;
 
-import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,15 +12,11 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentActivity;
 
-import com.blankj.utilcode.constant.PermissionConstants;
 import com.example.heshequ.base.NetWorkActivity;
 
 import java.io.BufferedOutputStream;
@@ -77,6 +71,7 @@ public class PhotoUtils {
 
     /**
      * Deprecated and use {@link #takePhoto(FragmentActivity, int)}
+     *
      * @see #startPhoto(NetWorkActivity, int)
      */
     @Deprecated
@@ -86,6 +81,7 @@ public class PhotoUtils {
 
     /**
      * Deprecated and use {@link #takePhoto(FragmentActivity, int)}
+     *
      * @see #startPhoto(NetWorkActivity)
      */
     @Deprecated

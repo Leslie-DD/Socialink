@@ -2,7 +2,6 @@ package com.example.heshequ.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Environment;
 
 import com.example.heshequ.MeetApplication;
 
@@ -13,11 +12,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
-/**
- * Created by Dengdongqi on 2018/8/28.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
 
 public class FileUtilcll {
 
@@ -42,6 +36,7 @@ public class FileUtilcll {
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         return baos.toByteArray();
     }
+
     /**
      * 获取公共目录
      *
@@ -50,6 +45,7 @@ public class FileUtilcll {
     public static String getPublicDir() {
         return MeetApplication.getInstance().getExternalFilesDir("").getAbsolutePath();
     }
+
     public static String saveFile(Context c, String filePath, String fileName, byte[] bytes) {
         String fileFullName = "";
         FileOutputStream fos = null;

@@ -28,10 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Dengdongqi on 2018/9/21.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public class CollectTeamFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, TeamAndWenwenAdapter.DoSaveListener {
     private View view;

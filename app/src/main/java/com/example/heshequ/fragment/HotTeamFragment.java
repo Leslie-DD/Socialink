@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.adapter.recycleview.CommentTeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.TeamBean;
@@ -226,7 +226,7 @@ public class HotTeamFragment extends NetWorkFragment implements CommentTeamAdapt
 
     @Override
     public void OnItemClick(int position) {
-        Intent intent = new Intent(mContext, TeamDetailActivity2.class);
+        Intent intent = new Intent(mContext, TeamDetailActivity.class);
         intent.putExtra("id", adapter.getData().get(position).getId());
         startActivity(intent);
     }

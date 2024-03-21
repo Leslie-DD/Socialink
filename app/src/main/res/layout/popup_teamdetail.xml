@@ -162,14 +162,12 @@
         >
 
         <ImageView
-            android:id="@+id/ivjb"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@mipmap/report"
             />
 
         <TextView
-            android:id="@+id/tvjb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="举报团队"
@@ -189,14 +187,12 @@
         >
 
         <ImageView
-            android:id="@+id/ivst"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@mipmap/yiguanbi"
             />
 
         <TextView
-            android:id="@+id/tvst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码加团(关)"
@@ -214,14 +210,12 @@
         >
 
         <ImageView
-            android:id="@+id/ivst_o"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@mipmap/yikaiqi"
             />
 
         <TextView
-            android:id="@+id/tvst_o"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码加团(开)"
@@ -245,7 +239,6 @@
             />
 
         <TextView
-            android:id="@+id/secretCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="检测中"
@@ -269,7 +262,6 @@
             />
 
         <TextView
-            android:id="@+id/secretJoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码加团"

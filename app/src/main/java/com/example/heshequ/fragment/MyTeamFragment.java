@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.heshequ.MeetApplication;
 import com.example.heshequ.R;
 import com.example.heshequ.activity.team.StatementDetailActivity;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.adapter.recycleview.CommentTeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -330,7 +330,7 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
         int type = adapter.getData().get(position).getItemType();
         switch (type) {
             case 1:
-                Intent intent = new Intent(mContext, TeamDetailActivity2.class);
+                Intent intent = new Intent(mContext, TeamDetailActivity.class);
                 intent.putExtra("id", adapter.getData().get(position).getId());
                 startActivity(intent);
                 break;

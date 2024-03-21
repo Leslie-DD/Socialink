@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.heshequ.R;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.utils.Utils;
 
 
@@ -27,9 +26,9 @@ public class PayPasswordView extends LinearLayout implements View.OnClickListene
     private LinearLayout mKeyBoardView;
     private PasswordEditText mPasswordEditText;
     public String pwd = "";
-    private TeamDetailActivity2 context;
+    private TeamDetailActivity context;
 
-    public void setActivity(TeamDetailActivity2 teamDetailActivity2) {
+    public void setActivity(TeamDetailActivity teamDetailActivity2) {
         this.context = teamDetailActivity2;
     }
 

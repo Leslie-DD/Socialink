@@ -22,7 +22,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/day_info"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"
@@ -35,7 +34,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/course_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"
@@ -48,7 +46,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/course_begin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"
@@ -61,7 +58,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/course_span"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"
@@ -74,7 +70,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/course_site"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"
@@ -87,7 +82,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/course_teacher"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"
@@ -100,7 +94,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/course_class"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"
@@ -113,7 +106,6 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/course_week"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/grey"

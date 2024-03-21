@@ -1,7 +1,6 @@
 package com.example.heshequ.base;
 
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import com.example.heshequ.constans.Constants;
 import com.example.heshequ.constans.WenConstans;
 import com.example.heshequ.view.CustomDialog;
 import com.example.heshequ.view.CustomProgressDialog;
-import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.lzy.okhttputils.request.BaseRequest;

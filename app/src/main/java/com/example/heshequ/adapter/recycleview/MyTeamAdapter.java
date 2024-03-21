@@ -13,17 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.heshequ.R;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
 import com.example.heshequ.view.CircleView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Dengdongqi on 2018/8/2.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public class MyTeamAdapter extends RecyclerView.Adapter {
     private Context context;
@@ -136,7 +133,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, TeamDetailActivity2.class);
+                    Intent intent = new Intent(context, TeamDetailActivity.class);
                     intent.putExtra("id", data.get(position).getId());
                     context.startActivity(intent);
                 }

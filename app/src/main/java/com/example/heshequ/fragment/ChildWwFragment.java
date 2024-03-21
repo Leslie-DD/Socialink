@@ -25,10 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/5/29 14:12
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter.DoSaveListener {
     private static final String TAG = "[ChildWwFragment]";
 

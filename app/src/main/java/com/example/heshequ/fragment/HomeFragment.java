@@ -29,9 +29,9 @@ import com.example.heshequ.activity.flowview.TeamActivity;
 import com.example.heshequ.activity.flowview.WenwenActivity;
 import com.example.heshequ.activity.friend.GPSActivity;
 import com.example.heshequ.activity.newsencond.SecondHandActivity;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.activity.timetable.TimetableCheckin;
-import com.example.heshequ.adapter.MyBannerAdapter;
+import com.example.heshequ.adapter.BannerAdapter;
 import com.example.heshequ.adapter.MyFragmentPagerAdapter;
 import com.example.heshequ.adapter.recycleview.RecycleAdapter;
 import com.example.heshequ.base.NetWorkFragment;
@@ -57,10 +57,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/5/8 14:12
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class HomeFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
 
     private static final String TAG = "HomeFragment";
@@ -83,7 +80,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     private MyFragmentPagerAdapter pagerAdapter;
 
     private RollPagerView rollPagerView;
-    private MyBannerAdapter bannerAdapter;
+    private BannerAdapter bannerAdapter;
     private List<Fragment> fragmentList;
     private FragmentBroadcast brodcast = new FragmentBroadcast();
     private final int getimgsCode = 1000;
@@ -107,7 +104,8 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
             if (!result.has("data") || result.optString("data").isEmpty()) {
                 return;
             }
-            imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {}.getType());
+            imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+            }.getType());
             if (imgsData != null && imgsData.size() > 0) {
                 imgsData.forEach(bannerImgsBean -> {
                     imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
@@ -161,7 +159,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         rollPagerView = (RollPagerView) headView.findViewById(R.id.rp);
         ViewGroup.LayoutParams params = rollPagerView.getLayoutParams();
         params.height = ConsTants.screenW * 10 / 22;
-        bannerAdapter = new MyBannerAdapter(rollPagerView, getActivity());
+        bannerAdapter = new BannerAdapter(rollPagerView, getActivity());
         imgs = new ArrayList<>();
         rollPagerView.setAdapter(bannerAdapter);
         getImgs();
@@ -238,7 +236,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
             }
         });
 
-        bannerAdapter.setonBanneritemClickListener(position -> {
+        bannerAdapter.setonBannerItemClickListener(position -> {
             Intent intent = new Intent(getActivity(), WebActivity.class).putExtra("url", imgsData.get(position).getLinkUrl());
             startActivity(intent);
         });
@@ -421,7 +419,7 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
             startActivity(new Intent(getActivity(),ApplyJoinTDActivity.class).putExtra("id",id));*/
             if (event.getResult().contains("XYTeam_")) {
                 int id = Integer.parseInt(event.getResult().replace("XYTeam_", ""));
-                startActivity(new Intent(getActivity(), TeamDetailActivity2.class).putExtra("id", id));
+                startActivity(new Intent(getActivity(), TeamDetailActivity.class).putExtra("id", id));
             } else {
                 Utils.toastShort(mContext, "请扫描高校联盟团队的二维码");
             }

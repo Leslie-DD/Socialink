@@ -10,10 +10,7 @@ import android.widget.TextView;
 import com.example.heshequ.R;
 import com.example.heshequ.utils.Utils;
 
-/**
- * Created by Dengdongqi on 2018/6/13.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public class GvEmojiAdapter extends BaseAdapter {
     private Context context;

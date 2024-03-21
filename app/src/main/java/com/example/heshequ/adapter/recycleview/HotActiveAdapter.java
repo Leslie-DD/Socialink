@@ -1,6 +1,4 @@
-/**
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 package com.example.heshequ.adapter.recycleview;
 

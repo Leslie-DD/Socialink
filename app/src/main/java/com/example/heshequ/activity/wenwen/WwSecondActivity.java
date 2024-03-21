@@ -36,10 +36,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/5/30 14:20
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class WwSecondActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
 
     private TextView tvName;

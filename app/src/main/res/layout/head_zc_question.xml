@@ -111,7 +111,6 @@
             android:layout_weight="1"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tvBlueDesc"
             android:text="为您线上答疑，欢迎向我提问！"
             android:textColor="@color/base_color_white"
             android:textSize="13sp"

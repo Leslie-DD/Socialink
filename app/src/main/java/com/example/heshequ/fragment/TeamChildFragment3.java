@@ -24,10 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Hulk_Zhang on 2018/5/9 11:28
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class TeamChildFragment3 extends BaseTeamPagerFragment {
     private int pn = 1;
     private int ps = 0;   //总页数

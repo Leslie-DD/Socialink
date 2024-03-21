@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.heshequ.R;
 import com.example.heshequ.activity.TeamMembersActivity;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.TeamBean;
 import com.example.heshequ.constans.Constants;
@@ -32,7 +32,7 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
     private ImageView ivStatus, ivActivity, ivNotice, ivVote, ivComment;
     private LinearLayout llManager, llAdmin;
     private int s1, s2 = 1, s3 = 1, s4 = 1, s5 = 1;
-    private TeamDetailActivity2 mActivity;
+    private TeamDetailActivity mActivity;
     private TeamBean cBean;
     private int status;
     private final int getCode = 1000;
@@ -85,7 +85,7 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
         tvNoticeTip = (TextView) view.findViewById(R.id.tvNoticeTip);
         tvVoteTip = (TextView) view.findViewById(R.id.tvVoteTip);
         tvComment = (TextView) view.findViewById(R.id.tvComment);
-        mActivity = (TeamDetailActivity2) getActivity();
+        mActivity = (TeamDetailActivity) getActivity();
         ivStatus = (ImageView) view.findViewById(R.id.ivStatus);
         ivActivity = (ImageView) view.findViewById(R.id.ivActivity);
         ivNotice = (ImageView) view.findViewById(R.id.ivNotice);

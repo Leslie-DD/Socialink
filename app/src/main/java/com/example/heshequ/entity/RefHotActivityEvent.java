@@ -1,9 +1,6 @@
 package com.example.heshequ.entity;
 
-/**
- * Created by Dengdongqi on 2018/7/9.
- * Copyright © 2018, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 
 public class RefHotActivityEvent {
     int type;   // 1  =刷新  2  = 加载

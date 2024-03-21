@@ -2,10 +2,7 @@ package com.example.heshequ.bean;
 
 import java.util.List;
 
-/**
- * Hulk_Zhang on 2018/6/14 16:31
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class ZcAnswerBean {
 
     public String title;

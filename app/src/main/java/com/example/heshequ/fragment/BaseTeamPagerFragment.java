@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.heshequ.R;
-import com.example.heshequ.activity.team.TeamDetailActivity2;
+import com.example.heshequ.activity.team.TeamDetailActivity;
 import com.example.heshequ.adapter.recycleview.CommentTeamAdapter;
 import com.example.heshequ.base.NetWorkFragment;
 import com.example.heshequ.bean.ConsTants;
@@ -21,10 +21,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Hulk_Zhang on 2018/5/9 11:22
- * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
- */
+
 public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener {
 
     private View view;
@@ -107,7 +104,7 @@ public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerV
     public void OnItemClick(int position) {
         //Log.e("YSF","我运行了"+adapter.getData().get(position).getId());
         int type = adapter.getData().get(position).getItemType();
-        Intent intent = new Intent(mContext, TeamDetailActivity2.class);
+        Intent intent = new Intent(mContext, TeamDetailActivity.class);
         intent.putExtra("id", adapter.getData().get(position).getId());
         startActivity(intent);
 

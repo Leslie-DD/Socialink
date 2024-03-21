@@ -60,9 +60,9 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
                 }
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
-                    if (data != null && data.has("list")) {
+                    if (data.has("list")) {
                         JSONArray array = data.getJSONArray("list");
-                        if (array != null && array.length() > 0) {
+                        if (array.length() > 0) {
                             for (int i = 0; i < array.length(); i++) {
                                 WenwenBean bean = gson.fromJson(array.getJSONObject(i)
                                         .getJSONObject("obj").toString(), WenwenBean.class);

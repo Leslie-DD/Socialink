@@ -3,6 +3,7 @@ package com.example.heshequ.fragment;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import java.util.List;
  * Copyright 2016, 长沙豆子信息技术有限公司, All rights reserved.
  */
 public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter.DoSaveListener {
+    private static final String TAG = "[ChildWwFragment]";
 
     private View view;
     private XRecyclerView mRecyclerView;
@@ -45,6 +47,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotWenwenAdapter
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
+        Log.d(TAG, "onSuccess where: " + where + ", result: " + result + ", fromCache: " + fromCache);
         if (ResultUtils.isFail(result, getActivity())) {
             return;
         }

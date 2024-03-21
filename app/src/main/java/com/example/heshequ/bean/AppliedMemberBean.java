@@ -21,6 +21,7 @@ public class AppliedMemberBean {
     private String telephone;
     private String college;
     private String name;
+    private int sex;
 
     public int getUid() {
         return uid;
@@ -97,6 +98,15 @@ public class AppliedMemberBean {
                 ", telephone='" + telephone + '\'' +
                 ", college='" + college + '\'' +
                 ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
                 ']';
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
     }
 }

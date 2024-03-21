@@ -36,6 +36,7 @@ public class WenwenBean implements Serializable {
     public String creator;
     public String memberNumber;
     public int category;
+    public String college;
 
 //    id：问题的唯一标识
 //    uid：发布问问的用户ID

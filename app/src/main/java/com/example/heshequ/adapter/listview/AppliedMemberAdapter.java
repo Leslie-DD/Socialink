@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -68,6 +69,7 @@ public class AppliedMemberAdapter extends BaseAdapter {
             viewHolder.tvTelephone = view.findViewById(R.id.tvTelephone);
             viewHolder.tvRealName = view.findViewById(R.id.tvRealName);
             viewHolder.tvCollege = view.findViewById(R.id.tvCollege);
+            viewHolder.ivSex = view.findViewById(R.id.ivSex);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -113,6 +115,16 @@ public class AppliedMemberAdapter extends BaseAdapter {
             viewHolder.tvCollege.setVisibility(View.GONE);
         }
 
+        if (bean.getSex() == 1) {   // 男
+            viewHolder.ivSex.setImageResource(R.mipmap.me19);
+            viewHolder.ivSex.setVisibility(View.VISIBLE);
+        } else if (bean.getSex() == 2) {    // 女
+            viewHolder.ivSex.setImageResource(R.mipmap.me36);
+            viewHolder.ivSex.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.ivSex.setVisibility(View.GONE);
+        }
+
         viewHolder.ivHead.setOnClickListener(v -> {
             context.startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", bean.getUid()));
         });
@@ -123,5 +135,6 @@ public class AppliedMemberAdapter extends BaseAdapter {
     public class ViewHolder {
         private CircleView ivHead;
         private TextView tvName, /*tvRole,*/ tvRealName, tvCollege, tvTelephone;
+        private ImageView ivSex;
     }
 }

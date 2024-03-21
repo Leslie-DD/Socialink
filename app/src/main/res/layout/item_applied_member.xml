@@ -31,8 +31,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:textColor="@color/black"
-                    android:text="周星星" />
+                    android:text="周星星"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/ivSex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@mipmap/me19"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvRealName"
@@ -42,13 +50,13 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-<!--            <TextView-->
-<!--                android:id="@+id/tvRole"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="16dp"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:text="团长" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/tvRole"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginLeft="16dp"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:text="团长" />-->
             <TextView
                 android:id="@+id/tvTelephone"
                 android:layout_width="wrap_content"
@@ -68,13 +76,13 @@
             android:gravity="end"
             android:text="湖南大学" />
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="15dp"-->
-<!--            android:gravity="end"-->
-<!--            android:text="已报名"-->
-<!--            android:textColor="#c3c3c3" />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginEnd="15dp"-->
+        <!--            android:gravity="end"-->
+        <!--            android:text="已报名"-->
+        <!--            android:textColor="#c3c3c3" />-->
 
 
     </LinearLayout>

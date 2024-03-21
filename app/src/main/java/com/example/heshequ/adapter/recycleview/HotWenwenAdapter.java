@@ -110,7 +110,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
         private ImageView ivImg;
         private MyGv gv;
         private CircleView ivHead;
-        private TextView tvName, tvTitle, tvBelong, tvNum, tvTime;
+        private TextView tvName, tvCollege, tvTitle, tvBelong, tvNum, tvTime;
         private TextView tvLoves;
         private LinearLayout llSave;
         private RollPagerView rollPagerView;
@@ -122,6 +122,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                 ivImg = (ImageView) view.findViewById(R.id.ivImg);
                 ivHead = (CircleView) view.findViewById(R.id.ivHead);
                 tvName = (TextView) view.findViewById(R.id.tvName);
+                tvCollege = view.findViewById(R.id.tvCollege);
                 tvTitle = (TextView) view.findViewById(R.id.tvTitle);
                 tvBelong = (TextView) view.findViewById(R.id.tvBelong);
                 tvNum = (TextView) view.findViewById(R.id.tvNum);
@@ -147,48 +148,55 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(final int position) {
-            if (data.get(position).type == 0) {
-                tvTime.setText(data.get(position).time == null ? "" : data.get(position).time);
-                tvTitle.setText(data.get(position).title == null ? "" : data.get(position).title);
-                tvNum.setText(data.get(position).commentAmount == null ? "" : data.get(position).commentAmount);
-                tvLoves.setText(data.get(position).likeAmount + "");
-                if (data.get(position).anonymity == 0) {
-                    tvName.setText(data.get(position).nn == null ? "" : data.get(position).nn);
-                    if (TextUtils.isEmpty(data.get(position).header)) {
+            WenwenBean wenwenBean = data.get(position);
+            if (wenwenBean.type == 0) {
+                tvTime.setText(wenwenBean.time == null ? "" : wenwenBean.time);
+                if (TextUtils.isEmpty(wenwenBean.college)) {
+                    tvCollege.setVisibility(View.GONE);
+                } else {
+                    tvCollege.setVisibility(View.VISIBLE);
+                    tvCollege.setText(wenwenBean.college);
+                }
+                tvTitle.setText(wenwenBean.title == null ? "" : wenwenBean.title);
+                tvNum.setText(wenwenBean.commentAmount == null ? "" : wenwenBean.commentAmount);
+                tvLoves.setText(wenwenBean.likeAmount + "");
+                if (wenwenBean.anonymity == 0) {
+                    tvName.setText(wenwenBean.nn == null ? "" : wenwenBean.nn);
+                    if (TextUtils.isEmpty(wenwenBean.header)) {
                         ivHead.setImageResource(R.mipmap.head3);
                     } else {
-                        Glide.with(context).load(Constants.base_url + data.get(position).header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                        Glide.with(context).load(Constants.base_url + wenwenBean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                     }
                 } else {
                     tvName.setText("匿名用户");
                     ivHead.setImageResource(R.mipmap.head3);
                 }
 
-                if (TextUtils.isEmpty(data.get(position).userLike)) {
+                if (TextUtils.isEmpty(wenwenBean.userLike)) {
                     ivImg.setImageResource(R.mipmap.sc);
                     tvLoves.setTextColor(Color.parseColor("#ababb3"));
                 } else {
                     ivImg.setImageResource(R.mipmap.saved);
                     tvLoves.setTextColor(Color.parseColor("#00bbff"));
                 }
-                if (data.get(position).labels != null && data.get(position).labels.size() > 0) {
+                if (wenwenBean.labels != null && wenwenBean.labels.size() > 0) {
                     String str = "";
-                    for (int i = 0; i < data.get(position).labels.size(); i++) {
+                    for (int i = 0; i < wenwenBean.labels.size(); i++) {
                         if (i == 0) {
-                            str = "#" + data.get(position).labels.get(i).name + "#";
+                            str = "#" + wenwenBean.labels.get(i).name + "#";
                         } else {
-                            str = str + "   #" + data.get(position).labels.get(i).name + "#";
+                            str = str + "   #" + wenwenBean.labels.get(i).name + "#";
                         }
                     }
                     tvBelong.setText(str);
                 } else {
                     tvBelong.setText("");
                 }
-                if (data.get(position).photos == null || data.get(position).photos.size() == 0) {
+                if (wenwenBean.photos == null || wenwenBean.photos.size() == 0) {
                     gv.setVisibility(View.GONE);
                 } else {
                     gv.setVisibility(View.VISIBLE);
-                    switch (data.get(position).photos.size()) {
+                    switch (wenwenBean.photos.size()) {
                         case 1:
                             gv.setNumColumns(1);
                             break;
@@ -203,14 +211,14 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                             break;
                     }
                     ArrayList<String> strings = new ArrayList<>();
-                    for (int i = 0; i < data.get(position).photos.size(); i++) {
-                        strings.add(WenConstans.BaseUrl + data.get(position).photos.get(i).photoId);
+                    for (int i = 0; i < wenwenBean.photos.size(); i++) {
+                        strings.add(WenConstans.BaseUrl + wenwenBean.photos.get(i).photoId);
                     }
                     gv.setAdapter(new Adapter_GridView(context, strings));
                     gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            List<WwPhotoBean> photoList = data.get(position).photos;
+                            List<WwPhotoBean> photoList = wenwenBean.photos;
                             ArrayList<String> list = new ArrayList<String>();
                             if (photoList != null && photoList.size() > 0) {
                                 for (int j = 0; j < photoList.size(); j++) {
@@ -229,44 +237,35 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (data.get(position).type != 1) {
-                            if (Objects.equals(data.get(position).uid, Constants.uid + "")) {
+                        if (wenwenBean.type != 1) {
+                            if (Objects.equals(wenwenBean.uid, Constants.uid + "")) {
                             }
 
                             Intent intent = new Intent(context, WenwenDetailActivity.class);
                             Bundle bundle = new Bundle();
-                            bundle.putSerializable("wenwen", data.get(position));
+                            bundle.putSerializable("wenwen", wenwenBean);
                             intent.putExtras(bundle);
                             context.startActivity(intent);
                         }
                     }
                 });
-                llSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                    if (!TextUtils.isEmpty(data.get(position).userLike)){
+                llSave.setOnClickListener(v -> {
+//                    if (!TextUtils.isEmpty(wenwenBean.userLike)){
 //                        Utils.toastShort(context,"你已经收藏过了");
 //                        return;
 //                    }
-                        if (data.get(position).type != 1) {
-                            if (mDoSaveListener != null) {
-                                mDoSaveListener.doSave(position);
-                            }
+                    if (wenwenBean.type != 1) {
+                        if (mDoSaveListener != null) {
+                            mDoSaveListener.doSave(position);
                         }
                     }
                 });
-            } else if (data.get(position).type == 1) {
-                //LogUtils.e("DDQ --> "+ bannerFlag);
+            } else if (wenwenBean.type == 1) {
                 if (bannerFlag == 0) {
                     bannerFlag++;
                     getImgs(position);
-                    bannerAdapter.setonBanneritemClickListener(new MyBannerAdapter.onBanneritemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            context.startActivity(new Intent(context, WebActivity.class)
-                                    .putExtra("url", imgsData.get(position).getLinkUrl()));
-                        }
-                    });
+                    bannerAdapter.setonBanneritemClickListener(position1 -> context.startActivity(new Intent(context, WebActivity.class)
+                            .putExtra("url", imgsData.get(position1).getLinkUrl())));
                 }
             }
         }

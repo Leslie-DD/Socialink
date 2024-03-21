@@ -13,7 +13,7 @@
         <include layout="@layout/new_title_bar2"/>
     </LinearLayout>
 
-    <com.example.heshequ.view.CircleView
+    <com.hnu.heshequ.view.CircleView
         android:layout_width="75dp"
         android:layout_below="@id/linearLayout2"
         android:src="@mipmap/head3"

@@ -69,7 +69,7 @@
             android:layout_height="1dp"
             android:background="#e6e6e6"
             />
-        <com.example.heshequ.view.FlowLayout
+        <com.hnu.heshequ.view.FlowLayout
             app:width_space="2dp"
             app:height_space="2dp"
             android:layout_marginTop="20dp"

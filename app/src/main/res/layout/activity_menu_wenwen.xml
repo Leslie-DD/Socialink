@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context = "com.example.heshequ.activity.flowview.WenwenActivity">
+    tools:context = "com.hnu.heshequ.activity.flowview.WenwenActivity">
 
     <fragment
         android:id="@+id/my_wenwen"
-        android:name="com.example.heshequ.fragment.WenwenFragment"
+        android:name="com.hnu.heshequ.fragment.WenwenFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </fragment>

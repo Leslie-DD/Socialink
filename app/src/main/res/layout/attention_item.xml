@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.example.heshequ.view.CircleView
+            <com.hnu.heshequ.view.CircleView
                 android:id="@+id/mynoticephoto"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

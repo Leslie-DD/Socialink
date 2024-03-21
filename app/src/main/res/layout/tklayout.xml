@@ -11,7 +11,7 @@
        android:layout_gravity="right"
        android:layout_height="20dp"
        android:id="@+id/ivClose" />
-     <com.example.heshequ.view.CircleView
+     <com.hnu.heshequ.view.CircleView
          android:layout_width="60dp"
          android:layout_gravity="center_horizontal"
          android:id="@+id/ivHead"

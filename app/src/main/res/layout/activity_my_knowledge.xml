@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/base_color_white">
-<!--    tools:context="com.example.meet.activity.knowledge.KnowledgeActivity">-->
+<!--    tools:context="com.hnu.meet.activity.knowledge.KnowledgeActivity">-->
 
     <include layout="@layout/new_title_bar2"/>
 

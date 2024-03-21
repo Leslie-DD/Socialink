@@ -19,7 +19,7 @@
         android:gravity="center_horizontal"
         android:id="@+id/headandsex"
         android:orientation="horizontal">
-        <com.example.heshequ.view.CircleView
+        <com.hnu.heshequ.view.CircleView
             android:layout_width="75dp"
             android:src="@mipmap/head3"
             android:id="@+id/ivHead"

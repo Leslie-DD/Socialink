@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context = "com.example.heshequ.activity.oldsecond.SecondActivity">
+    tools:context = "com.hnu.heshequ.activity.oldsecond.SecondActivity">
 
     <fragment
         android:id="@+id/my_wenwen"
-        android:name="com.example.heshequ.activity.oldsecond.SecondFragment"
+        android:name="com.hnu.heshequ.activity.oldsecond.SecondFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </fragment>

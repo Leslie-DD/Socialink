@@ -12,7 +12,7 @@
         android:layout_marginRight="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.example.heshequ.view.CircleView
+        <com.hnu.heshequ.view.CircleView
             android:id="@+id/ivHead"
             android:src="@mipmap/cjtp"
             android:layout_width="35dp"
@@ -84,7 +84,7 @@
 
     </RelativeLayout>
 
-    <com.example.heshequ.view.MyGv
+    <com.hnu.heshequ.view.MyGv
         android:layout_marginTop="2dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="12dp"
@@ -93,7 +93,7 @@
         android:numColumns="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.example.heshequ.view.MyGv>
+    </com.hnu.heshequ.view.MyGv>
 
     <RelativeLayout
         android:layout_marginBottom="15dp"

@@ -7,11 +7,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/base_color_white"
-    tools:context="com.example.heshequ.activity.team.ChooseTeamLableActivity">
+    tools:context="com.hnu.heshequ.activity.team.ChooseTeamLableActivity">
 
     <include layout="@layout/new_title_bar2"/>
 
-    <com.example.heshequ.view.FlowLayout
+    <com.hnu.heshequ.view.FlowLayout
         app:width_space="10dp"
         app:height_space="10dp"
         android:id="@+id/flow_layout"

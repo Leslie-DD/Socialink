@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
-    tools:context="com.example.heshequ.activity.login.LoginActivity">
+    tools:context="com.hnu.heshequ.activity.login.LoginActivity">
 
     <TextView
         android:id="@+id/tvSign"

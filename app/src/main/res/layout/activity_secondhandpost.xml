@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-    tools:context="com.example.heshequ.activity.mine.AuthenticationActivity">
+    tools:context="com.hnu.heshequ.activity.mine.AuthenticationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:textColor="#333333"
                     android:textColorHint="#999999"
                     android:textSize="15sp" />
-                <com.example.heshequ.view.MyGv
+                <com.hnu.heshequ.view.MyGv
                     android:id="@+id/gw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                     android:layout_marginTop="10dp"
                     android:horizontalSpacing="12dp"
                     android:numColumns="3"
-                    android:verticalSpacing="6dp"></com.example.heshequ.view.MyGv>
+                    android:verticalSpacing="6dp"></com.hnu.heshequ.view.MyGv>
                 <LinearLayout
                     android:visibility="gone"
                     android:id="@+id/llSelect"
@@ -115,7 +115,7 @@
 <!--                        android:layout_height="wrap_content"-->
 <!--                        android:id="@+id/tvBelong" />-->
 <!--                </LinearLayout>-->
-<!--                <com.example.meet.view.FlowLayout-->
+<!--                <com.hnu.meet.view.FlowLayout-->
 <!--                    app:width_space="10dp"-->
 <!--                    app:height_space="10dp"-->
 <!--                    android:id="@+id/flow_layout"-->

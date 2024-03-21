@@ -13,7 +13,7 @@
         android:layout_marginEnd="15dp"
         android:gravity="center_vertical">
 
-        <com.example.heshequ.view.CircleView
+        <com.hnu.heshequ.view.CircleView
             android:id="@+id/ivHead"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -74,7 +74,7 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-    <com.example.heshequ.view.MyGv
+    <com.hnu.heshequ.view.MyGv
         android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

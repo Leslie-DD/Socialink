@@ -1,4 +1,4 @@
-package com.example.heshequ;
+package com.hnu.heshequ;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ import android.content.Context;
 //    public void useAppContext() {
 //        // Context of the app under test.
 //        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-//        assertEquals("com.example.meet", appContext.getPackageName());
+//        assertEquals("com.hnu.meet", appContext.getPackageName());
 //    }
 //}

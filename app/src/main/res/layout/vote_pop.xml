@@ -49,7 +49,7 @@
                 android:paddingRight="20dp"
                 android:gravity="center_vertical"
                 android:background="@drawable/vote_bg"/>
-            <com.example.heshequ.view.MyLv
+            <com.hnu.heshequ.view.MyLv
                 android:layout_width="match_parent"
                 android:id="@+id/lv"
                 android:dividerHeight="1px"
@@ -58,7 +58,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
                 android:background="@drawable/vote_bg"
-                android:layout_height="wrap_content"></com.example.heshequ.view.MyLv>
+                android:layout_height="wrap_content"></com.hnu.heshequ.view.MyLv>
             <TextView
                 android:layout_width="wrap_content"
                 android:text="最多支持15个选项,每个选项不超过40字"

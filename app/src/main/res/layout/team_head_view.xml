@@ -24,7 +24,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
-                <com.example.heshequ.view.CircleView
+                <com.hnu.heshequ.view.CircleView
                     android:id="@+id/ivTeamHead"
                     android:layout_width="60dp"
                     android:layout_height="60dp" />
@@ -81,7 +81,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp">
 
-                <com.example.heshequ.view.CircleView
+                <com.hnu.heshequ.view.CircleView
                     android:id="@+id/ivGroupHead"
                     android:layout_width="33dp"
                     android:layout_height="33dp" />
@@ -122,18 +122,18 @@
                     android:layout_height="match_parent">
                 </com.book.douziit.meet.view.MyGv>-->
 
-                <com.example.heshequ.view.CircleView
+                <com.hnu.heshequ.view.CircleView
                     android:id="@+id/iv3"
                     android:layout_width="33dp"
                     android:layout_height="33dp" />
 
-                <com.example.heshequ.view.CircleView
+                <com.hnu.heshequ.view.CircleView
                     android:id="@+id/iv2"
                     android:layout_width="33dp"
                     android:layout_height="33dp"
                     android:layout_marginLeft="10dp" />
 
-                <com.example.heshequ.view.CircleView
+                <com.hnu.heshequ.view.CircleView
                     android:id="@+id/iv1"
                     android:layout_width="33dp"
                     android:layout_height="33dp"
@@ -192,10 +192,10 @@
                 style="@style/tv_style"
                 android:text="管理" />
         </LinearLayout>
-        <com.example.heshequ.view.CustomViewPager
+        <com.hnu.heshequ.view.CustomViewPager
             android:id="@+id/vp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </com.example.heshequ.view.CustomViewPager>
+        </com.hnu.heshequ.view.CustomViewPager>
     </LinearLayout>
 </LinearLayout>

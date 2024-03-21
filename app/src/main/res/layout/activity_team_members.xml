@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#ffffff"
 
-    tools:context="com.example.heshequ.activity.TeamMembersActivity">
+    tools:context="com.hnu.heshequ.activity.TeamMembersActivity">
    <RelativeLayout
        android:layout_width="match_parent"
        android:layout_height="50dp">

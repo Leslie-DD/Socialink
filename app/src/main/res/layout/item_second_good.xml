@@ -46,7 +46,7 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <com.example.heshequ.view.CircleView
+                    <com.hnu.heshequ.view.CircleView
                         android:id="@+id/ivHead"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
@@ -170,7 +170,7 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.example.heshequ.view.MyGv
+        <com.hnu.heshequ.view.MyGv
             android:id="@+id/gv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
             android:background="#ffffff"
             android:horizontalSpacing="10dp"
             android:verticalSpacing="10dp"
-            android:visibility="gone"></com.example.heshequ.view.MyGv>
+            android:visibility="gone"></com.hnu.heshequ.view.MyGv>
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>

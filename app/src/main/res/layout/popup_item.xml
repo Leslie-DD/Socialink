@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp"
     android:orientation="horizontal"
-    tools:context="com.example.heshequ.activity.team.MessageActivity"
+    tools:context="com.hnu.heshequ.activity.team.MessageActivity"
     >
 
     <!-- 这里的linearLayout加android:background=""这个属性要谨慎，如果加了后，popwindow是不能半透明了的 -->

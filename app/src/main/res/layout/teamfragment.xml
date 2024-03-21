@@ -135,11 +135,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.heshequ.view.MyXRecyclerView
+        <com.hnu.heshequ.view.MyXRecyclerView
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"></com.example.heshequ.view.MyXRecyclerView>
+            android:background="#ffffff"></com.hnu.heshequ.view.MyXRecyclerView>
 
         <TextView
             android:visibility="gone"

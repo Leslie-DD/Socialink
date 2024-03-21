@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context="com.example.heshequ.activity.team.StatementActivity">
+    tools:context="com.hnu.heshequ.activity.team.StatementActivity">
 
     <include layout="@layout/new_title_bar" />
 
@@ -36,7 +36,7 @@
                 android:textColorHint="@color/text9"
                 android:textSize="15sp" />
 
-            <com.example.heshequ.view.MyGv
+            <com.hnu.heshequ.view.MyGv
                 android:id="@+id/gw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

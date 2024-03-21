@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.heshequ.activity.knowledge.ArticleDetialActivity">
+    tools:context="com.hnu.heshequ.activity.knowledge.ArticleDetialActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvReadS">
 
-                <com.example.heshequ.view.CircleView
+                <com.hnu.heshequ.view.CircleView
                     android:id="@+id/ivHeadSubscriptionS"
                     android:layout_width="36dp"
                     android:layout_height="36dp"

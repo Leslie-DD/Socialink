@@ -4,7 +4,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.heshequ"
+        applicationId "com.hnu.heshequ"
         minSdk 27
         targetSdk 33
         versionCode 3
@@ -20,7 +20,7 @@ android {
             javaMaxHeapSize "4g"
         }
 
-        applicationId "com.example.heshequ"
+        applicationId "com.hnu.heshequ"
     }
 
     buildTypes {

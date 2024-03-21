@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.heshequ.activity.mine.MyMessageActivity">
+    tools:context="com.hnu.heshequ.activity.mine.MyMessageActivity">
     <fragment
         android:id="@+id/my_message"
-        android:name="com.example.heshequ.fragment.MsgFragment"
+        android:name="com.hnu.heshequ.fragment.MsgFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </fragment>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/base_color_white"
-    tools:context="com.example.heshequ.activity.ReportActivity">
+    tools:context="com.hnu.heshequ.activity.ReportActivity">
 
     <include layout="@layout/new_title_bar"/>
 

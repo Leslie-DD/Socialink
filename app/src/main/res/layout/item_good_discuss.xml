@@ -9,7 +9,7 @@
         android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.example.heshequ.view.CircleView
+        <com.hnu.heshequ.view.CircleView
             android:id="@+id/ivHead"
             android:src="@mipmap/head3"
             android:layout_width="35dp"

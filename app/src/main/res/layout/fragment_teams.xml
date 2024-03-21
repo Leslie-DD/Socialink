@@ -89,10 +89,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.heshequ.view.NoScrollViewPager
+        <com.hnu.heshequ.view.NoScrollViewPager
             android:id="@+id/vp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.example.heshequ.view.NoScrollViewPager>
+            android:layout_height="match_parent"></com.hnu.heshequ.view.NoScrollViewPager>
 
         <ImageView
             android:id="@+id/ivAdd"

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -34,7 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SignActivity extends NetWorkActivity implements View.OnClickListener {
+public class SignActivity extends NetWorkActivity {
     private TextView tvTitle, tvCode, tvSchool;
     private EditText etPhone, etCode, etPwd, etPwd2;
     private LinearLayout llSchool;
@@ -53,7 +54,8 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
     private Gson gson;
     private OptionsPickerView pvOptions;
     private ArrayList<LabelSelectionActivity.LableBean> datas;
-    private Handler handler = new Handler() {
+
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             count--;
@@ -101,12 +103,94 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
     }
 
     private void event() {
-        tvCode.setOnClickListener(this);
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        llSchool.setOnClickListener(this);
-        btNext.setOnClickListener(this);
-        ivSee.setOnClickListener(this);
-        ivSee2.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        tvCode.setOnClickListener(v -> {
+            if (getting) {
+                return;
+            }
+            phone = etPhone.getText().toString();
+            if (phone.isEmpty()) {
+                Utils.toastShort(mContext, "手机号码不能为空");
+                return;
+            }
+            if (!MatcherUtils.isPhone(phone)) {
+                Utils.toastShort(mContext, "请输入正确的手机号码！");
+                return;
+            }
+
+            setBodyParams(new String[]{"phone"}, new String[]{phone});
+            sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
+        });
+        llSchool.setOnClickListener(v -> {
+            Utils.hideSoftInput(this);
+            if (pvOptions == null) {
+                Utils.toastShort(mContext, "获取数据中~~~");
+                return;
+            }
+            pvOptions.show();
+        });
+        btNext.setOnClickListener(v -> {
+            String code = etCode.getText().toString();
+            phone = etPhone.getText().toString();
+            if (phone.isEmpty()) {
+                Utils.toastShort(mContext, "手机号码不能为空");
+                return;
+            }
+            if (!MatcherUtils.isPhone(phone)) {
+                Utils.toastShort(mContext, "请输入正确的手机号码！");
+                return;
+            }
+            if (code.length() == 0) {
+                Utils.toastShort(mContext, "验证码不能为空,请获取验证码后再填入验证码");
+                return;
+            }
+            if (code.length() != 6) {
+                Utils.toastShort(mContext, "请输入6位正确的验证码");
+                return;
+            }
+            pwd = etPwd.getText().toString();
+            if (pwd.isEmpty()) {
+                Utils.toastShort(mContext, "密码不能为空！");
+                return;
+            }
+            if (!MatcherUtils.isPwd(pwd)) {
+                Utils.toastShort(mContext, "密码格式错误！");
+                return;
+            }
+
+            pwd2 = etPwd2.getText().toString().trim();
+            if (pwd2.isEmpty()) {
+                Utils.toastShort(mContext, "‘确认密码’不能为空！");
+                return;
+            }
+            if (!MatcherUtils.isPwd(pwd)) {
+                Utils.toastShort(mContext, "‘确认密码’格式错误！");
+                return;
+            }
+            if (!pwd.equals(pwd2)) {
+                Utils.toastShort(mContext, "二次密码不一致！");
+                return;
+            }
+            if (school == null || school.isEmpty()) {
+                Utils.toastShort(mContext, "请先选择学校！");
+                return;
+            }
+            setBodyParams(new String[]{"phone", "code", "pwd", "school"},
+                    new String[]{phone, code, EncryptUtils.encryptMD5ToString(pwd), school});
+            sendPost(Constants.base_url + "/api/account/register.do", signCode, null);
+        });
+        ivSee.setOnClickListener(v -> {
+            canSee = !canSee;
+            ivSee.setImageResource(canSee ? R.mipmap.kj : R.mipmap.bkj);
+            etPwd.setTransformationMethod(canSee ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
+            etPwd.setSelection(etPwd.getText().toString().length());
+        });
+        ivSee2.setOnClickListener(v -> {
+            canSee2 = !canSee2;
+            ivSee2.setImageResource(canSee2 ? R.mipmap.kj : R.mipmap.bkj);
+            etPwd2.setTransformationMethod(canSee2 ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
+            etPwd2.setSelection(etPwd2.getText().toString().length());
+        });
     }
 
     @Override
@@ -200,103 +284,6 @@ public class SignActivity extends NetWorkActivity implements View.OnClickListene
     protected void onFailure(String result, int where) {
         getting = false;
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.tvCode:
-                if (getting) {
-                    return;
-                }
-                phone = etPhone.getText().toString();
-                if (phone.isEmpty()) {
-                    Utils.toastShort(mContext, "手机号码不能为空");
-                    return;
-                }
-                if (!MatcherUtils.isPhone(phone)) {
-                    Utils.toastShort(mContext, "请输入正确的手机号码！");
-                    return;
-                }
-
-                setBodyParams(new String[]{"phone"}, new String[]{phone});
-                sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
-                break;
-            case R.id.llSchool:
-                Utils.hideSoftInput(this);
-                if (pvOptions == null) {
-                    Utils.toastShort(mContext, "获取数据中~~~");
-                    return;
-                }
-                pvOptions.show();
-                break;
-            case R.id.btNext:
-                String code = etCode.getText().toString();
-                phone = etPhone.getText().toString();
-                if (phone.isEmpty()) {
-                    Utils.toastShort(mContext, "手机号码不能为空");
-                    return;
-                }
-                if (!MatcherUtils.isPhone(phone)) {
-                    Utils.toastShort(mContext, "请输入正确的手机号码！");
-                    return;
-                }
-                if (code.length() == 0) {
-                    Utils.toastShort(mContext, "验证码不能为空,请获取验证码后再填入验证码");
-                    return;
-                }
-                if (code.length() != 6) {
-                    Utils.toastShort(mContext, "请输入6位正确的验证码");
-                    return;
-                }
-                pwd = etPwd.getText().toString();
-                if (pwd.isEmpty()) {
-                    Utils.toastShort(mContext, "密码不能为空！");
-                    return;
-                }
-                if (!MatcherUtils.isPwd(pwd)) {
-                    Utils.toastShort(mContext, "密码格式错误！");
-                    return;
-                }
-
-                pwd2 = etPwd2.getText().toString().trim();
-                if (pwd2.isEmpty()) {
-                    Utils.toastShort(mContext, "‘确认密码’不能为空！");
-                    return;
-                }
-                if (!MatcherUtils.isPwd(pwd)) {
-                    Utils.toastShort(mContext, "‘确认密码’格式错误！");
-                    return;
-                }
-                if (!pwd.equals(pwd2)) {
-                    Utils.toastShort(mContext, "二次密码不一致！");
-                    return;
-                }
-                if (school == null || school.isEmpty()) {
-                    Utils.toastShort(mContext, "请先选择学校！");
-                    return;
-                }
-                setBodyParams(new String[]{"phone", "code", "pwd", "school"},
-                        new String[]{phone, code, EncryptUtils.encryptMD5ToString(pwd), school});
-                sendPost(Constants.base_url + "/api/account/register.do", signCode, null);
-                break;
-            case R.id.ivSee:
-                canSee = !canSee;
-                ivSee.setImageResource(canSee ? R.mipmap.kj : R.mipmap.bkj);
-                etPwd.setTransformationMethod(canSee ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
-                etPwd.setSelection(etPwd.getText().toString().length());
-                break;
-            case R.id.ivSee2:
-                canSee2 = !canSee2;
-                ivSee2.setImageResource(canSee2 ? R.mipmap.kj : R.mipmap.bkj);
-                etPwd2.setTransformationMethod(canSee2 ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
-                etPwd2.setSelection(etPwd2.getText().toString().length());
-                break;
-        }
-    }
-
 
     @Override
     protected void onDestroy() {

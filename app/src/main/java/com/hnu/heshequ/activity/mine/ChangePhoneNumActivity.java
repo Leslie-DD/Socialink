@@ -34,7 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ChangePhoneNumActivity extends NetWorkActivity implements View.OnClickListener {
+public class ChangePhoneNumActivity extends NetWorkActivity  {
     private TextView tvTitle, tvCancel, tvSchool;
     private EditText etPhone, etPwd, etCode;
     private String phone, pwd, code;
@@ -98,7 +98,11 @@ public class ChangePhoneNumActivity extends NetWorkActivity implements View.OnCl
         View pv = LayoutInflater.from(mContext).inflate(R.layout.list_changephone_q, null);
         ivClose = (ImageView) pv.findViewById(R.id.ivClose);
         lv = (ListView) pv.findViewById(R.id.lv);
-        ivClose.setOnClickListener(this);
+        ivClose.setOnClickListener(v -> {
+            if (pop != null) {
+                pop.dismiss();
+            }
+        });
         cpqAdapter = new CpqAdapter(this);
         lv.setAdapter(cpqAdapter);
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
@@ -107,12 +111,9 @@ public class ChangePhoneNumActivity extends NetWorkActivity implements View.OnCl
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
@@ -130,85 +131,63 @@ public class ChangePhoneNumActivity extends NetWorkActivity implements View.OnCl
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        btSub.setOnClickListener(this);
-        tvCancel.setOnClickListener(this);
-        tvCode.setOnClickListener(this);
-        tvSchool.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.tvCode:
-                phone = etPhone.getText().toString().trim();
-                if (TextUtils.isEmpty(phone)) {
-                    Utils.toastShort(this, "手机号不能为空");
-                    return;
-                }
-                if (!MatcherUtils.isPhone(phone)) {
-                    Utils.toastShort(mContext, "请输入正确的手机号码！");
-                    return;
-                }
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        count = 30;
-                        getting = true;
-                        while (getting) {
-                            handler.sendEmptyMessage(1);
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        btSub.setOnClickListener(v -> {
+            phone = etPhone.getText().toString().trim();
+            String code = etCode.getText().toString();
+            String content = etPwd.getText().toString();
+            String title = tvSchool.getText().toString();
+            if (TextUtils.isEmpty(phone)) {
+                Utils.toastShort(this, "手机号不能为空");
+                return;
+            }
+            if (TextUtils.isEmpty(code)) {
+                Utils.toastShort(this, "验证码不能为空");
+                return;
+            }
+            if (title.equals("请选择问题名称")) {
+                Utils.toastShort(this, "请选择问题名称");
+                return;
+            }
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(this, "答案不能为空");
+                return;
+            }
+            setBodyParams(new String[]{"phone", "code", "questionId", "answer"}
+                    , new String[]{phone, code, data.get(cp).getId() + "", content});
+            sendPost(Constants.base_url + "/api/user/updatePhone.do", 66, Constants.token);
+        });
+        tvCancel.setOnClickListener(v -> finish());
+        tvCode.setOnClickListener(v -> {
+            phone = etPhone.getText().toString().trim();
+            if (TextUtils.isEmpty(phone)) {
+                Utils.toastShort(this, "手机号不能为空");
+                return;
+            }
+            if (!MatcherUtils.isPhone(phone)) {
+                Utils.toastShort(mContext, "请输入正确的手机号码！");
+                return;
+            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    count = 30;
+                    getting = true;
+                    while (getting) {
+                        handler.sendEmptyMessage(1);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
-                }).start();
-                tvCode.setEnabled(false);
-                setBodyParams(new String[]{"phone"}, new String[]{phone});
-                sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
-                break;
-            case R.id.btSub:
-                phone = etPhone.getText().toString().trim();
-                String code = etCode.getText().toString();
-                String content = etPwd.getText().toString();
-                String title = tvSchool.getText().toString();
-                if (TextUtils.isEmpty(phone)) {
-                    Utils.toastShort(this, "手机号不能为空");
-                    return;
                 }
-                if (TextUtils.isEmpty(code)) {
-                    Utils.toastShort(this, "验证码不能为空");
-                    return;
-                }
-                if (title.equals("请选择问题名称")) {
-                    Utils.toastShort(this, "请选择问题名称");
-                    return;
-                }
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(this, "答案不能为空");
-                    return;
-                }
-                setBodyParams(new String[]{"phone", "code", "questionId", "answer"}
-                        , new String[]{phone, code, data.get(cp).getId() + "", content});
-                sendPost(Constants.base_url + "/api/user/updatePhone.do", 66, Constants.token);
-                break;
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.ivClose:
-                if (pop != null) {
-                    pop.dismiss();
-                }
-                break;
-            case R.id.tvSchool:
-                showPop();
-                break;
-        }
+            }).start();
+            tvCode.setEnabled(false);
+            setBodyParams(new String[]{"phone"}, new String[]{phone});
+            sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
+        });
+        tvSchool.setOnClickListener(v -> showPop());
     }
 
     @Override

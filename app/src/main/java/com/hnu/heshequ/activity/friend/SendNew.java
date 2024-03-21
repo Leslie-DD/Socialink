@@ -51,7 +51,7 @@ import top.zibin.luban.OnCompressListener;
  * Created by dell on 2020/3/27.
  */
 
-public class SendNew extends NetWorkActivity implements View.OnClickListener {
+public class SendNew extends NetWorkActivity  {
     private TextView tvCancle;
     private TextView tvTitle;
     private TextView tvSave;
@@ -147,11 +147,36 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
         stringList = new ArrayList<>();
 
         tvCancle = (TextView) findViewById(R.id.tvCancel);
-        tvCancle.setOnClickListener(this);
+        tvCancle.setOnClickListener(v -> finish());
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("发布动态");
         tvSave = (TextView) findViewById(R.id.tvSave);
-        tvSave.setOnClickListener(this);
+        tvSave.setOnClickListener(v -> {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date = new Date(System.currentTimeMillis());
+            Log.e("thisisdate", "" + simpleDateFormat.format(date));
+            String time = simpleDateFormat.format(date);
+            String content = NewDescribe.getText().toString();
+
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "内容不能为空");
+                return;
+            }
+//                if (fileList.size()<=0){
+//                    Utils.toastShort(mContext, "图片不能为空");
+//                    return;
+//                }
+            if (content.length() > 2000) {
+                Utils.toastShort(mContext, "内容最多2000个字符");
+                return;
+            }
+
+            Log.e("showid", id + "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+            setBodyParams(new String[]{"uid", "content", "location", "photoList"}, new String[]{id + "", content + "", location + "", photoList});
+            sendPost(WenConstans.SendNew, 100, WenConstans.token);
+
+            SendNew.this.finish();
+        });
 
         NewDescribe = (EditText) findViewById(R.id.NewDescribe);
 
@@ -160,30 +185,16 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
         gwPictureAdapter = new GwPictureAdapter(this);
         gw.setAdapter(gwPictureAdapter);
         gwPictureAdapter.setData(strings);
-        gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == strings.size() - 1) {
-                    if (strings.size() == 10) {
-                        Utils.toastShort(mContext, "最多添加9张图片");
-                        return;
-                    }
-                    showPop();
+        gw.setOnItemClickListener((parent, view, position, id) -> {
+            if (position == strings.size() - 1) {
+                if (strings.size() == 10) {
+                    Utils.toastShort(mContext, "最多添加9张图片");
+                    return;
                 }
+                showPop();
             }
         });
-        gw.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return false;
-            }
-        });
-//        gw.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                return false;
-//            }
-//        });
+        gw.setOnItemLongClickListener((parent, view, position, id) -> false);
 
         NewDescribe.addTextChangedListener(new TextWatcher() {
             @Override
@@ -216,107 +227,31 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
         tvPic = (TextView) pv.findViewById(R.id.tvPic);
         tvUp = (TextView) pv.findViewById(R.id.tvUp);
-        tvPic.setOnClickListener(this);
-        tvUp.setOnClickListener(this);
+        tvPic.setOnClickListener(v -> {
+            path = PhotoUtils.startPhoto(this);
+            pop.dismiss();
+        });
+        tvUp.setOnClickListener(v -> {
+            PhotoUtils.choosePhoto(202, this);
+            pop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
     }
 
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.tvSave:
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                Date date = new Date(System.currentTimeMillis());
-                Log.e("thisisdate", "" + simpleDateFormat.format(date));
-                String time = simpleDateFormat.format(date);
-                String content = NewDescribe.getText().toString();
-
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "内容不能为空");
-                    return;
-                }
-//                if (fileList.size()<=0){
-//                    Utils.toastShort(mContext, "图片不能为空");
-//                    return;
-//                }
-                if (content.length() > 2000) {
-                    Utils.toastShort(mContext, "内容最多2000个字符");
-                    return;
-                }
-
-                Log.e("showid", id + "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-                setBodyParams(new String[]{"uid", "content", "location", "photoList"}, new String[]{id + "", content + "", location + "", photoList});
-                sendPost(WenConstans.SendNew, 100, WenConstans.token);
-//                OkHttpUtils.post(WenConstans.SendNew)
-//                        .tag(this)
-//                        .headers(Constants.Token_Header, WenConstans.token)
-//                        .params("uid",id+"")
-//                        .params("content", content + "")
-//                        .params("location", location+ "")
-//                        .params("photoList", photoList+"")
-//                        .execute(new StringCallback() {
-//                            @Override
-//                            public void onSuccess(String s, Call call, Response response) {
-//                                Log.e("ying", "sresult:" + s);
-//                                try {
-//                                    JSONObject result = new JSONObject(s);
-//                                    Log.e("ying", "code:" + result.optInt("code"));
-//                                    if (result.optInt("code") == 0) {
-//                                        Intent intent = new Intent();
-//                                        intent.putExtra("item", 2);
-//                                        intent.setAction("fragment.listener");
-//                                        sendBroadcast(intent);
-//                                        SendNew.this.finish();
-//                                    } else {
-//                                        Utils.toastShort(mContext, result.optString("msg"));
-//                                    }
-//                                } catch (JSONException e) {
-//                                    Log.e("ying", "JSONException: " + e.toString());
-//                                    e.printStackTrace();
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(Call call, Response response, Exception e) {
-//                                isCommit = true;
-//                                super.onError(call, response, e);
-//                                Log.e("ying", "onError Exception: " + e.toString());
-//                            }
-//                        });
-                SendNew.this.finish();
-                break;
-            case R.id.tvUp:
-                PhotoUtils.choosePhoto(202, this);
-                pop.dismiss();
-                break;
-            case R.id.tvPic:
-                path = PhotoUtils.startPhoto(this);
-                pop.dismiss();
-                break;
-        }
-
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -324,7 +259,7 @@ public class SendNew extends NetWorkActivity implements View.OnClickListener {
             case 200:
                 break;
             case 202:
-                if (resultCode == Activity.RESULT_OK && data != null) {
+                if (data != null) {
                     photoUri = null;
                     photoUri = data.getData();
                     try {

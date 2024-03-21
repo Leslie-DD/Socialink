@@ -37,7 +37,7 @@ import java.util.List;
  * Description: 课程表模块 学号登录页面
  */
 
-public class TimetableCheckin extends NetWorkActivity implements View.OnClickListener {
+public class TimetableCheckin extends NetWorkActivity {
 
     private OptionsPickerView schoolChooseHelper;//学校选择器
     private ArrayList<SchoolBean> schools = new ArrayList<>();//学校列表
@@ -175,9 +175,20 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
      * 事件监听
      */
     private void event() {
-        mHead.setOnClickListener(this);
-        mLlSchool.setOnClickListener(this);
-        mBtLogin.setOnClickListener(this);
+        mHead.setOnClickListener(v -> {
+            switch (landingMode) {
+                case APPLY_FOR_LOGIN:
+                    break;
+                case APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE:
+                    applyForLogin(APPLY_FOR_LOGIN);
+            }
+        });
+        mLlSchool.setOnClickListener(v -> {
+            Utils.hideSoftInput(this);
+            schoolChooseHelper.show();//选择好学校之后发送登陆申请
+            //applyForLogin(0);
+        });
+        mBtLogin.setOnClickListener(v -> login());
 
     }
 
@@ -261,37 +272,6 @@ public class TimetableCheckin extends NetWorkActivity implements View.OnClickLis
         studentId = mEtUser.getText().toString();
         studentPwd = mEtPwd.getText().toString();
         code = school.getType() + "";
-    }
-
-    /**
-     * 点击事件监听
-     *
-     * @param v 点击的view
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.head://点击头像，为后期图像验证码使用
-                switch (landingMode) {
-                    case APPLY_FOR_LOGIN:
-                        break;
-                    case APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE:
-                        applyForLogin(APPLY_FOR_LOGIN);
-                }
-                break;
-            case R.id.llSchool://选择学校
-                Utils.hideSoftInput(this);
-                schoolChooseHelper.show();//选择好学校之后发送登陆申请
-                //applyForLogin(0);
-                break;
-            case R.id.btLogin://登陆
-
-                login();
-                break;
-
-        }
     }
 
     public void viewChanged() {

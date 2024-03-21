@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * Created by dell on 2020/4/28.
  */
 
-public class MyDynamic extends NetWorkActivity implements View.OnClickListener {
+public class MyDynamic extends NetWorkActivity  {
     private View view;
     private ViewPager vp;
     private ArrayList<Fragment> list;
@@ -50,7 +50,7 @@ public class MyDynamic extends NetWorkActivity implements View.OnClickListener {
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
     }
 
     @Override
@@ -75,15 +75,5 @@ public class MyDynamic extends NetWorkActivity implements View.OnClickListener {
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-        }
-    }
-
 
 }

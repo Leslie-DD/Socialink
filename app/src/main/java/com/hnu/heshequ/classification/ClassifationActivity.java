@@ -25,7 +25,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassifationActivity extends NetWorkActivity implements View.OnClickListener {
+public class ClassifationActivity extends NetWorkActivity {
 
     private List<String> menuList = new ArrayList<>();
     private List<CategoryBean.DataBean> homeList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ClassifationActivity extends NetWorkActivity implements View.OnClic
         et_search.setCompoundDrawables(drawable, null, null, null);
 
         ib_back = findViewById(R.id.classification_back);
-        ib_back.setOnClickListener(this);
+        ib_back.setOnClickListener(v -> finish());
         Fresco.initialize(this);
         initView();
         getData();
@@ -199,14 +199,5 @@ public class ClassifationActivity extends NetWorkActivity implements View.OnClic
             e.printStackTrace();
         }
         return stringBuilder.toString();
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.classification_back:
-                this.finish();
-        }
     }
 }

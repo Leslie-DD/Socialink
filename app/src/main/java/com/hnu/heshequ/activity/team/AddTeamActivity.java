@@ -50,7 +50,7 @@ import java.util.List;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class AddTeamActivity extends NetWorkActivity implements View.OnClickListener {
+public class AddTeamActivity extends NetWorkActivity  {
     private final int PHOTO_REQUEST_CUT = 300;
     private Button btSave;
     private EditText etName;
@@ -96,8 +96,14 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
         tvPic = (TextView) pv.findViewById(R.id.tvPic);
         tvUp = (TextView) pv.findViewById(R.id.tvUp);
-        tvPic.setOnClickListener(this);
-        tvUp.setOnClickListener(this);
+        tvPic.setOnClickListener(v -> {
+            path = PhotoUtils.startPhoto(this);
+            pop.dismiss();
+        });
+        tvUp.setOnClickListener(v -> {
+            PhotoUtils.choosePhoto(202, this);
+            pop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -119,9 +125,41 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        btSave.setOnClickListener(this);
-        ivHead.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        btSave.setOnClickListener(v -> {
+            if (labels == null) {
+                return;
+            }
+            name = etName.getText().toString();
+            if (TextUtils.isEmpty(name)) {
+                Utils.toastShort(mContext, "请先输入团队名称");
+                return;
+            }
+            if (TextUtils.isEmpty(path)) {
+                Utils.toastShort(mContext, "请先设置团队Logo");
+                return;
+            }
+            String label = "";
+            for (int i = 0; i < labels.size(); i++) {
+                Label bean = labels.get(i);
+                if (bean.getStatus() == 1) {
+                    if (label.length() == 0) {
+                        label = bean.getValue();
+                    } else {
+                        label = label + "," + bean.getValue();
+                    }
+                }
+            }
+            if (label.length() == 0) {
+                Utils.toastShort(mContext, "请先选择团队的标签");
+                return;
+            }
+            btSave.setClickable(false);
+            setFileBodyParams(new String[]{"file"}, new File[]{fileList.get(0)});
+            setBodyParams(new String[]{"name", "labels"}, new String[]{name, label});
+            sendPost(Constants.base_url + "/api/club/base/save.do", addCode, Constants.token);
+        });
+        ivHead.setOnClickListener(v -> showPop());
 
     }
 
@@ -192,6 +230,7 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             if (requestCode == 200) {
                 File file = new File(path);
@@ -311,59 +350,5 @@ public class AddTeamActivity extends NetWorkActivity implements View.OnClickList
             btSave.setClickable(true);
         }
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivHead:
-                showPop();
-                break;
-            case R.id.tvUp:
-                PhotoUtils.choosePhoto(202, this);
-                pop.dismiss();
-                break;
-            case R.id.tvPic:
-                path = PhotoUtils.startPhoto(this);
-                pop.dismiss();
-                break;
-            case R.id.btSave:
-                if (labels == null) {
-                    return;
-                }
-                name = etName.getText().toString();
-                if (TextUtils.isEmpty(name)) {
-                    Utils.toastShort(mContext, "请先输入团队名称");
-                    return;
-                }
-                if (TextUtils.isEmpty(path)) {
-                    Utils.toastShort(mContext, "请先设置团队Logo");
-                    return;
-                }
-                String label = "";
-                for (int i = 0; i < labels.size(); i++) {
-                    Label bean = labels.get(i);
-                    if (bean.getStatus() == 1) {
-                        if (label.length() == 0) {
-                            label = bean.getValue();
-                        } else {
-                            label = label + "," + bean.getValue();
-                        }
-                    }
-                }
-                if (label.length() == 0) {
-                    Utils.toastShort(mContext, "请先选择团队的标签");
-                    return;
-                }
-                btSave.setClickable(false);
-                setFileBodyParams(new String[]{"file"}, new File[]{fileList.get(0)});
-                setBodyParams(new String[]{"name", "labels"}, new String[]{name, label});
-                sendPost(Constants.base_url + "/api/club/base/save.do", addCode, Constants.token);
-                break;
-        }
-    }
-
 
 }

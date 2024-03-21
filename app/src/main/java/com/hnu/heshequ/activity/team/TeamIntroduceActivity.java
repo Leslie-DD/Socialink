@@ -17,7 +17,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TeamIntroduceActivity extends NetWorkActivity implements View.OnClickListener {
+public class TeamIntroduceActivity extends NetWorkActivity {
     private static final String TAG = "[TeamIntroduceActivity]";
     private TextView tvCancel, tvSave, tvTitle;
     private EditText etIntroduce;
@@ -51,27 +51,17 @@ public class TeamIntroduceActivity extends NetWorkActivity implements View.OnCli
     }
 
     private void event() {
-        tvSave.setOnClickListener(this);
-        tvCancel.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.tvSave:
-                content = etIntroduce.getText().toString();
-                if (content.length() == 0) {
-                    Utils.toastShort(mContext, "请先输入团队介绍");
-                    return;
-                }
-                tvSave.setClickable(false);
-                setBodyParams(new String[]{"id", "introduction"}, new String[]{"" + teamId, "" + content});
-                sendPost(Constants.base_url + "/api/club/base/update.do", upcode, Constants.token);
-                break;
-        }
+        tvSave.setOnClickListener(v -> {
+            content = etIntroduce.getText().toString();
+            if (content.length() == 0) {
+                Utils.toastShort(mContext, "请先输入团队介绍");
+                return;
+            }
+            tvSave.setClickable(false);
+            setBodyParams(new String[]{"id", "introduction"}, new String[]{"" + teamId, "" + content});
+            sendPost(Constants.base_url + "/api/club/base/update.do", upcode, Constants.token);
+        });
+        tvCancel.setOnClickListener(v -> finish());
     }
 
     @Override

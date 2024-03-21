@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Created by dev06 on 2018/5/15.
  */
-public class TeamFragment extends NetWorkFragment implements View.OnClickListener {
+public class TeamFragment extends NetWorkFragment  {
     private MyXRecyclerView lv;
     private TextView tvTips;
     private TextView tvNew, tvVote, tvActivity, tvNotice;
@@ -231,10 +231,10 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
         ivVote.setVisibility(View.GONE);
         ivActivity.setVisibility(View.GONE);
         ivNotice.setVisibility(View.GONE);
-        rlActivity.setOnClickListener(this);
-        rlNew.setOnClickListener(this);
-        rlNotice.setOnClickListener(this);
-        rlVote.setOnClickListener(this);
+        rlActivity.setOnClickListener(v -> setBg(2));
+        rlNew.setOnClickListener(v -> setBg(0));
+        rlNotice.setOnClickListener(v -> setBg(3));
+        rlVote.setOnClickListener(v -> setBg(1));
         data = new ArrayList<>();
         voteData = new ArrayList<>();
         activityData = new ArrayList<>();
@@ -304,24 +304,6 @@ public class TeamFragment extends NetWorkFragment implements View.OnClickListene
                         ApplyCode, Constants.token);
             }
         });
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rlNew:
-                setBg(0);
-                break;
-            case R.id.rlVote:
-                setBg(1);
-                break;
-            case R.id.rlActivity:
-                setBg(2);
-                break;
-            case R.id.rlNotice:
-                setBg(3);
-                break;
-        }
     }
 
     private void setBg(int status) {

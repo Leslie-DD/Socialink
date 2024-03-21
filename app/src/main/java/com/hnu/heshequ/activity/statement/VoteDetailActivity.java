@@ -36,7 +36,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-public class VoteDetailActivity extends NetWorkActivity implements View.OnClickListener {
+public class VoteDetailActivity extends NetWorkActivity {
     private int id;  //
     private TeamTestBean.ObjBean bean;
     private int isVote = -1;  // 0 - 未投票  1 - 已投票
@@ -106,8 +106,11 @@ public class VoteDetailActivity extends NetWorkActivity implements View.OnClickL
         ll_del = (LinearLayout) spv.findViewById(R.id.ll_del);
         ll_cacel = (LinearLayout) spv.findViewById(R.id.ll_cacel);
         //ll_editor.setOnClickListener(this);
-        ll_del.setOnClickListener(this);
-        ll_cacel.setOnClickListener(this);
+        ll_del.setOnClickListener(v -> {
+            setBodyParams(new String[]{"voteId"}, new String[]{"" + bean.getId()});
+            sendPost(Constants.base_url + "/api/club/vote/delete.do", DelCode, Constants.token);
+        });
+        ll_cacel.setOnClickListener(v -> pop.dismiss());
 
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
@@ -204,9 +207,42 @@ public class VoteDetailActivity extends NetWorkActivity implements View.OnClickL
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        btVote.setOnClickListener(this);
-        ivRight.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        btVote.setOnClickListener(v -> {
+            int voteId = 0;
+            StringBuilder optionId = new StringBuilder();
+            for (VoteBean.VoteItem voteItem : adapter.getData()) {
+                voteId = voteItem.getVoteId();
+                if (voteItem.getType() == 0) {  //单选
+                    for (Item item : voteItem.getData()) {
+                        if (item.getStatus() == 1) {
+                            if (optionId.length() == 0) {
+                                optionId = new StringBuilder(item.getId() + "");
+                            } else {
+                                optionId.append(",").append(item.getId());
+                            }
+                        }
+                    }
+                } else if (voteItem.getType() == 1) {  //多选
+                    for (Item item : voteItem.getData()) {
+                        if (item.getStatus() == 1) {
+                            if (optionId.length() == 0) {
+                                optionId = new StringBuilder(item.getId() + "");
+                            } else {
+                                optionId.append(",").append(item.getId());
+                            }
+                        }
+                    }
+                }
+            }
+            if (voteId == 0 || optionId.length() == 0) {
+                Utils.toastShort(mContext, "请选择投票后再进行提交");
+                return;
+            }
+            setBodyParams(new String[]{"voteId", "optionId"}, new String[]{"" + voteId, "" + optionId});
+            sendPost(Constants.base_url + "/api/club/vote/comment.do", ovteCode, Constants.token);
+        });
+        ivRight.setOnClickListener(v -> showSpvPop());
         eblv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
@@ -251,61 +287,5 @@ public class VoteDetailActivity extends NetWorkActivity implements View.OnClickL
     protected void onFailure(String result, int where) {
 
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.btVote:
-                //
-                int voteId = 0;
-                StringBuilder optionId = new StringBuilder();
-                for (VoteBean.VoteItem voteItem : adapter.getData()) {
-                    voteId = voteItem.getVoteId();
-                    if (voteItem.getType() == 0) {  //单选
-                        for (Item item : voteItem.getData()) {
-                            if (item.getStatus() == 1) {
-                                if (optionId.length() == 0) {
-                                    optionId = new StringBuilder(item.getId() + "");
-                                } else {
-                                    optionId.append(",").append(item.getId());
-                                }
-                            }
-                        }
-                    } else if (voteItem.getType() == 1) {  //多选
-                        for (Item item : voteItem.getData()) {
-                            if (item.getStatus() == 1) {
-                                if (optionId.length() == 0) {
-                                    optionId = new StringBuilder(item.getId() + "");
-                                } else {
-                                    optionId.append(",").append(item.getId());
-                                }
-                            }
-                        }
-                    }
-                }
-                if (voteId == 0 || optionId.length() == 0) {
-                    Utils.toastShort(mContext, "请选择投票后再进行提交");
-                    return;
-                }
-                setBodyParams(new String[]{"voteId", "optionId"}, new String[]{"" + voteId, "" + optionId});
-                sendPost(Constants.base_url + "/api/club/vote/comment.do", ovteCode, Constants.token);
-                break;
-            case R.id.ivRight:
-                showSpvPop();
-                break;
-            case R.id.ll_del:
-                //删除
-                setBodyParams(new String[]{"voteId"}, new String[]{"" + bean.getId()});
-                sendPost(Constants.base_url + "/api/club/vote/delete.do", DelCode, Constants.token);
-                break;
-            case R.id.ll_cacel:
-                pop.dismiss();
-                break;
-        }
-    }
-
 
 }

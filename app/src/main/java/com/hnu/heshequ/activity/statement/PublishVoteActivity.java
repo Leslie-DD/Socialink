@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class PublishVoteActivity extends NetWorkActivity implements View.OnClickListener {
+public class PublishVoteActivity extends NetWorkActivity {
     private TextView tvCancel, tvSave;
     private EditText etTitle;
     private EditText etContent;
@@ -210,9 +210,47 @@ public class PublishVoteActivity extends NetWorkActivity implements View.OnClick
         llType = (LinearLayout) pv.findViewById(R.id.llType);
         tvType = (TextView) pv.findViewById(R.id.tvType);
         btJoin = (Button) pv.findViewById(R.id.btJoin);
-        llHead.setOnClickListener(this);
-        llType.setOnClickListener(this);
-        btJoin.setOnClickListener(this);
+        llHead.setOnClickListener(v -> mPop.dismiss());
+        llType.setOnClickListener(v -> {
+            mPop.dismiss();
+            pvOptions.show();
+        });
+        btJoin.setOnClickListener(v -> {
+            theme = etTheme.getText().toString();
+            if (theme.length() == 0) {
+                Utils.toastShort(mContext, "请先输入投票主题！");
+                return;
+            }
+            if (list.size() == 1) {
+                Utils.toastShort(mContext, "请先添加选项！");
+                return;
+            }
+
+            if (list.size() < 3) {
+                Utils.toastShort(mContext, "请至少添加两个选项！");
+                return;
+            }
+
+            for (int i = 0; i < list.size() - 1; i++) {
+                if (TextUtils.isEmpty(list.get(i).getName())) {
+                    Utils.toastShort(mContext, "请先设置选项内容！");
+                    return;
+                }
+            }
+
+
+            VoteBean bean = new VoteBean();
+            VoteBean.VoteItem voteItem = bean.new VoteItem();
+            voteItem.setTheme(theme);
+            voteItem.setType(cType);
+            list.remove(list.size() - 1);
+            voteItem.setData(list);
+            data.add(voteItem);
+            adapter.notifyDataSetChanged();
+            expand();
+            mPop.dismiss();
+            resetPop();
+        });
         list = new ArrayList<>();
         list.add(new Item());
         addVoteAdapter = new AddVoteAdapter(mContext, list);
@@ -236,10 +274,58 @@ public class PublishVoteActivity extends NetWorkActivity implements View.OnClick
     }
 
     private void event() {
-        tvCancel.setOnClickListener(this);
-        tvSave.setOnClickListener(this);
-        llAddVote.setOnClickListener(this);
-        tvTime.setOnClickListener(this);
+        tvCancel.setOnClickListener(v -> finish());
+        tvSave.setOnClickListener(v -> {
+            String title = etTitle.getText().toString();
+            String introduction = etContent.getText().toString();
+            if (TextUtils.isEmpty(title)) {
+                Utils.toastShort(mContext, "标题不能为空");
+                return;
+            }
+            if (TextUtils.isEmpty(introduction)) {
+                Utils.toastShort(mContext, "内容不能为空");
+                return;
+            }
+            if (TextUtils.isEmpty(time)) {
+                Utils.toastShort(mContext, "请选择截止时间");
+                pvTime.show();
+                return;
+            }
+
+            //data.get(i).getTheme()
+            //data.get(i).getData().get(y)
+
+            if (data.size() < 1) {
+                Utils.toastShort(mContext, "请先添加投票");
+                return;
+            }
+
+            ArrayList<VoteJsonBean> voteBeans = new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+                VoteJsonBean bean1 = new VoteJsonBean();
+                bean1.setCategory(data.get(i).getType());
+                bean1.setContent(data.get(i).getTheme());
+                ArrayList<VoteJsonBean.Option> options = new ArrayList<>();
+                for (int j = 0; j < data.get(i).getData().size(); j++) {
+                    VoteJsonBean.Option option = new VoteJsonBean.Option();
+                    option.setContent(data.get(i).getData().get(j).getName());
+                    options.add(option);
+                }
+                bean1.setOptions(options);
+                voteBeans.add(bean1);
+            }
+            tvSave.setClickable(false);
+            String content = new Gson().toJson(voteBeans);
+            setBodyParams(new String[]{"clubId", "name", "introduction", "deadline", "content"},
+                    new String[]{"" + Constants.clubId, title, introduction, time, content});
+            sendPost(Constants.base_url + "/api/club/vote/save.do", postCode, Constants.token);
+
+        });
+        llAddVote.setOnClickListener(v -> showPop());
+        tvTime.setOnClickListener(v -> {
+            pvTime.show();
+            Utils.hideSoftInput(this);
+        });
 
         etTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -257,114 +343,6 @@ public class PublishVoteActivity extends NetWorkActivity implements View.OnClick
                 }
             }
         });
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.llAddVote:
-                showPop();
-                break;
-            case R.id.btJoin://加入投票
-                theme = etTheme.getText().toString();
-                if (theme.length() == 0) {
-                    Utils.toastShort(mContext, "请先输入投票主题！");
-                    return;
-                }
-                if (list.size() == 1) {
-                    Utils.toastShort(mContext, "请先添加选项！");
-                    return;
-                }
-
-                if (list.size() < 3) {
-                    Utils.toastShort(mContext, "请至少添加两个选项！");
-                    return;
-                }
-
-                for (int i = 0; i < list.size() - 1; i++) {
-                    if (TextUtils.isEmpty(list.get(i).getName())) {
-                        Utils.toastShort(mContext, "请先设置选项内容！");
-                        return;
-                    }
-                }
-
-
-                VoteBean bean = new VoteBean();
-                VoteBean.VoteItem voteItem = bean.new VoteItem();
-                voteItem.setTheme(theme);
-                voteItem.setType(cType);
-                list.remove(list.size() - 1);
-                voteItem.setData(list);
-                data.add(voteItem);
-                adapter.notifyDataSetChanged();
-                expand();
-                mPop.dismiss();
-                resetPop();
-
-                break;
-            case R.id.llType://选择类型
-                mPop.dismiss();
-                pvOptions.show();
-                break;
-            case R.id.llHead://选择类型
-                mPop.dismiss();
-                break;
-            case R.id.tvSave:
-                String title = etTitle.getText().toString();
-                String introduction = etContent.getText().toString();
-                if (TextUtils.isEmpty(title)) {
-                    Utils.toastShort(mContext, "标题不能为空");
-                    return;
-                }
-                if (TextUtils.isEmpty(introduction)) {
-                    Utils.toastShort(mContext, "内容不能为空");
-                    return;
-                }
-                if (TextUtils.isEmpty(time)) {
-                    Utils.toastShort(mContext, "请选择截止时间");
-                    pvTime.show();
-                    return;
-                }
-
-                //data.get(i).getTheme()
-                //data.get(i).getData().get(y)
-
-                if (data.size() < 1) {
-                    Utils.toastShort(mContext, "请先添加投票");
-                    return;
-                }
-
-                ArrayList<VoteJsonBean> voteBeans = new ArrayList<>();
-                for (int i = 0; i < data.size(); i++) {
-                    VoteJsonBean bean1 = new VoteJsonBean();
-                    bean1.setCategory(data.get(i).getType());
-                    bean1.setContent(data.get(i).getTheme());
-                    ArrayList<VoteJsonBean.Option> options = new ArrayList<>();
-                    for (int j = 0; j < data.get(i).getData().size(); j++) {
-                        VoteJsonBean.Option option = new VoteJsonBean.Option();
-                        option.setContent(data.get(i).getData().get(j).getName());
-                        options.add(option);
-                    }
-                    bean1.setOptions(options);
-                    voteBeans.add(bean1);
-                }
-                tvSave.setClickable(false);
-                String content = new Gson().toJson(voteBeans);
-                setBodyParams(new String[]{"clubId", "name", "introduction", "deadline", "content"},
-                        new String[]{"" + Constants.clubId, title, introduction, time, content});
-                sendPost(Constants.base_url + "/api/club/vote/save.do", postCode, Constants.token);
-
-                break;
-            case R.id.tvTime:
-                pvTime.show();
-                Utils.hideSoftInput(this);
-                break;
-        }
     }
 
     private void showPop() {

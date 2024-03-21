@@ -189,30 +189,32 @@ public class CreateArticleActivity extends NetWorkActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.undo:
-                richEditText.undo();
-                break;
-            case R.id.redo:
-                richEditText.redo();
-                break;
-            case R.id.export:
-                Log.e("xxx", richEditText.toHtml());
-                break;
-            default:
-                break;
-        }
-
-        return true;
-    }
+    // TODO: fix
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.ivBack:
+//                finish();
+//                break;
+//            case R.id.undo:
+//                richEditText.undo();
+//                break;
+//            case R.id.redo:
+//                richEditText.redo();
+//                break;
+//            case R.id.export:
+//                Log.e("xxx", richEditText.toHtml());
+//                break;
+//            default:
+//                break;
+//        }
+//
+//        return true;
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (data == null || data.getData() == null || requestCode == WRITE_EXTERNAL_STORAGE_REQUEST_CODE)
             return;
 

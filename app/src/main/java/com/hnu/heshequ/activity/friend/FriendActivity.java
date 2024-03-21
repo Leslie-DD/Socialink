@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * 交友activity——附近fragment
  */
 
-public class FriendActivity extends NetWorkActivity implements View.OnClickListener {
+public class FriendActivity extends NetWorkActivity {
     private View view;
     private ViewPager vp;
     private static double longitude;
@@ -98,14 +98,20 @@ public class FriendActivity extends NetWorkActivity implements View.OnClickListe
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        FriendFiltrate.setOnClickListener(this);
-        FriendSearch.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        FriendFiltrate.setOnClickListener(v -> startActivity(new Intent(FriendActivity.this, FriendFiltrate.class)));
+        FriendSearch.setOnClickListener(v -> startActivity(new Intent(mContext, FriendSearch.class)));
 
-        FriendSet.setOnClickListener(this);
-        tvnear.setOnClickListener(this);
-        tvnew.setOnClickListener(this);
-        tvfriend.setOnClickListener(this);
+        FriendSet.setOnClickListener(v -> {
+            Intent intent2 = new Intent();
+            intent2.putExtra("longitude", longitude + "");
+            intent2.putExtra("latitude", latitude + "");
+            intent2.setClass(FriendActivity.this, FriendSet.class);
+            startActivity(intent2);
+        });
+        tvnear.setOnClickListener(v -> setTvBg(0));
+        tvnew.setOnClickListener(v -> setTvBg(1));
+        tvfriend.setOnClickListener(v -> setTvBg(2));
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -154,43 +160,4 @@ public class FriendActivity extends NetWorkActivity implements View.OnClickListe
         sendPost(Constants.base_url + "/api/social/updatePosition.do", 100, WenConstans.token);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.FriendSearch:
-                startActivity(new Intent(mContext, FriendSearch.class));
-                break;
-            case R.id.FriendSet:
-                Intent intent2 = new Intent();
-                intent2.putExtra("longitude", longitude + "");
-                intent2.putExtra("latitude", latitude + "");
-                intent2.setClass(FriendActivity.this, FriendSet.class);
-                startActivity(intent2);
-                break;
-            case R.id.FriendFiltrate:
-                Intent intent1 = new Intent(FriendActivity.this, FriendFiltrate.class);
-                startActivity(intent1);
-                break;
-            case R.id.tvNear:
-                setTvBg(0);
-                break;
-            case R.id.tvNew:
-//                Intent intent3 = new Intent();
-//                intent3.putExtra("longitude", longitude + "");
-//                intent3.putExtra("latitude", latitude + "");
-//                intent3.setClass(FriendActivity.this, FriendActivity2.class);
-//                startActivity(intent3);
-//                overridePendingTransition(0, 0);
-//                finish();
-                setTvBg(1);
-                break;
-
-            case R.id.tvFriend:
-                setTvBg(2);
-                break;
-        }
-    }
 }

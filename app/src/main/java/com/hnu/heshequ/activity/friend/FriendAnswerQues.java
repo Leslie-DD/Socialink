@@ -26,7 +26,7 @@ import okhttp3.Response;
  * Created by dell on 2020/5/10.
  */
 
-public class FriendAnswerQues extends NetWorkActivity implements View.OnClickListener {
+public class FriendAnswerQues extends NetWorkActivity  {
     private int id;
     private String answer_1;
     private String answer_2;
@@ -67,8 +67,52 @@ public class FriendAnswerQues extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        findViewById(R.id.tvCancel).setOnClickListener(this);
-        findViewById(R.id.tvSave).setOnClickListener(this);
+        findViewById(R.id.tvCancel).setOnClickListener(v -> finish());
+        findViewById(R.id.tvSave).setOnClickListener(v -> {
+            answer_1 = answer1.getText().toString();
+            answer_2 = answer2.getText().toString();
+            answer_3 = answer3.getText().toString();
+            answer_4 = answer4.getText().toString();
+            answer_5 = answer5.getText().toString();
+            String answer_list[] = {answer_1, answer_2, answer_3, answer_4, answer_5};
+            JSONArray answerlist = new JSONArray();
+            for (int i = 0; i < ques_num; i++) {
+                answerlist.put(getTerm("" + hisid, content[i] + "", "" + answer_list[i]));
+            }
+//                answerlist.put(getTerm(""+hisid,content[0]+"",""+answer_1));
+//                answerlist.put(getTerm(""+hisid,content[1]+"",""+answer_2));
+//                answerlist.put(getTerm(""+hisid,content[2]+"",""+answer_3));
+//                answerlist.put(getTerm(""+hisid,content[3]+"",""+answer_4));
+//                answerlist.put(getTerm(""+hisid,content[4]+"",""+answer_5));
+            OkHttpUtils.post(WenConstans.AnswerSave)
+                    .tag(this)
+                    .headers(Constants.Token_Header, WenConstans.token)
+                    .params("answerlist", answerlist + "")
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onSuccess(String s, Call call, Response response) {
+
+                            Log.e("gerenxinxi", "sresult:" + s);
+                            try {
+                                JSONObject result = new JSONObject(s);
+
+                                String msg = result.getString("msg");
+                                Utils.toastShort(FriendAnswerQues.this, msg);
+                            } catch (JSONException e) {
+                                Log.e("gerenxinxi", "JSONException: " + e.toString());
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+
+                            super.onError(call, response, e);
+                            Log.e("个人信息", "onError Exception: " + e.toString());
+                        }
+                    });
+        });
 
     }
 
@@ -109,63 +153,6 @@ public class FriendAnswerQues extends NetWorkActivity implements View.OnClickLis
             }
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvCancel:
-//                Intent intent = new Intent(FriendAnswerQues.this,FriendSet.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.tvSave:
-                answer_1 = answer1.getText().toString();
-                answer_2 = answer2.getText().toString();
-                answer_3 = answer3.getText().toString();
-                answer_4 = answer4.getText().toString();
-                answer_5 = answer5.getText().toString();
-                String answer_list[] = {answer_1, answer_2, answer_3, answer_4, answer_5};
-                JSONArray answerlist = new JSONArray();
-                for (int i = 0; i < ques_num; i++) {
-                    answerlist.put(getTerm("" + hisid, content[i] + "", "" + answer_list[i]));
-                }
-//                answerlist.put(getTerm(""+hisid,content[0]+"",""+answer_1));
-//                answerlist.put(getTerm(""+hisid,content[1]+"",""+answer_2));
-//                answerlist.put(getTerm(""+hisid,content[2]+"",""+answer_3));
-//                answerlist.put(getTerm(""+hisid,content[3]+"",""+answer_4));
-//                answerlist.put(getTerm(""+hisid,content[4]+"",""+answer_5));
-                OkHttpUtils.post(WenConstans.AnswerSave)
-                        .tag(this)
-                        .headers(Constants.Token_Header, WenConstans.token)
-                        .params("answerlist", answerlist + "")
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-
-                                Log.e("gerenxinxi", "sresult:" + s);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-
-                                    String msg = result.getString("msg");
-                                    Utils.toastShort(FriendAnswerQues.this, msg);
-                                } catch (JSONException e) {
-                                    Log.e("gerenxinxi", "JSONException: " + e.toString());
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-
-                                super.onError(call, response, e);
-                                Log.e("个人信息", "onError Exception: " + e.toString());
-                            }
-                        });
-                break;
-
         }
     }
 

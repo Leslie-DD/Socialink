@@ -14,7 +14,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/5/10.
  */
 
-public class TimetableAddCourse extends NetWorkActivity implements View.OnClickListener {
+public class TimetableAddCourse extends NetWorkActivity {
     private Button set;
 
     @Override
@@ -33,8 +33,7 @@ public class TimetableAddCourse extends NetWorkActivity implements View.OnClickL
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
     }
 
     @Override
@@ -46,12 +45,6 @@ public class TimetableAddCourse extends NetWorkActivity implements View.OnClickL
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
     }
-
-    @Override
-    public void onClick(View view) {
-
-    }
-
 
 }
 

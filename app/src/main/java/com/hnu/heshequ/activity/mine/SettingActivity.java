@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SettingActivity extends NetWorkActivity implements View.OnClickListener {
+public class SettingActivity extends NetWorkActivity {
     private TextView tvTitle, tvTeam, tvQuestion;
     private ImageView ivTeam, ivQuestion;
     private LinearLayout llChangePhone, llSetQuestion, llLable;
@@ -65,55 +65,37 @@ public class SettingActivity extends NetWorkActivity implements View.OnClickList
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        ivTeam.setOnClickListener(this);
-        ivQuestion.setOnClickListener(this);
-        llChangePhone.setOnClickListener(this);
-        llSetQuestion.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        ivTeam.setOnClickListener(v -> {
+            if (canTeamSee) {
+                setBodyParams(new String[]{"settingClub"}, new String[]{"" + 1});
+                sendPost(Constants.base_url + "/api/user/update.do", settingClub, Constants.token);
+            } else {
+                setBodyParams(new String[]{"settingClub"}, new String[]{"" + 0});
+                sendPost(Constants.base_url + "/api/user/update.do", settingClub, Constants.token);
+            }
+        });
+        ivQuestion.setOnClickListener(v -> {
+            if (canQuestionSee) {
+                setBodyParams(new String[]{"settingAsk"}, new String[]{"" + 1});
+                sendPost(Constants.base_url + "/api/user/update.do", settingAsk, Constants.token);
+            } else {
+                setBodyParams(new String[]{"settingAsk"}, new String[]{"" + 0});
+                sendPost(Constants.base_url + "/api/user/update.do", settingAsk, Constants.token);
+            }
+        });
+        llChangePhone.setOnClickListener(v -> startActivity(new Intent(mContext, ChangePhoneNumActivity.class)));
+        llSetQuestion.setOnClickListener(v -> startActivity(new Intent(mContext, DefaultProblemActivity.class).putExtra("type", 2)));
 
-        llLable.setOnClickListener(this);
+        llLable.setOnClickListener(v -> {
+            startActivity(new Intent(mContext, LabelSelectionActivity.class)
+                    .putExtra("type", 2)
+                    .putExtra("userLabelsBeans", userLabelsBeans)
+            );
+            this.finish();
+        });
         //隐藏标签设置
         llLable.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivTeam:
-                if (canTeamSee) {
-                    setBodyParams(new String[]{"settingClub"}, new String[]{"" + 1});
-                    sendPost(Constants.base_url + "/api/user/update.do", settingClub, Constants.token);
-                } else {
-                    setBodyParams(new String[]{"settingClub"}, new String[]{"" + 0});
-                    sendPost(Constants.base_url + "/api/user/update.do", settingClub, Constants.token);
-                }
-                break;
-            case R.id.ivQuestion:
-                if (canQuestionSee) {
-                    setBodyParams(new String[]{"settingAsk"}, new String[]{"" + 1});
-                    sendPost(Constants.base_url + "/api/user/update.do", settingAsk, Constants.token);
-                } else {
-                    setBodyParams(new String[]{"settingAsk"}, new String[]{"" + 0});
-                    sendPost(Constants.base_url + "/api/user/update.do", settingAsk, Constants.token);
-                }
-                break;
-            case R.id.llChangePhone:
-                startActivity(new Intent(mContext, ChangePhoneNumActivity.class));
-                break;
-            case R.id.llSetQuestion:
-                startActivity(new Intent(mContext, DefaultProblemActivity.class).putExtra("type", 2));
-                break;
-            case R.id.llLable:
-                startActivity(new Intent(mContext, LabelSelectionActivity.class)
-                        .putExtra("type", 2)
-                        .putExtra("userLabelsBeans", userLabelsBeans)
-                );
-                this.finish();
-                break;
-        }
     }
 
     private void setUi() {

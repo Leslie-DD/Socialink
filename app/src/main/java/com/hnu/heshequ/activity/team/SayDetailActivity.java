@@ -32,7 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SayDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class SayDetailActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private View headView;
     private XRecyclerView rv;
     private ArrayList<CommentBean> data;
@@ -152,9 +152,7 @@ public class SayDetailActivity extends NetWorkActivity implements View.OnClickLi
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        ivBq.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
     }
 
     @Override
@@ -165,21 +163,6 @@ public class SayDetailActivity extends NetWorkActivity implements View.OnClickLi
     @Override
     protected void onFailure(String result, int where) {
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivSend:
-
-                break;
-            case R.id.ivBq:
-
-                break;
-        }
     }
 
     @Override

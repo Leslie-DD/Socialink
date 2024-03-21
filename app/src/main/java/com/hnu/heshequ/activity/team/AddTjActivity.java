@@ -47,7 +47,7 @@ import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class AddTjActivity extends NetWorkActivity implements View.OnClickListener {
+public class AddTjActivity extends NetWorkActivity  {
     private int type = 0;
     private GridView gw;
     private List<String> strings;
@@ -152,228 +152,129 @@ public class AddTjActivity extends NetWorkActivity implements View.OnClickListen
     }
 
     private void event() {
-        tvCancel.setOnClickListener(this);
-        tvSave.setOnClickListener(this);
-        gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == strings.size() - 1) {
-                    if (strings.size() == 10) {
-                        Utils.toastShort(mContext, "最多添加9张图片");
-                        return;
-                    }
-                    showPop();
-                } else {
-                    ArrayList<String> list = new ArrayList<String>();
-                    for (int i = 0; i < strings.size() - 1; i++) {
-                        list.add(strings.get(i));
-                    }
-                    Intent intent = new Intent(context, ImagePreviewActivity.class);
-                    intent.putStringArrayListExtra("imageList", list);
-                    intent.putExtra(P.START_ITEM_POSITION, position);
-                    intent.putExtra("del", true);
-                    intent.putExtra(P.START_IAMGE_POSITION, position);
-                    startActivity(intent);
+        tvCancel.setOnClickListener(v -> finish());
+        tvSave.setOnClickListener(v -> {
+            if (isCommit) {
+                isCommit = false;
+                String title = etTitle.getText().toString();
+                String content = etContent.getText().toString();
+                if (TextUtils.isEmpty(title)) {
+                    Utils.toastShort(mContext, "标题不能为空");
+                    return;
                 }
-            }
-        });
-        gw.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (TextUtils.isEmpty(content)) {
+                    Utils.toastShort(mContext, "内容不能为空");
+                    return;
+                }
+                if (type == 1) {
+                    tvSave.setClickable(false);
+                    OkHttpUtils.post(Constants.base_url + "/api/club/tb/save.do")
+                            .tag(this)
+                            .headers(Constants.Token_Header, Constants.token)
+                            .params("clubId", getIntent().getIntExtra("teamid", 0) + "")
+                            .params("title", title + "")
+                            .params("content", content + "")
+                            .addFileParams("files", fileList)
+                            .execute(new StringCallback() {
+                                @Override
+                                public void onSuccess(String s, Call call, Response response) {
+                                    Log.e("DDQ", s);
+                                    tvSave.setClickable(true);
+                                    try {
+                                        JSONObject result = new JSONObject(s);
+                                        switch (result.optInt("code")) {
+                                            case 0:
+                                                if (result.optInt("code") == 0) {
+                                                    //发送团建刷新event
+                                                    EventBus.getDefault().post(new RefTjEvent());
+                                                    AddTjActivity.this.finish();
+                                                }
+                                                break;
+                                            case 1:
+                                                Utils.toastShort(AddTjActivity.this, "您还没有登录或登录已过期，请重新登录");
+                                                break;
+                                            case 2:
 
-                return false;
-            }
-        });
-    }
-
-    @Override
-    protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-
-    }
-
-    @Override
-    protected void onFailure(String result, int where) {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.tvSave:
-                if (isCommit) {
-                    isCommit = false;
-                    String title = etTitle.getText().toString();
-                    String content = etContent.getText().toString();
-                    if (TextUtils.isEmpty(title)) {
-                        Utils.toastShort(mContext, "标题不能为空");
-                        return;
-                    }
-                    if (TextUtils.isEmpty(content)) {
-                        Utils.toastShort(mContext, "内容不能为空");
-                        return;
-                    }
-                    if (type == 1) {
-                        tvSave.setClickable(false);
-                        OkHttpUtils.post(Constants.base_url + "/api/club/tb/save.do")
-                                .tag(this)
-                                .headers(Constants.Token_Header, Constants.token)
-                                .params("clubId", getIntent().getIntExtra("teamid", 0) + "")
-                                .params("title", title + "")
-                                .params("content", content + "")
-                                .addFileParams("files", fileList)
-                                .execute(new StringCallback() {
-                                    @Override
-                                    public void onSuccess(String s, Call call, Response response) {
-                                        Log.e("DDQ", s);
-                                        tvSave.setClickable(true);
-                                        try {
-                                            JSONObject result = new JSONObject(s);
-                                            switch (result.optInt("code")) {
-                                                case 0:
-                                                    if (result.optInt("code") == 0) {
-                                                        //发送团建刷新event
-                                                        EventBus.getDefault().post(new RefTjEvent());
-                                                        AddTjActivity.this.finish();
-                                                    }
-                                                    break;
-                                                case 1:
-                                                    Utils.toastShort(AddTjActivity.this, "您还没有登录或登录已过期，请重新登录");
-                                                    break;
-                                                case 2:
-
-                                                    Utils.toastShort(AddTjActivity.this, result.optString("msg"));
-                                                    break;
-                                                case 3:
-                                                    Utils.toastShort(AddTjActivity.this, "您没有该功能操作权限");
-                                                    break;
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                                Utils.toastShort(AddTjActivity.this, result.optString("msg"));
+                                                break;
+                                            case 3:
+                                                Utils.toastShort(AddTjActivity.this, "您没有该功能操作权限");
+                                                break;
                                         }
-
-                                    }
-
-                                    @Override
-                                    public void onError(Call call, Response response, Exception e) {
-                                        isCommit = true;
-                                        tvSave.setClickable(true);
+                                    } catch (JSONException e) {
                                         e.printStackTrace();
-                                        super.onError(call, response, e);
                                     }
 
-                                });
-                    } else if (type == 2) {
-                        if (delFileIds.isEmpty()) { //如果没有图片删除
-                            Log.e("DDQ", "没有图片删除");
-                            if ((strings.size() - 1) > fristfiles) { //如果有图片添加
-                                Log.e("DDQ", "有图片添加,size = " + fileList.size());
-                                OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
-                                        .tag(this)
-                                        .headers(Constants.Token_Header, Constants.token)
-                                        .params("id", buildingBean.getId() + "")
-                                        .params("title", title + "")
-                                        .params("content", content + "")
-                                        .addFileParams("files", fileList)
-                                        .execute(new StringCallback() {
-                                            @Override
-                                            public void onSuccess(String s, Call call, Response response) {
-                                                Log.e("DDQ", s);
-                                                try {
-                                                    JSONObject result = new JSONObject(s);
-                                                    switch (result.optInt("code")) {
-                                                        case 0:
-                                                            if (result.optInt("code") == 0) {
-                                                                //发送团建刷新event
-                                                                EventBus.getDefault().post(new RefTjEvent());
-                                                                AddTjActivity.this.finish();
-                                                            }
-                                                            break;
-                                                        case 1:
-                                                            Utils.toastShort(AddTjActivity.this, "您还没有登录或登录已过期，请重新登录");
-                                                            break;
-                                                        case 2:
+                                }
 
-                                                            Utils.toastShort(AddTjActivity.this, result.optString("msg"));
-                                                            break;
-                                                        case 3:
-                                                            Utils.toastShort(AddTjActivity.this, "您没有该功能操作权限");
-                                                            break;
-                                                    }
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
+                                @Override
+                                public void onError(Call call, Response response, Exception e) {
+                                    isCommit = true;
+                                    tvSave.setClickable(true);
+                                    e.printStackTrace();
+                                    super.onError(call, response, e);
+                                }
 
-                                            }
-
-                                            @Override
-                                            public void onError(Call call, Response response, Exception e) {
-                                                isCommit = true;
-                                                e.printStackTrace();
-                                                super.onError(call, response, e);
-                                            }
-
-                                        });
-                            } else { //如果没有图片添加
-                                Log.e("DDQ", "没有图片添加");
-                                OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
-                                        .tag(this)
-                                        .headers(Constants.Token_Header, Constants.token)
-                                        .params("id", buildingBean.getId() + "")
-                                        .params("title", title + "")
-                                        .params("content", content + "")
-                                        .execute(new StringCallback() {
-                                            @Override
-                                            public void onSuccess(String s, Call call, Response response) {
-                                                Log.e("DDQ", s);
-                                                try {
-                                                    JSONObject result = new JSONObject(s);
-                                                    switch (result.optInt("code")) {
-                                                        case 0:
-                                                            if (result.optInt("code") == 0) {
-                                                                //发送团建刷新event
-                                                                EventBus.getDefault().post(new RefTjEvent());
-                                                                AddTjActivity.this.finish();
-                                                            }
-                                                            break;
-                                                        case 1:
-                                                            Utils.toastShort(AddTjActivity.this, "您还没有登录或登录已过期，请重新登录");
-                                                            break;
-                                                        case 2:
-
-                                                            Utils.toastShort(AddTjActivity.this, result.optString("msg"));
-                                                            break;
-                                                        case 3:
-                                                            Utils.toastShort(AddTjActivity.this, "您没有该功能操作权限");
-                                                            break;
-                                                    }
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-
-                                            }
-
-                                            @Override
-                                            public void onError(Call call, Response response, Exception e) {
-                                                isCommit = true;
-                                                e.printStackTrace();
-                                                super.onError(call, response, e);
-                                            }
-
-                                        });
-                            }
-
-                        } else { //有图片删除
-                            Log.e("DDQ", "有图片删除,delFileIds = " + delFileIds);
+                            });
+                } else if (type == 2) {
+                    if (delFileIds.isEmpty()) { //如果没有图片删除
+                        Log.e("DDQ", "没有图片删除");
+                        if ((strings.size() - 1) > fristfiles) { //如果有图片添加
+                            Log.e("DDQ", "有图片添加,size = " + fileList.size());
                             OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
                                     .tag(this)
                                     .headers(Constants.Token_Header, Constants.token)
                                     .params("id", buildingBean.getId() + "")
                                     .params("title", title + "")
                                     .params("content", content + "")
-                                    .params("delFileIds", delFileIds)
+                                    .addFileParams("files", fileList)
+                                    .execute(new StringCallback() {
+                                        @Override
+                                        public void onSuccess(String s, Call call, Response response) {
+                                            Log.e("DDQ", s);
+                                            try {
+                                                JSONObject result = new JSONObject(s);
+                                                switch (result.optInt("code")) {
+                                                    case 0:
+                                                        if (result.optInt("code") == 0) {
+                                                            //发送团建刷新event
+                                                            EventBus.getDefault().post(new RefTjEvent());
+                                                            AddTjActivity.this.finish();
+                                                        }
+                                                        break;
+                                                    case 1:
+                                                        Utils.toastShort(AddTjActivity.this, "您还没有登录或登录已过期，请重新登录");
+                                                        break;
+                                                    case 2:
+
+                                                        Utils.toastShort(AddTjActivity.this, result.optString("msg"));
+                                                        break;
+                                                    case 3:
+                                                        Utils.toastShort(AddTjActivity.this, "您没有该功能操作权限");
+                                                        break;
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onError(Call call, Response response, Exception e) {
+                                            isCommit = true;
+                                            e.printStackTrace();
+                                            super.onError(call, response, e);
+                                        }
+
+                                    });
+                        } else { //如果没有图片添加
+                            Log.e("DDQ", "没有图片添加");
+                            OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
+                                    .tag(this)
+                                    .headers(Constants.Token_Header, Constants.token)
+                                    .params("id", buildingBean.getId() + "")
+                                    .params("title", title + "")
+                                    .params("content", content + "")
                                     .execute(new StringCallback() {
                                         @Override
                                         public void onSuccess(String s, Call call, Response response) {
@@ -414,18 +315,90 @@ public class AddTjActivity extends NetWorkActivity implements View.OnClickListen
 
                                     });
                         }
+
+                    } else { //有图片删除
+                        Log.e("DDQ", "有图片删除,delFileIds = " + delFileIds);
+                        OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
+                                .tag(this)
+                                .headers(Constants.Token_Header, Constants.token)
+                                .params("id", buildingBean.getId() + "")
+                                .params("title", title + "")
+                                .params("content", content + "")
+                                .params("delFileIds", delFileIds)
+                                .execute(new StringCallback() {
+                                    @Override
+                                    public void onSuccess(String s, Call call, Response response) {
+                                        Log.e("DDQ", s);
+                                        try {
+                                            JSONObject result = new JSONObject(s);
+                                            switch (result.optInt("code")) {
+                                                case 0:
+                                                    if (result.optInt("code") == 0) {
+                                                        //发送团建刷新event
+                                                        EventBus.getDefault().post(new RefTjEvent());
+                                                        AddTjActivity.this.finish();
+                                                    }
+                                                    break;
+                                                case 1:
+                                                    Utils.toastShort(AddTjActivity.this, "您还没有登录或登录已过期，请重新登录");
+                                                    break;
+                                                case 2:
+
+                                                    Utils.toastShort(AddTjActivity.this, result.optString("msg"));
+                                                    break;
+                                                case 3:
+                                                    Utils.toastShort(AddTjActivity.this, "您没有该功能操作权限");
+                                                    break;
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onError(Call call, Response response, Exception e) {
+                                        isCommit = true;
+                                        e.printStackTrace();
+                                        super.onError(call, response, e);
+                                    }
+
+                                });
                     }
                 }
-                break;
-            case R.id.tvUp:
-                PhotoUtils.choosePhoto(202, this);
-                pop.dismiss();
-                break;
-            case R.id.tvPic:
-                path = PhotoUtils.startPhoto(this);
-                pop.dismiss();
-                break;
-        }
+            }
+        });
+        gw.setOnItemClickListener((parent, view, position, id) -> {
+            if (position == strings.size() - 1) {
+                if (strings.size() == 10) {
+                    Utils.toastShort(mContext, "最多添加9张图片");
+                    return;
+                }
+                showPop();
+            } else {
+                ArrayList<String> list = new ArrayList<String>();
+                for (int i = 0; i < strings.size() - 1; i++) {
+                    list.add(strings.get(i));
+                }
+                Intent intent = new Intent(context, ImagePreviewActivity.class);
+                intent.putStringArrayListExtra("imageList", list);
+                intent.putExtra(P.START_ITEM_POSITION, position);
+                intent.putExtra("del", true);
+                intent.putExtra(P.START_IAMGE_POSITION, position);
+                startActivity(intent);
+            }
+        });
+        gw.setOnItemLongClickListener((parent, view, position, id) -> false);
+    }
+
+    @Override
+    protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
+
+    }
+
+    @Override
+    protected void onFailure(String result, int where) {
+
     }
 
     private void initPop() {
@@ -434,8 +407,14 @@ public class AddTjActivity extends NetWorkActivity implements View.OnClickListen
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
         tvPic = (TextView) pv.findViewById(R.id.tvPic);
         tvUp = (TextView) pv.findViewById(R.id.tvUp);
-        tvPic.setOnClickListener(this);
-        tvUp.setOnClickListener(this);
+        tvPic.setOnClickListener(v -> {
+            path = PhotoUtils.startPhoto(this);
+            pop.dismiss();
+        });
+        tvUp.setOnClickListener(v -> {
+            PhotoUtils.choosePhoto(202, this);
+            pop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失

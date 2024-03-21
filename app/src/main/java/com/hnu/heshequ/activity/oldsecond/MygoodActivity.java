@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MygoodActivity extends NetWorkActivity implements View.OnClickListener {
+public class MygoodActivity extends NetWorkActivity  {
     private ViewPager vp;
     private List<GoodLabel> labelList = new ArrayList<>();
     private ArrayList<Fragment> list;
@@ -61,16 +61,6 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-        }
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
     }
@@ -101,7 +91,7 @@ public class MygoodActivity extends NetWorkActivity implements View.OnClickListe
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

@@ -21,7 +21,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/30.
  */
 
-public class Friendxingbieset extends NetWorkActivity implements View.OnClickListener {
+public class Friendxingbieset extends NetWorkActivity  {
     private RadioGroup nRg1;
 
     public static String school;
@@ -69,8 +69,17 @@ public class Friendxingbieset extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        set.setOnClickListener(v -> {
+            Log.e("sexcontent", "" + sexcontent);
+            if (sexcontent.equals("男")) {
+                sexnum = 1;
+            } else if (sexcontent.equals("女")) {
+                sexnum = 2;
+            }
+            Log.e("sexnum", "" + sexnum);
+            getData();
+        });
     }
 
     @Override
@@ -98,27 +107,5 @@ public class Friendxingbieset extends NetWorkActivity implements View.OnClickLis
         setBodyParams(new String[]{"file", "nickname", "sex", "college", "settingClub", "settingAsk"}, new String[]{"" + touxiang, "" + nickname, "" + sexnum, "" + school, "" + settingClub, "" + settingAsk});
         sendPost(Constants.base_url + "/api/user/update.do", 100, WenConstans.token);
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-//                Intent intent = new Intent(Friendxingbieset.this,FriendSet.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.set:
-                Log.e("sexcontent", "" + sexcontent);
-                if (sexcontent.equals("男")) {
-                    sexnum = 1;
-                } else if (sexcontent.equals("女")) {
-                    sexnum = 2;
-                }
-                Log.e("sexnum", "" + sexnum);
-                getData();
-                break;
-        }
-    }
-
 
 }

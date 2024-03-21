@@ -30,7 +30,7 @@ import okhttp3.Response;
  * Created by dell on 2020/5/8.
  */
 
-public class FriendNearDetail extends NetWorkActivity implements View.OnClickListener {
+public class FriendNearDetail extends NetWorkActivity  {
     private FriendListBean friendListBean;
     private TextView friendsetTip1, friendsetTip2, friendsetTip3, friendsetTip4, friendsetTip5, friendsetTip6, friendsetTip7, friendsetTip8, friendsetTip9, friendsetTip10, friendsetTip11;
     private static int hisid;
@@ -91,8 +91,42 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        set.setOnClickListener(v -> OkHttpUtils.post(WenConstans.JudgeSetques)
+                .tag(this)
+                .headers(Constants.Token_Header, WenConstans.token)
+                .params("uid", hisid + "")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        Log.i("gerenxinxi", "sresult:" + s);
+                        try {
+                            JSONObject result = new JSONObject(s);
+                            JSONObject dd = new JSONObject(result.optString("data"));
+                            String setques = dd.getString("setQues");
+                            Log.e("setques", "" + setques);
+                            if (setques.equals("true")) {
+                                Intent intent1 = new Intent();
+                                intent1.putExtra("hisid", hisid + "");
+                                intent1.setClass(FriendNearDetail.this, FriendAnswerQues.class);
+                                startActivity(intent1);
+
+                            } else {
+                                Utils.toastShort(FriendNearDetail.this, "这位用户没有设置试卷，您不能加他为好友");
+                            }
+                        } catch (JSONException e) {
+                            Log.e("gerenxinxi", "JSONException: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("gerenxinxi", "onError Exception: " + e.toString());
+                    }
+                }));
 
     }
 
@@ -162,54 +196,6 @@ public class FriendNearDetail extends NetWorkActivity implements View.OnClickLis
             } else {
                 ivHead.setImageResource(R.mipmap.head3);
             }
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.set:
-                OkHttpUtils.post(WenConstans.JudgeSetques)
-                        .tag(this)
-                        .headers(Constants.Token_Header, WenConstans.token)
-                        .params("uid", hisid + "")
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-
-                                Log.e("gerenxinxi", "sresult:" + s);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-                                    JSONObject dd = new JSONObject(result.optString("data"));
-                                    String setques = dd.getString("setQues");
-                                    Log.e("setques", "" + setques);
-                                    if (setques.equals("true")) {
-                                        Intent intent1 = new Intent();
-                                        intent1.putExtra("hisid", hisid + "");
-                                        intent1.setClass(FriendNearDetail.this, FriendAnswerQues.class);
-                                        startActivity(intent1);
-
-                                    } else {
-                                        Utils.toastShort(FriendNearDetail.this, "这位用户没有设置试卷，您不能加他为好友");
-                                    }
-                                } catch (JSONException e) {
-                                    Log.e("gerenxinxi", "JSONException: " + e.toString());
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-
-                                super.onError(call, response, e);
-                                Log.e("gerenxinxi", "onError Exception: " + e.toString());
-                            }
-                        });
-                break;
         }
     }
 

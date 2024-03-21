@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -52,7 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WenwenDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
+public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
     private int type = 0;
     private CircleView ivHead;
     private EditText etContent;
@@ -268,19 +269,65 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
         tvLoves = (TextView) headview.findViewById(R.id.tvLoves);
         tvNum = (TextView) headview.findViewById(R.id.tvNum);
         tvContent = (TextView) headview.findViewById(R.id.tvContent);
-        tvContent.setOnClickListener(this);
+        tvContent.setOnClickListener(v -> {
+            if (tvContent.getLineCount() >= 5) {
+                tvContent.setEllipsize(null);
+                tvContent.setSingleLine(false);
+                lvPicture.setVisibility(View.VISIBLE);
+            }
+        });
         etContent = (EditText) findViewById(R.id.etContent);
         llSave = (LinearLayout) headview.findViewById(R.id.llSave);
-        llSave.setOnClickListener(this);
+        llSave.setOnClickListener(v -> {
+            setBodyParams(new String[]{"id"}, new String[]{wenwenBean.id + ""});
+            sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+        });
         ivImg = (ImageView) headview.findViewById(R.id.ivImg);
         ivBq = (ImageView) findViewById(R.id.ivBq);
         ivSend = (ImageView) findViewById(R.id.ivSend);
         ivRight = (ImageView) findViewById(R.id.ivRight);
         ivRight.setImageResource(R.mipmap.more3);
-        ivRight.setOnClickListener(this);
-        ivBq.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
-        ivHead.setOnClickListener(this);
+        ivRight.setOnClickListener(v -> {
+            XialaPop.showSelectPop(this, save, wenwenBean.uid.equals(Constants.uid + ""), true, new XialaPop.TextListener() {
+                @Override
+                public void selectPosition(int num) {
+                    if (num == 0) {    //收藏相关
+                        if (save.equals("收藏")) {
+                            saveWw("1");
+                        } else {
+                            saveWw("2");
+                        }
+                    } else if (num == 1) {          //举报
+                        jbWw();
+                    } else if (num == 2) {
+                        DelWw();
+                    } else if (num == 3) {
+                        //ToastUtils.showShort("分享");
+                        showShare();
+                    }
+                }
+            });
+        });
+        ivSend.setOnClickListener(v -> {
+            String content = etContent.getText().toString();
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "您还没有输入任何内容");
+                return;
+            }
+            if (content.length() > 100) {
+                Utils.toastShort(mContext, "最多评论100个字符");
+                return;
+            }
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.showSoftInput(etContent,InputMethodManager.SHOW_FORCED);
+            imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); //强制隐藏键盘
+            sendDisscuss(content);
+        });
+        ivHead.setOnClickListener(v -> {
+            if (wenwenBean.anonymity == 0) {
+                startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", Integer.parseInt(wenwenBean.uid)));
+            }
+        });
         lvPicture = (MyLv) headview.findViewById(R.id.lvPicture);
         pictureAdapter = new PictureAdapter(this);
         lvPicture.setAdapter(pictureAdapter);
@@ -400,67 +447,6 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
         startActivity(new Intent(this, ReportActivity.class).putExtra("type", 1).putExtra("id", wenwenBean.id));
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvContent:
-                if (tvContent.getLineCount() >= 5) {
-                    tvContent.setEllipsize(null);
-                    tvContent.setSingleLine(false);
-                    lvPicture.setVisibility(View.VISIBLE);
-                }
-                break;
-            case R.id.ivBq:
-
-                break;
-            case R.id.ivHead:
-                if (wenwenBean.anonymity == 0) {
-                    startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", Integer.parseInt(wenwenBean.uid)));
-                }
-                break;
-            case R.id.ivSend:
-                String content = etContent.getText().toString();
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "您还没有输入任何内容");
-                    return;
-                }
-                if (content.length() > 100) {
-                    Utils.toastShort(mContext, "最多评论100个字符");
-                    return;
-                }
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.showSoftInput(etContent,InputMethodManager.SHOW_FORCED);
-                imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); //强制隐藏键盘
-                sendDisscuss(content);
-                break;
-            case R.id.ivRight:
-                XialaPop.showSelectPop(this, save, wenwenBean.uid.equals(Constants.uid + ""), true, new XialaPop.TextListener() {
-                    @Override
-                    public void selectPosition(int num) {
-                        if (num == 0) {    //收藏相关
-                            if (save.equals("收藏")) {
-                                saveWw("1");
-                            } else {
-                                saveWw("2");
-                            }
-                        } else if (num == 1) {          //举报
-                            jbWw();
-                        } else if (num == 2) {
-                            DelWw();
-                        } else if (num == 3) {
-                            //ToastUtils.showShort("分享");
-                            showShare();
-                        }
-                    }
-                });
-                break;
-            case R.id.llSave:
-                setBodyParams(new String[]{"id"}, new String[]{wenwenBean.id + ""});
-                sendPost(WenConstans.WwLike, 1000, WenConstans.token);
-                break;
-        }
-    }
-
     private void DelWw() {
         deldialog.show();
     }
@@ -515,7 +501,11 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
         brodcast = new RefreshBrodcast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("refresh.data");
-        registerReceiver(brodcast, intentFilter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(brodcast, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(brodcast, intentFilter);
+        }
     }
 
     @Override
@@ -563,11 +553,5 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    }
-
 
 }

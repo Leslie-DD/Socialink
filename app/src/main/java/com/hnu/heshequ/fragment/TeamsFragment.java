@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TeamsFragment extends NetWorkFragment implements View.OnClickListener {
+public class TeamsFragment extends NetWorkFragment {
 
     private View view;
     private ImageView llSearch;
@@ -60,7 +60,7 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
         fragments.add(new TeamChildFragment3());
         //fragments.add(new TeamChildFragment4());
         llSearch = (ImageView) view.findViewById(R.id.llSearch);
-        llSearch.setOnClickListener(this);
+        llSearch.setOnClickListener(v -> startActivity(new Intent(mContext, TeamSearchActivity.class)));
         tvNew = (TextView) view.findViewById(R.id.tvNew);
         tvRecommended = (TextView) view.findViewById(R.id.tvRecommended);
         tvMine = (TextView) view.findViewById(R.id.tvMine);
@@ -93,11 +93,11 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
     }
 
     private void event() {
-        ivAdd.setOnClickListener(this);
-        tvMine.setOnClickListener(this);
-        tvNew.setOnClickListener(this);
-        tvCollection.setOnClickListener(this);
-        tvRecommended.setOnClickListener(this);
+        ivAdd.setOnClickListener(v -> startActivity(new Intent(mContext, AddTeamActivity.class)));
+        tvMine.setOnClickListener(v -> setTvBg(0));
+        tvNew.setOnClickListener(v -> setTvBg(2));
+        tvCollection.setOnClickListener(v -> setTvBg(3));
+        tvRecommended.setOnClickListener(v -> setTvBg(1));
     }
 //
 
@@ -116,34 +116,6 @@ public class TeamsFragment extends NetWorkFragment implements View.OnClickListen
             ivAdd.setVisibility(View.VISIBLE);
         } else {
             ivAdd.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                break;
-            case R.id.llSearch:
-                startActivity(new Intent(mContext, TeamSearchActivity.class));
-                break;
-            case R.id.ivAdd:
-                startActivity(new Intent(mContext, AddTeamActivity.class));
-                break;
-            case R.id.tvMine:
-                setTvBg(0);
-                break;
-            case R.id.tvRecommended:
-                setTvBg(1);
-                break;
-            case R.id.tvNew:
-                setTvBg(2);
-                break;
-            case R.id.tvCollection:
-                setTvBg(3);
-                break;
-
-
         }
     }
 

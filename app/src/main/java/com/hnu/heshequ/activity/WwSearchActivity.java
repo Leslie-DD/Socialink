@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -345,7 +346,11 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        registerReceiver(brodcast, filter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(brodcast, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(brodcast, filter);
+        }
     }
 
     @Override

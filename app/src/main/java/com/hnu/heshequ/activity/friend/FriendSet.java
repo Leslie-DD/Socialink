@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LoginActivity;
 import com.hnu.heshequ.adapter.listview.FriendfiltrateAdapter;
@@ -23,7 +24,6 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 
@@ -37,7 +37,7 @@ import okhttp3.Response;
  * Created by dell on 2020/3/20.
  */
 
-public class FriendSet extends NetWorkActivity implements View.OnClickListener {
+public class FriendSet extends NetWorkActivity {
     private CircleView ivHead;
     private FriendfiltrateAdapter adapter;
     private FriendBean bean1;
@@ -209,20 +209,106 @@ public class FriendSet extends NetWorkActivity implements View.OnClickListener {
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        ivHead.setOnClickListener(this);
-        nicheng.setOnClickListener(this);
-        xingbie.setOnClickListener(this);
-        shengri.setOnClickListener(this);
-        xuexiao.setOnClickListener(this);
-        xueyuan.setOnClickListener(this);
-        zhuanye.setOnClickListener(this);
-        nianji.setOnClickListener(this);
-        gexing.setOnClickListener(this);
-        qingan.setOnClickListener(this);
-        jiaxiang.setOnClickListener(this);
-        shijuan.setOnClickListener(this);
-        dongtai.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        nicheng.setOnClickListener(v -> {
+            Log.e("sexdezhi", "" + sex);
+            Intent intent1 = new Intent();
+            intent1.putExtra("file", touxiang1 + "");
+            intent1.putExtra("sex", sex + "");
+            intent1.putExtra("school", daxue1 + "");
+            intent1.setClass(FriendSet.this, FriendNichengset.class);
+            startActivityForResult(intent1, 0);
+        });
+        xingbie.setOnClickListener(v -> {
+            Intent intent2 = new Intent();
+            intent2.putExtra("file", touxiang1 + "");
+            intent2.putExtra("school", "" + daxue1);
+            intent2.putExtra("nickname", nicheng1 + "");
+            intent2.setClass(FriendSet.this, Friendxingbieset.class);
+            startActivityForResult(intent2, 1);
+        });
+        shengri.setOnClickListener(v -> {
+            Intent intent3 = new Intent();
+            intent3.putExtra("gexing", "" + gexing1);
+            intent3.putExtra("id", "" + id);
+            intent3.setClass(FriendSet.this, FriendShengriSet.class);
+            startActivityForResult(intent3, 2);
+        });
+        xuexiao.setOnClickListener(v -> {
+            Intent intent4 = new Intent();
+            intent4.putExtra("file", touxiang1 + "");
+            intent4.putExtra("sex", sex + "");
+            intent4.putExtra("nickname", nicheng1 + "");
+            intent4.setClass(FriendSet.this, FriendXuexiaoSet.class);
+            startActivityForResult(intent4, 3);
+        });
+        xueyuan.setOnClickListener(v -> {
+            Intent intent5 = new Intent();
+            intent5.putExtra("jiaxiang", "" + jiaxiang1);
+            intent5.putExtra("qingan", "" + qingan1);
+            intent5.putExtra("zhuanye", "" + zhuanye1);
+            intent5.putExtra("nianji", "" + nianji1);
+            intent5.putExtra("id", "" + id);
+            intent5.setClass(FriendSet.this, FriendXueyuanSet.class);
+            startActivityForResult(intent5, 4);
+        });
+        zhuanye.setOnClickListener(v -> {
+            Intent intent6 = new Intent();
+            intent6.putExtra("jiaxiang", "" + jiaxiang1);
+            intent6.putExtra("qingan", "" + qingan1);
+            intent6.putExtra("xueyuan", "" + xueyuan1);
+            intent6.putExtra("nianji", nianji1);
+            intent6.putExtra("id", "" + id);
+            intent6.setClass(FriendSet.this, FriendZhuanyeSet.class);
+            startActivityForResult(intent6, 5);
+        });
+        nianji.setOnClickListener(v -> {
+            Intent intent7 = new Intent();
+            intent7.putExtra("jiaxiang", "" + jiaxiang1);
+            intent7.putExtra("qingan", "" + qingan1);
+            intent7.putExtra("zhuanye", "" + zhuanye1);
+            intent7.putExtra("xueyuan", xueyuan1);
+            intent7.putExtra("id", "" + id);
+            intent7.setClass(FriendSet.this, FriendNianjiSet.class);
+        });
+        gexing.setOnClickListener(v -> {
+            Intent intent8 = new Intent();
+            intent8.putExtra("shengri", "" + shengri1);
+            intent8.putExtra("id", "" + id);
+            intent8.setClass(FriendSet.this, FriendGexingSet.class);
+            startActivityForResult(intent8, 7);
+        });
+        qingan.setOnClickListener(v -> {
+            Intent intent9 = new Intent();
+            intent9.putExtra("jiaxiang", "" + jiaxiang1);
+            intent9.putExtra("nianji", "" + nianji1);
+            intent9.putExtra("zhuanye", "" + zhuanye1);
+            intent9.putExtra("xueyuan", xueyuan1);
+            intent9.putExtra("id", "" + id);
+            intent9.setClass(FriendSet.this, FriendQinganSet.class);
+            startActivityForResult(intent9, 8);
+        });
+        jiaxiang.setOnClickListener(v -> {
+            Intent intent10 = new Intent();
+            intent10.putExtra("nianji", "" + nianji1);
+            intent10.putExtra("qingan", "" + qingan1);
+            intent10.putExtra("zhuanye", "" + zhuanye1);
+            intent10.putExtra("xueyuan", xueyuan1);
+            intent10.putExtra("id", "" + id);
+            intent10.setClass(FriendSet.this, FriendJiaxiangSet.class);
+            startActivityForResult(intent10, 9);
+        });
+        shijuan.setOnClickListener(v -> {
+            Intent intent11 = new Intent(FriendSet.this, FriendShijuanShow.class);
+            intent11.putExtra("id", id + "");
+            intent11.setClass(FriendSet.this, FriendShijuanShow.class);
+            startActivity(intent11);
+        });
+        dongtai.setOnClickListener(v -> {
+            Intent intent12 = new Intent();
+            intent12.setClass(FriendSet.this, MyDynamic.class);
+            startActivity(intent12);
+        });
 
     }
 
@@ -257,12 +343,9 @@ public class FriendSet extends NetWorkActivity implements View.OnClickListener {
         modifyPop.setOutsideTouchable(true);
         // 设置焦点
         modifyPop.setFocusable(true);
-        modifyPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        modifyPop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
 
         // 设置所在布局
@@ -347,124 +430,6 @@ public class FriendSet extends NetWorkActivity implements View.OnClickListener {
 
         }
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-//                Intent intenttt = new Intent();
-//                intenttt.putExtra("longtitude",""+longtitude);
-//                intenttt.putExtra("latitude",""+latitude);
-//                intenttt.setClass(FriendSet.this,FriendActivity.class);
-//                Log.e("showmesg",""+latitude+"+"+longtitude);
-//                startActivity(intenttt);
-                finish();
-                break;
-            case R.id.nicheng:
-                Log.e("sexdezhi", "" + sex);
-                Intent intent1 = new Intent();
-                intent1.putExtra("file", touxiang1 + "");
-                intent1.putExtra("sex", sex + "");
-                intent1.putExtra("school", daxue1 + "");
-                intent1.setClass(FriendSet.this, FriendNichengset.class);
-                startActivityForResult(intent1, 0);
-                break;
-            case R.id.xingbie:
-
-                Intent intent2 = new Intent();
-                intent2.putExtra("file", touxiang1 + "");
-                intent2.putExtra("school", "" + daxue1);
-                intent2.putExtra("nickname", nicheng1 + "");
-                intent2.setClass(FriendSet.this, Friendxingbieset.class);
-                startActivityForResult(intent2, 1);
-                break;
-            case R.id.shengri:
-
-                Intent intent3 = new Intent();
-                intent3.putExtra("gexing", "" + gexing1);
-                intent3.putExtra("id", "" + id);
-                intent3.setClass(FriendSet.this, FriendShengriSet.class);
-                startActivityForResult(intent3, 2);
-                break;
-            case R.id.xuexiao:
-                Intent intent4 = new Intent();
-                intent4.putExtra("file", touxiang1 + "");
-                intent4.putExtra("sex", sex + "");
-                intent4.putExtra("nickname", nicheng1 + "");
-                intent4.setClass(FriendSet.this, FriendXuexiaoSet.class);
-                startActivityForResult(intent4, 3);
-                break;
-            case R.id.xueyuan:
-                Intent intent5 = new Intent();
-                intent5.putExtra("jiaxiang", "" + jiaxiang1);
-                intent5.putExtra("qingan", "" + qingan1);
-                intent5.putExtra("zhuanye", "" + zhuanye1);
-                intent5.putExtra("nianji", "" + nianji1);
-                intent5.putExtra("id", "" + id);
-                intent5.setClass(FriendSet.this, FriendXueyuanSet.class);
-                startActivityForResult(intent5, 4);
-                break;
-            case R.id.zhuanye:
-                Intent intent6 = new Intent();
-                intent6.putExtra("jiaxiang", "" + jiaxiang1);
-                intent6.putExtra("qingan", "" + qingan1);
-                intent6.putExtra("xueyuan", "" + xueyuan1);
-                intent6.putExtra("nianji", nianji1);
-                intent6.putExtra("id", "" + id);
-                intent6.setClass(FriendSet.this, FriendZhuanyeSet.class);
-                startActivityForResult(intent6, 5);
-                break;
-            case R.id.nianji:
-                Intent intent7 = new Intent();
-                intent7.putExtra("jiaxiang", "" + jiaxiang1);
-                intent7.putExtra("qingan", "" + qingan1);
-                intent7.putExtra("zhuanye", "" + zhuanye1);
-                intent7.putExtra("xueyuan", xueyuan1);
-                intent7.putExtra("id", "" + id);
-                intent7.setClass(FriendSet.this, FriendNianjiSet.class);
-                startActivityForResult(intent7, 6);
-                break;
-            case R.id.gexing:
-                Intent intent8 = new Intent();
-                intent8.putExtra("shengri", "" + shengri1);
-                intent8.putExtra("id", "" + id);
-                intent8.setClass(FriendSet.this, FriendGexingSet.class);
-                startActivityForResult(intent8, 7);
-                break;
-            case R.id.qingan:
-                Intent intent9 = new Intent();
-                intent9.putExtra("jiaxiang", "" + jiaxiang1);
-                intent9.putExtra("nianji", "" + nianji1);
-                intent9.putExtra("zhuanye", "" + zhuanye1);
-                intent9.putExtra("xueyuan", xueyuan1);
-                intent9.putExtra("id", "" + id);
-                intent9.setClass(FriendSet.this, FriendQinganSet.class);
-                startActivityForResult(intent9, 8);
-                break;
-            case R.id.jiaxiang:
-                Intent intent10 = new Intent();
-                intent10.putExtra("nianji", "" + nianji1);
-                intent10.putExtra("qingan", "" + qingan1);
-                intent10.putExtra("zhuanye", "" + zhuanye1);
-                intent10.putExtra("xueyuan", xueyuan1);
-                intent10.putExtra("id", "" + id);
-                intent10.setClass(FriendSet.this, FriendJiaxiangSet.class);
-                startActivityForResult(intent10, 9);
-                break;
-            case R.id.shijuan:
-                Intent intent11 = new Intent(FriendSet.this, FriendShijuanShow.class);
-                intent11.putExtra("id", id + "");
-                intent11.setClass(FriendSet.this, FriendShijuanShow.class);
-                startActivity(intent11);
-                break;
-            case R.id.dongtai:
-                Intent intent12 = new Intent();
-                intent12.setClass(FriendSet.this, MyDynamic.class);
-                startActivity(intent12);
-                break;
-        }
-    }
-
 
     private void getData() {
         setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + id, "" + id});

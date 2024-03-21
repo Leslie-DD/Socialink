@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ActivityDateilActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
+public class ActivityDateilActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
     private static final String TAG = "[ActivityDateilActivity]";
     private int activityId;
     private ImageView ivBack, ivShare, ivRight;
@@ -310,9 +310,15 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
         ll_editor = (LinearLayout) spv.findViewById(R.id.ll_editor);
         ll_del = (LinearLayout) spv.findViewById(R.id.ll_del);
         ll_cacel = (LinearLayout) spv.findViewById(R.id.ll_cacel);
-        ll_editor.setOnClickListener(this);
-        ll_del.setOnClickListener(this);
-        ll_cacel.setOnClickListener(this);
+        ll_editor.setOnClickListener(v -> {
+            startActivity(new Intent(mContext, ReleaseActivitiesActivity.class).putExtra("type", 2).putExtra("bean", bean));
+            pop.dismiss();
+        });
+        ll_del.setOnClickListener(v -> {
+            setBodyParams(new String[]{"id"}, new String[]{"" + bean.getId()});
+            sendPost(Constants.base_url + "/api/club/activity/delete.do", DelCode, Constants.token);
+        });
+        ll_cacel.setOnClickListener(v ->  pop.dismiss());
 
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
@@ -352,14 +358,59 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
     }
 
     private void event() {
-        ivBack.setOnClickListener(this);
-        ivShare.setOnClickListener(this);
-        ivRight.setOnClickListener(this);
-        ll_teamMembers.setOnClickListener(this);
-        ivBq.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
-        etComment.setOnClickListener(this);
-        tvBm.setOnClickListener(this);
+        ivBack.setOnClickListener(v -> finish());
+        ivShare.setOnClickListener(v -> showShare());
+        ivRight.setOnClickListener(v -> showSpvPop());
+        ll_teamMembers.setOnClickListener(v -> {
+            startActivity(new Intent(this, AppliedMemberActivity.class).putExtra("id", bean.getId())
+                    .putExtra("isTeamOwner", isTeamOwner));
+        });
+        ivBq.setOnClickListener(v -> {
+            if (Utils.isKeyBoarVisiableForLast) {
+                Utils.hideSoftInput(this);
+                //锁住RV高度
+                lockContentHeight();
+            }
+            //显示表情布局
+            LinearLayout.LayoutParams Params = (LinearLayout.LayoutParams) flEmoji.getLayoutParams();
+            Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight", 450);
+            flEmoji.setLayoutParams(Params);
+            flEmoji.setVisibility(View.VISIBLE);
+            isEmojiShow = true;
+        });
+        ivSend.setOnClickListener(v -> {
+            //Utils.toastShort(this, "发送评论");
+            comment = etComment.getText().toString().trim();
+            if (comment.isEmpty()) {
+                Utils.toastShort(this, "评论内容不能为空");
+                return;
+            }
+            setBodyParams(new String[]{"activityId", "content"}, new String[]{"" + activityId, "" + comment});
+            sendPost(Constants.base_url + "/api/club/activity/comment.do", sendComment, Constants.token);
+        });
+        etComment.setOnClickListener(v -> {
+            if (isEmojiShow) {
+                //unlockContentHeightDelayed();
+                flEmoji.setVisibility(View.GONE);
+                isEmojiShow = false;
+            }
+            //显示键盘后再解锁
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            unlockContentHeightDelayed();
+                        }
+                    });
+                }
+            }, 100);
+        });
+        tvBm.setOnClickListener(v -> {
+            setBodyParams(new String[]{"id", "op"}, new String[]{"" + bean.getId(), "" + 1});
+            sendPost(Constants.base_url + "/api/club/activity/apply.do", ApplyCode, Constants.token);
+        });
         //emoji 点击
         gvEmoji.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressLint("SetTextI18n")
@@ -395,91 +446,6 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvPl:
-                Utils.showSoftInput(etComment);
-                break;
-            case R.id.etComment:
-                if (isEmojiShow) {
-                    //unlockContentHeightDelayed();
-                    flEmoji.setVisibility(View.GONE);
-                    isEmojiShow = false;
-                }
-                //显示键盘后再解锁
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                unlockContentHeightDelayed();
-                            }
-                        });
-                    }
-                }, 100);
-                break;
-            case R.id.ivBq:
-                if (Utils.isKeyBoarVisiableForLast) {
-                    Utils.hideSoftInput(this);
-                    //锁住RV高度
-                    lockContentHeight();
-                }
-                //显示表情布局
-                LinearLayout.LayoutParams Params = (LinearLayout.LayoutParams) flEmoji.getLayoutParams();
-                Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight", 450);
-                flEmoji.setLayoutParams(Params);
-                flEmoji.setVisibility(View.VISIBLE);
-                isEmojiShow = true;
-                break;
-            case R.id.ivSend:
-                //Utils.toastShort(this, "发送评论");
-                comment = etComment.getText().toString().trim();
-                if (comment.isEmpty()) {
-                    Utils.toastShort(this, "评论内容不能为空");
-                    return;
-                }
-                setBodyParams(new String[]{"activityId", "content"}, new String[]{"" + activityId, "" + comment});
-                sendPost(Constants.base_url + "/api/club/activity/comment.do", sendComment, Constants.token);
-                break;
-            case R.id.ll_teamMembers:
-                //查看参与人员列表
-                startActivity(new Intent(this, AppliedMemberActivity.class).putExtra("id", bean.getId())
-                        .putExtra("isTeamOwner", isTeamOwner));
-                break;
-            case R.id.ivShare:
-                //分享
-                showShare();
-                break;
-            case R.id.ivRight:
-                //更多
-                showSpvPop();
-                break;
-            case R.id.ll_editor:
-                //编辑
-                startActivity(new Intent(mContext, ReleaseActivitiesActivity.class).putExtra("type", 2).putExtra("bean", bean));
-                pop.dismiss();
-                break;
-            case R.id.ll_del:
-                //删除
-                setBodyParams(new String[]{"id"}, new String[]{"" + bean.getId()});
-                sendPost(Constants.base_url + "/api/club/activity/delete.do", DelCode, Constants.token);
-                break;
-            case R.id.ll_cacel:
-                pop.dismiss();
-                break;
-            case R.id.tvBm:
-                setBodyParams(new String[]{"id", "op"}, new String[]{"" + bean.getId(), "" + 1});
-                sendPost(Constants.base_url + "/api/club/activity/apply.do", ApplyCode, Constants.token);
-                break;
-
-        }
-    }
-
     /**
      * 锁定RV高度，防止跳闪
      */
@@ -495,28 +461,22 @@ public class ActivityDateilActivity extends NetWorkActivity implements View.OnCl
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                pn = 1;
-                getData(pn, 1);
-                getHeadData();
-                rv.refreshComplete();
-            }
+        new Handler().postDelayed(() -> {
+            pn = 1;
+            getData(pn, 1);
+            getHeadData();
+            rv.refreshComplete();
         }, 1000);
     }
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (data.size() < allps && pn < allPn) {
-                    pn++;
-                    getData(pn, 2);
-                }
-                rv.loadMoreComplete();
+        new Handler().postDelayed(() -> {
+            if (data.size() < allps && pn < allPn) {
+                pn++;
+                getData(pn, 2);
             }
+            rv.loadMoreComplete();
         }, 1000);
     }
 

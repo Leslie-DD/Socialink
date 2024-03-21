@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ZcQusetionActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private ImageView ivImg;
     private ImageView ivSelect;
     private ImageView ivSend;
@@ -195,8 +195,33 @@ public class ZcQusetionActivity extends NetWorkActivity implements View.OnClickL
         webView = (NoScrollWebView) headview.findViewById(R.id.webView);
         ivSelect = (ImageView) findViewById(R.id.ivSelect);
         ivSend = (ImageView) findViewById(R.id.ivSend);
-        ivSelect.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
+        ivSelect.setOnClickListener(v -> {
+            if (niming == 1) {
+                niming = 0;
+                ivSelect.setImageResource(R.mipmap.unselected);
+            } else {
+                niming = 1;
+                ivSelect.setImageResource(R.mipmap.selected2);
+            }
+        });
+        ivSend.setOnClickListener(v -> {
+            content = etContent.getText().toString();
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "您还没有输入任何内容");
+                return;
+            }
+            if (content.length() > 100) {
+                Utils.toastShort(mContext, "最多评论100个字符");
+                return;
+            }
+            if (hasclick) {
+                hasclick = false;
+                setQuestion(2, content);
+            } else {
+                setQuestion(1, content);
+            }
+            hideInput();
+        });
         lv = (XRecyclerView) findViewById(R.id.lv);
         ConsTants.initXRecycleView(this, true, true, lv);
         adapter = new ZcDisscussAdapter(this);
@@ -225,39 +250,6 @@ public class ZcQusetionActivity extends NetWorkActivity implements View.OnClickL
         setBodyParams(new String[]{"id", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
         sendPost(WenConstans.ZcProblemsList, where, WenConstans.token);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivSelect:
-                if (niming == 1) {
-                    niming = 0;
-                    ivSelect.setImageResource(R.mipmap.unselected);
-                } else {
-                    niming = 1;
-                    ivSelect.setImageResource(R.mipmap.selected2);
-                }
-                break;
-            case R.id.ivSend:
-                content = etContent.getText().toString();
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "您还没有输入任何内容");
-                    return;
-                }
-                if (content.length() > 100) {
-                    Utils.toastShort(mContext, "最多评论100个字符");
-                    return;
-                }
-                if (hasclick) {
-                    hasclick = false;
-                    setQuestion(2, content);
-                } else {
-                    setQuestion(1, content);
-                }
-                hideInput();
-                break;
-        }
     }
 
     private void setQuestion(int type, String content) {

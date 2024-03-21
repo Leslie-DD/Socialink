@@ -29,7 +29,7 @@ import java.util.ArrayList;
 /**
  * Created by dev06 on 2018/6/13.
  */
-public class BottomShareFragment extends BottomSheetDialogFragment implements View.OnClickListener {
+public class BottomShareFragment extends BottomSheetDialogFragment  {
     private View view;
     private TextView tvCancel;
     private GridView gv;
@@ -48,13 +48,6 @@ public class BottomShareFragment extends BottomSheetDialogFragment implements Vi
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
     }
 
-    private static int getScreenHeight(Activity activity) {
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        return displaymetrics.heightPixels;
-    }
-
-
     @SuppressLint("RestrictedApi")
     @Override
     public void setupDialog(Dialog dialog, int style) {
@@ -62,13 +55,12 @@ public class BottomShareFragment extends BottomSheetDialogFragment implements Vi
         view = View.inflate(getContext(), R.layout.share_pop, null);
         view.setBackgroundResource(R.drawable.comment_bg);
         dialog.setContentView(view);
-//        ButterKnife.bind(this,view);
         init();
 
         CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) view.getParent()).getLayoutParams();
         CoordinatorLayout.Behavior behavior = params.getBehavior();
 
-        if (behavior != null && behavior instanceof BottomSheetBehavior) {
+        if (behavior instanceof BottomSheetBehavior) {
             mBottomSheetBehavior = (BottomSheetBehavior) behavior;
             mBottomSheetBehavior.setPeekHeight(300);
             mBottomSheetBehavior.setHideable(false);
@@ -100,28 +92,15 @@ public class BottomShareFragment extends BottomSheetDialogFragment implements Vi
         event();
     }
 
-    private static int getStatusBarHeight(Context context) {
-        int statusBarHeight = 0;
-        Resources res = context.getResources();
-        int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            statusBarHeight = res.getDimensionPixelSize(resourceId);
-        }
-        return statusBarHeight;
-    }
-
     private void event() {
-        tvCancel.setOnClickListener(this);
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String tip = data.get(i).getName();
+        tvCancel.setOnClickListener(v -> dismiss());
+        gv.setOnItemClickListener((adapterView, view, i, l) -> {
+            String tip = data.get(i).getName();
 
-                if (mDoClickListener != null) {
-                    mDoClickListener.clickPosition(i);
-                }
-                dismiss();
+            if (mDoClickListener != null) {
+                mDoClickListener.clickPosition(i);
             }
+            dismiss();
         });
     }
 
@@ -207,15 +186,6 @@ public class BottomShareFragment extends BottomSheetDialogFragment implements Vi
 
         if (adapter != null) {
             adapter.setData(data);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                dismiss();
-                break;
         }
     }
 

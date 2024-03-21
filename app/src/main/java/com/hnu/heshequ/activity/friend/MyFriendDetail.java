@@ -13,7 +13,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/5/1.
  */
 
-public class MyFriendDetail extends NetWorkActivity implements View.OnClickListener {
+public class MyFriendDetail extends NetWorkActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,11 +38,6 @@ public class MyFriendDetail extends NetWorkActivity implements View.OnClickListe
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-
-    }
-
-    @Override
-    public void onClick(View view) {
 
     }
 

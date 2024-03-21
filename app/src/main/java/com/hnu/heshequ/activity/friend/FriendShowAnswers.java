@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.friend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
 import com.hnu.heshequ.R;
@@ -28,7 +27,7 @@ import okhttp3.Response;
  * Created by dell on 2020/5/11.
  */
 
-public class FriendShowAnswers extends NetWorkActivity implements View.OnClickListener {
+public class FriendShowAnswers extends NetWorkActivity {
     private int user_id;
     private QuestionAnswerItem questionAnswerItem1, questionAnswerItem2, questionAnswerItem3, questionAnswerItem4, questionAnswerItem5;
     private FriendAddNewsBean friendAddNewsBean;
@@ -71,9 +70,61 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        ivreject.setOnClickListener(this);
-        ivaccept.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        ivreject.setOnClickListener(v -> OkHttpUtils.post(WenConstans.RejectFriend)
+                .tag(this)
+                .headers(Constants.Token_Header, WenConstans.token)
+                .params("user_id", user_id + "")
+                .params("id", "" + WenConstans.id)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+
+                        Log.e("gerenxinxi", "sresult:" + s);
+                        try {
+                            JSONObject result = new JSONObject(s);
+
+                            String msg = result.getString("msg");
+                            Utils.toastShort(mContext, result.optString("msg"));
+                        } catch (JSONException e) {
+                            Log.e("gerenxinxi", "JSONException: " + e.toString());
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("gerenxinxi", "onError Exception: " + e.toString());
+                    }
+                }));
+        ivaccept.setOnClickListener(v -> OkHttpUtils.post(WenConstans.AcceptFriend)
+                .tag(this)
+                .headers(Constants.Token_Header, WenConstans.token)
+                .params("user_id", user_id + "")
+//                        .params("id",""+WenConstans.id)
+                .params("id", "" + Constants.uid)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+
+                        Log.e("gerenxinxi", "sresult:" + s);
+                        try {
+                            JSONObject result = new JSONObject(s);
+                            Utils.toastShort(mContext, result.optString("msg"));
+                        } catch (JSONException e) {
+                            Log.e("gerenxinxi", "JSONException: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.e("gerenxinxi", "onError Exception: " + e.toString());
+                    }
+                }));
     }
 
     @Override
@@ -119,119 +170,6 @@ public class FriendShowAnswers extends NetWorkActivity implements View.OnClickLi
             }
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.ivaccept:
-                OkHttpUtils.post(WenConstans.AcceptFriend)
-                        .tag(this)
-                        .headers(Constants.Token_Header, WenConstans.token)
-                        .params("user_id", user_id + "")
-//                        .params("id",""+WenConstans.id)
-                        .params("id", "" + Constants.uid)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-
-                                Log.e("gerenxinxi", "sresult:" + s);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-
-                                    String msg = result.getString("msg");
-                                    Utils.toastShort(mContext, result.optString("msg"));
-                                } catch (JSONException e) {
-                                    Log.e("gerenxinxi", "JSONException: " + e.toString());
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-
-                                super.onError(call, response, e);
-                                Log.e("gerenxinxi", "onError Exception: " + e.toString());
-                            }
-                        });
-                break;
-            case R.id.ivreject:
-                OkHttpUtils.post(WenConstans.RejectFriend)
-                        .tag(this)
-                        .headers(Constants.Token_Header, WenConstans.token)
-                        .params("user_id", user_id + "")
-                        .params("id", "" + WenConstans.id)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-
-                                Log.e("gerenxinxi", "sresult:" + s);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-
-                                    String msg = result.getString("msg");
-                                    Utils.toastShort(mContext, result.optString("msg"));
-                                } catch (JSONException e) {
-                                    Log.e("gerenxinxi", "JSONException: " + e.toString());
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-
-                                super.onError(call, response, e);
-                                Log.e("gerenxinxi", "onError Exception: " + e.toString());
-                            }
-                        });
-                break;
-
-//                String answer_list[] = {answer_1,answer_2,answer_3,answer_4,answer_5};
-//                JSONArray answerlist = new JSONArray();
-//                for(int i =0;i<ques_num;i++){
-//                    answerlist.put(getTerm(""+hisid,content[i]+"",""+answer_list[i]));
-//                }
-////                answerlist.put(getTerm(""+hisid,content[0]+"",""+answer_1));
-////                answerlist.put(getTerm(""+hisid,content[1]+"",""+answer_2));
-////                answerlist.put(getTerm(""+hisid,content[2]+"",""+answer_3));
-////                answerlist.put(getTerm(""+hisid,content[3]+"",""+answer_4));
-////                answerlist.put(getTerm(""+hisid,content[4]+"",""+answer_5));
-//                OkHttpUtils.post(WenConstans.AnswerSave)
-//                        .tag(this)
-//                        .headers(Constants.Token_Header, WenConstans.token)
-//                        .params("answerlist", answerlist+"")
-//                        .execute(new StringCallback() {
-//                            @Override
-//                            public void onSuccess(String s, Call call, Response response) {
-//
-//                                Log.e("gerenxinxi", "sresult:" + s);
-//                                try {
-//                                    JSONObject result = new JSONObject(s);
-//
-//                                    String msg = result.getString("msg");
-//
-//                                } catch (JSONException e) {
-//                                    Log.e("gerenxinxi", "JSONException: " + e.toString());
-//                                    e.printStackTrace();
-//                                }
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(Call call, Response response, Exception e) {
-//
-//                                super.onError(call, response, e);
-//                                Log.e("gerenxinxi", "onError Exception: " + e.toString());
-//                            }
-//                        });
-//                break;
-
         }
     }
 

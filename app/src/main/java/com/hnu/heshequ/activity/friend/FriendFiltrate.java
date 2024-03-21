@@ -28,7 +28,7 @@ import java.util.List;
  * Created by dell on 2020/3/20.
  */
 
-public class FriendFiltrate extends NetWorkActivity implements View.OnClickListener {
+public class FriendFiltrate extends NetWorkActivity {
     private OptionsPickerView distanceChooseHelper; // 距离选择器
     private OptionsPickerView ageChooseHelper;      // 年龄选择器
     private OptionsPickerView sexChooseHelper;      // 性别选择器
@@ -292,19 +292,27 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
             collegeResults.add(collegeList.get(i));
         }
         schoolChooseHelper.setPicker(collegeResults);
-
     }
 
-
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
-        mLlDistance.setOnClickListener(this);
-        mLlAge.setOnClickListener(this);
-        mLlSex.setOnClickListener(this);
-        mLlSchool.setOnClickListener(this);
+        mLlDistance.setOnClickListener(v -> distanceChooseHelper.show());
+        mLlAge.setOnClickListener(v -> ageChooseHelper.show());
+        mLlSex.setOnClickListener(v -> sexChooseHelper.show());
+        mLlSchool.setOnClickListener(v -> schoolChooseHelper.show());
 
-        button1.setOnClickListener(this);
+        button1.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.putExtra("distance", theDistance.getDistance() + "");
+            intent1.putExtra("college", theCollege + "");
+            intent1.putExtra("age", theAge.getAge() + "");
+            intent1.putExtra("sex", theSex + "");
+            intent1.putExtra("interest", interest);
+            intent1.setClass(FriendFiltrate.this, FriendFiltrateShow.class);
+            startActivity(intent1);
+            finish();
+        });
     }
 
     @Override
@@ -315,75 +323,8 @@ public class FriendFiltrate extends NetWorkActivity implements View.OnClickListe
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.llDistance:
-                distanceChooseHelper.show();
-                break;
-            case R.id.llAge:
-                ageChooseHelper.show();
-                break;
-            case R.id.llSex:
-                sexChooseHelper.show();
-                break;
-            case R.id.llSchool:
-                schoolChooseHelper.show();
-                break;
-            case R.id.button1:
-//                if(juli.equals("2-3km")){
-//                    distance = 3;
-//                }
-//                else if(juli.equals("0-1km")){
-//                    distance = 1;
-//                }
-//                else if(juli.equals("1-2km")){
-//                    distance =2;
-//                }
-//                else{
-//                    distance = 0;
-//                }
-//                if(nianling.equals("10-20岁")){
-//                    age = 1;
-//                }
-//                else if(nianling.equals("21-25岁")){
-//                    age =2 ;
-//                }
-//                else if(nianling.equals("26-30岁")){
-//                    age =3;
-//                }
-//                else{
-//                    age = 0;
-//                }
-//                Log.e("Bundle",distance+" "+college+" "+sex+" "+age);
-//                Intent intent1=new Intent();
-//                intent1.putExtra("distance",distance+"");
-//                intent1.putExtra("college",college+"");
-//                intent1.putExtra("age",age+"");
-//                intent1.putExtra("sex",sex+"");
-//                intent1.putExtra("interest",interest);
-                Intent intent1 = new Intent();
-                intent1.putExtra("distance", theDistance.getDistance() + "");
-                intent1.putExtra("college", theCollege + "");
-                intent1.putExtra("age", theAge.getAge() + "");
-                intent1.putExtra("sex", theSex + "");
-                intent1.putExtra("interest", interest);
-                intent1.setClass(FriendFiltrate.this, FriendFiltrateShow.class);
-                startActivity(intent1);
-                finish();
-                break;
-
-        }
-    }
-
     private void getFiltrateData() {
         sendPost(Constants.base_url + " /api/social/getScreen.do", 10086, Constants.token);
     }
 
-    private void getData() {
-
-    }
 }

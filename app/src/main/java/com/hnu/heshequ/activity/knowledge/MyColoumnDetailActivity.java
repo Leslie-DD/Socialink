@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class MyColoumnDetailActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
 
     private TextView tvTitle, tvName, tvSummary, tvRead;
     private CircleView ivHead;
@@ -76,9 +76,14 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        btnEdit.setOnClickListener(this);
-        linearLayout.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        linearLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CreateArticleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("specialColumnId", columnId);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -134,24 +139,6 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements View.OnC
 
             }
             adapter.setData(allList);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.btnEdit:
-                break;
-            case R.id.add:
-                Intent intent = new Intent(context, CreateArticleActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("specialColumnId", columnId);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-                break;
         }
     }
 

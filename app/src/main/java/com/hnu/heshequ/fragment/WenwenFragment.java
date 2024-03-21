@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WenwenFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class WenwenFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
     private static final String TAG = "[WenwenFragment]";
     private View view;
     private ImageView addWenwen;
@@ -116,16 +117,40 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
         gson = new Gson();
         setFragmentListener();
         addWenwen = (ImageView) view.findViewById(R.id.add_wenwen);
-        addWenwen.setOnClickListener(this);
+        addWenwen.setOnClickListener(v -> {
+            intentActivity = new Intent(getActivity(), SendQuestionActivity.class);
+            startActivity(intentActivity);
+        });
         llSearch = (ImageView) view.findViewById(R.id.llSearch);
-        llSearch.setOnClickListener(this);
+        llSearch.setOnClickListener(v -> {
+            intentActivity = new Intent(getActivity(), WwSearchActivity.class);
+            startActivity(intentActivity);
+        });
         tv1 = (TextView) view.findViewById(R.id.tv1);
         tv1.setSelected(true);
-        tv1.setOnClickListener(this);
+        tv1.setOnClickListener(v -> {
+            if (item == 1) {
+                return;
+            }
+            item = 1;
+            setTextBg(item);
+        });
         tv2 = (TextView) view.findViewById(R.id.tv2);
-        tv2.setOnClickListener(this);
+        tv2.setOnClickListener(v -> {
+            if (item == 2) {
+                return;
+            }
+            item = 2;
+            setTextBg(item);
+        });
         tv3 = (TextView) view.findViewById(R.id.tv3);
-        tv3.setOnClickListener(this);
+        tv3.setOnClickListener(v -> {
+            if (item == 3) {
+                return;
+            }
+            item = 3;
+            setTextBg(item);
+        });
         llInvis = (LinearLayout) view.findViewById(R.id.llInVis);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         ConsTants.initXRecycleView(getActivity(), true, true, rv);
@@ -172,11 +197,29 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
         rollPagerView.setHintView(new ColorPointHintView(getActivity(), Color.parseColor("#00bbff"), Color.WHITE));
         tv4 = (TextView) headView.findViewById(R.id.tv4);
         tv4.setSelected(true);
-        tv4.setOnClickListener(this);
+        tv4.setOnClickListener(v -> {
+            if (item == 1) {
+                return;
+            }
+            item = 1;
+            setTextBg(item);
+        });
         tv5 = (TextView) headView.findViewById(R.id.tv5);
-        tv5.setOnClickListener(this);
+        tv5.setOnClickListener(v -> {
+            if (item == 2) {
+                return;
+            }
+            item = 2;
+            setTextBg(item);
+        });
         tv6 = (TextView) headView.findViewById(R.id.tv6);
-        tv6.setOnClickListener(this);
+        tv6.setOnClickListener(v -> {
+            if (item == 3) {
+                return;
+            }
+            item = 3;
+            setTextBg(item);
+        });
 
         llVis = (LinearLayout) headView.findViewById(R.id.llVis);
         vp = (CustomViewPager) headView.findViewById(R.id.vp);
@@ -221,62 +264,6 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
     private void getImgs() {
         setBodyParams(new String[]{"category"}, new String[]{"" + 3});
         sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.llSearch:
-                intentActivity = new Intent(getActivity(), WwSearchActivity.class);
-                startActivity(intentActivity);
-                break;
-            case R.id.add_wenwen:
-                intentActivity = new Intent(getActivity(), SendQuestionActivity.class);
-                startActivity(intentActivity);
-                break;
-            case R.id.tv1:
-                if (item == 1) {
-                    return;
-                }
-                item = 1;
-                setTextBg(item);
-                break;
-            case R.id.tv2:
-                if (item == 2) {
-                    return;
-                }
-                item = 2;
-                setTextBg(item);
-                break;
-            case R.id.tv3:
-                if (item == 3) {
-                    return;
-                }
-                item = 3;
-                setTextBg(item);
-                break;
-            case R.id.tv4:
-                if (item == 1) {
-                    return;
-                }
-                item = 1;
-                setTextBg(item);
-                break;
-            case R.id.tv5:
-                if (item == 2) {
-                    return;
-                }
-                item = 2;
-                setTextBg(item);
-                break;
-            case R.id.tv6:
-                if (item == 3) {
-                    return;
-                }
-                item = 3;
-                setTextBg(item);
-                break;
-        }
     }
 
     private void setTextBg(int item) {
@@ -368,7 +355,11 @@ public class WenwenFragment extends NetWorkFragment implements View.OnClickListe
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast, filter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getActivity().registerReceiver(brodcast, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            getActivity().registerReceiver(brodcast, filter);
+        }
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {

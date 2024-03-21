@@ -25,7 +25,7 @@ import org.json.JSONObject;
 /**
  * Created by dev06 on 2018/5/15.
  */
-public class ManagerFragment extends NetWorkFragment implements View.OnClickListener {
+public class ManagerFragment extends NetWorkFragment {
 
     private View view;
     private TextView tvTip, tvActivityTip, tvNoticeTip, tvVoteTip, tvNoAdmin, tvComment;
@@ -133,38 +133,13 @@ public class ManagerFragment extends NetWorkFragment implements View.OnClickList
     }
 
     private void event() {
-        ivStatus.setOnClickListener(this);
-        ivActivity.setOnClickListener(this);
-        ivNotice.setOnClickListener(this);
-        ivVote.setOnClickListener(this);
-        ivComment.setOnClickListener(this);
-        llManager.setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivStatus:
-                sendPost(0);
-                break;
-            case R.id.ivVote:
-                sendPost(3);
-                break;
-            case R.id.ivActivity:
-                sendPost(1);
-                break;
-            case R.id.ivNotice:
-                sendPost(2);
-                break;
-            case R.id.ivComment://团言评论权限
-                sendPost(4);
-                break;
-            case R.id.llManager:
-                startActivity(new Intent(mContext, TeamMembersActivity.class)
-                        .putExtra("id", mActivity.id));
-                break;
-        }
+        ivStatus.setOnClickListener(v -> sendPost(0));
+        ivActivity.setOnClickListener(v -> sendPost(1));
+        ivNotice.setOnClickListener(v -> sendPost(2));
+        ivVote.setOnClickListener(v -> sendPost(3));
+        ivComment.setOnClickListener(v -> sendPost(4));
+        llManager.setOnClickListener(v -> startActivity(new Intent(mContext, TeamMembersActivity.class)
+                .putExtra("id", mActivity.id)));
     }
 
     private void sendPost(int type) {

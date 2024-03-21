@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ZcFragment extends NetWorkFragment implements View.OnClickListener {
+public class ZcFragment extends NetWorkFragment  {
 
     private View view;
     private TextView tv1;
@@ -240,10 +241,74 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
         rl2 = (RelativeLayout) view.findViewById(R.id.rl2);
         rl3 = (RelativeLayout) view.findViewById(R.id.rl3);
         rl4 = (RelativeLayout) view.findViewById(R.id.rl4);
-        rl1.setOnClickListener(this);
-        rl2.setOnClickListener(this);
-        rl3.setOnClickListener(this);
-        rl4.setOnClickListener(this);
+        rl1.setOnClickListener(v -> {
+            if (item == 0) {
+                return;
+            }
+            item = 0;
+            clearAllBg();
+            tv1.setSelected(true);
+            if (zcList1.size() > 0) {
+                tvTip.setVisibility(View.GONE);
+                adapter.setType(item);
+                adapter.setData(zcList1);
+            } else {
+                adapter.setType(item);
+                adapter.setData(zcList1);
+                getData(pn1);
+            }
+        });
+        rl2.setOnClickListener(v -> {
+            if (item == 1) {
+                return;
+            }
+            item = 1;
+            clearAllBg();
+            tv2.setSelected(true);
+            if (zcList2.size() > 0) {
+                tvTip.setVisibility(View.GONE);
+                adapter.setType(item);
+                adapter.setData(zcList2);
+            } else {
+                adapter.setType(item);
+                adapter.setData(zcList2);
+                getData(pn2);
+            }
+        });
+        rl3.setOnClickListener(v -> {
+            if (item == 3) {
+                return;
+            }
+            item = 3;
+            clearAllBg();
+            tv3.setSelected(true);
+            if (zcList3.size() > 0) {
+                tvTip.setVisibility(View.GONE);
+                adapter.setType(item);
+                adapter.setData(zcList3);
+            } else {
+                adapter.setType(item);
+                adapter.setData(zcList3);
+                getData(pn3);
+            }
+        });
+        rl4.setOnClickListener(v -> {
+            if (item == 2) {
+                return;
+            }
+            item = 2;
+            clearAllBg();
+            tv4.setSelected(true);
+            if (zcList4.size() > 0) {
+                tvTip.setVisibility(View.GONE);
+                adapter.setType(item);
+                adapter.setData(zcList4);
+            } else {
+                adapter.setType(item);
+                adapter.setData(zcList4);
+                getData(pn4);
+            }
+        });
         v1 = view.findViewById(R.id.iv1);
         v2 = view.findViewById(R.id.iv2);
         v3 = view.findViewById(R.id.iv3);
@@ -253,135 +318,62 @@ public class ZcFragment extends NetWorkFragment implements View.OnClickListener 
         rv.setNestedScrollingEnabled(false);
         adapter = new ZcWwAdapter(getActivity());
         rv.setAdapter(adapter);
-        adapter.DoSaveListener(new ZcWwAdapter.DoClickListener() {
-            @Override
-            public void doSave(int position) {
-                switch (item) {
-                    case 0:
-                        if (zcList1.size() <= position) {
-                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
-                            return;
-                        }
-                        intent = new Intent(mContext, ZcQusetionActivity.class);
-                        bundle = new Bundle();
-                        bundle.putSerializable("beans", zcList1.get(position));
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        break;
-                    case 1:
-                        if (zcList2.size() <= position) {
-                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
-                            return;
-                        }
-                        intent = new Intent(mContext, ZcQusetionActivity.class);
-                        bundle = new Bundle();
-                        bundle.putSerializable("beans", zcList2.get(position));
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        break;
-                    case 3:
-                        if (zcList3.size() <= position) {
-                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
-                            return;
-                        }
-                        intent = new Intent(mContext, ZcArticleActivity.class);
-                        bundle = new Bundle();
-                        bundle.putSerializable("beans", zcList3.get(position));
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        break;
-                    case 2:
-                        if (zcList4.size() <= position) {
-                            Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
-                            return;
-                        }
-                        intent = new Intent(mContext, ZcQusetionActivity.class);
-                        bundle = new Bundle();
-                        bundle.putSerializable("beans", zcList4.get(position));
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        break;
-                }
+        adapter.DoSaveListener(position -> {
+            switch (item) {
+                case 0:
+                    if (zcList1.size() <= position) {
+                        Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
+                        return;
+                    }
+                    intent = new Intent(mContext, ZcQusetionActivity.class);
+                    bundle = new Bundle();
+                    bundle.putSerializable("beans", zcList1.get(position));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    break;
+                case 1:
+                    if (zcList2.size() <= position) {
+                        Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
+                        return;
+                    }
+                    intent = new Intent(mContext, ZcQusetionActivity.class);
+                    bundle = new Bundle();
+                    bundle.putSerializable("beans", zcList2.get(position));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    break;
+                case 3:
+                    if (zcList3.size() <= position) {
+                        Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
+                        return;
+                    }
+                    intent = new Intent(mContext, ZcArticleActivity.class);
+                    bundle = new Bundle();
+                    bundle.putSerializable("beans", zcList3.get(position));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    break;
+                case 2:
+                    if (zcList4.size() <= position) {
+                        Utils.toastShort(mContext, "网络请求较慢，请稍后重试");
+                        return;
+                    }
+                    intent = new Intent(mContext, ZcQusetionActivity.class);
+                    bundle = new Bundle();
+                    bundle.putSerializable("beans", zcList4.get(position));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    break;
             }
         });
         getData(1);
         brodCast = new ChangeBrodCast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("zcRefresh");
-        getActivity().registerReceiver(brodCast, intentFilter);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.rl1:
-                if (item == 0) {
-                    return;
-                }
-                item = 0;
-                clearAllBg();
-                tv1.setSelected(true);
-                if (zcList1.size() > 0) {
-                    tvTip.setVisibility(View.GONE);
-                    adapter.setType(item);
-                    adapter.setData(zcList1);
-                } else {
-                    adapter.setType(item);
-                    adapter.setData(zcList1);
-                    getData(pn1);
-                }
-                break;
-            case R.id.rl2:
-                if (item == 1) {
-                    return;
-                }
-                item = 1;
-                clearAllBg();
-                tv2.setSelected(true);
-                if (zcList2.size() > 0) {
-                    tvTip.setVisibility(View.GONE);
-                    adapter.setType(item);
-                    adapter.setData(zcList2);
-                } else {
-                    adapter.setType(item);
-                    adapter.setData(zcList2);
-                    getData(pn2);
-                }
-                break;
-            case R.id.rl3:
-                if (item == 3) {
-                    return;
-                }
-                item = 3;
-                clearAllBg();
-                tv3.setSelected(true);
-                if (zcList3.size() > 0) {
-                    tvTip.setVisibility(View.GONE);
-                    adapter.setType(item);
-                    adapter.setData(zcList3);
-                } else {
-                    adapter.setType(item);
-                    adapter.setData(zcList3);
-                    getData(pn3);
-                }
-                break;
-            case R.id.rl4:
-                if (item == 2) {
-                    return;
-                }
-                item = 2;
-                clearAllBg();
-                tv4.setSelected(true);
-                if (zcList4.size() > 0) {
-                    tvTip.setVisibility(View.GONE);
-                    adapter.setType(item);
-                    adapter.setData(zcList4);
-                } else {
-                    adapter.setType(item);
-                    adapter.setData(zcList4);
-                    getData(pn4);
-                }
-                break;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getActivity().registerReceiver(brodCast, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            getActivity().registerReceiver(brodCast, intentFilter);
         }
     }
 

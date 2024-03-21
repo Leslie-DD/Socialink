@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnTabSelectedListener, TextWatcher, View.OnClickListener {
+public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnTabSelectedListener, TextWatcher{
     private LinearLayout llBack, llData, llFl;
     private EditText etContent;
     private TabLayout tab;
@@ -120,7 +120,7 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
         fragments.add(new TeamSearchFragment());
         fragments.add(new WwSearchFragment());
         llBack = (LinearLayout) findViewById(R.id.llBack);
-        llBack.setOnClickListener(this);
+        llBack.setOnClickListener(v -> finish());
         etContent = (EditText) findViewById(R.id.etContent);
         etContent.addTextChangedListener(this);
         tab = (TabLayout) findViewById(R.id.tab);
@@ -218,15 +218,6 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
             } else {
                 f2.getData(content);
             }
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.llBack:
-                finish();
-                break;
         }
     }
 }

@@ -19,7 +19,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/30.
  */
 
-public class FriendShijuanShow extends NetWorkActivity implements View.OnClickListener {
+public class FriendShijuanShow extends NetWorkActivity {
     private int id;
     private String question_1;
     private String question_2;
@@ -52,8 +52,12 @@ public class FriendShijuanShow extends NetWorkActivity implements View.OnClickLi
     }
 
     private void event() {
-        findViewById(R.id.tvCancel).setOnClickListener(this);
-        findViewById(R.id.tvSave).setOnClickListener(this);
+        findViewById(R.id.tvCancel).setOnClickListener(v -> finish());
+        findViewById(R.id.tvSave).setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.setClass(FriendShijuanShow.this, FriendShijuanSet.class);
+            startActivity(intent1);
+        });
 
     }
 
@@ -89,23 +93,6 @@ public class FriendShijuanShow extends NetWorkActivity implements View.OnClickLi
             }
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvCancel:
-//                Intent intent = new Intent(FriendShijuanShow.this,FriendSet.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.tvSave:
-                Intent intent1 = new Intent();
-                intent1.setClass(FriendShijuanShow.this, FriendShijuanSet.class);
-                startActivity(intent1);
-                break;
-
         }
     }
 

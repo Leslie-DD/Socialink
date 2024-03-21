@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by dev06 on 2018/5/15.
  */
-public class StatementFragment extends NetWorkFragment implements View.OnClickListener {
+public class StatementFragment extends NetWorkFragment  {
     private XRecyclerView rv;
     private TextView tvTips;
     private int status = -1;
@@ -149,22 +149,10 @@ public class StatementFragment extends NetWorkFragment implements View.OnClickLi
 
 
     private void event() {
-        adapter.setDelItemListener(new OtherSayAdapter.DelItemListener() {
-            @Override
-            public void onDel(int position) {
-                setBodyParams(new String[]{"speakId"}, new String[]{"" + data.get(position).getId()});
-                sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", delSpeak, Constants.token);
-            }
+        adapter.setDelItemListener(position -> {
+            setBodyParams(new String[]{"speakId"}, new String[]{"" + data.get(position).getId()});
+            sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", delSpeak, Constants.token);
         });
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvNew:
-                setBg(0);
-                break;
-        }
     }
 
     private void setBg(int status) {

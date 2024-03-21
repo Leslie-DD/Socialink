@@ -45,7 +45,7 @@ import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class StatementActivity extends NetWorkActivity implements View.OnClickListener {
+public class StatementActivity extends NetWorkActivity {
     private GridView gw;
     private List<String> strings;
     private GwPictureAdapter gwPictureAdapter;
@@ -83,8 +83,65 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
     }
 
     private void event() {
-        tvCancel.setOnClickListener(this);
-        tvSave.setOnClickListener(this);
+        tvCancel.setOnClickListener(v -> finish());
+        tvSave.setOnClickListener(v -> {
+            String content = etContent.getText().toString();
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "内容不能为空");
+                return;
+            }
+            if (fileList.size() < 0) {
+                Utils.toastShort(this, "请至少添加一张图片");
+                return;
+            }
+            tvSave.setClickable(false);
+            OkHttpUtils.post(Constants.base_url + "/api/club/speak/save.do")
+                    .tag(this)
+                    .headers(Constants.Token_Header, Constants.token)
+                    .params("clubId", teamId + "")
+                    .params("content", content + "")
+                    .addFileParams("files", fileList)
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onSuccess(String s, Call call, Response response) {
+                            isCommit = true;
+                            tvSave.setClickable(true);
+                            try {
+                                JSONObject result = new JSONObject(s);
+                                switch (result.optInt("code")) {
+                                    case 0:
+                                        if (result.optString("msg").contains("发表成功")) {
+                                            Utils.toastShort(mContext, "发表成功");
+                                            StatementActivity.this.finish();
+                                            //发送团言刷新EventBus
+                                            EventBus.getDefault().post(new RefStatementEvent());
+                                        }
+                                        break;
+                                    case 1:
+                                        Utils.toastShort(StatementActivity.this, "您还没有登录或登录已过期，请重新登录");
+                                        break;
+                                    case 2:
+                                        Utils.toastShort(StatementActivity.this, result.optString("msg"));
+                                        break;
+                                    case 3:
+                                        Utils.toastShort(StatementActivity.this, "您没有该功能操作权限");
+                                        break;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            isCommit = true;
+                            tvSave.setClickable(true);
+                            super.onError(call, response, e);
+                        }
+
+                    });
+        });
         strings = new ArrayList<>();
         strings.add("");
         gwPictureAdapter = new GwPictureAdapter(this);
@@ -113,13 +170,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
                 }
             }
         });
-        gw.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                return false;
-            }
-        });
+        gw.setOnItemLongClickListener((parent, view, position, id) -> false);
     }
 
     @Subscribe
@@ -138,98 +189,26 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
         tvPic = (TextView) pv.findViewById(R.id.tvPic);
         tvUp = (TextView) pv.findViewById(R.id.tvUp);
-        tvPic.setOnClickListener(this);
-        tvUp.setOnClickListener(this);
+        tvPic.setOnClickListener(v -> {
+            path = PhotoUtils.startPhoto(this);
+            pop.dismiss();
+        });
+        tvUp.setOnClickListener(v -> {
+            PhotoUtils.choosePhoto(202, this);
+            pop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.tvSave:
-                String content = etContent.getText().toString();
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "内容不能为空");
-                    return;
-                }
-                if (fileList.size() < 0) {
-                    Utils.toastShort(this, "请至少添加一张图片");
-                    return;
-                }
-                tvSave.setClickable(false);
-                OkHttpUtils.post(Constants.base_url + "/api/club/speak/save.do")
-                        .tag(this)
-                        .headers(Constants.Token_Header, Constants.token)
-                        .params("clubId", teamId + "")
-                        .params("content", content + "")
-                        .addFileParams("files", fileList)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-                                isCommit = true;
-                                tvSave.setClickable(true);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-                                    switch (result.optInt("code")) {
-                                        case 0:
-                                            if (result.optString("msg").contains("发表成功")) {
-                                                Utils.toastShort(mContext, "发表成功");
-                                                StatementActivity.this.finish();
-                                                //发送团言刷新EventBus
-                                                EventBus.getDefault().post(new RefStatementEvent());
-                                            }
-                                            break;
-                                        case 1:
-                                            Utils.toastShort(StatementActivity.this, "您还没有登录或登录已过期，请重新登录");
-                                            break;
-                                        case 2:
-                                            Utils.toastShort(StatementActivity.this, result.optString("msg"));
-                                            break;
-                                        case 3:
-                                            Utils.toastShort(StatementActivity.this, "您没有该功能操作权限");
-                                            break;
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-                                isCommit = true;
-                                tvSave.setClickable(true);
-                                super.onError(call, response, e);
-                            }
-
-                        });
-                break;
-            case R.id.tvUp:
-                PhotoUtils.choosePhoto(202, this);
-                pop.dismiss();
-                break;
-            case R.id.tvPic:
-                path = PhotoUtils.startPhoto(this);
-                pop.dismiss();
-                break;
-        }
     }
 
     private void showPop() {
@@ -240,6 +219,7 @@ public class StatementActivity extends NetWorkActivity implements View.OnClickLi
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }

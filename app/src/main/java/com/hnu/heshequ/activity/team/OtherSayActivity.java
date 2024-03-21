@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OtherSayActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class OtherSayActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private OtherSayAdapter adapter;
     private XRecyclerView rv;
     private TextView tvTitle;
@@ -67,20 +67,8 @@ public class OtherSayActivity extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivSearch:
-
-                break;
-        }
     }
 
     @Override

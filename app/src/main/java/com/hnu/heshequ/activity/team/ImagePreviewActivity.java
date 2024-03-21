@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-public class ImagePreviewActivity extends BaseActivity implements View.OnClickListener {
+public class ImagePreviewActivity extends BaseActivity {
     private int itemPosition;
     private List<String> imageList;
     private CustomViewPager2 viewPager;
@@ -158,8 +158,8 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
         ivDel = (ImageView) findViewById(R.id.ivDel);
         tvTip = (TextView) findViewById(R.id.tvTip);
 
-        ivBack.setOnClickListener(this);
-        ivDel.setOnClickListener(this);
+        ivBack.setOnClickListener(v -> finish());
+        ivDel.setOnClickListener(v -> dialog.show());
         if (isDel) {
             rlDel.setVisibility(View.VISIBLE);
         } else {
@@ -252,18 +252,5 @@ public class ImagePreviewActivity extends BaseActivity implements View.OnClickLi
             }
         }
     };
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivDel:
-                dialog.show();
-                break;
-        }
-    }
-
 
 }

@@ -111,24 +111,25 @@ public final class BeepManager implements MediaPlayer.OnCompletionListener,
         mediaPlayer.setOnCompletionListener(this);
         mediaPlayer.setOnErrorListener(this);
         // 配置播放资源
-        try {
-            AssetFileDescriptor file = activity.getResources()
-                    .openRawResourceFd(R.raw.beep);
-            try {
-                mediaPlayer.setDataSource(file.getFileDescriptor(),
-                        file.getStartOffset(), file.getLength());
-            } finally {
-                file.close();
-            }
-            // 设置音量
-            mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
-            mediaPlayer.prepare();
-            return mediaPlayer;
-        } catch (IOException ioe) {
-            Log.w(TAG, ioe);
-            mediaPlayer.release();
-            return null;
-        }
+//        try {
+//            AssetFileDescriptor file = activity.getResources()
+//                    .openRawResourceFd(R.raw.beep);
+//            try {
+//                mediaPlayer.setDataSource(file.getFileDescriptor(),
+//                        file.getStartOffset(), file.getLength());
+//            } finally {
+//                file.close();
+//            }
+//            // 设置音量
+//            mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
+//            mediaPlayer.prepare();
+//            return mediaPlayer;
+//        } catch (IOException ioe) {
+//            Log.w(TAG, ioe);
+//            mediaPlayer.release();
+//            return null;
+//        }
+        return null;
     }
 
     @Override

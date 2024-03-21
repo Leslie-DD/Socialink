@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -33,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecondHandActivity extends NetWorkActivity implements View.OnClickListener {
+public class SecondHandActivity extends NetWorkActivity {
 
     public static final String LOCAL_BROADCAST = "ClassifyPosition";
 
@@ -116,7 +117,7 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
         LocalReceiver localReceiver = new LocalReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(LOCAL_BROADCAST);   //添加action
-        localBroadcastManager.registerReceiver(localReceiver, intentFilter);   //注册本地广播
+        localBroadcastManager.registerReceiver(localReceiver, intentFilter);
 
         getBannerImages();
         getCategory();
@@ -249,11 +250,6 @@ public class SecondHandActivity extends NetWorkActivity implements View.OnClickL
             setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{pn + "", ps + "", category2Id + ""});
             sendPost(WenConstans.Secondhand, where, WenConstans.token);
         }
-    }
-
-    @Override
-    public void onClick(View view) {
-
     }
 
     private void initParam() {

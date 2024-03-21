@@ -19,7 +19,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/30.
  */
 
-public class FriendShengriSet extends NetWorkActivity implements View.OnClickListener {
+public class FriendShengriSet extends NetWorkActivity  {
     private EditText year, month, day;
     private String year1, month1, day1;
     private static String gexing;
@@ -56,11 +56,13 @@ public class FriendShengriSet extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        year.setOnClickListener(this);
-        month.setOnClickListener(this);
-        day.setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        set.setOnClickListener(v -> {
+            year1 = year.getText().toString();
+            month1 = month.getText().toString();
+            day1 = day.getText().toString();
+            getData();
+        });
     }
 
     @Override
@@ -81,23 +83,6 @@ public class FriendShengriSet extends NetWorkActivity implements View.OnClickLis
             Intent i = new Intent();
             i.putExtra("shengri", "");
             setResult(2, i);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-//                Intent intent = new Intent(FriendShengriSet.this,FriendSet.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.set:
-                year1 = year.getText().toString();
-                month1 = month.getText().toString();
-                day1 = day.getText().toString();
-                getData();
-                break;
         }
     }
 

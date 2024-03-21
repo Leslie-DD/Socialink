@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendSearch extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class FriendSearch extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private int totalPage = 1;
     private List<FriendListBean> allList, moreList, newList;
     private boolean hasRefresh;
@@ -71,14 +71,11 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
 
 
         llBack = findViewById(R.id.llBack);
-        llBack.setOnClickListener(this);
+        llBack.setOnClickListener(v -> finish());
         search = findViewById(R.id.search);
-        search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                content = etContent.getText().toString();
-                getFriendData(content);
-            }
+        search.setOnClickListener(v -> {
+            content = etContent.getText().toString();
+            getFriendData(content);
         });
 
         llTip = findViewById(R.id.llTip);
@@ -101,20 +98,6 @@ public class FriendSearch extends NetWorkActivity implements View.OnClickListene
                 }
             }
         });
-
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.llBack:
-                finish();
-                break;
-
-
-        }
-
     }
 
     @Override

@@ -10,7 +10,7 @@ import com.hnu.heshequ.base.NetWorkActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ScanActivity extends NetWorkActivity implements View.OnClickListener {
+public class ScanActivity extends NetWorkActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,6 @@ public class ScanActivity extends NetWorkActivity implements View.OnClickListene
     }
 
     private void init() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
 
     }
 

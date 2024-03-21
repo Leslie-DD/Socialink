@@ -20,7 +20,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/30.
  */
 
-public class FriendShijuanSet extends NetWorkActivity implements View.OnClickListener {
+public class FriendShijuanSet extends NetWorkActivity {
     private String question_1;
     private String question_2;
     private String question_3;
@@ -39,8 +39,6 @@ public class FriendShijuanSet extends NetWorkActivity implements View.OnClickLis
     }
 
     private void init() {
-        findViewById(R.id.tvCancel).setOnClickListener(this);
-        findViewById(R.id.tvSave).setOnClickListener(this);
         question1 = (EditText) findViewById(R.id.question1);
         question2 = (EditText) findViewById(R.id.question2);
         question3 = (EditText) findViewById(R.id.question3);
@@ -49,14 +47,24 @@ public class FriendShijuanSet extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        findViewById(R.id.tvSave).setOnClickListener(this);
-        findViewById(R.id.tvCancel).setOnClickListener(this);
-
-        question1.setOnClickListener(this);
-        question2.setOnClickListener(this);
-        question3.setOnClickListener(this);
-        question4.setOnClickListener(this);
-        question5.setOnClickListener(this);
+        findViewById(R.id.tvCancel).setOnClickListener(v -> finish());
+        findViewById(R.id.tvSave).setOnClickListener(v -> {
+            question_1 = question1.getText().toString();
+            question_2 = question2.getText().toString();
+            question_3 = question3.getText().toString();
+            question_4 = question4.getText().toString();
+            question_5 = question5.getText().toString();
+            JSONArray questionlist = new JSONArray();
+            questionlist.put(getTerm(1, question_1 + ""));
+            questionlist.put(getTerm(2, question_2 + ""));
+            questionlist.put(getTerm(3, question_3 + ""));
+            questionlist.put(getTerm(4, question_4 + ""));
+            questionlist.put(getTerm(5, question_5 + ""));
+            setData(questionlist);
+            Intent intent2 = new Intent(FriendShijuanSet.this, FriendSet.class);
+            startActivity(intent2);
+            finish();
+        });
     }
 
     @Override
@@ -71,34 +79,6 @@ public class FriendShijuanSet extends NetWorkActivity implements View.OnClickLis
             Utils.toastShort(mContext, result.optString("msg"));
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvCancel:
-//                Intent intent = new Intent(FriendShijuanSet.this,FriendShijuanShow.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.tvSave:
-                question_1 = question1.getText().toString();
-                question_2 = question2.getText().toString();
-                question_3 = question3.getText().toString();
-                question_4 = question4.getText().toString();
-                question_5 = question5.getText().toString();
-                JSONArray questionlist = new JSONArray();
-                questionlist.put(getTerm(1, question_1 + ""));
-                questionlist.put(getTerm(2, question_2 + ""));
-                questionlist.put(getTerm(3, question_3 + ""));
-                questionlist.put(getTerm(4, question_4 + ""));
-                questionlist.put(getTerm(5, question_5 + ""));
-                setData(questionlist);
-                Intent intent2 = new Intent(FriendShijuanSet.this, FriendSet.class);
-                startActivity(intent2);
-                finish();
-                break;
         }
     }
 

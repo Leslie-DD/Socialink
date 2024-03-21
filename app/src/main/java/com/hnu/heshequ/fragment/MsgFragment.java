@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MsgFragment extends NetWorkFragment implements View.OnClickListener {
+public class MsgFragment extends NetWorkFragment  {
 
     private View view;
     private ArrayList<Fragment> list;
@@ -85,31 +85,21 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
         builder.setCancelable(false);
         builder.setTitle("提示");
         builder.setMessage("确定要清空消息吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //删除
-                if (cp == 0) {
-                    setBodyParams(new String[]{"type"}, new String[]{"" + 2});
-                    sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
-                } else if (cp == 1) {
-                    setBodyParams(new String[]{"type"}, new String[]{"" + 1});
-                    sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
-                } else if (cp == 2) {
-                    setBodyParams(new String[]{"type"}, new String[]{"" + 3});
-                    sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
-                }
-                deldialog.dismiss();
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            //删除
+            if (cp == 0) {
+                setBodyParams(new String[]{"type"}, new String[]{"" + 2});
+                sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
+            } else if (cp == 1) {
+                setBodyParams(new String[]{"type"}, new String[]{"" + 1});
+                sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
+            } else if (cp == 2) {
+                setBodyParams(new String[]{"type"}, new String[]{"" + 3});
+                sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", delAll, Constants.token);
             }
-
-
+            deldialog.dismiss();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deldialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
         deldialog = builder.create();
         deldialog.setCancelable(false);
     }
@@ -132,14 +122,28 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
             }
         });
 
-        tvTeam.setOnClickListener(this);
-        tvQuestion.setOnClickListener(this);
-        tvSay.setOnClickListener(this);
-        tvClear.setOnClickListener(this);
-        tvMessage.setOnClickListener(this);
-        tvFriend.setOnClickListener(this);
+        tvTeam.setOnClickListener(v -> {
+            setTvBg(0);
+            tvClear.setVisibility(View.VISIBLE);
+        });
+        tvQuestion.setOnClickListener(v -> {
+            setTvBg(2);
+            tvClear.setVisibility(View.VISIBLE);
+        });
+        tvSay.setOnClickListener(v -> {
+            setTvBg(1);
+            tvClear.setVisibility(View.VISIBLE);
+        });
+        tvClear.setOnClickListener(v -> deldialog.show());
+        tvMessage.setOnClickListener(v -> {
+            setTvBg(3);
+            tvClear.setVisibility(View.GONE);
+        });
+        tvFriend.setOnClickListener(v -> {
+            setTvBg(4);
+            tvClear.setVisibility(View.GONE);
+        });
     }
-
 
     public void setTvBg(int status) {
         if (this.status == status) {
@@ -150,7 +154,7 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
             Log.e("YSF", "我是vp的设置item" + status);
         }
         tvTeam.setSelected(status == 0 ? true : false);
-        tvSay.setSelected(status == 1 ? true : false);
+        tvSay.setSelected(status == 1);
         tvQuestion.setSelected(status == 2 ? true : false);
         tvMessage.setSelected(status == 3 ? true : false);
         tvFriend.setSelected(status == 4 ? true : false);
@@ -168,35 +172,6 @@ public class MsgFragment extends NetWorkFragment implements View.OnClickListener
             vp.setCurrentItem(status);
         }
         cp = status;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvTeam:
-                setTvBg(0);
-                tvClear.setVisibility(View.VISIBLE);
-                break;
-            case R.id.tvSay:
-                setTvBg(1);
-                tvClear.setVisibility(View.VISIBLE);
-                break;
-            case R.id.tvQuestion:
-                setTvBg(2);
-                tvClear.setVisibility(View.VISIBLE);
-                break;
-            case R.id.tvClear:
-                deldialog.show();
-                break;
-            case R.id.tvMessage:
-                setTvBg(3);
-                tvClear.setVisibility(View.GONE);
-                break;
-            case R.id.tvFriend:
-                setTvBg(4);
-                tvClear.setVisibility(View.GONE);
-                break;
-        }
     }
 
     @Override

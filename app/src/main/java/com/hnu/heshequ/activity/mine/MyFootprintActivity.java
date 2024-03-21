@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * 我的足迹页面
  */
-public class MyFootprintActivity extends NetWorkActivity implements View.OnClickListener {
+public class MyFootprintActivity extends NetWorkActivity {
     private ViewPager vp;
     private TextView tvTeam, tvWw;
     private ArrayList<Fragment> list;
@@ -56,9 +56,9 @@ public class MyFootprintActivity extends NetWorkActivity implements View.OnClick
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        tvTeam.setOnClickListener(this);
-        tvWw.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        tvTeam.setOnClickListener(v -> setTvBg(0));
+        tvWw.setOnClickListener(v -> setTvBg(1));
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -100,21 +100,5 @@ public class MyFootprintActivity extends NetWorkActivity implements View.OnClick
     protected void onFailure(String result, int where) {
 
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvTeam:
-                setTvBg(0);
-                break;
-            case R.id.tvWw:
-                setTvBg(1);
-                break;
-        }
-    }
-
 
 }

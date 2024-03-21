@@ -51,7 +51,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class MeFragment extends NetWorkFragment implements View.OnClickListener {
+public class MeFragment extends NetWorkFragment  {
 
     private static final String TAG = "[MeFragment]";
 
@@ -124,12 +124,22 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
     }
 
     private void event() {
-        ivEditor.setOnClickListener(this);
-        ivHead.setOnClickListener(this);
-        llSay.setOnClickListener(this);
-        llQuestion.setOnClickListener(this);
-        llNotice.setOnClickListener(this);
-        llSecondhand.setOnClickListener(this);
+        ivEditor.setOnClickListener(v -> {
+            if (userInfoBean == null) {
+                Utils.toastShort(getActivity(), "数据加载中~");
+                return;
+            }
+            startActivity(new Intent(mContext, BaseInfoActivity.class).putExtra("userinfobean", userInfoBean));
+        });
+        ivHead.setOnClickListener(v -> {
+            if (Constants.uid == 1 && mainActivity != null) {
+                mainActivity.showPop();
+            }
+        });
+        llSay.setOnClickListener(v -> startActivity(new Intent(mContext, MySayActivity.class)));
+        llQuestion.setOnClickListener(v -> startActivity(new Intent(mContext, MyQuestionActivity1.class)));
+        llNotice.setOnClickListener(v -> startActivity(new Intent(mContext, AttentionActivity.class)));
+        llSecondhand.setOnClickListener(v -> startActivity(new Intent(mContext, MygoodActivity.class)));
         lv.setOnItemClickListener((adapterView, view, i, l) -> {
             Log.e("YSF", "当前的位置：" + i);
             i = i - 1;
@@ -284,39 +294,6 @@ public class MeFragment extends NetWorkFragment implements View.OnClickListener 
             ivBg.setImageBitmap(newBitmap);
         }
     };
-
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivEditor:
-                if (userInfoBean == null) {
-                    Utils.toastShort(getActivity(), "数据加载中~");
-                    return;
-                }
-                startActivity(new Intent(mContext, BaseInfoActivity.class).putExtra("userinfobean", userInfoBean));
-                break;
-            case R.id.ivHead:
-                if (Constants.uid == 1 && mainActivity != null) {
-                    mainActivity.showPop();
-                }
-                break;
-            case R.id.llSay:
-                startActivity(new Intent(mContext, MySayActivity.class));
-                break;
-            case R.id.llQuestion:
-                startActivity(new Intent(mContext, MyQuestionActivity1.class));
-                break;
-            case R.id.llnotice:
-                startActivity(new Intent(mContext, AttentionActivity.class));
-                break;
-
-            case R.id.llSecondhand:
-                startActivity(new Intent(mContext, MygoodActivity.class));
-                break;
-        }
-    }
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {

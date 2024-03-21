@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TjDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class TjDetailActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private CircleView ivHead;
     private ImageView ivBack;
     private TextView tvTitle, tvName, tvContent, tvDel, tvDate, tvZan, tvPl, tvLikes, tvTitle2;
@@ -250,9 +250,22 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
             llLikes.setVisibility(View.GONE);
         }
 
-        tvDel.setOnClickListener(this);
-        tvZan.setOnClickListener(this);
-        tvPl.setOnClickListener(this);
+        tvDel.setOnClickListener(v -> delSpeakdialog.show());
+        tvZan.setOnClickListener(v -> {
+            int op;
+            if (isZan) {
+                op = 2;
+            } else {
+                op = 1;
+            }
+            setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + speakId, "" + op});
+            sendPost(Constants.base_url + "/api/club/tb/like.do", like, Constants.token);
+        });
+        tvPl.setOnClickListener(v -> {
+            if (Constants.isJoin) {
+                Utils.showSoftInput(etComment);
+            }
+        });
     }
 
     private void initDialog() {
@@ -295,10 +308,49 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
 
     private void event() {
         ivBack = (ImageView) findViewById(R.id.ivBack);
-        ivBack.setOnClickListener(this);
-        ivBq.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
-        etComment.setOnClickListener(this);
+        ivBack.setOnClickListener(v -> finish());
+        ivBq.setOnClickListener(v -> {
+            if (Utils.isKeyBoarVisiableForLast) {
+                //锁住RV高度
+                lockContentHeight();
+                Utils.hideSoftInput(etComment);
+            }
+            //显示表情布局
+            LinearLayout.LayoutParams Params = (LinearLayout.LayoutParams) flEmoji.getLayoutParams();
+            Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight", 450);
+            flEmoji.setLayoutParams(Params);
+            flEmoji.setVisibility(View.VISIBLE);
+            isEmojiShow = true;
+        });
+        ivSend.setOnClickListener(v -> {
+            //Utils.toastShort(this, "发送评论");
+            comment = etComment.getText().toString().trim();
+            if (comment.isEmpty()) {
+                Utils.toastShort(this, "评论内容不能为空");
+                return;
+            }
+            setBodyParams(new String[]{"tbId", "content"}, new String[]{"" + bean.getId(), "" + comment});
+            sendPost(Constants.base_url + "/api/club/tb/comment.do", sendComment, Constants.token);
+        });
+        etComment.setOnClickListener(v -> {
+            if (isEmojiShow) {
+                //unlockContentHeightDelayed();
+                flEmoji.setVisibility(View.GONE);
+                isEmojiShow = false;
+            }
+            //显示键盘后再解锁
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            unlockContentHeightDelayed();
+                        }
+                    });
+                }
+            }, 100);
+        });
         //emoji 点击
         gvEmoji.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @SuppressLint("SetTextI18n")
@@ -322,75 +374,6 @@ public class TjDetailActivity extends NetWorkActivity implements View.OnClickLis
                 startActivity(new Intent(context, PersonalInformationActivity.class).putExtra("uid", uid));
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvDel:
-                delSpeakdialog.show();
-                break;
-            case R.id.tvZan:
-                int op;
-                if (isZan) {
-                    op = 2;
-                } else {
-                    op = 1;
-                }
-                setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + speakId, "" + op});
-                sendPost(Constants.base_url + "/api/club/tb/like.do", like, Constants.token);
-                break;
-            case R.id.tvPl:
-                if (Constants.isJoin) {
-                    Utils.showSoftInput(etComment);
-                }
-                break;
-            case R.id.etComment:
-                if (isEmojiShow) {
-                    //unlockContentHeightDelayed();
-                    flEmoji.setVisibility(View.GONE);
-                    isEmojiShow = false;
-                }
-                //显示键盘后再解锁
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                unlockContentHeightDelayed();
-                            }
-                        });
-                    }
-                }, 100);
-                break;
-            case R.id.ivBq:
-                if (Utils.isKeyBoarVisiableForLast) {
-                    //锁住RV高度
-                    lockContentHeight();
-                    Utils.hideSoftInput(etComment);
-                }
-                //显示表情布局
-                LinearLayout.LayoutParams Params = (LinearLayout.LayoutParams) flEmoji.getLayoutParams();
-                Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight", 450);
-                flEmoji.setLayoutParams(Params);
-                flEmoji.setVisibility(View.VISIBLE);
-                isEmojiShow = true;
-                break;
-            case R.id.ivSend:
-                //Utils.toastShort(this, "发送评论");
-                comment = etComment.getText().toString().trim();
-                if (comment.isEmpty()) {
-                    Utils.toastShort(this, "评论内容不能为空");
-                    return;
-                }
-                setBodyParams(new String[]{"tbId", "content"}, new String[]{"" + bean.getId(), "" + comment});
-                sendPost(Constants.base_url + "/api/club/tb/comment.do", sendComment, Constants.token);
-                break;
-        }
     }
 
     @Override

@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * 意见反馈页面
  */
-public class FeedBackActivity extends NetWorkActivity implements View.OnClickListener {
+public class FeedBackActivity extends NetWorkActivity {
     private TextView tvCancel, tvSave;
     private LinearLayout llType;
     private TextView tvType;
@@ -63,9 +63,24 @@ public class FeedBackActivity extends NetWorkActivity implements View.OnClickLis
     }
 
     private void event() {
-        tvCancel.setOnClickListener(this);
-        tvSave.setOnClickListener(this);
-        llType.setOnClickListener(this);
+        tvCancel.setOnClickListener(v -> finish());
+        tvSave.setOnClickListener(v -> {
+            String content = etContent.getText().toString().trim();
+            if (content.isEmpty()) {
+                Utils.toastShort(mContext, "请先输入您的反馈意见！");
+                return;
+            }
+            if (cp == -1) {
+                return;
+            }
+            setBodyParams(new String[]{"category", "content"}, new String[]{categorys.get(cp).getId() + "", content});
+            sendPost(Constants.base_url + "/api/user/feedback.do", sendCode, Constants.token);
+        });
+        llType.setOnClickListener(v -> {
+            if (pvOptions != null) {
+                pvOptions.show();
+            }
+        });
         etContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -135,34 +150,6 @@ public class FeedBackActivity extends NetWorkActivity implements View.OnClickLis
 
     @Override
     protected void onFailure(String result, int where) {
-
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.llType:
-                if (pvOptions != null) {
-                    pvOptions.show();
-                }
-                break;
-            case R.id.tvSave:
-                String content = etContent.getText().toString().trim();
-                if (content.length() == 0) {
-                    Utils.toastShort(mContext, "请先输入您的反馈意见！");
-                    return;
-                }
-                if (cp == -1) {
-                    return;
-                }
-                setBodyParams(new String[]{"category", "content"}, new String[]{categorys.get(cp).getId() + "", content});
-                sendPost(Constants.base_url + "/api/user/feedback.do", sendCode, Constants.token);
-                break;
-        }
-    }
-
 
 }

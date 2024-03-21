@@ -27,7 +27,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class BullertinDetailActivity extends NetWorkActivity implements View.OnClickListener {
+public class BullertinDetailActivity extends NetWorkActivity {
     private TextView tvTitle, tv_title, tvContent, tvInitiator, tvTime;
     private ImageView ivBack, ivRight;
     private String title, content, initiator, time;
@@ -85,9 +85,20 @@ public class BullertinDetailActivity extends NetWorkActivity implements View.OnC
         ll_editor = (LinearLayout) spv.findViewById(R.id.ll_editor);
         ll_del = (LinearLayout) spv.findViewById(R.id.ll_del);
         ll_cacel = (LinearLayout) spv.findViewById(R.id.ll_cacel);
-        ll_editor.setOnClickListener(this);
-        ll_del.setOnClickListener(this);
-        ll_cacel.setOnClickListener(this);
+        ll_editor.setOnClickListener(v -> {
+            startActivityForResult(new Intent(this, EditorialBulletinActivity.class)
+                            .putExtra("type", 2)
+                            .putExtra("title", title)
+                            .putExtra("content", content)
+                            .putExtra("id", id)
+                    , 1);
+            pop.dismiss();
+        });
+        ll_del.setOnClickListener(v -> {
+            setBodyParams(new String[]{"id"}, new String[]{"" + id});
+            sendPost(Constants.base_url + "/api/club/notice/delete.do", 1000, Constants.token);
+        });
+        ll_cacel.setOnClickListener(v -> pop.dismiss());
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -112,39 +123,8 @@ public class BullertinDetailActivity extends NetWorkActivity implements View.OnC
     }
 
     private void event() {
-        ivBack.setOnClickListener(this);
-        ivRight.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.ivRight:
-                // shou pop
-                showSpvPop();
-                break;
-            case R.id.ll_editor:
-                //编辑
-                startActivityForResult(new Intent(this, EditorialBulletinActivity.class)
-                                .putExtra("type", 2)
-                                .putExtra("title", title)
-                                .putExtra("content", content)
-                                .putExtra("id", id)
-                        , 1);
-                pop.dismiss();
-                break;
-            case R.id.ll_del:
-                //删除
-                setBodyParams(new String[]{"id"}, new String[]{"" + id});
-                sendPost(Constants.base_url + "/api/club/notice/delete.do", 1000, Constants.token);
-                break;
-            case R.id.ll_cacel:
-                pop.dismiss();
-                break;
-        }
+        ivBack.setOnClickListener(v -> finish());
+        ivRight.setOnClickListener(v -> showSpvPop());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

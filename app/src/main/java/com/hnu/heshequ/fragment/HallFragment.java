@@ -45,7 +45,7 @@ import java.util.List;
 /**
  * Created by dev06 on 2018/5/15.
  */
-public class HallFragment extends NetWorkFragment implements View.OnClickListener {
+public class HallFragment extends NetWorkFragment {
     private View view;
     private MyRecyclerview recyclerview;
     private MyLv lv;
@@ -188,7 +188,7 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
     }
 
     public void setivPic(String path) {
-        Glide.with(this).load(path).asBitmap().into(ivPic);
+        Glide.with(this.mContext).load(path).asBitmap().into(ivPic);
     }
 
     public void setBean(TeamBean bean) {
@@ -199,17 +199,18 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
     }
 
     private void event() {
-        tvOtherMore.setOnClickListener(this);
-        tvPicEditor.setOnClickListener(this);
-        tvTeamEditor.setOnClickListener(this);
-        tvTjMore.setOnClickListener(this);
-        ivPic.setOnClickListener(this);
-        adapter.setDelItemListener(new OtherSayAdapter.DelItemListener() {
-            @Override
-            public void onDel(int position) {
-                setBodyParams(new String[]{"speakId"}, new String[]{"" + testData.get(position).getId()});
-                sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", DelCode, Constants.token);
-            }
+        tvOtherMore.setOnClickListener(v -> startActivity(new Intent(mContext, OtherSayActivity.class).putExtra("teamid", mActivity.id)));
+        tvPicEditor.setOnClickListener(v -> mActivity.showPop());
+        tvTeamEditor.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, TeamIntroduceActivity.class);
+            intent.putExtra("introduce", tvIntroduction.getText());
+            intent.putExtra("teamId", cBean.getId());
+            startActivity(intent);
+        });
+        tvTjMore.setOnClickListener(v -> startActivity(new Intent(mContext, PartyBuildingActivity.class).putExtra("teamid", mActivity.id)));
+        adapter.setDelItemListener(position -> {
+            setBodyParams(new String[]{"speakId"}, new String[]{"" + testData.get(position).getId()});
+            sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", DelCode, Constants.token);
         });
     }
 
@@ -217,37 +218,6 @@ public class HallFragment extends NetWorkFragment implements View.OnClickListene
     public void changeIntroduce(EventBean bean) {
         if (bean != null && bean.getIntroduce() != null) {
             tvIntroduction.setText(bean.getIntroduce());
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvOtherMore:
-                startActivity(new Intent(mContext, OtherSayActivity.class).putExtra("teamid", mActivity.id));
-                break;
-            case R.id.tvTjMore: //团建
-                startActivity(new Intent(mContext, PartyBuildingActivity.class).putExtra("teamid", mActivity.id));
-                break;
-            case R.id.tvPicEditor: //编辑团队封面
-                mActivity.showPop();
-                break;
-            case R.id.tvTeamEditor:
-                Intent intent = new Intent(mContext, TeamIntroduceActivity.class);
-                intent.putExtra("introduce", tvIntroduction.getText());
-                intent.putExtra("teamId", cBean.getId());
-                startActivity(intent);
-                break;
-            case R.id.ivPic:
-
-                /*ArrayList<String> imgs = new ArrayList<>();
-                imgs.add("");
-                startActivity(new Intent(mContext, ImagePreviewActivity.class)
-                        .putStringArrayListExtra("imageList", imgs)
-                .putExtra(P.START_ITEM_POSITION, 0)
-                .putExtra(P.START_IAMGE_POSITION, 0)
-                .putExtra("isdel2", false));*/
-                break;
         }
     }
 

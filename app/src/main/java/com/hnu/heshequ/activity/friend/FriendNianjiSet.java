@@ -19,7 +19,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/30.
  */
 
-public class FriendNianjiSet extends NetWorkActivity implements View.OnClickListener {
+public class FriendNianjiSet extends NetWorkActivity  {
     private EditText nianji;
     private String zhuanye;
     private int id;
@@ -61,9 +61,11 @@ public class FriendNianjiSet extends NetWorkActivity implements View.OnClickList
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        nianji.setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        set.setOnClickListener(v -> {
+            nianji1 = nianji.getText().toString();
+            getData();
+        });
     }
 
     @Override
@@ -81,21 +83,6 @@ public class FriendNianjiSet extends NetWorkActivity implements View.OnClickList
             setResult(1, i);
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-//                Intent intent = new Intent(FriendNianjiSet.this,FriendSet.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.set:
-                nianji1 = nianji.getText().toString();
-                getData();
-                break;
         }
     }
 

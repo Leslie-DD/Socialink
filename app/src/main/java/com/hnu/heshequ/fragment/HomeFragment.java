@@ -1,11 +1,14 @@
 package com.hnu.heshequ.fragment;
 
+import static androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED;
+
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -58,7 +62,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class HomeFragment extends NetWorkFragment implements  XRecyclerView.LoadingListener {
 
     private static final String TAG = "HomeFragment";
 
@@ -131,16 +135,16 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
     private void init() {
         setFragmentListener();
         ivSecondMa = (ImageView) view.findViewById(R.id.ivSecondMa);
-        ivSecondMa.setOnClickListener(this);
+        ivSecondMa.setOnClickListener(v -> startActivity(new Intent(mContext, CaptureActivity.class)));
         llSearch = (LinearLayout) view.findViewById(R.id.llSearch);
-        llSearch.setOnClickListener(this);
+        llSearch.setOnClickListener(v -> startActivity(new Intent(getActivity(), HomeSearchActivity.class)));
         tv1 = (TextView) view.findViewById(R.id.tv1);
         tv1.setSelected(true);
-        tv1.setOnClickListener(this);
+        tv1.setOnClickListener(v -> onTv1Clicked());
         tv2 = (TextView) view.findViewById(R.id.tv2);
-        tv2.setOnClickListener(this);
+        tv2.setOnClickListener(v -> onTv2Clicked());
         tv3 = (TextView) view.findViewById(R.id.tv3);
-        tv3.setOnClickListener(this);
+        tv3.setOnClickListener(v -> onTv3Clicked());
         llInvis = (LinearLayout) view.findViewById(R.id.llInVis);
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         ConsTants.initXRecycleView(getActivity(), true, true, rv);
@@ -176,22 +180,22 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         scheduleCard = (LinearLayout) headView.findViewById(R.id.schedulecard);
         makeFriends = (LinearLayout) headView.findViewById(R.id.makefriends);
 
-        team.setOnClickListener(this);
-        wenwen.setOnClickListener(this);
-        secondHand.setOnClickListener(this);
-        scheduleCard.setOnClickListener(this);
-        makeFriends.setOnClickListener(this);
+        team.setOnClickListener(v -> startActivity(new Intent(mContext, TeamActivity.class)));
+        wenwen.setOnClickListener(v -> startActivity(new Intent(mContext, WenwenActivity.class)));
+        secondHand.setOnClickListener(v -> startActivity(new Intent(mContext, SecondHandActivity.class)));
+        scheduleCard.setOnClickListener(v -> startActivity(new Intent(mContext, TimetableCheckin.class)));
+        makeFriends.setOnClickListener(v -> startActivity(new Intent(mContext, GPSActivity.class)));
 
         // 隐藏 menu
         headView.findViewById(R.id.menu).setVisibility(View.GONE);
 
         tv4 = (TextView) headView.findViewById(R.id.tv4);
         tv4.setSelected(true);
-        tv4.setOnClickListener(this);
+        tv4.setOnClickListener(v -> onTv1Clicked());
         tv5 = (TextView) headView.findViewById(R.id.tv5);
-        tv5.setOnClickListener(this);
+        tv5.setOnClickListener(v -> onTv2Clicked());
         tv6 = (TextView) headView.findViewById(R.id.tv6);
-        tv6.setOnClickListener(this);
+        tv6.setOnClickListener(v -> onTv3Clicked());
 
 
         llVis = (LinearLayout) headView.findViewById(R.id.llVis);
@@ -248,58 +252,28 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
     }
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.team:
-                startActivity(new Intent(mContext, TeamActivity.class));
-                break;
-            case R.id.wenwen:
-                startActivity(new Intent(mContext, WenwenActivity.class));
-                break;
-            case R.id.secondhand:
-                startActivity(new Intent(mContext, SecondHandActivity.class));
-                break;
-            case R.id.schedulecard:
-                startActivity(new Intent(mContext, TimetableCheckin.class));
-                break;
-            case R.id.makefriends:
-                startActivity(new Intent(mContext, GPSActivity.class));
-                break;
-            case R.id.llSearch:
-                Intent intent = new Intent(getActivity(), HomeSearchActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.ivSecondMa:
-                //
-                startActivity(new Intent(mContext, CaptureActivity.class));
-                break;
-            case R.id.tv1:
-            case R.id.tv4:
-                if (item == 1) {
-                    return;
-                }
-                item = 1;
-                setTextBg(item);
-                break;
-            case R.id.tv2:
-            case R.id.tv5:
-                if (item == 2) {
-                    return;
-                }
-                item = 2;
-                setTextBg(item);
-                break;
-            case R.id.tv3:
-            case R.id.tv6:
-                if (item == 3) {
-                    return;
-                }
-                item = 3;
-                setTextBg(item);
-                break;
+    private void onTv3Clicked() {
+        if (item == 3) {
+            return;
         }
+        item = 3;
+        setTextBg(item);
+    }
+
+    private void onTv2Clicked() {
+        if (item == 2) {
+            return;
+        }
+        item = 2;
+        setTextBg(item);
+    }
+
+    private void onTv1Clicked() {
+        if (item == 1) {
+            return;
+        }
+        item = 1;
+        setTextBg(item);
     }
 
     private void setTextBg(int item) {
@@ -385,9 +359,14 @@ public class HomeFragment extends NetWorkFragment implements View.OnClickListene
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter("fragment.listener");
-        getActivity().registerReceiver(brodcast, filter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getActivity().registerReceiver(brodcast, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            getActivity().registerReceiver(brodcast, filter);
+        }
     }
 
     private class FragmentBroadcast extends BroadcastReceiver {

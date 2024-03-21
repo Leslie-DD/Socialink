@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartyBuildingActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class PartyBuildingActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private XRecyclerView rv;
     private ArrayList<BuildingBean> rvData;
     private TextView tvTitle;
@@ -60,8 +60,8 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        ivAdd.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        ivAdd.setOnClickListener(v -> startActivity(new Intent(mContext, AddTjActivity.class).putExtra("teamid", teamid).putExtra("type", 1)));
     }
 
     private void init() {
@@ -124,10 +124,6 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
         builder.setNegativeButton("取消", (dialogInterface, i) -> delTjDialog.dismiss());
         delTjDialog = builder.create();
         delTjDialog.setCancelable(false);
-    }
-
-    public void delTjDialogShow(int position) {
-
     }
 
     private void getData(int pn) {
@@ -210,21 +206,6 @@ public class PartyBuildingActivity extends NetWorkActivity implements View.OnCli
     @Override
     protected void onFailure(String result, int where) {
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivSearch:
-
-                break;
-            case R.id.ivRight:
-                startActivity(new Intent(mContext, AddTjActivity.class).putExtra("teamid", teamid).putExtra("type", 1));
-                break;
-        }
     }
 
 

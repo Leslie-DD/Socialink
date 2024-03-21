@@ -57,7 +57,7 @@ import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
 
-public class SendQuestionActivity extends NetWorkActivity implements View.OnClickListener {
+public class SendQuestionActivity extends NetWorkActivity {
     private static final String TAG = "[SendQuestionActivity]";
     private TextView tvCancle;
     private TextView tvTitle;
@@ -172,13 +172,90 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         stringList = new ArrayList<>();
         testData = new ArrayList<TestBean>();
         llSelect = (LinearLayout) findViewById(R.id.llSelect);
-        llSelect.setOnClickListener(this);
+        llSelect.setOnClickListener(v -> {
+            if (niming == 0) {
+                niming = 1;
+                ivNm.setImageResource(R.mipmap.selected2);
+            } else {
+                niming = 0;
+                ivNm.setImageResource(R.mipmap.unselected);
+            }
+        });
         tvCancle = (TextView) findViewById(R.id.tvCancel);
-        tvCancle.setOnClickListener(this);
+        tvCancle.setOnClickListener(v -> finish());
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("发布问题");
         tvSave = (TextView) findViewById(R.id.tvSave);
-        tvSave.setOnClickListener(this);
+        tvSave.setOnClickListener(v -> {
+            String title = etTitle.getText().toString();
+            String content = etContent.getText().toString();
+            if (TextUtils.isEmpty(title)) {
+                Utils.toastShort(mContext, "标题不能为空");
+                return;
+            }
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "内容不能为空");
+                return;
+            }
+            if (bqList.size() == 0) {
+                Utils.toastShort(mContext, "标签不能为空");
+                return;
+            }
+            if (title.length() > 100) {
+                Utils.toastShort(mContext, "标题最多100个字符");
+                return;
+            }
+            if (content.length() > 5000) {
+                Utils.toastShort(mContext, "内容最多5000个字符");
+                return;
+            }
+            String biaoqain = "";
+            for (int i = 0; i < bqList.size(); i++) {
+                biaoqain = biaoqain + bqList.get(i) + ",";
+            }
+            biaoqain.substring(0, biaoqain.length() - 1);
+            tvSave.setClickable(false);
+            OkHttpUtils.post(WenConstans.SendQuestion)
+                    .tag(this)
+                    .headers(Constants.Token_Header, WenConstans.token)
+                    .params("name", title + "")
+                    .params("content", content + "")
+                    .params("labels", biaoqain + "")
+                    .params("anonymity", niming + "")
+                    .addFileParams("files", fileList)
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onSuccess(String s, Call call, Response response) {
+                            Log.e(TAG, "sresult:" + s);
+                            tvSave.setClickable(false);
+                            try {
+                                JSONObject result = new JSONObject(s);
+                                Log.e(TAG, "code:" + result.optInt("code"));
+                                if (result.optInt("code") == 0) {
+                                    Intent intent = new Intent();
+                                    intent.putExtra("item", 2);
+                                    intent.setAction("fragment.listener");
+                                    sendBroadcast(intent);
+                                    SendQuestionActivity.this.finish();
+                                } else {
+                                    Utils.toastShort(mContext, result.optString("msg"));
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "JSONException: " + e.getMessage());
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            tvSave.setClickable(false);
+                            isCommit = true;
+                            super.onError(call, response, e);
+                            Log.e(TAG, "onError Exception: " + e.toString());
+                        }
+                    });
+        });
         tvBelong = (TextView) findViewById(R.id.tvBelong);
         etTitle = (EditText) findViewById(R.id.etTitle);
         etContent = (EditText) findViewById(R.id.etContent);
@@ -250,8 +327,19 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
         tvPic = (TextView) pv.findViewById(R.id.tvPic);
         tvUp = (TextView) pv.findViewById(R.id.tvUp);
-        tvPic.setOnClickListener(this);
-        tvUp.setOnClickListener(this);
+        tvPic.setOnClickListener(v -> {
+            ActivityCompat.requestPermissions(
+                    context,
+                    new String[]{Manifest.permission_group.CAMERA},
+                    100
+            );
+            path = PhotoUtils.startPhoto(this);
+            pop.dismiss();
+        });
+        tvUp.setOnClickListener(v -> {
+            PhotoUtils.choosePhoto(202, this);
+            pop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -264,106 +352,6 @@ public class SendQuestionActivity extends NetWorkActivity implements View.OnClic
         });
         // 设置所在布局
         pop.setContentView(pv);
-    }
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.tvSave:
-                String title = etTitle.getText().toString();
-                String content = etContent.getText().toString();
-                if (TextUtils.isEmpty(title)) {
-                    Utils.toastShort(mContext, "标题不能为空");
-                    return;
-                }
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "内容不能为空");
-                    return;
-                }
-                if (bqList.size() == 0) {
-                    Utils.toastShort(mContext, "标签不能为空");
-                    return;
-                }
-                if (title.length() > 100) {
-                    Utils.toastShort(mContext, "标题最多100个字符");
-                    return;
-                }
-                if (content.length() > 5000) {
-                    Utils.toastShort(mContext, "内容最多5000个字符");
-                    return;
-                }
-                String biaoqain = "";
-                for (int i = 0; i < bqList.size(); i++) {
-                    biaoqain = biaoqain + bqList.get(i) + ",";
-                }
-                biaoqain.substring(0, biaoqain.length() - 1);
-                tvSave.setClickable(false);
-                OkHttpUtils.post(WenConstans.SendQuestion)
-                        .tag(this)
-                        .headers(Constants.Token_Header, WenConstans.token)
-                        .params("name", title + "")
-                        .params("content", content + "")
-                        .params("labels", biaoqain + "")
-                        .params("anonymity", niming + "")
-                        .addFileParams("files", fileList)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-                                Log.e(TAG, "sresult:" + s);
-                                tvSave.setClickable(false);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-                                    Log.e(TAG, "code:" + result.optInt("code"));
-                                    if (result.optInt("code") == 0) {
-                                        Intent intent = new Intent();
-                                        intent.putExtra("item", 2);
-                                        intent.setAction("fragment.listener");
-                                        sendBroadcast(intent);
-                                        SendQuestionActivity.this.finish();
-                                    } else {
-                                        Utils.toastShort(mContext, result.optString("msg"));
-                                    }
-                                } catch (JSONException e) {
-                                    Log.e(TAG, "JSONException: " + e.getMessage());
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-                                tvSave.setClickable(false);
-                                isCommit = true;
-                                super.onError(call, response, e);
-                                Log.e(TAG, "onError Exception: " + e.toString());
-                            }
-                        });
-                break;
-            case R.id.tvUp:
-                PhotoUtils.choosePhoto(202, this);
-                pop.dismiss();
-                break;
-            case R.id.tvPic:
-                ActivityCompat.requestPermissions(
-                        context,
-                        new String[]{Manifest.permission_group.CAMERA},
-                        100
-                );
-                path = PhotoUtils.startPhoto(this);
-                pop.dismiss();
-                break;
-            case R.id.llSelect:
-                if (niming == 0) {
-                    niming = 1;
-                    ivNm.setImageResource(R.mipmap.selected2);
-                } else {
-                    niming = 0;
-                    ivNm.setImageResource(R.mipmap.unselected);
-                }
-                break;
-        }
     }
 
     /**

@@ -19,7 +19,7 @@ import com.hnu.heshequ.view.CircleView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class QRcodeActivity extends NetWorkActivity implements View.OnClickListener {
+public class QRcodeActivity extends NetWorkActivity {
     private ImageView ivQr;
     private CircleView ivHead;
     private TextView tvName;
@@ -29,7 +29,7 @@ public class QRcodeActivity extends NetWorkActivity implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         cBean = (TeamBean) getIntent().getSerializableExtra("bean");
         initQr();
     }
@@ -59,17 +59,5 @@ public class QRcodeActivity extends NetWorkActivity implements View.OnClickListe
     protected void onFailure(String result, int where) {
 
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivSearch:
-                break;
-        }
-    }
-
 
 }

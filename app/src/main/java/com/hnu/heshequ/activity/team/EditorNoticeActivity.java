@@ -9,7 +9,7 @@ import com.hnu.heshequ.base.NetWorkActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EditorNoticeActivity extends NetWorkActivity implements View.OnClickListener {
+public class EditorNoticeActivity extends NetWorkActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,5 @@ public class EditorNoticeActivity extends NetWorkActivity implements View.OnClic
     protected void onFailure(String result, int where) {
 
     }
-
-    @Override
-    public void onClick(View view) {
-
-    }
-
 
 }

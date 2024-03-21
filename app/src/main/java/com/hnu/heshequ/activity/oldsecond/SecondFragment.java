@@ -57,7 +57,7 @@ import java.util.ArrayList;
  * Time: 8:47
  * Description: 二手商品主页面
  */
-public class SecondFragment extends NetWorkFragment implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class SecondFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
 
     /**
      * 通过广播 实现ClassifyAdatper调用此Fragment的setTvBg()方法
@@ -178,7 +178,13 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         ivRight = view.findViewById(R.id.ivRight);
         ivRight.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.kj2));
         llSearch = view.findViewById(R.id.llSearch);
-        llSearch.setOnClickListener(this);
+        llSearch.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, GoodsearchActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("category2_id", 0);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
 
         ivRight.setOnClickListener(v -> startActivity(new Intent(mContext, SecondhandPostActivity.class)));
 
@@ -216,7 +222,10 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
         llVis = (LinearLayout) headView.findViewById(R.id.llVis);
 
         ib_classifacation = (ImageButton) headView.findViewById(R.id.second_classifation);
-        ib_classifacation.setOnClickListener(this);
+        ib_classifacation.setOnClickListener(v -> {
+            Intent intent2 = new Intent(getContext(), ClassifationActivity.class);
+            startActivity(intent2);
+        });
     }
 
     //获取首页轮播图
@@ -228,25 +237,6 @@ public class SecondFragment extends NetWorkFragment implements View.OnClickListe
     // 获取二级分类
     private void getCategory() {
         sendPostConnection(WenConstans.SecondhandClassify, 102, WenConstans.token);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.llSearch:
-
-                Intent intent = new Intent(mContext, GoodsearchActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("category2_id", 0);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                break;
-            case R.id.second_classifation:
-                Intent intent2 = new Intent(getContext(), ClassifationActivity.class);
-                startActivity(intent2);
-                break;
-        }
     }
 
     public void setTvBg(int status) {

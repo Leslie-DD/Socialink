@@ -39,7 +39,7 @@ import java.util.List;
  * Created by dell on 2020/5/8.
  */
 
-public class NewSecondActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class NewSecondActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private TextView tvName;
     private TextView tvTime;
     private TextView tvDing;
@@ -200,7 +200,6 @@ public class NewSecondActivity extends NetWorkActivity implements View.OnClickLi
         tvName = (TextView) headview.findViewById(R.id.tvName);
         tvTime = (TextView) headview.findViewById(R.id.tvTime);
         tvDing = (TextView) headview.findViewById(R.id.tvDing);
-        tvDing.setOnClickListener(this);
         tvContent = (TextView) headview.findViewById(R.id.tvContent);
         tvResult = (TextView) headview.findViewById(R.id.tvResult);
         etContent = (EditText) findViewById(R.id.etContent);
@@ -208,11 +207,41 @@ public class NewSecondActivity extends NetWorkActivity implements View.OnClickLi
         ivSend = (ImageView) findViewById(R.id.ivSend);
         ivRight = (ImageView) findViewById(R.id.ivRight);
         ivRight.setImageResource(R.mipmap.more3);
-        ivRight.setOnClickListener(this);
+        ivRight.setOnClickListener(v -> {
+            XialaPop.showSelectPop(this, save, (bean.critics.toString()).equals(Constants.uid + ""), false, new XialaPop.TextListener() {
+                @Override
+                public void selectPosition(int num) {
+                    if (num == 0) {    //收藏相关
+                        if (save.equals("收藏")) {
+                            saveWw("1");
+                        } else {
+                            saveWw("2");
+                        }
+                    } else if (num == 1) {          //举报
+                        jbWw();
+                    } else if (num == 2) {
+                        jbDel();
+                    }
+                }
+            });
+        });
         ivHead = (CircleView) headview.findViewById(R.id.ivHead);
-        ivHead.setOnClickListener(this);
-        ivBq.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
+        ivHead.setOnClickListener(v -> startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", bean.critics)));
+        ivSend.setOnClickListener(v -> {
+            String content = etContent.getText().toString();
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "您还没有输入任何内容");
+                return;
+            }
+            if (content.length() > 100) {
+                Utils.toastShort(mContext, "最多评论100个字符");
+                return;
+            }
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.showSoftInput(etContent,InputMethodManager.SHOW_FORCED);
+            imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); //强制隐藏键盘
+            sendDisscuss(content);
+        });
         lv = (XRecyclerView) findViewById(R.id.lv);
         ConsTants.initXRecycleView(this, false, false, lv);
         adapter = new NewSecondAdapter(this);
@@ -227,58 +256,7 @@ public class NewSecondActivity extends NetWorkActivity implements View.OnClickLi
             tvContent.setText(bean.content + "");
         }
 
-        adapter.setListener(new NewSecondAdapter.DelListener() {
-            @Override
-            public void OnDel(int position) {
-                jbDel2(position);
-            }
-        });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBq:
-
-                break;
-            case R.id.ivHead:
-                startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", bean.critics));
-                break;
-            case R.id.ivSend:
-                String content = etContent.getText().toString();
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "您还没有输入任何内容");
-                    return;
-                }
-                if (content.length() > 100) {
-                    Utils.toastShort(mContext, "最多评论100个字符");
-                    return;
-                }
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.showSoftInput(etContent,InputMethodManager.SHOW_FORCED);
-                imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); //强制隐藏键盘
-                sendDisscuss(content);
-                break;
-            case R.id.ivRight:
-                XialaPop.showSelectPop(this, save, (bean.critics.toString()).equals(Constants.uid + ""), false, new XialaPop.TextListener() {
-                    @Override
-                    public void selectPosition(int num) {
-                        if (num == 0) {    //收藏相关
-                            if (save.equals("收藏")) {
-                                saveWw("1");
-                            } else {
-                                saveWw("2");
-                            }
-                        } else if (num == 1) {          //举报
-                            jbWw();
-                        } else if (num == 2) {
-                            jbDel();
-                        }
-                    }
-                });
-                break;
-
-        }
+        adapter.setListener(position -> jbDel2(position));
     }
 
     private void jbDel2(int p) {

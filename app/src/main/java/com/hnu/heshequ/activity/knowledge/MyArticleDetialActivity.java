@@ -20,7 +20,7 @@ import com.hnu.heshequ.view.CircleView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MyArticleDetialActivity extends NetWorkActivity implements View.OnClickListener {
+public class MyArticleDetialActivity extends NetWorkActivity  {
 
     private RecommendItemBean RecommendItemBean;
     private TextView tvTitle, tvName, tvColumn;
@@ -53,8 +53,14 @@ public class MyArticleDetialActivity extends NetWorkActivity implements View.OnC
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        tvColumn.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        tvColumn.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CreateArticleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("ArticleId", articleId);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -99,22 +105,6 @@ public class MyArticleDetialActivity extends NetWorkActivity implements View.OnC
             }
             webView.loadData(article.content, "text/html", "UTF-8");
 
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvColumn:
-                Intent intent = new Intent(context, CreateArticleActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("ArticleId", articleId);
-                intent.putExtras(bundle);
-                context.startActivity(intent);
-                break;
         }
     }
 

@@ -19,7 +19,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/30.
  */
 
-public class FriendGexingSet extends NetWorkActivity implements View.OnClickListener {
+public class FriendGexingSet extends NetWorkActivity {
     private EditText gexing;
     private String gexing1;
     private static String shengri;
@@ -54,9 +54,11 @@ public class FriendGexingSet extends NetWorkActivity implements View.OnClickList
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        gexing.setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        set.setOnClickListener(v -> {
+            gexing1 = gexing.getText().toString();
+            getData();
+        });
     }
 
     @Override
@@ -74,21 +76,6 @@ public class FriendGexingSet extends NetWorkActivity implements View.OnClickList
             setResult(1, i);
         } else {
             Utils.toastShort(mContext, result.optString("msg"));
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-//                Intent intent = new Intent(FriendGexingSet.this,FriendSet.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.set:
-                gexing1 = gexing.getText().toString();
-                getData();
-                break;
         }
     }
 

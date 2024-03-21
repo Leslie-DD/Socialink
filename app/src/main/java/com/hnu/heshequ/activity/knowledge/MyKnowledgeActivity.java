@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MyKnowledgeActivity extends NetWorkActivity implements View.OnClickListener {
+public class MyKnowledgeActivity extends NetWorkActivity  {
 
     private ViewPager vp;
     private TextView tvArticle, tvColumn;
@@ -59,10 +59,10 @@ public class MyKnowledgeActivity extends NetWorkActivity implements View.OnClick
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
-        tvArticle.setOnClickListener(this);
-        tvColumn.setOnClickListener(this);
+        tvArticle.setOnClickListener(v -> setTvBg(0));
+        tvColumn.setOnClickListener(v -> setTvBg(1));
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -102,21 +102,5 @@ public class MyKnowledgeActivity extends NetWorkActivity implements View.OnClick
             vp.setCurrentItem(status);
         }
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvRecommend:
-                setTvBg(0);
-                break;
-            case R.id.tvSubscription:
-                setTvBg(1);
-                break;
-        }
-    }
-
 
 }

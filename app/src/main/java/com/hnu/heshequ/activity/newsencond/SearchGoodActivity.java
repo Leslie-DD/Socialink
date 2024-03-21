@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchGoodActivity extends NetWorkActivity implements View.OnClickListener {
+public class SearchGoodActivity extends NetWorkActivity {
 
     private int beforeType;
     private int category2Id;
@@ -80,9 +80,15 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
         recyclerView = findViewById(R.id.search_good_rv);
         etContent = findViewById(R.id.search_good_et);
         llBack = findViewById(R.id.search_good_llBack);
-        llBack.setOnClickListener(this);
+        llBack.setOnClickListener(v -> finish());
         llSearch = findViewById(R.id.search_good_llSearch);
-        llSearch.setOnClickListener(this);
+        llSearch.setOnClickListener(v -> {
+            content = etContent.getText().toString();
+            category2Id = 0;
+            beforeType = INDEX_TYPE;
+            pn = 1;
+            getSearchData();
+        });
 
         xRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
             @Override
@@ -148,22 +154,6 @@ public class SearchGoodActivity extends NetWorkActivity implements View.OnClickL
 //        Utils.toastShort(context, "更多分类商品 category2Id=" + category2Id);
         setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});
         sendPost(WenConstans.Secondhand, 102, WenConstans.token);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.search_good_llBack:
-                finish();
-                break;
-            case R.id.search_good_llSearch:
-                content = etContent.getText().toString();
-                category2Id = 0;
-                beforeType = INDEX_TYPE;
-                pn = 1;
-                getSearchData();
-                break;
-        }
     }
 
     @Override

@@ -50,7 +50,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends NetWorkActivity implements View.OnClickListener {
+public class MainActivity extends NetWorkActivity {
     private static final String TAG = "[MainActivity]";
     private Fragment currentFragment;
 
@@ -117,11 +117,64 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         rb4 = findViewById(R.id.rb4);
         rb5 = findViewById(R.id.rb5);
 
-        rb1.setOnClickListener(this);
-        rb2.setOnClickListener(this);
-        rb3.setOnClickListener(this);
-        findViewById(R.id.rls).setOnClickListener(this);
-        rb5.setOnClickListener(this);
+        rb1.setOnClickListener(v -> {
+            if (colum == 0) {
+                return;
+            }
+            colum = 0;
+            clearAllSelect();
+            rb1.setSelected(true);
+            decorView.setSystemUiVisibility(oldSystemUiVisibility);
+            StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
+            switchFragment(homeFragment);
+        });
+        rb2.setOnClickListener(v -> {
+            if (colum == 1) {
+                return;
+            }
+            colum = 1;
+            clearAllSelect();
+            rb2.setSelected(true);
+            decorView.setSystemUiVisibility(oldSystemUiVisibility);
+            StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
+            switchFragment(teamFragment);
+        });
+        rb3.setOnClickListener(v -> {
+            if (colum == 2) {
+                return;
+            }
+            colum = 2;
+            clearAllSelect();
+            rb3.setSelected(true);
+            decorView.setSystemUiVisibility(oldSystemUiVisibility);
+            StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
+            switchFragment(wenwenFragment);
+        });
+        findViewById(R.id.rls).setOnClickListener(v -> {
+            if (colum == 3) {
+                return;
+            }
+            colum = 3;
+            redStatus(0);
+            clearAllSelect();
+            rb4.setSelected(true);
+            decorView.setSystemUiVisibility(oldSystemUiVisibility);
+            StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
+            switchFragment(msgFragment);
+        });
+        rb5.setOnClickListener(v -> {
+            if (colum == 4) {
+                return;
+            }
+            colum = 4;
+            clearAllSelect();
+            rb5.setSelected(true);
+            oldSystemUiVisibility = decorView.getSystemUiVisibility();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            switchFragment(meFragment);
+        });
 
         rb1.setSelected(true);
         RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(red.getLayoutParams());
@@ -147,11 +200,18 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         TextView tvCancel = pv.findViewById(R.id.tvPic);
         tvCancel.setText("取消");
         tvCancel.setTextColor(Color.parseColor("#999999"));
+        tvCancel.setOnClickListener(v -> pop.dismiss());
         tvExit = pv.findViewById(R.id.tvUp);
         tvExit.setText("退出");
         tvExit.setTextColor(Color.parseColor("#CC5252"));
-        tvCancel.setOnClickListener(this);
-        tvExit.setOnClickListener(this);
+        tvExit.setOnClickListener(v -> {
+            pop.dismiss();
+            sp.edit().putString("phone", "").putString("token", "").putInt("uid", 1).putBoolean("isLogin", false).apply();
+            sp.edit().putBoolean("isLogin", false).apply();
+            Constants.uid = 1;
+            MeetApplication.getInstance().finishAll();
+            startActivity(new Intent(mContext, LoginActivity.class));
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -213,81 +273,6 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         //请求用户信息
         setBodyParams(new String[]{"uid"}, new String[]{"" + Constants.uid});
         sendPost(Constants.base_url + "/api/user/info.do", getUserinfo, Constants.token);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvUp:  // 退出登录/登录
-                pop.dismiss();
-                sp.edit().putString("phone", "").putString("token", "").putInt("uid", 1).putBoolean("isLogin", false).apply();
-                sp.edit().putBoolean("isLogin", false).apply();
-                Constants.uid = 1;
-                MeetApplication.getInstance().finishAll();
-                startActivity(new Intent(mContext, LoginActivity.class));
-                break;
-            case R.id.tvPic: //取消
-                pop.dismiss();
-                break;
-            case R.id.rb1:  // 导航1 首页
-                if (colum == 0) {
-                    return;
-                }
-                colum = 0;
-                clearAllSelect();
-                rb1.setSelected(true);
-                decorView.setSystemUiVisibility(oldSystemUiVisibility);
-                StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
-                switchFragment(homeFragment);
-                break;
-            case R.id.rb2:  // 导航2 团队
-                if (colum == 1) {
-                    return;
-                }
-                colum = 1;
-                clearAllSelect();
-                rb2.setSelected(true);
-                decorView.setSystemUiVisibility(oldSystemUiVisibility);
-                StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
-                switchFragment(teamFragment);
-                break;
-            case R.id.rb3:  // 导航3 问问
-                if (colum == 2) {
-                    return;
-                }
-                colum = 2;
-                clearAllSelect();
-                rb3.setSelected(true);
-                decorView.setSystemUiVisibility(oldSystemUiVisibility);
-                StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
-                switchFragment(wenwenFragment);
-                break;
-            case R.id.rls:  // 导航4 消息
-                if (colum == 3) {
-                    return;
-                }
-                colum = 3;
-                redStatus(0);
-                clearAllSelect();
-                rb4.setSelected(true);
-                decorView.setSystemUiVisibility(oldSystemUiVisibility);
-                StatusBarCompat.setStatusBarColor(this, Color.parseColor("#ffffff"));
-                switchFragment(msgFragment);
-                break;
-            case R.id.rb5:  // 导航5 我的
-                if (colum == 4) {
-                    return;
-                }
-                colum = 4;
-                clearAllSelect();
-                rb5.setSelected(true);
-                oldSystemUiVisibility = decorView.getSystemUiVisibility();
-                int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
-                decorView.setSystemUiVisibility(option);
-                getWindow().setStatusBarColor(Color.TRANSPARENT);
-                switchFragment(meFragment);
-                break;
-        }
     }
 
     private void clearAllSelect() {

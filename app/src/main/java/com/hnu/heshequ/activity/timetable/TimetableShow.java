@@ -20,7 +20,7 @@ import org.json.JSONObject;
  * Description: 课程表模块 课程页面
  */
 
-public class TimetableShow extends NetWorkActivity implements View.OnClickListener {
+public class TimetableShow extends NetWorkActivity {
     private TextView zhouri_1, zhouri_2, zhouri_3, zhouri_4, zhouri_5;
     private TextView zhouyi_1, zhouyi_2, zhouyi_3, zhouyi_4, zhouyi_5;
     private TextView zhouer_1, zhouer_2, zhouer_3, zhouer_4, zhouer_5;
@@ -102,10 +102,25 @@ public class TimetableShow extends NetWorkActivity implements View.OnClickListen
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        findViewById(R.id.ivRight).setOnClickListener(this);
-        xuanzezhou.setOnClickListener(this);
-        xuanzezhanghao.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        findViewById(R.id.ivRight).setOnClickListener(v -> {
+            Intent intent3 = new Intent();
+            intent3.setClass(TimetableShow.this, TimetableAddCourse.class);
+            startActivity(intent3);
+            finish();
+        });
+        xuanzezhou.setOnClickListener(v -> {
+            Intent intent2 = new Intent();
+            intent2.setClass(TimetableShow.this, ZhouSelect.class);
+            startActivity(intent2);
+            finish();
+        });
+        xuanzezhanghao.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.setClass(TimetableShow.this, TimetableCheckin.class);
+            startActivity(intent1);
+            finish();
+        });
     }
 
     @Override
@@ -276,34 +291,6 @@ public class TimetableShow extends NetWorkActivity implements View.OnClickListen
             Utils.toastShort(mContext, result.optString("msg"));
         }
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.ivRight:
-                Intent intent3 = new Intent();
-                intent3.setClass(TimetableShow.this, TimetableAddCourse.class);
-                startActivity(intent3);
-                finish();
-                break;
-            case R.id.xuanzezhanghao:
-                Intent intent1 = new Intent();
-                intent1.setClass(TimetableShow.this, TimetableCheckin.class);
-                startActivity(intent1);
-                finish();
-                break;
-            case R.id.xuanzezhou:
-                Intent intent2 = new Intent();
-                intent2.setClass(TimetableShow.this, ZhouSelect.class);
-                startActivity(intent2);
-                finish();
-                break;
-        }
-    }
-
 
     public void getData() {
         setBodyParams(new String[]{"studentId", "pwd", "yearFirst", "yearSecond", "num", "Date", "currentWeek", "school"}, new String[]{studentId, pwd, year_1, year_2, term_1, today_1, week_1, schoolname});

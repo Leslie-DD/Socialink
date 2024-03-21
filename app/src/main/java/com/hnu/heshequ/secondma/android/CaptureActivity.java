@@ -41,7 +41,7 @@ import java.io.IOException;
  * @declare :扫一扫
  */
 
-public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback, View.OnClickListener {
+public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
     private ZxingConfig config;
@@ -116,12 +116,9 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
         TextView tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("扫描团队二维码");
         ImageView llBack = (ImageView) findViewById(R.id.ivBack);
-        llBack.setOnClickListener(this);
+        llBack.setOnClickListener(v -> finish());
         previewView = (SurfaceView) findViewById(R.id.preview_view);
-        previewView.setOnClickListener(CaptureActivity.this);
-
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-        viewfinderView.setOnClickListener(CaptureActivity.this);
     }
 
 
@@ -276,15 +273,6 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
                                int height) {
 
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        int id = view.getId();
-        if (id == R.id.ivBack) {
-            finish();
-        }
     }
 
 

@@ -25,7 +25,7 @@ import okhttp3.Response;
  * Created by dell on 2020/5/9.
  */
 
-public class TimetableSecondCheckin extends NetWorkActivity implements View.OnClickListener {
+public class TimetableSecondCheckin extends NetWorkActivity {
     private String year_1, year_2, term_1, today_1, week_1;
     public static String studentId;
     public static String pwd;
@@ -70,8 +70,52 @@ public class TimetableSecondCheckin extends NetWorkActivity implements View.OnCl
     }
 
     private void event() {
-        findViewById(R.id.tvCancel).setOnClickListener(this);
-        findViewById(R.id.tvSave).setOnClickListener(this);
+        findViewById(R.id.tvCancel).setOnClickListener(v -> finish());
+        findViewById(R.id.tvSave).setOnClickListener(v -> {
+            verification = yanzheng.getText().toString();
+            Log.e("key", "" + key);
+            Log.e("verification", "" + verification);
+            OkHttpUtils.post(WenConstans.ZhongnanGetYanzheng)
+                    .tag(this)
+                    .params("key", key + "")
+                    .params("verification", "" + verification)
+                    .execute(new StringCallback() {
+                        @Override
+                        public void onSuccess(String s, Call call, Response response) {
+                            Log.e("gerenxinxi", "sresult:" + s);
+                            try {
+                                JSONObject result = new JSONObject(s);
+
+                                key1 = result.getString("data");
+                                Log.e("key", key1 + "");
+                                Intent intent1 = new Intent();
+                                intent1.putExtra("key", key1 + "");
+                                intent1.putExtra("year1", "" + year_1);
+                                intent1.putExtra("year2", "" + year_2);
+                                intent1.putExtra("term1", "" + term_1);
+                                intent1.putExtra("week", "" + week_1);
+                                intent1.putExtra("today", "" + today_1);
+                                intent1.putExtra("pwd", pwd + "");
+                                intent1.putExtra("studentId", studentId + "");
+                                intent1.putExtra("schoolname", schoolname + "");
+                                intent1.setClass(TimetableSecondCheckin.this, ZhongnanShow.class);
+                                startActivity(intent1);
+                                finish();
+
+                            } catch (JSONException e) {
+                                Log.e("gerenxinxi", "JSONException: " + e.toString());
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(Call call, Response response, Exception e) {
+                            super.onError(call, response, e);
+                            Log.e("gerenxinxi", "onError Exception: " + e.toString());
+                        }
+                    });
+        });
     }
 
     @Override
@@ -81,88 +125,7 @@ public class TimetableSecondCheckin extends NetWorkActivity implements View.OnCl
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
-//        int ret = result.optInt("code");
-//        if (ret == 0) {
-//            JSONObject dd = new JSONObject(result.optString("data"));
-//            key1 = dd.getString("key");
-//
-//            Intent intent1 = new Intent();
-//            intent1.putExtra("key",key1+"");
-//            intent1.putExtra("year1",""+year_1);
-//            intent1.putExtra("year2",""+year_2);
-//            intent1.putExtra("term1",""+term_1);
-//            intent1.putExtra("week",""+week_1);
-//            intent1.putExtra("today",""+today_1);
-//            intent1.putExtra("pwd",pwd+"");
-//            intent1.putExtra("studentId",studentId+"");
-//            intent1.putExtra("schoolname",schoolname+"");
-//            intent1.setClass(TimetableSecondCheckin.this,ZhongnanShow.class);
-//            startActivity(intent1);
-//
-//        } else {
-//            Utils.toastShort(mContext, result.optString("msg"));
-//        }
+
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tvCancel:
-                finish();
-                break;
-            case R.id.tvSave:
-                verification = yanzheng.getText().toString();
-                Log.e("key", "" + key);
-                Log.e("verification", "" + verification);
-                OkHttpUtils.post(WenConstans.ZhongnanGetYanzheng)
-                        .tag(this)
-                        .params("key", key + "")
-                        .params("verification", "" + verification)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-                                Log.e("gerenxinxi", "sresult:" + s);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-
-                                    key1 = result.getString("data");
-                                    Log.e("key", key1 + "");
-                                    Intent intent1 = new Intent();
-                                    intent1.putExtra("key", key1 + "");
-                                    intent1.putExtra("year1", "" + year_1);
-                                    intent1.putExtra("year2", "" + year_2);
-                                    intent1.putExtra("term1", "" + term_1);
-                                    intent1.putExtra("week", "" + week_1);
-                                    intent1.putExtra("today", "" + today_1);
-                                    intent1.putExtra("pwd", pwd + "");
-                                    intent1.putExtra("studentId", studentId + "");
-                                    intent1.putExtra("schoolname", schoolname + "");
-                                    intent1.setClass(TimetableSecondCheckin.this, ZhongnanShow.class);
-                                    startActivity(intent1);
-                                    finish();
-
-                                } catch (JSONException e) {
-                                    Log.e("gerenxinxi", "JSONException: " + e.toString());
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-
-                                super.onError(call, response, e);
-                                Log.e("gerenxinxi", "onError Exception: " + e.toString());
-                            }
-                        });
-                break;
-        }
-    }
-
-    //    public void getData(){
-//        setBodyParams(new String[]{"key", "verification"}, new String[]{key, verification});
-//        sendPost(WenConstans.ZhongnanGetYanzheng,1 , null);
-//    }
-
 
 }

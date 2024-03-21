@@ -33,7 +33,7 @@ import java.util.ArrayList;
  * Time: 14:52
  * Description:知识页面fregment 原是activity，为了统一改为fragment
  */
-public class KnowledgeFragment extends NetWorkFragment implements View.OnClickListener {
+public class KnowledgeFragment extends NetWorkFragment {
 
     private View view;
     private ArrayList<Fragment> list;
@@ -81,7 +81,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
         vp = (ViewPager) view.findViewById(R.id.vp);
 
         ivAdd = view.findViewById(R.id.ivAdd);
-        ivAdd.setOnClickListener(this);
+        ivAdd.setOnClickListener(v -> startActivity(new Intent(mContext, CreateArticleActivity.class)));
         list = new ArrayList<>();
         recommendFragment = new RecommendFragment();
         subscriptionFragment = new SubscriptionFragment();
@@ -96,7 +96,7 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
     }
 
     private void event() {
-//        view.findViewById(R.id.ivBack).setOnClickListener(this);
+//        view.findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -112,8 +112,8 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
             public void onPageScrollStateChanged(int state) {
             }
         });
-        tvRecommend.setOnClickListener(this);
-        tvSubscription.setOnClickListener(this);
+        tvRecommend.setOnClickListener(v -> setTvBg(0));
+        tvSubscription.setOnClickListener(v -> setTvBg(1));
     }
 
     public void setTvBg(int status) {
@@ -130,34 +130,6 @@ public class KnowledgeFragment extends NetWorkFragment implements View.OnClickLi
             vp.setCurrentItem(status);
         }
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-//            case R.id.ivBack:
-//                this.finish();
-//                break;
-            case R.id.tvRecommend:
-                setTvBg(0);
-                break;
-            case R.id.tvSubscription:
-                setTvBg(1);
-                break;
-            case R.id.ivAdd:
-                startActivity(new Intent(mContext, CreateArticleActivity.class));
-                break;
-        }
-    }
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        //        //    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        //        //    }
-
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {

@@ -13,7 +13,7 @@ import com.hnu.heshequ.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ReportActivity extends NetWorkActivity implements View.OnClickListener {
+public class ReportActivity extends NetWorkActivity {
     private int type = 0;  //1 - 问问   2 - 团队
     private String id;
     private TextView tvTitle, tvSave;
@@ -40,27 +40,17 @@ public class ReportActivity extends NetWorkActivity implements View.OnClickListe
     }
 
     private void event() {
-        findViewById(R.id.tvCancel).setOnClickListener(this);
-        findViewById(R.id.btJb).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.btJb:
-                contennt = etContent.getText().toString().trim();
-                if (contennt.isEmpty()) {
-                    Utils.toastShort(mContext, "请输入举报内容后再提交");
-                    return;
-                }
-                setBodyParams(new String[]{"type", "id", "content"}
-                        , new String[]{type + "", id, contennt});
-                sendPost(WenConstans.WwJuBao, 100, WenConstans.token);
-                break;
-        }
+        findViewById(R.id.tvCancel).setOnClickListener(v -> finish());
+        findViewById(R.id.btJb).setOnClickListener(v -> {
+            contennt = etContent.getText().toString().trim();
+            if (contennt.isEmpty()) {
+                Utils.toastShort(mContext, "请输入举报内容后再提交");
+                return;
+            }
+            setBodyParams(new String[]{"type", "id", "content"}
+                    , new String[]{type + "", id, contennt});
+            sendPost(WenConstans.WwJuBao, 100, WenConstans.token);
+        });
     }
 
     @Override

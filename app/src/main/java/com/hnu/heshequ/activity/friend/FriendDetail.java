@@ -32,7 +32,7 @@ import okhttp3.Response;
  * Created by dell on 2020/3/29.
  */
 
-public class FriendDetail extends NetWorkActivity implements View.OnClickListener {
+public class FriendDetail extends NetWorkActivity {
     private CircleView ivHead;
     private ImageView xingbie;
     private TextView nicknametext, gexingqianming;
@@ -125,10 +125,55 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
     }
 
     private void event() {
-        deletefriend.setOnClickListener(this);
-        sendmessage.setOnClickListener(this);
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        dongtai.setOnClickListener(this);
+        deletefriend.setOnClickListener(v -> OkHttpUtils.post(WenConstans.DeleteFriend)
+                .tag(this)
+                .headers(Constants.Token_Header, WenConstans.token)
+                .params("user_id", hisid + "")
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+
+                        Log.e("gerenxinxi", "sresult:" + s);
+                        try {
+                            JSONObject result = new JSONObject(s);
+                            int ret = result.getInt("code");
+                            if (ret == 0) {
+                                //String msg = result.getString("setQues");
+                                //Log.e("shanchufanhuixinxi", "" + msg);
+
+                                Utils.toastShort(FriendDetail.this, "删除成功");
+                            } else {
+                                Utils.toastShort(FriendDetail.this, "删除失败");
+                            }
+                        } catch (JSONException e) {
+                            Log.e("shanchufanhuixinxii", "JSONException: " + e.toString());
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+
+                        super.onError(call, response, e);
+                        Log.e("gerenxinxi", "onError Exception: " + e.toString());
+                    }
+                }));
+        sendmessage.setOnClickListener(v -> {
+            Intent intent3 = new Intent();
+            intent3.putExtra("hisid", hisid);
+            intent3.putExtra("nickname", "" + nicheng1);
+            intent3.putExtra("myheader", myheader);
+            intent3.setClass(FriendDetail.this, MessageActivity.class);
+            startActivity(intent3);
+        });
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        dongtai.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.putExtra("uid", "" + hisid);
+            intent1.setClass(FriendDetail.this, OthersDynamic.class);
+            startActivity(intent1);
+        });
     }
 
     @Override
@@ -198,65 +243,6 @@ public class FriendDetail extends NetWorkActivity implements View.OnClickListene
             } else {
                 ivHead.setImageResource(R.mipmap.head3);
             }
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.dongtai:
-                Intent intent1 = new Intent();
-                intent1.putExtra("uid", "" + hisid);
-                intent1.setClass(FriendDetail.this, OthersDynamic.class);
-                startActivity(intent1);
-                break;
-            case R.id.sendmessage:
-                Intent intent3 = new Intent();
-                intent3.putExtra("hisid", hisid);
-                intent3.putExtra("nickname", "" + nicheng1);
-                intent3.putExtra("myheader", myheader);
-                intent3.setClass(FriendDetail.this, MessageActivity.class);
-                startActivity(intent3);
-                break;
-            case R.id.deletefriend:
-                OkHttpUtils.post(WenConstans.DeleteFriend)
-                        .tag(this)
-                        .headers(Constants.Token_Header, WenConstans.token)
-                        .params("user_id", hisid + "")
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(String s, Call call, Response response) {
-
-                                Log.e("gerenxinxi", "sresult:" + s);
-                                try {
-                                    JSONObject result = new JSONObject(s);
-                                    int ret = result.getInt("code");
-                                    if (ret == 0) {
-                                        //String msg = result.getString("setQues");
-                                        //Log.e("shanchufanhuixinxi", "" + msg);
-
-                                        Utils.toastShort(FriendDetail.this, "删除成功");
-                                    } else {
-                                        Utils.toastShort(FriendDetail.this, "删除失败");
-                                    }
-                                } catch (JSONException e) {
-                                    Log.e("shanchufanhuixinxii", "JSONException: " + e.toString());
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(Call call, Response response, Exception e) {
-
-                                super.onError(call, response, e);
-                                Log.e("gerenxinxi", "onError Exception: " + e.toString());
-                            }
-                        });
-                break;
         }
     }
 

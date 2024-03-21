@@ -24,7 +24,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 /**
  * Finishes an activity after a period of inactivity if the device is on battery
@@ -68,12 +71,18 @@ public final class InactivityTimer {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     public synchronized void onResume() {
         if (registered) {
             Log.w(TAG, "PowerStatusReceiver was already registered?");
         } else {
-            activity.registerReceiver(powerStatusReceiver, new IntentFilter(
-                    Intent.ACTION_BATTERY_CHANGED));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                activity.registerReceiver(powerStatusReceiver, new IntentFilter(
+                        Intent.ACTION_BATTERY_CHANGED), Context.RECEIVER_NOT_EXPORTED);
+            } else {
+                activity.registerReceiver(powerStatusReceiver, new IntentFilter(
+                        Intent.ACTION_BATTERY_CHANGED));
+            }
             registered = true;
         }
         onActivity();

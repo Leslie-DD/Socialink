@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -188,7 +189,11 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        getActivity().registerReceiver(brodcast, filter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getActivity().registerReceiver(brodcast, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            getActivity().registerReceiver(brodcast, filter);
+        }
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {

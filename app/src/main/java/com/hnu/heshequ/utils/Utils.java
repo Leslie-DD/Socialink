@@ -56,10 +56,6 @@ import com.hnu.heshequ.entity.TeamMemberBean;
 import com.hnu.heshequ.view.CircleView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -886,45 +882,6 @@ public class Utils {
         return sdf.parse(str);
     }
 
-    /**
-     * 计算图片的缩放比例
-     *
-     * @return
-     */
-    public static int getScare(String url, int screenWidth, int screenHeight) {
-        try {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-            HttpResponse response = client.execute(httpGet);
-            int code = response.getStatusLine().getStatusCode();
-
-            if (200 == code) {
-                InputStream is = response.getEntity().getContent();
-                Options opts = new Options();
-                opts.inJustDecodeBounds = true;
-                BitmapFactory.decodeStream(is, null, opts);
-
-                int imageWidth = opts.outWidth;
-                int imageHeight = opts.outHeight;
-
-                // Display display = ImageActivity.this.getWindowManager()
-                // .getDefaultDisplay();
-                // int screenWidth = display.getWidth();
-                // int screenHeight = display.getHeight();
-
-                int widthscale = imageWidth / screenWidth;
-                int heightscale = imageHeight / screenHeight;
-                int scale = widthscale > heightscale ? widthscale : heightscale;
-
-                is.close();
-                return scale;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 1;// 网络连接失败时默认返回1
-    }
-
     public static boolean isSlideToBottom(XRecyclerView recyclerView) {
         if (recyclerView == null) return false;
         if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()
@@ -932,40 +889,6 @@ public class Utils {
             return true;
         }
         return false;
-    }
-
-    /**
-     * 获取网络图片
-     */
-    public static Bitmap getNetImage(String url, int screenWidth, int screenHeight) {
-        try {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet httpGet = new HttpGet(url);
-            HttpResponse response = client.execute(httpGet);
-            int code = response.getStatusLine().getStatusCode();
-
-            if (200 == code) {
-                InputStream is = response.getEntity().getContent();
-
-                Options opts = new Options();
-
-                // 根据计算出的比例进行缩放
-                int scale = getScare(url, screenWidth / 3, screenHeight / 3);
-                opts.inSampleSize = scale;
-
-                Bitmap bm = BitmapFactory.decodeStream(is, null, opts);
-
-                Log.e("YSF", bm.getRowBytes() * bm.getHeight() + "字节");
-                int i = bm.getRowBytes() * bm.getHeight();
-                if (i / 1024 < 1024) {
-                    return bm;
-                }
-                return comp(bm);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public static Bitmap comp(Bitmap image) {

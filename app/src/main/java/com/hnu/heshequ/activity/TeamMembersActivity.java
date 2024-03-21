@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamMembersActivity extends NetWorkActivity implements View.OnClickListener {
+public class TeamMembersActivity extends NetWorkActivity {
     private ImageView ivBack;
     private EditText etSearch;
     private ListView lv;
@@ -62,16 +62,15 @@ public class TeamMembersActivity extends NetWorkActivity implements View.OnClick
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        etSearch.setOnClickListener(this);
-        adapter.setOnItemEditorNameListener(new TeamMemberAdapter.OnItemEditorNameListener() {
-            @Override
-            public void ItemEditor(int position, String mark) {
-                editorPosition = position;
-                editorName = mark;
-                setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + pData.get(position).getId(), "" + mark});
-                sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
-            }
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        etSearch.setOnClickListener(v -> {
+            startActivity(new Intent(this, SearchMembersActivity.class).putExtra("teamid", teamId));
+        });
+        adapter.setOnItemEditorNameListener((position, mark) -> {
+            editorPosition = position;
+            editorName = mark;
+            setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + pData.get(position).getId(), "" + mark});
+            sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
         });
 
     }
@@ -132,21 +131,6 @@ public class TeamMembersActivity extends NetWorkActivity implements View.OnClick
     @Override
     protected void onFailure(String result, int where) {
         Utils.toastShort(mContext, "网络异常");
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.ivSearch:
-                startActivity(new Intent(this, SearchMembersActivity.class).putExtra("teamid", teamId));
-                break;
-            case R.id.etSearch:
-                startActivity(new Intent(this, SearchMembersActivity.class).putExtra("teamid", teamId));
-                break;
-        }
     }
 
     @Override

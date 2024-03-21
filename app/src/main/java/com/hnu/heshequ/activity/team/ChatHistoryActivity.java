@@ -37,7 +37,7 @@ import java.util.List;
 
 //import com.zkk.rulerview.R;
 
-public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, View.OnClickListener {
+public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerView.LoadingListener{
     private RulerView ruler_height;   //身高的view
     private TextView tv_register_info_height_value;
     private Calendar calendar = Calendar.getInstance();
@@ -206,21 +206,27 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
         tv_register_info_height_value.setText("" + year + "-" + month + "-" + day);
         historyedit = (EditText) findViewById(R.id.historyedit);
         historysearch = (ImageView) findViewById(R.id.historysearch);
-
-        historyedit.setOnClickListener(this);
-        historysearch.setOnClickListener(this);
+        historysearch.setOnClickListener(v -> {
+            message = historyedit.getText().toString();
+            if (message.length() > 127) Utils.toastShort(this, "字符过长");
+            else if (message.length() == 0) Utils.toastShort(this, "搜索不能为空");
+            else {
+                pn = 1;
+                historysearch.setImageResource(R.mipmap.historysearching);
+                tv_register_info_height_value.setTextColor(Color.parseColor("#ababab"));
+                setBodyParams(new String[]{"receiver", "pn", "ps", "content"}, new String[]{"" + hisid, "" + 1, "" + ps, message});
+                sendPost(WenConstans.SearchMessage, refresh, Constants.token);
+            }
+        });
 
 
         //滚动设置 显示
-        ruler_height.setOnValueChangeListener(new RulerView.OnValueChangeListener() {
-            @Override
-            public void onValueChange(float value) {
-                pn = 0;
-                historysearch.setImageResource(R.mipmap.historysearch);
-                tv_register_info_height_value.setTextColor(Color.parseColor("#63B8FF"));
-                tv_register_info_height_value.setText(date[(int) value]);
-                today = (int) value;
-            }
+        ruler_height.setOnValueChangeListener(value -> {
+            pn = 0;
+            historysearch.setImageResource(R.mipmap.historysearch);
+            tv_register_info_height_value.setTextColor(Color.parseColor("#63B8FF"));
+            tv_register_info_height_value.setText(date[(int) value]);
+            today = (int) value;
         });
 
 
@@ -230,12 +236,7 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
     //返回按钮 加载监听
     private void event() {
         rv.setLoadingListener(this);
-        findViewById(R.id.historyback).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChatHistoryActivity.this.finish();
-            }
-        });
+        findViewById(R.id.historyback).setOnClickListener(view -> ChatHistoryActivity.this.finish());
     }
 
     private void getData(int hisid, int pn, int type) {
@@ -257,7 +258,7 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
 
     public void onRefresh() {
         message = historyedit.getText().toString();
-        if (message.length() > 0) {
+        if (!message.isEmpty()) {
             if (allpn == 1) {
                 rv.refreshComplete();
             } else if (pn < allpn) {
@@ -268,7 +269,6 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
             }
 
         } else {
-
             if (pn == 0) {
                 pn = 1;
                 getData(hisid, pn, 1);
@@ -407,23 +407,6 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
     protected void onFailure(String result, int where) {
         rv.refreshComplete();
         Utils.toastShort(this, "网络异常");
-    }
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.historysearch:
-                message = historyedit.getText().toString();
-                if (message.length() > 127) Utils.toastShort(this, "字符过长");
-                else if (message.length() == 0) Utils.toastShort(this, "搜索不能为空");
-                else {
-                    pn = 1;
-                    historysearch.setImageResource(R.mipmap.historysearching);
-                    tv_register_info_height_value.setTextColor(Color.parseColor("#ababab"));
-                    setBodyParams(new String[]{"receiver", "pn", "ps", "content"}, new String[]{"" + hisid, "" + 1, "" + ps, message});
-                    sendPost(WenConstans.SearchMessage, refresh, Constants.token);
-                }
-                break;
-        }
     }
 
     public void onResume() {

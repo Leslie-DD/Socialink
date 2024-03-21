@@ -26,6 +26,9 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.githang.statusbar.StatusBarCompat;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.CommentTeamAdapter;
@@ -45,9 +48,6 @@ import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.entity.RefMembers;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
-import com.githang.statusbar.StatusBarCompat;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,7 +58,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersonalInformationActivity extends NetWorkActivity implements View.OnClickListener,
+public class PersonalInformationActivity extends NetWorkActivity implements
         XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener, HotWenwenAdapter.DoSaveListener {
 
     private static final String TAG = "[PersonalInformationActivity]";
@@ -367,33 +367,23 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
             }
         });
 
-        llBlack1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setBodyParams(new String[]{"black"}, new String[]{"" + userInfoBean.getId()});
-                sendPost(WenConstans.DeletePullTheBlack, DELETETHEBLACK, Constants.token);
-            }
+        llBlack1.setOnClickListener(v -> {
+            setBodyParams(new String[]{"black"}, new String[]{"" + userInfoBean.getId()});
+            sendPost(WenConstans.DeletePullTheBlack, DELETETHEBLACK, Constants.token);
         });
 
-        llDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                settingPop.dismiss();
-
-                deldialog.show();
-            }
+        llDel.setOnClickListener(v -> {
+            settingPop.dismiss();
+            deldialog.show();
         });
 
-        llEditor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //showSpvPop();
-                settingPop.dismiss();
+        llEditor.setOnClickListener(v -> {
+            //showSpvPop();
+            settingPop.dismiss();
 
-                pop.showAtLocation(ivMore, Gravity.CENTER, 0, 0);
-                layoutParams.alpha = 0.5f;
-                getWindow().setAttributes(layoutParams);
-            }
+            pop.showAtLocation(ivMore, Gravity.CENTER, 0, 0);
+            layoutParams.alpha = 0.5f;
+            getWindow().setAttributes(layoutParams);
         });
 
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
@@ -535,19 +525,47 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     }
 
     private void event() {
-        tvTeam.setOnClickListener(this);
-        tvQu.setOnClickListener(this);
+        tvTeam.setOnClickListener(v -> setTvBg(0));
+        tvQu.setOnClickListener(v -> setTvBg(1));
 //        tvDyn.setOnClickListener(this);
 //        tvPhoto.setOnClickListener(this);
 //        tvgood.setOnClickListener(this);
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        llDel.setOnClickListener(this);
-        tvSet.setOnClickListener(this);
-        ivMore.setOnClickListener(this);
-        messages.setOnClickListener(this);
-        attention.setOnClickListener(this);
-        pulltheblack.setOnClickListener(this);
-        guanzhu.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> {
+            Intent intents = new Intent();
+            intents.putExtra("back_return", pulltheblack.getText().toString());
+            intents.putExtra("attention_return", attention.getText().toString());
+            setResult(1, intents);
+            finish();
+        });
+        tvSet.setOnClickListener(v -> {
+            if (role == 2) { //取消管理员
+                setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 2});
+                sendPost(Constants.base_url + "/api/club/member/setAdmin.do", cancelAdministrator, Constants.token);
+            } else if (role == 3) { //设置管理员
+                setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 1});
+                sendPost(Constants.base_url + "/api/club/member/setAdmin.do", setAdministrator, Constants.token);
+            }
+        });
+        ivMore.setOnClickListener(v -> showSpvPop());
+        messages.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setClass(PersonalInformationActivity.this, MessageActivity.class);
+            intent.putExtra("hisid", userInfoBean.getId());
+            intent.putExtra("nickname", hisnickname);
+            intent.putExtra("myid", Constants.uid);
+            intent.putExtra("myname", Constants.userName);
+            intent.putExtra("myheader", header);
+            startActivity(intent);
+        });
+        guanzhu.setOnClickListener(v -> {
+            if (!isattention) {
+                setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
+                sendPost(WenConstans.SetAttention, SETATTENTION, Constants.token);
+            } else {
+                setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
+                sendPost(WenConstans.DelecteAttention, DELETEATTENTION, Constants.token);
+            }
+        });
     }
 
 
@@ -1002,94 +1020,28 @@ public class PersonalInformationActivity extends NetWorkActivity implements View
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.messages:
-                Intent intent = new Intent();
-                intent.setClass(PersonalInformationActivity.this, MessageActivity.class);
-                intent.putExtra("hisid", userInfoBean.getId());
-                intent.putExtra("nickname", hisnickname);
-                intent.putExtra("myid", Constants.uid);
-                intent.putExtra("myname", Constants.userName);
-                intent.putExtra("myheader", header);
-                startActivity(intent);
-                break;
-            case R.id.guanzhu:
-                if (!isattention) {
-                    setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
-                    sendPost(WenConstans.SetAttention, SETATTENTION, Constants.token);
-                } else {
-                    setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
-                    sendPost(WenConstans.DelecteAttention, DELETEATTENTION, Constants.token);
-                }
-                break;
-            case R.id.ivBack:
-                Intent intents = new Intent();
-                intents.putExtra("back_return", pulltheblack.getText().toString());
-                intents.putExtra("attention_return", attention.getText().toString());
-                setResult(1, intents);
-                this.finish();
-                break;
-            case R.id.tvTeam:
-                setTvBg(0);
-                break;
-            case R.id.tvQu:
-                setTvBg(1);
-                break;
-//            case R.id.tvDyn:
-//                setTvBg(2);
-//                break;
-//            case R.id.tvPhoto:
-//                setTvBg(3);
-//                break;
-//            case R.id.tvgood:
-//                setTvBg(4);
-//                break;
-            case R.id.tvSet:
-                if (role == 2) { //取消管理员
-                    setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 2});
-                    sendPost(Constants.base_url + "/api/club/member/setAdmin.do", cancelAdministrator, Constants.token);
-                } else if (role == 3) { //设置管理员
-                    setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 1});
-                    sendPost(Constants.base_url + "/api/club/member/setAdmin.do", setAdministrator, Constants.token);
-                }
-                break;
-            case R.id.llDel:
-                settingPop.dismiss();
-                deldialog.show();
-                break;
-            case R.id.ivMore:
-                showSpvPop();
-                break;
-        }
-    }
-
-    @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (status == 0) {
-                    //团队
-                    pnT = 1;
-                    teamType = 1;
-                    getTeamData(pnT, teamType);
-                    rv.refreshComplete();
-                } else if (status == 1) {
-                    //问题
-                    quType = 1;
-                    pnQ = 1;
-                    getQuData(pnQ, quType);
-                    rvQu.refreshComplete();
-                } else if (status == 4) {
-                    //二手
-                    goodtype = 1;
-                    png = 1;
-                    getGoodData(png, goodtype);
-                    rvGood.refreshComplete();
-                }
-
+        new Handler().postDelayed(() -> {
+            if (status == 0) {
+                //团队
+                pnT = 1;
+                teamType = 1;
+                getTeamData(pnT, teamType);
+                rv.refreshComplete();
+            } else if (status == 1) {
+                //问题
+                quType = 1;
+                pnQ = 1;
+                getQuData(pnQ, quType);
+                rvQu.refreshComplete();
+            } else if (status == 4) {
+                //二手
+                goodtype = 1;
+                png = 1;
+                getGoodData(png, goodtype);
+                rvGood.refreshComplete();
             }
+
         }, 1000);
 
     }

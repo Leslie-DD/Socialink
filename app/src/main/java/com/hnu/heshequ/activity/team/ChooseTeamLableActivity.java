@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnClickListener {
+public class ChooseTeamLableActivity extends NetWorkActivity {
     private TextView tvTitle;
     private ImageView ivBack;
     private ArrayList<TeamBean.LabelsBean> ls;
@@ -62,40 +62,30 @@ public class ChooseTeamLableActivity extends NetWorkActivity implements View.OnC
     }
 
     private void event() {
-        ivBack.setOnClickListener(this);
-        btSave.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.btSave:
-                if (labels == null) {
-                    Utils.toastShort(mContext, "标签获取失败，请保持网络正常再尝试");
-                    return;
-                }
-                String label = "";
-                for (int i = 0; i < labels.size(); i++) {
-                    Label bean = labels.get(i);
-                    if (bean.getStatus() == 1) {
-                        if (label.length() == 0) {
-                            label = bean.getValue();
-                        } else {
-                            label = label + "," + bean.getValue();
-                        }
+        ivBack.setOnClickListener(v -> finish());
+        btSave.setOnClickListener(v -> {
+            if (labels == null) {
+                Utils.toastShort(mContext, "标签获取失败，请保持网络正常再尝试");
+                return;
+            }
+            String label = "";
+            for (int i = 0; i < labels.size(); i++) {
+                Label bean = labels.get(i);
+                if (bean.getStatus() == 1) {
+                    if (label.length() == 0) {
+                        label = bean.getValue();
+                    } else {
+                        label = label + "," + bean.getValue();
                     }
                 }
-                if (label.length() == 0) {
-                    Utils.toastShort(mContext, "请先选择团队的标签");
-                    return;
-                }
-                setBodyParams(new String[]{"id", "name", "labels"}, new String[]{"" + id, name, label});
-                sendPost(Constants.base_url + "/api/club/base/updatebase.do", editCode, Constants.token);
-                break;
-        }
+            }
+            if (label.length() == 0) {
+                Utils.toastShort(mContext, "请先选择团队的标签");
+                return;
+            }
+            setBodyParams(new String[]{"id", "name", "labels"}, new String[]{"" + id, name, label});
+            sendPost(Constants.base_url + "/api/club/base/updatebase.do", editCode, Constants.token);
+        });
     }
 
     private void setTvBg(TextView view, int status) {

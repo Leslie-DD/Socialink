@@ -23,7 +23,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends NetWorkActivity implements View.OnClickListener {
+public class LoginActivity extends NetWorkActivity  {
     private LinearLayout main;
     private TextView tvSign, tvForget, studentIDLogin;
     private EditText etUser, etPwd;
@@ -64,10 +64,24 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
     }
 
     private void event() {
-        btLogin.setOnClickListener(this);
-        tvSign.setOnClickListener(this);
-        tvForget.setOnClickListener(this);
-        studentIDLogin.setOnClickListener(this);
+        btLogin.setOnClickListener(v -> {
+            Phone = etUser.getText().toString();
+            String pwd = etPwd.getText().toString();
+            if (TextUtils.isEmpty(Phone)) {
+                Utils.toastShort(mContext, "请先输入账号");
+                return;
+            }
+            if (TextUtils.isEmpty(pwd)) {
+                Utils.toastShort(mContext, "请先输入密码");
+                return;
+            }
+            //setBodyParams(new String[]{"phone", "pwd"}, new String[]{Phone, EncryptUtils.encryptMD5ToString(pwd)});
+            setBodyParams(new String[]{"phone", "pwd"}, new String[]{Phone, pwd});
+            sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
+        });
+        tvSign.setOnClickListener(v -> startActivity(new Intent(mContext, SignActivity.class)));
+        tvForget.setOnClickListener(v -> startActivity(new Intent(mContext, ForgetPwdActivity.class).putExtra("type", 1)));
+        studentIDLogin.setOnClickListener(v -> startActivity(new Intent(mContext, StudentIdLoginActivity.class)));
     }
 
     @Override
@@ -118,36 +132,5 @@ public class LoginActivity extends NetWorkActivity implements View.OnClickListen
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.studentidlogin://学号登陆
-                startActivity(new Intent(mContext, StudentIdLoginActivity.class));
-                break;
-            case R.id.tvForget:
-                startActivity(new Intent(mContext, ForgetPwdActivity.class).putExtra("type", 1));
-                break;
-            case R.id.btLogin:
-                Phone = etUser.getText().toString();
-                String pwd = etPwd.getText().toString();
-                if (TextUtils.isEmpty(Phone)) {
-                    Utils.toastShort(mContext, "请先输入账号");
-                    return;
-                }
-                if (TextUtils.isEmpty(pwd)) {
-                    Utils.toastShort(mContext, "请先输入密码");
-                    return;
-                }
-                //setBodyParams(new String[]{"phone", "pwd"}, new String[]{Phone, EncryptUtils.encryptMD5ToString(pwd)});
-                setBodyParams(new String[]{"phone", "pwd"}, new String[]{Phone, pwd});
-                sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
-                break;
-            case R.id.tvSign:
-                startActivity(new Intent(mContext, SignActivity.class));
-                break;
-        }
-    }
-
 
 }

@@ -53,7 +53,7 @@ import top.zibin.luban.OnCompressListener;
  */
 
 
-public class MessageActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, View.OnClickListener {
+public class MessageActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private XRecyclerView rv;
     private EditText msg;
     private ImageView imageView;
@@ -135,9 +135,31 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
         ConsTants.initXRecycleView(mContext, true, true, rv);
         rv.setAdapter(adapter);
         pn = 0;
-        imageView.setOnClickListener(this);
-        send_photo.setOnClickListener(this);
-        history.setOnClickListener(this);
+        imageView.setOnClickListener(v -> {
+            //发送内容判定不为空则发送网络请求
+            msgs = msg.getText().toString();
+            if (msgs.length() > 127) Utils.toastShort(this, "字符过长");
+            else if (msgs.length() == 0) Utils.toastShort(this, "输入为空");
+            else {
+                setBodyParams(new String[]{"receiver", "content"}, new String[]{"" + hisid, "" + msgs});
+                sendPost(WenConstans.SendMessage, Sendmessage, Constants.token);
+            }
+        });
+        send_photo.setOnClickListener(v -> {
+            if (code != 3) {
+                showPopupWindow();
+            } else {
+                Utils.toastShort(this, "你已被拉黑！");
+            }
+        });
+        history.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setClass(MessageActivity.this, ChatHistoryActivity.class);
+            intent.putExtra("hisid", hisid);
+            intent.putExtra("myid", myid);
+//                context.startActivity(new Intent(context, ChatHistoryActivity.class));
+            startActivity(intent);
+        });
         rv.setLoadingListener(this);
 
         onRefresh();
@@ -159,31 +181,23 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
         Button first = (Button) view.findViewById(R.id.first);
         Button second = (Button) view.findViewById(R.id.second);
         iv_image = (ImageView) findViewById(R.id.iv_image);
-        second.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                window.dismiss();
-                path = PhotoUtils.startPhoto(MessageActivity.this);
-            }
+        second.setOnClickListener(v -> {
+            window.dismiss();
+            path = PhotoUtils.startPhoto(MessageActivity.this);
         });
-        first.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                window.dismiss();
-                PhotoUtils.choosePhoto(203, MessageActivity.this);
-            }
+        first.setOnClickListener(v -> {
+            window.dismiss();
+            PhotoUtils.choosePhoto(203, MessageActivity.this);
         });
-        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        window.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         window.setContentView(view);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -288,36 +302,6 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
                 } else {
                     Utils.toastShort(this, "图片格式暂不支持");
                 }
-                break;
-        }
-    }
-
-    //发送按钮监听，
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.msgSend2:
-                //发送内容判定不为空则发送网络请求
-                msgs = msg.getText().toString();
-                if (msgs.length() > 127) Utils.toastShort(this, "字符过长");
-                else if (msgs.length() == 0) Utils.toastShort(this, "输入为空");
-                else {
-                    setBodyParams(new String[]{"receiver", "content"}, new String[]{"" + hisid, "" + msgs});
-                    sendPost(WenConstans.SendMessage, Sendmessage, Constants.token);
-                }
-                break;
-            case R.id.sendother:
-                if (code != 3) showPopupWindow();
-                else {
-                    Utils.toastShort(this, "你已被拉黑！");
-                }
-                break;
-            case R.id.historyofchat:
-                Intent intent = new Intent();
-                intent.setClass(MessageActivity.this, ChatHistoryActivity.class);
-                intent.putExtra("hisid", hisid);
-                intent.putExtra("myid", myid);
-//                context.startActivity(new Intent(context, ChatHistoryActivity.class));
-                startActivity(intent);
                 break;
         }
     }

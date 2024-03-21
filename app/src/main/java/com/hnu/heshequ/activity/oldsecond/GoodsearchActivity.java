@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoodsearchActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class GoodsearchActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private int totalPage = 1;
     private List<SecondhandgoodBean> allList, moreList, newList;
     private TextView tvTips;
@@ -85,7 +85,7 @@ public class GoodsearchActivity extends NetWorkActivity implements View.OnClickL
         rv.setLoadingListener(this);
 
         llBack = findViewById(R.id.llBack);
-        llBack.setOnClickListener(this);
+        llBack.setOnClickListener(v -> finish());
         search = findViewById(R.id.search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,16 +116,6 @@ public class GoodsearchActivity extends NetWorkActivity implements View.OnClickL
                 }
             }
         });
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.llBack:
-                finish();
-                break;
-        }
     }
 
     @Override

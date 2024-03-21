@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -28,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyQuestionActivity1 extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, HotWenwenAdapter.DoSaveListener {
+public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerView.LoadingListener, HotWenwenAdapter.DoSaveListener {
 
     private XRecyclerView rv;
     private HotWenwenAdapter adapter;
@@ -139,11 +140,6 @@ public class MyQuestionActivity1 extends NetWorkActivity implements View.OnClick
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
     private void getData(int where) {
         if (where == 100) {
             pn = 1;
@@ -185,7 +181,11 @@ public class MyQuestionActivity1 extends NetWorkActivity implements View.OnClick
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");
         brodcast = new FragmentBrodcast();
-        registerReceiver(brodcast, filter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(brodcast, filter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(brodcast, filter);
+        }
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {

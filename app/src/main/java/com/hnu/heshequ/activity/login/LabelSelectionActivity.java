@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabelSelectionActivity extends NetWorkActivity implements View.OnClickListener {
+public class LabelSelectionActivity extends NetWorkActivity  {
     private FlowLayout flowLayout;
     private TextView tvTitle, tvSkip;
     private boolean skip = true;
@@ -104,11 +104,41 @@ public class LabelSelectionActivity extends NetWorkActivity implements View.OnCl
     }
 
     private void event() {
-        llMale.setOnClickListener(this);
-        llFemale.setOnClickListener(this);
-        btStart.setOnClickListener(this);
-        tvSkip.setOnClickListener(this);
-        findViewById(R.id.ivBack).setOnClickListener(this);
+        llMale.setOnClickListener(v -> setBg(0));
+        llFemale.setOnClickListener(v -> setBg(1));
+        btStart.setOnClickListener(v -> {
+            if (start) {
+                start = false;
+                if (stringList.size() == 0) {
+                    Utils.toastShort(mContext, "您还没有选择标签");
+                    start = true;
+                    return;
+                }
+                String lables = "";
+                for (int i = 0; i < stringList.size(); i++) {
+                    lables = lables + stringList.get(i) + ",";
+                }
+                lables = lables.substring(0, lables.length() - 1);
+                setBodyParams(new String[]{"sex", "labels"}
+                        , new String[]{sex + 1 + "", lables});
+                sendPost(Constants.base_url + "/api/user/label.do", 66, Constants.token);
+            }
+        });
+        tvSkip.setOnClickListener(v -> {
+            if (skip) {
+                skip = false;
+                if (type == 2) {
+                    this.finish();
+                } else if (type == 1) {
+                    //logo
+                    /*MeetApplication.getInstance().finishAll();
+                    startActivity(new Intent(mContext, MainActivity.class));*/
+                    setBodyParams(new String[]{"phone", "pwd"}, new String[]{phone, EncryptUtils.encryptMD5ToString(pwd)});
+                    sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
+                }
+            }
+        });
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
 
         testData = new ArrayList<TestBean>();
     }
@@ -220,53 +250,6 @@ public class LabelSelectionActivity extends NetWorkActivity implements View.OnCl
     @Override
     protected void onFailure(String result, int where) {
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.llMale:
-                setBg(0);
-                break;
-            case R.id.llFemale:
-                setBg(1);
-                break;
-            case R.id.btStart:
-                if (start) {
-                    start = false;
-                    if (stringList.size() == 0) {
-                        Utils.toastShort(mContext, "您还没有选择标签");
-                        start = true;
-                        return;
-                    }
-                    String lables = "";
-                    for (int i = 0; i < stringList.size(); i++) {
-                        lables = lables + stringList.get(i) + ",";
-                    }
-                    lables = lables.substring(0, lables.length() - 1);
-                    setBodyParams(new String[]{"sex", "labels"}
-                            , new String[]{sex + 1 + "", lables});
-                    sendPost(Constants.base_url + "/api/user/label.do", 66, Constants.token);
-                }
-                break;
-            case R.id.tvSkip:
-                if (skip) {
-                    skip = false;
-                    if (type == 2) {
-                        this.finish();
-                    } else if (type == 1) {
-                        //logo
-                    /*MeetApplication.getInstance().finishAll();
-                    startActivity(new Intent(mContext, MainActivity.class));*/
-                        setBodyParams(new String[]{"phone", "pwd"}, new String[]{phone, EncryptUtils.encryptMD5ToString(pwd)});
-                        sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
-                    }
-                }
-                break;
-        }
     }
 
     private void setBg(int sex) {

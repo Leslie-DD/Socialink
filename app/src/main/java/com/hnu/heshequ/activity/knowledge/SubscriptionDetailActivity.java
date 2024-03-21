@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubscriptionDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class SubscriptionDetailActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
 
     private TextView tvTitle, tvName, tvSummary, tvRead;
     private CircleView ivHead;
@@ -68,8 +68,8 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        btnUnsubscribe.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        btnUnsubscribe.setOnClickListener(v ->  sendPostConnection(WenConstans.unsubscribe + "?id=" + subscriptionId, new String[]{}, new String[]{}, 200, WenConstans.token));
     }
 
     @Override
@@ -132,18 +132,6 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements View.
             Utils.toastShort(mContext, "退订成功");
         }
 
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.unsubscribe:
-                sendPostConnection(WenConstans.unsubscribe + "?id=" + subscriptionId, new String[]{}, new String[]{}, 200, WenConstans.token);
-                break;
-        }
     }
 
     private void getData() {

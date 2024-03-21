@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.mine;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 /**
  * 我的问题页面
  */
-public class MyQuestionActivity extends NetWorkActivity implements View.OnClickListener {
+public class MyQuestionActivity extends NetWorkActivity {
 
     private ViewPager vp;
     private TextView tvQAQ, tvAns;
@@ -57,9 +56,9 @@ public class MyQuestionActivity extends NetWorkActivity implements View.OnClickL
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        tvAns.setOnClickListener(this);
-        tvQAQ.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        tvQAQ.setOnClickListener(v -> setTvBg(0));
+        tvAns.setOnClickListener(v -> setTvBg(1));
         vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -84,13 +83,12 @@ public class MyQuestionActivity extends NetWorkActivity implements View.OnClickL
             vp.setCurrentItem(status);
             Log.e("YSF", "我是vp的设置item" + status);
         }
-        tvQAQ.setSelected(status == 0 ? true : false);
-        tvAns.setSelected(status == 1 ? true : false);
+        tvQAQ.setSelected(status == 0);
+        tvAns.setSelected(status == 1);
         if (vp != null && vp.getCurrentItem() != status) {
             vp.setCurrentItem(status);
         }
     }
-
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
@@ -99,21 +97,5 @@ public class MyQuestionActivity extends NetWorkActivity implements View.OnClickL
     @Override
     protected void onFailure(String result, int where) {
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvQAQ:
-                setTvBg(0);
-                break;
-            case R.id.tvAnswer:
-                setTvBg(1);
-                break;
-        }
-    }
-
 
 }

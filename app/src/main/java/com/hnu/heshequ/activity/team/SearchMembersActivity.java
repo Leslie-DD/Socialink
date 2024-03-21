@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchMembersActivity extends NetWorkActivity implements View.OnClickListener {
+public class SearchMembersActivity extends NetWorkActivity {
     private ImageView ivBack;
     private ImageView ivSearch;
     private EditText etSearch;
@@ -65,53 +65,36 @@ public class SearchMembersActivity extends NetWorkActivity implements View.OnCli
 
 
     private void event() {
-        ivBack.setOnClickListener(this);
-        ivSearch.setOnClickListener(this);
-        etSearch.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == event.KEYCODE_ENTER) {
-                    // do some your things
-                    searchName = etSearch.getText().toString().trim();
-                    if (searchName.isEmpty()) {
-                        Utils.toastShort(SearchMembersActivity.this, "搜索内容不能为空");
-                    } else {
-                        setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
-                        sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
-                    }
-                }
-                return false;
-            }
-        });
-
-        adapter.setOnItemEditorNameListener(new TeamMemberAdapter.OnItemEditorNameListener() {
-            @Override
-            public void ItemEditor(int position, String mark) {
-                editorPosition = position;
-                editorName = mark;
-                setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + Data.get(position).getId(), "" + mark});
-                sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
-
-            }
-        });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.ivSearch:
+        ivBack.setOnClickListener(v -> finish());
+        ivSearch.setOnClickListener(v -> {});
+        searchName = etSearch.getText().toString().trim();
+        if (searchName.isEmpty()) {
+            Utils.toastShort(this, "搜索内容不能为空");
+            return;
+        }
+        setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
+        sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
+        etSearch.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == event.KEYCODE_ENTER) {
+                // do some your things
                 searchName = etSearch.getText().toString().trim();
                 if (searchName.isEmpty()) {
-                    Utils.toastShort(this, "搜索内容不能为空");
-                    return;
+                    Utils.toastShort(SearchMembersActivity.this, "搜索内容不能为空");
+                } else {
+                    setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
+                    sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
                 }
-                setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
-                sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
-                break;
-        }
+            }
+            return false;
+        });
+
+        adapter.setOnItemEditorNameListener((position, mark) -> {
+            editorPosition = position;
+            editorName = mark;
+            setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + Data.get(position).getId(), "" + mark});
+            sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
+
+        });
     }
 
     @Override

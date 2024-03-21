@@ -21,7 +21,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/30.
  */
 
-public class FriendQinganSet extends NetWorkActivity implements View.OnClickListener {
+public class FriendQinganSet extends NetWorkActivity  {
     private RadioGroup nRg1;
     private int id;
     public static String qingancontent;
@@ -71,8 +71,19 @@ public class FriendQinganSet extends NetWorkActivity implements View.OnClickList
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        set.setOnClickListener(v -> {
+            Log.e("qinggancontent", "" + qingancontent);
+            if (qingancontent.equals("保密")) {
+                qingan = 0;
+            } else if (qingancontent.equals("单身")) {
+                qingan = 1;
+            } else {
+                qingan = 2;
+            }
+
+            getData();
+        });
     }
 
     @Override
@@ -96,29 +107,6 @@ public class FriendQinganSet extends NetWorkActivity implements View.OnClickList
     private void getData() {
         setBodyParams(new String[]{"hometown", "emotion", "academy", "profession", "schoolgrade", "user_id"}, new String[]{"" + jiaxiang, "" + qingan, "" + xueyuan, "" + zhuanye, "" + nianji, "" + id});
         sendPost(Constants.base_url + "/api/social/updateinfor.do", 100, WenConstans.token);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-//                Intent intent = new Intent(FriendQinganSet.this, FriendSet.class);
-//                startActivity(intent);
-                finish();
-                break;
-            case R.id.set:
-                Log.e("qinggancontent", "" + qingancontent);
-                if (qingancontent.equals("保密")) {
-                    qingan = 0;
-                } else if (qingancontent.equals("单身")) {
-                    qingan = 1;
-                } else {
-                    qingan = 2;
-                }
-
-                getData();
-                break;
-        }
     }
 
 

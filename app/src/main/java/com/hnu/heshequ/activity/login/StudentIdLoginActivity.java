@@ -39,7 +39,7 @@ import java.util.List;
  * Created by 佳佳 on 2019/8/26.
  */
 
-public class StudentIdLoginActivity extends NetWorkActivity implements View.OnClickListener {
+public class StudentIdLoginActivity extends NetWorkActivity{
 
     private OptionsPickerView schoolChooseHelper;//学校选择器
     private ArrayList<SchoolBean> schools = new ArrayList<>();//学校列表
@@ -185,10 +185,21 @@ public class StudentIdLoginActivity extends NetWorkActivity implements View.OnCl
      * 事件监听
      */
     private void event() {
-        mHead.setOnClickListener(this);
-        mLlSchool.setOnClickListener(this);
-        mBtLogin.setOnClickListener(this);
-        mStudentidlogin.setOnClickListener(this);
+        mHead.setOnClickListener(v -> {
+            switch (landingMode) {
+                case APPLY_FOR_LOGIN:
+                    break;
+                case APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE:
+                    applyForLogin(APPLY_FOR_LOGIN);
+            }
+        });
+        mLlSchool.setOnClickListener(v -> {
+            Utils.hideSoftInput(this);
+            schoolChooseHelper.show();//选择好学校之后发送登陆申请
+            //applyForLogin(0);
+        });
+        mBtLogin.setOnClickListener(v -> login());
+        mStudentidlogin.setOnClickListener(v -> finish());
     }
 
     /**
@@ -260,39 +271,6 @@ public class StudentIdLoginActivity extends NetWorkActivity implements View.OnCl
         studentId = mEtUser.getText().toString();
         studentPwd = mEtPwd.getText().toString();
         code = school.getType() + "";
-    }
-
-    /**
-     * 点击事件监听
-     *
-     * @param v 点击的view
-     */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.head://点击头像，为后期图像验证码使用
-                switch (landingMode) {
-                    case APPLY_FOR_LOGIN:
-                        break;
-                    case APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE:
-                        applyForLogin(APPLY_FOR_LOGIN);
-                }
-                break;
-            case R.id.llSchool://选择学校
-                Utils.hideSoftInput(this);
-                schoolChooseHelper.show();//选择好学校之后发送登陆申请
-                //applyForLogin(0);
-                break;
-            case R.id.btLogin://登陆
-
-                login();
-                break;
-            case R.id.studentidlogin://切换登陆方式
-                this.finish();
-                break;
-        }
     }
 
     public void viewChanged() {

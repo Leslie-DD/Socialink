@@ -84,7 +84,7 @@ import java.util.Map;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class TeamDetailActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
+public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, BottomShareFragment.DoClickListener {
     private static final String TAG = "[TeamDetailActivity]";
     private ImageView ivAdd2, ivAdd3, ivAdd4, ivAdd5, ivAddBj;
     private boolean LockMenu = false;
@@ -234,7 +234,11 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
         tvTeam = (TextView) headView.findViewById(R.id.tvTeam);
         tvManager = (TextView) headView.findViewById(R.id.tvManager);
         ll_team_num = headView.findViewById(R.id.ll_teamMembers);
-        ll_team_num.setOnClickListener(this);
+        ll_team_num.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, TeamMembersActivity.class).putExtra("id", id);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        });
         iv1 = headView.findViewById(R.id.iv1);
         iv2 = headView.findViewById(R.id.iv2);
         iv3 = headView.findViewById(R.id.iv3);
@@ -276,8 +280,14 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
         tvPic = (TextView) pv.findViewById(R.id.tvPic);
         tvUp = (TextView) pv.findViewById(R.id.tvUp);
-        tvPic.setOnClickListener(this);
-        tvUp.setOnClickListener(this);
+        tvPic.setOnClickListener(v -> {
+            path = PhotoUtils.startPhoto(this);
+            pop.dismiss();
+        });
+        tvUp.setOnClickListener(v -> {
+            PhotoUtils.choosePhoto(202, this);
+            pop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -376,16 +386,73 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
                 }
             }
         }
-        ll_share.setOnClickListener(this);
-        ll_collect.setOnClickListener(this);
-        ll_invisible.setOnClickListener(this);
-        ll_joins.setOnClickListener(this);
-        ll_editor.setOnClickListener(this);
-        ll_label.setOnClickListener(this);
-        ll_jb.setOnClickListener(this);
-        ll_st.setOnClickListener(this);
-        ll_st_o.setOnClickListener(this);
-        ll_st_join.setOnClickListener(this);
+        ll_share.setOnClickListener(v -> {
+            //分享
+            settingPop.dismiss();
+            showShare();
+        });
+        ll_collect.setOnClickListener(v -> {
+            //收藏
+            if (isFavorite) {
+                setBodyParams(new String[]{"id", "op"}, new String[]{"" + cBean.getId(), "" + 2});
+                sendPost(Constants.base_url + "/api/club/base/favorite.do", notCollect, Constants.token);
+            } else {
+                setBodyParams(new String[]{"id", "op"}, new String[]{"" + cBean.getId(), "" + 1});
+                sendPost(Constants.base_url + "/api/club/base/favorite.do", collect, Constants.token);
+            }
+            settingPop.dismiss();
+        });
+        ll_invisible.setOnClickListener(v -> {
+            //设置可见性
+            if (isVisible) {
+                setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + cBean.getId(), "" + 1});
+                sendPost(Constants.base_url + "/api/club/base/setvisibility.do", inVisible, Constants.token);
+            } else {
+                setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + cBean.getId(), "" + 0});
+                sendPost(Constants.base_url + "/api/club/base/setvisibility.do", visible, Constants.token);
+            }
+            settingPop.dismiss();
+        });
+        ll_joins.setOnClickListener(v -> {
+            //加/退
+            if (isJoin) {
+                deldialog.show();
+            } else {
+                startActivity(new Intent(this, ApplyJoinTDActivity.class).putExtra("id", id));
+            }
+            settingPop.dismiss();
+        });
+        ll_editor.setOnClickListener(v -> {
+            //编辑
+            settingPop.dismiss();
+            showEditorPop();
+        });
+        ll_label.setOnClickListener(v -> {
+            settingPop.dismiss();
+            startActivity(new Intent(this, ChooseTeamLableActivity.class)
+                    .putExtra("id", id)
+                    .putExtra("name", teamName)
+                    .putExtra("labels", cBean.getLabels())
+            );
+        });
+        ll_jb.setOnClickListener(v -> {
+            // 举报
+            settingPop.dismiss();
+            startActivity(new Intent(this, ReportActivity.class).putExtra("type", 2).putExtra("id", cBean.getId() + ""));
+
+        });
+        ll_st.setOnClickListener(v -> {
+            settingPop.dismiss();
+            showSecretPop();
+        });
+        ll_st_o.setOnClickListener(v -> {
+            settingPop.dismiss();
+            showSecretChangePop();
+        });
+        ll_st_join.setOnClickListener(v -> {
+            settingPop.dismiss();
+            checkSecret3();
+        });
 
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         settingPop.setBackgroundDrawable(new BitmapDrawable());
@@ -493,8 +560,26 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
         }
         etName.setText(cBean.getName());
         etName.setSelection(etName.getText().toString().trim().length());
-        cvHead.setOnClickListener(this);
-        btConfirm.setOnClickListener(this);
+        cvHead.setOnClickListener(v -> {
+            iseditor = true;
+            PhotoUtils.choosePhoto(202, this);
+        });
+        btConfirm.setOnClickListener(v -> {
+            editorPop.dismiss();
+            String name = etName.getText().toString().trim();
+            if (name.isEmpty()) {
+                Utils.toastShort(this, "团队名称不能为空");
+                return;
+            }
+            if (editorFile == null) {
+                setBodyParams(new String[]{"id", "name"}, new String[]{"" + cBean.getId(), "" + name});
+                sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
+            } else {
+                setBodyParams(new String[]{"id", "name"}, new String[]{"" + cBean.getId(), "" + name});
+                setFileBodyParams(new String[]{"file"}, new File[]{editorFile});
+                sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
+            }
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         editorPop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -628,23 +713,53 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        ivEWM.setOnClickListener(this);
-        tvHall.setOnClickListener(this);
-        tvStatement.setOnClickListener(this);
-        tvTeam.setOnClickListener(this);
-        tvManager.setOnClickListener(this);
-        tvHall2.setOnClickListener(this);
-        tvStatement2.setOnClickListener(this);
-        tvTeam2.setOnClickListener(this);
-        tvManager2.setOnClickListener(this);
-        ivAdd.setOnClickListener(this);
-        ivAdd2.setOnClickListener(this);
-        ivAddBj.setOnClickListener(this);
-        ivAdd3.setOnClickListener(this);
-        ivAdd4.setOnClickListener(this);
-        ivAdd5.setOnClickListener(this);
-        ivMore.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        ivEWM.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext, QRcodeActivity.class);
+            if (cBean != null) {
+                intent.putExtra("bean", cBean);
+            }
+            startActivity(intent);
+        });
+        tvHall.setOnClickListener(v -> setTvBg(0));
+        tvStatement.setOnClickListener(v -> setTvBg(1));
+        tvTeam.setOnClickListener(v -> setTvBg(2));
+        tvManager.setOnClickListener(v -> setTvBg(3));
+        tvHall2.setOnClickListener(v -> setTvBg(0));
+        tvStatement2.setOnClickListener(v -> setTvBg(1));
+        tvTeam2.setOnClickListener(v -> setTvBg(2));
+        tvManager2.setOnClickListener(v -> {
+            setTvBg(3);
+        });
+        ivAdd.setOnClickListener(v -> startActivity(new Intent(this, StatementActivity.class).putExtra("teamId", teamId)));
+        ivAdd2.setOnClickListener(v -> {
+            if (!LockMenu) {
+                LockMenu = true;
+                openAnim(ivAdd3, 0, 5, 300);
+                openAnim(ivAdd4, 1, 5, 300);
+                openAnim(ivAdd5, 2, 5, 300);
+                ivAddBj.setVisibility(View.VISIBLE);
+                StatusBarCompat.setStatusBarColor(this, Color.parseColor("#CBF0FE"));
+            } else {
+                close();
+            }
+        });
+        ivAddBj.setOnClickListener(v -> close());
+        ivAdd3.setOnClickListener(v -> {
+            close();
+            startActivity(new Intent(mContext, EditorialBulletinActivity.class).putExtra("type", 1));
+        });
+        ivAdd4.setOnClickListener(v -> {
+            close();
+            startActivity(new Intent(mContext, ReleaseActivitiesActivity.class).putExtra("type", 1));
+        });
+        ivAdd5.setOnClickListener(v -> {
+            close();
+            startActivity(new Intent(mContext, PublishVoteActivity.class));
+        });
+        ivMore.setOnClickListener(v -> {
+            showSpvPop();
+        });
     }
 
     private void checkSecret() {
@@ -874,9 +989,6 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
                         break;
                 }
                 break;
-            case R.id.ivSearch:
-
-                break;
             case uptdfm:
                 switch (result.optInt("code")) {
                     case 0:
@@ -1057,180 +1169,6 @@ public class TeamDetailActivity extends NetWorkActivity implements View.OnClickL
         builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
         deldialog = builder.create();
         deldialog.setCancelable(false);
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_st_join:
-                settingPop.dismiss();
-                checkSecret3();
-                break;
-            case R.id.ll_st://开启密码加团
-                settingPop.dismiss();
-                showSecretPop();
-                break;
-            case R.id.ll_st_o://修改密码
-                settingPop.dismiss();
-                showSecretChangePop();
-                break;
-            case R.id.ivAdd: //添加团言
-                startActivity(new Intent(this, StatementActivity.class).putExtra("teamId", teamId));
-                break;
-            case R.id.ll_teamMembers:
-                Intent intent = new Intent(mContext, TeamMembersActivity.class).putExtra("id", id);
-                intent.putExtra("id", id);
-                startActivity(intent);
-                break;
-            case R.id.ivEWM:
-                intent = new Intent(mContext, QRcodeActivity.class);
-                if (cBean != null) {
-                    intent.putExtra("bean", cBean);
-                }
-                startActivity(intent);
-                //toast
-                break;
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.tvUp:
-                PhotoUtils.choosePhoto(202, this);
-                pop.dismiss();
-                break;
-            case R.id.tvPic:
-                path = PhotoUtils.startPhoto(this);
-                pop.dismiss();
-                break;
-            case R.id.tvHall:
-                setTvBg(0);
-                break;
-            case R.id.tvHall2:
-                setTvBg(0);
-                break;
-            case R.id.tvStatement:
-                setTvBg(1);
-                break;
-            case R.id.tvStatement2:
-                setTvBg(1);
-                break;
-            case R.id.tvTeam:
-                setTvBg(2);
-                break;
-            case R.id.tvTeam2:
-                setTvBg(2);
-                break;
-            case R.id.tvManager:
-                setTvBg(3);
-                break;
-            case R.id.tvManager2:
-                setTvBg(3);
-                break;
-            case R.id.ivMore:
-                showSpvPop();
-                break;
-            case R.id.ll_share:
-                //分享
-                settingPop.dismiss();
-                showShare();
-                break;
-            case R.id.ll_collect:
-                //收藏
-                if (isFavorite) {
-                    setBodyParams(new String[]{"id", "op"}, new String[]{"" + cBean.getId(), "" + 2});
-                    sendPost(Constants.base_url + "/api/club/base/favorite.do", notCollect, Constants.token);
-                } else {
-                    setBodyParams(new String[]{"id", "op"}, new String[]{"" + cBean.getId(), "" + 1});
-                    sendPost(Constants.base_url + "/api/club/base/favorite.do", collect, Constants.token);
-                }
-                settingPop.dismiss();
-                break;
-            case R.id.ll_invisible:
-                //设置可见性
-                if (isVisible) {
-                    setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + cBean.getId(), "" + 1});
-                    sendPost(Constants.base_url + "/api/club/base/setvisibility.do", inVisible, Constants.token);
-                } else {
-                    setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + cBean.getId(), "" + 0});
-                    sendPost(Constants.base_url + "/api/club/base/setvisibility.do", visible, Constants.token);
-                }
-                settingPop.dismiss();
-                break;
-            case R.id.ll_joins:
-                //加/退
-                if (isJoin) {
-                    deldialog.show();
-                } else {
-                    startActivity(new Intent(this, ApplyJoinTDActivity.class).putExtra("id", id));
-                }
-                settingPop.dismiss();
-                break;
-            case R.id.ll_editor:
-                //编辑
-                settingPop.dismiss();
-                showEditorPop();
-                break;
-            case R.id.ll_label: //修改团队标签
-                settingPop.dismiss();
-                startActivity(new Intent(this, ChooseTeamLableActivity.class)
-                        .putExtra("id", id)
-                        .putExtra("name", teamName)
-                        .putExtra("labels", cBean.getLabels())
-                );
-                break;
-            case R.id.ll_jb:
-                // 举报
-                settingPop.dismiss();
-                startActivity(new Intent(this, ReportActivity.class).putExtra("type", 2).putExtra("id", cBean.getId() + ""));
-                break;
-            case R.id.cvHead:
-                iseditor = true;
-                PhotoUtils.choosePhoto(202, this);
-                break;
-            case R.id.btConfirm:
-                editorPop.dismiss();
-                String name = etName.getText().toString().trim();
-                if (name.isEmpty()) {
-                    Utils.toastShort(this, "团队名称不能为空");
-                    return;
-                }
-                if (editorFile == null) {
-                    setBodyParams(new String[]{"id", "name"}, new String[]{"" + cBean.getId(), "" + name});
-                    sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
-                } else {
-                    setBodyParams(new String[]{"id", "name"}, new String[]{"" + cBean.getId(), "" + name});
-                    setFileBodyParams(new String[]{"file"}, new File[]{editorFile});
-                    sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
-                }
-                break;
-            case R.id.ivAdd2:
-                if (!LockMenu) {
-                    LockMenu = true;
-                    openAnim(ivAdd3, 0, 5, 300);
-                    openAnim(ivAdd4, 1, 5, 300);
-                    openAnim(ivAdd5, 2, 5, 300);
-                    ivAddBj.setVisibility(View.VISIBLE);
-                    StatusBarCompat.setStatusBarColor(this, Color.parseColor("#CBF0FE"));
-                } else {
-                    close();
-                }
-                break;
-            case R.id.ivAddBj:
-                close();
-                break;
-            case R.id.ivAdd3:
-                close();
-                startActivity(new Intent(mContext, EditorialBulletinActivity.class).putExtra("type", 1));
-                break;
-            case R.id.ivAdd4:
-                close();
-                startActivity(new Intent(mContext, ReleaseActivitiesActivity.class).putExtra("type", 1));
-                break;
-            case R.id.ivAdd5:
-                close();
-                startActivity(new Intent(mContext, PublishVoteActivity.class));
-                break;
-        }
     }
 
     public void setTvBg(int status) {

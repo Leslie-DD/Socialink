@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DefaultProblemActivity extends NetWorkActivity implements View.OnClickListener {
+public class DefaultProblemActivity extends NetWorkActivity {
     private TextView tvQuestion1, tvQuestion2, tvQuestion3, tvTitle, tvSkip, tvHint;
     private EditText etAnswer1, etAnswer2, etAnswer3;
     private Button btSub;
@@ -91,12 +91,62 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        tvQuestion1.setOnClickListener(this);
-        tvQuestion2.setOnClickListener(this);
-        tvQuestion3.setOnClickListener(this);
-        btSub.setOnClickListener(this);
-        tvSkip.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        tvQuestion1.setOnClickListener(v -> {
+            if (pvOptions1 != null) {
+                pvOptions1.show();
+            }
+        });
+        tvQuestion2.setOnClickListener(v -> {
+            if (pvOptions2 != null) {
+                pvOptions2.show();
+            }
+        });
+        tvQuestion3.setOnClickListener(v -> {
+            if (pvOptions3 != null) {
+                pvOptions3.show();
+            }
+        });
+        btSub.setOnClickListener(v -> {
+            String q1 = etAnswer1.getText().toString();
+            String q2 = etAnswer2.getText().toString();
+            String q3 = etAnswer3.getText().toString();
+            if (TextUtils.isEmpty(q1) || TextUtils.isEmpty(q2) || TextUtils.isEmpty(q3)) {
+                Utils.toastShort(mContext, "请把答案输入完整");
+                return;
+            }
+            JSONArray array = new JSONArray();
+            try {
+                JSONObject obj1 = new JSONObject();
+                obj1.put("content", tvQuestion1.getText().toString() + "");
+                obj1.put("answer", q1 + "");
+                array.put(obj1);
+                JSONObject obj2 = new JSONObject();
+                obj2.put("content", tvQuestion2.getText().toString() + "");
+                obj2.put("answer", q2 + "");
+                array.put(obj2);
+                JSONObject obj3 = new JSONObject();
+                obj3.put("content", tvQuestion3.getText().toString() + "");
+                obj3.put("answer", q3 + "");
+                array.put(obj3);
+                setBodyParams(new String[]{"questions"}
+                        , new String[]{array.toString() + ""});
+                sendPost(Constants.base_url + "/api/user/question.do", 66, Constants.token);
+            } catch (Exception e) {
+
+            }
+        });
+        tvSkip.setOnClickListener(v -> {
+            if (type == 2) {
+                this.finish();
+            } else {
+                startActivity(new Intent(this, LabelSelectionActivity.class)
+                        .putExtra("type", 1)
+                        .putExtra("phone", getIntent().getStringExtra("phone"))
+                        .putExtra("pwd", getIntent().getStringExtra("pwd"))
+                );
+            }
+        });
     }
 
     @Override
@@ -266,71 +316,5 @@ public class DefaultProblemActivity extends NetWorkActivity implements View.OnCl
     protected void onFailure(String result, int where) {
         Utils.toastShort(mContext, "网络异常");
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.tvQuestion1:
-                if (pvOptions1 != null) {
-                    pvOptions1.show();
-                }
-                break;
-            case R.id.tvQuestion2:
-                if (pvOptions2 != null) {
-                    pvOptions2.show();
-                }
-                break;
-            case R.id.tvQuestion3:
-                if (pvOptions3 != null) {
-                    pvOptions3.show();
-                }
-                break;
-            case R.id.btSub:
-                String q1 = etAnswer1.getText().toString();
-                String q2 = etAnswer2.getText().toString();
-                String q3 = etAnswer3.getText().toString();
-                if (TextUtils.isEmpty(q1) || TextUtils.isEmpty(q2) || TextUtils.isEmpty(q3)) {
-                    Utils.toastShort(mContext, "请把答案输入完整");
-                    return;
-                }
-                JSONArray array = new JSONArray();
-                try {
-                    JSONObject obj1 = new JSONObject();
-                    obj1.put("content", tvQuestion1.getText().toString() + "");
-                    obj1.put("answer", q1 + "");
-                    array.put(obj1);
-                    JSONObject obj2 = new JSONObject();
-                    obj2.put("content", tvQuestion2.getText().toString() + "");
-                    obj2.put("answer", q2 + "");
-                    array.put(obj2);
-                    JSONObject obj3 = new JSONObject();
-                    obj3.put("content", tvQuestion3.getText().toString() + "");
-                    obj3.put("answer", q3 + "");
-                    array.put(obj3);
-                    setBodyParams(new String[]{"questions"}
-                            , new String[]{array.toString() + ""});
-                    sendPost(Constants.base_url + "/api/user/question.do", 66, Constants.token);
-                } catch (Exception e) {
-
-                }
-//                  startActivity(new Intent(mContext,LabelSelectionActivity.class));
-                break;
-            case R.id.tvSkip:
-                if (type == 2) {
-                    this.finish();
-                } else {
-                    startActivity(new Intent(this, LabelSelectionActivity.class)
-                            .putExtra("type", 1)
-                            .putExtra("phone", getIntent().getStringExtra("phone"))
-                            .putExtra("pwd", getIntent().getStringExtra("pwd"))
-                    );
-                }
-                break;
-        }
-    }
-
 
 }

@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ZcArticleActivity extends NetWorkActivity implements View.OnClickListener, XRecyclerView.LoadingListener {
+public class ZcArticleActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private ImageView ivImg;
     private ImageView ivSelect;
     private ImageView ivSend;
@@ -200,7 +200,11 @@ public class ZcArticleActivity extends NetWorkActivity implements View.OnClickLi
         p.height = ConsTants.screenW * 11 / 20;
         tvTitles = (TextView) headview.findViewById(R.id.tvTitles);
         llZan = (LinearLayout) headview.findViewById(R.id.llZan);
-        llZan.setOnClickListener(this);
+        llZan.setOnClickListener(v -> {
+            setBodyParams(new String[]{"id"}
+                    , new String[]{bean.id + ""});
+            sendPost(WenConstans.ZcZan, 1000, WenConstans.token);
+        });
         tvZan = (TextView) headview.findViewById(R.id.tvZan);
         ivZan = (ImageView) headview.findViewById(R.id.ivZan);
         tvName = (TextView) headview.findViewById(R.id.tvName);
@@ -211,8 +215,38 @@ public class ZcArticleActivity extends NetWorkActivity implements View.OnClickLi
         webView = (NoScrollWebView) headview.findViewById(R.id.webView);
         ivSelect = (ImageView) findViewById(R.id.ivSelect);
         ivSend = (ImageView) findViewById(R.id.ivSend);
-        ivSelect.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
+        ivSelect.setOnClickListener(v -> {
+            if (niming == 1) {
+                niming = 0;
+                ivSelect.setImageResource(R.mipmap.unselected);
+            } else {
+                niming = 1;
+                ivSelect.setImageResource(R.mipmap.selected2);
+            }
+        });
+        ivSend.setOnClickListener(v -> {
+            content = etContent.getText().toString();
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "您还没有输入任何内容");
+                return;
+            }
+            if (content.length() > 100) {
+                Utils.toastShort(mContext, "最多评论100个字符");
+                return;
+            }
+            if (hasclick) {
+                hasclick = false;
+                setBodyParams(new String[]{"id", "content", "anonymity", "type", "askid"}
+                        , new String[]{bean.id + "", content, niming + "", 2 + "", askid + ""});
+                sendPost(WenConstans.ZcSendDisscuss, 2, WenConstans.token);
+            } else {
+                setBodyParams(new String[]{"id", "content", "anonymity"}
+                        , new String[]{bean.id + "", content, niming + ""});
+                sendPost(WenConstans.ZcDisscuss, 1, WenConstans.token);
+            }
+            hideInput();
+
+        });
         lv = (XRecyclerView) findViewById(R.id.lv);
         ConsTants.initXRecycleView(this, true, true, lv);
         adapter = new ZcAnswerAdapter(this);
@@ -247,72 +281,18 @@ public class ZcArticleActivity extends NetWorkActivity implements View.OnClickLi
         builder.setCancelable(false);
         builder.setTitle("提示");
         builder.setMessage("要删除这条回复吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //删除
-               /* setBodyParams(new String[]{"id"}, new String[]{"" + delid});
-                sendPost(Constants.base_url + "/api/club/activity/delcomment.do", delComment, Constants.token);*/
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            //删除
+           /* setBodyParams(new String[]{"id"}, new String[]{"" + delid});
+            sendPost(Constants.base_url + "/api/club/activity/delcomment.do", delComment, Constants.token);*/
 
-                setBodyParams(new String[]{"id"}, new String[]{delid + ""});
-                sendPost(WenConstans.ZcDeleteDisscuss, 1001, WenConstans.token);
-                deldialog.dismiss();
-            }
-
-
+            setBodyParams(new String[]{"id"}, new String[]{delid + ""});
+            sendPost(WenConstans.ZcDeleteDisscuss, 1001, WenConstans.token);
+            deldialog.dismiss();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deldialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
         deldialog = builder.create();
         deldialog.setCancelable(false);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivSelect:
-                if (niming == 1) {
-                    niming = 0;
-                    ivSelect.setImageResource(R.mipmap.unselected);
-                } else {
-                    niming = 1;
-                    ivSelect.setImageResource(R.mipmap.selected2);
-                }
-                break;
-            case R.id.ivSend:
-                content = etContent.getText().toString();
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "您还没有输入任何内容");
-                    return;
-                }
-                if (content.length() > 100) {
-                    Utils.toastShort(mContext, "最多评论100个字符");
-                    return;
-                }
-                if (hasclick) {
-                    hasclick = false;
-                    setBodyParams(new String[]{"id", "content", "anonymity", "type", "askid"}
-                            , new String[]{bean.id + "", content, niming + "", 2 + "", askid + ""});
-                    sendPost(WenConstans.ZcSendDisscuss, 2, WenConstans.token);
-                } else {
-                    setBodyParams(new String[]{"id", "content", "anonymity"}
-                            , new String[]{bean.id + "", content, niming + ""});
-                    sendPost(WenConstans.ZcDisscuss, 1, WenConstans.token);
-                }
-                hideInput();
-
-                break;
-            case R.id.llZan:
-                setBodyParams(new String[]{"id"}
-                        , new String[]{bean.id + ""});
-                sendPost(WenConstans.ZcZan, 1000, WenConstans.token);
-                break;
-        }
-
     }
 
     private void getList(int where) {

@@ -25,7 +25,7 @@ import com.hnu.heshequ.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickListener {
+public class ForgetPwdActivity extends NetWorkActivity  {
     private int type = 1;
     private TextView tvTitle, tvCode;
     private EditText etPhone, etCode, etPwd, etPwd2;
@@ -80,11 +80,95 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
     }
 
     private void event() {
-        tvCode.setOnClickListener(this);
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        btSave.setOnClickListener(this);
-        ivSee.setOnClickListener(this);
-        ivSee2.setOnClickListener(this);
+        tvCode.setOnClickListener(v -> {
+            if (getting) {
+                return;
+            }
+            phone = etPhone.getText().toString();
+            if (phone.isEmpty()) {
+                Utils.toastShort(mContext, "手机号码不能为空");
+                return;
+            }
+            if (!MatcherUtils.isPhone(phone)) {
+                Utils.toastShort(mContext, "请输入正确的手机号码！");
+                return;
+            }
+            if (type != 1) {
+                if (!phone.equals(MeetApplication.getInstance().getSharedPreferences().getString("phone", ""))) {
+                    Utils.toastShort(mContext, "非本账户绑定手机，请使用注册时的手机号！！");
+                    return;
+                }
+            }
+            setBodyParams(new String[]{"phone", "forget"}, new String[]{phone, "forget"});
+            sendPost(Constants.base_url + "/api/account/scode.do", S_CODE_CODE, null);
+        });
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        btSave.setOnClickListener(v -> {
+            phone = etPhone.getText().toString().trim();
+            String pwd = etPwd.getText().toString().trim();
+            String pwd2 = etPwd2.getText().toString().trim();
+            String code = etCode.getText().toString().trim();
+            if (phone.isEmpty()) {
+                Utils.toastShort(mContext, "手机号码不能为空");
+                return;
+            }
+            if (!MatcherUtils.isPhone(phone)) {
+                Utils.toastShort(mContext, "请输入正确的手机号码！");
+                return;
+            }
+            if (type != 1) {
+                if (!phone.equals(MeetApplication.getInstance().getSharedPreferences().getString("phone", ""))) {
+                    Utils.toastShort(mContext, "非本账户绑定手机，请使用注册时的手机号！！");
+                    return;
+                }
+            }
+            if (code.length() == 0) {
+                Utils.toastShort(mContext, "验证码不能为空,请获取验证码后再填入验证码");
+                return;
+            }
+            if (pwd.isEmpty()) {
+                Utils.toastShort(mContext, "新密码不能为空！");
+                return;
+            }
+
+            if (!MatcherUtils.isPwd(pwd)) {
+                Utils.toastShort(mContext, "密码格式不正确！");
+                return;
+            }
+            if (pwd2.isEmpty()) {
+                Utils.toastShort(mContext, "‘确认密码’不能为空！");
+                return;
+            }
+            if (!MatcherUtils.isPwd(pwd)) {
+                Utils.toastShort(mContext, "‘确认密码’格式错误！");
+                return;
+            }
+            if (!pwd.equals(pwd2)) {
+                Utils.toastShort(mContext, "二次密码不一致！");
+                return;
+            }
+            setBodyParams(new String[]{"phone", "code", "pwd"}, new String[]{phone, code, pwd /*EncryptUtils.encryptMD5ToString(pwd)*/});
+            sendPost(Constants.base_url + "/api/account/resetpwd.do", RESET_PWD_CODE, null);
+        });
+        ivSee.setOnClickListener(v -> {
+            canSee = !canSee;
+            ivSee.setImageResource(canSee ? R.mipmap.kj : R.mipmap.bkj);
+                /*
+                //从密码不可见模式变为密码可见模式
+                et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                //从密码可见模式变为密码不可见模式
+                et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                */
+            etPwd.setTransformationMethod(canSee ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
+
+            etPwd.setSelection(etPwd.getText().toString().length());
+        });
+        ivSee2.setOnClickListener(v -> {
+            canSee2 = !canSee2;
+            ivSee2.setImageResource(canSee2 ? R.mipmap.kj : R.mipmap.bkj);
+            etPwd2.setTransformationMethod(canSee2 ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
+            etPwd2.setSelection(etPwd2.getText().toString().length());
+        });
     }
 
     @Override
@@ -125,104 +209,6 @@ public class ForgetPwdActivity extends NetWorkActivity implements View.OnClickLi
     protected void onFailure(String result, int where) {
 
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                this.finish();
-                break;
-            case R.id.tvCode:
-                if (getting) {
-                    return;
-                }
-                phone = etPhone.getText().toString();
-                if (phone.isEmpty()) {
-                    Utils.toastShort(mContext, "手机号码不能为空");
-                    return;
-                }
-                if (!MatcherUtils.isPhone(phone)) {
-                    Utils.toastShort(mContext, "请输入正确的手机号码！");
-                    return;
-                }
-                if (type != 1) {
-                    if (!phone.equals(MeetApplication.getInstance().getSharedPreferences().getString("phone", ""))) {
-                        Utils.toastShort(mContext, "非本账户绑定手机，请使用注册时的手机号！！");
-                        return;
-                    }
-                }
-                setBodyParams(new String[]{"phone", "forget"}, new String[]{phone, "forget"});
-                sendPost(Constants.base_url + "/api/account/scode.do", S_CODE_CODE, null);
-                break;
-            case R.id.ivSee:
-                canSee = !canSee;
-                ivSee.setImageResource(canSee ? R.mipmap.kj : R.mipmap.bkj);
-                /*
-                //从密码不可见模式变为密码可见模式
-                et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                //从密码可见模式变为密码不可见模式
-                et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                */
-                etPwd.setTransformationMethod(canSee ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
-
-                etPwd.setSelection(etPwd.getText().toString().length());
-                break;
-            case R.id.ivSee2:
-                canSee2 = !canSee2;
-                ivSee2.setImageResource(canSee2 ? R.mipmap.kj : R.mipmap.bkj);
-                etPwd2.setTransformationMethod(canSee2 ? HideReturnsTransformationMethod.getInstance() : PasswordTransformationMethod.getInstance());
-                etPwd2.setSelection(etPwd2.getText().toString().length());
-                break;
-            case R.id.btSave:
-                phone = etPhone.getText().toString().trim();
-                String pwd = etPwd.getText().toString().trim();
-                String pwd2 = etPwd2.getText().toString().trim();
-                String code = etCode.getText().toString().trim();
-                if (phone.isEmpty()) {
-                    Utils.toastShort(mContext, "手机号码不能为空");
-                    return;
-                }
-                if (!MatcherUtils.isPhone(phone)) {
-                    Utils.toastShort(mContext, "请输入正确的手机号码！");
-                    return;
-                }
-                if (type != 1) {
-                    if (!phone.equals(MeetApplication.getInstance().getSharedPreferences().getString("phone", ""))) {
-                        Utils.toastShort(mContext, "非本账户绑定手机，请使用注册时的手机号！！");
-                        return;
-                    }
-                }
-                if (code.length() == 0) {
-                    Utils.toastShort(mContext, "验证码不能为空,请获取验证码后再填入验证码");
-                    return;
-                }
-                if (pwd.isEmpty()) {
-                    Utils.toastShort(mContext, "新密码不能为空！");
-                    return;
-                }
-
-                if (!MatcherUtils.isPwd(pwd)) {
-                    Utils.toastShort(mContext, "密码格式不正确！");
-                    return;
-                }
-                if (pwd2.isEmpty()) {
-                    Utils.toastShort(mContext, "‘确认密码’不能为空！");
-                    return;
-                }
-                if (!MatcherUtils.isPwd(pwd)) {
-                    Utils.toastShort(mContext, "‘确认密码’格式错误！");
-                    return;
-                }
-                if (!pwd.equals(pwd2)) {
-                    Utils.toastShort(mContext, "二次密码不一致！");
-                    return;
-                }
-                setBodyParams(new String[]{"phone", "code", "pwd"}, new String[]{phone, code, pwd /*EncryptUtils.encryptMD5ToString(pwd)*/});
-                sendPost(Constants.base_url + "/api/account/resetpwd.do", RESET_PWD_CODE, null);
-                break;
-        }
-    }
-
 
     @Override
     protected void onDestroy() {

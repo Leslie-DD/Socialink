@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * 我的收藏页面
  */
-public class MyCollectActivity extends NetWorkActivity implements View.OnClickListener {
+public class MyCollectActivity extends NetWorkActivity  {
     private ViewPager vp;
     private TextView tvTeam, tvWw, tvgood;
     private ArrayList<Fragment> list;
@@ -60,10 +60,10 @@ public class MyCollectActivity extends NetWorkActivity implements View.OnClickLi
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        tvTeam.setOnClickListener(this);
-        tvWw.setOnClickListener(this);
-        tvgood.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        tvTeam.setOnClickListener(v -> setTvBg(0));
+        tvWw.setOnClickListener(v -> setTvBg(1));
+        tvgood.setOnClickListener(v -> setTvBg(2));
         vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -106,24 +106,5 @@ public class MyCollectActivity extends NetWorkActivity implements View.OnClickLi
     protected void onFailure(String result, int where) {
 
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvTeam:
-                setTvBg(0);
-                break;
-            case R.id.tvWw:
-                setTvBg(1);
-                break;
-            case R.id.tvgood:
-                setTvBg(2);
-                break;
-        }
-    }
-
 
 }

@@ -14,7 +14,7 @@ import com.hnu.heshequ.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ApplyJoinTDActivity extends NetWorkActivity implements View.OnClickListener {
+public class ApplyJoinTDActivity extends NetWorkActivity {
     private TextView tvCancel, tvSave, tvTitle;
     private EditText etContent;
     private int id;
@@ -40,25 +40,15 @@ public class ApplyJoinTDActivity extends NetWorkActivity implements View.OnClick
     }
 
     private void event() {
-        tvCancel.setOnClickListener(this);
-        tvSave.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.tvSave:
-                content = etContent.getText().toString().trim();
-                if (TextUtils.isEmpty(content)) {
-                    content = "";
-                }
-                setBodyParams(new String[]{"id", "content"}, new String[]{"" + id, "" + content});
-                sendPost(Constants.base_url + "/api/club/base/savaSysUserNews.do", join, Constants.token);
-                break;
-        }
+        tvCancel.setOnClickListener(v -> finish());
+        tvSave.setOnClickListener(v -> {
+            content = etContent.getText().toString().trim();
+            if (TextUtils.isEmpty(content)) {
+                content = "";
+            }
+            setBodyParams(new String[]{"id", "content"}, new String[]{"" + id, "" + content});
+            sendPost(Constants.base_url + "/api/club/base/savaSysUserNews.do", join, Constants.token);
+        });
     }
 
     @Override

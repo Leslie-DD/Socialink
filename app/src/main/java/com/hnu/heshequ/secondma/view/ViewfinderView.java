@@ -56,15 +56,19 @@ public final class ViewfinderView extends View {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         Resources resources = getResources();
 
-        maskColor = resources.getColor(R.color.viewfinder_mask);
-        resultColor = resources.getColor(R.color.result_view);
-        resultPointColor = resources.getColor(R.color.possible_result_points);
-        statusColor = resources.getColor(R.color.status_text);
+//        maskColor = resources.getColor(R.color.viewfinder_mask);
+//        resultColor = resources.getColor(R.color.result_view);
+//        resultPointColor = resources.getColor(R.color.possible_result_points);
+//        statusColor = resources.getColor(R.color.status_text);
+        maskColor = resources.getColor(R.color.white);
+        resultColor = resources.getColor(R.color.black);
+        resultPointColor = resources.getColor(R.color.blue);
+        statusColor = resources.getColor(R.color.base_blue);
 
 
         possibleResultPoints = new ArrayList<ResultPoint>(10);
         lastPossibleResultPoints = null;
-        scanLight = BitmapFactory.decodeResource(resources, R.drawable.scan_light);
+        scanLight = BitmapFactory.decodeResource(resources, R.drawable.line_blue);
     }
 
     public void setCameraManager(CameraManager cameraManager) {

@@ -50,7 +50,7 @@ import java.util.ArrayList;
  * 个人基本资料页面
  */
 
-public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickListener {
+public class BaseInfoActivity extends PhotoBaseActivity  {
     private static final String TAG = "[BaseInfoActivity]";
 
     private final static int UPLOAD_HEAD = 1000;
@@ -120,8 +120,28 @@ public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickL
         View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
         tvPic = pv.findViewById(R.id.tvPic);
         tvUp = pv.findViewById(R.id.tvUp);
-        tvPic.setOnClickListener(this);
-        tvUp.setOnClickListener(this);
+        tvPic.setOnClickListener(v -> {
+            // 拍照
+            if (status == 0) {
+                takePhoto();
+            } else {  // 选择女
+                sex = 2;
+                setBodyParams(new String[]{"sex"}, new String[]{"" + 2});
+                sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
+            }
+            pop.dismiss();
+        });
+        tvUp.setOnClickListener(v -> {
+            // 相册选择
+            if (status == 0) {
+                choosePhoto();
+            } else {  // 选择男
+                sex = 1;
+                setBodyParams(new String[]{"sex"}, new String[]{"" + 1});
+                sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
+            }
+            pop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -141,7 +161,27 @@ public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickL
         Button btSave = v.findViewById(R.id.btSave);
         etContent = v.findViewById(R.id.etContent);
         v.findViewById(R.id.ivClose).setOnClickListener(view -> modifyPop.dismiss());
-        btSave.setOnClickListener(this);
+        btSave.setOnClickListener(v1 -> {
+            String content = etContent.getText().toString();
+            if (content.isEmpty()) {
+                Utils.toastShort(mContext, "请先输入信息!");
+                return;
+            }
+            // 修改名字
+            if (popStatus == 0) {
+                name = content;
+                setBodyParams(new String[]{"nickname"}, new String[]{content});
+                sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_NAME, Constants.token);
+            }
+            // 修改学校
+            if (popStatus == 1) {
+                name = content;
+                sp.edit().putString(Constants.uid + "school", name).apply();
+                data.get(2).setTip(name);
+                adapter.notifyDataSetChanged();
+            }
+            modifyPop.dismiss();
+        });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         modifyPop.setBackgroundDrawable(new BitmapDrawable());
         // 设置点击弹框外部，弹框消失
@@ -220,56 +260,6 @@ public class BaseInfoActivity extends PhotoBaseActivity implements View.OnClickL
                     break;
             }
         });
-    }
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvUp:
-                // 相册选择
-                if (status == 0) {
-                    choosePhoto();
-                } else {  // 选择男
-                    sex = 1;
-                    setBodyParams(new String[]{"sex"}, new String[]{"" + 1});
-                    sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
-                }
-                pop.dismiss();
-                break;
-            case R.id.tvPic:
-                // 拍照
-                if (status == 0) {
-                    takePhoto();
-                } else {  // 选择女
-                    sex = 2;
-                    setBodyParams(new String[]{"sex"}, new String[]{"" + 2});
-                    sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
-                }
-                pop.dismiss();
-                break;
-            case R.id.btSave:
-                String content = etContent.getText().toString();
-                if (content.length() == 0) {
-                    Utils.toastShort(mContext, "请先输入信息!");
-                    return;
-                }
-                // 修改名字
-                if (popStatus == 0) {
-                    name = content;
-                    setBodyParams(new String[]{"nickname"}, new String[]{content});
-                    sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_NAME, Constants.token);
-                }
-                // 修改学校
-                if (popStatus == 1) {
-                    name = content;
-                    sp.edit().putString(Constants.uid + "school", name).apply();
-                    data.get(2).setTip(name);
-                    adapter.notifyDataSetChanged();
-                }
-                modifyPop.dismiss();
-                break;
-        }
     }
 
     private void showPop(int status) {

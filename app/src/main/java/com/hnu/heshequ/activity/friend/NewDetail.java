@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  * 动态详情页面
  */
 
-public class NewDetail extends NetWorkActivity implements View.OnClickListener {
+public class NewDetail extends NetWorkActivity  {
     private int type = 0;
     private CircleView ivHead;
     private EditText etContent;
@@ -128,16 +129,34 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         tvContent = (TextView) headview.findViewById(R.id.tvContent);
         etContent = (EditText) findViewById(R.id.etContent);
         llSave = (LinearLayout) headview.findViewById(R.id.llSave);
-        llSave.setOnClickListener(this);
+        llSave.setOnClickListener(v -> {
+            Log.e("NewDetail.java Wen.id", "" + WenConstans.id);
+            setBodyParams(new String[]{"user_id", "dynamic_id"}, new String[]{WenConstans.id + "", "" + friendNewBean.dtid});
+            // 修改用Constants.uid而不用WenConstans.id，不然返回
+//                setBodyParams(new String[]{"user_id","dynamic_id"}, new String[]{Constants.uid+ "",""+friendNewBean.dtid});
+            sendPost(WenConstans.FriendNewZan, 1000, WenConstans.token);
+        });
         ivImg = (ImageView) headview.findViewById(R.id.ivImg);
         ivBq = (ImageView) findViewById(R.id.ivBq);
         ivSend = (ImageView) findViewById(R.id.ivSend);
         ivRight = (ImageView) findViewById(R.id.ivRight);
         ivRight.setImageResource(R.mipmap.more3);
-        ivRight.setOnClickListener(this);
-        ivBq.setOnClickListener(this);
-        ivSend.setOnClickListener(this);
-        ivHead.setOnClickListener(this);
+        ivSend.setOnClickListener(v -> {
+            String content = etContent.getText().toString();
+            if (TextUtils.isEmpty(content)) {
+                Utils.toastShort(mContext, "您还没有输入任何内容");
+                return;
+            }
+            if (content.length() > 100) {
+                Utils.toastShort(mContext, "最多评论100个字符");
+                return;
+            }
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.showSoftInput(etContent,InputMethodManager.SHOW_FORCED);
+            imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); //强制隐藏键盘
+            sendDisscuss(content);
+        });
+        ivHead.setOnClickListener(v -> startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", friendNewBean.user_id)));
         lvPicture = (MyLv) headview.findViewById(R.id.lvPicture);
         pictureAdapter = new FriendPictureAdapter(this);
         lvPicture.setAdapter(pictureAdapter);
@@ -403,44 +422,17 @@ public class NewDetail extends NetWorkActivity implements View.OnClickListener {
         brodcast = new RefreshBrodcast();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("refresh.data");
-        registerReceiver(brodcast, intentFilter);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(brodcast, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+        } else {
+            registerReceiver(brodcast, intentFilter);
+        }
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"dynamic_id", "type", "content", "presentor"}
                 , new String[]{friendNewBean.dtid + "", 1 + "", content, "" + friendNewBean.user_id});
         sendPost(WenConstans.FriendDiscuss, 102, WenConstans.token);
-
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivHead:
-                startActivity(new Intent(this, PersonalInformationActivity.class).putExtra("uid", friendNewBean.user_id));
-                break;
-            case R.id.ivSend:
-                String content = etContent.getText().toString();
-                if (TextUtils.isEmpty(content)) {
-                    Utils.toastShort(mContext, "您还没有输入任何内容");
-                    return;
-                }
-                if (content.length() > 100) {
-                    Utils.toastShort(mContext, "最多评论100个字符");
-                    return;
-                }
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.showSoftInput(etContent,InputMethodManager.SHOW_FORCED);
-                imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); //强制隐藏键盘
-                sendDisscuss(content);
-                break;
-            case R.id.llSave:
-                Log.e("NewDetail.java Wen.id", "" + WenConstans.id);
-                setBodyParams(new String[]{"user_id", "dynamic_id"}, new String[]{WenConstans.id + "", "" + friendNewBean.dtid});
-                // 修改用Constants.uid而不用WenConstans.id，不然返回
-//                setBodyParams(new String[]{"user_id","dynamic_id"}, new String[]{Constants.uid+ "",""+friendNewBean.dtid});
-                sendPost(WenConstans.FriendNewZan, 1000, WenConstans.token);
-        }
 
     }
 

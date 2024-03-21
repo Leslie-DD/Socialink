@@ -19,7 +19,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/4/28.
  */
 
-public class ShidaZhouShow extends NetWorkActivity implements View.OnClickListener {
+public class ShidaZhouShow extends NetWorkActivity  {
     private TextView zhouri_1, zhouri_2, zhouri_3, zhouri_4, zhouri_5, zhouri_6;
     private TextView zhouyi_1, zhouyi_2, zhouyi_3, zhouyi_4, zhouyi_5, zhouyi_6;
     private TextView zhouer_1, zhouer_2, zhouer_3, zhouer_4, zhouer_5, zhouer_6;
@@ -96,10 +96,25 @@ public class ShidaZhouShow extends NetWorkActivity implements View.OnClickListen
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        findViewById(R.id.ivRight).setOnClickListener(this);
-        xuanzezhou.setOnClickListener(this);
-        xuanzezhanghao.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        findViewById(R.id.ivRight).setOnClickListener(v -> {
+            Intent intent3 = new Intent();
+            intent3.setClass(ShidaZhouShow.this, TimetableAddCourse.class);
+            startActivity(intent3);
+            finish();
+        });
+        xuanzezhou.setOnClickListener(v -> {
+            Intent intent2 = new Intent();
+            intent2.setClass(ShidaZhouShow.this, ShidaZhouSelect.class);
+            startActivity(intent2);
+            finish();
+        });
+        xuanzezhanghao.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.setClass(ShidaZhouShow.this, TimetableCheckin.class);
+            startActivity(intent1);
+            finish();
+        });
     }
 
     @Override
@@ -291,34 +306,6 @@ public class ShidaZhouShow extends NetWorkActivity implements View.OnClickListen
             Utils.toastShort(mContext, result.optString("msg"));
         }
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.ivRight:
-                Intent intent3 = new Intent();
-                intent3.setClass(ShidaZhouShow.this, TimetableAddCourse.class);
-                startActivity(intent3);
-                finish();
-                break;
-            case R.id.xuanzezhanghao:
-                Intent intent1 = new Intent();
-                intent1.setClass(ShidaZhouShow.this, TimetableCheckin.class);
-                startActivity(intent1);
-                finish();
-                break;
-            case R.id.xuanzezhou:
-                Intent intent2 = new Intent();
-                intent2.setClass(ShidaZhouShow.this, ShidaZhouSelect.class);
-                startActivity(intent2);
-                finish();
-                break;
-        }
-    }
-
 
     public void getData() {
         setBodyParams(new String[]{"week"}, new String[]{week});

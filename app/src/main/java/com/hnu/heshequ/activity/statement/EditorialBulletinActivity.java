@@ -19,7 +19,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EditorialBulletinActivity extends NetWorkActivity implements View.OnClickListener {
+public class EditorialBulletinActivity extends NetWorkActivity {
     private int type;   // 1 = 创建； 2 = 编辑;
     private int id;
     private TextView tvCancel, tvSave;
@@ -54,8 +54,38 @@ public class EditorialBulletinActivity extends NetWorkActivity implements View.O
     }
 
     private void event() {
-        tvCancel.setOnClickListener(this);
-        tvSave.setOnClickListener(this);
+        tvCancel.setOnClickListener(v -> finish());
+        tvSave.setOnClickListener(v -> {
+            if (type == 1) {
+                String title = etTitle.getText().toString();
+                String content = etContent.getText().toString();
+                if (TextUtils.isEmpty(title)) {
+                    Utils.toastShort(mContext, "标题不能为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(content)) {
+                    Utils.toastShort(mContext, "内容不能为空");
+                    return;
+                }
+                tvSave.setClickable(false);
+                setBodyParams(new String[]{"clubId", "title", "content"}, new String[]{"" + Constants.clubId, title, content});
+                sendPost(Constants.base_url + "/api/club/notice/save.do", 1000, Constants.token);
+            } else if (type == 2) {
+                String title = etTitle.getText().toString();
+                String content = etContent.getText().toString();
+                if (TextUtils.isEmpty(title)) {
+                    Utils.toastShort(mContext, "标题不能为空");
+                    return;
+                }
+                if (TextUtils.isEmpty(content)) {
+                    Utils.toastShort(mContext, "内容不能为空");
+                    return;
+                }
+                tvSave.setClickable(false);
+                setBodyParams(new String[]{"id", "clubId", "title", "content"}, new String[]{"" + id, "" + Constants.clubId, title, content});
+                sendPost(Constants.base_url + "/api/club/notice/update.do", 1000, Constants.token);
+            }
+        });
 
         etTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -104,47 +134,6 @@ public class EditorialBulletinActivity extends NetWorkActivity implements View.O
             tvSave.setClickable(true);
         }
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tvCancel:
-                this.finish();
-                break;
-            case R.id.tvSave:
-                if (type == 1) {
-                    String title = etTitle.getText().toString();
-                    String content = etContent.getText().toString();
-                    if (TextUtils.isEmpty(title)) {
-                        Utils.toastShort(mContext, "标题不能为空");
-                        return;
-                    }
-                    if (TextUtils.isEmpty(content)) {
-                        Utils.toastShort(mContext, "内容不能为空");
-                        return;
-                    }
-                    tvSave.setClickable(false);
-                    setBodyParams(new String[]{"clubId", "title", "content"}, new String[]{"" + Constants.clubId, title, content});
-                    sendPost(Constants.base_url + "/api/club/notice/save.do", 1000, Constants.token);
-                } else if (type == 2) {
-                    String title = etTitle.getText().toString();
-                    String content = etContent.getText().toString();
-                    if (TextUtils.isEmpty(title)) {
-                        Utils.toastShort(mContext, "标题不能为空");
-                        return;
-                    }
-                    if (TextUtils.isEmpty(content)) {
-                        Utils.toastShort(mContext, "内容不能为空");
-                        return;
-                    }
-                    tvSave.setClickable(false);
-                    setBodyParams(new String[]{"id", "clubId", "title", "content"}, new String[]{"" + id, "" + Constants.clubId, title, content});
-                    sendPost(Constants.base_url + "/api/club/notice/update.do", 1000, Constants.token);
-                }
-                break;
-        }
-    }
-
 
     @Override
     public void onPause() {

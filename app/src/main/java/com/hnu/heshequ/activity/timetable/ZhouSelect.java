@@ -17,7 +17,7 @@ import org.json.JSONObject;
  * Created by dell on 2020/5/9.
  */
 
-public class ZhouSelect extends NetWorkActivity implements View.OnClickListener {
+public class ZhouSelect extends NetWorkActivity {
     private TextView zhoushu;
     private String week1;
     private Button set;
@@ -37,8 +37,15 @@ public class ZhouSelect extends NetWorkActivity implements View.OnClickListener 
     }
 
     private void event() {
-        findViewById(R.id.ivBack).setOnClickListener(this);
-        set.setOnClickListener(this);
+        findViewById(R.id.ivBack).setOnClickListener(v -> finish());
+        set.setOnClickListener(v -> {
+            week1 = zhoushu.getText().toString();
+            Intent intent1 = new Intent();
+            intent1.setClass(ZhouSelect.this, Zhoushow.class);
+            Zhoushow.week = week1;
+            startActivity(intent1);
+            finish();
+        });
     }
 
     @Override
@@ -50,23 +57,4 @@ public class ZhouSelect extends NetWorkActivity implements View.OnClickListener 
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
 
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ivBack:
-                finish();
-                break;
-            case R.id.set:
-                week1 = zhoushu.getText().toString();
-                Intent intent1 = new Intent();
-                intent1.setClass(ZhouSelect.this, Zhoushow.class);
-                Zhoushow.week = week1;
-                startActivity(intent1);
-                finish();
-                break;
-        }
-    }
-
-
 }

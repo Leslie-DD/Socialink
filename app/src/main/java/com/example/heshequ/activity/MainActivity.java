@@ -1,7 +1,6 @@
 package com.example.heshequ.activity;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -38,13 +37,9 @@ import com.example.heshequ.fragment.MeFragment;
 import com.example.heshequ.fragment.MsgFragment;
 import com.example.heshequ.fragment.TeamsFragment;
 import com.example.heshequ.fragment.WenwenFragment;
-import com.example.heshequ.umeng.MyPreferences;
-import com.example.heshequ.umeng.PushHelper;
 import com.example.heshequ.utils.Utils;
 import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
-import com.umeng.message.PushAgent;
-import com.umeng.message.api.UPushRegisterCallback;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -92,52 +87,6 @@ public class MainActivity extends NetWorkActivity implements View.OnClickListene
         Constants.userName = sp.getString("user", "18274962484");
         init();
         initPop();
-
-//        if (hasAgreedAgreement()) {
-//            PushAgent.getInstance(this).onAppStart();
-//        } else {
-//            showAgreementDialog();
-//        }
-    }
-
-    private boolean hasAgreedAgreement() {
-        return MyPreferences.getInstance(getApplicationContext()).hasAgreePrivacyAgreement();
-    }
-
-    private void showAgreementDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.agreement_title);
-        builder.setMessage(R.string.agreement_msg);
-        builder.setPositiveButton(R.string.agreement_ok, (dialog, which) -> {
-            dialog.dismiss();
-            //用户点击隐私协议同意按钮后，初始化PushSDK
-            MyPreferences.getInstance(getApplicationContext()).setAgreePrivacyAgreement(true);
-            MeetApplication.init(getApplicationContext());
-
-            UPushRegisterCallback callback = PushAgent.getInstance(getApplicationContext()).getRegisterCallback();
-            PushAgent.getInstance(getApplicationContext()).register(new UPushRegisterCallback() {
-                @Override
-                public void onSuccess(final String deviceToken) {
-                    Log.i(PushHelper.TAG, "agreed. deviceToken --> " + deviceToken);
-                    if (callback != null) {
-                        callback.onSuccess(deviceToken);
-                    }
-                }
-
-                @Override
-                public void onFailure(String code, String msg) {
-                    Log.e(PushHelper.TAG, "agreed. register failure：--> " + "code:" + code + ",desc:" + msg);
-                    if (callback != null) {
-                        callback.onFailure(code, msg);
-                    }
-                }
-            });
-        });
-        builder.setNegativeButton(R.string.agreement_cancel, (dialog, which) -> {
-            dialog.dismiss();
-            finish();
-        });
-        builder.create().show();
     }
 
     private void init() {

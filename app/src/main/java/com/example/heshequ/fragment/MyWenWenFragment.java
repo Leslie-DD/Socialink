@@ -182,12 +182,7 @@ public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapte
     public void onLoadMore() {
         pn++;
         if (pn > totalPage) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    rv.loadMoreComplete();
-                }
-            }, 1000);
+            new Handler().postDelayed(() -> rv.loadMoreComplete(), 1000);
         } else {
             getData(101);
         }

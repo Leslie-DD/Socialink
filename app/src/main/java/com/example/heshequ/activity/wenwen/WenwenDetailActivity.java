@@ -368,23 +368,13 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
         builder.setCancelable(false);
         builder.setTitle("提示");
         builder.setMessage("确定要删除这条问问吗？");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //删除
-                setBodyParams(new String[]{"uid", "askid"}, new String[]{wenwenBean.uid, wenwenBean.id + ""});
-                sendPost(Constants.base_url + "/api/ask/base/deleteMyAsk.do", 10010, WenConstans.token);
-                deldialog.dismiss();
-            }
-
-
+        builder.setPositiveButton("确定", (dialogInterface, i) -> {
+            //删除
+            setBodyParams(new String[]{"uid", "askid"}, new String[]{wenwenBean.uid, wenwenBean.id + ""});
+            sendPost(Constants.base_url + "/api/ask/base/deleteMyAsk.do", 10010, WenConstans.token);
+            deldialog.dismiss();
         });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deldialog.dismiss();
-            }
-        });
+        builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
         deldialog = builder.create();
         deldialog.setCancelable(false);
     }
@@ -393,20 +383,17 @@ public class WenwenDetailActivity extends NetWorkActivity implements View.OnClic
         if (where == 100) {
             pn = 1;
         }
-        setBodyParams(new String[]{"askid", "pn", "ps"}
-                , new String[]{wenwenBean.id + "", pn + "", ps + ""});
+        setBodyParams(new String[]{"askid", "pn", "ps"}, new String[]{wenwenBean.id + "", pn + "", ps + ""});
         sendPost(WenConstans.WwFirst, where, WenConstans.token);
     }
 
     private void sendDisscuss(String content) {
-        setBodyParams(new String[]{"id", "type", "content"}
-                , new String[]{wenwenBean.id + "", 1 + "", content});
+        setBodyParams(new String[]{"id", "type", "content"}, new String[]{wenwenBean.id + "", 1 + "", content});
         sendPost(WenConstans.WwDisscuss, 102, WenConstans.token);
     }
 
     private void saveWw(String type) {
-        setBodyParams(new String[]{"id", "op"}
-                , new String[]{wenwenBean.id + "", type});
+        setBodyParams(new String[]{"id", "op"}, new String[]{wenwenBean.id + "", type});
         sendPost(WenConstans.WwDSave, 104, WenConstans.token);
     }
 

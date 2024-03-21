@@ -389,6 +389,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                             });
                 } else if (type == 2) {
                     if (delFileIds.isEmpty()) { //如果没有图片删除
+                        tvSave.setClickable(false);
                         Log.e("DDQ", "没有图片删除");
                         //修改保存
                         OkHttpUtils.post(Constants.base_url + "/api/club/activity/update.do")
@@ -407,6 +408,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                                 .execute(new StringCallback() {
                                     @Override
                                     public void onSuccess(String s, Call call, Response response) {
+                                        tvSave.setClickable(true);
                                         try {
                                             JSONObject result = new JSONObject(s);
                                             switch (result.optInt("code")) {
@@ -435,12 +437,14 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                                     @Override
                                     public void onError(Call call, Response response, Exception e) {
                                         isCommit = true;
+                                        tvSave.setClickable(true);
                                         super.onError(call, response, e);
                                     }
 
                                 });
                     } else {
                         //修改保存
+                        tvSave.setClickable(false);
                         OkHttpUtils.post(Constants.base_url + "/api/club/activity/update.do")
                                 .tag(this)
                                 .headers(Constants.Token_Header, Constants.token)
@@ -456,6 +460,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                                 .execute(new StringCallback() {
                                     @Override
                                     public void onSuccess(String s, Call call, Response response) {
+                                        tvSave.setClickable(true);
                                         try {
                                             JSONObject result = new JSONObject(s);
                                             switch (result.optInt("code")) {
@@ -478,11 +483,11 @@ public class ReleaseActivitiesActivity extends NetWorkActivity implements View.O
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-
                                     }
 
                                     @Override
                                     public void onError(Call call, Response response, Exception e) {
+                                        tvSave.setClickable(true);
                                         isCommit = true;
                                         super.onError(call, response, e);
                                     }

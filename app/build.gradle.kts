@@ -49,72 +49,78 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.viewpager2)
 
-    implementation("com.youth.banner:banner:1.4.10")
-    implementation("com.githang:status-bar-compat:0.5")
+    implementation(libs.banner)
+    implementation(libs.status.bar.compat)
 
     // 支持 GIF 动图、WebP（静态图 + 动图），需要添加
-    implementation("com.facebook.fresco:fresco:0.12.0")
-    implementation("com.facebook.fresco:animated-gif:0.12.0")
-    implementation("com.facebook.fresco:animated-webp:0.12.0")
-    implementation("com.facebook.fresco:webpsupport:0.12.0")
+    implementation(libs.facebook.fresco)
+    implementation(libs.facebook.fresco.gif)
+    implementation(libs.facebook.fresco.webp)
+    implementation(libs.facebook.fresco.websupport)
 
-    implementation("androidx.multidex:multidex:2.0.1")
+    implementation(libs.androidx.multidex)
 
     //滚度刻度尺
-    implementation("com.zkk.view:ZkkRulerView:1.0.0")
+    implementation(libs.zkkrulerview)
 
-    implementation("com.alibaba:fastjson:1.2.79")
+    implementation(libs.fastjson)
 
-    implementation("com.jcodecraeer:xrecyclerview:1.6.0")
-    implementation("top.zibin:Luban:1.1.2")
-    implementation("com.jude:rollviewpager:1.2.9")
-    implementation("com.github.chrisbanes:PhotoView:2.0.0")
-    implementation("org.greenrobot:eventbus:3.1.1")
+    implementation(libs.xrecyclerview)
+    implementation(libs.luban)
+    implementation(libs.rollviewpager)
+    implementation(libs.photoview)
+    implementation(libs.eventbus)
 
     // 生成二维码依赖
-    implementation("cn.yipianfengye.android:zxing-library:2.1")
+    implementation(libs.zxing.library)
 
     // 布兰柯基工具类
-    implementation("com.blankj:utilcode:1.24.2")
+    implementation(libs.utilcode)
 
-    implementation("com.lzy.net:okhttputils:1.8.1")
-    implementation("com.lzy.net:okhttpserver:1.0.3")
+    implementation(libs.okhttputils)
+    implementation(libs.okhttpserver)
 
     // 小三角 需要 Maven https://jitpack.io
-    implementation("com.github.zengzhaoxing:SharpView:v2.3.0")
+    implementation(libs.sharpview)
 
     // 时间选择器
-    implementation("com.contrarywind:Android-PickerView:4.1.4")
+    implementation(libs.android.pickerview)
 
-    implementation("org.jsoup:jsoup:1.11.2")
+    implementation(libs.jsoup)
 
     implementation("com.github.huzhenjie:RichTextEditor:1.0.4") {
         exclude(group = "com.github.bumptech.glide")
     }
 
-    implementation("com.github.bumptech.glide:glide:3.7.0")
+    implementation(libs.glide)
+    annotationProcessor(libs.glide)
+
 
     // XRefreshView
-    implementation("com.huxq17.xrefreshview:xrefreshview:3.6.9")
+    implementation(libs.xrefreshview)
 
     // 加载中
-    implementation("com.github.limxing:Android-PromptDialog:1.1.3")
+    implementation(libs.android.promptdialog)
 
-    implementation("com.google.code.gson:gson:2.8.0")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation("com.squareup.retrofit2:retrofit:2.3.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava:2.1.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.1.0")
-    implementation("io.reactivex:rxandroid:1.2.1")
-    implementation("io.reactivex:rxjava:1.2.1")
+    implementation(libs.gson)
+    implementation(libs.okhttp3) {
+        exclude(group = "glide-parent")
+    }
+    implementation(libs.okhttp3.logging.interceptor) {
+        exclude(group = "glide-parent")
+    }
 
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.adapter.rxjava)
+    implementation(libs.retrofit.converter.gson)
+//    implementation("io.reactivex:rxandroid:1.2.1")
+//    implementation(libs.rxjava)
 
-    implementation("com.tencent.bugly:crashreport:latest.release") //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如4.0.3
+    implementation(libs.androidx.swiperefreshlayout)
+
+    implementation(libs.crashreport) //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如4.0.3
 
 }

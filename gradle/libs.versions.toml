@@ -1,30 +1,97 @@
 [versions]
 agp = "8.3.0"
+androidPickerview = "4.1.9"
+androidPromptdialog = "1.1.3"
+banner = "1.4.10"
+crashreport = "latest.release"
+eventbus = "3.3.1"
+fastjson = "1.2.79"
+glide = "3.7.0"
+gson = "2.10.1"
+jsoup = "1.13.1"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
+luban = "1.1.2"
 material = "1.11.0"
 constraintlayout = "2.1.4"
 lifecycleLivedataKtx = "2.7.0"
 lifecycleViewmodelKtx = "2.7.0"
+multidex = "2.0.1"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
+okhttp3 = "4.11.0"
+okhttpserver = "1.0.3"
+okhttputils = "1.8.1"
+photoview = "2.0.0"
+recyclerview = "1.3.2"
+retrofit = "2.9.0"
+rollviewpager = "1.2.9"
+rxjava = "1.2.1"
+sharpview = "v2.3.0"
+statusBarCompat = "0.5"
+swiperefreshlayout = "1.1.0"
+utilcode = "1.24.2"
+viewpager2 = "1.0.0"
+
+facebook-fresco = "0.12.0"
+xrecyclerview = "1.6.0"
+xrefreshview = "3.6.9"
+zkkrulerview = "1.0.0"
+zxingLibrary = "2.1"
 
 [libraries]
+android-pickerview = { module = "com.contrarywind:Android-PickerView", version.ref = "androidPickerview" }
+android-promptdialog = { module = "com.github.limxing:Android-PromptDialog", version.ref = "androidPromptdialog" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-multidex = { module = "androidx.multidex:multidex", version.ref = "multidex" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+
+banner = { module = "com.youth.banner:banner", version.ref = "banner" }
+crashreport = { module = "com.tencent.bugly:crashreport", version.ref = "crashreport" }
+eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
+fastjson = { module = "com.alibaba:fastjson", version.ref = "fastjson" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+luban = { module = "top.zibin:Luban", version.ref = "luban" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+okhttp3 = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3" }
+okhttp3-logging-interceptor = {module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3"}
+okhttpserver = { module = "com.lzy.net:okhttpserver", version.ref = "okhttpserver" }
+okhttputils = { module = "com.lzy.net:okhttputils", version.ref = "okhttputils" }
+photoview = { module = "com.github.chrisbanes:PhotoView", version.ref = "photoview" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-adapter-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava", version.ref = "retrofit" }
+retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+rollviewpager = { module = "com.jude:rollviewpager", version.ref = "rollviewpager" }
+rxjava = { module = "io.reactivex:rxjava", version.ref = "rxjava" }
+sharpview = { module = "com.github.zengzhaoxing:SharpView", version.ref = "sharpview" }
+status-bar-compat = { module = "com.githang:status-bar-compat", version.ref = "statusBarCompat" }
+
+facebook-fresco = { module = "com.facebook.fresco:fresco", version.ref = "facebook-fresco" }
+facebook-fresco-gif = { module = "com.facebook.fresco:animated-gif", version.ref = "facebook-fresco" }
+facebook-fresco-webp = { module = "com.facebook.fresco:animated-webp", version.ref = "facebook-fresco" }
+facebook-fresco-websupport = { module = "com.facebook.fresco:webpsupport", version.ref = "facebook-fresco" }
+utilcode = { module = "com.blankj:utilcode", version.ref = "utilcode" }
+xrecyclerview = { module = "com.jcodecraeer:xrecyclerview", version.ref = "xrecyclerview" }
+xrefreshview = { module = "com.huxq17.xrefreshview:xrefreshview", version.ref = "xrefreshview" }
+zkkrulerview = { module = "com.zkk.view:ZkkRulerView", version.ref = "zkkrulerview" }
+zxing-library = { module = "cn.yipianfengye.android:zxing-library", version.ref = "zxingLibrary" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

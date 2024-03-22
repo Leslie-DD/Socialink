@@ -26,9 +26,6 @@ import com.hnu.heshequ.view.MyGv;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dell on 2019/9/5.
- */
 
 public class LabelsortAdapter extends RecyclerView.Adapter {
 

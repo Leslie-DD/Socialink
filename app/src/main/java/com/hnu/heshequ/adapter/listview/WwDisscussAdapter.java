@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class WwDisscussAdapter extends RecyclerView.Adapter {
     private WenwenDetailActivity context;
     private List<WwDisscussBean> data = new ArrayList<>();

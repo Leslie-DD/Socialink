@@ -1,20 +1,17 @@
 package com.hnu.heshequ.activity.team;
 
-/**
- * Created by 佳佳 on 2018/12/23.
- */
-
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.MessageAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -23,8 +20,6 @@ import com.hnu.heshequ.bean.MessageBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.zkk.view.rulerview.RulerView;
 
@@ -37,7 +32,7 @@ import java.util.List;
 
 //import com.zkk.rulerview.R;
 
-public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerView.LoadingListener{
+public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {
     private RulerView ruler_height;   //身高的view
     private TextView tv_register_info_height_value;
     private Calendar calendar = Calendar.getInstance();

@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.listview.CpqAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -26,15 +28,13 @@ import com.hnu.heshequ.bean.QuestionBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.MatcherUtils;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ChangePhoneNumActivity extends NetWorkActivity  {
+public class ChangePhoneNumActivity extends NetWorkActivity {
     private TextView tvTitle, tvCancel, tvSchool;
     private EditText etPhone, etPwd, etCode;
     private String phone, pwd, code;

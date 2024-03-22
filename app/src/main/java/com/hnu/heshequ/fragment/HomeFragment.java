@@ -1,8 +1,5 @@
 package com.hnu.heshequ.fragment;
 
-import static androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED;
-
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.HomeSearchActivity;
 import com.hnu.heshequ.activity.WebActivity;
@@ -47,8 +46,6 @@ import com.hnu.heshequ.entity.ScanResultEvent;
 import com.hnu.heshequ.secondma.android.CaptureActivity;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CustomViewPager;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
@@ -62,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends NetWorkFragment implements  XRecyclerView.LoadingListener {
+public class HomeFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
 
     private static final String TAG = "HomeFragment";
 

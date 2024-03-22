@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class GwPictureAdapter extends BaseAdapter {
     private Context context;
     private List<String> data = new ArrayList<>();

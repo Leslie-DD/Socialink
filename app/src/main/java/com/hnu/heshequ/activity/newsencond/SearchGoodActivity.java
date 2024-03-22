@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.newsencond;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -10,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.andview.refreshview.XRefreshView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.SecondhandgoodBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;

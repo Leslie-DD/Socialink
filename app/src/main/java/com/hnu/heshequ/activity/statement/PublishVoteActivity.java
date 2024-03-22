@@ -23,6 +23,7 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.listview.AddVoteAdapter;
 import com.hnu.heshequ.adapter.listview.VoteAdapter;
@@ -34,7 +35,6 @@ import com.hnu.heshequ.entity.VoteBean;
 import com.hnu.heshequ.entity.VoteJsonBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.MyLv;
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;

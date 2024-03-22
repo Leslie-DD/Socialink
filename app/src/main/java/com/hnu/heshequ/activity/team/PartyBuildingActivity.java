@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.Tj_Adapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -17,8 +19,6 @@ import com.hnu.heshequ.entity.BuildingBean;
 import com.hnu.heshequ.entity.RefTjEvent;
 import com.hnu.heshequ.utils.SpaceItemDecoration;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;

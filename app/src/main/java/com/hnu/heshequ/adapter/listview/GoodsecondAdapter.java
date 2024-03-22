@@ -20,9 +20,6 @@ import com.hnu.heshequ.view.CircleView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dell on 2019/8/27.
- */
 
 public class GoodsecondAdapter extends RecyclerView.Adapter {
     private Context context;

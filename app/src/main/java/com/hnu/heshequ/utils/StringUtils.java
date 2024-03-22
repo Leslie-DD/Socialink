@@ -11,9 +11,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by sendtion on 2016/6/24.
- */
+
 public class StringUtils {
 
 

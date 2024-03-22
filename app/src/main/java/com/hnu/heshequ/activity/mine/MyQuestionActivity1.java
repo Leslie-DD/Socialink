@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -19,8 +21,6 @@ import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONException;

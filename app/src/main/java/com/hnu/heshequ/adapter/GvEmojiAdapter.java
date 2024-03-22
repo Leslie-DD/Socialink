@@ -11,7 +11,6 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.utils.Utils;
 
 
-
 public class GvEmojiAdapter extends BaseAdapter {
     private Context context;
     private String[] datas;

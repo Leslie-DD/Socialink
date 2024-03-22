@@ -1,8 +1,5 @@
 package com.hnu.heshequ.activity.friend;
 
-/**
- * Created by dell on 2020/3/26.
- */
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.FriendSearchAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -21,8 +20,6 @@ import com.hnu.heshequ.bean.FriendListBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;

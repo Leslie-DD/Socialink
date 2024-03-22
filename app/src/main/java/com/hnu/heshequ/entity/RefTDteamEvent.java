@@ -1,7 +1,6 @@
 package com.hnu.heshequ.entity;
 
 
-
 public class RefTDteamEvent {
 
     private boolean isDel;

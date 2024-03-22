@@ -10,7 +10,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
-
 public class UrlToBitmapUtil {
 
     private CompleteListener listener;

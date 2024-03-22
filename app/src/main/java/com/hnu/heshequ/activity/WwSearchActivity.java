@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LabelSelectionActivity;
 import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
@@ -32,8 +34,6 @@ import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.entity.TestBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.FlowLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONException;

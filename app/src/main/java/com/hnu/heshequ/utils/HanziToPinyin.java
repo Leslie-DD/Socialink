@@ -6,9 +6,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/**
- * Created by dev06 on 2018/5/17.
- */
+
 public class HanziToPinyin {
     private static final String TAG = "HanziToPinyin";
     private static final boolean DEBUG = false;

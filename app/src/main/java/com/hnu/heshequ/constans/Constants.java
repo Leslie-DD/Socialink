@@ -1,8 +1,5 @@
 package com.hnu.heshequ.constans;
 
-/**
- * Created by dev06 on 2018/5/15.
- */
 public class Constants {
     public static int screenW;
     public static int screenH;
@@ -17,15 +14,6 @@ public class Constants {
 
     public static String base_url = "http://8.138.85.81:6000/xiangyu";
     public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
-
-    public static final String APP_AD_WX = "wx78748a644eb7d5f7";
-
-    /**
-     * 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY
-     */
-    public static final String APP_KEY_WB = "2980212248";
-    public static final String REDIRECT_URL = "http://www.sina.com";
-    public static final String SCOPE = "";
 
     public static String Token_Header = "XIANGYU-ACCESS-TOKEN";
     public static int default_PS = 10;

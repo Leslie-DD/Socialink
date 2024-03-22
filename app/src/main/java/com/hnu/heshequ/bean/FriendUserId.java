@@ -1,8 +1,5 @@
 package com.hnu.heshequ.bean;
 
-/**
- * Created by dell on 2020/4/28.
- */
 
 public class FriendUserId {
     public Integer id = 0;

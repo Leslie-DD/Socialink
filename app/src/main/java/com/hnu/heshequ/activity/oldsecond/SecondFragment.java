@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.WebActivity;
 import com.hnu.heshequ.activity.newsencond.SecondhandPostActivity;
@@ -38,8 +40,6 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CustomViewPager;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;

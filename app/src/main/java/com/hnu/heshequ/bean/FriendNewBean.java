@@ -3,9 +3,6 @@ package com.hnu.heshequ.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by dell on 2020/4/21.
- */
 
 public class FriendNewBean implements Serializable {
     public int user_id;

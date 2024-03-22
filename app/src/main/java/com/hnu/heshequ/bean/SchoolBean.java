@@ -2,9 +2,6 @@ package com.hnu.heshequ.bean;
 
 import java.io.Serializable;
 
-/**
- * Created by 佳佳 on 2019/8/27.
- */
 
 public class SchoolBean implements Serializable {
     private String school;//学校名称

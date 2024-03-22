@@ -2,11 +2,12 @@ package com.hnu.heshequ.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.SearchMembersActivity;
 import com.hnu.heshequ.adapter.listview.TeamMemberAdapter;
@@ -15,8 +16,6 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefMembers;
 import com.hnu.heshequ.entity.TeamMemberBean;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

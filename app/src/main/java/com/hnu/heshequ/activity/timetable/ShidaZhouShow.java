@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.timetable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
@@ -15,11 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/4/28.
- */
 
-public class ShidaZhouShow extends NetWorkActivity  {
+public class ShidaZhouShow extends NetWorkActivity {
     private TextView zhouri_1, zhouri_2, zhouri_3, zhouri_4, zhouri_5, zhouri_6;
     private TextView zhouyi_1, zhouyi_2, zhouyi_3, zhouyi_4, zhouyi_5, zhouyi_6;
     private TextView zhouer_1, zhouer_2, zhouer_3, zhouer_4, zhouer_5, zhouer_6;

@@ -18,9 +18,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by dell on 2020/5/10.
- */
 
 public class OthersDynamic extends NetWorkActivity {
     private View view;

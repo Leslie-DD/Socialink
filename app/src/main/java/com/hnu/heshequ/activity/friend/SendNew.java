@@ -17,13 +17,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LoginActivity;
 import com.hnu.heshequ.adapter.listview.GwPictureAdapter;
@@ -33,7 +33,6 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.PhotoUtils;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,11 +46,8 @@ import java.util.List;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-/**
- * Created by dell on 2020/3/27.
- */
 
-public class SendNew extends NetWorkActivity  {
+public class SendNew extends NetWorkActivity {
     private TextView tvCancle;
     private TextView tvTitle;
     private TextView tvSave;

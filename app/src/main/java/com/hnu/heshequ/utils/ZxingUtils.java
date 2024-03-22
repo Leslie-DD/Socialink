@@ -7,9 +7,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
-/**
- * Created by dev06 on 2018/5/25.
- */
+
 public class ZxingUtils {
 
     private static final int WHITE = 0xFFFFFFFF;

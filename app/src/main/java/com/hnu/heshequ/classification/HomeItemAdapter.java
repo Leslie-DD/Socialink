@@ -13,9 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.newsencond.SearchGoodActivity;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 

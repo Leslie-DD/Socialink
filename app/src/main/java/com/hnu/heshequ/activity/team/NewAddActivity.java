@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.team;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
@@ -14,7 +13,7 @@ import com.hnu.heshequ.base.NetWorkActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class NewAddActivity extends NetWorkActivity  {
+public class NewAddActivity extends NetWorkActivity {
     private TextView tvTitle;
 
     @Override

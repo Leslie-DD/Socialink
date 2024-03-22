@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.friend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,11 +25,8 @@ import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * Created by dell on 2020/5/8.
- */
 
-public class FriendNearDetail extends NetWorkActivity  {
+public class FriendNearDetail extends NetWorkActivity {
     private FriendListBean friendListBean;
     private TextView friendsetTip1, friendsetTip2, friendsetTip3, friendsetTip4, friendsetTip5, friendsetTip6, friendsetTip7, friendsetTip8, friendsetTip9, friendsetTip10, friendsetTip11;
     private static int hisid;

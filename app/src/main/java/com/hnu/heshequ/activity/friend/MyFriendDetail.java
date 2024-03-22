@@ -1,7 +1,6 @@
 package com.hnu.heshequ.activity.friend;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -9,9 +8,6 @@ import com.hnu.heshequ.base.NetWorkActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/5/1.
- */
 
 public class MyFriendDetail extends NetWorkActivity {
 

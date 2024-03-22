@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.view.CustomDialog;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
@@ -55,10 +55,10 @@ public abstract class NetWorkFragment extends Fragment {
 
         requestData();
 
-        Constants.uid = MeetApplication.getInstance().getSharedPreferences().getInt("uid", 1);
-        Constants.token = MeetApplication.getInstance().getSharedPreferences().getString("token", "");
-        WenConstans.token = MeetApplication.getInstance().getSharedPreferences().getString("token", "");
-        Constants.userName = MeetApplication.getInstance().getSharedPreferences().getString("user", "18274962484");
+        Constants.uid = SharedPreferencesHelp.getInt("uid", 1);
+        Constants.token = SharedPreferencesHelp.getString("token", "");
+        WenConstans.token = SharedPreferencesHelp.getString("token", "");
+        Constants.userName = SharedPreferencesHelp.getString("user", "18274962484");
     }
 
     @Override

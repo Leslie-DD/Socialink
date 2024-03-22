@@ -3,7 +3,6 @@ package com.hnu.heshequ.utils;
 import java.security.MessageDigest;
 
 
-
 public final class EncryptUtils {
 
     public static String encryptMD5ToString(String encryptStr) {

@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.timetable;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,11 +12,8 @@ import com.hnu.heshequ.base.NetWorkActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/5/9.
- */
 
-public class ShidaZhouSelect extends NetWorkActivity  {
+public class ShidaZhouSelect extends NetWorkActivity {
     private TextView zhoushu;
     private String week1;
     private Button set;
@@ -38,7 +34,8 @@ public class ShidaZhouSelect extends NetWorkActivity  {
 
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
-        set.setOnClickListener(v -> { week1 = zhoushu.getText().toString();
+        set.setOnClickListener(v -> {
+            week1 = zhoushu.getText().toString();
             Intent intent1 = new Intent();
             intent1.setClass(ShidaZhouSelect.this, ShidaZhouShow.class);
             ShidaZhouShow.week = week1;

@@ -1,6 +1,5 @@
 package com.hnu.heshequ.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -13,12 +12,17 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.gson.Gson;
+import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.activity.MainActivity;
 import com.hnu.heshequ.activity.login.ForgetPwdActivity;
+import com.hnu.heshequ.activity.login.LoginActivity;
 import com.hnu.heshequ.activity.mine.AttentionActivity;
 import com.hnu.heshequ.activity.mine.AuthenticationActivity;
 import com.hnu.heshequ.activity.mine.BaseInfoActivity;
@@ -34,14 +38,15 @@ import com.hnu.heshequ.activity.oldsecond.MygoodActivity;
 import com.hnu.heshequ.adapter.listview.ItemAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ItemBean;
-import com.hnu.heshequ.bean.UserInfoBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefUserInfo;
+import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.ImageUtils;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.ArcImageView;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,7 +56,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class MeFragment extends NetWorkFragment  {
+public class MeFragment extends NetWorkFragment {
 
     private static final String TAG = "[MeFragment]";
 
@@ -66,7 +71,7 @@ public class MeFragment extends NetWorkFragment  {
     private ItemAdapter adapter;
     private ImageView ivEditor;
     private TextView current;
-    private MainActivity mainActivity;
+    private MainActivity2 mainActivity;
     private LinearLayout llSay, llQuestion, llNotice, llSecondhand;
     private Gson gson;
     private UserInfoBean userInfoBean;
@@ -103,7 +108,7 @@ public class MeFragment extends NetWorkFragment  {
         tvLevel = (TextView) headView.findViewById(R.id.tvLevel);
         initUserinfo();
         event();
-        mainActivity = (MainActivity) getActivity();
+        mainActivity = (MainActivity2) getActivity();
         return view;
     }
 
@@ -133,7 +138,20 @@ public class MeFragment extends NetWorkFragment  {
         });
         ivHead.setOnClickListener(v -> {
             if (Constants.uid == 1 && mainActivity != null) {
-                mainActivity.showPop();
+//                mainActivity.showPop();
+                SharedPreferencesHelp.getEditor()
+                        .putString("phone", "")
+                        .putString("token", "")
+                        .putInt("uid", 1)
+                        .putBoolean("isLogin", false)
+                        .apply();
+                SharedPreferencesHelp.getEditor()
+                        .putBoolean("isLogin", false)
+                        .apply();
+                Constants.uid = 1;
+                MeetApplication.getInstance().finishAll();
+                startActivity(new Intent(mContext, LoginActivity.class));
+
             }
         });
         llSay.setOnClickListener(v -> startActivity(new Intent(mContext, MySayActivity.class)));
@@ -181,7 +199,30 @@ public class MeFragment extends NetWorkFragment  {
                     break;
                 case 8:// 退出登录/登录
                     if (mainActivity != null) {
-                        mainActivity.showPop();
+                        new AlertDialog.Builder(getContext())
+                                .setTitle("退出登录")
+                                .setMessage("确定退出当前账号吗")
+                                .setNegativeButton("取消", (dialogInterface, i1) -> {
+                                    ToastUtils.showShort("点击了取消按钮");
+                                    dialogInterface.dismiss();//销毁对话框
+                                })
+                                .setPositiveButton("确定", (dialog1, which) -> {
+                                    dialog1.dismiss();
+                                    SharedPreferencesHelp.getEditor()
+                                            .putString("phone", "")
+                                            .putString("token", "")
+                                            .putInt("uid", 1)
+                                            .putBoolean("isLogin", false)
+                                            .apply();
+                                    SharedPreferencesHelp.getEditor()
+                                            .putBoolean("isLogin", false)
+                                            .apply();
+                                    Constants.uid = 1;
+                                    MeetApplication.getInstance().finishAll();
+                                    startActivity(new Intent(getContext(), LoginActivity.class));
+                                })
+                                .create()
+                                .show();
                     }
                     break;
 

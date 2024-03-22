@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.timetable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
@@ -15,9 +14,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/4/28.
- */
 
 public class Zhoushow extends NetWorkActivity {
     private TextView zhouri_1, zhouri_2, zhouri_3, zhouri_4, zhouri_5;

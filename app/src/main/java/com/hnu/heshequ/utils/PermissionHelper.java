@@ -10,11 +10,18 @@ import java.util.List;
 
 public class PermissionHelper {
 
+    public static final String[] PERMISSIONS_STARTUP = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     public static final String[] PERMISSIONS_CAMERA_TIRAMISU = {
             Manifest.permission.CAMERA,
             Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_VIDEO,
+            Manifest.permission.READ_MEDIA_VIDEO
     };
 
     public static final String[] PERMISSIONS_CAMERA = {

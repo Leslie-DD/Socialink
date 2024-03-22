@@ -14,7 +14,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.PopupWindow;
@@ -47,7 +46,7 @@ import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class AddTjActivity extends NetWorkActivity  {
+public class AddTjActivity extends NetWorkActivity {
     private int type = 0;
     private GridView gw;
     private List<String> strings;

@@ -21,7 +21,6 @@ import com.hnu.heshequ.view.CircleView;
 import java.util.ArrayList;
 
 
-
 public class MyTeamAdapter extends RecyclerView.Adapter {
     private Context context;
     private LayoutInflater inflater;

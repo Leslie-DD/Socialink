@@ -12,10 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.constans.WenConstans;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.json.JSONException;
 

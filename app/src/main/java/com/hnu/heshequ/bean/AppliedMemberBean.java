@@ -1,7 +1,6 @@
 package com.hnu.heshequ.bean;
 
 
-
 public class AppliedMemberBean {
     /**
      * uid : 4

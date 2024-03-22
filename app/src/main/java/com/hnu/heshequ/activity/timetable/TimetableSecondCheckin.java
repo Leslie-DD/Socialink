@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.timetable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -21,9 +20,6 @@ import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * Created by dell on 2020/5/9.
- */
 
 public class TimetableSecondCheckin extends NetWorkActivity {
     private String year_1, year_2, term_1, today_1, week_1;

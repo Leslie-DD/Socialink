@@ -1,6 +1,5 @@
 package com.hnu.heshequ.fragment;
 
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MsgFragment extends NetWorkFragment  {
+public class MsgFragment extends NetWorkFragment {
 
     private View view;
     private ArrayList<Fragment> list;

@@ -1,8 +1,5 @@
 package com.hnu.heshequ.bean;
 
-/**
- * Created by 佳佳 on 2018/11/26.
- */
 
 public class NoticeBean {
 

@@ -17,16 +17,16 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.activity.MainActivity;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.SchoolBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.launcher.MainActivity2;
 import com.hnu.heshequ.utils.Utils;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +39,7 @@ import java.util.List;
  * Created by 佳佳 on 2019/8/26.
  */
 
-public class StudentIdLoginActivity extends NetWorkActivity{
+public class StudentIdLoginActivity extends NetWorkActivity {
 
     private OptionsPickerView schoolChooseHelper;//学校选择器
     private ArrayList<SchoolBean> schools = new ArrayList<>();//学校列表
@@ -296,7 +296,7 @@ public class StudentIdLoginActivity extends NetWorkActivity{
             memory.edit().putString("ID", studentId).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
 
             this.finish();
-            startActivity(new Intent(mContext, MainActivity.class));
+            startActivity(new Intent(mContext, MainActivity2.class));
             Utils.toastShort(mContext, "登录成功");
         } else {
             Utils.toastShort(mContext, result.optString("msg"));

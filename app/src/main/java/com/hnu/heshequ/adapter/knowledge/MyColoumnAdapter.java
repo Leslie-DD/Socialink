@@ -12,12 +12,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.knowledge.MyColoumnDetailActivity;
 import com.hnu.heshequ.bean.knowledge.SubscriptionItemBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;

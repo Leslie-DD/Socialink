@@ -3,9 +3,7 @@ package com.hnu.heshequ.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by dev06 on 2018/5/15.
- */
+
 public class TestBean implements Serializable {
     private ArrayList<String> imgs;
     private int day, month;

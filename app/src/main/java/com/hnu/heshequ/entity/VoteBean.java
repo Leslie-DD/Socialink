@@ -2,9 +2,7 @@ package com.hnu.heshequ.entity;
 
 import java.util.ArrayList;
 
-/**
- * Created by dev06 on 2018/6/5.
- */
+
 public class VoteBean {
     private int id;
     private String name;

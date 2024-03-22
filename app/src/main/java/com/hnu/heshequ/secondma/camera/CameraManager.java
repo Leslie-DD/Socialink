@@ -25,9 +25,9 @@ import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+import com.google.zxing.PlanarYUVLuminanceSource;
 import com.hnu.heshequ.secondma.android.CaptureActivityHandler;
 import com.hnu.heshequ.secondma.common.Constant;
-import com.google.zxing.PlanarYUVLuminanceSource;
 
 import java.io.IOException;
 

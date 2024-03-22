@@ -1,7 +1,6 @@
 package com.hnu.heshequ.activity.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,10 +11,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.activity.MainActivity;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.EventBean;
+import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.network.util.AuthorizationInterceptor;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,12 +24,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends NetWorkActivity  {
+public class LoginActivity extends NetWorkActivity {
     private LinearLayout main;
     private TextView tvSign, tvForget, studentIDLogin;
     private EditText etUser, etPwd;
     private Button btLogin;
-    private SharedPreferences sp;
     private final int loginCode = 1000;
     private String Phone;
     private int loginMethod = 0;//登陆方式 0->账号密码登陆 1-> 学号登陆
@@ -43,7 +43,6 @@ public class LoginActivity extends NetWorkActivity  {
     }
 
     private void init() {
-        sp = getSharedPreferences("meet", 0);
         tvSign = (TextView) findViewById(R.id.tvSign);
         etUser = (EditText) findViewById(R.id.etUser);
         etPwd = (EditText) findViewById(R.id.etPwd);
@@ -110,9 +109,11 @@ public class LoginActivity extends NetWorkActivity  {
 //            FriendSet.id=uid;
 //            startActivity(intent1);
 
-            sp.edit().putString("phone", Phone).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
+            SharedPreferencesHelp.getEditor().putString("phone", Phone).putString("token", token).putInt("uid", uid).putBoolean(
+                    "isLogin", true).apply();
+            AuthorizationInterceptor.cacheToken(token);
             this.finish();
-            startActivity(new Intent(mContext, MainActivity.class));
+            startActivity(new Intent(mContext, MainActivity2.class));
 
             //WenConstans.id = uid;
             Utils.toastShort(mContext, "登录成功；用户id：" + Constants.uid);

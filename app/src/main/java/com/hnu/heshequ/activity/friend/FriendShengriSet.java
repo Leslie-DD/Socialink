@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.friend;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -15,11 +14,8 @@ import com.hnu.heshequ.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/4/30.
- */
 
-public class FriendShengriSet extends NetWorkActivity  {
+public class FriendShengriSet extends NetWorkActivity {
     private EditText year, month, day;
     private String year1, month1, day1;
     private static String gexing;

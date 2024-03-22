@@ -1,5 +1,3 @@
-
-
 package com.hnu.heshequ.adapter.recycleview;
 
 import android.content.Context;
@@ -15,6 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.MessageActivity;
 import com.hnu.heshequ.activity.team.PersonalInformationActivity;
@@ -26,7 +25,6 @@ import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 

@@ -16,7 +16,6 @@
 
 package com.hnu.heshequ.secondma.decode;
 
-import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -32,22 +31,22 @@ import com.hnu.heshequ.utils.FileUtilcll;
 
 public class ImageUtil {
 
-    @TargetApi(19)
     public static String getImageAbsolutePath(Context context, Uri imageUri) {
-        if (context == null || imageUri == null)
+        if (context == null || imageUri == null) {
             return null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(context, imageUri)) {
+        }
+        if (DocumentsContract.isDocumentUri(context, imageUri)) {
             if (isExternalStorageDocument(imageUri)) {
                 String docId = DocumentsContract.getDocumentId(imageUri);
                 String[] split = docId.split(":");
                 String type = split[0];
                 if ("primary".equalsIgnoreCase(type)) {
-//                    return Environment.getExternalStorageDirectory() + "/" + split[1];
                     return FileUtilcll.getPublicDir() + "/" + split[1];
                 }
             } else if (isDownloadsDocument(imageUri)) {
-                String id = DocumentsContract.getDocumentId(imageUri);
-                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                String documentId = DocumentsContract.getDocumentId(imageUri);
+                Uri downloadsUri = Uri.parse("content://downloads/public_downloads");
+                Uri contentUri = ContentUris.withAppendedId(downloadsUri, Long.parseLong(documentId));
                 return getDataColumn(context, contentUri, null, null);
             } else if (isMediaDocument(imageUri)) {
                 String docId = DocumentsContract.getDocumentId(imageUri);
@@ -80,18 +79,15 @@ public class ImageUtil {
     }
 
     public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-        Cursor cursor = null;
         String column = MediaStore.Images.Media.DATA;
         String[] projection = {column};
-        try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+        try (Cursor cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null)) {
             if (cursor != null && cursor.moveToFirst()) {
                 int index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(index);
             }
-        } finally {
-            if (cursor != null)
-                cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

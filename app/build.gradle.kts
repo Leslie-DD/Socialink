@@ -1,16 +1,18 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("dagger.hilt.android.plugin")
+
+    kotlin("kapt")
+    kotlin("plugin.parcelize")
 }
 
 android {
     namespace = "com.hnu.heshequ"
-    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.hnu.heshequ"
-        minSdk = 27
-        targetSdk = 34
+
         versionCode = 1
         versionName = "1.0"
 
@@ -36,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":network"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -45,12 +48,13 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.viewpager2)
+
+    implementation(libs.splitties.appctx)
 
     implementation(libs.banner)
     implementation(libs.status.bar.compat)
@@ -121,6 +125,13 @@ dependencies {
 
     implementation(libs.androidx.swiperefreshlayout)
 
-    implementation(libs.crashreport) //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如4.0.3
+    implementation(libs.mavericks)
+    implementation(libs.hilt.android)
+    kapt(libs.androidx.hilt.compiler)
+    kapt(libs.hilt.android.compiler)
+
+//    implementation(libs.crashreport) //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如4.0.3
+
+    testImplementation(libs.junit)
 
 }

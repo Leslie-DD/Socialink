@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ZcDisscussAdapter extends RecyclerView.Adapter {
     private ZcQusetionActivity context;
     private List<ZcQuestionBean> data = new ArrayList<>();

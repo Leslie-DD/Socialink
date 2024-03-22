@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.zxing.Result;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.BaseActivity;
 import com.hnu.heshequ.entity.ScanResultEvent;
@@ -28,7 +29,6 @@ import com.hnu.heshequ.secondma.decode.DecodeImgThread;
 import com.hnu.heshequ.secondma.decode.ImageUtil;
 import com.hnu.heshequ.secondma.view.ViewfinderView;
 import com.hnu.heshequ.utils.Utils;
-import com.google.zxing.Result;
 
 import org.greenrobot.eventbus.EventBus;
 

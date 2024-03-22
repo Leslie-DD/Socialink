@@ -19,9 +19,9 @@ import com.hnu.heshequ.activity.login.LoginActivity;
 import com.hnu.heshequ.adapter.listview.FriendfiltrateAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.FriendBean;
-import com.hnu.heshequ.bean.UserInfoBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -33,9 +33,6 @@ import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * Created by dell on 2020/3/20.
- */
 
 public class FriendSet extends NetWorkActivity {
     private CircleView ivHead;

@@ -17,11 +17,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by dell on 2020/4/28.
- */
 
-public class MyDynamic extends NetWorkActivity  {
+public class MyDynamic extends NetWorkActivity {
     private View view;
     private ViewPager vp;
     private ArrayList<Fragment> list;

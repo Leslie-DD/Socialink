@@ -13,9 +13,9 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.google.zxing.ResultPoint;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.secondma.camera.CameraManager;
-import com.google.zxing.ResultPoint;
 
 import java.util.ArrayList;
 import java.util.List;

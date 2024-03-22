@@ -1,7 +1,6 @@
 package com.hnu.heshequ.activity.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,15 +19,14 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.hnu.heshequ.MeetApplication;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.EncryptUtils;
 import com.hnu.heshequ.utils.MatcherUtils;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +48,6 @@ public class SignActivity extends NetWorkActivity {
     private boolean getting;
     private String phone;
     private String pwd, pwd2;
-    private SharedPreferences sp;
     private Gson gson;
     private OptionsPickerView pvOptions;
     private ArrayList<LabelSelectionActivity.LableBean> datas;
@@ -80,7 +77,6 @@ public class SignActivity extends NetWorkActivity {
     }
 
     private void init() {
-        sp = MeetApplication.getInstance().getSharedPreferences();
         gson = new Gson();
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("注册");

@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.timetable;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;

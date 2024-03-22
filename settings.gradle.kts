@@ -25,4 +25,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "heshequ"
 include(":app")
- 
+include(":network")

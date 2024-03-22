@@ -29,6 +29,8 @@ import android.widget.TextView;
 import androidx.core.app.ActivityCompat;
 
 import com.blankj.utilcode.util.PermissionUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LabelSelectionActivity;
 import com.hnu.heshequ.adapter.listview.GwPictureAdapter;
@@ -39,8 +41,6 @@ import com.hnu.heshequ.entity.TestBean;
 import com.hnu.heshequ.utils.PhotoUtils;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.FlowLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 

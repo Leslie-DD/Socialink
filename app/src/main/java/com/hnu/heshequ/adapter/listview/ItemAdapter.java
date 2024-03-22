@@ -14,7 +14,6 @@ import com.hnu.heshequ.bean.ItemBean;
 import java.util.ArrayList;
 
 
-
 public class ItemAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<ItemBean> data = new ArrayList<>();

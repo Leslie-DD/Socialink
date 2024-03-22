@@ -22,7 +22,6 @@ import com.hnu.heshequ.view.CircleView;
 import java.util.ArrayList;
 
 
-
 public class AppliedMemberAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<AppliedMemberBean> data = new ArrayList<>();

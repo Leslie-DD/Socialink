@@ -7,7 +7,6 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,17 +14,17 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.MatcherUtils;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ForgetPwdActivity extends NetWorkActivity  {
+public class ForgetPwdActivity extends NetWorkActivity {
     private int type = 1;
     private TextView tvTitle, tvCode;
     private EditText etPhone, etCode, etPwd, etPwd2;
@@ -94,7 +93,7 @@ public class ForgetPwdActivity extends NetWorkActivity  {
                 return;
             }
             if (type != 1) {
-                if (!phone.equals(MeetApplication.getInstance().getSharedPreferences().getString("phone", ""))) {
+                if (!phone.equals(SharedPreferencesHelp.getString("phone", ""))) {
                     Utils.toastShort(mContext, "非本账户绑定手机，请使用注册时的手机号！！");
                     return;
                 }
@@ -117,7 +116,7 @@ public class ForgetPwdActivity extends NetWorkActivity  {
                 return;
             }
             if (type != 1) {
-                if (!phone.equals(MeetApplication.getInstance().getSharedPreferences().getString("phone", ""))) {
+                if (!phone.equals(SharedPreferencesHelp.getString("phone", ""))) {
                     Utils.toastShort(mContext, "非本账户绑定手机，请使用注册时的手机号！！");
                     return;
                 }

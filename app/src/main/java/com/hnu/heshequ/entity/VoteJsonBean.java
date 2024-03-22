@@ -3,7 +3,6 @@ package com.hnu.heshequ.entity;
 import java.util.ArrayList;
 
 
-
 public class VoteJsonBean {
     private int category;
     private String content;

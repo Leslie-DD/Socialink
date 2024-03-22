@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class TeamGvAdapter extends BaseAdapter {
     private Context context;
     private List<String> data = new ArrayList<>();

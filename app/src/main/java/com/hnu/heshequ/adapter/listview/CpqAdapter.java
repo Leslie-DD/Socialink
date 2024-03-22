@@ -13,7 +13,6 @@ import com.hnu.heshequ.bean.QuestionBean;
 import java.util.ArrayList;
 
 
-
 public class CpqAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<QuestionBean> data = new ArrayList<>();

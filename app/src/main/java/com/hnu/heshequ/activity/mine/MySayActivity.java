@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.OtherSayAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -12,8 +14,6 @@ import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONException;

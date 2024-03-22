@@ -18,11 +18,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by dell on 2020/5/6.
- */
 
-public class FriendFiltrateShow extends NetWorkActivity  {
+public class FriendFiltrateShow extends NetWorkActivity {
     private View view;
     private ViewPager vp;
     private ArrayList<Fragment> list;

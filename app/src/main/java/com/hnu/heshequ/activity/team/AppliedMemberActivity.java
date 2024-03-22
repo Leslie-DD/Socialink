@@ -6,14 +6,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.listview.AppliedMemberAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.AppliedMemberBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;

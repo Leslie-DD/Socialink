@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
@@ -20,7 +21,6 @@ import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONArray;
@@ -29,9 +29,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dev06 on 2018/5/31.
- */
+
 public class MyWenWenFragment extends NetWorkFragment implements HotWenwenAdapter.DoSaveListener, XRecyclerView.LoadingListener {
     private HotWenwenAdapter adapter;
     private List<WenwenBean> data;

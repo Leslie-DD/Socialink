@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.knowledge;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -19,7 +18,7 @@ import com.hnu.heshequ.view.CircleView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ArticleDetialActivity extends NetWorkActivity  {
+public class ArticleDetialActivity extends NetWorkActivity {
 
     private TextView tvTitle, tvName, tvColumn;
     private CircleView ivHead;

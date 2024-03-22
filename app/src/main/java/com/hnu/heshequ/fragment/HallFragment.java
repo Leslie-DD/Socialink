@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.OtherSayActivity;
 import com.hnu.heshequ.activity.team.PartyBuildingActivity;
@@ -30,8 +32,6 @@ import com.hnu.heshequ.utils.SpaceItemDecoration;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.MyLv;
 import com.hnu.heshequ.view.MyRecyclerview;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,9 +42,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dev06 on 2018/5/15.
- */
+
 public class HallFragment extends NetWorkFragment {
     private View view;
     private MyRecyclerview recyclerview;

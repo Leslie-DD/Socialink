@@ -1,7 +1,6 @@
 package com.hnu.heshequ.activity.team;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;

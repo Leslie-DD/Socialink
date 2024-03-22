@@ -1,8 +1,6 @@
 package com.hnu.heshequ.bean;
 
-/**
- * Created by dev06 on 2018/5/30.
- */
+
 public class ItemBean {
     private String name;
     private String tip = "";

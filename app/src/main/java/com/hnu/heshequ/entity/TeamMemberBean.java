@@ -2,9 +2,7 @@ package com.hnu.heshequ.entity;
 
 import java.io.Serializable;
 
-/**
- * Created by dev06 on 2018/5/17.
- */
+
 public class TeamMemberBean implements Comparable<TeamMemberBean>, Serializable {
     private String header, initialLetter;
     private String nickname;

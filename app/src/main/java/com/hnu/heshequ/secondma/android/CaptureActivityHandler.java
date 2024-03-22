@@ -21,11 +21,11 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 
+import com.google.zxing.Result;
 import com.hnu.heshequ.secondma.camera.CameraManager;
 import com.hnu.heshequ.secondma.common.Constant;
 import com.hnu.heshequ.secondma.decode.DecodeThread;
 import com.hnu.heshequ.secondma.view.ViewfinderResultPointCallback;
-import com.google.zxing.Result;
 
 
 /**

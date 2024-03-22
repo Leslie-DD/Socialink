@@ -1,21 +1,19 @@
 package com.hnu.heshequ.activity.mine;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.DefaultProblemActivity;
 import com.hnu.heshequ.activity.login.LabelSelectionActivity;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.bean.UserInfoBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefUserInfo;
+import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,7 +27,6 @@ public class SettingActivity extends NetWorkActivity {
     private ImageView ivTeam, ivQuestion;
     private LinearLayout llChangePhone, llSetQuestion, llLable;
     private boolean canTeamSee = true, canQuestionSee = true;
-    private SharedPreferences sp;
     private final int settingClub = 1000;
     private final int settingAsk = 1001;
     private int ask, club;
@@ -47,7 +44,6 @@ public class SettingActivity extends NetWorkActivity {
     }
 
     private void init() {
-        sp = MeetApplication.getInstance().getSharedPreferences();
         ivQuestion = (ImageView) findViewById(R.id.ivQuestion);
         ivTeam = (ImageView) findViewById(R.id.ivTeam);
         tvTeam = (TextView) findViewById(R.id.tvTeam);

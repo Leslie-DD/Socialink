@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.TeamDetailActivity;
 import com.hnu.heshequ.adapter.recycleview.TeamAdapter;
@@ -21,8 +23,6 @@ import com.hnu.heshequ.entity.RefTDteamEvent;
 import com.hnu.heshequ.entity.TeamTestBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.MyXRecyclerView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,10 +33,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dev06 on 2018/5/15.
- */
-public class TeamFragment extends NetWorkFragment  {
+
+public class TeamFragment extends NetWorkFragment {
     private MyXRecyclerView lv;
     private TextView tvTips;
     private TextView tvNew, tvVote, tvActivity, tvNotice;

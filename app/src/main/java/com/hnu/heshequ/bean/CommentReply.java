@@ -2,9 +2,6 @@ package com.hnu.heshequ.bean;
 
 import java.io.Serializable;
 
-/**
- * Created by dell on 2020/4/24.
- */
 
 public class CommentReply implements Serializable {
     public Integer id;

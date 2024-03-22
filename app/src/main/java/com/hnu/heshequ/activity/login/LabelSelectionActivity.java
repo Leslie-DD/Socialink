@@ -1,7 +1,6 @@
 package com.hnu.heshequ.activity.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,20 +10,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.activity.MainActivity;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.bean.UserInfoBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.entity.RefUserInfo;
 import com.hnu.heshequ.entity.TestBean;
+import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.EncryptUtils;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.FlowLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabelSelectionActivity extends NetWorkActivity  {
+public class LabelSelectionActivity extends NetWorkActivity {
     private FlowLayout flowLayout;
     private TextView tvTitle, tvSkip;
     private boolean skip = true;
@@ -55,7 +55,6 @@ public class LabelSelectionActivity extends NetWorkActivity  {
     private ArrayList<TestBean> testData;
     private List<String> stringList;
     private int type = 0;
-    private SharedPreferences sp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,6 @@ public class LabelSelectionActivity extends NetWorkActivity  {
     }
 
     private void init() {
-        sp = MeetApplication.getInstance().getSharedPreferences();
         gson = new Gson();
         stringList = new ArrayList<>();
         type = getIntent().getIntExtra("type", 0);
@@ -237,9 +235,9 @@ public class LabelSelectionActivity extends NetWorkActivity  {
                 JSONObject dd = new JSONObject(result.optString("data"));
                 String token = dd.optString("token");
                 int uid = dd.optInt("uid");
-                sp.edit().putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
+                SharedPreferencesHelp.getEditor().putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
                 MeetApplication.getInstance().finishAll();
-                startActivity(new Intent(mContext, MainActivity.class));
+                startActivity(new Intent(mContext, MainActivity2.class));
                 Utils.toastShort(mContext, "登录成功");
             } else {
                 Utils.toastShort(mContext, result.optString("msg"));

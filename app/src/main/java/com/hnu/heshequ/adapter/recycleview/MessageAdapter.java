@@ -14,6 +14,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.activity.team.PersonalInformationActivity;
@@ -22,15 +25,10 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.view.CircleView;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 
-/**
- * Created by 佳佳 on 2018/11/20.
- */
+
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
     private int sss = 0;
     private Context context;

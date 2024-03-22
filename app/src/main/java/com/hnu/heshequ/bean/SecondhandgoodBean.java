@@ -3,9 +3,6 @@ package com.hnu.heshequ.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by dell on 2019/8/18.
- */
 
 public class SecondhandgoodBean implements Serializable {
     public String userLike;

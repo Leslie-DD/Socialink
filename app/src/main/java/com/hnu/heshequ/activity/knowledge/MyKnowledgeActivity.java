@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.knowledge;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +18,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MyKnowledgeActivity extends NetWorkActivity  {
+public class MyKnowledgeActivity extends NetWorkActivity {
 
     private ViewPager vp;
     private TextView tvArticle, tvColumn;

@@ -1,18 +1,17 @@
 package com.hnu.heshequ.fragment;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hnu.heshequ.MeetApplication;
+import com.google.gson.Gson;
 import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefCollect;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -32,7 +31,6 @@ public class TeamChildFragment4 extends BaseTeamPagerFragment {
     private final int REFDATA = 1001;
     private final int LOADATA = 1002;
     private Gson gson = new Gson();
-    private SharedPreferences sp;
     private TeamBean teamBean;
     private int type;  // 0 -> 初始化加载 ； 1 ->刷新；  2 -> 加载
     private JSONArray jsonArray;
@@ -40,7 +38,6 @@ public class TeamChildFragment4 extends BaseTeamPagerFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        sp = MeetApplication.getInstance().getSharedPreferences();
         EventBus.getDefault().register(this);
         if (firstin) {
             firstin = false;
@@ -57,20 +54,20 @@ public class TeamChildFragment4 extends BaseTeamPagerFragment {
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 4, "" + pn, "" + Constants.default_PS});
                 sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
-                        GETDATA, sp.getString("token", ""));
+                        GETDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 4, "" + pn, "" + Constants.default_PS});
                 sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
-                        REFDATA, sp.getString("token", ""));
+                        REFDATA, SharedPreferencesHelp.getString("token", ""));
 
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"},
                         new String[]{"" + 4, "" + pn, "" + Constants.default_PS});
                 sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
-                        LOADATA, sp.getString("token", ""));
+                        LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }
     }

@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.team;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 

@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.wenwen;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.listview.ZcAnswerAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -29,8 +30,6 @@ import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.NoScrollWebView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONException;

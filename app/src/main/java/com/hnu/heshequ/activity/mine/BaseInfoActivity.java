@@ -1,7 +1,5 @@
 package com.hnu.heshequ.activity.mine;
 
-import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -24,20 +22,20 @@ import android.widget.TextView;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
-import com.hnu.heshequ.MeetApplication;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LabelSelectionActivity;
 import com.hnu.heshequ.adapter.listview.BaseInfoItemAdapter;
 import com.hnu.heshequ.base.PhotoBaseActivity;
 import com.hnu.heshequ.bean.ItemBean;
-import com.hnu.heshequ.bean.UserInfoBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefUserInfo;
+import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.PhotoUtils;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -50,7 +48,7 @@ import java.util.ArrayList;
  * 个人基本资料页面
  */
 
-public class BaseInfoActivity extends PhotoBaseActivity  {
+public class BaseInfoActivity extends PhotoBaseActivity {
     private static final String TAG = "[BaseInfoActivity]";
 
     private final static int UPLOAD_HEAD = 1000;
@@ -78,7 +76,6 @@ public class BaseInfoActivity extends PhotoBaseActivity  {
     private final int upSchool = 1003;
     private String school;
     private int sex;
-    private SharedPreferences sp;
     private Gson gson;
     private OptionsPickerView<String> pvOptions;
     private Uri uriTempFile;
@@ -93,7 +90,6 @@ public class BaseInfoActivity extends PhotoBaseActivity  {
     }
 
     private void init() {
-        sp = MeetApplication.getInstance().getSharedPreferences();
         userInfoBean = (UserInfoBean) getIntent().getSerializableExtra("userinfobean");
 
         ivHead = findViewById(R.id.ivHead);
@@ -176,7 +172,7 @@ public class BaseInfoActivity extends PhotoBaseActivity  {
             // 修改学校
             if (popStatus == 1) {
                 name = content;
-                sp.edit().putString(Constants.uid + "school", name).apply();
+                SharedPreferencesHelp.getEditor().putString(Constants.uid + "school", name).apply();
                 data.get(2).setTip(name);
                 adapter.notifyDataSetChanged();
             }

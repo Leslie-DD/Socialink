@@ -2,9 +2,7 @@ package com.hnu.heshequ.utils;
 
 import android.graphics.Bitmap;
 
-/**
- * Created by dev06 on 2018/5/30.
- */
+
 public class FastBlur {
 
     public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {

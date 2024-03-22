@@ -12,18 +12,18 @@ import android.widget.TextView;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.SecondhandgoodAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.SecondhandgoodBean;
-import com.hnu.heshequ.bean.UserInfoBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;

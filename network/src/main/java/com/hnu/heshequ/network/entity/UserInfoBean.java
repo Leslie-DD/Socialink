@@ -1,4 +1,4 @@
-package com.hnu.heshequ.bean;
+package com.hnu.heshequ.network.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -190,6 +190,26 @@ public class UserInfoBean implements Serializable {
         public void setFrequency(int frequency) {
             this.frequency = frequency;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfoBean {" +
+                "id=" + id +
+                ", sex=" + sex +
+                ", nickname='" + nickname + '\'' +
+                ", college='" + college + '\'' +
+                ", grade=" + grade +
+                ", experience=" + experience +
+                ", certFlag=" + certFlag +
+                ", header='" + header + '\'' +
+                ", settingClub=" + settingClub +
+                ", settingAsk=" + settingAsk +
+                ", totalExperience=" + totalExperience +
+                ", needExperience=" + needExperience +
+                ", userNickName='" + userNickName + '\'' +
+                ", userLabels=" + userLabels +
+                '}';
     }
 
 

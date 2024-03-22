@@ -17,7 +17,6 @@ import com.hnu.heshequ.utils.Utils;
 import java.util.ArrayList;
 
 
-
 public class AddVoteAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Item> data = new ArrayList<>();

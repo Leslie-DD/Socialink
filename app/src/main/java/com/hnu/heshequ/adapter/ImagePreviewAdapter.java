@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.utils.Utils;
-import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.List;
 

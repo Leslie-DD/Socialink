@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.SayNewsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
@@ -16,16 +17,13 @@ import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.MsgSayBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by dev06 on 2018/5/29.
- */
+
 public class News_QuestionFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
     private View view;
     private ArrayList<MsgSayBean.SayBean> data;

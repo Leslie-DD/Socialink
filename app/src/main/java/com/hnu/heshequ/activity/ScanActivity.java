@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;

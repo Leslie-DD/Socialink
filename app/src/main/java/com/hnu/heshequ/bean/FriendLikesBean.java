@@ -5,9 +5,6 @@ import android.provider.ContactsContract;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by dell on 2020/4/24.
- */
 
 public class FriendLikesBean implements Serializable {
     public int uid;

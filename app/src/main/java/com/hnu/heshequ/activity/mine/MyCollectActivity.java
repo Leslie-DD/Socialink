@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.mine;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 /**
  * 我的收藏页面
  */
-public class MyCollectActivity extends NetWorkActivity  {
+public class MyCollectActivity extends NetWorkActivity {
     private ViewPager vp;
     private TextView tvTeam, tvWw, tvgood;
     private ArrayList<Fragment> list;

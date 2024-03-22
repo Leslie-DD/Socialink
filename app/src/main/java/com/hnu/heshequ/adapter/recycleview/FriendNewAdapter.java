@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.friend.NewDetail;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
@@ -25,16 +26,12 @@ import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by dell on 2020/3/30.
- */
 
 public class FriendNewAdapter extends RecyclerView.Adapter {
     private Context context;

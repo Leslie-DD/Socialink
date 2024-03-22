@@ -17,7 +17,6 @@ import com.hnu.heshequ.constans.P;
 import java.util.ArrayList;
 
 
-
 public class PictureAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<String> data = new ArrayList<>();

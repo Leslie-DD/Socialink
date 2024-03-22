@@ -1,8 +1,6 @@
 package com.hnu.heshequ.bean;
 
-/**
- * Created by dev06 on 2018/7/6.
- */
+
 public class CategoryBean {
     private String value;
     private String category;

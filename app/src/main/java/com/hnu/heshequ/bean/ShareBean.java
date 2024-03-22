@@ -1,8 +1,6 @@
 package com.hnu.heshequ.bean;
 
-/**
- * Created by dev06 on 2018/6/14.
- */
+
 public class ShareBean {
     private int resid;
     private String name;

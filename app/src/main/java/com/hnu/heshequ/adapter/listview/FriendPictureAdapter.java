@@ -17,9 +17,6 @@ import com.hnu.heshequ.constans.P;
 
 import java.util.ArrayList;
 
-/**
- * Created by dell on 2020/5/12.
- */
 
 public class FriendPictureAdapter extends BaseAdapter {
     private Context context;

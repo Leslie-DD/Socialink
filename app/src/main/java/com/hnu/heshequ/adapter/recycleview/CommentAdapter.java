@@ -1,5 +1,3 @@
-
-
 package com.hnu.heshequ.adapter.recycleview;
 
 import android.content.Context;

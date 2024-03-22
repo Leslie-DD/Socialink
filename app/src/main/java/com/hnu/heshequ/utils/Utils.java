@@ -446,7 +446,7 @@ public class Utils {
      *
      * @return
      */
-    public static final String createIMSI() {
+    public static String createIMSI() {
         StringBuffer strbuf = new StringBuffer();
         for (int i = 0; i < 15; i++)
             strbuf.append(random.nextInt(10));
@@ -1061,8 +1061,7 @@ public class Utils {
                 if (visible && visible != isKeyBoarVisiableForLast) {
                     //获得键盘高度
                     Constants.keyboardHeight = hight - displayHight - statusBarHeight;
-                    MeetApplication.getInstance().getSharedPreferences()
-                            .edit().putInt("keyboardHeight", Constants.keyboardHeight).apply();
+                    SharedPreferencesHelp.getEditor().putInt("keyboardHeight", Constants.keyboardHeight).apply();
                     Log.e("DDQ", "软键盘高度：keyboardHeight == " + Constants.keyboardHeight);
                 }
                 isKeyBoarVisiableForLast = visible;

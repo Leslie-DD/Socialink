@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.oldsecond.GoodDetailActivity;
 import com.hnu.heshequ.bean.SecondhandgoodBean;
@@ -22,7 +23,6 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
-import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 
 import java.util.ArrayList;

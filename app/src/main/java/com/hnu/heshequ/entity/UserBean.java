@@ -1,8 +1,6 @@
 package com.hnu.heshequ.entity;
 
-/**
- * Created by dev06 on 2018/5/17.
- */
+
 public class UserBean {
     private String name, initialLetter;
 

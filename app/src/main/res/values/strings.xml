@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">高校联盟</string>
 
+    <string name="menu_home">首页</string>
+    <string name="menu_team">团队</string>
+    <string name="menu_ask">问问</string>
+    <string name="menu_message">消息</string>
+    <string name="menu_mine">我的</string>
+
+
+
 </resources>

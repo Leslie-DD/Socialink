@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.friend;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
@@ -15,9 +14,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/4/30.
- */
 
 public class FriendShijuanShow extends NetWorkActivity {
     private int id;

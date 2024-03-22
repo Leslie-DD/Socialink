@@ -2,10 +2,11 @@ package com.hnu.heshequ.activity.knowledge;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.knowledge.ColumnDetailAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -16,8 +17,6 @@ import com.hnu.heshequ.bean.knowledge.SubscriptionBean;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONArray;
@@ -69,7 +68,7 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements XRecy
 
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
-        btnUnsubscribe.setOnClickListener(v ->  sendPostConnection(WenConstans.unsubscribe + "?id=" + subscriptionId, new String[]{}, new String[]{}, 200, WenConstans.token));
+        btnUnsubscribe.setOnClickListener(v -> sendPostConnection(WenConstans.unsubscribe + "?id=" + subscriptionId, new String[]{}, new String[]{}, 200, WenConstans.token));
     }
 
     @Override

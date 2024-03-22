@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ZcWwAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<ZcBean> data = new ArrayList<>();

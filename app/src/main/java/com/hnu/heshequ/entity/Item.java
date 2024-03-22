@@ -1,8 +1,6 @@
 package com.hnu.heshequ.entity;
 
-/**
- * Created by dev06 on 2018/6/5.
- */
+
 public class Item {
     private int id;
     private String name;

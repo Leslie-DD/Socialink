@@ -13,7 +13,6 @@ import com.hnu.heshequ.R;
 import java.util.ArrayList;
 
 
-
 public class ActiviteDateilAdapter extends BaseAdapter {
 
     private Context context;

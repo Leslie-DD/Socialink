@@ -2,9 +2,6 @@ package com.hnu.heshequ.bean;
 
 import java.io.Serializable;
 
-/**
- * Created by dell on 2019/8/25.
- */
 
 public class GoodsdiscussBean implements Serializable {
     public String id;

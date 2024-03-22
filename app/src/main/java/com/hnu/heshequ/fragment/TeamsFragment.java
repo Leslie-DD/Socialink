@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.activity.MainActivity;
 import com.hnu.heshequ.activity.TeamSearchActivity;
 import com.hnu.heshequ.activity.team.AddTeamActivity;
 import com.hnu.heshequ.adapter.MytPagersAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
+import com.hnu.heshequ.launcher.MainActivity2;
 import com.hnu.heshequ.view.NoScrollViewPager;
 
 import org.json.JSONObject;
@@ -52,7 +52,7 @@ public class TeamsFragment extends NetWorkFragment {
     }
 
     private void init() {
-        MainActivity activity = (MainActivity) getActivity();
+        MainActivity2 activity = (MainActivity2) getActivity();
 //        TeamActivity activity = (TeamActivity) getActivity();
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new TeamChildFragment1());

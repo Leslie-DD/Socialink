@@ -17,9 +17,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by dell on 2020/5/11.
- */
 
 public class FriendAddNews extends NetWorkActivity {
     private View view;

@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.TeamDetailActivity;
 import com.hnu.heshequ.adapter.recycleview.OtherSayAdapter;
@@ -15,8 +17,6 @@ import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefStatementEvent;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,10 +28,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dev06 on 2018/5/15.
- */
-public class StatementFragment extends NetWorkFragment  {
+
+public class StatementFragment extends NetWorkFragment {
     private XRecyclerView rv;
     private TextView tvTips;
     private int status = -1;

@@ -5,30 +5,6 @@
     android:background="@color/base_color_white"
     android:orientation="vertical">
 
-<!--    <LinearLayout-->
-<!--        android:id="@+id/llSearch"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="32dp"-->
-<!--        android:layout_marginLeft="15dp"-->
-<!--        android:layout_marginTop="6dp"-->
-<!--        android:layout_marginRight="15dp"-->
-<!--        android:background="@drawable/gray_search"-->
-<!--        android:gravity="center_vertical">-->
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:layout_marginLeft="14dp"-->
-<!--            android:drawableLeft="@mipmap/innquire"-->
-<!--            android:drawablePadding="5dp"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:hint="搜索相关"-->
-<!--            android:textColor="@color/text66"-->
-<!--            android:textColorHint="@color/text9"-->
-<!--            android:textSize="14sp" />-->
-<!--    </LinearLayout>-->
-
     <RelativeLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
@@ -92,7 +68,7 @@
         <com.hnu.heshequ.view.NoScrollViewPager
             android:id="@+id/vp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.hnu.heshequ.view.NoScrollViewPager>
+            android:layout_height="match_parent"/>
 
         <ImageView
             android:id="@+id/ivAdd"

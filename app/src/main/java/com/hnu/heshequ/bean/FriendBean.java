@@ -4,9 +4,7 @@ import android.provider.ContactsContract;
 
 import java.io.Serializable;
 
-/**
- * Created by dev06 on 2018/5/30.
- */
+
 public class FriendBean implements Serializable {
     private String academy; //学院
     private String nickname;    //昵称

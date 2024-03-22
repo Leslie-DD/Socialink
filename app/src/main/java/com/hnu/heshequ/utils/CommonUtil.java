@@ -15,9 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by sendtion on 2016/3/30.
- */
+
 public class CommonUtil {
 
     /**

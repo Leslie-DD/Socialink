@@ -19,9 +19,6 @@ import com.hnu.heshequ.view.CircleView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dell on 2019/8/26.
- */
 
 public class GoodDisscussAdapter extends RecyclerView.Adapter {
     private GoodDetailActivity context;

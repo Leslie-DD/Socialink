@@ -14,7 +14,6 @@ import java.util.Properties;
 import java.util.Set;
 
 
-
 public final class OSHelper {
 
     private static final String KEY_EMUI_VERSION_CODE = "ro.build.version.emui";

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/under_img_select1"
+        android:title="@string/menu_home" />
+
+    <item
+        android:id="@+id/navigation_team"
+        android:icon="@drawable/under_img_select2"
+        android:title="@string/menu_team" />
+
+    <item
+        android:id="@+id/navigation_ask"
+        android:icon="@drawable/under_img_select3"
+        android:title="@string/menu_ask" />
+
+<!--    TODO: set red dot to notify-->
+    <item
+        android:id="@+id/navigation_message"
+        android:icon="@drawable/under_img_select4"
+        android:title="@string/menu_message" />
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/under_img_select5"
+        android:title="@string/menu_mine" />
+</menu>

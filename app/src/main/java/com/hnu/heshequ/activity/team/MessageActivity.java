@@ -21,6 +21,8 @@ import android.widget.PopupWindow;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.MessageAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -30,8 +32,6 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.PhotoUtils;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
@@ -47,10 +47,6 @@ import okhttp3.Call;
 import okhttp3.Response;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
-
-/**
- * Created by 佳佳 on 2018/11/23.
- */
 
 
 public class MessageActivity extends NetWorkActivity implements XRecyclerView.LoadingListener {

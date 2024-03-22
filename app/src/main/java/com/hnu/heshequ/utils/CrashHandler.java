@@ -119,19 +119,18 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (e == null) {
             return false;
         }
+        Log.e(TAG, "handleException:", e);
+        e.printStackTrace();
         //收集设备参数信息
         collectDeviceInfo(mContext);
 
         //使用Toast来显示异常信息
-        new Thread() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                //待扩展成对话框提示 提交bug/关闭程序
-                Utils.toastShort(mContext, "很抱歉,程序出现异常,即将退出.");
-                Looper.loop();
-            }
-        }.start();
+        new Thread(() -> {
+            Looper.prepare();
+            //待扩展成对话框提示 提交bug/关闭程序
+            Utils.toastShort(mContext, "很抱歉,程序出现异常,即将退出.");
+            Looper.loop();
+        }).start();
         //保存日志文件
         saveCatchInfo2File(e);
         return true;
@@ -223,39 +222,25 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 将捕获的导致崩溃的错误信息发送给开发人员
      * <p>
-     * 目前只将log日志保存在sdcard 和输出到LogCat中，并未发送给后台。
+     * 目前只将log日志保存在sdcard 和输出到LogCat中，并未发送给后台。<br>
+     * TODO: 由于目前尚未确定以何种方式发送，所以先打出log日志。
      */
     private void sendCrashLog2PM(String fileName) {
         if (!new File(fileName).exists()) {
             Utils.toastShort(mContext, "日志文件不存在！");
             return;
         }
-        FileInputStream fis = null;
-        BufferedReader reader = null;
-        String s = null;
-        try {
-            fis = new FileInputStream(fileName);
-            reader = new BufferedReader(new InputStreamReader(fis, "GBK"));
+        try (FileInputStream fis = new FileInputStream(fileName);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(fis, "GBK"));) {
             while (true) {
-                s = reader.readLine();
-                if (s == null) break;
-                //由于目前尚未确定以何种方式发送，所以先打出log日志。
+                String s = reader.readLine();
+                if (s == null) {
+                    break;
+                }
                 Log.i("info", s);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {   // 关闭流
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-                if (fis != null) {
-                    fis.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

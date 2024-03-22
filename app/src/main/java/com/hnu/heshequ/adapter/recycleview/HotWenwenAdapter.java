@@ -1,5 +1,3 @@
-
-
 package com.hnu.heshequ.adapter.recycleview;
 
 import android.content.Context;
@@ -18,6 +16,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.WebActivity;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
@@ -34,8 +34,6 @@ import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.lzy.okhttputils.OkHttpUtils;

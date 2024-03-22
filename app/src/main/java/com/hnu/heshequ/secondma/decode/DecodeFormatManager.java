@@ -19,8 +19,8 @@ package com.hnu.heshequ.secondma.decode;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.hnu.heshequ.secondma.android.Intents;
 import com.google.zxing.BarcodeFormat;
+import com.hnu.heshequ.secondma.android.Intents;
 
 import java.util.Arrays;
 import java.util.EnumSet;

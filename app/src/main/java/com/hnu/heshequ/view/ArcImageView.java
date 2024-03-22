@@ -11,9 +11,6 @@ import androidx.annotation.Nullable;
 import com.hnu.heshequ.utils.Utils;
 
 
-/**
- * Created by dev06 on 2018/5/29.
- */
 public class ArcImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     private static final String TAG = "ArcImageView";

@@ -14,9 +14,6 @@ import com.hnu.heshequ.bean.GoodLabel;
 
 import java.util.List;
 
-/**
- * Created by dell on 2019/8/30.
- */
 
 public class LableAdapter extends RecyclerView.Adapter<LableAdapter.ViewHolder> {
     private final List<GoodLabel> mLabelList;

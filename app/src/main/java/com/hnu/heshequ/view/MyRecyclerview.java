@@ -5,9 +5,7 @@ import android.util.AttributeSet;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * Created by dev06 on 2018/5/14.
- */
+
 public class MyRecyclerview extends RecyclerView {
     public MyRecyclerview(Context context, AttributeSet attrs) {
         super(context, attrs);

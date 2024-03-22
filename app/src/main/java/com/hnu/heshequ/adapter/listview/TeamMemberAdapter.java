@@ -24,7 +24,6 @@ import com.hnu.heshequ.view.CircleView;
 import java.util.ArrayList;
 
 
-
 public class TeamMemberAdapter extends BaseAdapter {
     private Context context;
     private NetWorkActivity activity;

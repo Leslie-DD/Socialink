@@ -1,4 +1,3 @@
-
 package com.hnu.heshequ.adapter;
 
 import android.content.Context;

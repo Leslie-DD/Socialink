@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.knowledge.ArticleDetialActivity;
 import com.hnu.heshequ.bean.knowledge.ArticleSimpleBean;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;

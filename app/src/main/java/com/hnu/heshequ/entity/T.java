@@ -2,9 +2,7 @@ package com.hnu.heshequ.entity;
 
 import java.util.List;
 
-/**
- * Created by dev06 on 2018/6/6.
- */
+
 public class T {
 
     /**

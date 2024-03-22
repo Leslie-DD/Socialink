@@ -1,7 +1,6 @@
 package com.hnu.heshequ.activity.timetable;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.hnu.heshequ.R;
@@ -10,9 +9,6 @@ import com.hnu.heshequ.base.NetWorkActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/5/10.
- */
 
 public class TimetableAddCourse extends NetWorkActivity {
     private Button set;

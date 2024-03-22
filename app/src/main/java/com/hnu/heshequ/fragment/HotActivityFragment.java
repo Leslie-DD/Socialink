@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.HotActiveAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
@@ -15,7 +16,6 @@ import com.hnu.heshequ.bean.HotAvtivityBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefHotActivityEvent;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

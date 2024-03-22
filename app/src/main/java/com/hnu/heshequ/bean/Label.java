@@ -1,8 +1,6 @@
 package com.hnu.heshequ.bean;
 
-/**
- * Created by dev06 on 2018/6/6.
- */
+
 public class Label {
     private int id;
     private String value, category;

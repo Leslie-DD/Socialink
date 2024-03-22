@@ -1,7 +1,6 @@
 package com.hnu.heshequ.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hnu.heshequ.MeetApplication;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.TeamDetailActivity;
 import com.hnu.heshequ.adapter.recycleview.CommentTeamAdapter;
@@ -19,8 +18,8 @@ import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.utils.IChildFragment;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +38,6 @@ public class HotTeamFragment extends NetWorkFragment implements CommentTeamAdapt
     private final int REFDATA = 1001;
     private final int LOADATA = 1002;
     private Gson gson = new Gson();
-    private SharedPreferences sp;
     private TeamBean teamBean;
     private int type;  // 0 -> 初始化加载 ； 1 ->刷新；  2 -> 加载
     private JSONArray jsonArray;
@@ -50,7 +48,6 @@ public class HotTeamFragment extends NetWorkFragment implements CommentTeamAdapt
 
         view = inflater.inflate(R.layout.fragment_tim, null);
         tvTips = view.findViewById(R.id.tvTips);
-        sp = MeetApplication.getInstance().getSharedPreferences();
         init();
         return view;
     }
@@ -73,15 +70,16 @@ public class HotTeamFragment extends NetWorkFragment implements CommentTeamAdapt
         switch (type) {
             case 0:
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", GETDATA, sp.getString("token", ""));
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", GETDATA, SharedPreferencesHelp.getString(
+                        "token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", REFDATA, sp.getString("token", ""));
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", REFDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", LOADATA, sp.getString("token", ""));
+                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }
     }

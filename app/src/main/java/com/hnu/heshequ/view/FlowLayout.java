@@ -11,9 +11,6 @@ import com.hnu.heshequ.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Pinger on 2016/10/6.
- */
 
 public class FlowLayout extends ViewGroup {
     /**

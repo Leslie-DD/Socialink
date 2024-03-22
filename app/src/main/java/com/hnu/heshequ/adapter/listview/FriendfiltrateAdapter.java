@@ -11,9 +11,6 @@ import com.hnu.heshequ.bean.FriendBean;
 
 import java.util.ArrayList;
 
-/**
- * Created by dell on 2020/3/24.
- */
 
 public class FriendfiltrateAdapter extends BaseAdapter {
     private Context context;

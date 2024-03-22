@@ -2,9 +2,6 @@ package com.hnu.heshequ.bean;
 
 import java.io.Serializable;
 
-/**
- * Created by 佳佳 on 2018/11/18.
- */
 
 public class AttentionBean implements Serializable {
     private int id;

@@ -15,12 +15,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.friend.FriendNearDetail;
 import com.hnu.heshequ.bean.FriendListBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 
 import java.util.ArrayList;
@@ -28,9 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by dell on 2020/3/28.
- */
 
 public class FriendSearchAdapter extends RecyclerView.Adapter {
     private Context context;

@@ -3,7 +3,6 @@ package com.hnu.heshequ.entity;
 import java.util.List;
 
 
-
 public class VoteDataBean {
 
 

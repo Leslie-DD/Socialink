@@ -14,13 +14,10 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.knowledge.CreateArticleActivity;
 import com.hnu.heshequ.adapter.MyFragmentPagerAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
-import com.hnu.heshequ.entity.RefreshBean;
 import com.hnu.heshequ.fragment.knowledge.RecommendFragment;
 import com.hnu.heshequ.fragment.knowledge.SubscriptionFragment;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,22 +53,6 @@ public class KnowledgeFragment extends NetWorkFragment {
         init();
         event();
         return view;
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void RefreshData(RefreshBean refreshBean) {
-//        RecommendFragment t1= (RecommendFragment) adapter.getItem(0);
-//        SubscriptionFragment t2= (SubscriptionFragment) adapter.getItem(1);
-//
-//        if (refreshBean.type.equals("1")){
-//            if (t1!=null){
-//
-//            }
-//        }else if (refreshBean.type.equals("2")) {
-//            if (t2 != null) {
-//
-//            }
-//        }
     }
 
     private void init() {

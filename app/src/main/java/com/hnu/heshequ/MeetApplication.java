@@ -2,11 +2,9 @@ package com.hnu.heshequ;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.SharedPreferences;
 
-import com.hnu.heshequ.utils.CrashHandler;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.hnu.heshequ.utils.CrashHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ public class MeetApplication extends Application {
         Fresco.initialize(this);
         sInstance = this;
         CrashHandler.getInstance().init(this);
-        CrashReport.initCrashReport(getApplicationContext(), "8c0feaed02", true);
+//        CrashReport.initCrashReport(getApplicationContext(), "8c0feaed02", true);
     }
 
     public static MeetApplication getInstance() {
@@ -47,7 +45,7 @@ public class MeetApplication extends Application {
     public Activity getActivity(String simpleName) {
         Activity activity = null;
         synchronized (this) {
-            if (activityList.size() > 0) {
+            if (!activityList.isEmpty()) {
                 for (Activity a : activityList) {
                     if (simpleName.equals(a.getClass().getSimpleName())) {
                         activity = a;
@@ -61,7 +59,7 @@ public class MeetApplication extends Application {
 
     public void finishAll() {
         synchronized (this) {
-            if (activityList.size() > 0) {
+            if (!activityList.isEmpty()) {
                 for (Activity a : activityList) {
                     a.finish();
                 }
@@ -79,7 +77,4 @@ public class MeetApplication extends Application {
         System.gc();
     }
 
-    public SharedPreferences getSharedPreferences() {
-        return getInstance().getApplicationContext().getSharedPreferences("meet", 0);
-    }
 }

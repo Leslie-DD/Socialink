@@ -5,9 +5,7 @@ import com.hnu.heshequ.constans.Constants;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by dev06 on 2018/5/16.
- */
+
 public class TeamTestBean implements Serializable {
 
     /**

@@ -2,9 +2,6 @@ package com.hnu.heshequ.bean;
 
 import java.io.Serializable;
 
-/**
- * Created by dell on 2020/5/1.
- */
 
 public class TimetableLoginBean implements Serializable {
     public String studentId;

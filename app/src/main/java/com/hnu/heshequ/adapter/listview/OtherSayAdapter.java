@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class OtherSayAdapter extends BaseAdapter {
     private Context context;
     private List<TeamBean.SpeakBean> data = new ArrayList<>();

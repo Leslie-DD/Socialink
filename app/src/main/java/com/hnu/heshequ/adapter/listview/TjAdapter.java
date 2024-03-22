@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class TjAdapter extends BaseAdapter {
     private Context context;
     private List<TestBean> data = new ArrayList<>();

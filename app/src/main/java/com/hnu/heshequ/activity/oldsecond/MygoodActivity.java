@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.oldsecond;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -22,7 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MygoodActivity extends NetWorkActivity  {
+public class MygoodActivity extends NetWorkActivity {
     private ViewPager vp;
     private List<GoodLabel> labelList = new ArrayList<>();
     private ArrayList<Fragment> list;

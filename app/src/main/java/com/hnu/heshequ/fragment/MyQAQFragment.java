@@ -15,9 +15,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by dev06 on 2018/5/31.
- */
+
 public class MyQAQFragment extends NetWorkFragment {
     private View view;
     private XRecyclerView xRecyclerView;

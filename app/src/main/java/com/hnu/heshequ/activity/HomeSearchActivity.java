@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LabelSelectionActivity;
 import com.hnu.heshequ.adapter.MyFragmentPagerAdapter;
@@ -25,9 +28,6 @@ import com.hnu.heshequ.fragment.WwSearchFragment;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.FlowLayout;
 import com.hnu.heshequ.view.NoScrollViewPager;
-import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +35,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnTabSelectedListener, TextWatcher{
+public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnTabSelectedListener, TextWatcher {
     private LinearLayout llBack, llData, llFl;
     private EditText etContent;
     private TabLayout tab;

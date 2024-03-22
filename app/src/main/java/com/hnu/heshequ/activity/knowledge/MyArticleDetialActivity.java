@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.knowledge;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -20,7 +19,7 @@ import com.hnu.heshequ.view.CircleView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MyArticleDetialActivity extends NetWorkActivity  {
+public class MyArticleDetialActivity extends NetWorkActivity {
 
     private RecommendItemBean RecommendItemBean;
     private TextView tvTitle, tvName, tvColumn;

@@ -2,7 +2,6 @@ package com.hnu.heshequ.activity.team;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -36,6 +35,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.githang.statusbar.StatusBarCompat;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.ReportActivity;
 import com.hnu.heshequ.activity.TeamMembersActivity;
@@ -66,9 +68,6 @@ import com.hnu.heshequ.view.CustomViewPager;
 import com.hnu.heshequ.view.DragImageView;
 import com.hnu.heshequ.view.MyXRecyclerView;
 import com.hnu.heshequ.view.PayPasswordView;
-import com.githang.statusbar.StatusBarCompat;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;

@@ -1,13 +1,14 @@
 package com.hnu.heshequ.activity.team;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.listview.TeamMemberAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -15,8 +16,6 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefMembers;
 import com.hnu.heshequ.entity.TeamMemberBean;
 import com.hnu.heshequ.utils.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -66,7 +65,8 @@ public class SearchMembersActivity extends NetWorkActivity {
 
     private void event() {
         ivBack.setOnClickListener(v -> finish());
-        ivSearch.setOnClickListener(v -> {});
+        ivSearch.setOnClickListener(v -> {
+        });
         searchName = etSearch.getText().toString().trim();
         if (searchName.isEmpty()) {
             Utils.toastShort(this, "搜索内容不能为空");

@@ -24,7 +24,8 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.hnu.heshequ.MeetApplication;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.statement.ReleaseActivitiesActivity;
 import com.hnu.heshequ.adapter.GvEmojiAdapter;
@@ -41,11 +42,10 @@ import com.hnu.heshequ.entity.PhotosBean;
 import com.hnu.heshequ.entity.RefTDteamEvent;
 import com.hnu.heshequ.entity.TeamTestBean;
 import com.hnu.heshequ.fragment.BottomShareFragment;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -318,7 +318,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
             setBodyParams(new String[]{"id"}, new String[]{"" + bean.getId()});
             sendPost(Constants.base_url + "/api/club/activity/delete.do", DelCode, Constants.token);
         });
-        ll_cacel.setOnClickListener(v ->  pop.dismiss());
+        ll_cacel.setOnClickListener(v -> pop.dismiss());
 
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
         pop.setBackgroundDrawable(new BitmapDrawable());
@@ -373,7 +373,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
             }
             //显示表情布局
             LinearLayout.LayoutParams Params = (LinearLayout.LayoutParams) flEmoji.getLayoutParams();
-            Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight", 450);
+            Params.height = SharedPreferencesHelp.getInt("keyboardHeight", 450);
             flEmoji.setLayoutParams(Params);
             flEmoji.setVisibility(View.VISIBLE);
             isEmojiShow = true;

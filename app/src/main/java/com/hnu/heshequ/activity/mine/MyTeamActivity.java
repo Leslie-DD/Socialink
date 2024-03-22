@@ -1,7 +1,6 @@
 package com.hnu.heshequ.activity.mine;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.hnu.heshequ.MeetApplication;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.AddTeamActivity;
 import com.hnu.heshequ.adapter.recycleview.MyTeamAdapter;
@@ -28,9 +27,9 @@ import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefTeamChild1;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,7 +52,6 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
     private final int REFDATA = 1001;
     private final int LOADATA = 1002;
     private Gson gson = new Gson();
-    private SharedPreferences sp;
     private TeamBean teamBean;
     private int type;  // 0 -> 初始化加载 ； 1 ->刷新；  2 -> 加载
     private JSONArray jsonArray;
@@ -79,7 +77,6 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
         setText("我的团队");
         ivRight = findViewById(R.id.ivRight);
         ivRight.setImageDrawable(ContextCompat.getDrawable(mContext, R.mipmap.kj2));
-        sp = MeetApplication.getInstance().getSharedPreferences();
         rv = (XRecyclerView) findViewById(R.id.rv);
         tvNoData = findViewById(R.id.tvNoData);
         ConsTants.initXRecycleView(mContext, true, true, rv);
@@ -180,15 +177,15 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
         switch (type) {
             case 0:
                 setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.default_PS, Constants.uid + ""});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", GETDATA, sp.getString("token", ""));
+                sendPost(Constants.base_url + "/api/club/base/pglist.do", GETDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.default_PS, Constants.uid + ""});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", REFDATA, sp.getString("token", ""));
+                sendPost(Constants.base_url + "/api/club/base/pglist.do", REFDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.default_PS, Constants.uid + ""});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", LOADATA, sp.getString("token", ""));
+                sendPost(Constants.base_url + "/api/club/base/pglist.do", LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }
     }

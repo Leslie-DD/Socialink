@@ -1,16 +1,11 @@
 package com.hnu.heshequ.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -18,18 +13,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.ShareAdapter;
 import com.hnu.heshequ.bean.ShareBean;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 
-/**
- * Created by dev06 on 2018/6/13.
- */
-public class BottomShareFragment extends BottomSheetDialogFragment  {
+
+public class BottomShareFragment extends BottomSheetDialogFragment {
     private View view;
     private TextView tvCancel;
     private GridView gv;

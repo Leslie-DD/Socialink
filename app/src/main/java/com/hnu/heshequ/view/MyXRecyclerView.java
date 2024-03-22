@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-/**
- * Created by dev06 on 2018/6/8.
- */
+
 public class MyXRecyclerView extends XRecyclerView {
     boolean canLoad;
     private int startY, endY;

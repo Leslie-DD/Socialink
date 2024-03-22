@@ -5,9 +5,7 @@ import com.blankj.utilcode.util.RegexUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by dev06 on 2017/12/5.
- */
+
 public class MatcherUtils {
     public static boolean isPhone(String phone) {
         return RegexUtils.isMobileSimple(phone);

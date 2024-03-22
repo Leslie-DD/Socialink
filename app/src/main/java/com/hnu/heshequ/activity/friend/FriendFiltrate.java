@@ -24,9 +24,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dell on 2020/3/20.
- */
 
 public class FriendFiltrate extends NetWorkActivity {
     private OptionsPickerView distanceChooseHelper; // 距离选择器

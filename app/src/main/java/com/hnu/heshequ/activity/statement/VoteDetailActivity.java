@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.listview.VoteAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -27,7 +28,6 @@ import com.hnu.heshequ.entity.VoteBean;
 import com.hnu.heshequ.entity.VoteDataBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;

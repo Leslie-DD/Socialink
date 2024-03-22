@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.friend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,11 +21,8 @@ import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * Created by dell on 2020/5/10.
- */
 
-public class FriendAnswerQues extends NetWorkActivity  {
+public class FriendAnswerQues extends NetWorkActivity {
     private int id;
     private String answer_1;
     private String answer_2;

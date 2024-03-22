@@ -29,7 +29,6 @@ import com.bumptech.glide.Glide;
 import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.CommentTeamAdapter;
 import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
@@ -41,11 +40,12 @@ import com.hnu.heshequ.bean.NoticeBean;
 import com.hnu.heshequ.bean.PullTheBlackBean;
 import com.hnu.heshequ.bean.SecondhandgoodBean;
 import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.bean.UserInfoBean;
 import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.entity.RefMembers;
+import com.hnu.heshequ.network.entity.UserInfoBean;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -252,12 +252,12 @@ public class PersonalInformationActivity extends NetWorkActivity implements
 //    private void setattention()
 //    {
 //        setBodyParams(new String[]{"followId"},new String[]{""+userInfoBean.getId()});
-//        sendPost(WenConstans.DelecteAttention,ATTENTION2,MeetApplication.getInstance().getSharedPreferences().getString("token",""));
+//        sendPost(WenConstans.DelecteAttention,ATTENTION2,SharedPreferencesHelp.getString("token",""));
 //    }
 //    private void getAttention()
 //    {
 //        setBodyParams(new String[]{"followId"},new String[]{""+userInfoBean.getId()});
-//        sendPost(WenConstans.DelecteAttention,ATTENTION2,MeetApplication.getInstance().getSharedPreferences().getString("token",""));
+//        sendPost(WenConstans.DelecteAttention,ATTENTION2,SharedPreferencesHelp.getString("token",""));
 //    }
     private void initDialog() {
 
@@ -328,7 +328,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
                     return;
                 }
                 setBodyParams(new String[]{"friendId", "aliasName"}, new String[]{"" + userInfoBean.getId(), mark});
-                sendPost(Constants.base_url + "/api/user/updateRemark.do", changeName, MeetApplication.getInstance().getSharedPreferences().getString("token", ""));
+                sendPost(Constants.base_url + "/api/user/updateRemark.do", changeName, SharedPreferencesHelp.getString("token", ""));
                 pop.dismiss();
                 //onItemEditorNameListener.ItemEditor(position,mark);
             }
@@ -433,7 +433,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
 
     private void getQuData(int pnQ, int quType) {
         int type = 0; // 1 - 我的  2 - 别人的
-        if (userInfoBean.getNickname().equals(MeetApplication.getInstance().getSharedPreferences().getString("user", ""))) {
+        if (userInfoBean.getNickname().equals(SharedPreferencesHelp.getString("user", ""))) {
             type = 1;
         } else {
             type = 2;
@@ -472,7 +472,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
 
     private void getGoodData(int png, int goodType) {
         int type = 0; // 1 - 我的  2 - 别人的
-        if (userInfoBean.getNickname().equals(MeetApplication.getInstance().getSharedPreferences().getString("user", ""))) {
+        if (userInfoBean.getNickname().equals(SharedPreferencesHelp.getString("user", ""))) {
             type = 1;
         } else {
             type = 2;

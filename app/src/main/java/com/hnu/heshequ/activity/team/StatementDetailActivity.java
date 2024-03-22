@@ -23,7 +23,8 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.hnu.heshequ.MeetApplication;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.Adapter_GridView;
 import com.hnu.heshequ.adapter.GvEmojiAdapter;
@@ -35,11 +36,10 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.entity.CommentBean;
 import com.hnu.heshequ.entity.RefStatementEvent;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -335,7 +335,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
             }
             //显示表情布局
             LinearLayout.LayoutParams Params = (LinearLayout.LayoutParams) flEmoji.getLayoutParams();
-            Params.height = MeetApplication.getInstance().getSharedPreferences().getInt("keyboardHeight", 450);
+            Params.height = SharedPreferencesHelp.getInt("keyboardHeight", 450);
             flEmoji.setLayoutParams(Params);
             flEmoji.setVisibility(View.VISIBLE);
             isEmojiShow = true;
@@ -566,7 +566,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
             case like:
                 switch (result.optInt("code")) {
                     case 0:
-                        String username = MeetApplication.getInstance().getSharedPreferences().getString("user", "");
+                        String username = SharedPreferencesHelp.getString("user", "");
                         if (isZan) {
                             likeAmount = likeAmount - 1;
                             tvZan.setText("" + likeAmount);

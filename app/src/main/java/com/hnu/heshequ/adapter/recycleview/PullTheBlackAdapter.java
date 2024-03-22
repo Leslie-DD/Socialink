@@ -29,9 +29,7 @@ import java.util.ArrayList;
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * Created by 佳佳 on 2018/11/26.
- */
+
 public class PullTheBlackAdapter extends RecyclerView.Adapter {
     private Context context;
     private LayoutInflater inflater;

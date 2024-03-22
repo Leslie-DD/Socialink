@@ -3,7 +3,6 @@ package com.hnu.heshequ.activity.friend;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,11 +16,8 @@ import com.hnu.heshequ.utils.Utils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by dell on 2020/4/30.
- */
 
-public class FriendQinganSet extends NetWorkActivity  {
+public class FriendQinganSet extends NetWorkActivity {
     private RadioGroup nRg1;
     private int id;
     public static String qingancontent;

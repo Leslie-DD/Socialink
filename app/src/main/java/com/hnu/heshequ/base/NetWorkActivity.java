@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.view.CustomDialog;
 import com.hnu.heshequ.view.CustomProgressDialog;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -52,16 +52,16 @@ public abstract class NetWorkActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         context = this;
-        Constants.uid = MeetApplication.getInstance().getSharedPreferences().getInt("uid", 1);
+        Constants.uid = SharedPreferencesHelp.getInt("uid", 1);
         Log.i(TAG, "(onCreate) 用户id: " + Constants.uid);
-        Constants.token = MeetApplication.getInstance().getSharedPreferences().getString("token", "");
-        WenConstans.token = MeetApplication.getInstance().getSharedPreferences().getString("token", "");
-        Constants.userName = MeetApplication.getInstance().getSharedPreferences().getString("user", "18274962484");
+        Constants.token = SharedPreferencesHelp.getString("token", "");
+        WenConstans.token = SharedPreferencesHelp.getString("token", "");
+        Constants.userName = SharedPreferencesHelp.getString("user", "18274962484");
         try {
             progressDialog = new CustomProgressDialog(this);
             progressDialog.setMessage("载入中...");
         } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, "progressDialog error: " + e.getMessage());
         }
 
         if (vector != null) {
@@ -111,7 +111,7 @@ public abstract class NetWorkActivity extends BaseActivity {
             public void onSuccess(String s, Call call, Response response) {
                 try {
                     JSONObject json = new JSONObject(s);
-                    Log.i(TAG, tag + "onSuccess url: " + url + ", json: " + json);
+                    Log.d(TAG, tag + "onSuccess url: " + url + ", json: " + json);
                     NetWorkActivity.this.onSuccess(json, where, false);
                 } catch (JSONException e) {
                     e.printStackTrace();

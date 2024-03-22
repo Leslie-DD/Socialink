@@ -86,24 +86,29 @@ public class PhotoBaseActivity extends NetWorkActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
         switch (requestCode) {
             case PHOTO_REQUEST_TAKE_PHOTO:
                 // 拍照 path
-                if (takePhotoUri != null) {
-                    crop(takePhotoUri);
-                    takePhotoUri = null;
+                if (takePhotoUri == null) {
+                    ToastUtils.showShort("拍照出问题了");
+                    Log.w(TAG, "photo result is null");
+                    break;
                 }
+                crop(takePhotoUri);
+                takePhotoUri = null;
                 break;
             case PHOTO_REQUEST_CHOOSER:
-                if (intent != null) {
-                    Uri photoUri = intent.getData();
-                    crop(PhotoUtils.generateUri(PhotoBaseActivity.this.getApplicationContext(), photoUri));
-                } else {
+                if (intent == null) {
+                    ToastUtils.showShort("图片选择失败");
                     Log.w(TAG, "file chooser result is null");
+                    break;
                 }
+                Uri photoUri = intent.getData();
+                crop(PhotoUtils.generateUri(PhotoBaseActivity.this.getApplicationContext(), photoUri));
                 break;
             case PHOTO_REQUEST_CUT:
                 if (intent == null) {

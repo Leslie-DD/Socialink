@@ -2,7 +2,6 @@ package com.hnu.heshequ.bean;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -33,11 +32,6 @@ public class ConsTants {
     public static String token;
     public static String phone;
     public static int homeItem = 1;
-
-    public static SharedPreferences initSp(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("meetting", Context.MODE_PRIVATE);
-        return sp;
-    }
 
     public static boolean fail(Context context, JSONObject result) {
         if (result.has("ret")) {

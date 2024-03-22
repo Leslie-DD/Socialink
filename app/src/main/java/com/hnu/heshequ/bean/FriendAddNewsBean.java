@@ -2,9 +2,6 @@ package com.hnu.heshequ.bean;
 
 import java.io.Serializable;
 
-/**
- * Created by dell on 2020/5/11.
- */
 
 public class FriendAddNewsBean implements Serializable {
     private int id;

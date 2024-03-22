@@ -19,10 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.githang.statusbar.StatusBarCompat;
 import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.bean.ConsTants;
-import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
 import java.util.List;

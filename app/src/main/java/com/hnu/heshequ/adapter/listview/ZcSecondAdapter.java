@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ZcSecondAdapter extends BaseAdapter {
     private ZcQusetionActivity context;
     private List<ZcSecondBean> data = new ArrayList<>();

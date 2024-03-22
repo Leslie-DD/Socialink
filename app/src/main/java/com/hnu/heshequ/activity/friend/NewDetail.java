@@ -20,6 +20,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LoginActivity;
 import com.hnu.heshequ.activity.team.PersonalInformationActivity;
@@ -36,8 +38,6 @@ import com.hnu.heshequ.fragment.BottomShareFragment;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyLv;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONException;
@@ -51,7 +51,7 @@ import java.util.List;
  * 动态详情页面
  */
 
-public class NewDetail extends NetWorkActivity  {
+public class NewDetail extends NetWorkActivity {
     private int type = 0;
     private CircleView ivHead;
     private EditText etContent;

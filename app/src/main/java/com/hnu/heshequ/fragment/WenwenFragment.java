@@ -20,8 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.activity.MainActivity;
 import com.hnu.heshequ.activity.WebActivity;
 import com.hnu.heshequ.activity.WwSearchActivity;
 import com.hnu.heshequ.activity.wenwen.SendQuestionActivity;
@@ -33,10 +34,9 @@ import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.HomeBannerImgsBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.launcher.MainActivity2;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CustomViewPager;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
@@ -176,7 +176,7 @@ public class WenwenFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
     private void initHeadView() {
-        MainActivity activity = (MainActivity) getActivity();
+        MainActivity2 activity = (MainActivity2) getActivity();
 //        WenwenActivity activity = (WenwenActivity) getActivity();
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new ChildWwFragment());

@@ -3,7 +3,6 @@ package com.hnu.heshequ.bean;
 import java.util.ArrayList;
 
 
-
 public class MsgSayBean {
 
     /**

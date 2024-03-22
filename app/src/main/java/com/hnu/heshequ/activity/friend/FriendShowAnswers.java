@@ -23,9 +23,6 @@ import org.json.JSONObject;
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * Created by dell on 2020/5/11.
- */
 
 public class FriendShowAnswers extends NetWorkActivity {
     private int user_id;

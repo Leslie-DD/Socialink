@@ -8,7 +8,6 @@ import android.view.View;
 import androidx.viewpager.widget.ViewPager;
 
 
-
 public class AllShowViewPager extends ViewPager {
     public AllShowViewPager(Context context) {
         super(context);

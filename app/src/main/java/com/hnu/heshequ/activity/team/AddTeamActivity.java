@@ -25,6 +25,8 @@ import android.widget.TextView;
 import androidx.core.content.FileProvider;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.Label;
@@ -35,8 +37,6 @@ import com.hnu.heshequ.utils.PhotoUtils;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.FlowLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -50,7 +50,7 @@ import java.util.List;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
-public class AddTeamActivity extends NetWorkActivity  {
+public class AddTeamActivity extends NetWorkActivity {
     private final int PHOTO_REQUEST_CUT = 300;
     private Button btSave;
     private EditText etName;

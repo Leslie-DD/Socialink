@@ -22,9 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
-/**
- * Created by dev06 on 2018/5/15.
- */
+
 public class ManagerFragment extends NetWorkFragment {
 
     private View view;

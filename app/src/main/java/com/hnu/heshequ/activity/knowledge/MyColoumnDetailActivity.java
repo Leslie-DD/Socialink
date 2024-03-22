@@ -3,11 +3,12 @@ package com.hnu.heshequ.activity.knowledge;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.knowledge.ColumnDetailAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
@@ -18,8 +19,6 @@ import com.hnu.heshequ.bean.knowledge.SubscriptionBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.view.CircleView;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONArray;

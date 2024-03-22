@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class ZcAnswerAdapter extends RecyclerView.Adapter {
     private ZcArticleActivity context;
     private List<ZcAnswerBean> data = new ArrayList<>();

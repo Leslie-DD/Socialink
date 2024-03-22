@@ -20,7 +20,6 @@ public class FileUtilcll {
      *
      * @param fileName 文件名称
      * @param bitmap   图片
-     * @param资源类型，参照 MultimediaContentType 枚举，根据此类型，保存时可自动归类
      */
     public static String saveFile(Context c, String fileName, Bitmap bitmap) {
         return saveFile(c, "", fileName, bitmap);

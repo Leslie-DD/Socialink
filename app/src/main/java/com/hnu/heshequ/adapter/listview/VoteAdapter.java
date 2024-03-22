@@ -17,9 +17,7 @@ import com.hnu.heshequ.entity.VoteBean;
 
 import java.util.ArrayList;
 
-/**
- * Created by dev06 on 2018/6/5.
- */
+
 public class VoteAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;

@@ -2,9 +2,7 @@ package com.hnu.heshequ.entity;
 
 import java.io.Serializable;
 
-/**
- * Created by dev06 on 2018/6/7.
- */
+
 public class PhotosBean implements Serializable {
     private String photoId;
     private int bzId;

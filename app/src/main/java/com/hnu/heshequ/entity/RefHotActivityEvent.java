@@ -1,7 +1,6 @@
 package com.hnu.heshequ.entity;
 
 
-
 public class RefHotActivityEvent {
     int type;   // 1  =刷新  2  = 加载
 

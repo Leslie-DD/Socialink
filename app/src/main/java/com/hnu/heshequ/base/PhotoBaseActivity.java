@@ -11,8 +11,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.hnu.heshequ.utils.PhotoUtils;
+import com.hnu.heshequ.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +43,7 @@ public class PhotoBaseActivity extends NetWorkActivity {
 
             @Override
             public void onReject() {
-                ToastUtils.showShort("你拒绝了相关权限");
+                Utils.toastShort(context, "你拒绝了相关权限");
             }
         });
     }
@@ -57,7 +57,7 @@ public class PhotoBaseActivity extends NetWorkActivity {
 
             @Override
             public void onReject() {
-                ToastUtils.showShort("你拒绝了相关权限");
+                Utils.toastShort(context, "你拒绝了相关权限");
             }
         });
     }
@@ -94,7 +94,7 @@ public class PhotoBaseActivity extends NetWorkActivity {
             case PHOTO_REQUEST_TAKE_PHOTO:
                 // 拍照 path
                 if (takePhotoUri == null) {
-                    ToastUtils.showShort("拍照出问题了");
+                    Utils.toastShort(context, "拍照出问题了");
                     Log.w(TAG, "photo result is null");
                     break;
                 }
@@ -103,7 +103,7 @@ public class PhotoBaseActivity extends NetWorkActivity {
                 break;
             case PHOTO_REQUEST_CHOOSER:
                 if (intent == null) {
-                    ToastUtils.showShort("图片选择失败");
+                    Utils.toastShort(context, "图片选择失败");
                     Log.w(TAG, "file chooser result is null");
                     break;
                 }

@@ -307,7 +307,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
                     } else if (num == 2) {
                         DelWw();
                     } else if (num == 3) {
-                        //ToastUtils.showShort("分享");
+                        //Utils.toastShort("分享");
                         showShare();
                     }
                 }

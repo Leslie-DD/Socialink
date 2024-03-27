@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00BBFF</color>
+    <color name="colorPrimary">#2CD22B</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="base_blue">#00BBFF</color>
+    <color name="base_blue">#2CD22B</color>
     <color name="base_color_white">#FFFFFF</color>
     <!-- 字体浅黑 -->
     <color name="yellow">#f9bf36</color>
@@ -17,7 +17,7 @@
     <color name="textab">#ababb3</color>
     <color name="textf2">#f2f2f2</color>
     <color name="f8">#f8f8fd</color>
-    <color name="titlecolor">#00bbff</color>
+    <color name="titlecolor">#2CD22B</color>
     <color name="blue">#05bcff</color>
     <color name="red">#FFFF0905</color>
 

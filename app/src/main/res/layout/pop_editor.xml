@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:text="确定修改"
-        android:background="@drawable/bg_00bbff_solid_13"
+        android:background="@drawable/bg_2cd22b_solid_13"
         android:textColor="@android:color/white"
         />
 

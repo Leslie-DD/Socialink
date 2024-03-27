@@ -104,7 +104,7 @@ public class SendNew extends NetWorkActivity {
         } else {
             stringList.add(view.getText().toString());
         }
-        view.setBackgroundResource(status == 0 ? R.drawable.e6e6e6_17 : R.drawable.bg_00bbff_17);
+        view.setBackgroundResource(status == 0 ? R.drawable.e6e6e6_17 : R.drawable.bg_2cd22b_17);
         String color = status == 0 ? "#999999" : "#ffffff";
         view.setTextColor(Color.parseColor(color));
     }

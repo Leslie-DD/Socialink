@@ -22,7 +22,7 @@
         fresco:actualImageScaleType="centerInside"
         fresco:failureImage="@mipmap/failphoto"
         fresco:failureImageScaleType="centerInside"
-        fresco:placeholderImage="@mipmap/logo"
+        fresco:placeholderImage="@mipmap/app_icon"
         fresco:progressBarAutoRotateInterval="5000"
         fresco:progressBarImage="@mipmap/loadingphoto"
         />
@@ -38,7 +38,7 @@
         fresco:actualImageScaleType="fitCenter"
         fresco:failureImage="@mipmap/failphoto"
         fresco:failureImageScaleType="centerInside"
-        fresco:placeholderImage="@mipmap/logo"
+        fresco:placeholderImage="@mipmap/app_icon"
         fresco:progressBarAutoRotateInterval="5000"
         fresco:progressBarImage="@mipmap/loadingphoto"
         android:visibility="gone"
@@ -139,7 +139,7 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/bg_00bbff_23"
+            android:background="@drawable/bg_2cd22b_23"
             android:text="登录"
             android:textColor="#ffffff"
             android:textSize="18sp" />

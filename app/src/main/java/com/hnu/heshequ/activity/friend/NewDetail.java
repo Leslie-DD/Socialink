@@ -187,7 +187,7 @@ public class NewDetail extends NetWorkActivity {
                 tvLoves.setTextColor(Color.parseColor("#ababb3"));
             } else {
                 ivImg.setImageResource(R.mipmap.saved);
-                tvLoves.setTextColor(Color.parseColor("#00bbff"));
+                tvLoves.setTextColor(Color.parseColor("#2CD22B"));
             }
 
             if (friendNewBean.photos != null && friendNewBean.photos.size() > 0) {

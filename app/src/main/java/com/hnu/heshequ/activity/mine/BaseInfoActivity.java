@@ -262,8 +262,8 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         this.status = status;
         tvPic.setText(status == 0 ? "拍照" : "女");
         tvUp.setText(status == 0 ? "上传照片" : "男");
-        tvPic.setTextColor(Color.parseColor(status == 0 ? "#00bbff" : "#333333"));
-        tvUp.setTextColor(Color.parseColor(status == 0 ? "#00bbff" : "#333333"));
+        tvPic.setTextColor(Color.parseColor(status == 0 ? "#2CD22B" : "#333333"));
+        tvUp.setTextColor(Color.parseColor(status == 0 ? "#2CD22B" : "#333333"));
         layoutParams.alpha = 0.5f;
         getWindow().setAttributes(layoutParams);
         pop.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
@@ -359,8 +359,8 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                             .setSubCalSize(18)//确定和取消文字大小
                             .setTitleSize(20)//标题文字大小
                             .setTitleColor(Color.BLACK)//标题文字颜色
-                            .setSubmitColor(Color.parseColor("#00BBFF"))//确定按钮文字颜色
-                            .setCancelColor(Color.parseColor("#00BBFF"))//取消按钮文字颜色
+                            .setSubmitColor(Color.parseColor("#2CD22B"))//确定按钮文字颜色
+                            .setCancelColor(Color.parseColor("#2CD22B"))//取消按钮文字颜色
                             .setTitleBgColor(0xFFFFFFFF)//标题背景颜色 Night mode
                             .setBgColor(0xFFFFFFFF)//滚轮背景颜色
                             .setContentTextSize(18)//滚轮文字大小

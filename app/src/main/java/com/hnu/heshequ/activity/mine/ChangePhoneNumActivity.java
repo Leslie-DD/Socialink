@@ -219,8 +219,8 @@ public class ChangePhoneNumActivity extends NetWorkActivity {
                                 .setTitleText("选择问题")//标题文字
                                 .setOutSideCancelable(false)//点击屏幕，点在控件外部范围时，是否取消显示
                                 .setTitleColor(Color.BLACK)//标题文字颜色
-                                .setSubmitColor(Color.parseColor("#00BBFF"))//确定按钮文字颜色
-                                .setCancelColor(Color.parseColor("#00BBFF"))//取消按钮文字颜色
+                                .setSubmitColor(Color.parseColor("#2CD22B"))//确定按钮文字颜色
+                                .setCancelColor(Color.parseColor("#2CD22B"))//取消按钮文字颜色
                                 .setTitleBgColor(Color.WHITE)//标题背景颜色 Night mode
                                 .setBgColor(Color.WHITE)//滚轮背景颜色 Night mode
                                 .build();

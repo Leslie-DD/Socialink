@@ -85,7 +85,7 @@ public class ZcWwAdapter extends RecyclerView.Adapter {
                 tvJob.setText(bean.presentorJob + "");
                 if (type == 3) {
                     tvEnd.setText("查看详情");
-                    tvEnd.setTextColor(Color.parseColor("#00bbff"));
+                    tvEnd.setTextColor(Color.parseColor("#2CD22B"));
                 } else {
                     tvEnd.setText("截止时间: " + bean.endTime + "");
                     tvEnd.setTextColor(Color.parseColor("#666666"));

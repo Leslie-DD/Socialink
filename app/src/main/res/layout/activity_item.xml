@@ -91,7 +91,7 @@
              android:textSize="13sp"
              android:id="@+id/btStatus"
              android:text="我要报名"
-             android:background="@drawable/bg_00bbff_13"
+             android:background="@drawable/bg_2cd22b_13"
              android:layout_height="26dp" />
      </LinearLayout>
 </LinearLayout>

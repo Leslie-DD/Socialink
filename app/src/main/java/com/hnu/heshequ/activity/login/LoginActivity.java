@@ -14,7 +14,7 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.EventBean;
-import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.launcher.MainActivity;
 import com.hnu.heshequ.network.util.AuthorizationInterceptor;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
@@ -113,7 +113,7 @@ public class LoginActivity extends NetWorkActivity {
                     "isLogin", true).apply();
             AuthorizationInterceptor.cacheToken(token);
             this.finish();
-            startActivity(new Intent(mContext, MainActivity2.class));
+            startActivity(new Intent(mContext, MainActivity.class));
 
             //WenConstans.id = uid;
             Utils.toastShort(mContext, "登录成功；用户id：" + Constants.uid);

@@ -131,7 +131,7 @@ public class FriendSearchAdapter extends RecyclerView.Adapter {
 //                    tvLoves.setTextColor(Color.parseColor("#ababb3"));
 //                } else {
 //                    ivImg.setImageResource(R.mipmap.saved);
-//                    tvLoves.setTextColor(Color.parseColor("#00bbff"));
+//                    tvLoves.setTextColor(Color.parseColor("#2CD22B"));
 //                }
             if (data.get(position).descroption != null) {
 

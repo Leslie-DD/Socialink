@@ -9,7 +9,7 @@
         style="@style/save_style"
         android:layout_width="120dp"
         android:layout_height="34dp"
-        android:background="@drawable/bg_00bbff_17"
+        android:background="@drawable/bg_2cd22b_17"
         android:text="投票"
         android:id="@+id/btVote"
         />

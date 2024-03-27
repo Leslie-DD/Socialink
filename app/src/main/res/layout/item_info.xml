@@ -43,7 +43,7 @@
         android:layout_height="100dp"
         android:layout_marginLeft="30dp"
         android:scaleType="fitXY"
-        android:background="@mipmap/logo"
+        android:background="@mipmap/app_icon"
         android:layout_alignParentTop="true" />
 
 </RelativeLayout>

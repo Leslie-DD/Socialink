@@ -139,7 +139,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                 // 设置透明度
                 rollPagerView.setAnimationDurtion(500);
                 // 设置指示器（顺序依次）
-                rollPagerView.setHintView(new ColorPointHintView(context, Color.parseColor("#00bbff"), Color.WHITE));
+                rollPagerView.setHintView(new ColorPointHintView(context, Color.parseColor("#2CD22B"), Color.WHITE));
             }
         }
 
@@ -173,7 +173,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                     tvLoves.setTextColor(Color.parseColor("#ababb3"));
                 } else {
                     ivImg.setImageResource(R.mipmap.saved);
-                    tvLoves.setTextColor(Color.parseColor("#00bbff"));
+                    tvLoves.setTextColor(Color.parseColor("#2CD22B"));
                 }
                 if (wenwenBean.labels != null && wenwenBean.labels.size() > 0) {
                     String str = "";

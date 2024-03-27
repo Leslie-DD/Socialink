@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:text="举报"
-        android:background="@drawable/bg_00bbff_4"
+        android:background="@drawable/bg_2cd22b_4"
         android:textColor="@color/base_color_white"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"

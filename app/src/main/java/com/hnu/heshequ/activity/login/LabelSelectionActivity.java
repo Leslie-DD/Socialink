@@ -19,7 +19,7 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.entity.RefUserInfo;
 import com.hnu.heshequ.entity.TestBean;
-import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.launcher.MainActivity;
 import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.EncryptUtils;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
@@ -152,7 +152,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
         } else {
             stringList.add(view.getText().toString());
         }
-        view.setBackgroundResource(status == 0 ? R.drawable.e6e6e6_17 : R.drawable.bg_00bbff_17);
+        view.setBackgroundResource(status == 0 ? R.drawable.e6e6e6_17 : R.drawable.bg_2cd22b_17);
         String color = status == 0 ? "#999999" : "#ffffff";
         view.setTextColor(Color.parseColor(color));
     }
@@ -199,7 +199,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
                         final TextView view = new TextView(this);
                         view.setText(b.getValue());
                         view.setTextColor(Color.parseColor(bean.getStatus() == 0 ? "#999999" : "#ffffff"));
-                        view.setBackgroundResource(bean.getStatus() == 0 ? R.drawable.e6e6e6_17 : R.drawable.bg_00bbff_17);
+                        view.setBackgroundResource(bean.getStatus() == 0 ? R.drawable.e6e6e6_17 : R.drawable.bg_2cd22b_17);
                         view.setHeight(Utils.dip2px(context, 34));
                         view.setPadding(Utils.dip2px(context, 17), 0, Utils.dip2px(context, 17), 0);
                         view.setGravity(Gravity.CENTER);
@@ -237,7 +237,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
                 int uid = dd.optInt("uid");
                 SharedPreferencesHelp.getEditor().putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
                 MeetApplication.getInstance().finishAll();
-                startActivity(new Intent(mContext, MainActivity2.class));
+                startActivity(new Intent(mContext, MainActivity.class));
                 Utils.toastShort(mContext, "登录成功");
             } else {
                 Utils.toastShort(mContext, result.optString("msg"));

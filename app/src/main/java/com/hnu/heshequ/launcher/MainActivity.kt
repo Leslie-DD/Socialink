@@ -10,12 +10,12 @@ import com.githang.statusbar.StatusBarCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hnu.heshequ.MeetApplication
 import com.hnu.heshequ.R
-import com.hnu.heshequ.databinding.ActivityMain2Binding
+import com.hnu.heshequ.databinding.ActivityMainBinding
 import com.hnu.heshequ.launcher.model.MainViewModel
 
-class MainActivity2 : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMain2Binding
+    private lateinit var binding: ActivityMainBinding
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -23,7 +23,7 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         MeetApplication.getInstance().addActivity(this)
 
-        binding = ActivityMain2Binding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView

@@ -14,7 +14,7 @@ import com.hnu.heshequ.activity.TeamSearchActivity;
 import com.hnu.heshequ.activity.team.AddTeamActivity;
 import com.hnu.heshequ.adapter.MytPagersAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
-import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.launcher.MainActivity;
 import com.hnu.heshequ.view.NoScrollViewPager;
 
 import org.json.JSONObject;
@@ -52,7 +52,7 @@ public class TeamsFragment extends NetWorkFragment {
     }
 
     private void init() {
-        MainActivity2 activity = (MainActivity2) getActivity();
+        MainActivity activity = (MainActivity) getActivity();
 //        TeamActivity activity = (TeamActivity) getActivity();
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new TeamChildFragment1());

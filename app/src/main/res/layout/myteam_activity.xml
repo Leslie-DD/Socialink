@@ -99,7 +99,7 @@
             android:id="@+id/tvInitiator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#00BBFF"
+            android:textColor="#2CD22B"
             android:textSize="13sp"
             />
         <View

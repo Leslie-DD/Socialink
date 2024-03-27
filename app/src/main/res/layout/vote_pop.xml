@@ -97,7 +97,7 @@
                 style="@style/save_style"
                 android:layout_width="82dp"
                 android:layout_height="34dp"
-                android:background="@drawable/bg_00bbff_17"
+                android:background="@drawable/bg_2cd22b_17"
                 android:text="加入"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="18dp"

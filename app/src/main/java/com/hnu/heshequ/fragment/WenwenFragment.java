@@ -34,7 +34,7 @@ import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.HomeBannerImgsBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
-import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.launcher.MainActivity;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CustomViewPager;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -176,7 +176,7 @@ public class WenwenFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
     private void initHeadView() {
-        MainActivity2 activity = (MainActivity2) getActivity();
+        MainActivity activity = (MainActivity) getActivity();
 //        WenwenActivity activity = (WenwenActivity) getActivity();
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new ChildWwFragment());

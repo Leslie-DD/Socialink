@@ -137,7 +137,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                         tvLoves.setTextColor(Color.parseColor("#ababb3"));
                     } else {
                         ivImg.setImageResource(R.mipmap.saved);
-                        tvLoves.setTextColor(Color.parseColor("#00bbff"));
+                        tvLoves.setTextColor(Color.parseColor("#2CD22B"));
                     }
                     if (bean.labels != null && bean.labels.size() > 0) {
                         String str = "";

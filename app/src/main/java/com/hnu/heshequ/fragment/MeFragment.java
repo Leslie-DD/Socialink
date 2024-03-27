@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -40,7 +39,7 @@ import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ItemBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefUserInfo;
-import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.launcher.MainActivity;
 import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.ImageUtils;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
@@ -71,7 +70,7 @@ public class MeFragment extends NetWorkFragment {
     private ItemAdapter adapter;
     private ImageView ivEditor;
     private TextView current;
-    private MainActivity2 mainActivity;
+    private MainActivity mainActivity;
     private LinearLayout llSay, llQuestion, llNotice, llSecondhand;
     private Gson gson;
     private UserInfoBean userInfoBean;
@@ -108,7 +107,7 @@ public class MeFragment extends NetWorkFragment {
         tvLevel = (TextView) headView.findViewById(R.id.tvLevel);
         initUserinfo();
         event();
-        mainActivity = (MainActivity2) getActivity();
+        mainActivity = (MainActivity) getActivity();
         return view;
     }
 
@@ -203,7 +202,6 @@ public class MeFragment extends NetWorkFragment {
                                 .setTitle("退出登录")
                                 .setMessage("确定退出当前账号吗")
                                 .setNegativeButton("取消", (dialogInterface, i1) -> {
-                                    ToastUtils.showShort("点击了取消按钮");
                                     dialogInterface.dismiss();//销毁对话框
                                 })
                                 .setPositiveButton("确定", (dialog1, which) -> {

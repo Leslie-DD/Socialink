@@ -113,12 +113,12 @@ public class TeamAdapter extends RecyclerView.Adapter {
 
         public void setData(final int position) {
             final TeamTestBean bean = data.get(position);
-            String color = "#00BBFF";
+            String color = "#2CD22B";
             String content = "[投票]";
             btStatus.setVisibility(View.VISIBLE);
             switch (bean.getType()) {
                 case 1: //投票
-                    color = "#00BBFF";
+                    color = "#2CD22B";
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -216,8 +216,8 @@ public class TeamAdapter extends RecyclerView.Adapter {
             if (bean.getObj().getIsLike() == 1)//已报名
             {
                 btStatus.setText("已报名");
-                btStatus.setTextColor(Color.parseColor("#00bbff"));
-                btStatus.setBackgroundResource(R.drawable.bg_00bbff_13);
+                btStatus.setTextColor(Color.parseColor("#2CD22B"));
+                btStatus.setBackgroundResource(R.drawable.bg_2cd22b_13);
             } else {
                 /*btStatus.setText("我要报名");
                 btStatus.setTextColor(Color.parseColor("#ffffff"));
@@ -226,7 +226,7 @@ public class TeamAdapter extends RecyclerView.Adapter {
                     if (Utils.isPastDue(bean.getObj().getApplyDeadline(), "yyyy-MM-dd HH:mm")) {
                         btStatus.setText("我要报名");
                         btStatus.setTextColor(Color.parseColor("#ffffff"));
-                        btStatus.setBackgroundResource(R.drawable.bg_00bbff_solid_13);
+                        btStatus.setBackgroundResource(R.drawable.bg_2cd22b_solid_13);
                     } else {
                         btStatus.setText("我要报名");
                         btStatus.setTextColor(Color.parseColor("#ffffff"));

@@ -25,7 +25,7 @@ import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.SchoolBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
-import com.hnu.heshequ.launcher.MainActivity2;
+import com.hnu.heshequ.launcher.MainActivity;
 import com.hnu.heshequ.utils.Utils;
 
 import org.json.JSONException;
@@ -161,8 +161,8 @@ public class StudentIdLoginActivity extends NetWorkActivity {
                 .setSubCalSize(18)  // 确定和取消文字大小
                 .setTitleSize(20)   // 标题文字大小
                 .setTitleColor(Color.BLACK) // 标题文字颜色
-                .setSubmitColor(Color.parseColor("#00BBFF"))    // 确定按钮文字颜色
-                .setCancelColor(Color.parseColor("#00BBFF"))    // 取消按钮文字颜色
+                .setSubmitColor(Color.parseColor("#2CD22B"))    // 确定按钮文字颜色
+                .setCancelColor(Color.parseColor("#2CD22B"))    // 取消按钮文字颜色
                 .setTitleBgColor(0xFFFFFFFF)    // 标题背景颜色 Night mode
                 .setBgColor(0xFFFFFFFF) // 滚轮背景颜色
                 .setContentTextSize(18) // 滚轮文字大小
@@ -296,7 +296,7 @@ public class StudentIdLoginActivity extends NetWorkActivity {
             memory.edit().putString("ID", studentId).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
 
             this.finish();
-            startActivity(new Intent(mContext, MainActivity2.class));
+            startActivity(new Intent(mContext, MainActivity.class));
             Utils.toastShort(mContext, "登录成功");
         } else {
             Utils.toastShort(mContext, result.optString("msg"));

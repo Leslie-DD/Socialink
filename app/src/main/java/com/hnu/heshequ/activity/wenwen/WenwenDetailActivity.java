@@ -105,7 +105,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
                 zan = zan + 1;
                 wenwenBean.likeAmount = zan;
                 ivImg.setImageResource(R.mipmap.saved);
-                tvLoves.setTextColor(Color.parseColor("#00bbff"));
+                tvLoves.setTextColor(Color.parseColor("#2CD22B"));
             } else {
                 wenwenBean.userLike = "";
                 zan = zan - 1;
@@ -302,7 +302,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
                     } else if (num == 2) {
                         DelWw();
                     } else if (num == 3) {
-                        //ToastUtils.showShort("分享");
+                        //Utils.toastShort("分享");
                         showShare();
                     }
                 }

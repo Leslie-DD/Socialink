@@ -35,7 +35,7 @@ public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_GOOD = 1;
 
     private Context mContext;
-    private List<Integer> mTypeList = new ArrayList<>();
+    private List<Integer> mTypeList;
 
     private List<String> mBannerList = new ArrayList<>();
     private List<HomeBannerImgsBean> mBannerList2 = new ArrayList<>();
@@ -139,8 +139,7 @@ public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 LinearLayoutManager manager = new LinearLayoutManager(mContext);
                 manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 ((SearchViewHolder) holder).rcvSearch.setLayoutManager(manager);
-                ((SearchViewHolder) holder).rcvSearch.setHasFixedSize(true);
-//                ((SearchViewHolder) holder).rcvSearch.addItemDecoration(new XRecyclerView.DividerItemDecoration(mContext, XRecyclerView.DividerItemDecoration.HORIZONTAL));
+//                ((SearchViewHolder) holder).rcvSearch.setHasFixedSize(true);
                 ((SearchViewHolder) holder).rcvSearch.setAdapter(searchAdapter);
                 searchAdapter.notifyDataSetChanged();
 
@@ -151,16 +150,12 @@ public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 LinearLayoutManager manager = new LinearLayoutManager(mContext);
                 manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 ((ClassifylViewHolder) holder).rcvHorizontal.setLayoutManager(manager);
-                ((ClassifylViewHolder) holder).rcvHorizontal.setHasFixedSize(true);
-//                ((ClassifylViewHolder) holder).rcvHorizontal.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.HORIZONTAL));
+//                ((ClassifylViewHolder) holder).rcvHorizontal.setHasFixedSize(true);
                 ((ClassifylViewHolder) holder).rcvHorizontal.setAdapter(classifyAdapter);
                 classifyAdapter.notifyDataSetChanged();
-                ((ClassifylViewHolder) holder).ibSlideSearch.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(mContext, ClassifationActivity.class);
-                        startActivity(intent);
-                    }
+                ((ClassifylViewHolder) holder).ibSlideSearch.setOnClickListener(v -> {
+                    Intent intent = new Intent(mContext, ClassifationActivity.class);
+                    startActivity(intent);
                 });
 
             }
@@ -168,8 +163,7 @@ public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (mGoodList != null) {
                 goodAdapter = new GoodAdapter(mContext, mGoodList);
                 ((GoodViewHolder) holder).rcvVertical.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                ((GoodViewHolder) holder).rcvVertical.setHasFixedSize(true);
-//                ((GoodViewHolder) holder).rcvVertical.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
+//                ((GoodViewHolder) holder).rcvVertical.setHasFixedSize(true);
                 ((GoodViewHolder) holder).rcvVertical.setAdapter(goodAdapter);
 
                 goodAdapter.notifyDataSetChanged();
@@ -180,8 +174,7 @@ public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 LinearLayoutManager manager = new LinearLayoutManager(mContext);
                 manager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 ((PicViewHolder) holder).rcvBanner.setLayoutManager(manager);
-                ((PicViewHolder) holder).rcvBanner.setHasFixedSize(true);
-//                ((PicViewHolder) holder).rcvBanner.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
+//                ((PicViewHolder) holder).rcvBanner.setHasFixedSize(true);
                 ((PicViewHolder) holder).rcvBanner.setAdapter(picAdapter);
 
                 picAdapter.notifyDataSetChanged();

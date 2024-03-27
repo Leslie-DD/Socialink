@@ -1096,7 +1096,6 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
             tvContent.setText("公告：" + cBean.getNotice().getTitle());
         } else {
             tvContent.setVisibility(View.GONE);
-            //tvContent.setText("公告：欢迎大家来到高校联盟，一起加油！");
         }
         ArrayList<TeamBean.UsersBean> users = cBean.getUsers();
         ArrayList<String> imgs = new ArrayList<>();

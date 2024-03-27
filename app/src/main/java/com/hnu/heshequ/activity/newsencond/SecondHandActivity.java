@@ -75,7 +75,7 @@ public class SecondHandActivity extends NetWorkActivity {
         adapter = new SecondHandAdapter(this, mTypeList);
         RecyclerView rcv_test = findViewById(R.id.rv_xrefresh_test);
         rcv_test.setLayoutManager(new LinearLayoutManager(this));
-        rcv_test.setHasFixedSize(false);
+//        rcv_test.setHasFixedSize(false);
         rcv_test.setAdapter(adapter);
 
         adapter.setSearchDataList(mSearchList);

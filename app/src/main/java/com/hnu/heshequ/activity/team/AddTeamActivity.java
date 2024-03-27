@@ -312,8 +312,7 @@ public class AddTeamActivity extends NetWorkActivity {
         intent.putExtra("outputX", Utils.dip2px(this, 75));
         intent.putExtra("outputY", Utils.dip2px(this, 75));
         //裁剪后的图片Uri路径，uritempFile为Uri类变量
-//        uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "XiangYuIcon.jpg");
-        File file = new File(FileUtilcll.getPublicDir() + "/XiangYuIcon.jpg");
+        File file = new File(FileUtilcll.getPublicDir() + "/socialink_icon.jpg");
         uritempFile = FileProvider.getUriForFile(context, PhotoUtils.AUTHORITY, file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());

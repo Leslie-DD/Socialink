@@ -397,7 +397,7 @@ public class HomeFragment extends NetWorkFragment implements XRecyclerView.Loadi
                 int id = Integer.parseInt(event.getResult().replace("XYTeam_", ""));
                 startActivity(new Intent(getActivity(), TeamDetailActivity.class).putExtra("id", id));
             } else {
-                Utils.toastShort(mContext, "请扫描高校联盟团队的二维码");
+                Utils.toastShort(mContext, "请扫描 Socialink 团队的二维码");
             }
         } catch (Exception e) {
             Utils.toastShort(mContext, "二维码不合法，识别失败");

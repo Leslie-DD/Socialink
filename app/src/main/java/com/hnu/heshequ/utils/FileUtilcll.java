@@ -53,8 +53,7 @@ public class FileUtilcll {
         try {
             String suffix = "";
             if (filePath == null || filePath.trim().length() == 0) {
-//                filePath = Environment.getExternalStorageDirectory() + "/Xiangyu/" + dateFolder + "/";
-                filePath = FileUtilcll.getPublicDir() + "/Xiangyu/" + dateFolder + "/";
+                filePath = FileUtilcll.getPublicDir() + "/socialink/" + dateFolder + "/";
             }
             File file = new File(filePath);
             if (!file.exists()) {

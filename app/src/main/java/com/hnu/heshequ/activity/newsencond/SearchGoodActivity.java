@@ -179,7 +179,7 @@ public class SearchGoodActivity extends NetWorkActivity {
                 }
                 goodAdapter = new GoodAdapter(this, secondhandgoodBeanList);
                 recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                recyclerView.setHasFixedSize(true);
+//                recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(goodAdapter);
 //                Utils.toastShort(context, "Goods.size(): " + secondhandgoodBeanList.size());
                 goodAdapter.notifyDataSetChanged();

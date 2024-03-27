@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.Date
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -13,8 +16,16 @@ android {
     defaultConfig {
         applicationId = "com.hnu.heshequ"
 
+        /**
+         * versionName 和 versionCode 是 Android 应用程序的版本管理中常用的两个属性，它们有以下区别：
+         *
+         * versionName: versionName 是用来展示给用户的版本号，通常是一个易于理解的字符串，例如 "1.0"、"v2.1.3" 等。这个版本号用于标识应用程序的发布版本，用户可以通过这个版本号了解应用程序的更新情况。
+         * versionCode: versionCode 是一个用于内部管理的整数值，它代表了应用程序的版本号，用于在代码中判断应用程序的版本顺序。每次发布新版本时，versionCode 都应该递增，这样可以确保新版本的 versionCode 大于旧版本，方便系统判断版本更新。
+         *
+         * 总结起来，versionName 是给用户看的，用于展示版本号的易读字符串；而 versionCode 是给开发者和系统看的，用于在代码中处理版本号的整数值。
+         */
         versionCode = 1
-        versionName = "1.0"
+        versionName = "v1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,6 +46,21 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    applicationVariants.all {
+        outputs.map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
+            .all { output ->
+                output.outputFileName = "Socialink-$versionName-${currentTime()}.apk"
+                false
+            }
+    }
+
+}
+
+fun currentTime(): String {
+    val currentTime = Date()
+    val sdf = SimpleDateFormat("yyyyMMdd-HHmmss") // 自定义时间格式
+    return sdf.format(currentTime)
 }
 
 dependencies {

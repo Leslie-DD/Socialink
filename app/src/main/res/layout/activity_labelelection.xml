@@ -102,7 +102,7 @@
                 style="@style/save_style"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:text="开启高校联盟之旅"
+                android:text="开启 Socialink 之旅"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 />

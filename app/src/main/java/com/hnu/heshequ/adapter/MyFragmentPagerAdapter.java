@@ -4,12 +4,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
 public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
-    List<Fragment> list = new ArrayList<>();
+    List<Fragment> list;
     FragmentManager fm;
     String string;
 
@@ -21,7 +19,6 @@ public class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     public void setList(List<Fragment> list, String string) {
         this.string = string;
-        //Log.e("zhang","刷新？？？？？");
         this.list = list;
         this.notifyDataSetChanged();
     }

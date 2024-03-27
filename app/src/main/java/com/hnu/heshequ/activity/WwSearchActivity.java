@@ -24,7 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LabelSelectionActivity;
-import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
+import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.WenwenBean;
@@ -43,12 +43,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, HotWenwenAdapter.DoSaveListener, TextWatcher {
+public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, HotQuestionsAdapter.DoSaveListener, TextWatcher {
     private LinearLayout llBack, llFl;
     private EditText etContent;
     private XRecyclerView rv;
     private TextView tvTips;
-    private HotWenwenAdapter adapter;
+    private HotQuestionsAdapter adapter;
     private RelativeLayout rlData;
     private boolean isLable = false;
     private int i = 0;
@@ -216,8 +216,8 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         tvTips = (TextView) findViewById(R.id.tvTips);
         rv = (XRecyclerView) findViewById(R.id.rv);
         ConsTants.initXRecycleView(this, true, true, rv);
-        adapter = new HotWenwenAdapter(this);
-        adapter.DoSaveListener(this);
+        adapter = new HotQuestionsAdapter(this);
+        adapter.setListener(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
         etContent.addTextChangedListener(this);

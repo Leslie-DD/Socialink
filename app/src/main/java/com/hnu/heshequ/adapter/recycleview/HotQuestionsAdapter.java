@@ -8,11 +8,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -44,28 +44,22 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * @author dev06
- * 2016年7月4日
- */
-
-public class HotWenwenAdapter extends RecyclerView.Adapter {
-    private Context context;
+public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapter.ViewHolder> {
+    private final Context context;
     private List<WenwenBean> data = new ArrayList<>();
     private View views;
 
-    private ArrayList<String> imgs;
-    private Gson gson = new Gson();
+    private ArrayList<String> images;
+    private final Gson gson = new Gson();
     private BannerAdapter bannerAdapter;
     private ArrayList<HomeBannerImgsBean> imgsData;
     private int bannerFlag = 0;
 
-    public HotWenwenAdapter(Context context) {
+    public HotQuestionsAdapter(Context context) {
         super();
         this.context = context;
     }
@@ -80,8 +74,9 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
         return data.get(position).type;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HotQuestionsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0) {
             views = LayoutInflater.from(context).inflate(R.layout.item_hot_ww, parent, false);
         } else if (viewType == 1) {
@@ -91,9 +86,8 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.setData(position);
+    public void onBindViewHolder(@NonNull HotQuestionsAdapter.ViewHolder holder, int position) {
+        holder.setData(position);
     }
 
     @Override
@@ -101,7 +95,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
         return data.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView ivImg;
         private MyGv gv;
@@ -110,29 +104,27 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
         private TextView tvLoves;
         private LinearLayout llSave;
         private RollPagerView rollPagerView;
-        private LinearLayout ll;
 
         public ViewHolder(View view, int type) {
             super(view);
             if (type == 0) {
-                ivImg = (ImageView) view.findViewById(R.id.ivImg);
-                ivHead = (CircleView) view.findViewById(R.id.ivHead);
-                tvName = (TextView) view.findViewById(R.id.tvName);
+                ivImg = view.findViewById(R.id.ivImg);
+                ivHead = view.findViewById(R.id.ivHead);
+                tvName = view.findViewById(R.id.tvName);
                 tvCollege = view.findViewById(R.id.tvCollege);
-                tvTitle = (TextView) view.findViewById(R.id.tvTitle);
-                tvBelong = (TextView) view.findViewById(R.id.tvBelong);
-                tvNum = (TextView) view.findViewById(R.id.tvNum);
-                tvTime = (TextView) view.findViewById(R.id.tvTime);
-                tvLoves = (TextView) view.findViewById(R.id.tvLoves);
-                gv = (MyGv) view.findViewById(R.id.gv);
-                llSave = (LinearLayout) view.findViewById(R.id.llSave);
+                tvTitle = view.findViewById(R.id.tvTitle);
+                tvBelong = view.findViewById(R.id.tvBelong);
+                tvNum = view.findViewById(R.id.tvNum);
+                tvTime = view.findViewById(R.id.tvTime);
+                tvLoves = view.findViewById(R.id.tvLoves);
+                gv = view.findViewById(R.id.gv);
+                llSave = view.findViewById(R.id.llSave);
             } else if (type == 1) {
-                ll = view.findViewById(R.id.ll);
-                rollPagerView = (RollPagerView) view.findViewById(R.id.rp);
+                rollPagerView = view.findViewById(R.id.rp);
                 ViewGroup.LayoutParams params = rollPagerView.getLayoutParams();
                 params.height = ConsTants.screenW * 10 / 22;
                 bannerAdapter = new BannerAdapter(rollPagerView, context);
-                imgs = new ArrayList<>();
+                images = new ArrayList<>();
                 rollPagerView.setAdapter(bannerAdapter);
                 // 设置播放时间间隔
                 rollPagerView.setPlayDelay(3000);
@@ -175,7 +167,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                     ivImg.setImageResource(R.mipmap.saved);
                     tvLoves.setTextColor(Color.parseColor("#2CD22B"));
                 }
-                if (wenwenBean.labels != null && wenwenBean.labels.size() > 0) {
+                if (wenwenBean.labels != null && !wenwenBean.labels.isEmpty()) {
                     String str = "";
                     for (int i = 0; i < wenwenBean.labels.size(); i++) {
                         if (i == 0) {
@@ -188,7 +180,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                 } else {
                     tvBelong.setText("");
                 }
-                if (wenwenBean.photos == null || wenwenBean.photos.size() == 0) {
+                if (wenwenBean.photos == null || wenwenBean.photos.isEmpty()) {
                     gv.setVisibility(View.GONE);
                 } else {
                     gv.setVisibility(View.VISIBLE);
@@ -211,49 +203,34 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                         strings.add(WenConstans.BaseUrl + wenwenBean.photos.get(i).photoId);
                     }
                     gv.setAdapter(new Adapter_GridView(context, strings));
-                    gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            List<WwPhotoBean> photoList = wenwenBean.photos;
-                            ArrayList<String> list = new ArrayList<String>();
-                            if (photoList != null && photoList.size() > 0) {
-                                for (int j = 0; j < photoList.size(); j++) {
-                                    list.add(WenConstans.BaseUrl + photoList.get(j).photoId);
-                                }
+                    gv.setOnItemClickListener((adapterView, view, i, l) -> {
+                        List<WwPhotoBean> photoList = wenwenBean.photos;
+                        ArrayList<String> list = new ArrayList<>();
+                        if (photoList != null && !photoList.isEmpty()) {
+                            for (int j = 0; j < photoList.size(); j++) {
+                                list.add(WenConstans.BaseUrl + photoList.get(j).photoId);
                             }
-                            Intent intent = new Intent(context, ImagePreviewActivity.class);
-                            intent.putStringArrayListExtra("imageList", list);
-                            intent.putExtra(P.START_ITEM_POSITION, i);
-                            intent.putExtra(P.START_IAMGE_POSITION, i);
-                            intent.putExtra("isdel2", false);
-                            context.startActivity(intent);
                         }
+                        Intent intent = new Intent(context, ImagePreviewActivity.class);
+                        intent.putStringArrayListExtra("imageList", list);
+                        intent.putExtra(P.START_ITEM_POSITION, i);
+                        intent.putExtra(P.START_IAMGE_POSITION, i);
+                        intent.putExtra("isdel2", false);
+                        context.startActivity(intent);
                     });
                 }
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (wenwenBean.type != 1) {
-                            if (Objects.equals(wenwenBean.uid, Constants.uid + "")) {
-                            }
-
-                            Intent intent = new Intent(context, WenwenDetailActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putSerializable("wenwen", wenwenBean);
-                            intent.putExtras(bundle);
-                            context.startActivity(intent);
-                        }
+                itemView.setOnClickListener(v -> {
+                    if (wenwenBean.type != 1) {
+                        Intent intent = new Intent(context, WenwenDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("wenwen", wenwenBean);
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
                     }
                 });
                 llSave.setOnClickListener(v -> {
-//                    if (!TextUtils.isEmpty(wenwenBean.userLike)){
-//                        Utils.toastShort(context,"你已经收藏过了");
-//                        return;
-//                    }
-                    if (wenwenBean.type != 1) {
-                        if (mDoSaveListener != null) {
-                            mDoSaveListener.doSave(position);
-                        }
+                    if (wenwenBean.type != 1 && mDoSaveListener != null) {
+                        mDoSaveListener.doSave(position);
                     }
                 });
             } else if (wenwenBean.type == 1) {
@@ -278,27 +255,26 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
                     public void onSuccess(String s, Call call, Response response) {
                         try {
                             JSONObject result = new JSONObject(s);
-                            if (result.optInt("code") == 0) {
-                                if (result.has("data") && !result.optString("data").isEmpty()) {
-                                    imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
-                                    }.getType());
-                                    if (imgsData != null && imgsData.size() > 0) {
-                                        for (HomeBannerImgsBean bannerImgsBean : imgsData) {
-                                            imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
-                                        }
-
-                                    }
-                                    if (imgs.size() > 0) {
-                                        bannerAdapter.setData(imgs);
-                                    } else {
-                                        HotWenwenAdapter.this.data.remove(position);
-                                        HotWenwenAdapter.this.notifyDataSetChanged();
-                                    }
-                                }
-                            } else {
+                            if (result.optInt("code") != 0) {
                                 Utils.toastShort(context, result.optString("msg"));
+                                return;
                             }
-
+                            if (!result.has("data") || result.optString("data").isEmpty()) {
+                                return;
+                            }
+                            imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+                            }.getType());
+                            if (imgsData != null && !imgsData.isEmpty()) {
+                                for (HomeBannerImgsBean bannerImgsBean : imgsData) {
+                                    images.add(Constants.base_url + bannerImgsBean.getCoverImage());
+                                }
+                            }
+                            if (!images.isEmpty()) {
+                                bannerAdapter.setData(images);
+                            } else {
+                                HotQuestionsAdapter.this.data.remove(position);
+                                HotQuestionsAdapter.this.notifyDataSetChanged();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -313,7 +289,7 @@ public class HotWenwenAdapter extends RecyclerView.Adapter {
         void doSave(int position);
     }
 
-    public void DoSaveListener(DoSaveListener mDoSaveListener) {
+    public void setListener(DoSaveListener mDoSaveListener) {
         this.mDoSaveListener = mDoSaveListener;
     }
 }

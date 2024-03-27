@@ -3,16 +3,20 @@ package com.hnu.heshequ.fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -40,6 +44,7 @@ import com.hnu.heshequ.bean.ItemBean;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefUserInfo;
 import com.hnu.heshequ.launcher.MainActivity;
+import com.hnu.heshequ.network.HttpRequestUtil;
 import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.ImageUtils;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
@@ -55,8 +60,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class MeFragment extends NetWorkFragment {
-
+public class MeFragment extends Fragment {
     private static final String TAG = "[MeFragment]";
 
     private View view;
@@ -70,26 +74,94 @@ public class MeFragment extends NetWorkFragment {
     private ItemAdapter adapter;
     private ImageView ivEditor;
     private TextView current;
-    private MainActivity mainActivity;
     private LinearLayout llSay, llQuestion, llNotice, llSecondhand;
-    private Gson gson;
+    private final Gson gson = new Gson();
     private UserInfoBean userInfoBean;
     private final int XIANGYU_MONEY = 1001;
 
     private final int initUserInfo = 1000;
     private int settingClub, settingAsk;
 
+    private final HttpRequestUtil.RequestCallBack requestCallBack = new HttpRequestUtil.RequestCallBack() {
+
+        @Override
+        public void onSuccess(JSONObject result, int where, boolean fromCache) {
+            Log.e(TAG, result.toString());
+            switch (where) {
+                case XIANGYU_MONEY:
+                    if (result.optInt("code") == 0) {
+                        int money = result.optInt("data");
+                        xiangyuMoney.setText(String.valueOf(money));
+                    } else {
+                        String msg = result.optString("msg");
+                        Utils.toastShort(getContext(), msg);
+                    }
+                    break;
+
+                case initUserInfo:
+                    if (result.optInt("code") != 0) {
+                        Utils.toastShort(getContext(), result.optString("msg"));
+                        break;
+                    }
+                    if (result.optString("data").isEmpty()) {
+                        break;
+                    }
+                    userInfoBean = gson.fromJson(result.optString("data"), UserInfoBean.class);
+                    settingAsk = userInfoBean.getSettingAsk();
+                    settingClub = userInfoBean.getSettingClub();
+                    if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
+                        //Glide.with(mContext).load(R.mipmap.head2).asBitmap().into(target);
+                        Glide.with(getActivity()).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(target);
+                        Glide.with(getActivity()).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(ivHead);
+                        ivBg.setBackgroundColor(Color.WHITE);
+                    } else {
+                        Glide.with(getActivity()).load(R.mipmap.head2).asBitmap().into(ivHead);
+                    }
+                    tvName.setText(userInfoBean.getNickname());
+                    tvSchool.setText(userInfoBean.getCollege());
+                    tvDetail.setText("经验值：" + (userInfoBean.getExperience() - userInfoBean.getTotalExperience()) + "/" + userInfoBean.getNeedExperience());
+                    tvLevel.setText("LV" + userInfoBean.getGrade());
+                    certFlag = userInfoBean.getCertFlag();
+                    setStarLine(current, userInfoBean.getNeedExperience(), userInfoBean.getTotalExperience(), userInfoBean.getExperience());
+                    switch (certFlag) {
+                        case 0:
+                            data.get(4).setTip("未认证");
+                            break;
+                        case 1:
+                            data.get(4).setTip("审核中");
+                            break;
+                        case 2:
+                            data.get(4).setTip("验证未通过");
+                            break;
+                        case 3:
+                            data.get(4).setTip("验证通过");
+                            break;
+                    }
+                    adapter.notifyDataSetChanged();
+
+                    getXiangyuMoney();
+                    break;
+            }
+        }
+
+        @Override
+        public void onFailure(String result, int where) {
+        }
+    };
+
+    private final HttpRequestUtil httpRequest = new HttpRequestUtil(requestCallBack, TAG);
+
     @Override
-    protected View createView(LayoutInflater inflater) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i(TAG, "(createView) uid = " + Constants.uid);
-        view = inflater.inflate(R.layout.fragment_me, null);
+        view = inflater.inflate(R.layout.fragment_me, container, false);
         EventBus.getDefault().register(this);
-        gson = new Gson();
+
         lv = view.findViewById(R.id.lv);
         getData();
-        adapter = new ItemAdapter(mContext, data);
+        adapter = new ItemAdapter(getContext(), data);
         lv.setAdapter(adapter);
-        headView = LayoutInflater.from(mContext).inflate(R.layout.mehead, null);
+        headView = LayoutInflater.from(getContext()).inflate(R.layout.mehead, null);
         xiangyuMoney = headView.findViewById(R.id.xiangyuMoney);
         llSay = headView.findViewById(R.id.llSay);
         llQuestion = headView.findViewById(R.id.llQuestion);
@@ -107,18 +179,17 @@ public class MeFragment extends NetWorkFragment {
         tvLevel = headView.findViewById(R.id.tvLevel);
         initUserinfo();
         event();
-        mainActivity = (MainActivity) getActivity();
         return view;
     }
 
     private void initUserinfo() {
-        setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
-        sendPostConnection(Constants.base_url + "/api/user/info.do", initUserInfo, Constants.token);
+        httpRequest.setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
+        httpRequest.sendPostConnection(Constants.base_url + "/api/user/info.do", initUserInfo, Constants.token);
     }
 
     private void getXiangyuMoney() {
-        setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
-        sendPostConnection(Constants.base_url + "/api/user/cornAmount.do", XIANGYU_MONEY, Constants.token);
+        httpRequest.setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
+        httpRequest.sendPostConnection(Constants.base_url + "/api/user/cornAmount.do", XIANGYU_MONEY, Constants.token);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -133,63 +204,50 @@ public class MeFragment extends NetWorkFragment {
                 Utils.toastShort(getActivity(), "数据加载中~");
                 return;
             }
-            startActivity(new Intent(mContext, BaseInfoActivity.class).putExtra("userinfobean", userInfoBean));
+            startActivity(new Intent(getActivity(), BaseInfoActivity.class).putExtra("userinfobean", userInfoBean));
         });
         ivHead.setOnClickListener(v -> {
-            if (Constants.uid == 1 && mainActivity != null) {
-//                mainActivity.showPop();
-                SharedPreferencesHelp.getEditor()
-                        .putString("phone", "")
-                        .putString("token", "")
-                        .putInt("uid", 1)
-                        .putBoolean("isLogin", false)
-                        .apply();
-                SharedPreferencesHelp.getEditor()
-                        .putBoolean("isLogin", false)
-                        .apply();
-                Constants.uid = 1;
-                MeetApplication.getInstance().finishAll();
-                startActivity(new Intent(mContext, LoginActivity.class));
-
+            if (Constants.uid == 1) {
+                goLoginPage();
             }
         });
-        llSay.setOnClickListener(v -> startActivity(new Intent(mContext, MySayActivity.class)));
-        llQuestion.setOnClickListener(v -> startActivity(new Intent(mContext, MyQuestionActivity1.class)));
-        llNotice.setOnClickListener(v -> startActivity(new Intent(mContext, AttentionActivity.class)));
-        llSecondhand.setOnClickListener(v -> startActivity(new Intent(mContext, MygoodActivity.class)));
+        llSay.setOnClickListener(v -> startActivity(new Intent(getContext(), MySayActivity.class)));
+        llQuestion.setOnClickListener(v -> startActivity(new Intent(getContext(), MyQuestionActivity1.class)));
+        llNotice.setOnClickListener(v -> startActivity(new Intent(getContext(), AttentionActivity.class)));
+        llSecondhand.setOnClickListener(v -> startActivity(new Intent(getContext(), MygoodActivity.class)));
         lv.setOnItemClickListener((adapterView, view, i, l) -> {
             Log.e("YSF", "当前的位置：" + i);
             i = i - 1;
             switch (i) {
                 case 0://我的团队
-                    startActivity(new Intent(mContext, MyTeamActivity.class));
+                    startActivity(new Intent(getContext(), MyTeamActivity.class));
                     break;
 //                case 1://我的创作
-//                    startActivity(new Intent(mContext, MyKnowledgeActivity.class));
+//                    startActivity(new Intent(getContext(), MyKnowledgeActivity.class));
 //                    break;
                 case 1:  //我的收藏
-                    startActivity(new Intent(mContext, MyCollectActivity.class));
+                    startActivity(new Intent(getContext(), MyCollectActivity.class));
                     break;
                 case 2: //我的足迹
-                    startActivity(new Intent(mContext, MyFootprintActivity.class));
+                    startActivity(new Intent(getContext(), MyFootprintActivity.class));
                     break;
                 case 3://我的拉黑
-                    startActivity(new Intent(mContext, MyPullTheBlackActivity.class));
+                    startActivity(new Intent(getContext(), MyPullTheBlackActivity.class));
                     break;
                 case 4://实名认证
                     if (certFlag == -1) {
                         return;
                     }
-                    startActivity(new Intent(mContext, AuthenticationActivity.class).putExtra("certFlag", certFlag));
+                    startActivity(new Intent(getContext(), AuthenticationActivity.class).putExtra("certFlag", certFlag));
                     break;
                 case 5://意见反馈
-                    startActivity(new Intent(mContext, FeedBackActivity.class));
+                    startActivity(new Intent(getContext(), FeedBackActivity.class));
                     break;
                 case 6://修改密码
-                    startActivity(new Intent(mContext, ForgetPwdActivity.class));
+                    startActivity(new Intent(getContext(), ForgetPwdActivity.class));
                     break;
                 case 7://设置
-                    startActivity(new Intent(mContext, SettingActivity.class)
+                    startActivity(new Intent(getContext(), SettingActivity.class)
                                     .putExtra("settingAsk", settingAsk)
                                     .putExtra("settingClub", settingClub)
                             //.putExtra("userLabelsBeans",userInfoBean.getUserLabels())
@@ -197,35 +255,40 @@ public class MeFragment extends NetWorkFragment {
                     );
                     break;
                 case 8:// 退出登录/登录
-                    if (mainActivity != null) {
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("退出登录")
-                                .setMessage("确定退出当前账号吗")
-                                .setNegativeButton("取消", (dialogInterface, i1) -> {
-                                    dialogInterface.dismiss();//销毁对话框
-                                })
-                                .setPositiveButton("确定", (dialog1, which) -> {
-                                    dialog1.dismiss();
-                                    SharedPreferencesHelp.getEditor()
-                                            .putString("phone", "")
-                                            .putString("token", "")
-                                            .putInt("uid", 1)
-                                            .putBoolean("isLogin", false)
-                                            .apply();
-                                    SharedPreferencesHelp.getEditor()
-                                            .putBoolean("isLogin", false)
-                                            .apply();
-                                    Constants.uid = 1;
-                                    MeetApplication.getInstance().finishAll();
-                                    startActivity(new Intent(getContext(), LoginActivity.class));
-                                })
-                                .create()
-                                .show();
+                    if (Constants.uid == 1) {
+                        goLoginPage();
+                        break;
                     }
+                    new AlertDialog.Builder(requireContext())
+                            .setTitle("退出登录")
+                            .setMessage("确定退出当前账号吗")
+                            .setNegativeButton("取消", (dialogInterface, i1) -> {
+                                dialogInterface.dismiss();//销毁对话框
+                            })
+                            .setPositiveButton("确定", (dialog1, which) -> {
+                                dialog1.dismiss();
+                                goLoginPage();
+                            })
+                            .create()
+                            .show();
                     break;
-
             }
         });
+    }
+
+    private void goLoginPage() {
+        SharedPreferencesHelp.getEditor()
+                .putString("phone", "")
+                .putString("token", "")
+                .putInt("uid", 1)
+                .putBoolean("isLogin", false)
+                .apply();
+        SharedPreferencesHelp.getEditor()
+                .putBoolean("isLogin", false)
+                .apply();
+        Constants.uid = 1;
+        MeetApplication.getInstance().finishAll();
+        startActivity(new Intent(getContext(), LoginActivity.class));
     }
 
     private void getData() {
@@ -301,7 +364,7 @@ public class MeFragment extends NetWorkFragment {
     //动态设置Textview长度
     private void setStarLine(final TextView tv, final int n, final int t, final int e) {
         tv.post(() -> {
-            int maxLength = Utils.dip2px(mContext, 130);
+            int maxLength = Utils.dip2px(requireContext(), 130);
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) tv.getLayoutParams();
             int width = (int) (maxLength * (((e - t) * 1.0F) / n));
             Log.d("[MeFragment]", "width == " + width);
@@ -323,80 +386,13 @@ public class MeFragment extends NetWorkFragment {
 //                    .bitmap(bitmap) //要模糊的图片
 //                    .radius(0)//模糊半径
 //                    .blur();
-
-
             Bitmap newBitmap = ImageUtils.stackBlur(bitmap, 25);
-
             //Bitmap newBitmap = StackBlur.blur(bitmap, (int) 50, false);
 //            Bitmap newBitmap=Utils.blurBitmap(mContext,bitmap,5);
             ivBg.setScaleType(ImageView.ScaleType.CENTER_CROP);
             ivBg.setImageBitmap(newBitmap);
         }
     };
-
-    @Override
-    protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        Log.e(TAG, result.toString());
-        switch (where) {
-            case XIANGYU_MONEY:
-                if (result.optInt("code") == 0) {
-                    int money = result.optInt("data");
-                    xiangyuMoney.setText(String.valueOf(money));
-                } else {
-                    String msg = result.optString("msg");
-                    Utils.toastShort(getContext(), msg);
-                }
-                break;
-
-            case initUserInfo:
-                if (result.optInt("code") == 0) {
-                    if (!result.optString("data").isEmpty()) {
-                        userInfoBean = gson.fromJson(result.optString("data"), UserInfoBean.class);
-                        settingAsk = userInfoBean.getSettingAsk();
-                        settingClub = userInfoBean.getSettingClub();
-                        if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
-                            //Glide.with(mContext).load(R.mipmap.head2).asBitmap().into(target);
-                            Glide.with(mContext).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(target);
-                            Glide.with(mContext).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(ivHead);
-                            ivBg.setBackgroundColor(Color.WHITE);
-                        } else {
-                            Glide.with(mContext).load(R.mipmap.head2).asBitmap().into(ivHead);
-                        }
-                        tvName.setText(userInfoBean.getNickname());
-                        tvSchool.setText(userInfoBean.getCollege());
-                        tvDetail.setText("经验值：" + (userInfoBean.getExperience() - userInfoBean.getTotalExperience()) + "/" + userInfoBean.getNeedExperience());
-                        tvLevel.setText("LV" + userInfoBean.getGrade());
-                        certFlag = userInfoBean.getCertFlag();
-                        setStarLine(current, userInfoBean.getNeedExperience(), userInfoBean.getTotalExperience(), userInfoBean.getExperience());
-                        switch (certFlag) {
-                            case 0:
-                                data.get(4).setTip("未认证");
-                                break;
-                            case 1:
-                                data.get(4).setTip("审核中");
-                                break;
-                            case 2:
-                                data.get(4).setTip("验证未通过");
-                                break;
-                            case 3:
-                                data.get(4).setTip("验证通过");
-                                break;
-                        }
-                        adapter.notifyDataSetChanged();
-
-                        getXiangyuMoney();
-                    }
-                } else {
-                    Utils.toastShort(mContext, result.optString("msg"));
-                }
-                break;
-        }
-    }
-
-    @Override
-    protected void onFailure(String result, int where) {
-        //Utils.toastShort(getContext(), "网络状态错误", Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onDestroy() {

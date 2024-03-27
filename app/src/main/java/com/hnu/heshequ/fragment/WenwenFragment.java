@@ -301,21 +301,15 @@ public class WenwenFragment extends NetWorkFragment implements XRecyclerView.Loa
     public void onRefresh() {
         if (item == 1) {
             ChildWwFragment childWwFragment = (ChildWwFragment) pagerAdapter.getItem(0);
-            if (childWwFragment != null) {
-                childWwFragment.getData(true);
-            }
+            childWwFragment.getData(true);
         } else if (item == 2) {
             ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);
             fragment2.setType(2);
-            if (fragment2 != null) {
-                fragment2.getData(true);
-            }
+            fragment2.getData(true);
         } else if (item == 3) {
             ZcFragment fragment3 = (ZcFragment) pagerAdapter.getItem(2);
-            if (fragment3 != null) {
-                fragment3.getData(true);
-            }
-//            new Handler().postDelayed(new Runnable() {
+            fragment3.getData(true);
+            //            new Handler().postDelayed(new Runnable() {
 //                @Override
 //                public void run() {
 //                    rv.refreshComplete();
@@ -329,20 +323,14 @@ public class WenwenFragment extends NetWorkFragment implements XRecyclerView.Loa
     public void onLoadMore() {
         if (item == 1) {
             ChildWwFragment childWwFragment = (ChildWwFragment) pagerAdapter.getItem(0);
-            if (childWwFragment != null) {
-                childWwFragment.getData(false);
-            }
+            childWwFragment.getData(false);
         } else if (item == 2) {
             ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);
-            if (fragment2 != null) {
-                fragment2.getData(false);
-            }
+            fragment2.getData(false);
         } else if (item == 3) {
             ZcFragment fragment3 = (ZcFragment) pagerAdapter.getItem(2);
-            if (fragment3 != null) {
-                fragment3.getData(false);
-            }
-//            new Handler().postDelayed(new Runnable() {
+            fragment3.getData(false);
+            //            new Handler().postDelayed(new Runnable() {
 //                @Override
 //                public void run() {
 //                    rv.refreshComplete();
@@ -371,13 +359,9 @@ public class WenwenFragment extends NetWorkFragment implements XRecyclerView.Loa
                 rv.loadMoreComplete();
             } else if (items == 2) {
                 ChildFragment2 fragment2 = (ChildFragment2) pagerAdapter.getItem(1);
-                if (fragment2 != null) {
-                    fragment2.getData(true);
-                }
+                fragment2.getData(true);
                 ChildWwFragment childWwFragment = (ChildWwFragment) pagerAdapter.getItem(0);
-                if (childWwFragment != null) {
-                    childWwFragment.getData(true);
-                }
+                childWwFragment.getData(true);
             } else if (items == 3) {   //刷新
                 rv.refreshComplete();
             }

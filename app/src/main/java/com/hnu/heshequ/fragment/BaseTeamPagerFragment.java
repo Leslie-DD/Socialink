@@ -65,22 +65,12 @@ public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerV
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                rv.refreshComplete();
-            }
-        }, 1000);
+        new Handler().postDelayed(() -> rv.refreshComplete(), 1000);
     }
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                rv.loadMoreComplete();
-            }
-        }, 1000);
+        new Handler().postDelayed(() -> rv.loadMoreComplete(), 1000);
     }
 
     public void setData(ArrayList<TeamBean> list) {

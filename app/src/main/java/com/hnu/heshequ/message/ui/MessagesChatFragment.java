@@ -1,4 +1,4 @@
-package com.hnu.heshequ.fragment;
+package com.hnu.heshequ.message.ui;
 
 import android.content.DialogInterface;
 import android.os.Handler;
@@ -16,6 +16,7 @@ import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.MsgSayBean;
 import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -24,14 +25,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class News_QuestionFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
+//私聊消息列表
+public class MessagesChatFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, IMessagesFragment {
     private View view;
     private ArrayList<MsgSayBean.SayBean> data;
     private SayNewsAdapter adapter;
+    private SayNewsAdapter adapter2;
     private XRecyclerView rv;
     private TextView tvTips;
 
-
+    private final int DeleteMessage = 999;
     private final int GetCode = 1000;
     private final int LoadMore = 1001;
     private final int DelMsg = 1002;
@@ -46,6 +49,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
 
 
     @Override
+    //初始化
     protected View createView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.only_rv_item, null);
         init();
@@ -53,6 +57,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
         return view;
     }
 
+    //控件初始化，设置删除的监听器
     private void init() {
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = view.findViewById(R.id.tvTips);
@@ -61,11 +66,12 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
         type = 1;
         getData(pn, type);
         data = new ArrayList<>();
-        adapter = new SayNewsAdapter(mContext, data, 2);
+        adapter = new SayNewsAdapter(mContext, data, 3);
         rv.setAdapter(adapter);
         initDialog();
     }
 
+    //删除时弹窗
     private void initDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setCancelable(false);
@@ -75,8 +81,8 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
-                setBodyParams(new String[]{"id"}, new String[]{"" + data.get(delp).getId()});
-                sendPostConnection(Constants.base_url + "/api/user/news/clearNews.do", DelMsg, Constants.token);
+                setBodyParams(new String[]{"chatBoxId"}, new String[]{"" + data.get(delp).getId()});
+                sendPostConnection(WenConstans.DeleteMessageBox, DelMsg, Constants.token);
                 deldialog.dismiss();
             }
 
@@ -92,17 +98,21 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
         deldialog.setCancelable(false);
     }
 
+    //type=1 更新
+    //type=2 加载
     private void getData(int pn, int type) {
         if (type == 1) {
             setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
-            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", GetCode, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/chat/base/myChatBox.do", GetCode, Constants.token);
         } else if (type == 2) {
             setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
-            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", LoadMore, Constants.token);
+            sendPostConnection(Constants.base_url + "/api/chat/base/myChatBox.do", LoadMore, Constants.token);
         }
+
     }
 
     @Override
+    //刷新
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -115,7 +125,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
         }, 1000);
     }
 
-    public void refData() {
+    public void refreshData() {
         if (view == null) {
             return;
         }
@@ -139,6 +149,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
         }, 1000);
     }
 
+    //返回按钮监听器
     private void event() {
         rv.setLoadingListener(this);
 
@@ -153,6 +164,7 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
     }
 
     @Override
+    //网络请求成功后，数据添加到组件
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
         Log.e("ddq", result.toString());
         switch (where) {
@@ -182,11 +194,13 @@ public class News_QuestionFragment extends NetWorkFragment implements XRecyclerV
                 }
                 break;
             case DelMsg:
+                //删除操作，实体提醒
                 if (result.optInt("code") == 0) {
                     type = 1;
                     pn = 1;
                     getData(pn, type);
                     Utils.toastShort(mContext, "删除成功");
+                    onRefresh();
                 } else {
                     Utils.toastShort(mContext, result.optString("msg"));
                 }

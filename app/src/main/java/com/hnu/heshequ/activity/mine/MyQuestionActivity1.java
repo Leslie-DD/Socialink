@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
+import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.WenwenBean;
@@ -29,10 +29,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerView.LoadingListener, HotWenwenAdapter.DoSaveListener {
+public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerView.LoadingListener, HotQuestionsAdapter.DoSaveListener {
 
     private XRecyclerView rv;
-    private HotWenwenAdapter adapter;
+    private HotQuestionsAdapter adapter;
     private int pn = 1;
     private int ps = 20;
     private boolean hasRefresh;
@@ -55,9 +55,9 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
         tvTips = (TextView) findViewById(R.id.tvTips);
         rv = (XRecyclerView) findViewById(R.id.rv);
         ConsTants.initXRecycleView(this, true, true, rv);
-        adapter = new HotWenwenAdapter(this);
+        adapter = new HotQuestionsAdapter(this);
         rv.setAdapter(adapter);
-        adapter.DoSaveListener(this);
+        adapter.setListener(this);
         rv.setLoadingListener(this);
         getData(100);
     }

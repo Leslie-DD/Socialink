@@ -31,7 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.CommentTeamAdapter;
-import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
+import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
 import com.hnu.heshequ.adapter.recycleview.SecondhandgoodAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonalInformationActivity extends NetWorkActivity implements
-        XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener, HotWenwenAdapter.DoSaveListener {
+        XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener, HotQuestionsAdapter.DoSaveListener {
 
     private static final String TAG = "[PersonalInformationActivity]";
 
@@ -104,7 +104,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
     private Boolean isattention;
     private CommentTeamAdapter teamAdapter;
     private ArrayList<TeamBean> teamData;
-    private HotWenwenAdapter quAdapter;
+    private HotQuestionsAdapter quAdapter;
     private SecondhandgoodAdapter goodAdapter;
     private ArrayList<SecondhandgoodBean> goodData;
     private ArrayList<SecondhandgoodBean> goodmoreData;
@@ -221,10 +221,10 @@ public class PersonalInformationActivity extends NetWorkActivity implements
 //
 //        getattention();
         teamAdapter = new CommentTeamAdapter(mContext, new ArrayList<TeamBean>());
-        quAdapter = new HotWenwenAdapter(mContext);
+        quAdapter = new HotQuestionsAdapter(mContext);
         goodAdapter = new SecondhandgoodAdapter(mContext);
 
-        quAdapter.DoSaveListener(this);
+        quAdapter.setListener(this);
         teamType = 0;
         pnT = 1;
         getTeamData(pnT, teamType);

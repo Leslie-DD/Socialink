@@ -83,10 +83,14 @@
         <activity android:name="com.hnu.heshequ.activity.mine.AttentionActivity" />
         <activity android:name="com.hnu.heshequ.activity.team.MessageActivity" />
         <activity android:name="com.hnu.heshequ.activity.team.ChatHistoryActivity" />
-        <activity android:name="com.hnu.heshequ.activity.login.LoginActivity" />
+        <activity android:name="com.hnu.heshequ.activity.login.LoginActivity"
+            android:theme="@style/NoActionBarAppTheme">
+        </activity>
+        <activity android:name="com.hnu.heshequ.activity.login.SignActivity"
+            android:theme="@style/NoActionBarAppTheme">
+        </activity>
         <activity android:name="com.hnu.heshequ.activity.login.StudentIdLoginActivity" />
         <activity android:name="com.hnu.heshequ.activity.login.ForgetPwdActivity" />
-        <activity android:name="com.hnu.heshequ.activity.login.SignActivity" />
         <activity android:name="com.hnu.heshequ.activity.login.DefaultProblemActivity" />
         <activity android:name="com.hnu.heshequ.activity.team.TeamIntroduceActivity" />
         <activity android:name="com.hnu.heshequ.activity.team.PartyBuildingActivity" />

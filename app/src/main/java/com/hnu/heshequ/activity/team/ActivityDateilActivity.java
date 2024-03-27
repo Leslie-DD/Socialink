@@ -95,7 +95,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
     private AlertDialog deldialog;
     private int delid;
     private final int initData = 1000;
-    //private final int refData = 1001;
+    //private final int refreshData = 1001;
     private final int lodData = 1002;
     private final int sendComment = 1005;
     private final int delComment = 1006;

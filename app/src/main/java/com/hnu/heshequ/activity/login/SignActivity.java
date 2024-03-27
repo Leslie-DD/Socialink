@@ -63,7 +63,6 @@ public class SignActivity extends NetWorkActivity {
                 getting = false;
             } else {
                 tvCode.setText("倒计时" + count);
-
             }
         }
     };
@@ -78,16 +77,16 @@ public class SignActivity extends NetWorkActivity {
 
     private void init() {
         gson = new Gson();
-        tvTitle = (TextView) findViewById(R.id.tvTitle);
+        tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("注册");
-        tvCode = (TextView) findViewById(R.id.tvCode);
-        tvSchool = (TextView) findViewById(R.id.tvSchool);
-        llSchool = (LinearLayout) findViewById(R.id.llSchool);
-        etPhone = (EditText) findViewById(R.id.etPhone);
-        etCode = (EditText) findViewById(R.id.etCode);
-        btNext = (Button) findViewById(R.id.btNext);
-        etPwd = (EditText) findViewById(R.id.etPwd);
-        ivSee = (ImageView) findViewById(R.id.ivSee);
+        tvCode = findViewById(R.id.tvCode);
+        tvSchool = findViewById(R.id.tvSchool);
+        llSchool = findViewById(R.id.llSchool);
+        etPhone = findViewById(R.id.etPhone);
+        etCode = findViewById(R.id.etCode);
+        btNext = findViewById(R.id.btNext);
+        etPwd = findViewById(R.id.etPwd);
+        ivSee = findViewById(R.id.ivSee);
         etPwd2 = findViewById(R.id.etPwd2);
         ivSee2 = findViewById(R.id.ivSee2);
         getSchoolData();

@@ -1,4 +1,4 @@
-package com.hnu.heshequ.fragment;
+package com.hnu.heshequ.message.ui;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class News_FriendFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
+public class MessagesFriendApplyFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, IMessagesFragment {
     private View view;
     private XRecyclerView rv;
     private FriendAddNewsAdapter adapter;
@@ -164,7 +164,8 @@ public class News_FriendFragment extends NetWorkFragment implements XRecyclerVie
         }
     }
 
-    public void refData() {
+    @Override
+    public void refreshData() {
         if (view == null) {
             return;
         }

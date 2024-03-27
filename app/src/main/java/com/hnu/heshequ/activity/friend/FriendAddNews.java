@@ -10,7 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.MyFragmentPagerAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.fragment.News_FriendFragment;
+import com.hnu.heshequ.message.ui.MessagesFriendApplyFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +22,7 @@ public class FriendAddNews extends NetWorkActivity {
     private View view;
     private ViewPager vp;
     private ArrayList<Fragment> list;
-    private News_FriendFragment ffFragment;
+    private MessagesFriendApplyFragment ffFragment;
     private MyFragmentPagerAdapter adapter;
     private int status = -1;
 
@@ -38,7 +38,7 @@ public class FriendAddNews extends NetWorkActivity {
     private void init() {
         setText("您收到的好友请求");
         list = new ArrayList<>();
-        ffFragment = new News_FriendFragment();
+        ffFragment = new MessagesFriendApplyFragment();
         list.add(ffFragment);
         vp = (ViewPager) findViewById(R.id.vp);
         adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), list);

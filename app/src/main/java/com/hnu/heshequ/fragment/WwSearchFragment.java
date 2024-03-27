@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
+import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.WenwenBean;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, HotWenwenAdapter.DoSaveListener {
+public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, HotQuestionsAdapter.DoSaveListener {
 
     private View view;
     private int pn = 1;
@@ -41,7 +41,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
     private int totalPage;
     private FragmentBrodcast brodcast;
     private List<WenwenBean> newList, moreList;
-    private HotWenwenAdapter adapter;
+    private HotQuestionsAdapter adapter;
     private int clickPosition;
 
     private boolean islabel = false;
@@ -144,8 +144,8 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
         ConsTants.initXRecycleView(getActivity(), true, true, rv);
-        adapter = new HotWenwenAdapter(getActivity());
-        adapter.DoSaveListener(this);
+        adapter = new HotQuestionsAdapter(getActivity());
+        adapter.setListener(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
         getData("");

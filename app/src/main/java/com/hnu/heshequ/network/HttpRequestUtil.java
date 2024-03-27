@@ -1,18 +1,9 @@
-package com.hnu.heshequ.base;
+package com.hnu.heshequ.network;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
-import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.lzy.okhttputils.request.BaseRequest;
@@ -29,13 +20,10 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * 要联网操作的 Fragment 继承该类
- */
-public abstract class NetWorkFragment extends Fragment {
-    private static final String TAG = "[NetWorkFragment]";
-    protected Activity mContext;
-    private View mainView;
+public class HttpRequestUtil {
+    private static final String TAG = "[HttpRequestUtil]";
+
+    private String tag = TAG;
 
     // body体中是否包含文件
     private boolean existsFile;
@@ -44,29 +32,18 @@ public abstract class NetWorkFragment extends Fragment {
     private File[] uploadFile;
     private Map<String, String> params;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "(onCreate) " + getClass().getSimpleName());
-        super.onCreate(savedInstanceState);
-        mContext = this.getActivity();
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        mainView = createView(inflater);
+    private RequestCallBack requestCallBack;
 
-        requestData();
-
-        Constants.uid = SharedPreferencesHelp.getInt("uid", 1);
-        Constants.token = SharedPreferencesHelp.getString("token", "");
-        WenConstans.token = SharedPreferencesHelp.getString("token", "");
-        Constants.userName = SharedPreferencesHelp.getString("user", "18274962484");
+    public HttpRequestUtil() {
     }
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup parent = (ViewGroup) mainView.getParent();
-        if (parent != null) {
-            parent.removeView(mainView);
-        }
-        return mainView;
+    public HttpRequestUtil(RequestCallBack callBack) {
+        requestCallBack = callBack;
+    }
+
+    public HttpRequestUtil(RequestCallBack callBack, String tag) {
+        requestCallBack = callBack;
+        this.tag = tag;
     }
 
     public void sendGetConnection(String url, int where) {
@@ -118,27 +95,33 @@ public abstract class NetWorkFragment extends Fragment {
         executeRequest("(sendPostConnection)", url, where, postRequest);
     }
 
-    private <REQUEST extends BaseRequest<REQUEST>> void executeRequest(String tag, String url, int where, BaseRequest<REQUEST> request) {
-        Log.d(TAG, tag + " executeRequest, url: " + url);
+    private <REQUEST extends BaseRequest<REQUEST>> void executeRequest(String funcTag, String url, int where, BaseRequest<REQUEST> request) {
+        Log.d(tag, funcTag + " executeRequest, url: " + url);
         request.execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {
                 try {
                     JSONObject json = new JSONObject(s);
-                    Log.i(TAG, tag + " " + Thread.currentThread().getName() + " onSuccess url: " + url + ", json: " + json);
-                    NetWorkFragment.this.onSuccess(json, where, false);
+                    Log.i(tag, funcTag + " " + Thread.currentThread().getName() + " onSuccess url: " + url + ", json: " + json);
+                    if (requestCallBack != null) {
+                        requestCallBack.onSuccess(json, where, false);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.e(TAG, tag + " onFailure url: " + url + ", exception: " + e);
-                    NetWorkFragment.this.onFailure(e.getMessage(), where);
+                    Log.e(tag, funcTag + " onFailure url: " + url + ", exception: " + e);
+                    if (requestCallBack != null) {
+                        requestCallBack.onFailure(e.getMessage(), where);
+                    }
                 }
             }
 
             @Override
             public void onError(Call call, Response response, Exception e) {
                 super.onError(call, response, e);
-                Log.e(TAG, tag + " onFailure url: " + url + ", exception: " + e.toString());
-                NetWorkFragment.this.onFailure(e.getMessage(), where);
+                Log.e(tag, funcTag + " onFailure url: " + url + ", exception: " + e.toString());
+                if (requestCallBack != null) {
+                    requestCallBack.onFailure(e.getMessage(), where);
+                }
             }
         });
     }
@@ -162,22 +145,9 @@ public abstract class NetWorkFragment extends Fragment {
         this.existsFile = true;
     }
 
-    protected abstract void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException;
+    public interface RequestCallBack {
+        void onSuccess(JSONObject result, int where, boolean fromCache);
 
-    protected abstract void onFailure(String result, int where);
-
-    protected abstract View createView(LayoutInflater inflater);
-
-    /**
-     * 如果要请求数据，实现改方法
-     */
-    protected void requestData() {
-    }
-
-    public View findViewById(int resId) {
-        if (mainView == null) {
-            return null;
-        }
-        return mainView.findViewById(resId);
+        void onFailure(String result, int where);
     }
 }

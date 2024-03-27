@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotWenwenAdapter;
+import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.WenwenBean;
@@ -29,10 +29,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyAnswerFragment extends NetWorkFragment implements HotWenwenAdapter.DoSaveListener, XRecyclerView.LoadingListener {
+public class MyAnswerFragment extends NetWorkFragment implements HotQuestionsAdapter.DoSaveListener, XRecyclerView.LoadingListener {
     private View view;
     private XRecyclerView xRecyclerView;
-    private HotWenwenAdapter adapter;
+    private HotQuestionsAdapter adapter;
 
     private int pn = 1;
     private int ps = 20;
@@ -125,8 +125,8 @@ public class MyAnswerFragment extends NetWorkFragment implements HotWenwenAdapte
         view = inflater.inflate(R.layout.only_rv_item, null);
         xRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         ConsTants.initXRecycleView(mContext, true, true, xRecyclerView);
-        adapter = new HotWenwenAdapter(mContext);
-        adapter.DoSaveListener(this);
+        adapter = new HotQuestionsAdapter(mContext);
+        adapter.setListener(this);
         xRecyclerView.setAdapter(adapter);
         xRecyclerView.setLoadingListener(this);
         tvTips = (TextView) view.findViewById(R.id.tvTips);

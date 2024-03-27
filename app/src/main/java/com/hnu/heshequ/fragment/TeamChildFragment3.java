@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
@@ -38,7 +40,7 @@ public class TeamChildFragment3 extends BaseTeamPagerFragment {
     private boolean firstin = true;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         if (firstin) {
             firstin = false;

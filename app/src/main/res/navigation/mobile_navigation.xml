@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.hnu.heshequ.fragment.HomeFragment"
+        android:name="com.hnu.heshequ.home.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_message"
-        android:name="com.hnu.heshequ.fragment.MsgFragment"
+        android:name="com.hnu.heshequ.message.ui.MessageFragment"
         android:label="@string/menu_message"
         tools:layout="@layout/fragment_wenwen" />
 

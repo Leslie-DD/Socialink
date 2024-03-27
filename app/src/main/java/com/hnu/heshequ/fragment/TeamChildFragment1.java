@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
@@ -40,7 +42,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
     private boolean firstin = true;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
         if (firstin) {
             firstin = false;
@@ -54,20 +56,17 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
     private void getData(int pn, int type) {
         switch (type) {
             case 0:
-                setBodyParams(new String[]{"type", "pn", "ps"},
-                        new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
                 sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         GETDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
-                setBodyParams(new String[]{"type", "pn", "ps"},
-                        new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
                 sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         REFDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 2:
-                setBodyParams(new String[]{"type", "pn", "ps"},
-                        new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 3, "" + pn, "" + Constants.default_PS});
                 sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
                         LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
@@ -76,29 +75,23 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                pn = 1;
-                type = 1;
-                getData(pn, type);
-                rv.refreshComplete();
-            }
+        new Handler().postDelayed(() -> {
+            pn = 1;
+            type = 1;
+            getData(pn, type);
+            rv.refreshComplete();
         }, 1000);
     }
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (pn < ps) {
-                    pn++;
-                    type = 2;
-                    getData(pn, type);
-                }
-                rv.loadMoreComplete();
+        new Handler().postDelayed(() -> {
+            if (pn < ps) {
+                pn++;
+                type = 2;
+                getData(pn, type);
             }
+            rv.loadMoreComplete();
         }, 1000);
     }
 

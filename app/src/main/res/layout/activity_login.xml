@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingLeft="15dp"
@@ -88,8 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
                 android:background="@drawable/bg_2cd22b_23"
                 android:text="登录"
                 android:textColor="#ffffff"
@@ -98,6 +99,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:id="@+id/tvForget"
                     android:layout_width="match_parent"
@@ -115,8 +117,7 @@
                     android:layout_marginRight="25dp"
                     android:paddingTop="20dp"
                     android:text="学号登陆"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
 
             </RelativeLayout>
 

@@ -1,121 +1,54 @@
 package com.hnu.heshequ.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.TeamSearchActivity;
 import com.hnu.heshequ.activity.team.AddTeamActivity;
-import com.hnu.heshequ.adapter.MytPagersAdapter;
-import com.hnu.heshequ.base.NetWorkFragment;
-import com.hnu.heshequ.launcher.MainActivity;
-import com.hnu.heshequ.view.NoScrollViewPager;
+import com.hnu.heshequ.teams.adapter.TeamsFragmentViewPagerAdapter;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class TeamsFragment extends NetWorkFragment {
+public class TeamsFragment extends Fragment {
+    private static final String TAG = "[TeamsFragment]";
 
     private View view;
-    private ImageView llSearch;
-    private NoScrollViewPager vp;
-    private MytPagersAdapter pagerAdapter;
-    private TextView tvMine, tvRecommended, tvNew, tvCollection;
-    private int status = -1;
-    private ImageView ivAdd;
+
+    private final String[] tabTitleList = {"我的", "推荐", "最新"};
 
     @Override
-    protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-
-    }
-
-    @Override
-    protected void onFailure(String result, int where) {
-
-    }
-
-    @Override
-    protected View createView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_teams, null);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView");
+        view = inflater.inflate(R.layout.fragment_teams, container, false);
         init();
-        event();
         return view;
     }
 
     private void init() {
-        MainActivity activity = (MainActivity) getActivity();
-//        TeamActivity activity = (TeamActivity) getActivity();
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new TeamChildFragment1());
-        fragments.add(new TeamChildFragment2());
-        fragments.add(new TeamChildFragment3());
-        //fragments.add(new TeamChildFragment4());
-        llSearch = (ImageView) view.findViewById(R.id.llSearch);
-        llSearch.setOnClickListener(v -> startActivity(new Intent(mContext, TeamSearchActivity.class)));
-        tvNew = (TextView) view.findViewById(R.id.tvNew);
-        tvRecommended = (TextView) view.findViewById(R.id.tvRecommended);
-        tvMine = (TextView) view.findViewById(R.id.tvMine);
-        tvCollection = (TextView) view.findViewById(R.id.tvCollection);
-        vp = (NoScrollViewPager) view.findViewById(R.id.vp);
-        vp.setNoScroll(false);
-        ivAdd = (ImageView) view.findViewById(R.id.ivAdd);
-        pagerAdapter = new MytPagersAdapter
-                (activity.getSupportFragmentManager(), fragments);
-        vp.setAdapter(pagerAdapter);
-        vp.setId(fragments.get(0).hashCode());
-        vp.setCurrentItem(0);
-        setTvBg(0);
-        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        ImageView llSearch = (ImageView) view.findViewById(R.id.llSearch);
+        llSearch.setOnClickListener(v -> startActivity(new Intent(getActivity(), TeamSearchActivity.class)));
+        ImageView ivAdd = (ImageView) view.findViewById(R.id.ivAdd);
+        ivAdd.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddTeamActivity.class)));
 
-            }
+        TabLayout tabs = view.findViewById(R.id.tabs);
+        TeamsFragmentViewPagerAdapter pagerAdapter = new TeamsFragmentViewPagerAdapter(requireActivity().getSupportFragmentManager(), getLifecycle());
+        ViewPager2 viewPager = view.findViewById(R.id.vp);
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(3);
 
-            @Override
-            public void onPageSelected(int position) {
-                setTvBg(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        new TabLayoutMediator(tabs, viewPager, (tab, position) -> {
+            tab.setText(tabTitleList[position]);
+        }).attach();
     }
 
-    private void event() {
-        ivAdd.setOnClickListener(v -> startActivity(new Intent(mContext, AddTeamActivity.class)));
-        tvMine.setOnClickListener(v -> setTvBg(0));
-        tvNew.setOnClickListener(v -> setTvBg(2));
-        tvCollection.setOnClickListener(v -> setTvBg(3));
-        tvRecommended.setOnClickListener(v -> setTvBg(1));
-    }
-//
-
-    public void setTvBg(int status) {
-        if (this.status == status) {
-            return;
-        }
-        if (vp != null) {
-            vp.setCurrentItem(status);
-        }
-        tvMine.setSelected(status == 0 ? true : false);
-        tvRecommended.setSelected(status == 1 ? true : false);
-        tvNew.setSelected(status == 2 ? true : false);
-        tvCollection.setSelected(status == 3 ? true : false);
-        if (status == 0) {
-            ivAdd.setVisibility(View.VISIBLE);
-        } else {
-            ivAdd.setVisibility(View.GONE);
-        }
-    }
 }

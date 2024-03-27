@@ -1,88 +1,76 @@
-package com.hnu.heshequ.fragment;
+package com.hnu.heshequ.home.ui;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.HotActiveAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
+import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.HotAvtivityBean;
 import com.hnu.heshequ.constans.Constants;
-import com.hnu.heshequ.entity.RefHotActivityEvent;
 import com.hnu.heshequ.utils.Utils;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HotActivityFragment extends NetWorkFragment {
+public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
 
     private static final String TAG = "[HotActivityFragment]";
-    private View view;
-    private RecyclerView mRecyclerView;
     private HotActiveAdapter adapter;
     private TextView tvTips;
+    XRecyclerView mRecyclerView;
     private final int GetData = 1000;
     private final int LoaMore = 1001;
 
     private int pn;
     private int totalPage;
-    private int type;
     private HotAvtivityBean hotAvtivityBean;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
     private ArrayList<HotAvtivityBean.HotBean> data;
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_tim, null);
-        EventBus.getDefault().register(this);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.rv);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        tvTips = (TextView) view.findViewById(R.id.tvTips);
-//        ConsTants.initXRecycleView(getActivity(), false, false, mRecyclerView);
+        View view = inflater.inflate(R.layout.fragment_tim, null);
+        mRecyclerView = view.findViewById(R.id.rv);
+        ConsTants.initXRecycleView(getActivity(), true, false, mRecyclerView);
+        mRecyclerView.setLoadingListener(this);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        tvTips = view.findViewById(R.id.tvTips);
         mRecyclerView.setNestedScrollingEnabled(false);
 
-        pn = 1;
-        type = 1;
-        getData(pn, type);
+        getData(true);
 
         adapter = new HotActiveAdapter(getActivity());
         mRecyclerView.setAdapter(adapter);
-        //adapter.setData();
         return view;
     }
 
-    private void getData(int pn, int type) {
-        if (type == 1) {
-            setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, Constants.default_PS + ""});
-            sendPostConnection(Constants.base_url + "/api/club/activity/hotlist.do", GetData, Constants.token);
-        } else if (type == 2) {
-            setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, Constants.default_PS + ""});
-            sendPostConnection(Constants.base_url + "/api/club/activity/hotlist.do", LoaMore, Constants.token);
-        }
+    @Override
+    public void onRefresh() {
+//        new Handler().postDelayed(() -> mRecyclerView.refreshComplete(), 1000);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void refload(RefHotActivityEvent event) {
-        if (event.getType() == 1) {
+    @Override
+    public void onLoadMore() {
+        new Handler().postDelayed(() -> mRecyclerView.loadMoreComplete(), 1000);
+    }
+
+    public void getData(boolean isRefresh) {
+        if (isRefresh) {
             pn = 1;
-            type = 1;
-            getData(pn, type);
-        } else if (event.getType() == 2) {
-            if (pn < totalPage) {
-                pn++;
-                type = 2;
-                getData(pn, type);
-            }
+            setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, Constants.default_PS + ""});
+            sendPostConnection(Constants.base_url + "/api/club/activity/hotlist.do", GetData, Constants.token);
+        } else if (pn < totalPage) {
+            pn++;
+            setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, Constants.default_PS + ""});
+            sendPostConnection(Constants.base_url + "/api/club/activity/hotlist.do", LoaMore, Constants.token);
         }
     }
 
@@ -100,7 +88,7 @@ public class HotActivityFragment extends NetWorkFragment {
                 if (hotAvtivityBean.getData() == null) {
                     return;
                 }
-                if (hotAvtivityBean.getData().size() > 0) {
+                if (!hotAvtivityBean.getData().isEmpty()) {
                     tvTips.setVisibility(View.GONE);
                     data = hotAvtivityBean.getData();
                     adapter.setData(data);
@@ -116,7 +104,7 @@ public class HotActivityFragment extends NetWorkFragment {
                 if (hotAvtivityBean.getData() == null) {
                     return;
                 }
-                if (hotAvtivityBean.getData().size() > 0) {
+                if (!hotAvtivityBean.getData().isEmpty()) {
                     data = hotAvtivityBean.getData();
                     adapter.setData2(data);
                 } else {
@@ -130,12 +118,5 @@ public class HotActivityFragment extends NetWorkFragment {
     @Override
     protected void onFailure(String result, int where) {
         Utils.toastShort(mContext, "网络异常");
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 }

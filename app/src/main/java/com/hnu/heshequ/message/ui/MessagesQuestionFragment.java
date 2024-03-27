@@ -1,4 +1,4 @@
-package com.hnu.heshequ.fragment;
+package com.hnu.heshequ.message.ui;
 
 import android.content.DialogInterface;
 import android.os.Handler;
@@ -24,12 +24,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class News_SayFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
+public class MessagesQuestionFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, IMessagesFragment {
     private View view;
     private ArrayList<MsgSayBean.SayBean> data;
     private SayNewsAdapter adapter;
     private XRecyclerView rv;
     private TextView tvTips;
+
 
     private final int GetCode = 1000;
     private final int LoadMore = 1001;
@@ -52,7 +53,6 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
         return view;
     }
 
-
     private void init() {
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = view.findViewById(R.id.tvTips);
@@ -61,7 +61,7 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
         type = 1;
         getData(pn, type);
         data = new ArrayList<>();
-        adapter = new SayNewsAdapter(mContext, data, 1);
+        adapter = new SayNewsAdapter(mContext, data, 2);
         rv.setAdapter(adapter);
         initDialog();
     }
@@ -94,13 +94,12 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
 
     private void getData(int pn, int type) {
         if (type == 1) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 1});
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
             sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", GetCode, Constants.token);
         } else if (type == 2) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 1});
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
             sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", LoadMore, Constants.token);
         }
-
     }
 
     @Override
@@ -116,7 +115,8 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
         }, 1000);
     }
 
-    public void refData() {
+    @Override
+    public void refreshData() {
         if (view == null) {
             return;
         }
@@ -142,6 +142,7 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
 
     private void event() {
         rv.setLoadingListener(this);
+
         adapter.setListener(new SayNewsAdapter.ItemDelListener() {
             @Override
             public void onDel(int position) {
@@ -151,7 +152,6 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
             }
         });
     }
-
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
@@ -199,4 +199,5 @@ public class News_SayFragment extends NetWorkFragment implements XRecyclerView.L
     protected void onFailure(String result, int where) {
         Utils.toastShort(mContext, "网络异常");
     }
+
 }

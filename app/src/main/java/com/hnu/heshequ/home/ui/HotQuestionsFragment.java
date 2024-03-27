@@ -1,9 +1,7 @@
-package com.hnu.heshequ.fragment;
+package com.hnu.heshequ.home.ui;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -25,26 +23,23 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdapter.DoSaveListener {
-    private static final String TAG = "[ChildWwFragment]";
+public class HotQuestionsFragment extends NetWorkFragment implements HotQuestionsAdapter.DoSaveListener, XRecyclerView.LoadingListener {
+    private static final String TAG = "[HotQuestionsFragment]";
 
     private View view;
     private XRecyclerView mRecyclerView;
     private HotQuestionsAdapter adapter;
-    private List<WenwenBean> list;
     private int pn = 1;
-    private int ps = 10;
+    private int ps = 20;
     private List<WenwenBean> newList, moreList;
     private TextView tvTips;
     private int totalPage = 1;
     private boolean hasRefresh;
-    private int type = 2;
+    private int type = 3;
     private int clickPosition;
 
     @Override
     protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        Log.d(TAG, "onSuccess where: " + where + ", result: " + result + ", fromCache: " + fromCache);
         if (ResultUtils.isFail(result, getActivity())) {
             return;
         }
@@ -53,10 +48,6 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
             if (where == 100) {
                 if (hasRefresh) {
                     hasRefresh = false;
-                    Intent intent = new Intent();
-                    intent.setAction("fragment.listener");
-                    intent.putExtra("item", 3);
-                    getActivity().sendBroadcast(intent);
                 }
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
@@ -81,10 +72,6 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
                 } else {
                     tvTips.setVisibility(View.GONE);
                 }
-                WenwenBean bean = new WenwenBean();
-                bean.type = 1;
-                bean.id = "-1";
-                newList.add(bean);
                 setList(newList);
             } else if (where == 101) {
                 if (result.has("data")) {
@@ -108,31 +95,22 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
                 } else {
                     tvTips.setVisibility(View.GONE);
                 }
-                /*WenwenBean bean = new WenwenBean();
-                bean.type = 1;
-                bean.id = "-1";
-                newList.add(bean);*/
                 setList(newList);
-                Intent intent = new Intent();
-                intent.setAction("fragment.listener");
-                intent.putExtra("item", 1);
-                getActivity().sendBroadcast(intent);
             } else if (where == 1000) {
-                Utils.toastShort(mContext, result.getString("msg") + "");
+                Utils.toastShort(mContext, result.getString("msg"));
                 int zan = newList.get(clickPosition).likeAmount;
                 if (TextUtils.isEmpty(newList.get(clickPosition).userLike)) {
                     newList.get(clickPosition).userLike = "1";
                     zan = zan + 1;
-                    newList.get(clickPosition).likeAmount = zan;
                 } else {
                     newList.get(clickPosition).userLike = "";
                     zan = zan - 1;
-                    newList.get(clickPosition).likeAmount = zan;
                 }
+                newList.get(clickPosition).likeAmount = zan;
                 adapter.setData(newList);
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -143,18 +121,29 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
 
     @Override
     protected View createView(LayoutInflater inflater) {
-        view = inflater.inflate(R.layout.fragment_child_ww, null);
-        mRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
-        tvTips = (TextView) view.findViewById(R.id.tvTips);
-        ConsTants.initXRecycleView(getActivity(), false, false, mRecyclerView);
-        mRecyclerView.setNestedScrollingEnabled(false);
+        view = inflater.inflate(R.layout.fragment_tim, null);
+        tvTips = view.findViewById(R.id.tvTips);
         adapter = new HotQuestionsAdapter(getActivity());
+        mRecyclerView = view.findViewById(R.id.rv);
+        ConsTants.initXRecycleView(getActivity(), true, false, mRecyclerView);
+        mRecyclerView.setLoadingListener(this);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(adapter);
         adapter.setListener(this);
-        list = new ArrayList<>();
-        setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", "1", "10"});
+        setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, "1", "20"});
         sendPostConnection(WenConstans.WenwenList, 100, WenConstans.token);
         return view;
+    }
+
+    @Override
+    public void onRefresh() {
+//        new Handler().postDelayed(() -> mRecyclerView.refreshComplete(), 1000);
+    }
+
+    @Override
+    public void onLoadMore() {
+        new Handler().postDelayed(() -> mRecyclerView.loadMoreComplete(), 1000);
     }
 
     private void setList(List<WenwenBean> list) {
@@ -167,19 +156,13 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
         if (isRefresh) {
             hasRefresh = true;
             pn = 1;
-            setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", pn + "", ps + ""});
+            setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, pn + "", ps + ""});
             sendPostConnection(WenConstans.WenwenList, 100, WenConstans.token);
         } else {
             pn++;
             if (pn > totalPage) {
-                new Handler().postDelayed(() -> {
-                    Intent intent = new Intent();
-                    intent.setAction("fragment.listener");
-                    intent.putExtra("item", 1);
-                    getActivity().sendBroadcast(intent);
-                }, 700);
             } else {
-                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", pn + "", ps + ""});
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, pn + "", ps + ""});
                 sendPostConnection(WenConstans.WenwenList, 101, WenConstans.token);
             }
         }
@@ -188,7 +171,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
     @Override
     public void doSave(int position) {
         clickPosition = position;
-        setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id + ""});
+        setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id});
         sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
     }
 }

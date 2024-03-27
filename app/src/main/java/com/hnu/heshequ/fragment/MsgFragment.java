@@ -68,7 +68,6 @@ public class MsgFragment extends NetWorkFragment {
         list.add(teamFragment);
         list.add(sayFragment);
         list.add(questionFragment);
-        //list.add(questionFragment2);
         list.add(messageFragment);
         list.add(friendFragment);
         adapter = new MyFragmentPagerAdapter(getChildFragmentManager(), list);

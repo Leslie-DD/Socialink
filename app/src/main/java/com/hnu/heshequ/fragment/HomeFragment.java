@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.githang.statusbar.StatusBarCompat;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
@@ -126,6 +127,8 @@ public class HomeFragment extends NetWorkFragment implements XRecyclerView.Loadi
         view = inflater.inflate(R.layout.fragment_home, null);
         EventBus.getDefault().register(this);
         init();
+
+        StatusBarCompat.setStatusBarColor(getActivity(), Color.WHITE);
         return view;
     }
 

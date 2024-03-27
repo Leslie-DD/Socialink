@@ -385,11 +385,6 @@ public class WenwenFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
     }

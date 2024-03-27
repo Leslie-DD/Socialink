@@ -1,17 +1,17 @@
 package com.hnu.heshequ.launcher
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.githang.statusbar.StatusBarCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hnu.heshequ.MeetApplication
 import com.hnu.heshequ.R
 import com.hnu.heshequ.databinding.ActivityMainBinding
 import com.hnu.heshequ.launcher.model.MainViewModel
+import com.hnu.heshequ.utils.StatusBarUtil
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,11 +27,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
 
-        StatusBarCompat.setStatusBarColor(this, Color.WHITE)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.navigation_mine) {
+                StatusBarUtil.hackInStatusBar(this@MainActivity)
+            } else {
+                StatusBarUtil.hackOutStatusBar(this@MainActivity)
+            }
+        }
 
         viewModel.initialize()
     }
+
+    companion object {
+        private const val TAG = "[MainActivity]"
+    }
+
 }

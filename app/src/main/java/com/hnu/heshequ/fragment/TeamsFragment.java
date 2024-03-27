@@ -118,14 +118,4 @@ public class TeamsFragment extends NetWorkFragment {
             ivAdd.setVisibility(View.GONE);
         }
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
 }

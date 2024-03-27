@@ -15,8 +15,9 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     init {
         viewModelScope.launch {
-            val userInfoBean: UserInfoBean =
-                RetrofitClient.userService.info((SharedPreferencesHelp.getInt("uid", 1).toString()))
+            val userInfoBean: UserInfoBean = RetrofitClient.userService.info(
+                SharedPreferencesHelp.getInt("uid", 1).toString()
+            )
             Log.i(TAG, "userInfoBean: $userInfoBean")
         }
     }

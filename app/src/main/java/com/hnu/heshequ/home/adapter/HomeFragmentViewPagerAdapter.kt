@@ -13,29 +13,13 @@ class HomeFragmentViewPagerAdapter(
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    private val teamsFragment: HotTeamsFragment by lazy { HotTeamsFragment() }
-    private val questionsFragment: HotQuestionsFragment by lazy { HotQuestionsFragment() }
-    private val activitiesFragment: HotActivitiesFragment by lazy { HotActivitiesFragment() }
-
     override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment {
-        return getFragment(position)
-    }
-
-    private fun getFragment(position: Int): Fragment {
         return when (position) {
-            0 -> teamsFragment
-            1 -> questionsFragment
-            else -> activitiesFragment
-        }
-    }
-
-    fun refresh(position: Int) {
-        when (position) {
-            0 -> teamsFragment.refreshData()
-            1 -> questionsFragment.getData(true)
-            2 -> activitiesFragment.getData(true)
+            0 -> HotTeamsFragment()
+            1 -> HotQuestionsFragment()
+            else -> HotActivitiesFragment()
         }
     }
 

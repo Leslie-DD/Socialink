@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -45,6 +44,7 @@ public class HomeFragment extends Fragment {
     private View view;
 
     private StickyLayout stickyLayout;
+    private LinearLayout stickyHeader;
 
     private RollPagerView bannerView;
     private BannerAdapter bannerAdapter;
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                 List<String> imagesUrl = new ArrayList<>();
                 List<HomeBannerImgsBean> imagesData = gson.fromJson(result.optString("data"),
                         new TypeToken<ArrayList<HomeBannerImgsBean>>() {
-                }.getType());
+                        }.getType());
 
                 if (imagesData != null && !imagesData.isEmpty()) {
                     imagesData.forEach(bannerImage -> {
@@ -99,14 +99,33 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.i(TAG, "onViewCreated");
+    }
+
     private void init() {
+        stickyHeader = view.findViewById(R.id.sticky_header);
+
         ImageView ivSecondMa = view.findViewById(R.id.ivSecondMa);
         ivSecondMa.setOnClickListener(v -> startActivity(new Intent(getActivity(), CaptureActivity.class)));
         LinearLayout llSearch = view.findViewById(R.id.llSearch);
         llSearch.setOnClickListener(v -> startActivity(new Intent(getActivity(), HomeSearchActivity.class)));
 
         stickyLayout = view.findViewById(R.id.rootView);
-        stickyLayout.setOnGiveUpTouchEventListener(event -> viewPager.getTop() >= 0);
+        stickyLayout.setHeaderAndContentId(R.id.sticky_header, R.id.sticky_content);
+        // 通过判断 viewpager 当前 fragment 中的 recyclerview 的第一个 item 是否显示来决定是否拦截事件
+        stickyLayout.setOnGiveUpTouchEventListener(event -> {
+            int currentItem = viewPager.getCurrentItem();
+            Fragment currentFragment = getChildFragmentManager().findFragmentByTag("f" + currentItem);
+            if (currentFragment == null) {
+                return false;
+            }
+            return ((IListFragment) currentFragment).isFirstItemVisible();
+        });
+        // 当 stickyHeader 的高度确定后需要初始化 stickyLayout 的数据
+        stickyHeader.post(() -> stickyLayout.initData());
 
         bannerView = view.findViewById(R.id.rollPageView);
         bannerAdapter = new BannerAdapter(bannerView, getActivity());
@@ -116,7 +135,7 @@ public class HomeFragment extends Fragment {
         // 设置指示器
         bannerView.setHintView(new ColorPointHintView(getActivity(), Color.parseColor("#00bbff"), Color.WHITE));
 
-        pagerAdapter = new HomeFragmentViewPagerAdapter(requireActivity().getSupportFragmentManager(), getLifecycle());
+        pagerAdapter = new HomeFragmentViewPagerAdapter(getChildFragmentManager(), getLifecycle());
         tabs = view.findViewById(R.id.tabs);
         tabsSticky = view.findViewById(R.id.tabs_sticky);
         viewPager = view.findViewById(R.id.vp);
@@ -131,11 +150,11 @@ public class HomeFragment extends Fragment {
             tab.setText(tabTitleList[position]);
         }).attach();
 
-        getImages();
+        fetchBannerImages();
     }
 
     // 获取首页轮播图
-    private void getImages() {
+    private void fetchBannerImages() {
         httpRequest.setBodyParams(new String[]{"category"}, new String[]{"" + 1});
         httpRequest.sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", FETCH_BANNER_IMAGES, Constants.token);
     }

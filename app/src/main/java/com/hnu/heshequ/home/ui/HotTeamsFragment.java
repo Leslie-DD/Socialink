@@ -1,22 +1,26 @@
 package com.hnu.heshequ.home.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.TeamDetailActivity;
 import com.hnu.heshequ.adapter.recycleview.CommentTeamAdapter;
-import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.TeamBean;
 import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.HttpRequestUtil;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -27,49 +31,135 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HotTeamsFragment extends NetWorkFragment implements CommentTeamAdapter.OnItemClickListener, XRecyclerView.LoadingListener {
-    private static final String TAG = "[HotTeamFragment]";
-    private View view;
-    public XRecyclerView rv;
+public class HotTeamsFragment
+        extends Fragment
+        implements CommentTeamAdapter.OnItemClickListener,
+        XRecyclerView.LoadingListener,
+        IListFragment {
+    private static final String TAG = "[HotTeamsFragment]";
+
+    private static final int GET_DATA = 1000;
+    private static final int REF_DATA = 1001;
+    private static final int LOA_DATA = 1002;
+
+    private static final int TYPE_INIT = 0;
+    private static final int TYPE_REFRESH = 1;
+    private static final int TYPE_LOAD_MORE = 2;
+
+    private final Gson gson = new Gson();
+
+    public XRecyclerView mRecyclerView;
     public CommentTeamAdapter adapter;
     public ArrayList<TeamBean> list;
     private int pn = 1;
-    private int ps = 0;   //总页数
-    private final int GETDATA = 1000;
-    private final int REFDATA = 1001;
-    private final int LOADATA = 1002;
-    private Gson gson = new Gson();
-    private TeamBean teamBean;
-    private int type;  // 0 -> 初始化加载 ； 1 ->刷新；  2 -> 加载
-    private JSONArray jsonArray;
+    private int ps = 0;
+    private int type;
     private TextView tvTips;
 
-    @Override
-    protected View createView(LayoutInflater inflater) {
+    private final HttpRequestUtil.RequestCallBack callBack = new HttpRequestUtil.RequestCallBack() {
+        @Override
+        public void onSuccess(JSONObject result, int where, boolean fromCache) {
+            Log.i(TAG, "onSuccess: where = " + where + ", result" + result.toString());
+            if (where == LOA_DATA) {
+                mRecyclerView.loadMoreComplete();
+            }
+            if (result.optInt("code") != 0) {
+                Utils.toastShort(getActivity(), result.optString("msg"));
+                return;
+            }
+            if (result.optString("data").isEmpty()) {
+                return;
+            }
+            TeamBean teamBean;
+            JSONArray jsonArray;
+            switch (where) {
+                case GET_DATA:
+                    try {
+                        ps = result.optJSONObject("data").optInt("totalPage");
+                        list = new ArrayList<>();
+                        jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
+                        Log.i(TAG, "GET_DATA size: " + jsonArray.length());
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
+                            teamBean.setItemType(1);
+                            list.add(teamBean);
+                        }
+                        setData(list);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case REF_DATA:
+                    try {
+                        ps = result.optJSONObject("data").optInt("totalPage");
+                        list = new ArrayList<>();
+                        jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
+                        Log.i(TAG, "REF_DATA size: " + jsonArray.length());
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
+                            teamBean.setItemType(1);
+                            list.add(teamBean);
+                        }
+                        setData(list);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case LOA_DATA:
+                    try {
+                        ps = result.optJSONObject("data").optInt("totalPage");
+                        jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
+                        Log.i(TAG, "LOA_DATA size: " + jsonArray.length());
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
+                            teamBean.setItemType(1);
+                            list.add(teamBean);
+                        }
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
 
-        view = inflater.inflate(R.layout.fragment_tim, null);
+        @Override
+        public void onFailure(String result, int where) {
+            Utils.toastShort(getActivity(), "网络异常");
+            if (where == REF_DATA) {
+                mRecyclerView.loadMoreComplete();
+            }
+        }
+    };
+
+    private final HttpRequestUtil httpRequest = new HttpRequestUtil(callBack, TAG);
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.w(TAG, "hashcode: " + hashCode() + " (onCreateView)");
+        View view = inflater.inflate(R.layout.fragment_tim, container, false);
         tvTips = view.findViewById(R.id.tvTips);
-        rv = view.findViewById(R.id.rv);
+        mRecyclerView = view.findViewById(R.id.rv);
         init();
         return view;
     }
 
     private void init() {
-        ConsTants.initXRecycleView(getActivity(), true, false, rv);
+        ConsTants.initXRecycleView(getActivity(), true, false, mRecyclerView);
         list = new ArrayList<>();
         adapter = new CommentTeamAdapter(getActivity(), list);
         adapter.setListener(this);
-        rv.setLoadingListener(this);
-        rv.setAdapter(adapter);
+        mRecyclerView.setLoadingListener(this);
+        mRecyclerView.setAdapter(adapter);
 
-        type = 0;
+        type = TYPE_INIT;
         pn = 1;
         getData(pn, type);
     }
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(() -> rv.refreshComplete(), 1000);
+        new Handler().postDelayed(() -> mRecyclerView.refreshComplete(), 1000);
     }
 
     @Override
@@ -80,139 +170,33 @@ public class HotTeamsFragment extends NetWorkFragment implements CommentTeamAdap
     private void getData(int pn, int type) {
         switch (type) {
             case 0:
-                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", GETDATA, SharedPreferencesHelp.getString("token", ""));
+                httpRequest.setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
+                httpRequest.sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", GET_DATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
-                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", REFDATA, SharedPreferencesHelp.getString("token", ""));
+                httpRequest.setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
+                httpRequest.sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", REF_DATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 2:
-                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", LOADATA, SharedPreferencesHelp.getString("token", ""));
+                httpRequest.setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 1, "" + pn, "" + Constants.default_PS});
+                httpRequest.sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", LOA_DATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }
     }
 
     public void refreshData() {
         pn = 1;
-        type = 1;
+        type = TYPE_REFRESH;
         getData(pn, type);
     }
 
     public void loadMoreData() {
         if (pn < ps) {
             pn++;
-            type = 2;
+            type = TYPE_LOAD_MORE;
             getData(pn, type);
         } else {
-            rv.loadMoreComplete();
-        }
-
-    }
-
-    @Override
-    protected void onSuccess(JSONObject result, int where, boolean fromCache) {
-        Log.i(TAG, "onSuccess: where = " + where + ", result" + result.toString());
-        int resultType = result.optInt("code");
-        switch (where) {
-            case GETDATA:
-                if (resultType != 0) {
-                    Utils.toastShort(getActivity(), result.optString("msg"));
-                    break;
-                }
-                if (result.optString("data").isEmpty()) {
-                    break;
-                }
-                try {
-                    ps = result.optJSONObject("data").optInt("totalPage");
-                    list = new ArrayList<>();
-                    jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
-                    Log.i(TAG, "GETDATA size: " + jsonArray.length());
-                    if (jsonArray.length() > 0) {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
-                            teamBean.setItemType(1);
-                            list.add(teamBean);
-                        }
-                    }
-//                    TeamBean bbean = new TeamBean();
-//                    bbean.setItemType(4);
-//                    bbean.setId(-1);
-//                    list.add(bbean);
-                    setData(list);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case REFDATA:
-                if (resultType != 0) {
-                    Utils.toastShort(getActivity(), result.optString("msg"));
-                    break;
-                }
-                if (result.optString("data").isEmpty()) {
-                    break;
-                }
-                try {
-                    ps = result.optJSONObject("data").optInt("totalPage");
-                    list = new ArrayList<>();
-                    jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
-                    Log.i(TAG, "REFDATA size: " + jsonArray.length());
-                    if (jsonArray.length() > 0) {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
-                            teamBean.setItemType(1);
-                            list.add(teamBean);
-                        }
-                    }
-//                    TeamBean bbean = new TeamBean();
-//                    bbean.setItemType(4);
-//                    bbean.setId(-1);
-//                    list.add(bbean);
-                    setData(list);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case LOADATA:
-                rv.loadMoreComplete();
-                if (resultType != 0) {
-                    Utils.toastShort(getActivity(), result.optString("msg"));
-                    break;
-                }
-                if (result.optString("data").isEmpty()) {
-                    break;
-                }
-                try {
-                    ps = result.optJSONObject("data").optInt("totalPage");
-                    jsonArray = new JSONArray(result.optJSONObject("data").optString("list"));
-                    Log.i(TAG, "LOADATA size: " + jsonArray.length());
-                    if (jsonArray.length() > 0) {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            teamBean = gson.fromJson(jsonArray.getString(i), TeamBean.class);
-                            teamBean.setItemType(1);
-                            list.add(teamBean);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                break;
-        }
-    }
-
-    @Override
-    protected void onFailure(String result, int where) {
-        Utils.toastShort(getActivity(), "网络异常");
-        switch (where) {
-            case GETDATA:
-                break;
-            case REFDATA:
-                rv.loadMoreComplete();
-                break;
-            case LOADATA:
-                break;
+            mRecyclerView.loadMoreComplete();
         }
     }
 
@@ -226,12 +210,23 @@ public class HotTeamsFragment extends NetWorkFragment implements CommentTeamAdap
         }
     }
 
-
     @Override
     public void OnItemClick(int position) {
-        Intent intent = new Intent(mContext, TeamDetailActivity.class);
+        Intent intent = new Intent(getContext(), TeamDetailActivity.class);
         intent.putExtra("id", adapter.getData().get(position).getId());
         startActivity(intent);
     }
 
+    @Override
+    public boolean isFirstItemVisible() {
+        if (mRecyclerView == null) {
+            return false;
+        }
+        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+        if (layoutManager != null) {
+            int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+            return firstVisiblePosition == 0;
+        }
+        return false;
+    }
 }

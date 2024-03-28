@@ -2,9 +2,12 @@ package com.hnu.heshequ.home.ui;
 
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,7 +26,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotQuestionsFragment extends NetWorkFragment implements HotQuestionsAdapter.DoSaveListener, XRecyclerView.LoadingListener {
+public class HotQuestionsFragment
+        extends NetWorkFragment
+        implements HotQuestionsAdapter.DoSaveListener, XRecyclerView.LoadingListener, IListFragment {
     private static final String TAG = "[HotQuestionsFragment]";
 
     private View view;
@@ -124,6 +129,7 @@ public class HotQuestionsFragment extends NetWorkFragment implements HotQuestion
 
     @Override
     protected View createView(LayoutInflater inflater) {
+        Log.i(TAG, "(createView)");
         view = inflater.inflate(R.layout.fragment_tim, null);
         tvTips = view.findViewById(R.id.tvTips);
         adapter = new HotQuestionsAdapter(getActivity());
@@ -177,5 +183,18 @@ public class HotQuestionsFragment extends NetWorkFragment implements HotQuestion
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id});
         sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
+    }
+
+    @Override
+    public boolean isFirstItemVisible() {
+        if (mRecyclerView == null) {
+            return false;
+        }
+        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+        if (layoutManager != null) {
+            int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+            return firstVisiblePosition == 0;
+        }
+        return false;
     }
 }

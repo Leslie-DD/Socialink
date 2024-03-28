@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.HotActiveAdapter;
@@ -20,12 +22,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerView.LoadingListener {
+public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, IListFragment {
 
     private static final String TAG = "[HotActivityFragment]";
     private HotActiveAdapter adapter;
     private TextView tvTips;
-    XRecyclerView mRecyclerView;
+    private XRecyclerView mRecyclerView;
     private final int GetData = 1000;
     private final int LoaMore = 1001;
 
@@ -37,6 +39,7 @@ public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerV
 
     @Override
     protected View createView(LayoutInflater inflater) {
+        Log.i(TAG, "(createView)");
         View view = inflater.inflate(R.layout.fragment_tim, null);
         mRecyclerView = view.findViewById(R.id.rv);
         ConsTants.initXRecycleView(getActivity(), true, false, mRecyclerView);
@@ -121,5 +124,18 @@ public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerV
     @Override
     protected void onFailure(String result, int where) {
         Utils.toastShort(mContext, "网络异常");
+    }
+
+    @Override
+    public boolean isFirstItemVisible() {
+        if (mRecyclerView == null) {
+            return false;
+        }
+        LinearLayoutManager layoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+        if (layoutManager != null) {
+            int firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition();
+            return firstVisiblePosition == 0;
+        }
+        return false;
     }
 }

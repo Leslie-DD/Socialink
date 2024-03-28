@@ -39,14 +39,6 @@ class HomeFragmentViewPagerAdapter(
         }
     }
 
-    fun loadMore(position: Int) {
-        when (position) {
-            0 -> teamsFragment.loaData()
-            1 -> questionsFragment.getData(false);
-            2 -> activitiesFragment.getData(false)
-        }
-    }
-
     companion object {
         private const val TAG = "[HomeFragmentViewPagerAdapter]"
     }

@@ -59,7 +59,7 @@ public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerV
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(() -> mRecyclerView.loadMoreComplete(), 1000);
+        new Handler().postDelayed(() -> getData(false), 1000);
     }
 
     public void getData(boolean isRefresh) {
@@ -71,6 +71,8 @@ public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerV
             pn++;
             setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, Constants.default_PS + ""});
             sendPostConnection(Constants.base_url + "/api/club/activity/hotlist.do", LoaMore, Constants.token);
+        } else {
+            mRecyclerView.loadMoreComplete();
         }
     }
 
@@ -99,6 +101,7 @@ public class HotActivitiesFragment extends NetWorkFragment implements XRecyclerV
                 }
                 break;
             case LoaMore:
+                mRecyclerView.loadMoreComplete();
                 hotAvtivityBean = gson.fromJson(result.optString("data"), HotAvtivityBean.class);
                 totalPage = hotAvtivityBean.getTotalPage();
                 if (hotAvtivityBean.getData() == null) {

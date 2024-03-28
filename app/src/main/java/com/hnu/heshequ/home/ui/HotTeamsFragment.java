@@ -74,7 +74,7 @@ public class HotTeamsFragment extends NetWorkFragment implements CommentTeamAdap
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(() -> rv.loadMoreComplete(), 1000);
+        new Handler().postDelayed(this::loadMoreData, 1000);
     }
 
     private void getData(int pn, int type) {
@@ -100,14 +100,13 @@ public class HotTeamsFragment extends NetWorkFragment implements CommentTeamAdap
         getData(pn, type);
     }
 
-    public void loaData() {
+    public void loadMoreData() {
         if (pn < ps) {
             pn++;
             type = 2;
             getData(pn, type);
         } else {
-            new Handler().postDelayed(() -> {
-            }, 2000);
+            rv.loadMoreComplete();
         }
 
     }
@@ -176,6 +175,7 @@ public class HotTeamsFragment extends NetWorkFragment implements CommentTeamAdap
                 }
                 break;
             case LOADATA:
+                rv.loadMoreComplete();
                 if (resultType != 0) {
                     Utils.toastShort(getActivity(), result.optString("msg"));
                     break;
@@ -209,6 +209,7 @@ public class HotTeamsFragment extends NetWorkFragment implements CommentTeamAdap
             case GETDATA:
                 break;
             case REFDATA:
+                rv.loadMoreComplete();
                 break;
             case LOADATA:
                 break;

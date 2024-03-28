@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class ItemAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<ItemBean> data = new ArrayList<>();
+    private ArrayList<ItemBean> data;
 
     public ItemAdapter(Context context, ArrayList<ItemBean> data) {
         this.data = data;
@@ -50,9 +50,9 @@ public class ItemAdapter extends BaseAdapter {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.set_item, null);
             viewHolder = new ViewHolder();
-            viewHolder.ivIcon = (ImageView) view.findViewById(R.id.ivIcon);
-            viewHolder.tvName = (TextView) view.findViewById(R.id.tvName);
-            viewHolder.tvTip = (TextView) view.findViewById(R.id.tvTip);
+            viewHolder.ivIcon = view.findViewById(R.id.ivIcon);
+            viewHolder.tvName = view.findViewById(R.id.tvName);
+            viewHolder.tvTip = view.findViewById(R.id.tvTip);
             viewHolder.v1 = view.findViewById(R.id.v1);
             viewHolder.v2 = view.findViewById(R.id.v2);
             view.setTag(viewHolder);

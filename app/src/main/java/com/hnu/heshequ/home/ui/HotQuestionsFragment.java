@@ -74,6 +74,7 @@ public class HotQuestionsFragment extends NetWorkFragment implements HotQuestion
                 }
                 setList(newList);
             } else if (where == 101) {
+                mRecyclerView.loadMoreComplete();
                 if (result.has("data")) {
                     JSONObject data = result.getJSONObject("data");
                     if (data.has("list")) {
@@ -116,7 +117,9 @@ public class HotQuestionsFragment extends NetWorkFragment implements HotQuestion
 
     @Override
     protected void onFailure(String result, int where) {
-
+        if (where == 101) {
+            mRecyclerView.loadMoreComplete();
+        }
     }
 
     @Override
@@ -143,7 +146,7 @@ public class HotQuestionsFragment extends NetWorkFragment implements HotQuestion
 
     @Override
     public void onLoadMore() {
-        new Handler().postDelayed(() -> mRecyclerView.loadMoreComplete(), 1000);
+        new Handler().postDelayed(() -> getData(false), 1000);
     }
 
     private void setList(List<WenwenBean> list) {
@@ -161,6 +164,7 @@ public class HotQuestionsFragment extends NetWorkFragment implements HotQuestion
         } else {
             pn++;
             if (pn > totalPage) {
+                mRecyclerView.loadMoreComplete();
             } else {
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, pn + "", ps + ""});
                 sendPostConnection(WenConstans.WenwenList, 101, WenConstans.token);

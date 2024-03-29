@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_teams" />
 
     <fragment
-        android:id="@+id/navigation_ask"
-        android:name="com.hnu.heshequ.fragment.WenwenFragment"
+        android:id="@+id/navigation_question"
+        android:name="com.hnu.heshequ.questions.QuestionsFragment"
         android:label="@string/menu_ask"
-        tools:layout="@layout/fragment_wenwen" />
+        tools:layout="@layout/fragment_questions" />
 
     <fragment
         android:id="@+id/navigation_message"

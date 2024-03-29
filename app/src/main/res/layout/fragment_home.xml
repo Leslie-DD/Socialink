@@ -4,7 +4,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/home_gradient_background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -44,10 +44,10 @@
 
             <ImageView
                 android:id="@+id/ivSecondMa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:src="@mipmap/saomiao" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/qr_scan" />
         </LinearLayout>
 
         <com.jude.rollviewpager.RollPagerView
@@ -62,12 +62,14 @@
         android:id="@+id/sticky_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/top_round_corners"
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
             android:background="@color/white"
             app:layout_scrollFlags="scroll|enterAlways"
             app:tabIndicatorColor="@color/colorPrimary" />

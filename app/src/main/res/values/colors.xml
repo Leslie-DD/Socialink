@@ -29,4 +29,7 @@
     <color name="back">#63B8FF</color>
     <color name="background">#F1F1F1</color>
 
+    <color name="home_header_color_start">#62DA54</color>
+    <color name="home_header_color_end">#24BC1C</color>
+
 </resources>

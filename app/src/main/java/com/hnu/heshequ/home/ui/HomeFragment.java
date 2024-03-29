@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -26,7 +26,10 @@ import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.home.adapter.HomeFragmentViewPagerAdapter;
 import com.hnu.heshequ.network.HttpRequestUtil;
 import com.hnu.heshequ.secondma.android.CaptureActivity;
+import com.hnu.heshequ.utils.BarUtils;
+import com.hnu.heshequ.utils.StatusBarUtil;
 import com.hnu.heshequ.utils.Utils;
+import com.hnu.heshequ.widget.RoundViewOutlineProvider;
 import com.hnu.heshequ.widget.StickyLayout;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
@@ -95,7 +98,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView");
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        init();
+        view.findViewById(R.id.ivSecondMa).setOnClickListener(v -> startActivity(new Intent(getActivity(), CaptureActivity.class)));
+        view.findViewById(R.id.llSearch).setOnClickListener(v -> startActivity(new Intent(getActivity(), HomeSearchActivity.class)));
+        initStickyLayout();
+        initViewPager();
+        initBanner();
         return view;
     }
 
@@ -105,14 +112,7 @@ public class HomeFragment extends Fragment {
         Log.i(TAG, "onViewCreated");
     }
 
-    private void init() {
-        stickyHeader = view.findViewById(R.id.sticky_header);
-
-        ImageView ivSecondMa = view.findViewById(R.id.ivSecondMa);
-        ivSecondMa.setOnClickListener(v -> startActivity(new Intent(getActivity(), CaptureActivity.class)));
-        LinearLayout llSearch = view.findViewById(R.id.llSearch);
-        llSearch.setOnClickListener(v -> startActivity(new Intent(getActivity(), HomeSearchActivity.class)));
-
+    private void initStickyLayout() {
         stickyLayout = view.findViewById(R.id.rootView);
         stickyLayout.setHeaderAndContentId(R.id.sticky_header, R.id.sticky_content);
         // 通过判断 viewpager 当前 fragment 中的 recyclerview 的第一个 item 是否显示来决定是否拦截事件
@@ -124,17 +124,14 @@ public class HomeFragment extends Fragment {
             }
             return ((IListFragment) currentFragment).isFirstItemVisible();
         });
+
+        stickyHeader = view.findViewById(R.id.sticky_header);
+        StatusBarUtil.<LinearLayout.LayoutParams>setMarginStatusBar(stickyHeader);
         // 当 stickyHeader 的高度确定后需要初始化 stickyLayout 的数据
         stickyHeader.post(() -> stickyLayout.initData());
+    }
 
-        bannerView = view.findViewById(R.id.rollPageView);
-        bannerAdapter = new BannerAdapter(bannerView, getActivity());
-        bannerView.setAdapter(bannerAdapter);
-        bannerView.setPlayDelay(3000);
-        bannerView.setAnimationDurtion(500);
-        // 设置指示器
-        bannerView.setHintView(new ColorPointHintView(getActivity(), Color.parseColor("#00bbff"), Color.WHITE));
-
+    private void initViewPager() {
         pagerAdapter = new HomeFragmentViewPagerAdapter(getChildFragmentManager(), getLifecycle());
         tabs = view.findViewById(R.id.tabs);
         tabsSticky = view.findViewById(R.id.tabs_sticky);
@@ -149,8 +146,21 @@ public class HomeFragment extends Fragment {
         new TabLayoutMediator(tabsSticky, viewPager, (tab, position) -> {
             tab.setText(tabTitleList[position]);
         }).attach();
+    }
 
+    private void initBanner() {
+        bannerView = view.findViewById(R.id.rollPageView);
+        bannerAdapter = new BannerAdapter(bannerView, getActivity());
+        bannerView.setAdapter(bannerAdapter);
+        bannerView.setPlayDelay(3000);
+        bannerView.setAnimationDurtion(500);
+        // 设置指示器
+        bannerView.setHintView(new ColorPointHintView(getActivity(), requireContext().getColor(R.color.colorPrimary), Color.WHITE));
+        RoundViewOutlineProvider outlineProvider = new RoundViewOutlineProvider(getResources().getDimensionPixelOffset(R.dimen.home_banner_radius));
+        bannerView.setOutlineProvider(outlineProvider);
+        bannerView.setClipToOutline(true);
         fetchBannerImages();
+
     }
 
     // 获取首页轮播图

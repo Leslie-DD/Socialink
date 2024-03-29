@@ -12,7 +12,6 @@ import com.hnu.heshequ.databinding.ActivityMainBinding
 import com.hnu.heshequ.launcher.model.MainViewModel
 import com.hnu.heshequ.utils.StatusBarUtil
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -23,20 +22,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         MeetApplication.getInstance().addActivity(this)
 
+        StatusBarUtil.hackInStatusBar(this@MainActivity)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.navigation_mine) {
-                StatusBarUtil.hackInStatusBar(this@MainActivity)
-            } else {
-                StatusBarUtil.hackOutStatusBar(this@MainActivity)
-            }
-        }
 
         viewModel.initialize()
     }

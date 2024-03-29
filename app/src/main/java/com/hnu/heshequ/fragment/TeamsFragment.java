@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,7 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.TeamSearchActivity;
 import com.hnu.heshequ.activity.team.AddTeamActivity;
 import com.hnu.heshequ.teams.adapter.TeamsFragmentViewPagerAdapter;
+import com.hnu.heshequ.utils.StatusBarUtil;
 
 public class TeamsFragment extends Fragment {
     private static final String TAG = "[TeamsFragment]";
@@ -35,9 +37,12 @@ public class TeamsFragment extends Fragment {
     }
 
     private void init() {
-        ImageView llSearch = (ImageView) view.findViewById(R.id.llSearch);
+        RelativeLayout titleLayout = view.findViewById(R.id.title_layout);
+        StatusBarUtil.setMarginStatusBar(titleLayout);
+
+        ImageView llSearch = view.findViewById(R.id.llSearch);
         llSearch.setOnClickListener(v -> startActivity(new Intent(getActivity(), TeamSearchActivity.class)));
-        ImageView ivAdd = (ImageView) view.findViewById(R.id.ivAdd);
+        ImageView ivAdd = view.findViewById(R.id.ivAdd);
         ivAdd.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddTeamActivity.class)));
 
         TabLayout tabs = view.findViewById(R.id.tabs);

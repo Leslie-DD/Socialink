@@ -11,7 +11,7 @@
         android:title="@string/menu_team" />
 
     <item
-        android:id="@+id/navigation_ask"
+        android:id="@+id/navigation_question"
         android:icon="@drawable/under_img_select3"
         android:title="@string/menu_ask" />
 

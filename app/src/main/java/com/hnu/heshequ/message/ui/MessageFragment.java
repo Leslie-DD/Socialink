@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.message.adapter.MessageFragmentViewPagerAdapter;
 import com.hnu.heshequ.network.HttpRequestUtil;
+import com.hnu.heshequ.utils.StatusBarUtil;
 import com.hnu.heshequ.utils.Utils;
 
 import org.json.JSONObject;
@@ -56,6 +58,8 @@ public class MessageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_msg, container, false);
+        RelativeLayout titleLayout = view.findViewById(R.id.title_layout);
+        StatusBarUtil.setMarginStatusBar(titleLayout);
         init();
         return view;
     }

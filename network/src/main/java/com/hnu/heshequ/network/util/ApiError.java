@@ -19,6 +19,6 @@ public class ApiError extends RuntimeException {
 
     @Override
     public String toString() {
-        return String.format("ApiError: %d %s",getCode(), getMessage());
+        return String.format("ApiError: %d %s", getCode(), getMessage());
     }
 }

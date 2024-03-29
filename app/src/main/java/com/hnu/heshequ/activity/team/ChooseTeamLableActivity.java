@@ -13,9 +13,9 @@ import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.Label;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefTeamDetailEvent;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.FlowLayout;
 

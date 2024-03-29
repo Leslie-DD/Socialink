@@ -14,12 +14,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
+import com.hnu.heshequ.adapter.recycleview.QuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -29,15 +29,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerView.LoadingListener, HotQuestionsAdapter.DoSaveListener {
+public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerView.LoadingListener, QuestionsAdapter.DoSaveListener {
 
     private XRecyclerView rv;
-    private HotQuestionsAdapter adapter;
+    private QuestionsAdapter adapter;
     private int pn = 1;
     private int ps = 20;
     private boolean hasRefresh;
     private int totalPage = 1;
-    private List<WenwenBean> allList, moreList;
+    private List<QuestionBean> allList, moreList;
     private TextView tvTips;
     private int clickPosition;
     private FragmentBrodcast brodcast;
@@ -55,7 +55,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
         tvTips = (TextView) findViewById(R.id.tvTips);
         rv = (XRecyclerView) findViewById(R.id.rv);
         ConsTants.initXRecycleView(this, true, true, rv);
-        adapter = new HotQuestionsAdapter(this);
+        adapter = new QuestionsAdapter(this);
         rv.setAdapter(adapter);
         adapter.setListener(this);
         rv.setLoadingListener(this);
@@ -78,7 +78,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
                 JSONObject data = result.getJSONObject("data");
                 if (data != null && data.has("list")) {
                     allList = gson.fromJson(data.getJSONArray("list").toString(),
-                            new TypeToken<List<WenwenBean>>() {
+                            new TypeToken<List<QuestionBean>>() {
                             }.getType());
                     if (allList == null || allList.size() == 0) {
                         allList = new ArrayList<>();
@@ -101,7 +101,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
                 JSONObject data = result.getJSONObject("data");
                 if (data != null && data.has("list")) {
                     moreList = gson.fromJson(data.getJSONArray("list").toString(),
-                            new TypeToken<List<WenwenBean>>() {
+                            new TypeToken<List<QuestionBean>>() {
                             }.getType());
                     if (moreList == null || moreList.size() == 0) {
                         moreList = new ArrayList<>();

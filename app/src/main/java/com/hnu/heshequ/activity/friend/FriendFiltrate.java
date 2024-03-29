@@ -16,7 +16,7 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.AgeBean;
 import com.hnu.heshequ.bean.knowledge.DistanceBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;

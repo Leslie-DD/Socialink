@@ -14,11 +14,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.MyFragmentPagerAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.fragment.FriendFragment;
 import com.hnu.heshequ.fragment.NearFragment;
 import com.hnu.heshequ.fragment.NewFragment;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.Utils;
 
 import org.json.JSONException;

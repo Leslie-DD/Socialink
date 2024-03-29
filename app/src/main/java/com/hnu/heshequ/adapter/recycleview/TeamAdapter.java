@@ -18,9 +18,9 @@ import com.hnu.heshequ.activity.statement.VoteDetailActivity;
 import com.hnu.heshequ.activity.team.ActivityDateilActivity;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.adapter.Adapter_GridView;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.entity.TeamTestBean;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.MyGv;
 

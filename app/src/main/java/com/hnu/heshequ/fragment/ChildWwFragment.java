@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
+import com.hnu.heshequ.adapter.recycleview.QuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -26,16 +26,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdapter.DoSaveListener {
+public class ChildWwFragment extends NetWorkFragment implements QuestionsAdapter.DoSaveListener {
     private static final String TAG = "[ChildWwFragment]";
 
     private View view;
     private XRecyclerView mRecyclerView;
-    private HotQuestionsAdapter adapter;
-    private List<WenwenBean> list;
+    private QuestionsAdapter adapter;
+    private List<QuestionBean> list;
     private int pn = 1;
     private int ps = 10;
-    private List<WenwenBean> newList, moreList;
+    private List<QuestionBean> newList, moreList;
     private TextView tvTips;
     private int totalPage = 1;
     private boolean hasRefresh;
@@ -62,7 +62,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
                     JSONObject data = result.getJSONObject("data");
                     if (data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (newList == null || newList.isEmpty()) {
                             newList = new ArrayList<>();
@@ -81,7 +81,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
                 } else {
                     tvTips.setVisibility(View.GONE);
                 }
-                WenwenBean bean = new WenwenBean();
+                QuestionBean bean = new QuestionBean();
                 bean.type = 1;
                 bean.id = "-1";
                 newList.add(bean);
@@ -91,7 +91,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
                     JSONObject data = result.getJSONObject("data");
                     if (data.has("list")) {
                         moreList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (moreList == null || moreList.isEmpty()) {
                             moreList = new ArrayList<>();
@@ -148,7 +148,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
         tvTips = (TextView) view.findViewById(R.id.tvTips);
         ConsTants.initXRecycleView(getActivity(), false, false, mRecyclerView);
         mRecyclerView.setNestedScrollingEnabled(false);
-        adapter = new HotQuestionsAdapter(getActivity());
+        adapter = new QuestionsAdapter(getActivity());
         mRecyclerView.setAdapter(adapter);
         adapter.setListener(this);
         list = new ArrayList<>();
@@ -157,7 +157,7 @@ public class ChildWwFragment extends NetWorkFragment implements HotQuestionsAdap
         return view;
     }
 
-    private void setList(List<WenwenBean> list) {
+    private void setList(List<QuestionBean> list) {
         if (adapter != null) {
             adapter.setData(list);
         }

@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.EncryptUtils;
 import com.hnu.heshequ.utils.MatcherUtils;
 import com.hnu.heshequ.utils.Utils;

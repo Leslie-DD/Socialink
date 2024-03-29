@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.bean.HomeBannerImgsBean;
 import com.hnu.heshequ.bean.SecondhandgoodBean;
 import com.hnu.heshequ.classification.ClassifationActivity;
 import com.hnu.heshequ.classification.ClassifySecondaryBean;
+import com.hnu.heshequ.network.entity.HomeBanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private List<Integer> mTypeList;
 
     private List<String> mBannerList = new ArrayList<>();
-    private List<HomeBannerImgsBean> mBannerList2 = new ArrayList<>();
+    private List<HomeBanner> mBannerList2 = new ArrayList<>();
     private List<String> mSearchList = new ArrayList<>();
     private List<String> mPicList = new ArrayList<>();
     private List<ClassifySecondaryBean> mClassifyList = new ArrayList<>();
@@ -56,7 +56,7 @@ public class SecondHandAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         mTypeList = typeList;
     }
 
-    public void setBannerDataList(List<String> bannerDataList, List<HomeBannerImgsBean> bannerDataList2) {
+    public void setBannerDataList(List<String> bannerDataList, List<HomeBanner> bannerDataList2) {
         mBannerList = bannerDataList;
         mBannerList2 = bannerDataList2;
         notifyDataSetChanged();

@@ -16,9 +16,9 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.TeamAndWenwenAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -38,7 +38,7 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
     private int ps = 20;
     private boolean hasRefresh;
     private int totalPage = 1;
-    private List<WenwenBean> allList, moreList;
+    private List<QuestionBean> allList, moreList;
     private int clickPosition;
     private TextView tvTips;
     private FragmentBrodcast brodcast;
@@ -87,8 +87,8 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject oo = array.getJSONObject(i);
                             if (oo != null) {
-                                WenwenBean bean = gson.fromJson(oo
-                                        .getJSONObject("obj").toString(), WenwenBean.class);
+                                QuestionBean bean = gson.fromJson(oo
+                                        .getJSONObject("obj").toString(), QuestionBean.class);
                                 bean.category = oo.getInt("category");
                                 allList.add(bean);
                             }
@@ -121,8 +121,8 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
                         for (int i = 0; i < array.length(); i++) {
                             JSONObject oo = array.getJSONObject(i);
                             if (oo != null) {
-                                WenwenBean bean = gson.fromJson(oo
-                                        .getJSONObject("obj").toString(), WenwenBean.class);
+                                QuestionBean bean = gson.fromJson(oo
+                                        .getJSONObject("obj").toString(), QuestionBean.class);
                                 bean.category = oo.getInt("category");
                                 moreList.add(bean);
                             }

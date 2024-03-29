@@ -11,9 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.Item;
 import com.hnu.heshequ.entity.VoteBean;
+import com.hnu.heshequ.network.Constants;
 
 import java.util.ArrayList;
 

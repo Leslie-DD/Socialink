@@ -15,7 +15,7 @@ import com.hnu.heshequ.adapter.recycleview.SayNewsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.MsgSayBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 

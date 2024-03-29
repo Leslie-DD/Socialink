@@ -20,9 +20,9 @@ import com.hnu.heshequ.activity.team.PersonalInformationActivity;
 import com.hnu.heshequ.activity.team.StatementDetailActivity;
 import com.hnu.heshequ.activity.wenwen.WenwenDetailActivity;
 import com.hnu.heshequ.bean.MsgSayBean;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.bean.WenwenBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.QuestionBean;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -208,7 +208,7 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                                         try {
                                             result = new JSONObject(s);
                                             if (result.optInt("code") == 0) {
-                                                WenwenBean wenwenBean = gson.fromJson(result.optString("data"), WenwenBean.class);
+                                                QuestionBean wenwenBean = gson.fromJson(result.optString("data"), QuestionBean.class);
                                                 if (wenwenBean != null) {
                                                     Intent intent = new Intent(context, WenwenDetailActivity.class);
                                                     Bundle bundle = new Bundle();
@@ -244,7 +244,7 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                                         try {
                                             result = new JSONObject(s);
                                             if (result.optInt("code") == 0) {
-                                                WenwenBean wenwenBean = gson.fromJson(result.optString("data"), WenwenBean.class);
+                                                QuestionBean wenwenBean = gson.fromJson(result.optString("data"), QuestionBean.class);
                                                 if (wenwenBean != null) {
 
                                                     Intent intent = new Intent(context, WenwenDetailActivity.class);

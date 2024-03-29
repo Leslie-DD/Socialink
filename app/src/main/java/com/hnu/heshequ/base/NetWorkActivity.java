@@ -6,8 +6,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.view.CustomDialog;
 import com.hnu.heshequ.view.CustomProgressDialog;

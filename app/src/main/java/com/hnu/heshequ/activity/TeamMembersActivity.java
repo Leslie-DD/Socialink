@@ -12,9 +12,9 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.SearchMembersActivity;
 import com.hnu.heshequ.adapter.listview.TeamMemberAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefMembers;
 import com.hnu.heshequ.entity.TeamMemberBean;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;

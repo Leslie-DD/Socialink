@@ -32,12 +32,12 @@ import com.hnu.heshequ.adapter.MyFragmentPagerAdapter;
 import com.hnu.heshequ.adapter.recycleview.RecycleAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.HomeBannerImgsBean;
 import com.hnu.heshequ.classification.ClassifationActivity;
 import com.hnu.heshequ.classification.ClassificationBean;
 import com.hnu.heshequ.classification.ClassifySecondaryBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.HomeBanner;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CustomViewPager;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -88,7 +88,7 @@ public class SecondFragment extends NetWorkFragment implements XRecyclerView.Loa
     private RollPagerView rollPagerView;    // 轮播图
     private BannerAdapter bannerAdapter;
     private final int getimgsCode = 1000;
-    private ArrayList<HomeBannerImgsBean> imgsData;
+    private ArrayList<HomeBanner> imgsData;
     private Gson gson = new Gson();
     private ArrayList<String> imgs;
     private int position;
@@ -101,10 +101,10 @@ public class SecondFragment extends NetWorkFragment implements XRecyclerView.Loa
             case getimgsCode:
                 if (result.optInt("code") == 0) {
                     if (result.has("data") && !result.optString("data").isEmpty()) {
-                        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+                        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBanner>>() {
                         }.getType());
                         if (imgsData != null && imgsData.size() > 0) {
-                            for (HomeBannerImgsBean bannerImgsBean : imgsData) {
+                            for (HomeBanner bannerImgsBean : imgsData) {
                                 imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
                             }
                         }

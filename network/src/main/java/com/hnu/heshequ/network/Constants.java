@@ -1,4 +1,4 @@
-package com.hnu.heshequ.constans;
+package com.hnu.heshequ.network;
 
 public class Constants {
     public static int screenW;
@@ -9,11 +9,11 @@ public class Constants {
     public static String url4 = "http://img4.duitang.com/uploads/item/201509/26/20150926014223_BW8EG.jpeg";
     public static String url5 = "http://mvimg10.meitudata.com/569b9090af0526344.jpg";
 
-//    public static String base_url = "http://182.92.84.79:8081/xiangyu";
-//    public static String base_url_tmp = "http://182.92.84.79:8081/xiangyu";
+    public static String base_url = "http://182.92.84.79:8081/xiangyu";
+    public static String base_url_tmp = "http://182.92.84.79:8081/xiangyu";
 
-    public static String base_url = "http://8.138.85.81:6000/xiangyu";
-    public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
+//    public static String base_url = "http://8.138.85.81:6000/xiangyu";
+//    public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
 
     public static String Token_Header = "XIANGYU-ACCESS-TOKEN";
     public static int default_PS = 10;

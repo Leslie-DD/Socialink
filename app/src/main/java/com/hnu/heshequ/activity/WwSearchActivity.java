@@ -24,14 +24,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.login.LabelSelectionActivity;
-import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
+import com.hnu.heshequ.adapter.recycleview.QuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.WenwenBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.entity.TestBean;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.FlowLayout;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -43,12 +43,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, HotQuestionsAdapter.DoSaveListener, TextWatcher {
+public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.LoadingListener, QuestionsAdapter.DoSaveListener, TextWatcher {
     private LinearLayout llBack, llFl;
     private EditText etContent;
     private XRecyclerView rv;
     private TextView tvTips;
-    private HotQuestionsAdapter adapter;
+    private QuestionsAdapter adapter;
     private RelativeLayout rlData;
     private boolean isLable = false;
     private int i = 0;
@@ -58,7 +58,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
     private boolean hasRefresh;
     private int totalPage;
     private FragmentBrodcast brodcast;
-    private List<WenwenBean> newList, moreList;
+    private List<QuestionBean> newList, moreList;
     private int clickPosition;
     private FlowLayout flowLayout;
     private ArrayList<LabelSelectionActivity.LableBean> datas;
@@ -81,7 +81,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
                     JSONObject data = result.getJSONObject("data");
                     if (data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (newList == null || newList.size() == 0) {
                             newList = new ArrayList<>();
@@ -106,7 +106,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
                     JSONObject data = result.getJSONObject("data");
                     if (data != null && data.has("list")) {
                         moreList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (moreList == null || moreList.size() == 0) {
                             moreList = new ArrayList<>();
@@ -190,7 +190,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         }
     }
 
-    private void setList(List<WenwenBean> newList) {
+    private void setList(List<QuestionBean> newList) {
         adapter.setData(newList);
     }
 
@@ -216,7 +216,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         tvTips = (TextView) findViewById(R.id.tvTips);
         rv = (XRecyclerView) findViewById(R.id.rv);
         ConsTants.initXRecycleView(this, true, true, rv);
-        adapter = new HotQuestionsAdapter(this);
+        adapter = new QuestionsAdapter(this);
         adapter.setListener(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

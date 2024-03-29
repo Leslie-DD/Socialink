@@ -29,8 +29,8 @@ import com.hnu.heshequ.activity.login.LoginActivity;
 import com.hnu.heshequ.adapter.listview.GwPictureAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.FriendUserId;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.PhotoUtils;
 import com.hnu.heshequ.utils.Utils;
 

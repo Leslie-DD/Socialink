@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.friend.FriendNearDetail;
 import com.hnu.heshequ.bean.FriendListBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.view.CircleView;
 import com.jude.rollviewpager.RollPagerView;
 

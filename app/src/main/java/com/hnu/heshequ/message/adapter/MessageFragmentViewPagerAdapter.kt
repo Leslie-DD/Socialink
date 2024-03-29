@@ -5,8 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.hnu.heshequ.message.ui.IMessagesFragment
-import com.hnu.heshequ.message.ui.MessagesFriendApplyFragment
 import com.hnu.heshequ.message.ui.MessagesChatFragment
+import com.hnu.heshequ.message.ui.MessagesFriendApplyFragment
 import com.hnu.heshequ.message.ui.MessagesQuestionFragment
 import com.hnu.heshequ.message.ui.MessagesSayFragment
 import com.hnu.heshequ.message.ui.MessagesTeamFragment

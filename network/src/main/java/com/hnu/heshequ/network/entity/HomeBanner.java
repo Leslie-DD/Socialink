@@ -1,18 +1,6 @@
-package com.hnu.heshequ.bean;
+package com.hnu.heshequ.network.entity;
 
-
-public class HomeBannerImgsBean {
-
-    /**
-     * id : 1
-     * gmtCreate : 1528367771000
-     * gmtModified : 1528367793000
-     * name : 首页广告
-     * coverImage : tb/20180601/2_20180601113632_940.png
-     * linkUrl : www.hao123.com
-     * category : 1
-     */
-
+public class HomeBanner {
     private int id;
     private long gmtCreate;
     private long gmtModified;

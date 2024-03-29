@@ -25,7 +25,7 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.listview.CpqAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.QuestionBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.MatcherUtils;
 import com.hnu.heshequ.utils.Utils;
 

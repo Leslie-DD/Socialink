@@ -12,8 +12,8 @@ import com.hnu.heshequ.adapter.recycleview.SearchTeamAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.SearchTeamBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
+import com.hnu.heshequ.network.Constants;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONObject;

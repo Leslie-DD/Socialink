@@ -2,7 +2,6 @@ package com.hnu.heshequ.network;
 
 import android.util.Log;
 
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;

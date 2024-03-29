@@ -19,46 +19,39 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.ActivityDateilActivity;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.adapter.Adapter_GridView;
-import com.hnu.heshequ.bean.HotAvtivityBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.HotActivities;
 import com.hnu.heshequ.view.CircleView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author dev06
- * 2016年7月4日
- */
-
 public class HotActiveAdapter extends RecyclerView.Adapter {
 
-    private Context context;
-    private LayoutInflater inflater;
-    private ArrayList<HotAvtivityBean.HotBean> data = new ArrayList<>();
-    private View views;
+    private final Context context;
+    private List<HotActivities.HotBean> data = new ArrayList<>();
 
     public HotActiveAdapter(Context context) {
         super();
         this.context = context;
-        this.inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
     }
 
-    public void setData(ArrayList<HotAvtivityBean.HotBean> data) {
+    public void setData(List<HotActivities.HotBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
 
-    public void setData2(ArrayList<HotAvtivityBean.HotBean> data) {
+    public void setData2(List<HotActivities.HotBean> data) {
         this.data.addAll(data);
         this.notifyDataSetChanged();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        views = LayoutInflater.from(context).inflate(R.layout.item_hot_active, parent, false);
+        View views = LayoutInflater.from(context).inflate(R.layout.item_hot_active, parent, false);
         return new ViewHolder(views);
     }
 
@@ -96,7 +89,7 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
 
         @SuppressLint("SetTextI18n")
         public void setData(final int position) {
-            final HotAvtivityBean.HotBean hotBean = data.get(position);
+            final HotActivities.HotBean hotBean = data.get(position);
 
             if (!TextUtils.isEmpty(hotBean.getClubInfo().getLogoImage())) {
                 Glide.with(context).load(Constants.base_url + hotBean.getClubInfo().getLogoImage()).asBitmap().into(ivHead);
@@ -131,7 +124,7 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
                 gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        List<HotAvtivityBean.HotBean.PhotosBean> photoList = data.get(position).getPhotos();
+                        List<HotActivities.HotBean.PhotosBean> photoList = data.get(position).getPhotos();
                         ArrayList<String> list = new ArrayList<String>();
                         if (photoList != null && photoList.size() > 0) {
                             for (int j = 0; j < photoList.size(); j++) {

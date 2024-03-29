@@ -17,9 +17,9 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.activity.team.StatementDetailActivity;
 import com.hnu.heshequ.adapter.Adapter_GridView;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
 

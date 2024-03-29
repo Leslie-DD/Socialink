@@ -21,9 +21,9 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.activity.team.PersonalInformationActivity;
 import com.hnu.heshequ.bean.MessageBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.view.CircleView;
 
 import java.util.ArrayList;

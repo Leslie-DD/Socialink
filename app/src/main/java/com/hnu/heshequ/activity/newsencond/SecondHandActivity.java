@@ -17,13 +17,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.bean.HomeBannerImgsBean;
 import com.hnu.heshequ.bean.SecondhandgoodBean;
 import com.hnu.heshequ.classification.ClassificationBean;
 import com.hnu.heshequ.classification.ClassifySecondaryBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.HomeBanner;
 import com.hnu.heshequ.utils.Utils;
 
 import org.json.JSONException;
@@ -130,10 +130,10 @@ public class SecondHandActivity extends NetWorkActivity {
             case 1000:  // 获取轮播图数据
                 if (result.optInt("code") == 0) {
                     if (result.has("data") && !result.optString("data").isEmpty()) {
-                        ArrayList<HomeBannerImgsBean> imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+                        ArrayList<HomeBanner> imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBanner>>() {
                         }.getType());
                         if (imgsData != null && imgsData.size() > 0) {
-                            for (HomeBannerImgsBean bannerImgsBean : imgsData) {
+                            for (HomeBanner bannerImgsBean : imgsData) {
                                 String img = Constants.base_url + bannerImgsBean.getCoverImage();
                                 images.add(img);
                             }

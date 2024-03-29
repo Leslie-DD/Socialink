@@ -1,6 +1,6 @@
 package com.hnu.heshequ.entity;
 
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -14,7 +14,7 @@ import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.WebActivity;
 import com.hnu.heshequ.adapter.BannerAdapter;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.HomeBannerImgsBean;
+import com.hnu.heshequ.network.entity.HomeBanner;
 import com.hnu.heshequ.utils.Utils;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
@@ -30,11 +30,11 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.PicViewHolder> {
 
     private List<String> mList = new ArrayList<>();     // RecyclerView
     private List<String> mList2 = new ArrayList<>();    // 轮播图
-    private List<HomeBannerImgsBean> mList3 = new ArrayList<>();    // 轮播图2
+    private List<HomeBanner> mList3 = new ArrayList<>();    // 轮播图2
 
     private BannerAdapter bannerAdapter;
 
-    public PicAdapter(Context context, List<String> list, List<String> list2, List<HomeBannerImgsBean> list3) {
+    public PicAdapter(Context context, List<String> list, List<String> list2, List<HomeBanner> list3) {
         mContext = context;
         mList = list;
         mList2 = list2;

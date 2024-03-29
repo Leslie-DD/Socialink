@@ -50,9 +50,9 @@ import androidx.core.util.Pair;
 import com.bumptech.glide.Glide;
 import com.hnu.heshequ.MeetApplication;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.Name;
 import com.hnu.heshequ.entity.TeamMemberBean;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.view.CircleView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 

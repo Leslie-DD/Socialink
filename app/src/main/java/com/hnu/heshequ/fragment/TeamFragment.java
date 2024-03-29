@@ -17,10 +17,10 @@ import com.hnu.heshequ.activity.team.TeamDetailActivity;
 import com.hnu.heshequ.adapter.recycleview.TeamAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefTDteamEvent;
 import com.hnu.heshequ.entity.TeamTestBean;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.MyXRecyclerView;
 

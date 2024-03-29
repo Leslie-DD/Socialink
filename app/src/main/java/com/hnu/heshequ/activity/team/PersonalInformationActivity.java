@@ -5,7 +5,6 @@ import static android.view.View.GONE;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,7 +30,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.adapter.recycleview.CommentTeamAdapter;
-import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
+import com.hnu.heshequ.adapter.recycleview.QuestionsAdapter;
 import com.hnu.heshequ.adapter.recycleview.SecondhandgoodAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
@@ -39,11 +38,11 @@ import com.hnu.heshequ.bean.MessageBean;
 import com.hnu.heshequ.bean.NoticeBean;
 import com.hnu.heshequ.bean.PullTheBlackBean;
 import com.hnu.heshequ.bean.SecondhandgoodBean;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.bean.WenwenBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.entity.RefMembers;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.QuestionBean;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.network.entity.UserInfoBean;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
@@ -59,7 +58,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonalInformationActivity extends NetWorkActivity implements
-        XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener, HotQuestionsAdapter.DoSaveListener {
+        XRecyclerView.LoadingListener, CommentTeamAdapter.OnItemClickListener, QuestionsAdapter.DoSaveListener {
 
     private static final String TAG = "[PersonalInformationActivity]";
 
@@ -104,12 +103,12 @@ public class PersonalInformationActivity extends NetWorkActivity implements
     private Boolean isattention;
     private CommentTeamAdapter teamAdapter;
     private ArrayList<TeamBean> teamData;
-    private HotQuestionsAdapter quAdapter;
+    private QuestionsAdapter quAdapter;
     private SecondhandgoodAdapter goodAdapter;
     private ArrayList<SecondhandgoodBean> goodData;
     private ArrayList<SecondhandgoodBean> goodmoreData;
-    private ArrayList<WenwenBean> quData;
-    private ArrayList<WenwenBean> moreQUDate;
+    private ArrayList<QuestionBean> quData;
+    private ArrayList<QuestionBean> moreQUDate;
     private LinearLayout llTip;
     private int uid;
     private Gson gson = new Gson();
@@ -221,7 +220,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
 //
 //        getattention();
         teamAdapter = new CommentTeamAdapter(mContext, new ArrayList<TeamBean>());
-        quAdapter = new HotQuestionsAdapter(mContext);
+        quAdapter = new QuestionsAdapter(mContext);
         goodAdapter = new SecondhandgoodAdapter(mContext);
 
         quAdapter.setListener(this);
@@ -899,7 +898,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
                     JSONObject data = result.getJSONObject("data");
                     if (data != null && data.has("list")) {
                         quData = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (quData == null || quData.size() == 0) {
                             quData = new ArrayList<>();
@@ -916,7 +915,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
                     JSONObject data = result.getJSONObject("data");
                     if (data != null && data.has("list")) {
                         moreQUDate = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (moreQUDate == null || moreQUDate.size() == 0) {
                             moreQUDate = new ArrayList<>();

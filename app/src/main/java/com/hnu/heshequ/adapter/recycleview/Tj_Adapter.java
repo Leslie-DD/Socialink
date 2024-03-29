@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.TjDetailActivity;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.BuildingBean;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.Utils;
 
 import java.text.ParseException;

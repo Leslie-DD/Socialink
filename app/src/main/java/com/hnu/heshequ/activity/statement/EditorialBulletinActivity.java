@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.RefTDteamEvent;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;

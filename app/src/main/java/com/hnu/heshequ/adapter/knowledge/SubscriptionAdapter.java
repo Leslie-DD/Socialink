@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.knowledge.SubscriptionDetailActivity;
 import com.hnu.heshequ.bean.knowledge.SubscriptionItemBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.view.CircleView;
 
 import java.util.ArrayList;

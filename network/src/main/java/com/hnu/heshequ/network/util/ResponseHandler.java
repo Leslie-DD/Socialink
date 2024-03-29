@@ -9,5 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface ResponseHandler {
     Class cls() default MinaResponse.class;
+
     Class handler() default MinaHandler.class;
 }

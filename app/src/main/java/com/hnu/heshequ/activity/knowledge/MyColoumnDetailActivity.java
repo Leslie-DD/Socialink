@@ -16,8 +16,8 @@ import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.knowledge.ArticleSimpleBean;
 import com.hnu.heshequ.bean.knowledge.Author;
 import com.hnu.heshequ.bean.knowledge.SubscriptionBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.view.CircleView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 

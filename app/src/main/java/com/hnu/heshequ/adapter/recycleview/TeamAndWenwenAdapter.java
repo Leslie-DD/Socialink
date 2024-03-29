@@ -21,11 +21,11 @@ import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.activity.team.TeamDetailActivity;
 import com.hnu.heshequ.activity.wenwen.WenwenDetailActivity;
 import com.hnu.heshequ.adapter.Adapter_GridView;
-import com.hnu.heshequ.bean.WenwenBean;
-import com.hnu.heshequ.bean.WwPhotoBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.QuestionBean;
+import com.hnu.heshequ.network.entity.QuestionPhotoBean;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
 
@@ -41,7 +41,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private List<WenwenBean> data = new ArrayList<>();
+    private List<QuestionBean> data = new ArrayList<>();
     private View views;
 
     public TeamAndWenwenAdapter(Context context) {
@@ -50,7 +50,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
         this.inflater = LayoutInflater.from(context);
     }
 
-    public void setData(List<WenwenBean> data) {
+    public void setData(List<QuestionBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -123,7 +123,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
 
         public void setData(final int position) {
             if (type == 1) {
-                WenwenBean bean = data.get(position);
+                QuestionBean bean = data.get(position);
                 if (bean != null) {
                     tvTime.setText(bean.time == null ? "" : bean.time);
                     tvTitle.setText(bean.title == null ? "" : bean.title);
@@ -190,7 +190,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
                         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                List<WwPhotoBean> photoList = data.get(position).photos;
+                                List<QuestionPhotoBean> photoList = data.get(position).photos;
                                 ArrayList<String> list = new ArrayList<String>();
                                 if (photoList != null && photoList.size() > 0) {
                                     for (int j = 0; j < photoList.size(); j++) {
@@ -218,7 +218,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
 
                 }
             } else {
-                WenwenBean bean = data.get(position);
+                QuestionBean bean = data.get(position);
                 if (bean != null) {
                     Glide.with(context).load(WenConstans.BaseUrl + bean.logoImage)
                             .asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);

@@ -1,10 +1,10 @@
-package com.hnu.heshequ.bean;
+package com.hnu.heshequ.network.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HotAvtivityBean {
+public class HotActivities {
 
     /**
      * list : [{"id":1,"gmtCreate":"2018-06-02 15:04","presentor":1,"presentorName":"18774961742","header":"/info/file/pub.do?fileId=logo/20180528/1_20180528182708_118.jpg","title":"吃西瓜大赛","content":"谁吃的多谁就能得到如花香吻一个","applyDeadline":"2018-06-02 15:07","limitMember":200,"addressName":"湖南大学","like_amount":1,"comment_amount":1,"likes":[{"uid":1,"header":"/info/file/pub.do?fileId=logo/20180528/1_20180528182708_118.jpg","bzId":1}],"isLike":1}]

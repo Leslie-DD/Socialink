@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;
 

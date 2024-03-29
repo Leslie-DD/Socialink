@@ -15,8 +15,8 @@ import com.hnu.heshequ.adapter.recycleview.PullTheBlackAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.PullTheBlackBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 

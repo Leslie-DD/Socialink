@@ -13,13 +13,13 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
+import com.hnu.heshequ.adapter.recycleview.QuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.WenwenBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, HotQuestionsAdapter.DoSaveListener {
+public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.LoadingListener, QuestionsAdapter.DoSaveListener {
 
     private View view;
     private int pn = 1;
@@ -40,8 +40,8 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
     private boolean hasRefresh;
     private int totalPage;
     private FragmentBrodcast brodcast;
-    private List<WenwenBean> newList, moreList;
-    private HotQuestionsAdapter adapter;
+    private List<QuestionBean> newList, moreList;
+    private QuestionsAdapter adapter;
     private int clickPosition;
 
     private boolean islabel = false;
@@ -62,7 +62,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
                     JSONObject data = result.getJSONObject("data");
                     if (data != null && data.has("list")) {
                         newList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (newList == null || newList.size() == 0) {
                             newList = new ArrayList<>();
@@ -92,7 +92,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
                     JSONObject data = result.getJSONObject("data");
                     if (data != null && data.has("list")) {
                         moreList = gson.fromJson(data.getJSONArray("list").toString(),
-                                new TypeToken<List<WenwenBean>>() {
+                                new TypeToken<List<QuestionBean>>() {
                                 }.getType());
                         if (moreList == null || moreList.size() == 0) {
                             moreList = new ArrayList<>();
@@ -129,7 +129,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         }
     }
 
-    private void setList(List<WenwenBean> newList) {
+    private void setList(List<QuestionBean> newList) {
         adapter.setData(newList);
     }
 
@@ -144,7 +144,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         rv = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
         ConsTants.initXRecycleView(getActivity(), true, true, rv);
-        adapter = new HotQuestionsAdapter(getActivity());
+        adapter = new QuestionsAdapter(getActivity());
         adapter.setListener(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);

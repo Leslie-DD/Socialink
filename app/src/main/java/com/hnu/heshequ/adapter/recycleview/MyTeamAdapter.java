@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.TeamDetailActivity;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.view.CircleView;
 
 import java.util.ArrayList;

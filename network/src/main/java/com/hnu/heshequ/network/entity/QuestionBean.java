@@ -1,10 +1,10 @@
-package com.hnu.heshequ.bean;
+package com.hnu.heshequ.network.entity;
 
 import java.io.Serializable;
 import java.util.List;
 
 
-public class WenwenBean implements Serializable {
+public class QuestionBean implements Serializable {
     public int type = 0;
     public String userLike;
     public String specialId;
@@ -23,8 +23,8 @@ public class WenwenBean implements Serializable {
     public String gmtModified;
     public String content;
     public String isCollect;
-    public List<WwPhotoBean> photos;
-    public List<WwLablesBean> labels;
+    public List<QuestionPhotoBean> photos;
+    public List<QuestionLablesBean> labels;
 
     public String name;
     public String logoImage;

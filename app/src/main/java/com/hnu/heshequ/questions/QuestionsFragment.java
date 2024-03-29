@@ -32,12 +32,12 @@ import com.hnu.heshequ.adapter.MyFragmentPagerAdapter;
 import com.hnu.heshequ.adapter.recycleview.RecycleAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.HomeBannerImgsBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.fragment.ChildFragment2;
 import com.hnu.heshequ.fragment.ChildWwFragment;
 import com.hnu.heshequ.fragment.ZcFragment;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.HomeBanner;
 import com.hnu.heshequ.utils.StatusBarUtil;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CustomViewPager;
@@ -73,7 +73,7 @@ public class QuestionsFragment extends NetWorkFragment implements XRecyclerView.
     private FragmentBrodcast brodcast;
     private Intent intentActivity;
     private final int getimgsCode = 1000;
-    private ArrayList<HomeBannerImgsBean> imgsData;
+    private ArrayList<HomeBanner> imgsData;
     private Gson gson;
     ArrayList<String> imgs;
 
@@ -89,13 +89,13 @@ public class QuestionsFragment extends NetWorkFragment implements XRecyclerView.
         if (!result.has("data") || result.optString("data").isEmpty()) {
             return;
         }
-        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+        imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBanner>>() {
         }.getType());
 
         Log.d(TAG, "imgsData" + imgsData.size());
         if (imgsData != null && !imgsData.isEmpty()) {
             Log.d(TAG, "imgsData" + imgsData.size());
-            for (HomeBannerImgsBean bannerImgsBean : imgsData) {
+            for (HomeBanner bannerImgsBean : imgsData) {
                 imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
             }
         }

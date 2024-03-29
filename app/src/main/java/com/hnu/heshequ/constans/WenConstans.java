@@ -1,6 +1,8 @@
 package com.hnu.heshequ.constans;
 
 
+import com.hnu.heshequ.network.Constants;
+
 public class WenConstans {
     public static String BaseUrl = Constants.base_url;
     //    public static String BaseUrl="http://rxcpe2.natappfree.cc";

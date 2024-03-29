@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
+import com.hnu.heshequ.network.Constants;
 
 import java.util.ArrayList;
 

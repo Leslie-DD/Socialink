@@ -25,12 +25,12 @@ import com.hnu.heshequ.activity.wenwen.WenwenDetailActivity;
 import com.hnu.heshequ.adapter.Adapter_GridView;
 import com.hnu.heshequ.adapter.BannerAdapter;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.HomeBannerImgsBean;
-import com.hnu.heshequ.bean.WenwenBean;
-import com.hnu.heshequ.bean.WwPhotoBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.HomeBanner;
+import com.hnu.heshequ.network.entity.QuestionBean;
+import com.hnu.heshequ.network.entity.QuestionPhotoBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
@@ -48,23 +48,23 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapter.ViewHolder> {
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
     private final Context context;
-    private List<WenwenBean> data = new ArrayList<>();
+    private List<QuestionBean> data = new ArrayList<>();
     private View views;
 
     private ArrayList<String> images;
     private final Gson gson = new Gson();
     private BannerAdapter bannerAdapter;
-    private ArrayList<HomeBannerImgsBean> imgsData;
+    private ArrayList<HomeBanner> imgsData;
     private int bannerFlag = 0;
 
-    public HotQuestionsAdapter(Context context) {
+    public QuestionsAdapter(Context context) {
         super();
         this.context = context;
     }
 
-    public void setData(List<WenwenBean> data) {
+    public void setData(List<QuestionBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
@@ -76,7 +76,7 @@ public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapte
 
     @NonNull
     @Override
-    public HotQuestionsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public QuestionsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 0) {
             views = LayoutInflater.from(context).inflate(R.layout.item_hot_ww, parent, false);
         } else if (viewType == 1) {
@@ -86,7 +86,7 @@ public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HotQuestionsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull QuestionsAdapter.ViewHolder holder, int position) {
         holder.setData(position);
     }
 
@@ -136,7 +136,7 @@ public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapte
         }
 
         public void setData(final int position) {
-            WenwenBean wenwenBean = data.get(position);
+            QuestionBean wenwenBean = data.get(position);
             if (wenwenBean.type == 0) {
                 tvTime.setText(wenwenBean.time == null ? "" : wenwenBean.time);
                 if (TextUtils.isEmpty(wenwenBean.college)) {
@@ -204,7 +204,7 @@ public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapte
                     }
                     gv.setAdapter(new Adapter_GridView(context, strings));
                     gv.setOnItemClickListener((adapterView, view, i, l) -> {
-                        List<WwPhotoBean> photoList = wenwenBean.photos;
+                        List<QuestionPhotoBean> photoList = wenwenBean.photos;
                         ArrayList<String> list = new ArrayList<>();
                         if (photoList != null && !photoList.isEmpty()) {
                             for (int j = 0; j < photoList.size(); j++) {
@@ -262,18 +262,18 @@ public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapte
                             if (!result.has("data") || result.optString("data").isEmpty()) {
                                 return;
                             }
-                            imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+                            imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBanner>>() {
                             }.getType());
                             if (imgsData != null && !imgsData.isEmpty()) {
-                                for (HomeBannerImgsBean bannerImgsBean : imgsData) {
+                                for (HomeBanner bannerImgsBean : imgsData) {
                                     images.add(Constants.base_url + bannerImgsBean.getCoverImage());
                                 }
                             }
                             if (!images.isEmpty()) {
                                 bannerAdapter.setData(images);
                             } else {
-                                HotQuestionsAdapter.this.data.remove(position);
-                                HotQuestionsAdapter.this.notifyDataSetChanged();
+                                QuestionsAdapter.this.data.remove(position);
+                                QuestionsAdapter.this.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

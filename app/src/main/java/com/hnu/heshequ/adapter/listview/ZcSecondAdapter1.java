@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.wenwen.ZcArticleActivity;
 import com.hnu.heshequ.bean.ZcSecondBean;
-import com.hnu.heshequ.constans.Constants;
+import com.hnu.heshequ.network.Constants;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,8 +14,8 @@ import com.bumptech.glide.Glide;
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.activity.wenwen.ZcQusetionActivity;
 import com.hnu.heshequ.bean.ZcQuestionBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyLv;
 

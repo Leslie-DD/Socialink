@@ -119,7 +119,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (e == null) {
             return false;
         }
-        Log.e(TAG, "handleException:", e);
+        Log.e(TAG, "handleException: " + e.getMessage(), e);
         e.printStackTrace();
         //收集设备参数信息
         collectDeviceInfo(mContext);

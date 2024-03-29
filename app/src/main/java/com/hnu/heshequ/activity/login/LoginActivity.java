@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.hnu.heshequ.R;
 import com.hnu.heshequ.base.NetWorkActivity;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.entity.EventBean;
 import com.hnu.heshequ.launcher.MainActivity;
+import com.hnu.heshequ.network.Constants;
 import com.hnu.heshequ.network.util.AuthorizationInterceptor;
 import com.hnu.heshequ.utils.SharedPreferencesHelp;
 import com.hnu.heshequ.utils.Utils;

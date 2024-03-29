@@ -24,10 +24,10 @@ import com.hnu.heshequ.activity.team.ImagePreviewActivity;
 import com.hnu.heshequ.adapter.Adapter_GridView;
 import com.hnu.heshequ.adapter.BannerAdapter;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.HomeBannerImgsBean;
-import com.hnu.heshequ.bean.TeamBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.P;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.HomeBanner;
+import com.hnu.heshequ.network.entity.TeamBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyGv;
@@ -40,20 +40,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
 
-/**
- * @author dev06
- * 2016年7月4日
- */
-
 public class CommentTeamAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private LayoutInflater inflater;
-    private ArrayList<TeamBean> data = new ArrayList<>();
+    private List<TeamBean> data = new ArrayList<>();
     private View views;
     private int num;
     private OnItemClickListener listener;
@@ -62,18 +57,17 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
 
     private Gson gson = new Gson();
     private BannerAdapter bannerAdapter;
-    private ArrayList<HomeBannerImgsBean> imgsData;
+    private List<HomeBanner> imgsData;
     private int bannerFlag = 0;
 
 
-    public CommentTeamAdapter(Context context, ArrayList<TeamBean> data) {
+    public CommentTeamAdapter(Context context, List<TeamBean> data) {
         super();
         this.context = context;
         this.data = data;
-        this.inflater = LayoutInflater.from(context);
     }
 
-    public ArrayList<TeamBean> getData() {
+    public List<TeamBean> getData() {
         return data;
     }
 
@@ -85,29 +79,13 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
         this.listener = listener;
     }
 
-    public void setData(ArrayList<TeamBean> data) {
+    public void setData(List<TeamBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
-        /*int viewType = 0;
-        switch (data.get(position).getItemType()) {
-            case 1:
-                viewType = 1;
-                break;
-            case 2:
-                viewType = 2;
-                break;
-            case 3:
-                viewType = 3;
-                break;
-            case 4:
-                viewType = 4;
-                break;
-        }*/
-
         return data.get(position).getItemType();
     }
 
@@ -127,8 +105,6 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                 views = LayoutInflater.from(context).inflate(R.layout.myteam_team_banner, parent, false);
                 break;
         }
-
-
         return new ViewHolder(views, viewType);
     }
 
@@ -416,10 +392,10 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                             JSONObject result = new JSONObject(s);
                             if (result.optInt("code") == 0) {
                                 if (result.has("data") && !result.optString("data").isEmpty()) {
-                                    imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBannerImgsBean>>() {
+                                    imgsData = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<HomeBanner>>() {
                                     }.getType());
                                     if (imgsData != null && imgsData.size() > 0) {
-                                        for (HomeBannerImgsBean bannerImgsBean : imgsData) {
+                                        for (HomeBanner bannerImgsBean : imgsData) {
                                             imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
                                         }
 

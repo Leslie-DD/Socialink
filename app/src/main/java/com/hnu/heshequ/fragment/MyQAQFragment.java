@@ -5,10 +5,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
+import com.hnu.heshequ.adapter.recycleview.QuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.WenwenBean;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.json.JSONObject;
@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class MyQAQFragment extends NetWorkFragment {
     private View view;
     private XRecyclerView xRecyclerView;
-    private HotQuestionsAdapter adapter;
-    private ArrayList<WenwenBean> data;
+    private QuestionsAdapter adapter;
+    private ArrayList<QuestionBean> data;
     private TextView tvTips;
 
     @Override
@@ -39,7 +39,7 @@ public class MyQAQFragment extends NetWorkFragment {
         xRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         tvTips = (TextView) view.findViewById(R.id.tvTips);
         ConsTants.initXRecycleView(mContext, true, true, xRecyclerView);
-        adapter = new HotQuestionsAdapter(mContext);
+        adapter = new QuestionsAdapter(mContext);
         xRecyclerView.setAdapter(adapter);
         return view;
     }

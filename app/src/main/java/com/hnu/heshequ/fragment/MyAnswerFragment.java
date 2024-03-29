@@ -14,12 +14,12 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hnu.heshequ.R;
-import com.hnu.heshequ.adapter.recycleview.HotQuestionsAdapter;
+import com.hnu.heshequ.adapter.recycleview.QuestionsAdapter;
 import com.hnu.heshequ.base.NetWorkFragment;
 import com.hnu.heshequ.bean.ConsTants;
-import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.hnu.heshequ.utils.Utils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -29,16 +29,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyAnswerFragment extends NetWorkFragment implements HotQuestionsAdapter.DoSaveListener, XRecyclerView.LoadingListener {
+public class MyAnswerFragment extends NetWorkFragment implements QuestionsAdapter.DoSaveListener, XRecyclerView.LoadingListener {
     private View view;
     private XRecyclerView xRecyclerView;
-    private HotQuestionsAdapter adapter;
+    private QuestionsAdapter adapter;
 
     private int pn = 1;
     private int ps = 20;
     private boolean hasRefresh;
     private int totalPage = 1;
-    private List<WenwenBean> allList, moreList;
+    private List<QuestionBean> allList, moreList;
     private TextView tvTips;
     private int clickPosition;
     private FragmentBrodcast brodcast;
@@ -59,7 +59,7 @@ public class MyAnswerFragment extends NetWorkFragment implements HotQuestionsAda
                 JSONObject data = result.optJSONObject("data");
                 if (data != null && data.has("list")) {
                     allList = gson.fromJson(data.optJSONArray("list").toString(),
-                            new TypeToken<List<WenwenBean>>() {
+                            new TypeToken<List<QuestionBean>>() {
                             }.getType());
                     if (allList == null || allList.size() == 0) {
                         allList = new ArrayList<>();
@@ -82,7 +82,7 @@ public class MyAnswerFragment extends NetWorkFragment implements HotQuestionsAda
                 JSONObject data = result.optJSONObject("data");
                 if (data != null && data.has("list")) {
                     moreList = gson.fromJson(data.optJSONArray("list").toString(),
-                            new TypeToken<List<WenwenBean>>() {
+                            new TypeToken<List<QuestionBean>>() {
                             }.getType());
                     if (moreList == null || moreList.size() == 0) {
                         moreList = new ArrayList<>();
@@ -125,7 +125,7 @@ public class MyAnswerFragment extends NetWorkFragment implements HotQuestionsAda
         view = inflater.inflate(R.layout.only_rv_item, null);
         xRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         ConsTants.initXRecycleView(mContext, true, true, xRecyclerView);
-        adapter = new HotQuestionsAdapter(mContext);
+        adapter = new QuestionsAdapter(mContext);
         adapter.setListener(this);
         xRecyclerView.setAdapter(adapter);
         xRecyclerView.setLoadingListener(this);

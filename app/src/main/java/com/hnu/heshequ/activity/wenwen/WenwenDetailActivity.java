@@ -31,12 +31,12 @@ import com.hnu.heshequ.adapter.listview.WwDisscussAdapter;
 import com.hnu.heshequ.base.NetWorkActivity;
 import com.hnu.heshequ.bean.ConsTants;
 import com.hnu.heshequ.bean.ShareBean;
-import com.hnu.heshequ.bean.WenwenBean;
 import com.hnu.heshequ.bean.WwDisscussBean;
-import com.hnu.heshequ.constans.Constants;
 import com.hnu.heshequ.constans.ResultUtils;
 import com.hnu.heshequ.constans.WenConstans;
 import com.hnu.heshequ.fragment.BottomShareFragment;
+import com.hnu.heshequ.network.Constants;
+import com.hnu.heshequ.network.entity.QuestionBean;
 import com.hnu.heshequ.utils.Utils;
 import com.hnu.heshequ.view.CircleView;
 import com.hnu.heshequ.view.MyLv;
@@ -70,7 +70,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
     private PictureAdapter pictureAdapter;
     private WwDisscussAdapter wwDisscussAdapter;
     private ImageView ivRight;
-    private WenwenBean wenwenBean;
+    private QuestionBean wenwenBean;
     private LinearLayout llSave;
     private ImageView ivImg;
     private int dz;
@@ -216,7 +216,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
         } else if (where == 10086) {
             if (result.optInt("code") == 0) {
                 Gson gson = new Gson();
-                wenwenBean = gson.fromJson(result.optString("data"), WenwenBean.class);
+                wenwenBean = gson.fromJson(result.optString("data"), QuestionBean.class);
                 dz = wenwenBean.likeAmount;
                 setListener();
                 init();
@@ -248,7 +248,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ww_detail);
         EventBus.getDefault().register(this);
-        wenwenBean = (WenwenBean) getIntent().getSerializableExtra("wenwen");
+        wenwenBean = (QuestionBean) getIntent().getSerializableExtra("wenwen");
         dz = wenwenBean.likeAmount;
         setListener();
         init();

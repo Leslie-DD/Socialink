@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:id="@+id/etTheme"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp"
                 android:textColorHint="#cccccc"
                 android:hint="输入投票主题"

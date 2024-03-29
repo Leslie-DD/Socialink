@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:layout_height="match_parent"
     android:focusable="true"
     android:orientation="vertical"
@@ -42,7 +42,7 @@
             android:gravity="right"
             android:hint="不限距离"
             android:paddingRight="15dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="15sp" />
 
         <ImageView
@@ -82,7 +82,7 @@
             android:gravity="right"
             android:hint="不限年龄"
             android:paddingRight="15dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="15sp" />
 
         <ImageView
@@ -121,7 +121,7 @@
             android:gravity="right"
             android:hint="不限性别"
             android:paddingRight="15dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="15sp" />
 
         <ImageView
@@ -160,7 +160,7 @@
             android:gravity="right"
             android:hint="不限学校"
             android:paddingRight="15dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="15sp" />
 
         <ImageView

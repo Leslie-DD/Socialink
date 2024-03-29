@@ -131,7 +131,7 @@ public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapte
                 // 设置透明度
                 rollPagerView.setAnimationDurtion(500);
                 // 设置指示器（顺序依次）
-                rollPagerView.setHintView(new ColorPointHintView(context, Color.parseColor("#2CD22B"), Color.WHITE));
+                rollPagerView.setHintView(new ColorPointHintView(context, context.getResources().getColor(R.color.colorPrimary, null), Color.WHITE));
             }
         }
 
@@ -165,7 +165,7 @@ public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapte
                     tvLoves.setTextColor(Color.parseColor("#ababb3"));
                 } else {
                     ivImg.setImageResource(R.mipmap.saved);
-                    tvLoves.setTextColor(Color.parseColor("#2CD22B"));
+                    tvLoves.setTextColor(context.getResources().getColor(R.color.colorPrimary, null));
                 }
                 if (wenwenBean.labels != null && !wenwenBean.labels.isEmpty()) {
                     String str = "";

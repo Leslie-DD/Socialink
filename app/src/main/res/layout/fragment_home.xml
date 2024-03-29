@@ -4,7 +4,7 @@
     android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -36,8 +36,8 @@
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:hint="搜索相关"
-                    android:textColor="@color/text66"
-                    android:textColorHint="@color/text9"
+                    android:textColor="@color/text_66"
+                    android:textColorHint="@color/text_9"
                     android:textSize="14sp"
                     app:drawableStartCompat="@mipmap/innquire" />
             </LinearLayout>
@@ -68,7 +68,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/base_color_white"
+            android:background="@color/white"
             app:layout_scrollFlags="scroll|enterAlways"
             app:tabIndicatorColor="@color/colorPrimary" />
 
@@ -82,7 +82,7 @@
             android:id="@+id/tabs_sticky"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/base_color_white"
+            android:background="@color/white"
             android:visibility="gone"
             app:layout_scrollFlags="scroll|enterAlways"
             app:tabIndicatorColor="@color/colorPrimary" />

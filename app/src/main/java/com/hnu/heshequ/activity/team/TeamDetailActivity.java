@@ -184,7 +184,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_detail2);
-        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#2CD22B"));
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary, null));
         id = getIntent().getIntExtra("id", 0);
         Log.e(TAG, "我是获得" + id);
         init();
@@ -1401,7 +1401,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         closeAnim(ivAdd4, 1, 5, 300);
         closeAnim(ivAdd5, 2, 5, 300);
         ivAddBj.setVisibility(View.GONE);
-        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#2CD22B"));
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary, null));
     }
 
     public String getNewSecret() {

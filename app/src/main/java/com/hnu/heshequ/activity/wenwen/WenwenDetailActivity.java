@@ -105,7 +105,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
                 zan = zan + 1;
                 wenwenBean.likeAmount = zan;
                 ivImg.setImageResource(R.mipmap.saved);
-                tvLoves.setTextColor(Color.parseColor("#2CD22B"));
+                tvLoves.setTextColor(getResources().getColor(R.color.colorPrimary, null));
             } else {
                 wenwenBean.userLike = "";
                 zan = zan - 1;

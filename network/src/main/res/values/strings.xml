@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_http_error">网络异常</string>
+    <string name="error_msg_unknown">未知错误 code(%1$d)</string>
+</resources>

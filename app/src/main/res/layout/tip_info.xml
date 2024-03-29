@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="提示"
-            android:textColor="@color/text4"
+            android:textColor="@color/text_4"
             android:textSize="18sp" />
 
         <TextView
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="确定要从购物车中删除此商品吗？"
-            android:textColor="@color/text66"
+            android:textColor="@color/text_66"
             android:textSize="15sp" />
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="取消"
-                    android:textColor="@color/text66"
+                    android:textColor="@color/text_66"
                     android:textSize="18sp" />
             </LinearLayout>
             <TextView
@@ -65,7 +65,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="确定"
-                android:textColor="@color/base_color_white"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>

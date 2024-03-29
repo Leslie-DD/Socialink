@@ -3,6 +3,7 @@ package com.hnu.heshequ.network
 import android.util.Log
 import com.hnu.heshequ.network.service.UserService
 import com.hnu.heshequ.network.util.AuthorizationInterceptor
+import com.hnu.heshequ.network.util.Gsons
 import com.hnu.heshequ.network.util.LoggingInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

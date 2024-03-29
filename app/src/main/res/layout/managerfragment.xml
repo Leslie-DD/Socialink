@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="团言"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="14sp" />
 
                 <TextView
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="团言"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="14sp" />
 
                 <TextView
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="活动"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="14sp" />
 
                 <TextView
@@ -141,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="公告"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="14sp" />
 
                 <TextView
@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="投票"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="14sp" />
 
                 <TextView
@@ -207,7 +207,7 @@
             android:gravity="center"
             android:paddingBottom="40dp"
             android:text="仅管理员可设置模块可见性"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:visibility="invisible" />
     </RelativeLayout>
 
@@ -224,7 +224,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="队员管理"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp" />
 
         <ImageView

@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:id="@+id/tvTitle"
         android:textSize="14sp"
-        android:textColor="#333333"
+        android:textColor="@color/light_gray"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content" />
     <TextView

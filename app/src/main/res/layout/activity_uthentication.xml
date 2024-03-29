@@ -22,7 +22,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:textSize="14sp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:id="@+id/tvTip"
             android:layout_marginTop="21dp"
             android:layout_height="wrap_content" />
@@ -41,7 +41,7 @@
                 android:layout_height="46dp"
                 android:textSize="15sp"
                 android:background="#f8f8fd"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:id="@+id/etName"
                 android:textColorHint="#999999"
                 android:hint="请输入真实姓名"
@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="证件类型"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="15sp"
                     android:layout_marginLeft="15dp"
                     android:layout_height="wrap_content" />
@@ -65,7 +65,7 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="学生证"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="15sp"
                     android:layout_marginRight="15dp"
                     android:layout_height="wrap_content" />
@@ -78,7 +78,7 @@
                 android:textSize="15sp"
                 android:id="@+id/etCard"
                 android:background="#f8f8fd"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:inputType="number"
                 android:textColorHint="#999999"
                 android:hint="请输入证件号码"
@@ -87,7 +87,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:text="上传证件照片"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="15dp"

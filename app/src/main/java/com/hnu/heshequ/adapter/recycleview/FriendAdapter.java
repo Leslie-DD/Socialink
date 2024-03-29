@@ -119,7 +119,7 @@ public class FriendAdapter extends RecyclerView.Adapter {
 //                    tvLoves.setTextColor(Color.parseColor("#ababb3"));
 //                } else {
 //                    ivImg.setImageResource(R.mipmap.saved);
-//                    tvLoves.setTextColor(Color.parseColor("#2CD22B"));
+//                    tvLoves.setTextColor(getResources().getColor(R.color.colorPrimary, null));
 //                }
             if (data.get(position).descroption != null) {
 

@@ -20,7 +20,7 @@
              android:layout_weight="1"
              android:textSize="14sp"
              android:id="@+id/tvName"
-             android:textColor="#333333"
+             android:textColor="@color/light_gray"
              android:layout_marginLeft="10dp"
              android:layout_height="wrap_content" />
 
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:id="@+id/tvVoteTitle"
             android:textSize="15sp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:layout_height="wrap_content" />
         <Button
             android:layout_width="75dp"

@@ -17,7 +17,7 @@
             android:id="@+id/tvName"
             android:lines="1"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/text3"
+            android:textColor="@color/text_3"
             android:textSize="14.5sp"
             android:text="李思思"
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:id="@+id/tvTime"
             android:lines="1"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/text9"
+            android:textColor="@color/text_9"
             android:textSize="13sp"
             android:text="今天  12:00"
             android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
             android:paddingBottom="4dp"
             android:paddingTop="4dp"
             android:id="@+id/tvDing"
-            android:textColor="@color/text93"
+            android:textColor="@color/text_93"
             android:textSize="13sp"
             android:text="0 顶"
             android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
         <TextView
             android:lineSpacingMultiplier="1.35"
             android:textSize="13sp"
-            android:textColor="@color/text66"
+            android:textColor="@color/text_66"
             android:text="湖南大学有没有轮滑社湖南大学有没有轮滑社湖南大学有没有轮滑社湖南大学有没有轮滑社"
             android:id="@+id/tvContent"
             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content" />
     <View
         android:layout_marginTop="15dp"
-        android:background="@color/f8"
+        android:background="@color/F8"
         android:layout_width="match_parent"
         android:layout_height="8dp"></View>
     <TextView
@@ -84,7 +84,7 @@
         android:text="暂无评论"
         android:layout_centerInParent="true"
         android:textSize="17sp"
-        android:textColor="@color/text9"
+        android:textColor="@color/text_9"
         android:id="@+id/tvTips"
         android:paddingTop="60dp"
         android:paddingBottom="60dp"

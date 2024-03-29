@@ -24,7 +24,7 @@ public class TeamsFragment extends Fragment {
 
     private View view;
 
-    private final String[] tabTitleList = {"我的", "推荐", "最新"};
+    private final String[] tabTitleList = {"推荐", "最新", "我的"};
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -24,7 +24,7 @@
                 android:text="HR教你如何突出重围？"
                 android:textSize="15sp"
                 android:maxLines="1"
-                android:textColor="@color/text3"
+                android:textColor="@color/text_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -32,7 +32,7 @@
                 android:id="@+id/tvTime"
                 android:text="12:08"
                 android:textSize="13sp"
-                android:textColor="@color/text9"
+                android:textColor="@color/text_9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <LinearLayout
@@ -45,7 +45,7 @@
                     android:id="@+id/tvName"
                     android:text="李思思"
                     android:textSize="13sp"
-                    android:textColor="@color/text66"
+                    android:textColor="@color/text_66"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -56,14 +56,14 @@
                     android:id="@+id/tvJob"
                     android:text="长沙移动资深HR"
                     android:textSize="13sp"
-                    android:textColor="@color/text9"
+                    android:textColor="@color/text_9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
     <TextView
-        android:textColor="@color/text66"
+        android:textColor="@color/text_66"
         android:text="截止时间：2018-05-28"
         android:id="@+id/tvEnd"
         android:gravity="center_vertical"
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <View
-        android:background="@color/f8"
+        android:background="@color/F8"
         android:layout_width="match_parent"
         android:layout_height="8dp"></View>
 </LinearLayout>

@@ -30,7 +30,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:text="低血糖标准"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="17sp" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:clickable="true"
             android:gravity="center"
             android:text="确定"
-            android:textColor="@color/titlecolor"
+            android:textColor="@color/colorPrimary"
             android:textSize="17sp" />
     </LinearLayout>
 

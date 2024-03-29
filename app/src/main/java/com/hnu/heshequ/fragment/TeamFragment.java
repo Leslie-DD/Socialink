@@ -327,7 +327,7 @@ public class TeamFragment extends NetWorkFragment {
         }
         if (adapter != null) {
             adapter.setData(datas.get(status));
-            tvTips.setVisibility(datas.get(status).size() > 0 ? View.GONE : View.VISIBLE);
+            tvTips.setVisibility(!datas.get(status).isEmpty() ? View.GONE : View.VISIBLE);
         }
     }
 

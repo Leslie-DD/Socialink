@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
@@ -22,15 +22,15 @@
                 android:id="@+id/etTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/f8"
+                android:background="@color/F8"
                 android:hint="请输入活动标题"
                 android:maxLength="32"
                 android:paddingBottom="10dp"
                 android:paddingLeft="13dp"
                 android:paddingRight="13dp"
                 android:paddingTop="9dp"
-                android:textColor="@color/text3"
-                android:textColorHint="@color/text9"
+                android:textColor="@color/text_3"
+                android:textColorHint="@color/text_9"
                 android:textSize="15sp" />
 
             <EditText
@@ -38,15 +38,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/f8"
+                android:background="@color/F8"
                 android:gravity="top"
                 android:hint="请输入活动内容"
                 android:paddingBottom="10dp"
                 android:paddingLeft="13dp"
                 android:paddingRight="13dp"
                 android:paddingTop="9dp"
-                android:textColor="@color/text3"
-                android:textColorHint="@color/text9"
+                android:textColor="@color/text_3"
+                android:textColorHint="@color/text_9"
                 android:textSize="15sp" />
 
             <com.hnu.heshequ.view.MyGv
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="报名截止时间"
-                    android:textColor="#333333" />
+                    android:textColor="@color/light_gray" />
 
                 <TextView
                     android:id="@+id/tvGetTime"
@@ -121,7 +121,7 @@
                     android:maxLength="128"
                     android:background="#00000000"
                     android:hint="请输入具体地址"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textColorHint="#999999"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -150,7 +150,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:text="限制人数"
-                    android:textColor="#333333"
+                    android:textColor="@color/light_gray"
                     android:textSize="14sp" />
 
                 <TextView

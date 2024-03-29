@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/ll"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:paddingTop="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -16,7 +16,7 @@
         android:layout_height="90dp">
     </com.jude.rollviewpager.RollPagerView>
     <View
-        android:background="@color/f8"
+        android:background="@color/F8"
         android:layout_width="match_parent"
         android:layout_height="8dp"></View>
 </LinearLayout>

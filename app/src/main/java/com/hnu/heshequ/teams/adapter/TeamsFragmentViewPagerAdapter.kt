@@ -13,9 +13,9 @@ class TeamsFragmentViewPagerAdapter(
     lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    private val teamsFragment: TeamChildFragment1 by lazy { TeamChildFragment1() }
     private val asksFragment: TeamChildFragment2 by lazy { TeamChildFragment2() }
     private val activitiesFragment: TeamChildFragment3 by lazy { TeamChildFragment3() }
+    private val teamsFragment: TeamChildFragment1 by lazy { TeamChildFragment1() }
 
     override fun getItemCount(): Int = 3
 
@@ -25,9 +25,9 @@ class TeamsFragmentViewPagerAdapter(
 
     fun getFragment(position: Int): Fragment {
         return when (position) {
-            0 -> teamsFragment
-            1 -> asksFragment
-            else -> activitiesFragment
+            0 -> asksFragment
+            1 -> activitiesFragment
+            else -> teamsFragment
         }
     }
 }

@@ -2,6 +2,8 @@ package com.hnu.heshequ.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -9,15 +11,19 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
 
-import com.blankj.utilcode.util.ThreadUtils;
+import androidx.annotation.NonNull;
 
+import com.hnu.heshequ.utils.WorkThread;
+
+import java.lang.ref.WeakReference;
 import java.util.NoSuchElementException;
-
-import dagger.hilt.android.internal.ThreadUtil;
 
 public class StickyLayout extends LinearLayout {
     private static final String TAG = "[StickyLayout]";
-    private static final boolean DEBUG = true;
+
+    private static final boolean DEBUG = false;
+
+    private static final int MSG_SCHEDULE_SCROLL = 1;
 
     private View mHeader;
     private View mContent;
@@ -59,6 +65,8 @@ public class StickyLayout extends LinearLayout {
     private int headerId;
     private int contentId;
 
+    private final Handler mHandler = new MyHandler(this);
+
     public StickyLayout(Context context) {
         super(context);
     }
@@ -71,29 +79,12 @@ public class StickyLayout extends LinearLayout {
         super(context, attrs, defStyle);
     }
 
-//    @Override
-//    public void onWindowFocusChanged(boolean hasWindowFocus) {
-//        super.onWindowFocusChanged(hasWindowFocus);
-//        if (DEBUG) {
-//            Log.i(TAG, "(onWindowFocusChanged) hasWindowFocus = " + hasWindowFocus + ", mHeader = " + mHeader + ", mContent =" +
-//                    " " + mContent);
-//        }
-//        if (hasWindowFocus && (mHeader == null || mContent == null)) {
-//            initData();
-//        }
-//    }
-
     public void setHeaderAndContentId(int headerId, int contentId) {
         this.headerId = headerId;
         this.contentId = contentId;
     }
 
     public void initData() {
-        RuntimeException re = new RuntimeException();
-        re.fillInStackTrace();
-        if (DEBUG) {
-            Log.i(TAG, "(initData)", re);
-        }
         if (headerId == 0 || contentId == 0) {
             throw new NoSuchElementException("Did your view with id \"sticky_header\" or \"sticky_content\" exists?");
         }
@@ -106,6 +97,9 @@ public class StickyLayout extends LinearLayout {
             mInitDataSucceed = true;
         }
         if (DEBUG) {
+            RuntimeException runtimeException = new RuntimeException();
+            runtimeException.fillInStackTrace();
+            Log.d(TAG, "(initData)", runtimeException);
             Log.d(TAG + this.hashCode(), "(initData) mTouchSlop = " + mTouchSlop + ", mHeaderHeight = " + mHeaderHeight);
         }
     }
@@ -152,7 +146,7 @@ public class StickyLayout extends LinearLayout {
         }
 
         if (DEBUG) {
-            Log.d(TAG, " y = " + y + ", headerHeight = " + mHeaderHeight + ", " +  "intercepted = " + intercepted + " event" +
+            Log.d(TAG, " y = " + y + ", headerHeight = " + mHeaderHeight + ", " + "intercepted = " + intercepted + " event" +
                     ".action = " + event.getAction());
         }
         return intercepted != 0 && mIsSticky;
@@ -187,7 +181,7 @@ public class StickyLayout extends LinearLayout {
                     mStatus = STATUS_EXPANDED;
                 }
                 // 慢慢滑向终点
-                this.smoothSetHeaderHeight(mHeaderHeight, destHeight, 200);
+                smoothSetHeaderHeight(mHeaderHeight, destHeight, 200);
                 break;
 
             default:
@@ -198,51 +192,15 @@ public class StickyLayout extends LinearLayout {
         return true;
     }
 
-    public void smoothSetHeaderHeight(final int from, final int to, long duration) {
-        smoothSetHeaderHeight(from, to, duration, false);
-    }
-
     private static final int FRAME_RATE = 100;
     private static final int FRAME_INTERVAL = 1000 / FRAME_RATE;
 
-    public void smoothSetHeaderHeight(final int from, final int to, long duration, final boolean modifyOriginalHeaderHeight) {
-
+    public void smoothSetHeaderHeight(final int from, final int to, long duration) {
         if (DEBUG) {
             Log.d(TAG + this.hashCode(), "(smoothSetHeaderHeight) from = " + from + " to = " + to);
         }
-        final int frameCount = (int) (duration / FRAME_INTERVAL);
-        final float partition = (to - from) / (float) frameCount;
-        // TODO: opt this thread
-        new Thread("Thread#smoothSetHeaderHeight") {
-            @Override
-            public void run() {
-                for (int i = 0; i < frameCount; i++) {
-                    final int height;
-                    if (i == frameCount - 1) {
-                        height = to;
-                    } else {
-                        height = (int) (from + partition * i);
-                    }
-                    postDelayed(() -> setHeaderHeight(height), (long) FRAME_INTERVAL * i);
-                }
-
-//                if (modifyOriginalHeaderHeight) {
-//                    setOriginalHeaderHeight(to);
-//                }
-            }
-        }.start();
+        mHandler.obtainMessage(MSG_SCHEDULE_SCROLL, from, to, duration).sendToTarget();
     }
-
-//    public void setOriginalHeaderHeight(int originalHeaderHeight) {
-//        mOriginalHeaderHeight = originalHeaderHeight;
-//    }
-
-//    public void setHeaderHeight(int height, boolean modifyOriginalHeaderHeight) {
-//        if (modifyOriginalHeaderHeight) {
-//            setOriginalHeaderHeight(height);
-//        }
-//        setHeaderHeight(height);
-//    }
 
     public void setHeaderHeight(int height) {
         if (DEBUG) {
@@ -253,7 +211,7 @@ public class StickyLayout extends LinearLayout {
         }
 
         if (DEBUG) {
-            Log.d(TAG, "setHeaderHeight height=" + height);
+            Log.d(TAG, "(setHeaderHeight) height=" + height);
         }
         if (height <= 0) {
             height = 0;
@@ -261,11 +219,7 @@ public class StickyLayout extends LinearLayout {
             height = mOriginalHeaderHeight;
         }
 
-        if (height == 0) {
-            mStatus = STATUS_COLLAPSED;
-        } else {
-            mStatus = STATUS_EXPANDED;
-        }
+        mStatus = height == 0 ? STATUS_COLLAPSED : STATUS_EXPANDED;
 
         if (mHeader != null && mHeader.getLayoutParams() != null) {
             mHeader.getLayoutParams().height = height;
@@ -282,15 +236,47 @@ public class StickyLayout extends LinearLayout {
         return mHeaderHeight;
     }
 
+    @SuppressWarnings("unused")
     public void setSticky(boolean isSticky) {
         mIsSticky = isSticky;
     }
 
+    @SuppressWarnings("unused")
     public void requestDisallowInterceptTouchEventOnHeader(boolean disallowIntercept) {
         mDisallowInterceptTouchEventOnHeader = disallowIntercept;
     }
 
     public interface OnGiveUpTouchEventListener {
         boolean giveUpTouchEvent(MotionEvent event);
+    }
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<StickyLayout> viewRef;
+
+        public MyHandler(StickyLayout view) {
+            super(WorkThread.getWorkLooper());
+            viewRef = new WeakReference<>(view);
+        }
+
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if (msg.what == MSG_SCHEDULE_SCROLL) {
+                StickyLayout stickyLayout = viewRef.get();
+                if (stickyLayout == null) {
+                    Log.d(TAG, "stickyLayout is null");
+                    return;
+                }
+                int from = msg.arg1;
+                int to = msg.arg2;
+                long duration = (long) msg.obj;
+                int frameCount = (int) (duration / FRAME_INTERVAL);
+                float partition = (to - from) / (float) frameCount;
+
+                for (int i = 0; i < frameCount; i++) {
+                    final int height = (i == frameCount - 1) ? to : (int) (from + partition * i);
+                    stickyLayout.postDelayed(() -> stickyLayout.setHeaderHeight(height), (long) FRAME_INTERVAL * i);
+                }
+            }
+        }
     }
 }

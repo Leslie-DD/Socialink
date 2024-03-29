@@ -24,7 +24,7 @@
         <TextView
             android:textSize="14.5sp"
             android:text="王芳芳："
-            android:textColor="@color/text3"
+            android:textColor="@color/text_3"
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -42,7 +42,7 @@
             android:paddingRight="3dp"
             android:textSize="13sp"
             android:text="删除"
-            android:textColor="@color/text9"
+            android:textColor="@color/text_9"
             android:id="@+id/tvdelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -52,7 +52,7 @@
         android:lineSpacingMultiplier="1.35"
         android:text="你猜一下是什么时候等领导审批中你猜一下是什么时候等领 导审批中耐心等待吧..."
         android:id="@+id/tvContent"
-        android:textColor="@color/text66"
+        android:textColor="@color/text_66"
         android:textSize="13sp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"

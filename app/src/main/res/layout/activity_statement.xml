@@ -25,15 +25,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/f8"
+                android:background="@color/F8"
                 android:gravity="top"
                 android:hint="请输入团言内容"
                 android:paddingBottom="10dp"
                 android:paddingLeft="13dp"
                 android:paddingRight="13dp"
                 android:paddingTop="9dp"
-                android:textColor="@color/text3"
-                android:textColorHint="@color/text9"
+                android:textColor="@color/text_3"
+                android:textColorHint="@color/text_9"
                 android:textSize="15sp" />
 
             <com.hnu.heshequ.view.MyGv

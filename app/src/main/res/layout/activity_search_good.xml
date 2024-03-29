@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -45,8 +45,8 @@
             android:paddingTop="7dp"
             android:paddingBottom="7dp"
             android:singleLine="true"
-            android:textColor="@color/text66"
-            android:textColorHint="@color/text9"
+            android:textColor="@color/text_66"
+            android:textColorHint="@color/text_9"
             android:textSize="15sp" />
 
         <LinearLayout

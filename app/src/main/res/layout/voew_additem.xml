@@ -8,7 +8,7 @@
    <EditText
        android:layout_width="0dp"
        android:layout_weight="1"
-       android:textColor="#333333"
+       android:textColor="@color/light_gray"
        android:textSize="14sp"
        android:paddingTop="13dp"
        android:paddingBottom="13dp"

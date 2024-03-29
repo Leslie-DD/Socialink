@@ -34,7 +34,7 @@
                 android:layout_marginLeft="10dp"
                 android:maxLines="1"
                 android:text="李思思"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <TextView
@@ -67,7 +67,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="看到你们的请求，可以加入吗？"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp" />
 
         <TextView

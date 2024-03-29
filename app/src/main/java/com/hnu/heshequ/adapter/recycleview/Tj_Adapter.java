@@ -119,7 +119,7 @@ public class Tj_Adapter extends RecyclerView.Adapter {
             }
             if (bean.getRecommend() == 0) {
                 viewHolder.tvRecommended.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_2cd22b_15));
-                viewHolder.tvRecommended.setTextColor(Color.parseColor("#2CD22B"));
+                viewHolder.tvRecommended.setTextColor(context.getResources().getColor(R.color.colorPrimary, null));
                 viewHolder.tvRecommended.setText("推荐到大厅");
             }
 

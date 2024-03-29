@@ -140,7 +140,7 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
                     Tvjoin.setText("已被踢出");
                     tvTip.setVisibility(View.GONE);
                 }
-                tvTip.setTextColor(Color.parseColor(sayBean.getStatus() == 2 ? "#2CD22B" : "#333333"));
+                tvTip.setTextColor(Color.parseColor(sayBean.getStatus() == 2 ? "#2CD22B" : "@color/light_gray"));
                 tvRefuse.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

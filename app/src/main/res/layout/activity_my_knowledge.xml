@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/base_color_white">
+    android:background="@color/white">
 <!--    tools:context="com.hnu.meet.activity.knowledge.KnowledgeActivity">-->
 
     <include layout="@layout/new_title_bar2"/>

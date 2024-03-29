@@ -11,7 +11,7 @@
         android:layout_height="50dp">
         <TextView
             android:layout_width="wrap_content"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:text="知识"
             android:textSize="18sp"
             android:layout_centerInParent="true"

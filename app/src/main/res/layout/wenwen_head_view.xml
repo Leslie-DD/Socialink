@@ -16,7 +16,7 @@
         android:id="@+id/llVis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/base_color_white"
+        android:background="@color/white"
         android:paddingTop="11dp"
         android:paddingBottom="3dp">
 

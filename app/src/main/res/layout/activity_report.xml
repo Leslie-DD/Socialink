@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     tools:context="com.hnu.heshequ.activity.ReportActivity">
 
     <include layout="@layout/new_title_bar"/>
@@ -40,7 +40,7 @@
         android:layout_height="40dp"
         android:text="举报"
         android:background="@drawable/bg_2cd22b_4"
-        android:textColor="@color/base_color_white"
+        android:textColor="@color/white"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginTop="100dp"

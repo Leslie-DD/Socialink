@@ -98,7 +98,7 @@
                 android:layout_height="58.0dip"
                 android:layout_marginTop="24.0dip"
                 app:alphaEnable="true"
-                app:lineColor="@color/back1"
+                app:lineColor="@color/back"
                 app:lineMaxHeight="40dp"
                 app:lineMidHeight="30dp"
                 app:lineMinHeight="20dp"
@@ -127,7 +127,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/imageView4"
                 android:text="Today"
-                android:textColor="@color/back1"/>
+                android:textColor="@color/back"/>
         </RelativeLayout>
 
 

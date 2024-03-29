@@ -17,7 +17,7 @@
             android:id="@+id/first"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/base_color_white"
+            android:background="@color/white"
             android:layout_weight="1"
             android:text="相册" />
 
@@ -25,7 +25,7 @@
             android:id="@+id/second"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/base_color_white"
+            android:background="@color/white"
             android:layout_weight="1"
             android:text="相机" />
 

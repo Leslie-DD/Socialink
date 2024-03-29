@@ -18,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:textColor="#333333"
+        android:textColor="@color/light_gray"
         android:textSize="18sp" />
     <ImageView
         android:layout_width="50dp"

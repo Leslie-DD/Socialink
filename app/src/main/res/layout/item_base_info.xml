@@ -24,7 +24,7 @@
             android:layout_marginStart="11dp"
             android:gravity="center_vertical"
             android:text="item"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp" />
 
         <TextView

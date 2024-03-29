@@ -157,7 +157,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_information);
-        StatusBarCompat.setStatusBarColor(this, Color.parseColor("#2CD22B"));
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colorPrimary, null));
         init();
         event();
     }

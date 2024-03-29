@@ -25,7 +25,7 @@
             android:layout_toEndOf="@+id/ivIcon"
             android:gravity="center_vertical"
             android:text="1234"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp" />
 
         <TextView

@@ -34,7 +34,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:text="X 1"
-        android:textColor="#333333"
+        android:textColor="@color/light_gray"
         android:textSize="12sp"/>
 
     <ImageView

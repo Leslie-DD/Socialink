@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:text="我加入的团队"
             android:layout_marginLeft="5dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp"
             android:layout_height="wrap_content" />
         <TextView
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:text="我加入的问题"
             android:layout_marginLeft="5dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp"
             android:layout_height="wrap_content" />
         <TextView
@@ -97,7 +97,7 @@
             android:layout_weight="1"
             android:text="更换手机号"
             android:layout_marginLeft="5dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp"
             android:layout_height="wrap_content" />
         <ImageView
@@ -124,7 +124,7 @@
             android:layout_weight="1"
             android:text="预设问题"
             android:layout_marginLeft="5dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp"
             android:layout_height="wrap_content" />
         <ImageView
@@ -152,7 +152,7 @@
             android:layout_weight="1"
             android:text="标签设置"
             android:layout_marginLeft="5dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp"
             android:layout_height="wrap_content" />
         <ImageView

@@ -216,7 +216,7 @@ public class TeamAdapter extends RecyclerView.Adapter {
             if (bean.getObj().getIsLike() == 1)//已报名
             {
                 btStatus.setText("已报名");
-                btStatus.setTextColor(Color.parseColor("#2CD22B"));
+                btStatus.setTextColor(context.getResources().getColor(R.color.colorPrimary, null));
                 btStatus.setBackgroundResource(R.drawable.bg_2cd22b_13);
             } else {
                 /*btStatus.setText("我要报名");

@@ -10,7 +10,7 @@
     <EditText
         android:layout_width="match_parent"
         android:padding="16dp"
-        android:textColor="#333333"
+        android:textColor="@color/light_gray"
         android:textSize="15sp"
         android:background="#f8f8fd"
         android:textColorHint="#cccccc"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:padding="16dp"
         android:layout_marginTop="10dp"
-        android:textColor="#333333"
+        android:textColor="@color/light_gray"
         android:textSize="15sp"
         android:background="#f8f8fd"
         android:textColorHint="#cccccc"

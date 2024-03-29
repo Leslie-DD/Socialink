@@ -26,7 +26,7 @@
             />
         <TextView
             android:layout_width="wrap_content"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="17sp"
             android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:text="扫一扫二维码加入我们吧！"
         android:textSize="14sp"
-        android:textColor="#333333"
+        android:textColor="@color/light_gray"
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content" />
 </LinearLayout>

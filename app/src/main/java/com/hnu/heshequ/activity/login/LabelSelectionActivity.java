@@ -254,7 +254,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
         this.sex = sex;
         ivMale.setImageResource(sex == 0 ? R.mipmap.male1 : R.mipmap.male2);
         ivFemale.setImageResource(sex == 1 ? R.mipmap.female1 : R.mipmap.female2);
-        String c1 = "#333333";
+        String c1 = "@color/light_gray";
         String c2 = "#999999";
         tvMale.setTextColor(Color.parseColor(sex == 0 ? c1 : c2));
         tvFemale.setTextColor(Color.parseColor(sex == 1 ? c1 : c2));

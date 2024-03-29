@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="请选择您的性别"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <LinearLayout
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:text="男"
-                        android:textColor="#333333"
+                        android:textColor="@color/light_gray"
                         android:textSize="17sp" />
                 </LinearLayout>
 
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="42dp"
                 android:text="选择你喜欢的,让我更懂你"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <com.hnu.heshequ.view.FlowLayout

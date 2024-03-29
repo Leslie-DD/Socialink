@@ -36,7 +36,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <TextView
@@ -58,7 +58,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <ImageView
@@ -78,7 +78,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="看到你们的请求，可以加入吗？"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="14sp" />
 
         <LinearLayout
@@ -107,7 +107,7 @@
                 android:background="@drawable/bg_2cd22b_13"
                 android:gravity="center"
                 android:text="拒绝"
-                android:textColor="@color/base_blue"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
 
             <TextView
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="已同意"
-                android:textColor="@color/base_blue"
+                android:textColor="@color/colorPrimary"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

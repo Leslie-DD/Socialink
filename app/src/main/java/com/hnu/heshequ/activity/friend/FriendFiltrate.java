@@ -184,8 +184,8 @@ public class FriendFiltrate extends NetWorkActivity {
                 .setSubCalSize(18)  // 确定和取消文字大小
                 .setTitleSize(20)   // 标题文字大小
                 .setTitleColor(Color.BLACK)//标题文字颜色
-                .setSubmitColor(Color.parseColor("#2CD22B"))    // 确定按钮文字颜色
-                .setCancelColor(Color.parseColor("#2CD22B"))    // 取消按钮文字颜色
+                .setSubmitColor(getResources().getColor(R.color.colorPrimary, null))    // 确定按钮文字颜色
+                .setCancelColor(getResources().getColor(R.color.colorPrimary, null))    // 取消按钮文字颜色
                 .setTitleBgColor(0xFFFFFFFF)    // 标题背景颜色 Night mode
                 .setBgColor(0xFFFFFFFF) // 滚轮背景颜色
                 .setContentTextSize(18) // 滚轮文字大小
@@ -215,8 +215,8 @@ public class FriendFiltrate extends NetWorkActivity {
                 .setSubCalSize(18)  // 确定和取消文字大小
                 .setTitleSize(20)   // 标题文字大小
                 .setTitleColor(Color.BLACK)//标题文字颜色
-                .setSubmitColor(Color.parseColor("#2CD22B"))    // 确定按钮文字颜色
-                .setCancelColor(Color.parseColor("#2CD22B"))    // 取消按钮文字颜色
+                .setSubmitColor(getResources().getColor(R.color.colorPrimary, null))    // 确定按钮文字颜色
+                .setCancelColor(getResources().getColor(R.color.colorPrimary, null))    // 取消按钮文字颜色
                 .setTitleBgColor(0xFFFFFFFF)    // 标题背景颜色 Night mode
                 .setBgColor(0xFFFFFFFF) // 滚轮背景颜色
                 .setContentTextSize(18) // 滚轮文字大小
@@ -244,8 +244,8 @@ public class FriendFiltrate extends NetWorkActivity {
                 .setSubCalSize(18)  // 确定和取消文字大小
                 .setTitleSize(20)   // 标题文字大小
                 .setTitleColor(Color.BLACK)//标题文字颜色
-                .setSubmitColor(Color.parseColor("#2CD22B"))    // 确定按钮文字颜色
-                .setCancelColor(Color.parseColor("#2CD22B"))    // 取消按钮文字颜色
+                .setSubmitColor(getResources().getColor(R.color.colorPrimary, null))    // 确定按钮文字颜色
+                .setCancelColor(getResources().getColor(R.color.colorPrimary, null))    // 取消按钮文字颜色
                 .setTitleBgColor(0xFFFFFFFF)    // 标题背景颜色 Night mode
                 .setBgColor(0xFFFFFFFF) // 滚轮背景颜色
                 .setContentTextSize(18) // 滚轮文字大小
@@ -274,8 +274,8 @@ public class FriendFiltrate extends NetWorkActivity {
                 .setSubCalSize(18)  // 确定和取消文字大小
                 .setTitleSize(20)   // 标题文字大小
                 .setTitleColor(Color.BLACK)//标题文字颜色
-                .setSubmitColor(Color.parseColor("#2CD22B"))    // 确定按钮文字颜色
-                .setCancelColor(Color.parseColor("#2CD22B"))    // 取消按钮文字颜色
+                .setSubmitColor(getResources().getColor(R.color.colorPrimary, null))    // 确定按钮文字颜色
+                .setCancelColor(getResources().getColor(R.color.colorPrimary, null))    // 取消按钮文字颜色
                 .setTitleBgColor(0xFFFFFFFF)    // 标题背景颜色 Night mode
                 .setBgColor(0xFFFFFFFF) // 滚轮背景颜色
                 .setContentTextSize(18) // 滚轮文字大小

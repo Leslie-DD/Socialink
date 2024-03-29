@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:paddingTop="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -31,7 +31,7 @@
                     android:id="@+id/tvName"
                     android:lines="1"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/text3"
+                    android:textColor="@color/text_3"
                     android:textSize="15sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -40,7 +40,7 @@
                     android:id="@+id/tvCollege"
                     android:lines="1"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/text7"
+                    android:textColor="@color/text_7"
                     android:layout_marginTop="5dp"
                     android:textSize="12sp"
                     android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
             <TextView
                 android:lineSpacingMultiplier="1.35"
                 android:textSize="14sp"
-                android:textColor="@color/text6e"
+                android:textColor="@color/text_6E"
                 android:id="@+id/tvDesc"
                 android:maxLines="5"
                 android:ellipsize="end"
@@ -95,7 +95,7 @@
                     android:textSize="13sp"
                     android:layout_marginLeft="5dp"
                     android:text="团长:  "
-                    android:textColor="@color/textab"
+                    android:textColor="@color/text_AB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -118,13 +118,13 @@
                     android:textSize="13sp"
                     android:layout_marginLeft="5dp"
                     android:text="成员数:  "
-                    android:textColor="@color/textab"
+                    android:textColor="@color/text_AB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/tvNum"
                     android:textSize="13sp"
-                    android:textColor="@color/textab"
+                    android:textColor="@color/text_AB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -142,7 +142,7 @@
         android:layout_height="90dp">
     </com.jude.rollviewpager.RollPagerView>
     <View
-        android:background="@color/f8"
+        android:background="@color/F8"
         android:layout_width="match_parent"
         android:layout_height="8dp"></View>
 </LinearLayout>

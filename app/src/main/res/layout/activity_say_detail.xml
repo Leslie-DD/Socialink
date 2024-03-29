@@ -35,7 +35,7 @@
                android:id="@+id/etComment"
                android:gravity="center_vertical"
                android:layout_weight="1"
-               android:textColor="#333333"
+               android:textColor="@color/light_gray"
                android:textSize="14sp"
                android:background="#F7F8FA"
                android:layout_height="match_parent" />

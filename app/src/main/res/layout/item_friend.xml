@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:paddingTop="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -38,7 +38,7 @@
             android:gravity="center_vertical|left"
             android:lines="1"
 
-            android:textColor="@color/text93"
+            android:textColor="@color/text_93"
             android:textSize="15sp" />
 
 
@@ -51,7 +51,7 @@
             android:layout_centerVertical="true"
             android:gravity="center_vertical|right"
 
-            android:textColor="@color/text93"
+            android:textColor="@color/text_93"
             android:textSize="15sp" />
 
         <!--<View-->
@@ -81,14 +81,14 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
-            android:textColor="@color/text93"
+            android:textColor="@color/text_93"
             android:textSize="13sp" />
 
 
 
     </LinearLayout>
     <View
-        android:background="@color/f8"
+        android:background="@color/F8"
         android:layout_width="match_parent"
         android:layout_height="8dp"></View>
 </LinearLayout>

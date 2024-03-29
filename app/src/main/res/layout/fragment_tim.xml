@@ -17,7 +17,7 @@
         android:paddingTop="60dp"
         android:paddingBottom="60dp"
         android:text="暂无数据"
-        android:textColor="@color/text9"
+        android:textColor="@color/text_9"
         android:textSize="17sp"
         android:visibility="gone" />
 </RelativeLayout>

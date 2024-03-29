@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:paddingTop="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -36,7 +36,7 @@
                 android:layout_marginLeft="10dp"
                 android:lines="1"
                 android:layout_centerVertical="true"
-                android:textColor="@color/text3"
+                android:textColor="@color/text_3"
                 android:textSize="15sp" />
             <TextView
                 android:id="@+id/tvCollegeName"
@@ -47,7 +47,7 @@
                 android:layout_marginLeft="10dp"
                 android:lines="1"
                 android:layout_centerVertical="true"
-                android:textColor="@color/text3"
+                android:textColor="@color/text_3"
                 android:textSize="15sp" />
         </LinearLayout>
 
@@ -81,7 +81,7 @@
             android:gravity="right"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/tvfriendnewtime"
-            android:textColor="@color/text93"
+            android:textColor="@color/text_93"
             android:textSize="13.5sp" />
 
         <!--<View-->
@@ -102,7 +102,7 @@
         <TextView
             android:lineSpacingMultiplier="1.35"
             android:textSize="14sp"
-            android:textColor="@color/text6e"
+            android:textColor="@color/text_6E"
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -133,7 +133,7 @@
             android:layout_marginRight="15dp"
             android:id="@+id/tvBelong"
             android:textSize="13sp"
-            android:textColor="@color/textab"
+            android:textColor="@color/text_AB"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
@@ -155,7 +155,7 @@
             <TextView
                 android:id="@+id/tvLoves"
                 android:textSize="13sp"
-                android:textColor="@color/textab"
+                android:textColor="@color/text_AB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -163,7 +163,7 @@
 
     </LinearLayout>
     <View
-        android:background="@color/f8"
+        android:background="@color/F8"
         android:layout_width="match_parent"
         android:layout_height="8dp"></View>
 

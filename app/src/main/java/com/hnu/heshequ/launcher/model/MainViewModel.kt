@@ -10,14 +10,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+//@HiltViewModel
+class MainViewModel /*@Inject*/ constructor() : ViewModel() {
 
     init {
         viewModelScope.launch {
-            val userInfoBean: UserInfoBean = RetrofitClient.userService.info(
+            val userInfoBean: UserInfoBean? = RetrofitClient.userService.info(
                 SharedPreferencesHelp.getInt("uid", 1).toString()
-            )
+            ).data
             Log.i(TAG, "userInfoBean: $userInfoBean")
         }
     }

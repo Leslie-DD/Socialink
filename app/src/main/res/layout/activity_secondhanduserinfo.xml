@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.hnu.heshequ.activity.oldsecond.secondhanduserinfo">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
@@ -30,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="个人信息"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="18sp" />
 
 
@@ -39,7 +37,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2CD22B"
+            android:background="@color/colorPrimary"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="15dp">
@@ -90,7 +88,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="湖南大学"
-                        android:textColor="@color/base_color_white"
+                        android:textColor="@color/white"
                         android:textSize="14sp" />
 
                     <TextView
@@ -100,7 +98,7 @@
                         android:layout_marginLeft="10dp"
                         android:background="@color/grgray"
                         android:text="关注"
-                        android:textColor="@color/f8"
+                        android:textColor="@color/F8"
                         android:visibility="gone" />
 
                     <TextView
@@ -110,7 +108,7 @@
                         android:layout_marginLeft="20dp"
                         android:background="@color/grgray"
                         android:text="拉黑"
-                        android:textColor="@color/f8"
+                        android:textColor="@color/F8"
                         android:visibility="gone" />
 
                 </LinearLayout>
@@ -157,7 +155,7 @@
                         android:id="@+id/tvUserNikeName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/base_color_white"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
 
 

@@ -14,7 +14,7 @@
         android:text="暂无数据"
         android:layout_centerInParent="true"
         android:textSize="17sp"
-        android:textColor="@color/text9"
+        android:textColor="@color/text_9"
         android:id="@+id/tvTips"
         android:paddingTop="60dp"
         android:paddingBottom="60dp"

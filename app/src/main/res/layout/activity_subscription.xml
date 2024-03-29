@@ -74,7 +74,7 @@
                 android:layout_height="30dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="@color/base_blue"
+                android:background="@color/colorPrimary"
                 android:visibility="gone"
                 android:text="退订"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout5"

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:orientation="vertical"
     android:paddingTop="15dp">
 
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lines="1"
-                android:textColor="@color/text3"
+                android:textColor="@color/text_3"
                 android:textSize="15sp" />
 
             <TextView
@@ -52,7 +52,7 @@
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text93"
+            android:textColor="@color/text_93"
             android:textSize="13.5sp" />
     </LinearLayout>
 
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:lineSpacingMultiplier="1.35"
             android:maxLines="5"
-            android:textColor="@color/text6e"
+            android:textColor="@color/text_6E"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -103,7 +103,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
-            android:textColor="@color/textab"
+            android:textColor="@color/text_AB"
             android:textSize="13sp" />
 
         <LinearLayout
@@ -127,7 +127,7 @@
                 android:id="@+id/tvLoves"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textab"
+                android:textColor="@color/text_AB"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -137,12 +137,12 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@mipmap/plhf"
             android:drawablePadding="5dp"
-            android:textColor="@color/textab"
+            android:textColor="@color/text_AB"
             android:textSize="13sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:background="@color/f8" />
+        android:background="@color/F8" />
 </LinearLayout>

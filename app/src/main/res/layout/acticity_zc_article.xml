@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@color/base_color_white"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/new_title_bar2"></include>
@@ -12,7 +12,7 @@
         android:layout_weight="1"></com.jcodecraeer.xrecyclerview.XRecyclerView>
     <View
         android:layout_marginTop="15dp"
-        android:background="@color/textf2"
+        android:background="@color/text_F2"
         android:layout_width="match_parent"
         android:layout_height="8dp"></View>
     <LinearLayout
@@ -30,7 +30,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="15sp"
-            android:textColor="@color/text3"
+            android:textColor="@color/text_3"
             android:background="@drawable/edittext_bg"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -46,7 +46,7 @@
         <TextView
             android:visibility="gone"
             android:text="匿名"
-            android:textColor="@color/text66"
+            android:textColor="@color/text_66"
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -53,7 +53,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="团队介绍"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <TextView
@@ -72,7 +72,7 @@
             android:layout_marginRight="15dp"
             android:letterSpacing="0.05"
             android:lineSpacingExtra="2dp"
-            android:textColor="#333333"
+            android:textColor="@color/light_gray"
             android:textSize="12sp" />
 
         <View
@@ -94,7 +94,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:text="他们说"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <TextView
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="团建"
-                android:textColor="#333333"
+                android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
             <TextView

@@ -7,7 +7,7 @@
               android:layout_width="match_parent"
               android:layout_height="50dp"
               android:gravity="center"
-              android:textColor="@color/base_blue"
+              android:textColor="@color/colorPrimary"
               android:text="上传照片"
               android:id="@+id/tvUp"
               />
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:textColor="@color/base_blue"
+        android:textColor="@color/colorPrimary"
         android:text="拍照"
         android:id="@+id/tvPic"
         />

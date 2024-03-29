@@ -97,14 +97,14 @@
     <style name="edit_style" >
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">#333333</item>
+        <item name="android:textColor">"@color/light_gray"</item>
         <item name="android:textColorHint">#999999</item>
     </style>
 
     <style name="view_4_17" >
         <item name="android:layout_width">4dp</item>
         <item name="android:layout_height">17dp</item>
-        <item name="android:background">@color/base_blue</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="MyPopwindow_anim_style" mce_bogus="1" parent="android:Animation">

@@ -78,7 +78,6 @@
         <activity android:name="com.hnu.heshequ.activity.newsencond.SecondhandPostActivity" />
         <activity android:name="com.hnu.heshequ.activity.oldsecond.secondhanduserinfo" />
         <activity android:name="com.hnu.heshequ.activity.flowview.TeamActivity" />
-        <activity android:name="com.hnu.heshequ.activity.flowview.WenwenActivity" />
         <activity android:name="com.hnu.heshequ.activity.mine.MyPullTheBlackActivity" />
         <activity android:name="com.hnu.heshequ.activity.mine.AttentionActivity" />
         <activity android:name="com.hnu.heshequ.activity.team.MessageActivity" />

@@ -8,9 +8,9 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/sticky_header"
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
@@ -50,43 +50,57 @@
                 android:src="@drawable/qr_scan" />
         </LinearLayout>
 
-        <com.jude.rollviewpager.RollPagerView
-            android:id="@+id/rollPageView"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/sticky_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/top_round_corners"
-        android:orientation="vertical">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+        <LinearLayout
+            android:id="@+id/sticky_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:background="@color/white"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:tabIndicatorColor="@color/colorPrimary" />
+            android:orientation="vertical">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <com.jude.rollviewpager.RollPagerView
+                android:id="@+id/rollPageView"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="10dp" />
+        </LinearLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs_sticky"
+        <LinearLayout
+            android:id="@+id/sticky_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:visibility="gone"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:tabIndicatorColor="@color/colorPrimary" />
+            android:layout_height="match_parent"
+            android:background="@drawable/top_round_corners"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/home_content_top_radius">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="热门"
+                    android:textColor="@color/home_header_color_end"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:tabIndicatorColor="@color/colorPrimary" />
+            </LinearLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
 </com.hnu.heshequ.widget.StickyLayout>

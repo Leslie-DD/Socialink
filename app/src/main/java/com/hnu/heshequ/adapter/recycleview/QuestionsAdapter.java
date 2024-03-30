@@ -289,7 +289,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         void doSave(int position);
     }
 
-    public void setListener(DoSaveListener mDoSaveListener) {
+    public void setSaveListener(DoSaveListener mDoSaveListener) {
         this.mDoSaveListener = mDoSaveListener;
     }
 }

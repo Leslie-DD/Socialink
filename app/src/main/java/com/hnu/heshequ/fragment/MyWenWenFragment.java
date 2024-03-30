@@ -150,7 +150,7 @@ public class MyWenWenFragment extends NetWorkFragment implements QuestionsAdapte
         ConsTants.initXRecycleView(mContext, true, true, rv);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
-        adapter.setListener(this);
+        adapter.setSaveListener(this);
         getData(100);
         setFragmentListener();
         return view;

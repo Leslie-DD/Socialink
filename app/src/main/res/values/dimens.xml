@@ -3,4 +3,5 @@
     <dimen name="gv_width">30dp</dimen>
 
     <dimen name="home_banner_radius">12dp</dimen>
+    <dimen name="home_content_top_radius">20dp</dimen>
 </resources>

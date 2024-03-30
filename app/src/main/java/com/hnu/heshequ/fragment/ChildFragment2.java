@@ -128,7 +128,7 @@ public class ChildFragment2 extends NetWorkFragment implements QuestionsAdapter.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setAdapter(adapter);
-        adapter.setListener(this);
+        adapter.setSaveListener(this);
         setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, "1", "20"});
         sendPostConnection(WenConstans.WenwenList, 100, WenConstans.token);
         return view;

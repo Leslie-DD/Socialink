@@ -41,7 +41,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewPager: ViewPager2
     private var pagerAdapter: HomeFragmentViewPagerAdapter? = null
 
-    private val tabTitleList = arrayOf("热门团队", "热门问问", "热门活动")
+    private val tabTitleList = arrayOf("团队", "问问", "活动")
 
     private val viewModel: HomeFragmentViewModel by viewModels()
 
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
             (currentFragment as IListFragment).isFirstItemVisible()
         }
         stickyHeader = view.findViewById(R.id.sticky_header)
-        setMarginStatusBar<LinearLayout.LayoutParams>(stickyHeader)
+        setMarginStatusBar<LinearLayout.LayoutParams>(view.findViewById(R.id.content))
         // 当 stickyHeader 的高度确定后需要初始化 stickyLayout 的数据
         stickyHeader.post { stickyLayout.initData() }
     }
@@ -79,14 +79,10 @@ class HomeFragment : Fragment() {
     private fun initViewPager() {
         pagerAdapter = HomeFragmentViewPagerAdapter(getChildFragmentManager(), lifecycle)
         val tabs: TabLayout = view.findViewById(R.id.tabs)
-        val tabsSticky: TabLayout = view.findViewById(R.id.tabs_sticky)
         viewPager = view.findViewById(R.id.vp)
         viewPager.setAdapter(pagerAdapter)
         viewPager.setOffscreenPageLimit(3)
         TabLayoutMediator(tabs, viewPager) { tab: TabLayout.Tab, position: Int ->
-            tab.setText(tabTitleList[position])
-        }.attach()
-        TabLayoutMediator(tabsSticky, viewPager) { tab: TabLayout.Tab, position: Int ->
             tab.setText(tabTitleList[position])
         }.attach()
     }

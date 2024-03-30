@@ -119,7 +119,7 @@ public abstract class NetWorkFragment extends Fragment {
     }
 
     private <REQUEST extends BaseRequest<REQUEST>> void executeRequest(String tag, String url, int where, BaseRequest<REQUEST> request) {
-        Log.d(TAG, tag + " executeRequest, url: " + url);
+        Log.d(TAG, tag + " executeRequest, url: " + url + " params: " + request.getParams());
         request.execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {

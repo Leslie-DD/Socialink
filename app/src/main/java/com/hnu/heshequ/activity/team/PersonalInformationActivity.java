@@ -223,7 +223,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
         quAdapter = new QuestionsAdapter(mContext);
         goodAdapter = new SecondhandgoodAdapter(mContext);
 
-        quAdapter.setListener(this);
+        quAdapter.setSaveListener(this);
         teamType = 0;
         pnT = 1;
         getTeamData(pnT, teamType);

@@ -126,7 +126,7 @@ public class MyAnswerFragment extends NetWorkFragment implements QuestionsAdapte
         xRecyclerView = (XRecyclerView) view.findViewById(R.id.rv);
         ConsTants.initXRecycleView(mContext, true, true, xRecyclerView);
         adapter = new QuestionsAdapter(mContext);
-        adapter.setListener(this);
+        adapter.setSaveListener(this);
         xRecyclerView.setAdapter(adapter);
         xRecyclerView.setLoadingListener(this);
         tvTips = (TextView) view.findViewById(R.id.tvTips);

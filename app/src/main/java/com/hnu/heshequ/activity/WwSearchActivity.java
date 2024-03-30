@@ -217,7 +217,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         rv = (XRecyclerView) findViewById(R.id.rv);
         ConsTants.initXRecycleView(this, true, true, rv);
         adapter = new QuestionsAdapter(this);
-        adapter.setListener(this);
+        adapter.setSaveListener(this);
         rv.setAdapter(adapter);
         rv.setLoadingListener(this);
         etContent.addTextChangedListener(this);

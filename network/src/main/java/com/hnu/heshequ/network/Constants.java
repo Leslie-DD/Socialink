@@ -9,11 +9,11 @@ public class Constants {
     public static String url4 = "http://img4.duitang.com/uploads/item/201509/26/20150926014223_BW8EG.jpeg";
     public static String url5 = "http://mvimg10.meitudata.com/569b9090af0526344.jpg";
 
-    public static String base_url = "http://182.92.84.79:8081/xiangyu";
-    public static String base_url_tmp = "http://182.92.84.79:8081/xiangyu";
+//    public static String base_url = "http://182.92.84.79:8081/xiangyu";
+//    public static String base_url_tmp = "http://182.92.84.79:8081/xiangyu";
 
-//    public static String base_url = "http://8.138.85.81:6000/xiangyu";
-//    public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
+    public static String base_url = "http://8.138.85.81:6000/xiangyu";
+    public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
 
     public static String Token_Header = "XIANGYU-ACCESS-TOKEN";
     public static int default_PS = 10;
@@ -22,7 +22,7 @@ public class Constants {
     public static int clubId; //当前团队id
     public static boolean isJoin; //是否加入该团队
     public static boolean isAdmin; //在当前团队是否管理员
-    public static int creatorId;  //团队创建者id
+    public static int creatorId;  //团队创建者idM
     public static String userName;
     //存储键盘高度
     public static int keyboardHeight = 0;

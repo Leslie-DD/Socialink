@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:focusable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/title_layout"
@@ -39,84 +41,18 @@
             android:src="@drawable/blue_search" />
     </RelativeLayout>
 
-    <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:id="@+id/rv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/title_layout"
-        android:layout_marginTop="-1dp" />
-
-    <LinearLayout
-        android:id="@+id/llInVis"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title_layout"
         android:background="@color/white"
-        android:paddingTop="11dp"
-        android:paddingBottom="15dp">
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:tabIndicatorColor="@color/colorPrimary" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal">
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="23dp"
-                android:layout_marginRight="18dp"
-                android:background="@drawable/bg_select"
-                android:gravity="center_horizontal"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:text="推荐"
-                android:textColor="@drawable/three_text_select"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/tv2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="18dp"
-                android:background="@drawable/bg_select"
-                android:gravity="center_horizontal"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:text="最新"
-                android:textColor="@drawable/three_text_select"
-                android:textSize="15sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/tv3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:layout_marginRight="23dp"
-                android:background="@drawable/bg_select"
-                android:gravity="center_horizontal"
-                android:paddingTop="6dp"
-                android:paddingBottom="7dp"
-                android:text="专场"
-                android:textColor="@drawable/three_text_select"
-                android:textSize="15sp" />
-        </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

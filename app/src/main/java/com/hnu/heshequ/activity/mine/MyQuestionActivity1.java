@@ -57,7 +57,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
         ConsTants.initXRecycleView(this, true, true, rv);
         adapter = new QuestionsAdapter(this);
         rv.setAdapter(adapter);
-        adapter.setListener(this);
+        adapter.setSaveListener(this);
         rv.setLoadingListener(this);
         getData(100);
     }

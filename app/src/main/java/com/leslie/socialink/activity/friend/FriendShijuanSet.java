@@ -95,7 +95,7 @@ public class FriendShijuanSet extends NetWorkActivity {
 
     private void setData(JSONArray questionlist) {
         setBodyParams(new String[]{"questionlist"}, new String[]{"" + questionlist});
-        sendPost(Constants.base_url + "/api/social/modifyquest.do", 100, WenConstans.token);
+        sendPost(Constants.base_url + "/api/social/modifyquest.do", 100, Constants.token);
     }
 
 

@@ -1091,7 +1091,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{quData.get(position).id + ""});
-        sendPost(WenConstans.WwLike, dosave, WenConstans.token);
+        sendPost(WenConstans.WwLike, dosave, Constants.token);
     }
 
     @Override

@@ -237,16 +237,16 @@ public class SecondHandActivity extends NetWorkActivity {
 
     // 获取二级分类
     private void getCategory() {
-        sendPost(WenConstans.SecondhandClassify, 102, WenConstans.token);
+        sendPost(WenConstans.SecondhandClassify, 102, Constants.token);
     }
 
     // 获取商品
     private void getData(int where) {
         if (category2Id == 0 && category1Id == 0) {
-            sendPost(WenConstans.SecondhandRecommend, where, WenConstans.token);
+            sendPost(WenConstans.SecondhandRecommend, where, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{pn + "", ps + "", category2Id + ""});
-            sendPost(WenConstans.Secondhand, where, WenConstans.token);
+            sendPost(WenConstans.Secondhand, where, Constants.token);
         }
     }
 

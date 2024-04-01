@@ -101,7 +101,7 @@ public class Friendxingbieset extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"file", "nickname", "sex", "college", "settingClub", "settingAsk"}, new String[]{"" + touxiang, "" + nickname, "" + sexnum, "" + school, "" + settingClub, "" + settingAsk});
-        sendPost(Constants.base_url + "/api/user/update.do", 100, WenConstans.token);
+        sendPost(Constants.base_url + "/api/user/update.do", 100, Constants.token);
     }
 
 }

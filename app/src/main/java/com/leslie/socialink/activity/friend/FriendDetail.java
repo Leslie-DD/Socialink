@@ -55,7 +55,7 @@ public class FriendDetail extends NetWorkActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_myfrienddetail);
-//        uid = WenConstans.id;
+//        uid = Constants.uid;
         uid = Constants.uid;
         friendListBean = new FriendListBean();
         friendListBean = (FriendListBean) getIntent().getSerializableExtra("Friend");
@@ -70,7 +70,7 @@ public class FriendDetail extends NetWorkActivity {
         Log.e("得到hisid", hisid + "");
         OkHttpUtils.post(WenConstans.UserInfo)
                 .tag(this)
-                .headers(Constants.Token_Header, WenConstans.token)
+                .headers(Constants.Token_Header, Constants.token)
                 .params("id", uid + "")
                 .execute(new StringCallback() {
                     @Override
@@ -123,7 +123,7 @@ public class FriendDetail extends NetWorkActivity {
     private void event() {
         deletefriend.setOnClickListener(v -> OkHttpUtils.post(WenConstans.DeleteFriend)
                 .tag(this)
-                .headers(Constants.Token_Header, WenConstans.token)
+                .headers(Constants.Token_Header, Constants.token)
                 .params("user_id", hisid + "")
                 .execute(new StringCallback() {
                     @Override
@@ -245,7 +245,7 @@ public class FriendDetail extends NetWorkActivity {
     private void getData() {
         Log.e("uid: " + uid, "hisid: " + hisid);
         setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + uid, "" + hisid});
-        sendPost(WenConstans.FriendInfo, 1, WenConstans.token);
+        sendPost(WenConstans.FriendInfo, 1, Constants.token);
     }
 
 }

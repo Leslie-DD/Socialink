@@ -53,7 +53,7 @@ public class FriendNearDetail extends NetWorkActivity {
 
         friendListBean = new FriendListBean();
         friendListBean = (FriendListBean) getIntent().getSerializableExtra("FriendNear");
-//        uid = WenConstans.id;
+//        uid = Constants.uid;
         uid = Constants.uid;
         String ids = uid + "";
         if (ids.equals("0")) {
@@ -90,7 +90,7 @@ public class FriendNearDetail extends NetWorkActivity {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         set.setOnClickListener(v -> OkHttpUtils.post(WenConstans.JudgeSetques)
                 .tag(this)
-                .headers(Constants.Token_Header, WenConstans.token)
+                .headers(Constants.Token_Header, Constants.token)
                 .params("uid", hisid + "")
                 .execute(new StringCallback() {
                     @Override
@@ -197,7 +197,7 @@ public class FriendNearDetail extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + uid, "" + hisid});
-        sendPost(WenConstans.FriendInfo, 1, WenConstans.token);
+        sendPost(WenConstans.FriendInfo, 1, Constants.token);
     }
 
 

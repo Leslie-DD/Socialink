@@ -236,7 +236,7 @@ public class SecondFragment extends NetWorkFragment implements XRecyclerView.Loa
 
     // 获取二级分类
     private void getCategory() {
-        sendPostConnection(WenConstans.SecondhandClassify, 102, WenConstans.token);
+        sendPostConnection(WenConstans.SecondhandClassify, 102, Constants.token);
     }
 
     public void setTvBg(int status) {

@@ -71,7 +71,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
 
     private void getData(int where) {
         setBodyParams(new String[]{"pn", "ps", "uid"}, new String[]{"" + pn, "" + Constants.default_PS, "" + hisid});
-        sendPostConnection(WenConstans.GetonesDynamic, where, WenConstans.token);
+        sendPostConnection(WenConstans.GetonesDynamic, where, Constants.token);
     }
 
     @Override
@@ -168,7 +168,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
     public void doSave(int position) {
 //        clickPosition = position;
 //        setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-//        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+//        sendPost(WenConstans.WwLike, 1000, Constants.token);
         //暂时还没写交友的关注功能
     }
 

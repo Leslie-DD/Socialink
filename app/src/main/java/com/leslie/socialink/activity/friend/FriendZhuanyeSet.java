@@ -33,7 +33,7 @@ public class FriendZhuanyeSet extends NetWorkActivity {
         qingan = Integer.parseInt(intent1.getStringExtra("qingan"));
         xueyuan = intent1.getStringExtra("xueyuan");
         nianji = intent1.getStringExtra("nianji");
-//        id = WenConstans.id;
+//        id = Constants.uid;
         id = Constants.uid;
         jiaxiang = intent1.getStringExtra("jiaxiang");
 
@@ -83,7 +83,7 @@ public class FriendZhuanyeSet extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"hometown", "emotion", "academy", "profession", "schoolgrade", "user_id"}, new String[]{"" + jiaxiang, "" + qingan, "" + xueyuan, "" + zhuanye1, "" + nianji, "" + id});
-        sendPost(Constants.base_url + "/api/social/updateinfor.do", 100, WenConstans.token);
+        sendPost(Constants.base_url + "/api/social/updateinfor.do", 100, Constants.token);
     }
 
 

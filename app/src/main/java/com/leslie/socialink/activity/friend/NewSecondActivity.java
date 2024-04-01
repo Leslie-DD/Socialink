@@ -259,37 +259,37 @@ public class NewSecondActivity extends NetWorkActivity implements XRecyclerView.
     private void jbDel2(int p) {
 //        setBodyParams(new String[]{"uid", "type", "id"}
 //                , new String[]{adapter.getData().get(p).uid, 2 + "", adapter.getData().get(p).id + ""});
-//        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10010, WenConstans.token);
+//        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10010, Constants.token);
     }
 
     private void jbDel() {
 //        setBodyParams(new String[]{"uid", "type", "id"}
 //                , new String[]{bean.uid, 1 + "", bean.id + ""});
-//        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10086, WenConstans.token);
+//        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10086, Constants.token);
     }
 
     private void getDisscuss(int where) {
         setBodyParams(new String[]{"firstid", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.SecondgooddiscussSecond, where, WenConstans.token);
+        sendPost(WenConstans.SecondgooddiscussSecond, where, Constants.token);
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{bean.id + "", 2 + "", content});
-        sendPost(WenConstans.Secondgooddiscuss, 102, WenConstans.token);
+        sendPost(WenConstans.Secondgooddiscuss, 102, Constants.token);
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}
                 , new String[]{bean.id + "", type});
-        sendPost(WenConstans.Secondgoodcollect, 104, WenConstans.token);
+        sendPost(WenConstans.Secondgoodcollect, 104, Constants.token);
     }
 
     private void jbWw() {
 //        setBodyParams(new String[]{"id"}
 //                , new String[]{bean.askId + ""});
-//        sendPost(WenConstans.WwJuBao, 105, WenConstans.token);
+//        sendPost(WenConstans.WwJuBao, 105, Constants.token);
     }
 
     @Override

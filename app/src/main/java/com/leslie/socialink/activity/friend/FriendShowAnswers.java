@@ -37,7 +37,7 @@ public class FriendShowAnswers extends NetWorkActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        uid = WenConstans.id;
+//        uid = Constants.uid;
         uid = Constants.uid;
         String ids = uid + "";
         if (ids.equals("0")) {
@@ -70,9 +70,9 @@ public class FriendShowAnswers extends NetWorkActivity {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         ivreject.setOnClickListener(v -> OkHttpUtils.post(WenConstans.RejectFriend)
                 .tag(this)
-                .headers(Constants.Token_Header, WenConstans.token)
+                .headers(Constants.Token_Header, Constants.token)
                 .params("user_id", user_id + "")
-                .params("id", "" + WenConstans.id)
+                .params("id", "" + Constants.uid)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -98,9 +98,9 @@ public class FriendShowAnswers extends NetWorkActivity {
                 }));
         ivaccept.setOnClickListener(v -> OkHttpUtils.post(WenConstans.AcceptFriend)
                 .tag(this)
-                .headers(Constants.Token_Header, WenConstans.token)
+                .headers(Constants.Token_Header, Constants.token)
                 .params("user_id", user_id + "")
-//                        .params("id",""+WenConstans.id)
+//                        .params("id",""+Constants.uid)
                 .params("id", "" + Constants.uid)
                 .execute(new StringCallback() {
                     @Override
@@ -172,7 +172,7 @@ public class FriendShowAnswers extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"user_id"}, new String[]{"" + user_id});
-        sendPost(Constants.base_url + "/api/social/getPaper.do", 100, WenConstans.token);
+        sendPost(Constants.base_url + "/api/social/getPaper.do", 100, Constants.token);
     }
 
 

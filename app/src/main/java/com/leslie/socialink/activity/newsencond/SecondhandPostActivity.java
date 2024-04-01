@@ -267,7 +267,7 @@ public class SecondhandPostActivity extends PhotoBaseActivity {
         promptDialog = new PromptDialog(this);
         promptDialog.showLoading("正在发布");
         OkHttpUtils.post(WenConstans.Sendgoods).tag(this)
-                .headers(Constants.Token_Header, WenConstans.token)
+                .headers(Constants.Token_Header, Constants.token)
                 .params("price", temp + "")
                 .params("content", content + "")
                 .params("anonymity", niming + "")

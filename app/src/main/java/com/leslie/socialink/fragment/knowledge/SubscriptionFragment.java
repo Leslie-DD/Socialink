@@ -17,6 +17,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.knowledge.SubscriptionItemBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONArray;
@@ -55,9 +56,9 @@ public class SubscriptionFragment extends NetWorkFragment implements XRecyclerVi
     }
 
     private void getData(int pn, int ps) {
-        sendGetConnection(WenConstans.getSubscription + "?pageSize=" + ps + "&pageNum=" + pn, 100, WenConstans.token);
-        Log.e("token", "" + WenConstans.token);
-        Log.e("userid", "" + WenConstans.id);
+        sendGetConnection(WenConstans.getSubscription + "?pageSize=" + ps + "&pageNum=" + pn, 100, Constants.token);
+        Log.e("token", "" + Constants.token);
+        Log.e("userid", "" + Constants.uid);
     }
 
     @Override

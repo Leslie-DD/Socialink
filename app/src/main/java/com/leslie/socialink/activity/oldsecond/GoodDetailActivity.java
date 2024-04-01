@@ -285,7 +285,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
         llSave = (LinearLayout) headview.findViewById(R.id.llSave);
         llSave.setOnClickListener(v -> {
             setBodyParams(new String[]{"goodsid"}, new String[]{secondhandgoodBean.id + ""});
-            sendPost(WenConstans.Secondgoodlike, 1000, WenConstans.token);
+            sendPost(WenConstans.Secondgoodlike, 1000, Constants.token);
         });
         ivImg = (ImageView) headview.findViewById(R.id.ivImg);
         ivBq = (ImageView) findViewById(R.id.ivBq);
@@ -409,7 +409,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 setBodyParams(new String[]{"uid", "goodsid"}, new String[]{secondhandgoodBean.uid, secondhandgoodBean.id + ""});
-                sendPost(WenConstans.SecondhandGoodDele, 10010, WenConstans.token);
+                sendPost(WenConstans.SecondhandGoodDele, 10010, Constants.token);
                 deldialog.dismiss();
             }
 
@@ -433,7 +433,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
      */
     private void sendClickGoods() {
         setBodyParams(new String[]{"goodsid"}, new String[]{secondhandgoodBean.id + ""});
-        sendPost(WenConstans.SecondhandGoodsInfo, 123, WenConstans.token);
+        sendPost(WenConstans.SecondhandGoodsInfo, 123, Constants.token);
     }
 
     private void getDisscuss(int where) {
@@ -442,20 +442,20 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
         }
         setBodyParams(new String[]{"goodsid", "pn", "ps"}
                 , new String[]{secondhandgoodBean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.SecondgooddiscussFirst, where, WenConstans.token);
+        sendPost(WenConstans.SecondgooddiscussFirst, where, Constants.token);
 
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{secondhandgoodBean.id + "", 1 + "", content});
-        sendPost(WenConstans.Secondgooddiscuss, 102, WenConstans.token);
+        sendPost(WenConstans.Secondgooddiscuss, 102, Constants.token);
 
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}, new String[]{secondhandgoodBean.id + "", type});
-        sendPost(WenConstans.Secondgoodcollect, 104, WenConstans.token);
+        sendPost(WenConstans.Secondgoodcollect, 104, Constants.token);
 
     }
 
@@ -502,7 +502,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
         clickPosition = position;
         setBodyParams(new String[]{"id"}
                 , new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.SecondgooddiscussDing, 103, WenConstans.token);
+        sendPost(WenConstans.SecondgooddiscussDing, 103, Constants.token);
     }
 
     public void doSecond(int position) {

@@ -22,6 +22,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.FriendNewBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,8 +66,8 @@ public class NewFragment extends NetWorkFragment implements XRecyclerView.Loadin
 
     private void getData(int where) {
         setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, "" + 20});
-        sendPostConnection(WenConstans.GetFriendDynamic, where, WenConstans.token);
-        Log.i("NewFragment", "WenConstants.Token: " + WenConstans.token);
+        sendPostConnection(WenConstans.GetFriendDynamic, where, Constants.token);
+        Log.i("NewFragment", "WenConstants.Token: " + Constants.token);
     }
 
     @Override

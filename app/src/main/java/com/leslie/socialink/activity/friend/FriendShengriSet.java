@@ -28,7 +28,7 @@ public class FriendShengriSet extends NetWorkActivity {
         setContentView(R.layout.friend_shengriset);
         Intent intent1 = getIntent();
         gexing = intent1.getStringExtra("gexing");
-//        id = WenConstans.id;
+//        id = Constants.uid;
         id = Constants.uid;
 
         /**
@@ -84,7 +84,7 @@ public class FriendShengriSet extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"description", "birthday", "user_id"}, new String[]{"" + gexing, "" + year1 + "-" + month1 + "-" + day1, id + ""});
-        sendPost(Constants.base_url + "/api/social/updateinfo.do", 100, WenConstans.token);
+        sendPost(Constants.base_url + "/api/social/updateinfo.do", 100, Constants.token);
     }
 
 

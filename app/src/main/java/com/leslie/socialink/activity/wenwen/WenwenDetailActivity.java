@@ -280,7 +280,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
         llSave = (LinearLayout) headview.findViewById(R.id.llSave);
         llSave.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}, new String[]{wenwenBean.id + ""});
-            sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+            sendPost(WenConstans.WwLike, 1000, Constants.token);
         });
         ivImg = (ImageView) headview.findViewById(R.id.ivImg);
         ivBq = (ImageView) findViewById(R.id.ivBq);
@@ -414,7 +414,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
         builder.setPositiveButton("确定", (dialogInterface, i) -> {
             //删除
             setBodyParams(new String[]{"uid", "askid"}, new String[]{wenwenBean.uid, wenwenBean.id + ""});
-            sendPost(Constants.base_url + "/api/ask/base/deleteMyAsk.do", 10010, WenConstans.token);
+            sendPost(Constants.base_url + "/api/ask/base/deleteMyAsk.do", 10010, Constants.token);
             deldialog.dismiss();
         });
         builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
@@ -427,23 +427,23 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
             pn = 1;
         }
         setBodyParams(new String[]{"askid", "pn", "ps"}, new String[]{wenwenBean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.WwFirst, where, WenConstans.token);
+        sendPost(WenConstans.WwFirst, where, Constants.token);
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}, new String[]{wenwenBean.id + "", 1 + "", content});
-        sendPost(WenConstans.WwDisscuss, 102, WenConstans.token);
+        sendPost(WenConstans.WwDisscuss, 102, Constants.token);
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}, new String[]{wenwenBean.id + "", type});
-        sendPost(WenConstans.WwDSave, 104, WenConstans.token);
+        sendPost(WenConstans.WwDSave, 104, Constants.token);
     }
 
     private void jbWw() {
         /*setBodyParams(new String[]{"id"}
                 ,new String[]{wenwenBean.id+""});
-        sendPost(WenConstans.WwJuBao,105,WenConstans.token);*/
+        sendPost(WenConstans.WwJuBao,105,Constants.token);*/
         startActivity(new Intent(this, ReportActivity.class).putExtra("type", 1).putExtra("id", wenwenBean.id));
     }
 
@@ -484,7 +484,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
         clickPosition = position;
         setBodyParams(new String[]{"id"}
                 , new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.WwDing, 103, WenConstans.token);
+        sendPost(WenConstans.WwDing, 103, Constants.token);
     }
 
     public void doSecond(int position) {

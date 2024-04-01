@@ -202,7 +202,7 @@ public class ZcArticleActivity extends NetWorkActivity implements XRecyclerView.
         llZan.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}
                     , new String[]{bean.id + ""});
-            sendPost(WenConstans.ZcZan, 1000, WenConstans.token);
+            sendPost(WenConstans.ZcZan, 1000, Constants.token);
         });
         tvZan = (TextView) headview.findViewById(R.id.tvZan);
         ivZan = (ImageView) headview.findViewById(R.id.ivZan);
@@ -237,11 +237,11 @@ public class ZcArticleActivity extends NetWorkActivity implements XRecyclerView.
                 hasclick = false;
                 setBodyParams(new String[]{"id", "content", "anonymity", "type", "askid"}
                         , new String[]{bean.id + "", content, niming + "", 2 + "", askid + ""});
-                sendPost(WenConstans.ZcSendDisscuss, 2, WenConstans.token);
+                sendPost(WenConstans.ZcSendDisscuss, 2, Constants.token);
             } else {
                 setBodyParams(new String[]{"id", "content", "anonymity"}
                         , new String[]{bean.id + "", content, niming + ""});
-                sendPost(WenConstans.ZcDisscuss, 1, WenConstans.token);
+                sendPost(WenConstans.ZcDisscuss, 1, Constants.token);
             }
             hideInput();
 
@@ -286,7 +286,7 @@ public class ZcArticleActivity extends NetWorkActivity implements XRecyclerView.
             sendPost(Constants.base_url + "/api/club/activity/delcomment.do", delComment, Constants.token);*/
 
             setBodyParams(new String[]{"id"}, new String[]{delid + ""});
-            sendPost(WenConstans.ZcDeleteDisscuss, 1001, WenConstans.token);
+            sendPost(WenConstans.ZcDeleteDisscuss, 1001, Constants.token);
             deldialog.dismiss();
         });
         builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
@@ -300,7 +300,7 @@ public class ZcArticleActivity extends NetWorkActivity implements XRecyclerView.
         }
         setBodyParams(new String[]{"id", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.ZcProblemsList, where, WenConstans.token);
+        sendPost(WenConstans.ZcProblemsList, where, Constants.token);
     }
 
 

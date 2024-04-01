@@ -53,7 +53,7 @@ public abstract class NetWorkActivity extends BaseActivity {
         Constants.uid = SharedPreferencesHelp.getInt("uid", 1);
         Log.i(TAG, "(onCreate) 用户id: " + Constants.uid);
         Constants.token = SharedPreferencesHelp.getString("token", "");
-        WenConstans.token = SharedPreferencesHelp.getString("token", "");
+        Constants.token = SharedPreferencesHelp.getString("token", "");
         Constants.userName = SharedPreferencesHelp.getString("user", "18274962484");
 
         if (vector != null) {
@@ -65,7 +65,7 @@ public abstract class NetWorkActivity extends BaseActivity {
     public void sendGetConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         GetRequest getRequest = OkHttpUtils.get(url).tag(this);
         if (token != null && !token.equals("")) {
-            getRequest = getRequest.headers(Constants.Token_Header, WenConstans.token);
+            getRequest = getRequest.headers(Constants.Token_Header, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             getRequest = getRequest.params(argsKeys[i], argsValues[i]);
@@ -77,7 +77,7 @@ public abstract class NetWorkActivity extends BaseActivity {
     public void sendPostConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         PostRequest postRequest = OkHttpUtils.post(url).tag(this);
         if (token != null && !token.equals("")) {
-            postRequest = postRequest.headers(Constants.Token_Header, WenConstans.token);
+            postRequest = postRequest.headers(Constants.Token_Header, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             postRequest = postRequest.params(argsKeys[i], argsValues[i]);
@@ -96,8 +96,7 @@ public abstract class NetWorkActivity extends BaseActivity {
     }
 
     private <REQUEST extends BaseRequest<REQUEST>> void executeRequest(String tag, String url, int where, BaseRequest<REQUEST> request) {
-        Log.d(TAG, tag + " executeRequest, url: " + url + ", params: " + request.getParams().toString());
-
+        Log.d(TAG, tag + " executeRequest, url: " + url + " params: " + request.getParams() + ", headers: " + request.getHeaders());
         request.execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {

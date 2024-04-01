@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONArray;
@@ -285,8 +286,8 @@ public class ZhongnanShow extends NetWorkActivity {
 
     public void getData() {
         setBodyParams(new String[]{"key", "studentId", "pwd", "yearFirst", "yearSecond", "num", "Date", "currentWeek"}, new String[]{key + "", "" + studentId, "" + pwd, "" + year_1, "" + year_2, "" + term_1, "" + today_1, "" + week_1});
-        sendPost(WenConstans.ZhongnanTimetable, 1, WenConstans.token);
-        Log.e("token", WenConstans.token + "");
+        sendPost(WenConstans.ZhongnanTimetable, 1, Constants.token);
+        Log.e("token", Constants.token + "");
     }
 
 

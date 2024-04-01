@@ -154,9 +154,6 @@ public class WenConstans {
     public static String getMyColumnList = BaseUrl + "/api/payforkownledge/specialColumn/listMy.do";
     public static String midifyArticle = BaseUrl + "/api/payforkownledge/passage/put.do";
     public static String newArticle = BaseUrl + "/api/payforkownledge/passage/addNew.do";
-    public static String token;
     public static String Timetabletoken;
-    public static boolean hasChanged;
-    public static int id;
     public static int Timetableid;
 }

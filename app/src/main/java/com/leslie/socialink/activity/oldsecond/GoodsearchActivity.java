@@ -130,7 +130,7 @@ public class GoodsearchActivity extends NetWorkActivity implements XRecyclerView
         } else {
             Utils.toastShort(context, "商品搜索 category2Id=" + category2Id);
             setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});
-            sendPost(WenConstans.Secondhand, 10086, WenConstans.token);
+            sendPost(WenConstans.Secondhand, 10086, Constants.token);
         }
     }
 

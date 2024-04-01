@@ -56,7 +56,7 @@ public class HttpRequestUtil {
     public void sendGetConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         GetRequest getRequest = OkHttpUtils.get(url).tag(this);
         if (token != null && !token.isEmpty()) {
-            getRequest = getRequest.headers(Constants.Token_Header, WenConstans.token);
+            getRequest = getRequest.headers(Constants.Token_Header, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             getRequest = getRequest.params(argsKeys[i], argsValues[i]);
@@ -76,7 +76,7 @@ public class HttpRequestUtil {
     public void sendPostConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         PostRequest postRequest = OkHttpUtils.post(url).tag(this);
         if (token != null && !token.isEmpty()) {
-            postRequest = postRequest.headers(Constants.Token_Header, WenConstans.token);
+            postRequest = postRequest.headers(Constants.Token_Header, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             postRequest = postRequest.params(argsKeys[i], argsValues[i]);
@@ -95,7 +95,7 @@ public class HttpRequestUtil {
     }
 
     private <REQUEST extends BaseRequest<REQUEST>> void executeRequest(String funcTag, String url, int where, BaseRequest<REQUEST> request) {
-        Log.d(tag, funcTag + " executeRequest, url: " + url);
+        Log.d(TAG, tag + " executeRequest, url: " + url + " params: " + request.getParams() + ", headers: " + request.getHeaders());
         request.execute(new StringCallback() {
             @Override
             public void onSuccess(String s, Call call, Response response) {

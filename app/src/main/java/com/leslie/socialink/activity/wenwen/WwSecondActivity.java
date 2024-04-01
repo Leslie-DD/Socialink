@@ -216,7 +216,7 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
         tvDing = (TextView) headview.findViewById(R.id.tvDing);
         tvDing.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}, new String[]{bean.id + ""});
-            sendPost(WenConstans.WwDing, 103, WenConstans.token);
+            sendPost(WenConstans.WwDing, 103, Constants.token);
         });
         tvContent = (TextView) headview.findViewById(R.id.tvContent);
         tvResult = (TextView) headview.findViewById(R.id.tvResult);
@@ -283,37 +283,37 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
     private void jbDel2(int p) {
         setBodyParams(new String[]{"uid", "type", "id"}
                 , new String[]{adapter.getData().get(p).uid, 2 + "", adapter.getData().get(p).id + ""});
-        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10010, WenConstans.token);
+        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10010, Constants.token);
     }
 
     private void jbDel() {
         setBodyParams(new String[]{"uid", "type", "id"}
                 , new String[]{bean.uid, 1 + "", bean.id + ""});
-        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10086, WenConstans.token);
+        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10086, Constants.token);
     }
 
     private void getDisscuss(int where) {
         setBodyParams(new String[]{"firstid", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.WwSecond, where, WenConstans.token);
+        sendPost(WenConstans.WwSecond, where, Constants.token);
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{bean.id + "", 2 + "", content});
-        sendPost(WenConstans.WwDisscuss, 102, WenConstans.token);
+        sendPost(WenConstans.WwDisscuss, 102, Constants.token);
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}
                 , new String[]{bean.askId + "", type});
-        sendPost(WenConstans.WwDSave, 104, WenConstans.token);
+        sendPost(WenConstans.WwDSave, 104, Constants.token);
     }
 
     private void jbWw() {
         setBodyParams(new String[]{"id"}
                 , new String[]{bean.askId + ""});
-        sendPost(WenConstans.WwJuBao, 105, WenConstans.token);
+        sendPost(WenConstans.WwJuBao, 105, Constants.token);
     }
 
     @Override

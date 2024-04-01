@@ -82,7 +82,7 @@ public class FriendSet extends NetWorkActivity {
         setContentView(R.layout.activity_set);
 
         Intent intentt = getIntent();
-//        id = WenConstans.id;  //这里取不到正确的用户id  导致会跳转到登陆界面
+//        id = Constants.uid;  //这里取不到正确的用户id  导致会跳转到登陆界面
         id = Constants.uid;
         longitude = intentt.getDoubleExtra("longitude", 0);
         latitude = intentt.getDoubleExtra("latitude", 0);
@@ -113,7 +113,7 @@ public class FriendSet extends NetWorkActivity {
 //            public void run() {
 //                OkHttpUtils.post(WenConstans.InitUserinfo)
 //                        .tag(this)
-//                        .headers(Constants.Token_Header, WenConstans.token)
+//                        .headers(Constants.Token_Header, Constants.token)
 //                        .params("id", id+"")
 //                        .execute(new StringCallback() {
 //                            @Override
@@ -177,7 +177,7 @@ public class FriendSet extends NetWorkActivity {
         public void run() {
             OkHttpUtils.post(WenConstans.InitUserinfo)
                     .tag(this)
-                    .headers(Constants.Token_Header, WenConstans.token)
+                    .headers(Constants.Token_Header, Constants.token)
                     .params("id", id + "")
                     .execute(new StringCallback() {
                         @Override               // 重写AbsCallback<String>的onSuccess方法
@@ -430,7 +430,7 @@ public class FriendSet extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + id, "" + id});
-        sendPost(WenConstans.FriendInfo, jibenxinxi, WenConstans.token);
+        sendPost(WenConstans.FriendInfo, jibenxinxi, Constants.token);
     }
 
     /**

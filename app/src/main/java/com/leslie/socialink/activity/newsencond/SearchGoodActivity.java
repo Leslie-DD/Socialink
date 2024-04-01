@@ -140,7 +140,7 @@ public class SearchGoodActivity extends NetWorkActivity {
     private void getClassifyData() {
 //        Utils.toastShort(context, "分类搜索 category2Id=" + category2Id);
         setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});
-        sendPost(WenConstans.Secondhand, 100, WenConstans.token);
+        sendPost(WenConstans.Secondhand, 100, Constants.token);
     }
 
     private void getMoreData() {
@@ -152,7 +152,7 @@ public class SearchGoodActivity extends NetWorkActivity {
     private void getMoreClassifyData() {
 //        Utils.toastShort(context, "更多分类商品 category2Id=" + category2Id);
         setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});
-        sendPost(WenConstans.Secondhand, 102, WenConstans.token);
+        sendPost(WenConstans.Secondhand, 102, Constants.token);
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.knowledge.SubscriptionItemBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONArray;
@@ -56,7 +57,7 @@ public class MyColumnFragment extends NetWorkFragment implements XRecyclerView.L
     }
 
     private void getData(int pn, int ps) {
-        sendGetConnection(WenConstans.getMyColumnList + "?pageSize=" + ps + "&pageNum=" + pn, 100, WenConstans.token);
+        sendGetConnection(WenConstans.getMyColumnList + "?pageSize=" + ps + "&pageNum=" + pn, 100, Constants.token);
 
     }
 

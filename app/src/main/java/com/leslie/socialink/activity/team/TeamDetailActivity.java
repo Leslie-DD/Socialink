@@ -354,7 +354,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         //身份处理
         for (int i = 0; i < cBean.getUsers().size(); i++) {
             if (cBean.getUsers().get(i).getMemberId() == Constants.uid) {
-                Log.e(TAG, "token: " + WenConstans.token);
+                Log.e(TAG, "token: " + Constants.token);
                 if (cBean.getUsers().get(i).getRole() == 1) {//群主
                     Log.i(TAG, "团长 memberId: " + cBean.getUsers().get(i).getMemberId() + "Constants.uid: " + Constants.uid);
                     IDENTIFY = 1;

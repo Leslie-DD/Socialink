@@ -249,18 +249,18 @@ public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView
         }
         setBodyParams(new String[]{"id", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.ZcProblemsList, where, WenConstans.token);
+        sendPost(WenConstans.ZcProblemsList, where, Constants.token);
     }
 
     private void setQuestion(int type, String content) {
         if (type == 1) {
             setBodyParams(new String[]{"id", "content", "anonymity", "type"}
                     , new String[]{bean.id + "", content, niming + "", type + ""});
-            sendPost(WenConstans.ZcSendDisscuss, 1, WenConstans.token);
+            sendPost(WenConstans.ZcSendDisscuss, 1, Constants.token);
         } else {
             setBodyParams(new String[]{"id", "content", "anonymity", "type", "askid"}
                     , new String[]{bean.id + "", content, niming + "", type + "", askid + ""});
-            sendPost(WenConstans.ZcSendDisscuss, 2, WenConstans.token);
+            sendPost(WenConstans.ZcSendDisscuss, 2, Constants.token);
         }
 
     }
@@ -312,12 +312,12 @@ public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView
     public void doDing(int position) {
         dingPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+        sendPost(WenConstans.WwLike, 1000, Constants.token);
     }
 
     public void doDelete(String askId, int pofirst, int posecond) {
         /*setBodyParams(new String[]{"id"}, new String[]{delid + ""});
-        sendPost(WenConstans.ZcDeleteDisscuss, 1001, WenConstans.token);*/
+        sendPost(WenConstans.ZcDeleteDisscuss, 1001, Constants.token);*/
         firstItem = pofirst;
         secondItem = posecond;
         delid = askId;
@@ -351,7 +351,7 @@ public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
                 setBodyParams(new String[]{"id"}, new String[]{delid + ""});
-                sendPost(WenConstans.ZcDeleteDisscuss, 1001, WenConstans.token);
+                sendPost(WenConstans.ZcDeleteDisscuss, 1001, Constants.token);
                 deldialog.dismiss();
             }
 

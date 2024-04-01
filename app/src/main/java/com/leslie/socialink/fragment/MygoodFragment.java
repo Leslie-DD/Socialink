@@ -21,6 +21,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.SecondhandgoodBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONException;
@@ -64,7 +65,7 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
 
     private void getData(int where) {
         setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{pn + "", ps + "", "1"});
-        sendPostConnection(WenConstans.Mygood, where, WenConstans.token);
+        sendPostConnection(WenConstans.Mygood, where, Constants.token);
     }
 
     @Override
@@ -167,7 +168,7 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-        sendPostConnection(WenConstans.WwLike, 1000, WenConstans.token);
+        sendPostConnection(WenConstans.WwLike, 1000, Constants.token);
     }
 
     private void setFragmentListener() {

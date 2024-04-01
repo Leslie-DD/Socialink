@@ -217,7 +217,7 @@ public class SendQuestionActivity extends NetWorkActivity {
             tvSave.setClickable(false);
             OkHttpUtils.post(WenConstans.SendQuestion)
                     .tag(this)
-                    .headers(Constants.Token_Header, WenConstans.token)
+                    .headers(Constants.Token_Header, Constants.token)
                     .params("name", title + "")
                     .params("content", content + "")
                     .params("labels", biaoqain + "")

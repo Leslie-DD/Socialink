@@ -23,6 +23,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.FriendListBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,7 +73,7 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
 
     private void getData(double longtitude, double latitude, int pn, int ps) {
         setBodyParams(new String[]{"longtitude", "latitude", "pn", "ps"}, new String[]{"" + longtitude, "" + latitude, "" + pn, "" + ps});
-        sendPostConnection(WenConstans.FriendNear, 100, WenConstans.token);
+        sendPostConnection(WenConstans.FriendNear, 100, Constants.token);
     }
 
     @Override

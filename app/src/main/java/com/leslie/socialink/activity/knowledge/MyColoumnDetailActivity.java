@@ -142,7 +142,7 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements XRecycle
     }
 
     private void getData(int id) {
-        sendGetConnection(WenConstans.getColumnDetail + "?id=" + id, new String[]{}, new String[]{}, 100, WenConstans.token);
+        sendGetConnection(WenConstans.getColumnDetail + "?id=" + id, new String[]{}, new String[]{}, 100, Constants.token);
     }
 
 

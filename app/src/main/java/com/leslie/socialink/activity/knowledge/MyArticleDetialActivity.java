@@ -108,7 +108,7 @@ public class MyArticleDetialActivity extends NetWorkActivity {
     }
 
     private void getData(int id) {
-        sendGetConnection(WenConstans.getMyArticleDetail + "?id=" + id, new String[]{}, new String[]{}, 100, WenConstans.token);
+        sendGetConnection(WenConstans.getMyArticleDetail + "?id=" + id, new String[]{}, new String[]{}, 100, Constants.token);
 
     }
 

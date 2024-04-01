@@ -125,7 +125,7 @@ public class SendNew extends NetWorkActivity {
     private void init() {
 
 
-//        id = WenConstans.id;
+//        id = Constants.uid;
         id = Constants.uid;
         String ids = id + "";
         Log.e("ids", ids + "");
@@ -169,7 +169,7 @@ public class SendNew extends NetWorkActivity {
 
             Log.e("showid", id + "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
             setBodyParams(new String[]{"uid", "content", "location", "photoList"}, new String[]{id + "", content + "", location + "", photoList});
-            sendPost(WenConstans.SendNew, 100, WenConstans.token);
+            sendPost(WenConstans.SendNew, 100, Constants.token);
 
             SendNew.this.finish();
         });

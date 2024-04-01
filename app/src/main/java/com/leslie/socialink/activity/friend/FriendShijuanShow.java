@@ -31,7 +31,7 @@ public class FriendShijuanShow extends NetWorkActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shijuanshow);
         //Intent intent1 = getIntent();
-//        id = WenConstans.id;
+//        id = Constants.uid;
         id = Constants.uid;
         init();
         event();
@@ -94,7 +94,7 @@ public class FriendShijuanShow extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"user_id"}, new String[]{"" + id});
-        sendPost(Constants.base_url + "/api/social/getquest.do", 100, WenConstans.token);
+        sendPost(Constants.base_url + "/api/social/getquest.do", 100, Constants.token);
     }
 
 

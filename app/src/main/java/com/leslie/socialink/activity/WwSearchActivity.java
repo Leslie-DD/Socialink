@@ -357,7 +357,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+        sendPost(WenConstans.WwLike, 1000, Constants.token);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {

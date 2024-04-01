@@ -67,9 +67,9 @@ public class MessagesFriendApplyFragment extends NetWorkFragment implements XRec
 
     private void getData(int pn) {
         setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 4});
-        sendPostConnection(WenConstans.ShowFriendAdd, 100, WenConstans.token);
-        Log.e("token", "" + WenConstans.token);
-        Log.e("userid", "" + WenConstans.id);
+        sendPostConnection(WenConstans.ShowFriendAdd, 100, Constants.token);
+        Log.e("token", "" + Constants.token);
+        Log.e("userid", "" + Constants.uid);
     }
 
     @Override

@@ -93,8 +93,9 @@ public class LoginActivity extends NetWorkActivity {
             String token = dd.optString("token");
             int uid = dd.optInt("uid");
 
-//            WenConstans.id=uid;
+//            Constants.uid=uid;
             Constants.uid = uid;
+            Constants.token = token;
 
             /**
              * 2020.09.08 注释
@@ -115,7 +116,7 @@ public class LoginActivity extends NetWorkActivity {
             this.finish();
             startActivity(new Intent(mContext, MainActivity.class));
 
-            //WenConstans.id = uid;
+            //Constants.uid = uid;
             Utils.toastShort(mContext, "登录成功；用户id：" + Constants.uid);
 
         } else {

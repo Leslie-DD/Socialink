@@ -155,9 +155,9 @@ public class FriendActivity extends NetWorkActivity {
     }
 
     private void getData() {
-        Log.d("FriendActivity", "setBodyParams 经度纬度 WenConstants.token:  " + WenConstans.token + ", Constants.token: " + Constants.token);
+        Log.d("FriendActivity", "setBodyParams 经度纬度 WenConstants.token:  " + Constants.token + ", Constants.token: " + Constants.token);
         setBodyParams(new String[]{"longitude", "latitude"}, new String[]{"" + longitude, "" + latitude});
-        sendPost(Constants.base_url + "/api/social/updatePosition.do", 100, WenConstans.token);
+        sendPost(Constants.base_url + "/api/social/updatePosition.do", 100, Constants.token);
     }
 
 }

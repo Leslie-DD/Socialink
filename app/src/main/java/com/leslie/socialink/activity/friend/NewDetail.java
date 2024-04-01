@@ -99,7 +99,7 @@ public class NewDetail extends NetWorkActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friend_newdetail);
         //EventBus.getDefault().register(this);
-        uid = WenConstans.id;
+        uid = Constants.uid;
         String ids = uid + "";
         if (ids.equals("0")) {
             Intent intents = new Intent(NewDetail.this, LoginActivity.class);
@@ -130,11 +130,11 @@ public class NewDetail extends NetWorkActivity {
         etContent = (EditText) findViewById(R.id.etContent);
         llSave = (LinearLayout) headview.findViewById(R.id.llSave);
         llSave.setOnClickListener(v -> {
-            Log.e("NewDetail.java Wen.id", "" + WenConstans.id);
-            setBodyParams(new String[]{"user_id", "dynamic_id"}, new String[]{WenConstans.id + "", "" + friendNewBean.dtid});
-            // 修改用Constants.uid而不用WenConstans.id，不然返回
+            Log.e("NewDetail.java Wen.id", "" + Constants.uid);
+            setBodyParams(new String[]{"user_id", "dynamic_id"}, new String[]{Constants.uid + "", "" + friendNewBean.dtid});
+            // 修改用Constants.uid而不用Constants.uid，不然返回
 //                setBodyParams(new String[]{"user_id","dynamic_id"}, new String[]{Constants.uid+ "",""+friendNewBean.dtid});
-            sendPost(WenConstans.FriendNewZan, 1000, WenConstans.token);
+            sendPost(WenConstans.FriendNewZan, 1000, Constants.token);
         });
         ivImg = (ImageView) headview.findViewById(R.id.ivImg);
         ivBq = (ImageView) findViewById(R.id.ivBq);
@@ -216,7 +216,7 @@ public class NewDetail extends NetWorkActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除接口还没开始写
                 setBodyParams(new String[]{"dynamic_id"}, new String[]{friendNewBean.dtid + ""});
-                sendPost(Constants.base_url + "/api/social/deleteDynamic.do", 10010, WenConstans.token);
+                sendPost(Constants.base_url + "/api/social/deleteDynamic.do", 10010, Constants.token);
                 deldialog.dismiss();
             }
 
@@ -243,7 +243,7 @@ public class NewDetail extends NetWorkActivity {
         }
         setBodyParams(new String[]{"dynamic_id"}
                 , new String[]{friendNewBean.dtid + ""});
-        sendPost(WenConstans.GetSingleDynamic, where, WenConstans.token);
+        sendPost(WenConstans.GetSingleDynamic, where, Constants.token);
 
     }
 
@@ -432,7 +432,7 @@ public class NewDetail extends NetWorkActivity {
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"dynamic_id", "type", "content", "presentor"}
                 , new String[]{friendNewBean.dtid + "", 1 + "", content, "" + friendNewBean.user_id});
-        sendPost(WenConstans.FriendDiscuss, 102, WenConstans.token);
+        sendPost(WenConstans.FriendDiscuss, 102, Constants.token);
 
     }
 

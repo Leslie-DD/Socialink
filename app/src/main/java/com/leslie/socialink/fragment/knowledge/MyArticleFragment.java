@@ -16,6 +16,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.knowledge.RecommendItemBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONArray;
@@ -55,7 +56,7 @@ public class MyArticleFragment extends NetWorkFragment implements XRecyclerView.
     }
 
     private void getData(int pn, int ps) {
-        sendGetConnection(WenConstans.getMyArticle + "?pageSize=" + ps + "&pageNum=" + pn, 100, WenConstans.token);
+        sendGetConnection(WenConstans.getMyArticle + "?pageSize=" + ps + "&pageNum=" + pn, 100, Constants.token);
     }
 
     @Override
@@ -151,7 +152,7 @@ public class MyArticleFragment extends NetWorkFragment implements XRecyclerView.
     public void doSave(int position) {
 //        clickPosition = position;
 //        setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-//        sendPost(WenConstans.WwLike, 1000, WenConstans.token);
+//        sendPost(WenConstans.WwLike, 1000, Constants.token);
         //暂时还没写交友的关注功能
     }
 

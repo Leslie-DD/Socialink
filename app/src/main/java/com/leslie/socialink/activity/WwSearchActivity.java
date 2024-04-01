@@ -1,5 +1,6 @@
 package com.leslie.socialink.activity;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -342,6 +343,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         }
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

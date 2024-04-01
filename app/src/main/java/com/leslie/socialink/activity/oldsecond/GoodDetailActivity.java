@@ -130,6 +130,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             tvLoves.setText(zan + "");
             if (dz != zan) {
                 Intent intent = new Intent();
+                intent.setPackage(getPackageName());;
                 intent.setAction("fragment.listener");
                 intent.putExtra("item", 2);
                 sendBroadcast(intent);
@@ -191,7 +192,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             etContent.setText("");
             Utils.toastShort(mContext, "评论成功");
             Intent intent = new Intent();
-            intent.setAction("fragment.listener");
+            intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
             intent.putExtra("item", 2);
             sendBroadcast(intent);
             getDisscuss(100);
@@ -213,6 +214,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             if (save.equals("收藏")) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
+                intent.setPackage(getPackageName());;
                 intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "收藏成功");
@@ -220,7 +222,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             } else {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());;intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "取消收藏成功");
                 save = "收藏";
@@ -243,7 +245,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             if (result.optInt("code") == 0) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "删除问问成功");
                 this.finish();
@@ -515,6 +517,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
         startActivityForResult(intent, 100);
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setListener() {
         brodcast = new RefreshBrodcast();
         IntentFilter intentFilter = new IntentFilter();

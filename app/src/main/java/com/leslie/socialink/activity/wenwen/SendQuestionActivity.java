@@ -234,7 +234,7 @@ public class SendQuestionActivity extends NetWorkActivity {
                                 if (result.optInt("code") == 0) {
                                     Intent intent = new Intent();
                                     intent.putExtra("item", 2);
-                                    intent.setAction("fragment.listener");
+                                    intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                                     sendBroadcast(intent);
                                     SendQuestionActivity.this.finish();
                                 } else {

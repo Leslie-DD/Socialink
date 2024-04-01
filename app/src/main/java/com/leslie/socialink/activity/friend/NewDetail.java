@@ -1,5 +1,6 @@
 package com.leslie.socialink.activity.friend;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -63,7 +64,7 @@ public class NewDetail extends NetWorkActivity {
     private TextView tvTitles;
     private TextView tvBelong;
     private TextView tvLoves;
-    private TextView tvNum, tvContent;
+    private TextView tvContent;
     private MyLv lvPicture;
     private XRecyclerView lvDisscuss;
     private FriendPictureAdapter pictureAdapter;
@@ -125,7 +126,6 @@ public class NewDetail extends NetWorkActivity {
         tvTitles = (TextView) headview.findViewById(R.id.tvTitles);
         tvBelong = (TextView) headview.findViewById(R.id.tvBelong);
         tvLoves = (TextView) headview.findViewById(R.id.tvLoves);
-        tvNum = (TextView) headview.findViewById(R.id.tvNum);
         tvContent = (TextView) headview.findViewById(R.id.tvContent);
         etContent = (EditText) findViewById(R.id.etContent);
         llSave = (LinearLayout) headview.findViewById(R.id.llSave);
@@ -303,7 +303,7 @@ public class NewDetail extends NetWorkActivity {
             tvLoves.setText(zan + "");
             if (dz != zan) {
                 Intent intent = new Intent();
-                intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                 intent.putExtra("item", 2);
                 sendBroadcast(intent);
             }
@@ -368,7 +368,7 @@ public class NewDetail extends NetWorkActivity {
             etContent.setText("");
             Utils.toastShort(mContext, "评论成功");
             Intent intent = new Intent();
-            intent.setAction("fragment.listener");
+            intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
             intent.putExtra("item", 2);
             sendBroadcast(intent);
             getDisscuss(100);
@@ -379,14 +379,14 @@ public class NewDetail extends NetWorkActivity {
             if (save.equals("收藏")) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "收藏成功");
                 save = "取消收藏";
             } else {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "取消收藏成功");
                 save = "收藏";
@@ -408,7 +408,7 @@ public class NewDetail extends NetWorkActivity {
             if (result.optInt("code") == 0) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "删除动态成功");
                 this.finish();
@@ -418,6 +418,7 @@ public class NewDetail extends NetWorkActivity {
         }
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setListener() {
         brodcast = new RefreshBrodcast();
         IntentFilter intentFilter = new IntentFilter();

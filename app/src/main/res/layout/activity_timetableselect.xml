@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -8,11 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5">
-            <include layout="@layout/new_shijuan_title"/>
+
+            <include layout="@layout/new_shijuan_title" />
         </LinearLayout>
 
         <LinearLayout
@@ -28,10 +30,10 @@
                 android:layout_marginTop="30dp"
                 android:background="#EEEEEE"
                 android:hint="学年1（例：2019）"
-                android:text="2019"
                 android:maxLines="1"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
+                android:text="2019"
                 android:textSize="15dp" />
         </LinearLayout>
 
@@ -42,18 +44,19 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/year2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="25dp"
                 android:background="#EEEEEE"
                 android:hint="学年2（例：2020）"
-                android:text="2020"
+                android:maxLines="1"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:textSize="15dp"
-                android:maxLines="1"
-                android:id="@+id/year2"/>
+                android:text="2020"
+                android:textSize="15dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -61,18 +64,19 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/term"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="25dp"
                 android:background="#EEEEEE"
                 android:hint="查询的学期（1 or 2）"
-                android:text="2"
+                android:maxLines="1"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:textSize="15dp"
-                android:maxLines="1"
-                android:id="@+id/term"/>
+                android:text="2"
+                android:textSize="15dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -80,18 +84,19 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/today"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="25dp"
                 android:background="#EEEEEE"
                 android:hint="当前日期（yyyy-mm-dd）"
-                android:text="2020-05-05"
+                android:maxLines="1"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:textSize="15dp"
-                android:maxLines="1"
-                android:id="@+id/today"/>
+                android:text="2020-05-05"
+                android:textSize="15dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -99,18 +104,18 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/week"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="25dp"
                 android:background="#EEEEEE"
                 android:hint="本日周次（1 - 30）"
-                android:text="10"
+                android:maxLines="1"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:textSize="15dp"
-                android:maxLines="1"
-                android:id="@+id/week"/>
+                android:text="10"
+                android:textSize="15dp" />
         </LinearLayout>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

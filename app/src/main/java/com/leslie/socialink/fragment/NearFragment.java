@@ -1,5 +1,6 @@
 package com.leslie.socialink.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -148,6 +149,7 @@ public class NearFragment extends NetWorkFragment implements XRecyclerView.Loadi
         // TODO: implement
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

@@ -1,5 +1,6 @@
 package com.leslie.socialink.network.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.StringRes;
@@ -52,6 +53,7 @@ public enum ErrorCode {
         return mMsgRes;
     }
 
+    @SuppressLint("ResourceType")
     public String getMsgString(Context context) {
         if (mMsgRes > 0) {
             return context.getString(mMsgRes);

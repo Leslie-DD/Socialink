@@ -282,7 +282,7 @@ public class SecondhandPostActivity extends PhotoBaseActivity {
                             if (result.optInt("code") == 0) {
                                 Intent intent = new Intent();
                                 intent.putExtra("item", 2);
-                                intent.setAction("fragment.listener");
+                                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                                 sendBroadcast(intent);
                                 SecondhandPostActivity.this.finish();
                                 Utils.toastShort(mContext, "发布成功");
@@ -304,6 +304,7 @@ public class SecondhandPostActivity extends PhotoBaseActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }

@@ -22,7 +22,7 @@ import com.leslie.socialink.R;
 /**
  * 圆形ImageView组件
  */
-public class CircleView extends ImageView {
+public class CircleView extends androidx.appcompat.widget.AppCompatImageView {
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 

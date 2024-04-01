@@ -525,6 +525,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
@@ -532,26 +533,27 @@ public class ReleaseActivitiesActivity extends NetWorkActivity {
             case 200:
                 break;
             case 202:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    photoUri = null;
-                    photoUri = data.getData();
-                    try {
-                        ContentResolver resolver = this.getContentResolver();
-                        Uri originalUri = data.getData(); // 获得图片的uri
-                        photoUri = originalUri;
-                        String[] proj = {MediaStore.Images.Media.DATA};
-                        Cursor cursor = resolver.query(originalUri, proj, null, null, null);
-                        if (cursor == null) {
-                            this.path = photoUri.getPath();
-                        } else {
-                            if (cursor.moveToFirst()) {
-                                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                                this.path = cursor.getString(column_index);
-                            }
+                if (data == null) {
+                    break;
+                }
+                photoUri = null;
+                photoUri = data.getData();
+                try {
+                    ContentResolver resolver = this.getContentResolver();
+                    Uri originalUri = data.getData(); // 获得图片的uri
+                    photoUri = originalUri;
+                    String[] proj = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = resolver.query(originalUri, proj, null, null, null);
+                    if (cursor == null) {
+                        this.path = photoUri.getPath();
+                    } else {
+                        if (cursor.moveToFirst()) {
+                            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                            this.path = cursor.getString(column_index);
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 break;
         }
@@ -559,7 +561,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity {
         gwPictureAdapter.setData(strings);
         Luban.with(this).load(new File(path)).
                 setCompressListener(new OnCompressListener() {
-                    //                    @Override
+                    @Override
                     public void onStart() {
 
                     }

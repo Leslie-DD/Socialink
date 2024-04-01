@@ -43,7 +43,7 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         if (firstin) {
             firstin = false;
             type = 0;
@@ -300,6 +300,6 @@ public class TeamChildFragment1 extends BaseTeamPagerFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
     }
 }

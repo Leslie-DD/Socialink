@@ -1,6 +1,7 @@
 package com.leslie.socialink.questions
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,20 +18,22 @@ import com.leslie.socialink.utils.StatusBarUtil.setMarginStatusBar
 class QuestionsFragment : Fragment() {
     private lateinit var view: View
 
+    private var pagerAdapter : QuestionsFragmentViewPagerAdapter? = null
+
     private val tabsValue = arrayOf("推荐", "最新")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
         view = inflater.inflate(R.layout.fragment_questions, container, false)
         val titleLayout = view.findViewById<RelativeLayout>(R.id.title_layout)
         setMarginStatusBar<MarginLayoutParams>(titleLayout)
-
+        val fragmentManager = requireActivity().supportFragmentManager.fragments.size
+        Log.i(TAG, "onCreateView activity fragment size: $fragmentManager")
         initViewPager()
         return view
     }
 
     private fun initViewPager() {
-        val pagerAdapter = QuestionsFragmentViewPagerAdapter(getChildFragmentManager(), lifecycle)
+        pagerAdapter = QuestionsFragmentViewPagerAdapter(childFragmentManager, lifecycle)
         val tabs: TabLayout = view.findViewById(R.id.tabs)
         val viewPager: ViewPager2 = view.findViewById(R.id.vp)
         viewPager.setAdapter(pagerAdapter)

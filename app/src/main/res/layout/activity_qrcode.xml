@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
    android:orientation="vertical"
     android:background="#ffffff"
-    tools:context="com.hnu.heshequ.activity.team.QRcodeActivity">
+    tools:context="com.leslie.socialink.activity.team.QRcodeActivity">
    <ImageView
        android:layout_width="50dp"
        android:id="@+id/ivBack"
@@ -18,7 +18,7 @@
         android:gravity="center_vertical"
         android:layout_marginTop="50dp"
         android:layout_height="wrap_content">
-        <com.hnu.heshequ.view.CircleView
+        <com.leslie.socialink.view.CircleView
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:id="@+id/ivHead"

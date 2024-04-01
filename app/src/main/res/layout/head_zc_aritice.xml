@@ -92,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />-->
 
-    <com.hnu.heshequ.view.NoScrollWebView
+    <com.leslie.socialink.view.NoScrollWebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="100dp"

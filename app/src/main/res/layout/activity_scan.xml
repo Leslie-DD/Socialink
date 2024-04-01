@@ -29,7 +29,7 @@
             <include layout="@layout/new_title_bar2"/>
 
             <!-- 扫描取景框 -->
-            <com.hnu.heshequ.secondma.view.ViewfinderView
+            <com.leslie.socialink.secondma.view.ViewfinderView
                 android:layout_marginTop="50dp"
                 android:id="@+id/viewfinder_view"
                 android:layout_width="match_parent"

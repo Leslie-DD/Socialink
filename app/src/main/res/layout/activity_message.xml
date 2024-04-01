@@ -12,7 +12,7 @@
         android:id="@+id/left"
         >
 
-        <com.hnu.heshequ.view.CircleView
+        <com.leslie.socialink.view.CircleView
             android:id="@+id/messageimageViewleft"
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -81,7 +81,7 @@
         />
 
 
-        <com.hnu.heshequ.view.CircleView
+        <com.leslie.socialink.view.CircleView
             android:id="@+id/messageimageViewr"
             android:layout_height="45dp"
             android:layout_width="45dp"

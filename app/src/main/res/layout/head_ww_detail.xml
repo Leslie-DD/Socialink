@@ -9,7 +9,7 @@
         android:layout_marginRight="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.hnu.heshequ.view.CircleView
+        <com.leslie.socialink.view.CircleView
             android:id="@+id/ivHead"
             android:src="@mipmap/head3"
             android:layout_width="35dp"
@@ -62,7 +62,7 @@
         android:ellipsize="end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <com.hnu.heshequ.view.MyLv
+    <com.leslie.socialink.view.MyLv
         android:visibility="gone"
         android:layout_marginTop="7dp"
         android:layout_marginLeft="12dp"
@@ -73,7 +73,7 @@
         android:divider="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.hnu.heshequ.view.MyLv>
+    </com.leslie.socialink.view.MyLv>
     <LinearLayout
         android:gravity="center_vertical"
         android:layout_marginBottom="8dp"

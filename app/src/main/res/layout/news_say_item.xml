@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
-            <com.hnu.heshequ.view.CircleView
+            <com.leslie.socialink.view.CircleView
                 android:id="@+id/ivHead"
                 android:layout_width="35dp"
                 android:layout_height="35dp"

@@ -63,7 +63,7 @@
             android:textSize="12sp"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <com.hnu.heshequ.view.MyGv
+    <com.leslie.socialink.view.MyGv
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:verticalSpacing="10dp"
         android:background="#ffffff"
         android:id="@+id/gv">
-        </com.hnu.heshequ.view.MyGv>
+        </com.leslie.socialink.view.MyGv>
      <LinearLayout
          android:layout_width="match_parent"
          android:gravity="center_vertical"

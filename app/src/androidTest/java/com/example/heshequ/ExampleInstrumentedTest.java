@@ -1,6 +1,4 @@
-package com.hnu.heshequ;
-
-import android.content.Context;
+package com.leslie.socialink;
 
 //import androidx.test.platform.app.InstrumentationRegistry;
 //import androidx.test.ext.junit.runners.AndroidJUnit4;

@@ -5,7 +5,7 @@
     android:background="#f8f8fd"
     android:paddingBottom="10dp">
 
-    <com.hnu.heshequ.view.ArcImageView
+    <com.leslie.socialink.view.ArcImageView
         android:id="@+id/ivBg"
         android:layout_width="match_parent"
         android:layout_height="240dp"
@@ -44,7 +44,7 @@
         android:scaleType="center"
         android:src="@mipmap/bianji" />
 
-    <com.hnu.heshequ.view.CircleView
+    <com.leslie.socialink.view.CircleView
         android:id="@+id/ivHead"
         android:layout_width="75dp"
         android:layout_height="75dp"

@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hnu.heshequ.activity.mine.MyMessageActivity">
+    tools:context="com.leslie.socialink.activity.mine.MyMessageActivity">
     <fragment
         android:id="@+id/my_message"
-        android:name="com.hnu.heshequ.message.ui.MessageFragment"
+        android:name="com.leslie.socialink.message.ui.MessageFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </fragment>

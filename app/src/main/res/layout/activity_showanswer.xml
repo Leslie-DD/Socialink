@@ -22,27 +22,27 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <com.hnu.heshequ.view.QuestionAnswerItem
+            <com.leslie.socialink.view.QuestionAnswerItem
                 android:id="@+id/questionAnswerItem1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.hnu.heshequ.view.QuestionAnswerItem
+            <com.leslie.socialink.view.QuestionAnswerItem
                 android:id="@+id/questionAnswerItem2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.hnu.heshequ.view.QuestionAnswerItem
+            <com.leslie.socialink.view.QuestionAnswerItem
                 android:id="@+id/questionAnswerItem3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.hnu.heshequ.view.QuestionAnswerItem
+            <com.leslie.socialink.view.QuestionAnswerItem
                 android:id="@+id/questionAnswerItem4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.hnu.heshequ.view.QuestionAnswerItem
+            <com.leslie.socialink.view.QuestionAnswerItem
                 android:id="@+id/questionAnswerItem5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

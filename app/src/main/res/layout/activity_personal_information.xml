@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="com.hnu.heshequ.activity.team.PersonalInformationActivity">
+    tools:context="com.leslie.socialink.activity.team.PersonalInformationActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp">
 
-            <com.hnu.heshequ.view.CircleView
+            <com.leslie.socialink.view.CircleView
                 android:id="@+id/ivHead"
                 android:layout_width="60dp"
                 android:layout_height="60dp"

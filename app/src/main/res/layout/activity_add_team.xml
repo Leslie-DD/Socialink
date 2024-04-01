@@ -7,9 +7,9 @@
     android:orientation="vertical"
     android:background="#ffffff"
     android:gravity="center_horizontal"
-    tools:context="com.hnu.heshequ.activity.team.AddTeamActivity">
+    tools:context="com.leslie.socialink.activity.team.AddTeamActivity">
    <include layout="@layout/new_title_bar2"/>
-    <com.hnu.heshequ.view.CircleView
+    <com.leslie.socialink.view.CircleView
         android:layout_width="60dp"
         android:id="@+id/ivHead"
         android:layout_gravity="center_horizontal"
@@ -43,7 +43,7 @@
         android:layout_marginTop="26dp"
         android:text="添加标签让更多人搜到你"
         android:layout_height="wrap_content" />
-    <com.hnu.heshequ.view.FlowLayout
+    <com.leslie.socialink.view.FlowLayout
         app:width_space="10dp"
         app:height_space="10dp"
         android:id="@+id/flow_layout"

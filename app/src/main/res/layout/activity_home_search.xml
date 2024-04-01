@@ -71,7 +71,7 @@
             android:layout_height="1dp"
             android:background="#e6e6e6"
             />
-        <com.hnu.heshequ.view.FlowLayout
+        <com.leslie.socialink.view.FlowLayout
             app:width_space="2dp"
             app:height_space="2dp"
             android:layout_marginTop="20dp"
@@ -99,11 +99,11 @@
             app:tabSelectedTextColor="@color/colorPrimary"
             app:tabTextAppearance="@style/TabLayoutTextStyle"
             app:tabTextColor="@color/text_66" />
-        <com.hnu.heshequ.view.NoScrollViewPager
+        <com.leslie.socialink.view.NoScrollViewPager
             android:id="@+id/vp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </com.hnu.heshequ.view.NoScrollViewPager>
+        </com.leslie.socialink.view.NoScrollViewPager>
     </LinearLayout>
 
 </LinearLayout>

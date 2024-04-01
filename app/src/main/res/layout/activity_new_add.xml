@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.hnu.heshequ.activity.team.NewAddActivity">
+    tools:context="com.leslie.socialink.activity.team.NewAddActivity">
 
     <include layout="@layout/new_title_bar2"/>
 

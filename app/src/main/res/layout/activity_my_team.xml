@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.hnu.heshequ.activity.mine.MySayActivity">
+    tools:context="com.leslie.socialink.activity.mine.MySayActivity">
     <include layout="@layout/new_title_bar2"/>
     <TextView
         android:id="@+id/tvNoData"

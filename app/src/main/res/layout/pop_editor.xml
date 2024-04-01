@@ -10,7 +10,7 @@
     app:radius="5dp"
     app:backgroundColor="@android:color/white">
 
-    <com.hnu.heshequ.view.CircleView
+    <com.leslie.socialink.view.CircleView
         android:id="@+id/cvHead"
         android:layout_height="50dp"
         android:layout_width="50dp"

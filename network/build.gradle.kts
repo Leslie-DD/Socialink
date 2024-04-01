@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hnu.heshequ.network"
+    namespace = "com.leslie.socialink.network"
 }
 
 dependencies {

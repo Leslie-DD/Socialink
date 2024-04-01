@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
    android:orientation="vertical"
-    tools:context="com.hnu.heshequ.activity.statement.PublishVoteActivity">
+    tools:context="com.leslie.socialink.activity.statement.PublishVoteActivity">
    <include layout="@layout/new_title_bar"/>
   <ExpandableListView
       android:layout_width="match_parent"

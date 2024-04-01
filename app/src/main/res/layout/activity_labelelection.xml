@@ -89,7 +89,7 @@
                 android:textColor="@color/light_gray"
                 android:textSize="14sp" />
 
-            <com.hnu.heshequ.view.FlowLayout
+            <com.leslie.socialink.view.FlowLayout
                 android:id="@+id/flow_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

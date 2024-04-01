@@ -11,10 +11,10 @@ plugins {
 }
 
 android {
-    namespace = "com.hnu.heshequ"
+    namespace = "com.leslie.socialink"
 
     defaultConfig {
-        applicationId = "com.hnu.heshequ"
+        applicationId = "com.leslie.socialink"
 
         /**
          * versionName 和 versionCode 是 Android 应用程序的版本管理中常用的两个属性，它们有以下区别：

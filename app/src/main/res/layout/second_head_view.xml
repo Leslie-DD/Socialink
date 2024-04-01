@@ -38,10 +38,10 @@
         android:layout_width="fill_parent"
         android:layout_height="3dip"
         android:background="#E3EDFF" />
-    <com.hnu.heshequ.view.CustomViewPager
+    <com.leslie.socialink.view.CustomViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.hnu.heshequ.view.CustomViewPager>
+    </com.leslie.socialink.view.CustomViewPager>
 </LinearLayout>

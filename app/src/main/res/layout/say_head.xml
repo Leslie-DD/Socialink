@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.hnu.heshequ.view.CircleView
+        <com.leslie.socialink.view.CircleView
             android:layout_width="35dp"
             android:id="@+id/ivHead"
             android:layout_height="35dp" />
@@ -59,7 +59,7 @@
         android:id="@+id/tvContent"
         android:layout_height="wrap_content" />
 
-    <com.hnu.heshequ.view.MyGv
+    <com.leslie.socialink.view.MyGv
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -67,6 +67,6 @@
         android:verticalSpacing="10dp"
         android:background="#ffffff"
         android:id="@+id/gv">
-    </com.hnu.heshequ.view.MyGv>
+    </com.leslie.socialink.view.MyGv>
 
 </LinearLayout>

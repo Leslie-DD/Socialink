@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.hnu.heshequ.home.ui.HomeFragment"
+        android:name="com.leslie.socialink.home.ui.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_team"
-        android:name="com.hnu.heshequ.fragment.TeamsFragment"
+        android:name="com.leslie.socialink.fragment.TeamsFragment"
         android:label="@string/menu_team"
         tools:layout="@layout/fragment_teams" />
 
     <fragment
         android:id="@+id/navigation_question"
-        android:name="com.hnu.heshequ.questions.QuestionsFragment"
+        android:name="com.leslie.socialink.questions.QuestionsFragment"
         android:label="@string/menu_ask"
         tools:layout="@layout/fragment_questions" />
 
     <fragment
         android:id="@+id/navigation_message"
-        android:name="com.hnu.heshequ.message.ui.MessageFragment"
+        android:name="com.leslie.socialink.message.ui.MessageFragment"
         android:label="@string/menu_message"
         tools:layout="@layout/fragment_wenwen" />
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.hnu.heshequ.fragment.MeFragment"
+        android:name="com.leslie.socialink.fragment.MeFragment"
         android:label="@string/menu_mine"
         tools:layout="@layout/fragment_me" />
 </navigation>

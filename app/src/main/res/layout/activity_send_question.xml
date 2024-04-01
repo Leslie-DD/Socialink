@@ -45,7 +45,7 @@
                 android:background="@color/F8"
                 android:layout_width="match_parent"
                 android:layout_height="190dp" />
-            <com.hnu.heshequ.view.MyGv
+            <com.leslie.socialink.view.MyGv
                 android:numColumns="3"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
@@ -56,7 +56,7 @@
                 android:verticalSpacing="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            </com.hnu.heshequ.view.MyGv>
+            </com.leslie.socialink.view.MyGv>
 
 
             <LinearLayout
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>-->
 
-            <com.hnu.heshequ.view.FlowLayout
+            <com.leslie.socialink.view.FlowLayout
                 app:width_space="10dp"
                 app:height_space="10dp"
                 android:id="@+id/flow_layout"

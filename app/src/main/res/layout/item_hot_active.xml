@@ -11,7 +11,7 @@
         android:layout_marginRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.hnu.heshequ.view.CircleView
+        <com.leslie.socialink.view.CircleView
             android:id="@+id/ivHead"
             android:src="@mipmap/head3"
             android:layout_width="35dp"
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <com.hnu.heshequ.view.MyGv
+    <com.leslie.socialink.view.MyGv
         android:visibility="gone"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="10dp"
@@ -98,7 +98,7 @@
         android:numColumns="3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    </com.hnu.heshequ.view.MyGv>
+    </com.leslie.socialink.view.MyGv>
     <TextView
         android:id="@+id/tvTime"
         android:layout_marginBottom="8dp"

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <com.hnu.heshequ.view.CircleView
+        <com.leslie.socialink.view.CircleView
             android:id="@+id/ivHead"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <com.hnu.heshequ.view.MyGv
+    <com.leslie.socialink.view.MyGv
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
         android:verticalSpacing="10dp"
         android:background="#ffffff"
         android:id="@+id/gv">
-    </com.hnu.heshequ.view.MyGv>
+    </com.leslie.socialink.view.MyGv>
     <LinearLayout
         android:gravity="center_vertical"
         android:layout_marginBottom="8dp"

@@ -49,7 +49,7 @@
                 android:textColorHint="@color/text_9"
                 android:textSize="15sp" />
 
-            <com.hnu.heshequ.view.MyGv
+            <com.leslie.socialink.view.MyGv
                 android:id="@+id/gw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:layout_marginTop="10dp"
                 android:horizontalSpacing="12dp"
                 android:numColumns="3"
-                android:verticalSpacing="6dp"></com.hnu.heshequ.view.MyGv>
+                android:verticalSpacing="6dp"></com.leslie.socialink.view.MyGv>
 
             <LinearLayout
                 android:layout_width="match_parent"

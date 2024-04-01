@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.hnu.heshequ.activity.team.ChatHistoryActivity"
+    tools:context="com.leslie.socialink.activity.team.ChatHistoryActivity"
     android:orientation="vertical">
 
     <RelativeLayout

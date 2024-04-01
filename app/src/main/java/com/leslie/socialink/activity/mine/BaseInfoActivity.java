@@ -7,17 +7,19 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
@@ -33,7 +35,6 @@ import com.leslie.socialink.entity.RefUserInfo;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.UserInfoBean;
 import com.leslie.socialink.utils.PhotoUtils;
-import com.leslie.socialink.utils.SharedPreferencesHelp;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
 
@@ -47,12 +48,15 @@ import java.util.ArrayList;
 /**
  * 个人基本资料页面
  */
-
 public class BaseInfoActivity extends PhotoBaseActivity {
     private static final String TAG = "[BaseInfoActivity]";
 
     private final static int UPLOAD_HEAD = 1000;
     private final static int UPLOAD_NAME = 1001;
+    private final static int UPDATE_SEX = 1002;
+    private final static int UPDATE_SCHOOL = 1003;
+
+    private WindowManager.LayoutParams windowLayoutParams;
 
     private ArrayList<ItemBean> data;
     private BaseInfoItemAdapter adapter;
@@ -60,25 +64,24 @@ public class BaseInfoActivity extends PhotoBaseActivity {
     private CircleView ivHead;
     private TextView tvTitle;
     private LinearLayout llHead;
-    private PopupWindow pop;
-    private TextView tvUp, tvPic;
-    private int status;
-    private WindowManager.LayoutParams layoutParams;
-    private PopupWindow modifyPop;
-    private TextView tvTip;
-    private EditText etContent;
-    private int popStatus;
+
+    private PopupWindow modifyHeadPopWindow;
+    private PopupWindow modifySexPopWindow;
+    private PopupWindow modifyNamePopWindow;
+    private PopupWindow modifySchoolPopWindow;
+
+    private EditText etNameContent;
+    private EditText etSchoolContent;
+
     private UserInfoBean userInfoBean;
-    private Uri takePhotoUri;
-    private String path;
+
     private String name;
-    private final int upSex = 1002;
-    private final int upSchool = 1003;
     private String school;
     private int sex;
-    private Gson gson;
+
+    private final Gson gson = new Gson();
+
     private OptionsPickerView<String> pvOptions;
-    private Uri uriTempFile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,11 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         setContentView(R.layout.activity_base_info);
         init();
         event();
-        initPop();
+        windowLayoutParams = getWindow().getAttributes();
+        initHeadModifyPopWindow();
+        initSexModifyPopWindow();
+        initNameModifyPopWindow();
+        initSchoolModifyPopWindow();
     }
 
     private void init() {
@@ -97,7 +104,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         Glide.with(mContext).load(Constants.url5).asBitmap().into(ivHead);
         tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("基本资料");
-        getData();
+        initItemsView();
         lv = findViewById(R.id.lv);
         adapter = new BaseInfoItemAdapter(mContext, data);
         lv.setAdapter(adapter);
@@ -109,86 +116,108 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         getSchoolData();
     }
 
-    private void initPop() {
-        gson = new Gson();
-        pop = new PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        layoutParams = getWindow().getAttributes();
-        View pv = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
-        tvPic = pv.findViewById(R.id.tvPic);
-        tvUp = pv.findViewById(R.id.tvUp);
+    private void initHeadModifyPopWindow() {
+        modifyHeadPopWindow = new PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        View content = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
+
+        TextView tvPic = content.findViewById(R.id.tvPic);
+        tvPic.setText("拍照");
+        tvPic.setTextColor(context.getColor(R.color.colorPrimary));
         tvPic.setOnClickListener(v -> {
-            // 拍照
-            if (status == 0) {
-                takePhoto();
-            } else {  // 选择女
-                sex = 2;
-                setBodyParams(new String[]{"sex"}, new String[]{"" + 2});
-                sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
-            }
-            pop.dismiss();
+            takePhoto();
+            modifyHeadPopWindow.dismiss();
         });
+
+        TextView tvUp = content.findViewById(R.id.tvUp);
+        tvUp.setText("上传照片");
+        tvUp.setTextColor(context.getColor(R.color.colorPrimary));
         tvUp.setOnClickListener(v -> {
-            // 相册选择
-            if (status == 0) {
-                choosePhoto();
-            } else {  // 选择男
-                sex = 1;
-                setBodyParams(new String[]{"sex"}, new String[]{"" + 1});
-                sendPost(Constants.base_url + "/api/user/update.do", upSex, Constants.token);
-            }
-            pop.dismiss();
+            choosePhoto();
+            modifyHeadPopWindow.dismiss();
         });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
-        pop.setBackgroundDrawable(new BitmapDrawable());
-        // 设置点击弹框外部，弹框消失
-        pop.setOutsideTouchable(true);
-        // 设置焦点
-        pop.setFocusable(true);
-        pop.setOnDismissListener(() -> {
-            layoutParams.alpha = 1f;
-            getWindow().setAttributes(layoutParams);
+        modifyHeadPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        modifyHeadPopWindow.setOutsideTouchable(true);
+        modifyHeadPopWindow.setFocusable(true);
+        modifyHeadPopWindow.setOnDismissListener(() -> {
+            windowLayoutParams.alpha = 1f;
+            getWindow().setAttributes(windowLayoutParams);
         });
-        // 设置所在布局
-        pop.setContentView(pv);
-        modifyPop = new PopupWindow(Constants.screenW - Utils.dip2px(mContext, 80), WindowManager.LayoutParams.WRAP_CONTENT);
-        View v = LayoutInflater.from(mContext).inflate(R.layout.tklayout, null);
-        v.findViewById(R.id.ivHead).setVisibility(View.GONE);
-        tvTip = v.findViewById(R.id.tvTip);
-        Button btSave = v.findViewById(R.id.btSave);
-        etContent = v.findViewById(R.id.etContent);
-        v.findViewById(R.id.ivClose).setOnClickListener(view -> modifyPop.dismiss());
-        btSave.setOnClickListener(v1 -> {
-            String content = etContent.getText().toString();
-            if (content.isEmpty()) {
+        modifyHeadPopWindow.setContentView(content);
+    }
+
+    private void initSexModifyPopWindow() {
+        modifySexPopWindow = new PopupWindow(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        View content = LayoutInflater.from(mContext).inflate(R.layout.upheadlayout, null);
+
+        TextView sexFemale = content.findViewById(R.id.tvPic);
+        sexFemale.setText("女");
+        sexFemale.setTextColor(context.getColor(R.color.light_gray));
+        sexFemale.setOnClickListener(v -> {
+            sex = 2;
+            setBodyParams(new String[]{"sex"}, new String[]{"" + 2});
+            sendPost(Constants.base_url + "/api/user/update.do", UPDATE_SEX, Constants.token);
+            modifySexPopWindow.dismiss();
+        });
+
+        TextView sexMale = content.findViewById(R.id.tvUp);
+        sexMale.setText("男");
+        sexMale.setTextColor(context.getColor(R.color.light_gray));
+        sexMale.setOnClickListener(v -> {
+            sex = 1;
+            setBodyParams(new String[]{"sex"}, new String[]{"" + 1});
+            sendPost(Constants.base_url + "/api/user/update.do", UPDATE_SEX, Constants.token);
+            modifySexPopWindow.dismiss();
+        });
+
+        // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
+        modifySexPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        modifySexPopWindow.setOutsideTouchable(true);
+        modifySexPopWindow.setFocusable(true);
+        modifySexPopWindow.setOnDismissListener(() -> {
+            windowLayoutParams.alpha = 1f;
+            getWindow().setAttributes(windowLayoutParams);
+        });
+        modifySexPopWindow.setContentView(content);
+    }
+
+    private void initNameModifyPopWindow() {
+        WindowManager windowManager = getWindowManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int screenWidth = displayMetrics.widthPixels;
+
+        modifyNamePopWindow = new PopupWindow(
+                screenWidth - Utils.dip2px(context, 20),
+                WindowManager.LayoutParams.WRAP_CONTENT
+        );
+
+        View content = LayoutInflater.from(mContext).inflate(R.layout.tklayout, null);
+        content.findViewById(R.id.ivHead).setVisibility(View.GONE);
+        content.findViewById(R.id.ivClose).setOnClickListener(view -> modifyNamePopWindow.dismiss());
+        content.findViewById(R.id.btSave).setOnClickListener(v1 -> {
+            String modifiedValue = etNameContent.getText().toString();
+            if (modifiedValue.isEmpty()) {
                 Utils.toastShort(mContext, "请先输入信息!");
                 return;
             }
-            // 修改名字
-            if (popStatus == 0) {
-                name = content;
-                setBodyParams(new String[]{"nickname"}, new String[]{content});
-                sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_NAME, Constants.token);
-            }
-            // 修改学校
-            if (popStatus == 1) {
-                name = content;
-                SharedPreferencesHelp.getEditor().putString(Constants.uid + "school", name).apply();
-                data.get(2).setTip(name);
-                adapter.notifyDataSetChanged();
-            }
-            modifyPop.dismiss();
+            name = modifiedValue;
+            setBodyParams(new String[]{"nickname"}, new String[]{modifiedValue});
+            sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_NAME, Constants.token);
+            modifyNamePopWindow.dismiss();
         });
+        TextView tvTip = content.findViewById(R.id.tvTip);
+        tvTip.setText("修改昵称");
+        etNameContent = content.findViewById(R.id.etContent);
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
-        modifyPop.setBackgroundDrawable(new BitmapDrawable());
-        // 设置点击弹框外部，弹框消失
-        modifyPop.setOutsideTouchable(true);
-        // 设置焦点
-        modifyPop.setFocusable(true);
-        modifyPop.setOnDismissListener(() -> {
-            layoutParams.alpha = 1f;
-            getWindow().setAttributes(layoutParams);
+        modifyNamePopWindow.setBackgroundDrawable(new BitmapDrawable());
+        modifyNamePopWindow.setOutsideTouchable(true);
+        modifyNamePopWindow.setFocusable(true);
+        modifyNamePopWindow.setOnDismissListener(() -> {
+            windowLayoutParams.alpha = 1f;
+            getWindow().setAttributes(windowLayoutParams);
         });
-        etContent.addTextChangedListener(new TextWatcher() {
+        etNameContent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -204,7 +233,53 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                 }
             }
         });
-        modifyPop.setContentView(v);
+        modifyNamePopWindow.setContentView(content);
+    }
+
+    private void initSchoolModifyPopWindow() {
+        modifySchoolPopWindow = new PopupWindow(Constants.screenW - Utils.dip2px(mContext, 80), WindowManager.LayoutParams.WRAP_CONTENT);
+        View content = LayoutInflater.from(mContext).inflate(R.layout.tklayout, null);
+        content.findViewById(R.id.ivHead).setVisibility(View.GONE);
+        content.findViewById(R.id.ivClose).setOnClickListener(view -> modifySchoolPopWindow.dismiss());
+        content.findViewById(R.id.btSave).setOnClickListener(v1 -> {
+            String modifiedValue = etNameContent.getText().toString();
+            if (modifiedValue.isEmpty()) {
+                Utils.toastShort(mContext, "请先输入信息!");
+                return;
+            }
+            name = modifiedValue;
+            data.get(2).setTip(name);
+            adapter.notifyDataSetChanged();
+            modifySchoolPopWindow.dismiss();
+        });
+        TextView tvTip = content.findViewById(R.id.tvTip);
+        tvTip.setText("修改学校");
+        // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
+        modifySchoolPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        modifySchoolPopWindow.setOutsideTouchable(true);
+        modifySchoolPopWindow.setFocusable(true);
+        modifySchoolPopWindow.setOnDismissListener(() -> {
+            windowLayoutParams.alpha = 1f;
+            getWindow().setAttributes(windowLayoutParams);
+        });
+        etSchoolContent = content.findViewById(R.id.etContent);
+        etSchoolContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() >= 20) {
+                    Utils.toastShort(mContext, "超过最长字符，无法继续输入");
+                }
+            }
+        });
+        modifySchoolPopWindow.setContentView(content);
     }
 
     private void getSchoolData() {
@@ -212,20 +287,19 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
-    private void getData() {
+    private void initItemsView() {
         data = new ArrayList<>();
+
         ItemBean bean = new ItemBean();
         bean.setName("昵称");
         bean.setTip(userInfoBean.getNickname());
         data.add(bean);
+
         bean = new ItemBean();
         bean.setName("性别");
-        if (userInfoBean.getSex() == 1) {
-            bean.setTip("男");
-        } else {
-            bean.setTip("女");
-        }
+        bean.setTip(userInfoBean.getSex() == 1 ? "男" : "女");
         data.add(bean);
+
         bean = new ItemBean();
         bean.setName("学校");
         bean.setTip(userInfoBean.getCollege());
@@ -234,14 +308,14 @@ public class BaseInfoActivity extends PhotoBaseActivity {
 
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
-        llHead.setOnClickListener(v -> showPop(0));
+        llHead.setOnClickListener(v -> showModifyHeadPopWindow());
         lv.setOnItemClickListener((parent, view, position, id) -> {
             switch (position) {
                 case 0:
-                    showModifyPop(0);
+                    showModifyNamePop();
                     break;
                 case 1:
-                    showPop(1);
+                    showModifySexPopWindow();
                     break;
                 case 2:
                     if (!TextUtils.isEmpty(userInfoBean.getCollege()) && !TextUtils.equals(userInfoBean.getCollege(), "null")) {
@@ -258,28 +332,43 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         });
     }
 
-    private void showPop(int status) {
-        this.status = status;
-        tvPic.setText(status == 0 ? "拍照" : "女");
-        tvUp.setText(status == 0 ? "上传照片" : "男");
-        tvPic.setTextColor(context.getColor(status == 0 ? R.color.colorPrimary : R.color.light_gray));
-        tvUp.setTextColor(context.getColor(status == 0 ? R.color.colorPrimary : R.color.light_gray));
-        layoutParams.alpha = 0.5f;
-        getWindow().setAttributes(layoutParams);
-        pop.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
+    private void showModifyHeadPopWindow() {
+        windowLayoutParams.alpha = 0.5f;
+        getWindow().setAttributes(windowLayoutParams);
+        modifyHeadPopWindow.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
     }
 
-    private void showModifyPop(int status) {
-        this.popStatus = status;
-        etContent.setText("");
-        if (status == 0) {
-            tvTip.setText("修改昵称");
-        } else {
-            tvTip.setText("修改学校");
-        }
-        layoutParams.alpha = 0.5f;
-        getWindow().setAttributes(layoutParams);
-        modifyPop.showAtLocation(tvTitle, Gravity.CENTER, 0, 0);
+    private void showModifySexPopWindow() {
+        windowLayoutParams.alpha = 0.5f;
+        getWindow().setAttributes(windowLayoutParams);
+        modifySexPopWindow.showAtLocation(tvTitle, Gravity.BOTTOM, 0, 0);
+    }
+
+    private void showModifyNamePop() {
+        etNameContent.setText("");
+        windowLayoutParams.alpha = 0.5f;
+        getWindow().setAttributes(windowLayoutParams);
+        modifyNamePopWindow.showAtLocation(tvTitle, Gravity.CENTER, 0, 0);
+//
+//        new AlertDialog.Builder(context)
+//                .setTitle("退出登录")
+//                .setMessage("确定退出当前账号吗")
+//                .setNegativeButton("取消", (dialogInterface, i1) -> {
+//                    dialogInterface.dismiss();//销毁对话框
+//                })
+//                .setPositiveButton("确定", (dialog1, which) -> {
+//                    dialog1.dismiss();
+//                    goLoginPage();
+//                })
+//                .create()
+//                .show();
+    }
+
+    private void showModifySchoolPop() {
+        etSchoolContent.setText("");
+        windowLayoutParams.alpha = 0.5f;
+        getWindow().setAttributes(windowLayoutParams);
+        modifySchoolPopWindow.showAtLocation(tvTitle, Gravity.CENTER, 0, 0);
     }
 
     @Override
@@ -319,8 +408,19 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                 break;
             case UPLOAD_NAME:
                 if (result.optInt("code") == 0) {
-                    if (popStatus == 0) {
-                        data.get(0).setTip(name);
+                    data.get(0).setTip(name);
+                    adapter.notifyDataSetChanged();
+                    EventBus.getDefault().post(new RefUserInfo());
+                } else {
+                    Utils.toastShort(this, result.optString("msg"));
+                }
+                break;
+            case UPDATE_SEX:
+                if (result.optInt("code") == 0) {
+                    if (sex == 1) {
+                        data.get(1).setTip("男");
+                    } else if (sex == 2) {
+                        data.get(1).setTip("女");
                     }
                     adapter.notifyDataSetChanged();
                     EventBus.getDefault().post(new RefUserInfo());
@@ -328,13 +428,9 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                     Utils.toastShort(this, result.optString("msg"));
                 }
                 break;
-            case upSex:
+            case UPDATE_SCHOOL:
                 if (result.optInt("code") == 0) {
-                    if (sex == 1) {
-                        data.get(1).setTip("男");
-                    } else if (sex == 2) {
-                        data.get(1).setTip("女");
-                    }
+                    data.get(2).setTip(school);
                     adapter.notifyDataSetChanged();
                     EventBus.getDefault().post(new RefUserInfo());
                 } else {
@@ -352,7 +448,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                     pvOptions = new OptionsPickerBuilder(this, (options1, option2, options3, v) -> {
                         school = data.get(options1);
                         setBodyParams(new String[]{"college"}, new String[]{school});
-                        sendPost(Constants.base_url + "/api/user/update.do", upSchool, Constants.token);
+                        sendPost(Constants.base_url + "/api/user/update.do", UPDATE_SCHOOL, Constants.token);
                     }).setSubmitText("确定")//确定按钮文字
                             .setCancelText("取消")//取消按钮文字
                             .setTitleText("选择学校")//标题
@@ -373,16 +469,6 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                 } else {
                     Utils.toastShort(this, result.optString("msg"));
                 }
-                break;
-            case upSchool:
-                if (result.optInt("code") == 0) {
-                    data.get(2).setTip(school);
-                    adapter.notifyDataSetChanged();
-                    EventBus.getDefault().post(new RefUserInfo());
-                } else {
-                    Utils.toastShort(this, result.optString("msg"));
-                }
-
                 break;
         }
 

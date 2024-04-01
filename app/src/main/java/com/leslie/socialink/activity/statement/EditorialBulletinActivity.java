@@ -68,7 +68,7 @@ public class EditorialBulletinActivity extends NetWorkActivity {
                 }
                 tvSave.setClickable(false);
                 setBodyParams(new String[]{"clubId", "title", "content"}, new String[]{"" + Constants.clubId, title, content});
-                sendPost(Constants.base_url + "/api/club/notice/save.do", 1000, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/notice/save.do", 1000, Constants.token);
             } else if (type == 2) {
                 String title = etTitle.getText().toString();
                 String content = etContent.getText().toString();
@@ -82,7 +82,7 @@ public class EditorialBulletinActivity extends NetWorkActivity {
                 }
                 tvSave.setClickable(false);
                 setBodyParams(new String[]{"id", "clubId", "title", "content"}, new String[]{"" + id, "" + Constants.clubId, title, content});
-                sendPost(Constants.base_url + "/api/club/notice/update.do", 1000, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/notice/update.do", 1000, Constants.token);
             }
         });
 

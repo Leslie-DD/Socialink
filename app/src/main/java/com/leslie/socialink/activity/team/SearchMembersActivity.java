@@ -73,7 +73,7 @@ public class SearchMembersActivity extends NetWorkActivity {
             return;
         }
         setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
-        sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/member/pglist.do", searchData, Constants.token);
         etSearch.setOnKeyListener((v, keyCode, event) -> {
             if (keyCode == event.KEYCODE_ENTER) {
                 // do some your things
@@ -82,7 +82,7 @@ public class SearchMembersActivity extends NetWorkActivity {
                     Utils.toastShort(SearchMembersActivity.this, "搜索内容不能为空");
                 } else {
                     setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
-                    sendPost(Constants.base_url + "/api/club/member/pglist.do", searchData, Constants.token);
+                    sendPost(Constants.BASE_URL + "/api/club/member/pglist.do", searchData, Constants.token);
                 }
             }
             return false;
@@ -92,7 +92,7 @@ public class SearchMembersActivity extends NetWorkActivity {
             editorPosition = position;
             editorName = mark;
             setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + Data.get(position).getId(), "" + mark});
-            sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/member/update.do", EditorName, Constants.token);
 
         });
     }

@@ -209,11 +209,11 @@ public class StudentIdLoginActivity extends NetWorkActivity {
         switch (type) {
             case APPLY_FOR_LOGIN://申请登陆
                 setBodyParams(new String[]{"studentId", "pwd", "type"}, new String[]{studentId, studentPwd, code});
-                sendPost(Constants.base_url + "/api/account/highLogin.do", APPLY_FOR_LOGIN, null);
+                sendPost(Constants.BASE_URL + "/api/account/highLogin.do", APPLY_FOR_LOGIN, null);
                 break;
             case APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE://验证码申请登陆
                 setBodyParams(new String[]{"key", "verification", "studentId", "pwd", "type"}, new String[]{key, verification, studentId, studentPwd, code});
-                sendPost(Constants.base_url + "/api/account/verification.do", APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE, null);
+                sendPost(Constants.BASE_URL + "/api/account/verification.do", APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE, null);
                 break;
         }
 

@@ -60,8 +60,8 @@ public class OtherSayActivity extends NetWorkActivity implements XRecyclerView.L
     }
 
     private void getData(int pn) {
-        setBodyParams(new String[]{"type", "id", "pn", "ps"}, new String[]{"3", getIntent().getIntExtra("teamid", 0) + "", "" + pn, "" + Constants.default_PS});
-        sendPost(Constants.base_url + "/api/club/speak/pglist.do", getSayCode, Constants.token);
+        setBodyParams(new String[]{"type", "id", "pn", "ps"}, new String[]{"3", getIntent().getIntExtra("teamid", 0) + "", "" + pn, "" + Constants.DEFAULT_PS});
+        sendPost(Constants.BASE_URL + "/api/club/speak/pglist.do", getSayCode, Constants.token);
 
     }
 

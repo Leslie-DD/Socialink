@@ -69,14 +69,14 @@ public class TeamMembersActivity extends NetWorkActivity {
             editorPosition = position;
             editorName = mark;
             setBodyParams(new String[]{"id", "nickname"}, new String[]{"" + pData.get(position).getId(), "" + mark});
-            sendPost(Constants.base_url + "/api/club/member/update.do", EditorName, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/member/update.do", EditorName, Constants.token);
         });
 
     }
 
     private void getData() {
         setBodyParams(new String[]{"clubId"}, new String[]{"" + teamId});
-        sendPost(Constants.base_url + "/api/club/member/pglist.do", getData, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/member/pglist.do", getData, Constants.token);
     }
 
     @Override

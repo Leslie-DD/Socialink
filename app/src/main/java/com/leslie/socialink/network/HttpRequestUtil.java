@@ -2,7 +2,6 @@ package com.leslie.socialink.network;
 
 import android.util.Log;
 
-import com.leslie.socialink.constans.WenConstans;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.lzy.okhttputils.request.BaseRequest;
@@ -56,7 +55,7 @@ public class HttpRequestUtil {
     public void sendGetConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         GetRequest getRequest = OkHttpUtils.get(url).tag(this);
         if (token != null && !token.isEmpty()) {
-            getRequest = getRequest.headers(Constants.Token_Header, Constants.token);
+            getRequest = getRequest.headers(Constants.TOKEN_HEADER, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             getRequest = getRequest.params(argsKeys[i], argsValues[i]);
@@ -76,7 +75,7 @@ public class HttpRequestUtil {
     public void sendPostConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         PostRequest postRequest = OkHttpUtils.post(url).tag(this);
         if (token != null && !token.isEmpty()) {
-            postRequest = postRequest.headers(Constants.Token_Header, Constants.token);
+            postRequest = postRequest.headers(Constants.TOKEN_HEADER, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             postRequest = postRequest.params(argsKeys[i], argsValues[i]);

@@ -321,7 +321,7 @@ public class FriendFiltrate extends NetWorkActivity {
     }
 
     private void getFiltrateData() {
-        sendPost(Constants.base_url + " /api/social/getScreen.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + " /api/social/getScreen.do", 10086, Constants.token);
     }
 
 }

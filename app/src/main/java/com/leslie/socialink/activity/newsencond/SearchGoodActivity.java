@@ -134,7 +134,7 @@ public class SearchGoodActivity extends NetWorkActivity {
     private void getSearchData() {
 //        Utils.toastShort(context, "商品搜索："+content);
         setBodyParams(new String[]{"pn", "ps", "keyword"}, new String[]{"" + pn, "" + ps, "" + content});
-        sendPost(Constants.base_url + "/api/goods/base/search.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/goods/base/search.do", 100, Constants.token);
     }
 
     private void getClassifyData() {
@@ -146,7 +146,7 @@ public class SearchGoodActivity extends NetWorkActivity {
     private void getMoreData() {
 //        Utils.toastShort(context, "更多搜索商品" + category2Id);
         setBodyParams(new String[]{"pn", "ps", "keyword"}, new String[]{"" + pn, "" + ps, "" + content});
-        sendPost(Constants.base_url + "/api/goods/base/search.do", 102, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/goods/base/search.do", 102, Constants.token);
     }
 
     private void getMoreClassifyData() {

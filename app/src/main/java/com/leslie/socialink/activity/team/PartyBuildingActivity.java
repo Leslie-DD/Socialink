@@ -100,10 +100,10 @@ public class PartyBuildingActivity extends NetWorkActivity implements XRecyclerV
                     recommend = rvData.get(position).getRecommend();
                     if (recommend == 0) {
                         setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 1});
-                        sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
+                        sendPost(Constants.BASE_URL + "/api/club/tb/hall.do", hallCode, Constants.token);
                     } else if (recommend == 1) {
                         setBodyParams(new String[]{"tbId", "op"}, new String[]{"" + rvData.get(recommendPosition).getId(), "" + 0});
-                        sendPost(Constants.base_url + "/api/club/tb/hall.do", hallCode, Constants.token);
+                        sendPost(Constants.BASE_URL + "/api/club/tb/hall.do", hallCode, Constants.token);
                     }
                     break;
             }
@@ -118,7 +118,7 @@ public class PartyBuildingActivity extends NetWorkActivity implements XRecyclerV
         builder.setPositiveButton("确定", (dialogInterface, i) -> {
             //删除
             setBodyParams(new String[]{"tbId"}, new String[]{"" + rvData.get(delPosition).getId()});
-            sendPost(Constants.base_url + "/api/club/tb/delete.do", delTjCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/tb/delete.do", delTjCode, Constants.token);
             delTjDialog.dismiss();
         });
         builder.setNegativeButton("取消", (dialogInterface, i) -> delTjDialog.dismiss());
@@ -128,8 +128,8 @@ public class PartyBuildingActivity extends NetWorkActivity implements XRecyclerV
 
     private void getData(int pn) {
         //获取推荐团建
-        setBodyParams(new String[]{"type", "id", "pn", "ps"}, new String[]{"0", teamid + "", "" + pn, "" + Constants.default_PS});
-        sendPost(Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
+        setBodyParams(new String[]{"type", "id", "pn", "ps"}, new String[]{"0", teamid + "", "" + pn, "" + Constants.DEFAULT_PS});
+        sendPost(Constants.BASE_URL + "/api/club/tb/pglist.do", getTjCode, Constants.token);
     }
 
     @Override

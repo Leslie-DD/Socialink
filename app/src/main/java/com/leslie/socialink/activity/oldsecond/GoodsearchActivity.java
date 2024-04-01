@@ -125,8 +125,8 @@ public class GoodsearchActivity extends NetWorkActivity implements XRecyclerView
 
     private void getGoodData(int png, String content) {
         if (category2Id == 0) {
-            setBodyParams(new String[]{"pn", "ps", "keyword"}, new String[]{"" + png, "" + Constants.default_PS, "" + content});
-            sendPost(Constants.base_url + "/api/goods/base/search.do", 10086, Constants.token);
+            setBodyParams(new String[]{"pn", "ps", "keyword"}, new String[]{"" + png, "" + Constants.DEFAULT_PS, "" + content});
+            sendPost(Constants.BASE_URL + "/api/goods/base/search.do", 10086, Constants.token);
         } else {
             Utils.toastShort(context, "商品搜索 category2Id=" + category2Id);
             setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});

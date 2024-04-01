@@ -120,7 +120,7 @@ public class TeamNewsAdapter extends RecyclerView.Adapter {
                     tvName.setText(sayBean.getNickName());
                 }
                 if (!TextUtils.isEmpty(sayBean.getHeader())) {
-                    Glide.with(context).load(Constants.base_url + sayBean.getHeader()).asBitmap().into(ivHead);
+                    Glide.with(context).load(Constants.BASE_URL + sayBean.getHeader()).asBitmap().into(ivHead);
                 } else {
                     ivHead.setImageResource(R.mipmap.head3);
                 }

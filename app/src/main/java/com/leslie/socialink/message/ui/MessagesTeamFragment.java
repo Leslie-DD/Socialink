@@ -72,7 +72,7 @@ public class MessagesTeamFragment extends NetWorkFragment implements XRecyclerVi
         builder.setPositiveButton("确定", (dialogInterface, i) -> {
             //删除
             setBodyParams(new String[]{"id"}, new String[]{"" + data.get(delp).getId()});
-            sendPostConnection(Constants.base_url + "/api/user/news/clearNews.do", DelMsg, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/user/news/clearNews.do", DelMsg, Constants.token);
             deldialog.dismiss();
         });
         builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
@@ -82,11 +82,11 @@ public class MessagesTeamFragment extends NetWorkFragment implements XRecyclerVi
 
     private void getData(int pn, int type) {
         if (type == 1) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 2});
-            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", GetCode, Constants.token);
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + 2});
+            sendPostConnection(Constants.BASE_URL + "/api/user/news/pglist.do", GetCode, Constants.token);
         } else if (type == 2) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 2});
-            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", LoadMore, Constants.token);
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + 2});
+            sendPostConnection(Constants.BASE_URL + "/api/user/news/pglist.do", LoadMore, Constants.token);
         }
 
     }
@@ -138,7 +138,7 @@ public class MessagesTeamFragment extends NetWorkFragment implements XRecyclerVi
                 //同意  // "id":35,"replyId":2,"receiveId":4,"bizId":42
                 setBodyParams(new String[]{"nid", "id", "userId", "op"},
                         new String[]{"" + msgSayBean.getData().get(position).getId(), "" + msgSayBean.getData().get(position).getBizId(), "" + msgSayBean.getData().get(position).getReplyId(), "" + 3});
-                sendPostConnection(Constants.base_url + "/api/club/base/apply.do", Agree, Constants.token);
+                sendPostConnection(Constants.BASE_URL + "/api/club/base/apply.do", Agree, Constants.token);
             }
 
             @Override
@@ -146,7 +146,7 @@ public class MessagesTeamFragment extends NetWorkFragment implements XRecyclerVi
                 //同意  // "id":35,"replyId":2,"receiveId":4,"bizId":42
                 setBodyParams(new String[]{"nid", "id", "userId", "op"},
                         new String[]{"" + msgSayBean.getData().get(position).getId(), "" + msgSayBean.getData().get(position).getBizId(), "" + msgSayBean.getData().get(position).getReplyId(), "" + 1});
-                sendPostConnection(Constants.base_url + "/api/club/base/apply.do", Agree, Constants.token);
+                sendPostConnection(Constants.BASE_URL + "/api/club/base/apply.do", Agree, Constants.token);
             }
 
             @Override

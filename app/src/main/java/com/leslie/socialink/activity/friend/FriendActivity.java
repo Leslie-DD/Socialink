@@ -14,7 +14,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.leslie.socialink.R;
 import com.leslie.socialink.adapter.MyFragmentPagerAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.fragment.FriendFragment;
 import com.leslie.socialink.fragment.NearFragment;
 import com.leslie.socialink.fragment.NewFragment;
@@ -157,7 +156,7 @@ public class FriendActivity extends NetWorkActivity {
     private void getData() {
         Log.d("FriendActivity", "setBodyParams 经度纬度 WenConstants.token:  " + Constants.token + ", Constants.token: " + Constants.token);
         setBodyParams(new String[]{"longitude", "latitude"}, new String[]{"" + longitude, "" + latitude});
-        sendPost(Constants.base_url + "/api/social/updatePosition.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/updatePosition.do", 100, Constants.token);
     }
 
 }

@@ -32,7 +32,7 @@ public class TeamTestBean implements Serializable {
         if (obj.getPhotos() != null) {
             imgs = new ArrayList<>();
             for (int i = 0; i < obj.getPhotos().size(); i++) {
-                imgs.add(Constants.base_url + obj.getPhotos().get(i).getPhotoId());
+                imgs.add(Constants.BASE_URL + obj.getPhotos().get(i).getPhotoId());
             }
         }
     }

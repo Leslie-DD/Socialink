@@ -162,7 +162,7 @@ public class ManagerFragment extends NetWorkFragment {
                 setBodyParams(new String[]{"id", "settingSpeakComment"}, new String[]{mActivity.id + " ", Math.abs(cBean.getSettingSpeakComment() - 1) + ""});
 
         }
-        sendPostConnection(Constants.base_url + "/api/club/base/setvisibility.do", getCode, Constants.token);
+        sendPostConnection(Constants.BASE_URL + "/api/club/base/setvisibility.do", getCode, Constants.token);
     }
 
     @Override

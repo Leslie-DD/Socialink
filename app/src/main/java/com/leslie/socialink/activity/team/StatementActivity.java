@@ -95,9 +95,9 @@ public class StatementActivity extends NetWorkActivity {
                 return;
             }
             tvSave.setClickable(false);
-            OkHttpUtils.post(Constants.base_url + "/api/club/speak/save.do")
+            OkHttpUtils.post(Constants.BASE_URL + "/api/club/speak/save.do")
                     .tag(this)
-                    .headers(Constants.Token_Header, Constants.token)
+                    .headers(Constants.TOKEN_HEADER, Constants.token)
                     .params("clubId", teamId + "")
                     .params("content", content + "")
                     .addFileParams("files", fileList)

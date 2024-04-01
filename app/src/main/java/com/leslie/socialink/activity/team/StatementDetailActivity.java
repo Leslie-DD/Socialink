@@ -161,12 +161,12 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
 
     private void getHeadData() {
         setBodyParams(new String[]{"id"}, new String[]{"" + bean.getSpeak().getId()});
-        sendPost(Constants.base_url + "/api/club/speak/detail.do", getheadCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/speak/detail.do", getheadCode, Constants.token);
     }
 
     public void isCommentAble() {
         setBodyParams(new String[]{"id"}, new String[]{"" + Constants.clubId});
-        sendPost(Constants.base_url + "/api/club/speak/commentjudge.do", ISCOMMENTABLE, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/speak/commentjudge.do", ISCOMMENTABLE, Constants.token);
     }
 
     private void initDelDialog() {
@@ -179,7 +179,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
                 setBodyParams(new String[]{"id"}, new String[]{"" + delid});
-                sendPost(Constants.base_url + "/api/club/speak/delcomment.do", delComment, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/speak/delcomment.do", delComment, Constants.token);
                 deldialog.dismiss();
             }
         });
@@ -196,7 +196,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
     private void setDataToHeadUi(TeamBean.SpeakBean bean) {
         speakId = bean.getId();
         if (bean.getHeader() != null && !bean.getHeader().isEmpty()) {
-            Glide.with(this).load(Constants.base_url + bean.getHeader())
+            Glide.with(this).load(Constants.BASE_URL + bean.getHeader())
                     .asBitmap().error(R.mipmap.head3).into(ivHead);
         } else {
             ivHead.setImageResource(R.mipmap.head3);
@@ -207,7 +207,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
             gv.setVisibility(View.VISIBLE);
             imgs = new ArrayList<>();
             for (TeamBean.SpeakBean.PhotosBean photosBean : bean.getPhotos()) {
-                imgs.add(Constants.base_url + photosBean.getPhotoId());
+                imgs.add(Constants.BASE_URL + photosBean.getPhotoId());
             }
             switch (imgs.size()) {
                 case 1:
@@ -299,7 +299,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
                 Log.e("DDQ", "shanchu  ");
                 //删除
                 setBodyParams(new String[]{"speakId"}, new String[]{"" + speakId});
-                sendPost(Constants.base_url + "/api/club/speak/delete.do", delSpeak, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/speak/delete.do", delSpeak, Constants.token);
                 delSpeakdialog.dismiss();
             }
         });
@@ -316,11 +316,11 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
     private void getData(int pn, int type) {
         // type = 1 初始化/刷新  2 加载
         if (type == 1) {
-            setBodyParams(new String[]{"speakId", "pn", "ps"}, new String[]{"" + bean.getSpeak().getId(), "" + pn, "" + Constants.default_PS});
-            sendPost(Constants.base_url + "/api/club/speak/pgcomment.do", initData, Constants.token);
+            setBodyParams(new String[]{"speakId", "pn", "ps"}, new String[]{"" + bean.getSpeak().getId(), "" + pn, "" + Constants.DEFAULT_PS});
+            sendPost(Constants.BASE_URL + "/api/club/speak/pgcomment.do", initData, Constants.token);
         } else if (type == 2) {
-            setBodyParams(new String[]{"speakId", "pn", "ps"}, new String[]{"" + bean.getSpeak().getId(), "" + pn, "" + Constants.default_PS});
-            sendPost(Constants.base_url + "/api/club/speak/pgcomment.do", lodData, Constants.token);
+            setBodyParams(new String[]{"speakId", "pn", "ps"}, new String[]{"" + bean.getSpeak().getId(), "" + pn, "" + Constants.DEFAULT_PS});
+            sendPost(Constants.BASE_URL + "/api/club/speak/pgcomment.do", lodData, Constants.token);
         }
     }
 
@@ -349,7 +349,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
             }
             ivSend.setClickable(false);
             setBodyParams(new String[]{"speakId", "content"}, new String[]{"" + speakId, "" + comment});
-            sendPost(Constants.base_url + "/api/club/speak/comment.do", sendComment, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/speak/comment.do", sendComment, Constants.token);
         });
         etComment.setOnClickListener(v -> {
             if (isEmojiShow) {
@@ -374,7 +374,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
         tvDel.setOnClickListener(v -> delSpeakdialog.show());
         llRecommend.setOnClickListener(v -> {
             setBodyParams(new String[]{"speakId", "op"}, new String[]{"" + speakId, "" + Math.abs(itsaidFlag - 1)});
-            sendPost(Constants.base_url + "/api/club/speak/itsaid.do", itsaid, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/speak/itsaid.do", itsaid, Constants.token);
         });
         tvZan.setOnClickListener(v -> {
             int op;
@@ -384,7 +384,7 @@ public class StatementDetailActivity extends NetWorkActivity implements XRecycle
                 op = 1;
             }
             setBodyParams(new String[]{"speakId", "op"}, new String[]{"" + speakId, "" + op});
-            sendPost(Constants.base_url + "/api/club/speak/like.do", like, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/speak/like.do", like, Constants.token);
         });
         tvPl.setOnClickListener(v -> {
             if (Constants.isJoin) {

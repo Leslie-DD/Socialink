@@ -143,10 +143,10 @@ public class HallFragment extends NetWorkFragment {
         if (mActivity.id != 0) {
             //获取他们说
             setBodyParams(new String[]{"type", "id"}, new String[]{"3", mActivity.id + ""});
-            sendPostConnection(Constants.base_url + "/api/club/speak/pglist.do", getSayCode, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/speak/pglist.do", getSayCode, Constants.token);
             //获取推荐团建
             setBodyParams(new String[]{"type", "id"}, new String[]{"1", mActivity.id + ""});
-            sendPostConnection(Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/tb/pglist.do", getTjCode, Constants.token);
 
         }
         if (cBean != null) {
@@ -208,7 +208,7 @@ public class HallFragment extends NetWorkFragment {
         tvTjMore.setOnClickListener(v -> startActivity(new Intent(mContext, PartyBuildingActivity.class).putExtra("teamid", mActivity.id)));
         adapter.setDelItemListener(position -> {
             setBodyParams(new String[]{"speakId"}, new String[]{"" + testData.get(position).getId()});
-            sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", DelCode, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/speak/delete.do", DelCode, Constants.token);
         });
     }
 
@@ -223,14 +223,14 @@ public class HallFragment extends NetWorkFragment {
     public void addRefresh(RefStatementEvent event) {
         //获取他们说
         setBodyParams(new String[]{"type", "id"}, new String[]{"3", mActivity.id + ""});
-        sendPostConnection(Constants.base_url + "/api/club/speak/pglist.do", getSayCode, Constants.token);
+        sendPostConnection(Constants.BASE_URL + "/api/club/speak/pglist.do", getSayCode, Constants.token);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refTj(RefTjEvent event) {
         //获取推荐团建
         setBodyParams(new String[]{"type", "id"}, new String[]{"1", mActivity.id + ""});
-        sendPostConnection(Constants.base_url + "/api/club/tb/pglist.do", getTjCode, Constants.token);
+        sendPostConnection(Constants.BASE_URL + "/api/club/tb/pglist.do", getTjCode, Constants.token);
     }
 
     @Override

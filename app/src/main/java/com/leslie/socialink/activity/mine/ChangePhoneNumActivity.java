@@ -121,7 +121,7 @@ public class ChangePhoneNumActivity extends NetWorkActivity {
 
     //初始化问题
     private void initQ() {
-        sendPost(Constants.base_url + "/api/user/myQuestion.do", myQuestion, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/user/myQuestion.do", myQuestion, Constants.token);
     }
 
     public void showPop() {
@@ -155,7 +155,7 @@ public class ChangePhoneNumActivity extends NetWorkActivity {
             }
             setBodyParams(new String[]{"phone", "code", "questionId", "answer"}
                     , new String[]{phone, code, data.get(cp).getId() + "", content});
-            sendPost(Constants.base_url + "/api/user/updatePhone.do", 66, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/user/updatePhone.do", 66, Constants.token);
         });
         tvCancel.setOnClickListener(v -> finish());
         tvCode.setOnClickListener(v -> {
@@ -185,7 +185,7 @@ public class ChangePhoneNumActivity extends NetWorkActivity {
             }).start();
             tvCode.setEnabled(false);
             setBodyParams(new String[]{"phone"}, new String[]{phone});
-            sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
+            sendPost(Constants.BASE_URL + "/api/account/scode.do", getCode, null);
         });
         tvSchool.setOnClickListener(v -> showPop());
     }

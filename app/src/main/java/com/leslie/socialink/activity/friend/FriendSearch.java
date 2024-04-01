@@ -104,7 +104,7 @@ public class FriendSearch extends NetWorkActivity implements XRecyclerView.Loadi
 
     private void getFriendData(String content) {
         setBodyParams(new String[]{"content"}, new String[]{"" + content});
-        sendPost(Constants.base_url + "/api/social/search.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/search.do", 10086, Constants.token);
     }
 
     @Override

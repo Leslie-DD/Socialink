@@ -82,7 +82,7 @@ public class FriendAnswerQues extends NetWorkActivity {
 //                answerlist.put(getTerm(""+hisid,content[4]+"",""+answer_5));
             OkHttpUtils.post(WenConstans.AnswerSave)
                     .tag(this)
-                    .headers(Constants.Token_Header, Constants.token)
+                    .headers(Constants.TOKEN_HEADER, Constants.token)
                     .params("answerlist", answerlist + "")
                     .execute(new StringCallback() {
                         @Override
@@ -169,7 +169,7 @@ public class FriendAnswerQues extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"user_id"}, new String[]{"" + hisid});
-        sendPost(Constants.base_url + "/api/social/getquest.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/getquest.do", 100, Constants.token);
     }
 }
 

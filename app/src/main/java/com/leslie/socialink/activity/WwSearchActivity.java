@@ -232,7 +232,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
 
     private void getLableData() {
         setBodyParams(new String[]{"type"}, new String[]{"label"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
     private void event() {
@@ -271,7 +271,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
-            sendPost(Constants.base_url + "/api/ask/base/labelList.do", 100, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/ask/base/labelList.do", 100, Constants.token);
         }
     }
 
@@ -288,7 +288,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
-            sendPost(Constants.base_url + "/api/ask/base/labelList.do", 101, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/ask/base/labelList.do", 101, Constants.token);
         }
     }
 

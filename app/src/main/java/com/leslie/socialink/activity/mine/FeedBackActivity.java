@@ -59,7 +59,7 @@ public class FeedBackActivity extends NetWorkActivity {
         tvSave.setText("提交");
         //获取反馈类型
         setBodyParams(new String[]{"type"}, new String[]{"feedback"});
-        sendPostConnection(Constants.base_url + "/api/pub/category/list.do", new String[]{}, new String[]{}, getCode, Constants.token);
+        sendPostConnection(Constants.BASE_URL + "/api/pub/category/list.do", new String[]{}, new String[]{}, getCode, Constants.token);
     }
 
     private void event() {
@@ -74,7 +74,7 @@ public class FeedBackActivity extends NetWorkActivity {
                 return;
             }
             setBodyParams(new String[]{"category", "content"}, new String[]{categorys.get(cp).getId() + "", content});
-            sendPost(Constants.base_url + "/api/user/feedback.do", sendCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/user/feedback.do", sendCode, Constants.token);
         });
         llType.setOnClickListener(v -> {
             if (pvOptions != null) {

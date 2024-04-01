@@ -60,7 +60,7 @@ public class FriendPictureAdapter extends BaseAdapter {
         }
         ViewGroup.LayoutParams p = holder.ivPicture.getLayoutParams();
         p.height = ConsTants.screenW * 10 / 22;
-        Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position)).asBitmap()
+        Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position)).asBitmap()
                 .fitCenter().placeholder(R.mipmap.mrtp).into(holder.ivPicture);
 
         holder.ivPicture.setOnClickListener(new View.OnClickListener() {

@@ -122,7 +122,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.left.setVisibility(View.VISIBLE);
             holder.right.setVisibility(View.GONE);
             if (!TextUtils.isEmpty(messageBean.getHeader())) {
-                Glide.with(context).load(Constants.base_url + messageBean.getHeader()).asBitmap().into(holder.imageView);
+                Glide.with(context).load(Constants.BASE_URL + messageBean.getHeader()).asBitmap().into(holder.imageView);
             } else {
                 holder.imageView.setImageResource(R.mipmap.head3);
             }
@@ -143,7 +143,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             }
         } else {
             if (!TextUtils.isEmpty(messageBean.getHeader())) {
-                Glide.with(context).load(Constants.base_url + messageBean.getHeader()).asBitmap().into(holder.imageViewr);
+                Glide.with(context).load(Constants.BASE_URL + messageBean.getHeader()).asBitmap().into(holder.imageViewr);
             } else {
                 holder.imageViewr.setImageResource(R.mipmap.head3);
             }

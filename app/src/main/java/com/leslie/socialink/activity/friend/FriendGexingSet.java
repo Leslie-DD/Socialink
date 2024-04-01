@@ -7,7 +7,6 @@ import android.widget.EditText;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -77,7 +76,7 @@ public class FriendGexingSet extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"descroption", "birthday", "user_id"}, new String[]{"" + gexing1, "" + shengri, id + ""});
-        sendPost(Constants.base_url + "/api/social/updateinfo.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/updateinfo.do", 100, Constants.token);
     }
 }
 

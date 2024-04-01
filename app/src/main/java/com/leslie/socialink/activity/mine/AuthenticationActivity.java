@@ -174,9 +174,9 @@ public class AuthenticationActivity extends NetWorkActivity {
             return;
         }
 
-        OkHttpUtils.post(Constants.base_url + "/api/user/certification.do")
+        OkHttpUtils.post(Constants.BASE_URL + "/api/user/certification.do")
                 .tag(this)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("idcardNumber", "" + cardId)
                 .params("name", "" + name)
                 .addFileParams("files", files)

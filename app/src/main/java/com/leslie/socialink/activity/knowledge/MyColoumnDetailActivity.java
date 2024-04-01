@@ -120,7 +120,7 @@ public class MyColoumnDetailActivity extends NetWorkActivity implements XRecycle
             if (subscriptionBean.author.header != null) {
                 // 完善协议完善协议
                 //Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + subscriptionBean.author.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showset", "" + Constants.base_url + "/info/file/pub.do?fileId=" + subscriptionBean.author.header);
+                Log.e("showset", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + subscriptionBean.author.header);
             } else {
                 ivHead.setImageResource(R.mipmap.head3);
             }

@@ -96,7 +96,7 @@ public class BullertinDetailActivity extends NetWorkActivity {
         });
         ll_del.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}, new String[]{"" + id});
-            sendPost(Constants.base_url + "/api/club/notice/delete.do", 1000, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/notice/delete.do", 1000, Constants.token);
         });
         ll_cacel.setOnClickListener(v -> pop.dismiss());
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失

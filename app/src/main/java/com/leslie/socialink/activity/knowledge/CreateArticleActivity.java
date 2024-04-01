@@ -66,7 +66,7 @@ public class CreateArticleActivity extends NetWorkActivity {
 
                     OkHttpUtils.put(WenConstans.newArticle)
                             .tag(this)
-                            .headers(Constants.Token_Header, Constants.token)
+                            .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("specialColumnId", specialColumnId)
                             .params("title", tvTitle.getText().toString())
                             .params("content", richEditText.toHtml())
@@ -93,7 +93,7 @@ public class CreateArticleActivity extends NetWorkActivity {
                     mArticle.content = richEditText.toHtml();
                     OkHttpUtils.put(WenConstans.midifyArticle)
                             .tag(this)
-                            .headers(Constants.Token_Header, Constants.token)
+                            .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("createTime", mArticle.createTime)
                             .params("updateTime", mArticle.updateTime)
                             .params("id", mArticle.id)

@@ -101,11 +101,11 @@ public class FriendAddNewsAdapter extends RecyclerView.Adapter {
             tvTime.setText(data.get(position).getTime() == null ? "" : data.get(position).getTime());
             tvName.setText(data.get(position).getnickName() == null ? "" : data.get(position).getnickName());
             if (TextUtils.isEmpty(data.get(position).getHeader())) {
-                Log.e("shownearnull", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).getHeader());
+                Log.e("shownearnull", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).getHeader());
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + data.get(position).getHeader()).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("shownear", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).getHeader());
+                Glide.with(context).load(Constants.BASE_URL + data.get(position).getHeader()).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("shownear", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).getHeader());
             }
 
 

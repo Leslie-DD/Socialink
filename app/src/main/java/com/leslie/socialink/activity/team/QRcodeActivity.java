@@ -41,8 +41,8 @@ public class QRcodeActivity extends NetWorkActivity {
             tvName.setText(cBean.getName());
             Utils.setHead(mContext, cBean.getLogoImage(), ivHead);
             if (!TextUtils.isEmpty(cBean.getQrcodeImage())) {
-                Log.e("YSF", "我是二维码" + Constants.base_url + cBean.getQrcodeImage());
-                Glide.with(mContext).load(Constants.base_url + cBean.getQrcodeImage()).fitCenter().into(ivQr);
+                Log.e("YSF", "我是二维码" + Constants.BASE_URL + cBean.getQrcodeImage());
+                Glide.with(mContext).load(Constants.BASE_URL + cBean.getQrcodeImage()).fitCenter().into(ivQr);
             } else {
                 ivQr.setImageBitmap(ZxingUtils.createBitmap("XYTeam_" + cBean.getId()));
             }

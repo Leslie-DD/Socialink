@@ -55,7 +55,7 @@ public class AppliedMemberActivity extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"id"}, new String[]{"" + id});
-        sendPost(Constants.base_url + "/api/club/activity/member.do", getCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/activity/member.do", getCode, Constants.token);
     }
 
     private void event() {

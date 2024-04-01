@@ -110,7 +110,7 @@ public class SayDetailActivity extends NetWorkActivity implements XRecyclerView.
         if (TextUtils.isEmpty(bean.getHeader())) {
             ivHead.setImageResource(R.mipmap.head3);
         } else {
-            Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(ivHead);
+            Glide.with(context).load(Constants.BASE_URL + bean.getHeader()).asBitmap().into(ivHead);
         }
 
         if (bean.getImgs() == null || bean.getImgs().size() == 0) {

@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -95,7 +94,7 @@ public class FriendShijuanSet extends NetWorkActivity {
 
     private void setData(JSONArray questionlist) {
         setBodyParams(new String[]{"questionlist"}, new String[]{"" + questionlist});
-        sendPost(Constants.base_url + "/api/social/modifyquest.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/modifyquest.do", 100, Constants.token);
     }
 
 

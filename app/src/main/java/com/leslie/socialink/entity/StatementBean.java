@@ -64,7 +64,7 @@ public class StatementBean implements Serializable {
         if (photos != null) {
             imgs = new ArrayList<>();
             for (int i = 0; i < photos.size(); i++) {
-                imgs.add(Constants.base_url + photos.get(i).getPhotoId());
+                imgs.add(Constants.BASE_URL + photos.get(i).getPhotoId());
             }
         }
     }

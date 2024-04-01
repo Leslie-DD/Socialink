@@ -99,7 +99,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
 
     private void getLableData() {
         setBodyParams(new String[]{"type"}, new String[]{"label"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
     private void event() {
@@ -120,7 +120,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
                 lables = lables.substring(0, lables.length() - 1);
                 setBodyParams(new String[]{"sex", "labels"}
                         , new String[]{sex + 1 + "", lables});
-                sendPost(Constants.base_url + "/api/user/label.do", 66, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/user/label.do", 66, Constants.token);
             }
         });
         tvSkip.setOnClickListener(v -> {
@@ -133,7 +133,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
                     /*MeetApplication.getInstance().finishAll();
                     startActivity(new Intent(mContext, MainActivity.class));*/
                     setBodyParams(new String[]{"phone", "pwd"}, new String[]{phone, EncryptUtils.encryptMD5ToString(pwd)});
-                    sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
+                    sendPost(Constants.BASE_URL + "/api/account/login.do", loginCode, null);
                 }
             }
         });
@@ -174,7 +174,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
             } else if (type == 1) {
                 //logo
                 setBodyParams(new String[]{"phone", "pwd"}, new String[]{phone, EncryptUtils.encryptMD5ToString(pwd)});
-                sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
+                sendPost(Constants.BASE_URL + "/api/account/login.do", loginCode, null);
             }
         } else if (where == 10086) {
             if (result.optInt("code") == 0) {

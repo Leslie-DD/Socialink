@@ -95,7 +95,7 @@ public class SignActivity extends NetWorkActivity {
 
     private void getSchoolData() {
         setBodyParams(new String[]{"type"}, new String[]{"school"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
     private void event() {
@@ -115,7 +115,7 @@ public class SignActivity extends NetWorkActivity {
             }
 
             setBodyParams(new String[]{"phone"}, new String[]{phone});
-            sendPost(Constants.base_url + "/api/account/scode.do", getCode, null);
+            sendPost(Constants.BASE_URL + "/api/account/scode.do", getCode, null);
         });
         llSchool.setOnClickListener(v -> {
             Utils.hideSoftInput(this);
@@ -173,7 +173,7 @@ public class SignActivity extends NetWorkActivity {
             }
             setBodyParams(new String[]{"phone", "code", "pwd", "school"},
                     new String[]{phone, code, EncryptUtils.encryptMD5ToString(pwd), school});
-            sendPost(Constants.base_url + "/api/account/register.do", signCode, null);
+            sendPost(Constants.BASE_URL + "/api/account/register.do", signCode, null);
         });
         ivSee.setOnClickListener(v -> {
             canSee = !canSee;

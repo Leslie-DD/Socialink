@@ -114,7 +114,7 @@ public class MyFriendAdapter extends RecyclerView.Adapter {
             if (TextUtils.isEmpty(data.get(position).url)) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + data.get(position).url).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Glide.with(context).load(Constants.BASE_URL + data.get(position).url).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
             }
 
 

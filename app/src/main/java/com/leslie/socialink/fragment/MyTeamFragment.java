@@ -228,15 +228,15 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
     private void getData(int pn, int type) {
         switch (type) {
             case 0:
-                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.DEFAULT_PS});
                 sendPostConnection(WenConstans.MyFoots, GETDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
-                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.DEFAULT_PS});
                 sendPostConnection(WenConstans.MyFoots, REFDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 2:
-                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.default_PS});
+                setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.DEFAULT_PS});
                 sendPostConnection(WenConstans.MyFoots, LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }

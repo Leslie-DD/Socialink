@@ -7,7 +7,6 @@ import android.widget.EditText;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -83,7 +82,7 @@ public class FriendZhuanyeSet extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"hometown", "emotion", "academy", "profession", "schoolgrade", "user_id"}, new String[]{"" + jiaxiang, "" + qingan, "" + xueyuan, "" + zhuanye1, "" + nianji, "" + id});
-        sendPost(Constants.base_url + "/api/social/updateinfor.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/updateinfor.do", 100, Constants.token);
     }
 
 

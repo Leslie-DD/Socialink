@@ -71,7 +71,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
     }
 
     private void getData(int where) {
-        setBodyParams(new String[]{"pn", "ps", "uid"}, new String[]{"" + pn, "" + Constants.default_PS, "" + hisid});
+        setBodyParams(new String[]{"pn", "ps", "uid"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + hisid});
         sendPostConnection(WenConstans.GetonesDynamic, where, Constants.token);
     }
 

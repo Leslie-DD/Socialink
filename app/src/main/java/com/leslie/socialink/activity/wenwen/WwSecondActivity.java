@@ -286,13 +286,13 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
     private void jbDel2(int p) {
         setBodyParams(new String[]{"uid", "type", "id"}
                 , new String[]{adapter.getData().get(p).uid, 2 + "", adapter.getData().get(p).id + ""});
-        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10010, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/ask/base/deleteMyComment.do", 10010, Constants.token);
     }
 
     private void jbDel() {
         setBodyParams(new String[]{"uid", "type", "id"}
                 , new String[]{bean.uid, 1 + "", bean.id + ""});
-        sendPost(Constants.base_url + "/api/ask/base/deleteMyComment.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/ask/base/deleteMyComment.do", 10086, Constants.token);
     }
 
     private void getDisscuss(int where) {

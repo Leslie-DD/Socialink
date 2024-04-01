@@ -46,7 +46,7 @@ public class ApplyJoinTDActivity extends NetWorkActivity {
                 content = "";
             }
             setBodyParams(new String[]{"id", "content"}, new String[]{"" + id, "" + content});
-            sendPost(Constants.base_url + "/api/club/base/savaSysUserNews.do", join, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/savaSysUserNews.do", join, Constants.token);
         });
     }
 

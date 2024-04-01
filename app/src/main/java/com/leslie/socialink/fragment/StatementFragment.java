@@ -127,8 +127,8 @@ public class StatementFragment extends NetWorkFragment {
     private void getData() {
         if (mActivity.id != 0) {
             setBodyParams(new String[]{"type", "id", "pn", "ps"}, new String[]{"1", mActivity.id + ""
-                    , index + "", Constants.default_PS + ""});
-            sendPostConnection(Constants.base_url + "/api/club/speak/pglist.do", getCode, Constants.token);
+                    , index + "", Constants.DEFAULT_PS + ""});
+            sendPostConnection(Constants.BASE_URL + "/api/club/speak/pglist.do", getCode, Constants.token);
         }
     }
 
@@ -149,7 +149,7 @@ public class StatementFragment extends NetWorkFragment {
     private void event() {
         adapter.setDelItemListener(position -> {
             setBodyParams(new String[]{"speakId"}, new String[]{"" + data.get(position).getId()});
-            sendPostConnection(Constants.base_url + "/api/club/speak/delete.do", delSpeak, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/speak/delete.do", delSpeak, Constants.token);
         });
     }
 

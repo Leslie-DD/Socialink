@@ -65,19 +65,19 @@ public class SettingActivity extends NetWorkActivity {
         ivTeam.setOnClickListener(v -> {
             if (canTeamSee) {
                 setBodyParams(new String[]{"settingClub"}, new String[]{"" + 1});
-                sendPost(Constants.base_url + "/api/user/update.do", settingClub, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/user/update.do", settingClub, Constants.token);
             } else {
                 setBodyParams(new String[]{"settingClub"}, new String[]{"" + 0});
-                sendPost(Constants.base_url + "/api/user/update.do", settingClub, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/user/update.do", settingClub, Constants.token);
             }
         });
         ivQuestion.setOnClickListener(v -> {
             if (canQuestionSee) {
                 setBodyParams(new String[]{"settingAsk"}, new String[]{"" + 1});
-                sendPost(Constants.base_url + "/api/user/update.do", settingAsk, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/user/update.do", settingAsk, Constants.token);
             } else {
                 setBodyParams(new String[]{"settingAsk"}, new String[]{"" + 0});
-                sendPost(Constants.base_url + "/api/user/update.do", settingAsk, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/user/update.do", settingAsk, Constants.token);
             }
         });
         llChangePhone.setOnClickListener(v -> startActivity(new Intent(mContext, ChangePhoneNumActivity.class)));

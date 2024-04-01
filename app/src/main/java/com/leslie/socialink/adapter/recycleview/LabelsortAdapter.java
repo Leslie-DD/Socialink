@@ -125,7 +125,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                         if (TextUtils.isEmpty(bean.header)) {
                             ivHead.setImageResource(R.mipmap.head3);
                         } else {
-                            Glide.with(context).load(Constants.base_url + bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                            Glide.with(context).load(Constants.BASE_URL + bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                         }
                     } else {
                         tvName.setText("匿名用户");

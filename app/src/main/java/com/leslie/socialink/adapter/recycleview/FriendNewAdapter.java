@@ -115,8 +115,8 @@ public class FriendNewAdapter extends RecyclerView.Adapter {
             if (TextUtils.isEmpty(data.get(position).headImg)) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showheadimg", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).headImg);
+                Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("showheadimg", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).headImg);
             }
 
 

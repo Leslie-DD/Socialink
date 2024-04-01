@@ -57,7 +57,7 @@ public class ChooseTeamLableActivity extends NetWorkActivity {
         flowLayout = (FlowLayout) findViewById(R.id.flow_layout);
         //获取标签
         setBodyParams(new String[]{"type"}, new String[]{"label"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", getLabelCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", getLabelCode, Constants.token);
 
     }
 
@@ -84,7 +84,7 @@ public class ChooseTeamLableActivity extends NetWorkActivity {
                 return;
             }
             setBodyParams(new String[]{"id", "name", "labels"}, new String[]{"" + id, name, label});
-            sendPost(Constants.base_url + "/api/club/base/updatebase.do", editCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/updatebase.do", editCode, Constants.token);
         });
     }
 

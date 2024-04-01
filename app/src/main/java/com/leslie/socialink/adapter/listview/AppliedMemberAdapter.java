@@ -71,7 +71,7 @@ public class AppliedMemberAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         if (!TextUtils.isEmpty(data.get(position).getHeader())) {
-            Glide.with(context).load(Constants.base_url + data.get(position).getHeader()).asBitmap().into(viewHolder.ivHead);
+            Glide.with(context).load(Constants.BASE_URL + data.get(position).getHeader()).asBitmap().into(viewHolder.ivHead);
         } else {
             viewHolder.ivHead.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.head3));
         }

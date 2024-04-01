@@ -90,7 +90,7 @@ public class TeamMemberAdapter extends BaseAdapter {
             viewHolder.llHead.setVisibility(View.GONE);
         }
         if (!TextUtils.isEmpty(bean.getHeader())) {
-            Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(viewHolder.ivHead);
+            Glide.with(context).load(Constants.BASE_URL + bean.getHeader()).asBitmap().into(viewHolder.ivHead);
         } else {
             viewHolder.ivHead.setImageResource(R.mipmap.head3);
         }

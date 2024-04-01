@@ -172,8 +172,8 @@ public class NewDetail extends NetWorkActivity {
             if (TextUtils.isEmpty(friendNewBean.headImg)) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + friendNewBean.headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showheadimg", "" + Constants.base_url + "/info/file/pub.do?fileId=" + friendNewBean.headImg);
+                Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=" + friendNewBean.headImg).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("showheadimg", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + friendNewBean.headImg);
             }
 
             // tvTitles.setText(secondhandgoodBean.title + "");
@@ -216,7 +216,7 @@ public class NewDetail extends NetWorkActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除接口还没开始写
                 setBodyParams(new String[]{"dynamic_id"}, new String[]{friendNewBean.dtid + ""});
-                sendPost(Constants.base_url + "/api/social/deleteDynamic.do", 10010, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/social/deleteDynamic.do", 10010, Constants.token);
                 deldialog.dismiss();
             }
 

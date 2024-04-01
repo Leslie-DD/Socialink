@@ -134,7 +134,7 @@ public class SecondHandActivity extends NetWorkActivity {
                         }.getType());
                         if (imgsData != null && imgsData.size() > 0) {
                             for (HomeBanner bannerImgsBean : imgsData) {
-                                String img = Constants.base_url + bannerImgsBean.getCoverImage();
+                                String img = Constants.BASE_URL + bannerImgsBean.getCoverImage();
                                 images.add(img);
                             }
 
@@ -232,7 +232,7 @@ public class SecondHandActivity extends NetWorkActivity {
     // 获取首页轮播图
     private void getBannerImages() {
         setBodyParams(new String[]{"category"}, new String[]{"" + 1});
-        sendPost(Constants.base_url + "/api/pub/category/advertisement.do", 1000, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/advertisement.do", 1000, Constants.token);
     }
 
     // 获取二级分类

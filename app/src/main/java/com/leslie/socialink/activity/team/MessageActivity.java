@@ -217,7 +217,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
                                     OkHttpUtils
                                             .post(WenConstans.SendMessage)
                                             .tag(context)
-                                            .headers(Constants.Token_Header, Constants.token)
+                                            .headers(Constants.TOKEN_HEADER, Constants.token)
                                             .params("type", "" + 1)
                                             .params("receiver", hisid + "")
                                             .params("file", file)
@@ -272,7 +272,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
                                 public void onSuccess(File file) {
                                     OkHttpUtils.post(BaseUrl + "/api/chat/base/save.do")
                                             .tag(context)
-                                            .headers(Constants.Token_Header, Constants.token)
+                                            .headers(Constants.TOKEN_HEADER, Constants.token)
                                             .params("file", file)
                                             .params("type", "1")
                                             .params("receiver", hisid + "")

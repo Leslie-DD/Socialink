@@ -1,5 +1,6 @@
 package com.leslie.socialink.adapter.listview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.entity.Item;
 import com.leslie.socialink.entity.VoteBean;
 import com.leslie.socialink.network.Constants;
+import com.leslie.socialink.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -117,40 +119,35 @@ public class VoteAdapter extends BaseExpandableListAdapter {
             holder = (ViewCHolder) view.getTag();
         }
         holder.tvName.setText(item.getName());
-        if (type == 1) //正在投票状态
-        {
+        if (type == 1) {
+            //正在投票状态
             holder.ivBg.setVisibility(View.GONE);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    if (voteItem.getType() == 0) {
-                        for (int j = 0; j < voteItem.getData().size(); j++) {
-                            Item im = voteItem.getData().get(j);
-                            if (j == i1) {
-                                im.setStatus(Math.abs(item.getStatus() - 1));
-                            } else {
-                                im.setStatus(0);
-                            }
+            view.setOnClickListener(view1 -> {
+                if (voteItem.getType() == 0) {
+                    for (int j = 0; j < voteItem.getData().size(); j++) {
+                        Item im = voteItem.getData().get(j);
+                        if (j == i1) {
+                            im.setStatus(Math.abs(item.getStatus() - 1));
+                        } else {
+                            im.setStatus(0);
                         }
-                    } else {
-                        item.setStatus(Math.abs(item.getStatus() - 1));
-
                     }
-                    notifyDataSetChanged();
+                } else {
+                    item.setStatus(Math.abs(item.getStatus() - 1));
+
                 }
+                notifyDataSetChanged();
             });
             view.setBackgroundColor(Color.parseColor(item.getStatus() == 0 ? "#E6F3FA" : "#C8E9FA"));
-        } else if (type == 2)  //查看投票
-        {
+        } else if (type == 2) {
+            //查看投票
             holder.ivBg.setVisibility(View.VISIBLE);
             view.setBackgroundColor(Color.parseColor("#E6F3FA"));
             holder.tvCount.setText(item.getCount() + "票");
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) holder.ivBg.getLayoutParams();
 
-            lp.width = (int) (Constants.screenW * (item.getCount() * 1f / item.getTotal()));
+            lp.width = (int) (Utils.getScreenWidth((Activity) mContext) * (item.getCount() * 1f / item.getTotal()));
             holder.ivBg.setLayoutParams(lp);
-            Log.e("YSF", "我是计算的" + Constants.screenW + "&&" + item.getCount() + "&&" + item.getTotal() + "*&*" + lp.width);
         }
 
         return view;

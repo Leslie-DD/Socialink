@@ -259,22 +259,22 @@ public class TeamFragment extends NetWorkFragment {
         switch (status) {
             case 0:
                 setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", 2 + ""});
-                sendPostConnection(Constants.base_url + "/api/club/release/pglist.do"
+                sendPostConnection(Constants.BASE_URL + "/api/club/release/pglist.do"
                         , status, Constants.token);
                 break;
             case 1:
-                setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.default_PS + ""});
-                sendPostConnection(Constants.base_url + "/api/club/vote/pglist.do"
+                setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.DEFAULT_PS + ""});
+                sendPostConnection(Constants.BASE_URL + "/api/club/vote/pglist.do"
                         , status, Constants.token);
                 break;
             case 2:
-                setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.default_PS + ""});
-                sendPostConnection(Constants.base_url + "/api/club/activity/pglist.do"
+                setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.DEFAULT_PS + ""});
+                sendPostConnection(Constants.BASE_URL + "/api/club/activity/pglist.do"
                         , status, Constants.token);
                 break;
             case 3:
-                setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.default_PS + ""});
-                sendPostConnection(Constants.base_url + "/api/club/notice/pglist.do"
+                setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{mActivity.id + "", indexs.get(status) + "", Constants.DEFAULT_PS + ""});
+                sendPostConnection(Constants.BASE_URL + "/api/club/notice/pglist.do"
                         , status, Constants.token);
                 break;
         }
@@ -288,7 +288,7 @@ public class TeamFragment extends NetWorkFragment {
             public void del(int position, int id) {
                 // 活动删除
                 setBodyParams(new String[]{"id"}, new String[]{"" + id});
-                sendPostConnection(Constants.base_url + "/api/club/activity/delete.do",
+                sendPostConnection(Constants.BASE_URL + "/api/club/activity/delete.do",
                         DelCode, Constants.token);
             }
         });
@@ -298,7 +298,7 @@ public class TeamFragment extends NetWorkFragment {
             public void apply(int position, int id, int status) {
                 // 报名 或者 取消
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 1});
-                sendPostConnection(Constants.base_url + "/api/club/activity/apply.do",
+                sendPostConnection(Constants.BASE_URL + "/api/club/activity/apply.do",
                         ApplyCode, Constants.token);
             }
         });

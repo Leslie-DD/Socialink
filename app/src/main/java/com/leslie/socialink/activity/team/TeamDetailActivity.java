@@ -265,7 +265,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         });
         //获取团队详情数据
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
-        sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/base/detail.do", getCode, Constants.token);
     }
 
     public void setTitleName(String name) {
@@ -394,10 +394,10 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
             //收藏
             if (isFavorite) {
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + cBean.getId(), "" + 2});
-                sendPost(Constants.base_url + "/api/club/base/favorite.do", notCollect, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/base/favorite.do", notCollect, Constants.token);
             } else {
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + cBean.getId(), "" + 1});
-                sendPost(Constants.base_url + "/api/club/base/favorite.do", collect, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/base/favorite.do", collect, Constants.token);
             }
             settingPop.dismiss();
         });
@@ -405,10 +405,10 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
             //设置可见性
             if (isVisible) {
                 setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + cBean.getId(), "" + 1});
-                sendPost(Constants.base_url + "/api/club/base/setvisibility.do", inVisible, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/base/setvisibility.do", inVisible, Constants.token);
             } else {
                 setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + cBean.getId(), "" + 0});
-                sendPost(Constants.base_url + "/api/club/base/setvisibility.do", visible, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/base/setvisibility.do", visible, Constants.token);
             }
             settingPop.dismiss();
         });
@@ -555,7 +555,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         etName = (EditText) editorview.findViewById(R.id.etName);
         btConfirm = (Button) editorview.findViewById(R.id.btConfirm);
         if (cBean.getLogoImage() != null && !cBean.getLogoImage().isEmpty()) {
-            Glide.with(this).load(Constants.base_url + cBean.getLogoImage()).asBitmap().into(cvHead);
+            Glide.with(this).load(Constants.BASE_URL + cBean.getLogoImage()).asBitmap().into(cvHead);
         }
         etName.setText(cBean.getName());
         etName.setSelection(etName.getText().toString().trim().length());
@@ -572,11 +572,11 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
             }
             if (editorFile == null) {
                 setBodyParams(new String[]{"id", "name"}, new String[]{"" + cBean.getId(), "" + name});
-                sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/base/updatebase.do", editor, Constants.token);
             } else {
                 setBodyParams(new String[]{"id", "name"}, new String[]{"" + cBean.getId(), "" + name});
                 setFileBodyParams(new String[]{"file"}, new File[]{editorFile});
-                sendPost(Constants.base_url + "/api/club/base/updatebase.do", editor, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/base/updatebase.do", editor, Constants.token);
             }
         });
         // 设置一个透明的背景，不然无法实现点击弹框外，弹框消失
@@ -1085,11 +1085,11 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
     //刷新团队详情数据
     private void refData() {
         setBodyParams(new String[]{"id"}, new String[]{String.valueOf(id)});
-        sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/base/detail.do", getCode, Constants.token);
     }
 
     private void setUi() {
-        Glide.with(mContext).load(Constants.base_url + cBean.getLogoImage()).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(ivTeamHead);
+        Glide.with(mContext).load(Constants.BASE_URL + cBean.getLogoImage()).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(ivTeamHead);
         tvTeamName.setText(cBean.getName());
         tvMInfo.setText("成员：" + cBean.getMemberNumber() + " " + "昨日来访：" + cBean.getYesterdayTraffic());
         if (cBean.getNotice() != null) {
@@ -1107,7 +1107,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
                     if (TextUtils.isEmpty(user.getHeader())) {
                         ivGroupHead.setImageResource(R.mipmap.head3);
                     } else {
-                        Glide.with(mContext).load(Constants.base_url + user.getHeader()).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(ivGroupHead);
+                        Glide.with(mContext).load(Constants.BASE_URL + user.getHeader()).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(ivGroupHead);
                     }
                 } else {
                     if (i <= 3) {
@@ -1118,22 +1118,22 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         }
         if (imgs.size() == 1) {
             iv1.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(Constants.base_url + imgs.get(0)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv1);
+            Glide.with(mContext).load(Constants.BASE_URL + imgs.get(0)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv1);
             iv2.setVisibility(View.GONE);
             iv3.setVisibility(View.GONE);
         } else if (imgs.size() == 2) {
             iv1.setVisibility(View.VISIBLE);
             iv2.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(Constants.base_url + imgs.get(0)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv1);
-            Glide.with(mContext).load(Constants.base_url + imgs.get(1)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv2);
+            Glide.with(mContext).load(Constants.BASE_URL + imgs.get(0)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv1);
+            Glide.with(mContext).load(Constants.BASE_URL + imgs.get(1)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv2);
             iv3.setVisibility(View.GONE);
         } else if (imgs.size() == 3) {
             iv1.setVisibility(View.VISIBLE);
             iv2.setVisibility(View.VISIBLE);
             iv3.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(Constants.base_url + imgs.get(0)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv1);
-            Glide.with(mContext).load(Constants.base_url + imgs.get(1)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv2);
-            Glide.with(mContext).load(Constants.base_url + imgs.get(2)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv3);
+            Glide.with(mContext).load(Constants.BASE_URL + imgs.get(0)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv1);
+            Glide.with(mContext).load(Constants.BASE_URL + imgs.get(1)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv2);
+            Glide.with(mContext).load(Constants.BASE_URL + imgs.get(2)).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(iv3);
         }
         if (cBean.getCollege() != null) {
             if (!cBean.getCollege().isEmpty()) {
@@ -1161,7 +1161,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         builder.setPositiveButton("确定", (dialogInterface, i) -> {
             //退出团队
             setBodyParams(new String[]{"nid", "id", "op"}, new String[]{0 + "", "" + cBean.getId(), "" + 2});
-            sendPost(Constants.base_url + "/api/club/base/join.do", out, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/join.do", out, Constants.token);
             deldialog.dismiss();
         });
         builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
@@ -1263,7 +1263,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
                                 }
                                 setBodyParams(new String[]{"id"}, new String[]{"" + id});
                                 setFileBodyParams(new String[]{"file"}, new File[]{file});
-                                sendPost(Constants.base_url + "/api/club/base/update.do", uptdfm, Constants.token);
+                                sendPost(Constants.BASE_URL + "/api/club/base/update.do", uptdfm, Constants.token);
                             }
                         }).launch();
                 break;
@@ -1276,7 +1276,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         if (status == 0) {
             hasRefresh = true;
             setBodyParams(new String[]{"id"}, new String[]{String.valueOf(id)});
-            sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/detail.do", getCode, Constants.token);
         } else if (status == 1) {
             StatementFragment s1 = (StatementFragment) pagerAdapter.getItem(1);
             s1.refreshData();
@@ -1286,7 +1286,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
         } else if (status == 3) {
             hasRefresh = true;
             setBodyParams(new String[]{"id"}, new String[]{String.valueOf(id)});
-            sendPost(Constants.base_url + "/api/club/base/detail.do", getCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/detail.do", getCode, Constants.token);
         }
     }
 

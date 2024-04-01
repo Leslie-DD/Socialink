@@ -85,7 +85,7 @@ public class CommentAdapter extends RecyclerView.Adapter {
             tvTime.setText(bean.getTime());
             tvComment.setText(Utils.getEmoji(context, bean.getContent()));
             if (bean.getHeader() != null && !bean.getHeader().isEmpty()) {
-                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(ivHead);
+                Glide.with(context).load(Constants.BASE_URL + bean.getHeader()).asBitmap().into(ivHead);
             } else {
                 Glide.with(context).load(R.mipmap.head3).asBitmap().into(ivHead);
             }

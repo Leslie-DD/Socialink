@@ -343,7 +343,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
                 if (TextUtils.isEmpty(wenwenBean.header)) {
                     ivHead.setImageResource(R.mipmap.head3);
                 } else {
-                    Glide.with(context).load(Constants.base_url + wenwenBean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                    Glide.with(context).load(Constants.BASE_URL + wenwenBean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 }
             } else {
                 tvName.setText("匿名用户");
@@ -414,7 +414,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
         builder.setPositiveButton("确定", (dialogInterface, i) -> {
             //删除
             setBodyParams(new String[]{"uid", "askid"}, new String[]{wenwenBean.uid, wenwenBean.id + ""});
-            sendPost(Constants.base_url + "/api/ask/base/deleteMyAsk.do", 10010, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/ask/base/deleteMyAsk.do", 10010, Constants.token);
             deldialog.dismiss();
         });
         builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());

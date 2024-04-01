@@ -111,7 +111,7 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
                 if (TextUtils.isEmpty(bean.header)) {
                     ivHead.setImageResource(R.mipmap.head3);
                 } else {
-                    Glide.with(mContext).load(Constants.base_url + bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                    Glide.with(mContext).load(Constants.BASE_URL + bean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 }
 
                 if (TextUtils.isEmpty(bean.userLike)) {

@@ -90,7 +90,7 @@ public class AttentionAdapter extends RecyclerView.Adapter {
             final AttentionBean bean = data.get(position);
             nickname.setText(bean.getNickname());
             if (!TextUtils.isEmpty(bean.getHeader())) {
-                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(header);
+                Glide.with(context).load(Constants.BASE_URL + bean.getHeader()).asBitmap().into(header);
             } else {
                 header.setImageResource(R.mipmap.head3);
             }
@@ -101,7 +101,7 @@ public class AttentionAdapter extends RecyclerView.Adapter {
 
                     OkHttpUtils.post(WenConstans.DelecteAttention)
                             .tag(context)
-                            .headers(Constants.Token_Header, Constants.token)
+                            .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("concerned", "" + data.get(position).getConcerned())
                             .execute(new StringCallback() {
                                 @Override

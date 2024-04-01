@@ -104,10 +104,10 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
             public void OnCanSee(int position) {
                 if (adapter.getData().get(position).getSettingVisible() == 0) {
                     setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + adapter.getData().get(position).getId(), "" + 1});
-                    sendPost(Constants.base_url + "/api/club/base/setvisibility.do", CanSeeCode, Constants.token);
+                    sendPost(Constants.BASE_URL + "/api/club/base/setvisibility.do", CanSeeCode, Constants.token);
                 } else {
                     setBodyParams(new String[]{"id", "settingVisible"}, new String[]{"" + adapter.getData().get(position).getId(), "" + 0});
-                    sendPost(Constants.base_url + "/api/club/base/setvisibility.do", CanSeeCode, Constants.token);
+                    sendPost(Constants.BASE_URL + "/api/club/base/setvisibility.do", CanSeeCode, Constants.token);
                 }
             }
 
@@ -160,7 +160,7 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
             }
             String name = etName.getText().toString().trim();
             setBodyParams(new String[]{"id", "name"}, new String[]{"" + adapter.getData().get(p).getId(), "" + name});
-            sendPost(Constants.base_url + "/api/club/base/updatebase.do", editorCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/updatebase.do", editorCode, Constants.token);
             editorPop.dismiss();
         });
         editorPop.setContentView(editorview);
@@ -176,16 +176,16 @@ public class MyTeamActivity extends NetWorkActivity implements XRecyclerView.Loa
     private void getData(int pn, int type) {
         switch (type) {
             case 0:
-                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.default_PS, Constants.uid + ""});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", GETDATA, SharedPreferencesHelp.getString("token", ""));
+                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.DEFAULT_PS, Constants.uid + ""});
+                sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", GETDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
-                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.default_PS, Constants.uid + ""});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", REFDATA, SharedPreferencesHelp.getString("token", ""));
+                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.DEFAULT_PS, Constants.uid + ""});
+                sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", REFDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 2:
-                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.default_PS, Constants.uid + ""});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", LOADATA, SharedPreferencesHelp.getString("token", ""));
+                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 6, "" + pn, "" + Constants.DEFAULT_PS, Constants.uid + ""});
+                sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }
     }

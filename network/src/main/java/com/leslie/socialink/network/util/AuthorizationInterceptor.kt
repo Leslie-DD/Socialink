@@ -24,8 +24,10 @@ class AuthorizationInterceptor : Interceptor {
         private var _token: String? = null
         private val token: String
             get() {
-                return _token ?: (appCtx.getSharedPreferences("meet", Context.MODE_PRIVATE)
-                    .getString("token", "") ?: "").also {
+                return _token ?: (appCtx.getSharedPreferences(
+                    "meet",
+                    Context.MODE_PRIVATE
+                ).getString("token", "") ?: "").also {
                     _token = it
                 }
             }

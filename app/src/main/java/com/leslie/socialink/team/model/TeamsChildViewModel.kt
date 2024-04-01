@@ -46,7 +46,7 @@ class TeamsChildViewModel : ViewModel() {
         RetrofitClient.homeService.teams(
             type = type,
             pn = pn.toString(),
-            ps = Constants.default_PS.toString()
+            ps = Constants.DEFAULT_PS.toString()
         ).data?.let {
             totalPage = it.totalPage
             if (it.data.isEmpty()) {

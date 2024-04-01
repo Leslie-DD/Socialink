@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.SharedPreferencesHelp;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -80,7 +79,7 @@ public abstract class NetWorkFragment extends Fragment {
     public void sendGetConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         GetRequest getRequest = OkHttpUtils.get(url).tag(this);
         if (token != null && !token.isEmpty()) {
-            getRequest = getRequest.headers(Constants.Token_Header, Constants.token);
+            getRequest = getRequest.headers(Constants.TOKEN_HEADER, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             getRequest = getRequest.params(argsKeys[i], argsValues[i]);
@@ -100,7 +99,7 @@ public abstract class NetWorkFragment extends Fragment {
     public void sendPostConnection(String url, String[] argsKeys, String[] argsValues, int where, String token) {
         PostRequest postRequest = OkHttpUtils.post(url).tag(this);
         if (token != null && !token.isEmpty()) {
-            postRequest = postRequest.headers(Constants.Token_Header, Constants.token);
+            postRequest = postRequest.headers(Constants.TOKEN_HEADER, Constants.token);
         }
         for (int i = 0; i < argsKeys.length; i++) {
             postRequest = postRequest.params(argsKeys[i], argsValues[i]);

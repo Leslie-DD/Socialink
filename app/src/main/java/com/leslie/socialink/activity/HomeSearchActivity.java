@@ -148,7 +148,7 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
 
     private void getLableData() {
         setBodyParams(new String[]{"type"}, new String[]{"label"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
 

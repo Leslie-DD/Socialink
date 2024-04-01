@@ -105,7 +105,7 @@ public class SecondFragment extends NetWorkFragment implements XRecyclerView.Loa
                         }.getType());
                         if (imgsData != null && imgsData.size() > 0) {
                             for (HomeBanner bannerImgsBean : imgsData) {
-                                imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
+                                imgs.add(Constants.BASE_URL + bannerImgsBean.getCoverImage());
                             }
                         }
                         bannerAdapter.setData(imgs);
@@ -231,7 +231,7 @@ public class SecondFragment extends NetWorkFragment implements XRecyclerView.Loa
     //获取首页轮播图
     private void getImgs() {
         setBodyParams(new String[]{"category"}, new String[]{"" + 1});
-        sendPostConnection(Constants.base_url + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
+        sendPostConnection(Constants.BASE_URL + "/api/pub/category/advertisement.do", getimgsCode, Constants.token);
     }
 
     // 获取二级分类

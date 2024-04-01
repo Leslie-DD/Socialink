@@ -93,7 +93,7 @@ public class MyTeamAdapter extends RecyclerView.Adapter {
             } else if (data.get(position).getLogoImage().isEmpty()) {
                 Glide.with(context).load(R.mipmap.head3).asBitmap().into(ivHead);
             } else {
-                Glide.with(context).load(Constants.base_url + data.get(position).getLogoImage()).asBitmap().into(ivHead);
+                Glide.with(context).load(Constants.BASE_URL + data.get(position).getLogoImage()).asBitmap().into(ivHead);
             }
             tvName.setText(data.get(position).getName());
 

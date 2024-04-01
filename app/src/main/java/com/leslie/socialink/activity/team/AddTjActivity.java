@@ -107,7 +107,7 @@ public class AddTjActivity extends NetWorkActivity {
                 if (buildingBean.getPhotos() != null && buildingBean.getPhotos().size() > 0) {
                     fristfiles = buildingBean.getPhotos().size();
                     for (int i = 0; i < buildingBean.getPhotos().size(); i++) {
-                        String filepath = Constants.base_url + buildingBean.getPhotos().get(i).getPhotoId();
+                        String filepath = Constants.BASE_URL + buildingBean.getPhotos().get(i).getPhotoId();
                         strings.add(strings.size() - 1, filepath);
                         gwPictureAdapter.setData(strings);
                         filesid[i] = buildingBean.getPhotos().get(i).getId();
@@ -167,9 +167,9 @@ public class AddTjActivity extends NetWorkActivity {
                 }
                 if (type == 1) {
                     tvSave.setClickable(false);
-                    OkHttpUtils.post(Constants.base_url + "/api/club/tb/save.do")
+                    OkHttpUtils.post(Constants.BASE_URL + "/api/club/tb/save.do")
                             .tag(this)
-                            .headers(Constants.Token_Header, Constants.token)
+                            .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("clubId", getIntent().getIntExtra("teamid", 0) + "")
                             .params("title", title + "")
                             .params("content", content + "")
@@ -220,9 +220,9 @@ public class AddTjActivity extends NetWorkActivity {
                         Log.e("DDQ", "没有图片删除");
                         if ((strings.size() - 1) > fristfiles) { //如果有图片添加
                             Log.e("DDQ", "有图片添加,size = " + fileList.size());
-                            OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
+                            OkHttpUtils.post(Constants.BASE_URL + "/api/club/tb/update.do")
                                     .tag(this)
-                                    .headers(Constants.Token_Header, Constants.token)
+                                    .headers(Constants.TOKEN_HEADER, Constants.token)
                                     .params("id", buildingBean.getId() + "")
                                     .params("title", title + "")
                                     .params("content", content + "")
@@ -268,9 +268,9 @@ public class AddTjActivity extends NetWorkActivity {
                                     });
                         } else { //如果没有图片添加
                             Log.e("DDQ", "没有图片添加");
-                            OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
+                            OkHttpUtils.post(Constants.BASE_URL + "/api/club/tb/update.do")
                                     .tag(this)
-                                    .headers(Constants.Token_Header, Constants.token)
+                                    .headers(Constants.TOKEN_HEADER, Constants.token)
                                     .params("id", buildingBean.getId() + "")
                                     .params("title", title + "")
                                     .params("content", content + "")
@@ -317,9 +317,9 @@ public class AddTjActivity extends NetWorkActivity {
 
                     } else { //有图片删除
                         Log.e("DDQ", "有图片删除,delFileIds = " + delFileIds);
-                        OkHttpUtils.post(Constants.base_url + "/api/club/tb/update.do")
+                        OkHttpUtils.post(Constants.BASE_URL + "/api/club/tb/update.do")
                                 .tag(this)
-                                .headers(Constants.Token_Header, Constants.token)
+                                .headers(Constants.TOKEN_HEADER, Constants.token)
                                 .params("id", buildingBean.getId() + "")
                                 .params("title", title + "")
                                 .params("content", content + "")

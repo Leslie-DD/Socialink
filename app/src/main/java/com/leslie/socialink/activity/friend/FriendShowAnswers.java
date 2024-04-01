@@ -70,7 +70,7 @@ public class FriendShowAnswers extends NetWorkActivity {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         ivreject.setOnClickListener(v -> OkHttpUtils.post(WenConstans.RejectFriend)
                 .tag(this)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("user_id", user_id + "")
                 .params("id", "" + Constants.uid)
                 .execute(new StringCallback() {
@@ -98,7 +98,7 @@ public class FriendShowAnswers extends NetWorkActivity {
                 }));
         ivaccept.setOnClickListener(v -> OkHttpUtils.post(WenConstans.AcceptFriend)
                 .tag(this)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("user_id", user_id + "")
 //                        .params("id",""+Constants.uid)
                 .params("id", "" + Constants.uid)
@@ -172,7 +172,7 @@ public class FriendShowAnswers extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"user_id"}, new String[]{"" + user_id});
-        sendPost(Constants.base_url + "/api/social/getPaper.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/getPaper.do", 100, Constants.token);
     }
 
 

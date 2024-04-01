@@ -92,7 +92,7 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
             final HotActivities.HotBean hotBean = data.get(position);
 
             if (!TextUtils.isEmpty(hotBean.getClubInfo().getLogoImage())) {
-                Glide.with(context).load(Constants.base_url + hotBean.getClubInfo().getLogoImage()).asBitmap().into(ivHead);
+                Glide.with(context).load(Constants.BASE_URL + hotBean.getClubInfo().getLogoImage()).asBitmap().into(ivHead);
             } else {
                 Glide.with(context).load(R.mipmap.head3).asBitmap().into(ivHead);
             }

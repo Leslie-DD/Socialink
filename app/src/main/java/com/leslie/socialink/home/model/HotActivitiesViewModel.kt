@@ -39,7 +39,7 @@ class HotActivitiesViewModel : ViewModel() {
         }
         RetrofitClient.homeService.hotActivities(
             pn = pn.toString(),
-            ps = Constants.default_PS.toString()
+            ps = Constants.DEFAULT_PS.toString()
         ).data?.let {
             totalPage = it.totalPage
             if (it.data.isNotEmpty()) {

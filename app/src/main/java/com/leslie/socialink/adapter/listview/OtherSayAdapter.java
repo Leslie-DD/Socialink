@@ -89,7 +89,7 @@ public class OtherSayAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         if (!TextUtils.isEmpty(bean.getHeader())) {
-            Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(viewHolder.ivHead);
+            Glide.with(context).load(Constants.BASE_URL + bean.getHeader()).asBitmap().into(viewHolder.ivHead);
         } else {
             viewHolder.ivHead.setImageDrawable(ContextCompat.getDrawable(context, R.mipmap.head3));
         }

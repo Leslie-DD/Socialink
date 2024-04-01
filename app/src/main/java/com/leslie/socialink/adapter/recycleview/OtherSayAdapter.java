@@ -105,7 +105,7 @@ public class OtherSayAdapter extends RecyclerView.Adapter {
             if (TextUtils.isEmpty(bean.getHeader())) {
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(ivHead);
+                Glide.with(context).load(Constants.BASE_URL + bean.getHeader()).asBitmap().into(ivHead);
             }
             bean.setImgs();
             Log.e("DDQ", bean.getImgs().size() + "imgsize");

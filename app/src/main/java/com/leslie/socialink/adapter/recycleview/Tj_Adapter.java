@@ -97,7 +97,7 @@ public class Tj_Adapter extends RecyclerView.Adapter {
             viewHolder.tvName.setText(bean.getTitle() + "");
 
             if (bean.getPhotos() != null && bean.getPhotos().size() != 0) {
-                Glide.with(context).load(Constants.base_url + bean.getPhotos().get(0).getPhotoId()).centerCrop().into(viewHolder.ivPic);
+                Glide.with(context).load(Constants.BASE_URL + bean.getPhotos().get(0).getPhotoId()).centerCrop().into(viewHolder.ivPic);
             } else {
                 viewHolder.ivPic.setImageResource(R.mipmap.mrtp);
             }
@@ -107,7 +107,7 @@ public class Tj_Adapter extends RecyclerView.Adapter {
             viewHolder.tvName.setText(bean.getTitle() + "");
 
             if (bean.getPhotos() != null && bean.getPhotos().size() != 0) {
-                Glide.with(context).load(Constants.base_url + bean.getPhotos().get(0).getPhotoId()).centerCrop().into(viewHolder.ivPic);
+                Glide.with(context).load(Constants.BASE_URL + bean.getPhotos().get(0).getPhotoId()).centerCrop().into(viewHolder.ivPic);
             } else {
                 viewHolder.ivPic.setImageResource(R.mipmap.mrtp);
             }

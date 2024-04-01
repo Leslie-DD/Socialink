@@ -99,7 +99,7 @@ public class ForgetPwdActivity extends NetWorkActivity {
                 }
             }
             setBodyParams(new String[]{"phone", "forget"}, new String[]{phone, "forget"});
-            sendPost(Constants.base_url + "/api/account/scode.do", S_CODE_CODE, null);
+            sendPost(Constants.BASE_URL + "/api/account/scode.do", S_CODE_CODE, null);
         });
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         btSave.setOnClickListener(v -> {
@@ -147,7 +147,7 @@ public class ForgetPwdActivity extends NetWorkActivity {
                 return;
             }
             setBodyParams(new String[]{"phone", "code", "pwd"}, new String[]{phone, code, pwd /*EncryptUtils.encryptMD5ToString(pwd)*/});
-            sendPost(Constants.base_url + "/api/account/resetpwd.do", RESET_PWD_CODE, null);
+            sendPost(Constants.BASE_URL + "/api/account/resetpwd.do", RESET_PWD_CODE, null);
         });
         ivSee.setOnClickListener(v -> {
             canSee = !canSee;

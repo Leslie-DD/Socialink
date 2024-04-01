@@ -64,8 +64,8 @@ public class MySayActivity extends NetWorkActivity implements XRecyclerView.Load
     }
 
     private void getData(int pn) {
-        setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, "" + Constants.default_PS});
-        sendPost(Constants.base_url + "/api/user/mySpeak.do", 1000, Constants.token);
+        setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS});
+        sendPost(Constants.BASE_URL + "/api/user/mySpeak.do", 1000, Constants.token);
     }
 
     @Override

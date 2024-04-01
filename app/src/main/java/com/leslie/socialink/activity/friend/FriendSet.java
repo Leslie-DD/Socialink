@@ -177,7 +177,7 @@ public class FriendSet extends NetWorkActivity {
         public void run() {
             OkHttpUtils.post(WenConstans.InitUserinfo)
                     .tag(this)
-                    .headers(Constants.Token_Header, Constants.token)
+                    .headers(Constants.TOKEN_HEADER, Constants.token)
                     .params("id", id + "")
                     .execute(new StringCallback() {
                         @Override               // 重写AbsCallback<String>的onSuccess方法
@@ -321,16 +321,14 @@ public class FriendSet extends NetWorkActivity {
         pop.setOutsideTouchable(true);
         // 设置焦点
         pop.setFocusable(true);
-        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                layoutParams.alpha = 1f;
-                getWindow().setAttributes(layoutParams);
-            }
+        pop.setOnDismissListener(() -> {
+            layoutParams.alpha = 1f;
+            getWindow().setAttributes(layoutParams);
         });
         // 设置所在布局
         pop.setContentView(pv);
-        modifyPop = new PopupWindow(Constants.screenW - Utils.dip2px(mContext, 80), WindowManager.LayoutParams.WRAP_CONTENT);
+        modifyPop = new PopupWindow(Utils.getScreenWidth(this) - Utils.dip2px(mContext, 80),
+                WindowManager.LayoutParams.WRAP_CONTENT);
         View v = LayoutInflater.from(mContext).inflate(R.layout.tklayout, null);
         v.findViewById(R.id.ivHead).setVisibility(View.GONE);
 
@@ -415,8 +413,8 @@ public class FriendSet extends NetWorkActivity {
                     Log.e("个人信息头像touxiang1", "" + touxiang1);
 
                     if (touxiang1 != null) {
-                        Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + touxiang1).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                        Log.e("showset", "" + Constants.base_url + "/info/file/pub.do?fileId=" + touxiang1);
+                        Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=" + touxiang1).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                        Log.e("showset", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + touxiang1);
                     } else {
                         ivHead.setImageResource(R.mipmap.head3);
                     }

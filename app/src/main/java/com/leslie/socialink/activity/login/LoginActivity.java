@@ -76,7 +76,7 @@ public class LoginActivity extends NetWorkActivity {
             }
             //setBodyParams(new String[]{"phone", "pwd"}, new String[]{Phone, EncryptUtils.encryptMD5ToString(pwd)});
             setBodyParams(new String[]{"phone", "pwd"}, new String[]{Phone, pwd});
-            sendPost(Constants.base_url + "/api/account/login.do", loginCode, null);
+            sendPost(Constants.BASE_URL + "/api/account/login.do", loginCode, null);
         });
         tvSign.setOnClickListener(v -> startActivity(new Intent(mContext, SignActivity.class)));
         tvForget.setOnClickListener(v -> startActivity(new Intent(mContext, ForgetPwdActivity.class).putExtra("type", 1)));
@@ -93,7 +93,6 @@ public class LoginActivity extends NetWorkActivity {
             String token = dd.optString("token");
             int uid = dd.optInt("uid");
 
-//            Constants.uid=uid;
             Constants.uid = uid;
             Constants.token = token;
 

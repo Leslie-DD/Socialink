@@ -33,7 +33,6 @@ import android.provider.MediaStore;
 import android.renderscript.Allocation;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -529,29 +528,6 @@ public class Utils {
     }
 
     /**
-     * 得到手机屏幕的宽
-     *
-     * @param mActivity
-     * @return
-     */
-    public static int getScreenWidth(Activity mActivity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        mActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm.widthPixels;
-    }
-
-    /**
-     * 得到手机屏幕的高
-     *
-     * @return
-     */
-    public static int getScreenHeight(Activity mActivity) {
-        DisplayMetrics dm = new DisplayMetrics();
-        mActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        return dm.heightPixels;
-    }
-
-    /**
      * 获取文件夹大小
      *
      * @param path
@@ -956,11 +932,11 @@ public class Utils {
     }
 
     public static void setHead(Context mContext, String logoImage, CircleView ivHead) {
-        Glide.with(mContext).load(Constants.base_url + logoImage).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(ivHead);
+        Glide.with(mContext).load(Constants.BASE_URL + logoImage).asBitmap().error(R.mipmap.head3).placeholder(R.mipmap.head3).into(ivHead);
     }
 
     public static void setImg(Context mContext, String url, ImageView ivPic, int resId) {
-        Glide.with(mContext).load(Constants.base_url + url).error(resId).placeholder(resId).centerCrop().into(ivPic);
+        Glide.with(mContext).load(Constants.BASE_URL + url).error(resId).placeholder(resId).centerCrop().into(ivPic);
     }
 
     /**
@@ -1210,17 +1186,22 @@ public class Utils {
      *
      * @return the width of screen, in pixel
      */
-    public static int getScreenWidth() {
-        WindowManager wm = (WindowManager) MeetApplication.getInstance().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        Point point = new Point();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            //noinspection ConstantConditions
-            wm.getDefaultDisplay().getRealSize(point);
-        } else {
-            //noinspection ConstantConditions
-            wm.getDefaultDisplay().getSize(point);
-        }
-        return point.x;
+    public static int getScreenWidth(Activity activity) {
+        WindowManager windowManager = activity.getWindowManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
+    }
+
+    /**
+     * Return the height of screen, in pixel.
+     *
+     * @return the height of screen, in pixel
+     */
+    public static int getScreenHeight(Activity mActivity) {
+        DisplayMetrics dm = new DisplayMetrics();
+        mActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm.heightPixels;
     }
 
     /**

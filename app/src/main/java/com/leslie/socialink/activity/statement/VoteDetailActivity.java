@@ -108,7 +108,7 @@ public class VoteDetailActivity extends NetWorkActivity {
         //ll_editor.setOnClickListener(this);
         ll_del.setOnClickListener(v -> {
             setBodyParams(new String[]{"voteId"}, new String[]{"" + bean.getId()});
-            sendPost(Constants.base_url + "/api/club/vote/delete.do", DelCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/vote/delete.do", DelCode, Constants.token);
         });
         ll_cacel.setOnClickListener(v -> pop.dismiss());
 
@@ -138,11 +138,11 @@ public class VoteDetailActivity extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"voteId"}, new String[]{"" + id});
-        sendPost(Constants.base_url + "/api/club/vote/detail.do", getData, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/vote/detail.do", getData, Constants.token);
     }
 
     private void setHeadUi(TeamTestBean.ObjBean objBean) {
-        Glide.with(this).load(Constants.base_url + objBean.getHeader()).asBitmap().into(ivHead);
+        Glide.with(this).load(Constants.BASE_URL + objBean.getHeader()).asBitmap().into(ivHead);
         tvName.setText(objBean.getPresentorName());
         tvTitlt.setText(objBean.getName());
         tvContent.setText(objBean.getIntroduction());
@@ -240,7 +240,7 @@ public class VoteDetailActivity extends NetWorkActivity {
                 return;
             }
             setBodyParams(new String[]{"voteId", "optionId"}, new String[]{"" + voteId, "" + optionId});
-            sendPost(Constants.base_url + "/api/club/vote/comment.do", ovteCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/vote/comment.do", ovteCode, Constants.token);
         });
         ivRight.setOnClickListener(v -> showSpvPop());
         eblv.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {

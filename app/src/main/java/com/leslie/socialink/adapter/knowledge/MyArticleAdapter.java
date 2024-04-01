@@ -83,12 +83,12 @@ public class MyArticleAdapter extends RecyclerView.Adapter {
 
 
             if (TextUtils.isEmpty(data.get(position).author.header)) {
-                Log.e("shownearnull", "" + Constants.base_url_tmp + "/api/payforkownledge/passage/feed.do?pageSize=10&pageNum=1&isAsc=asc&orderByColumn=id" + data.get(position).author.header);
+                Log.e("shownearnull", "" + Constants.BASE_URL + "/api/payforkownledge/passage/feed.do?pageSize=10&pageNum=1&isAsc=asc&orderByColumn=id" + data.get(position).author.header);
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
                 // 协议完善协议完善
-                // Glide.with(context).load(Constants.base_url_tmp + "/info/file/pub.do?fileId="+data.get(position).author.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("shownear", "" + Constants.base_url_tmp + "/info/file/pub.do?fileId=" + data.get(position).author.header);
+                // Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId="+data.get(position).author.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("shownear", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).author.header);
             }
 
             tvName.setText(data.get(position).author.nickname == null ? "" : data.get(position).author.nickname);

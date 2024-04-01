@@ -19,8 +19,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
-
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
@@ -82,6 +80,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
     private final Gson gson = new Gson();
 
     private OptionsPickerView<String> pvOptions;
+    private int screenWidth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,6 +89,8 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         init();
         event();
         windowLayoutParams = getWindow().getAttributes();
+        screenWidth = Utils.getScreenWidth(this);
+
         initHeadModifyPopWindow();
         initSexModifyPopWindow();
         initNameModifyPopWindow();
@@ -101,7 +102,6 @@ public class BaseInfoActivity extends PhotoBaseActivity {
 
         ivHead = findViewById(R.id.ivHead);
         llHead = findViewById(R.id.llHead);
-        Glide.with(mContext).load(Constants.url5).asBitmap().into(ivHead);
         tvTitle = findViewById(R.id.tvTitle);
         tvTitle.setText("基本资料");
         initItemsView();
@@ -109,7 +109,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         adapter = new BaseInfoItemAdapter(mContext, data);
         lv.setAdapter(adapter);
         if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
-            Glide.with(mContext).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(ivHead);
+            Glide.with(mContext).load(Constants.BASE_URL + userInfoBean.getHeader()).asBitmap().into(ivHead);
         } else {
             Glide.with(mContext).load(R.mipmap.head2).asBitmap().into(ivHead);
         }
@@ -156,7 +156,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         sexFemale.setOnClickListener(v -> {
             sex = 2;
             setBodyParams(new String[]{"sex"}, new String[]{"" + 2});
-            sendPost(Constants.base_url + "/api/user/update.do", UPDATE_SEX, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/user/update.do", UPDATE_SEX, Constants.token);
             modifySexPopWindow.dismiss();
         });
 
@@ -166,7 +166,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         sexMale.setOnClickListener(v -> {
             sex = 1;
             setBodyParams(new String[]{"sex"}, new String[]{"" + 1});
-            sendPost(Constants.base_url + "/api/user/update.do", UPDATE_SEX, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/user/update.do", UPDATE_SEX, Constants.token);
             modifySexPopWindow.dismiss();
         });
 
@@ -182,11 +182,6 @@ public class BaseInfoActivity extends PhotoBaseActivity {
     }
 
     private void initNameModifyPopWindow() {
-        WindowManager windowManager = getWindowManager();
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
-
         modifyNamePopWindow = new PopupWindow(
                 screenWidth - Utils.dip2px(context, 20),
                 WindowManager.LayoutParams.WRAP_CONTENT
@@ -203,7 +198,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
             }
             name = modifiedValue;
             setBodyParams(new String[]{"nickname"}, new String[]{modifiedValue});
-            sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_NAME, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/user/update.do", UPLOAD_NAME, Constants.token);
             modifyNamePopWindow.dismiss();
         });
         TextView tvTip = content.findViewById(R.id.tvTip);
@@ -237,7 +232,10 @@ public class BaseInfoActivity extends PhotoBaseActivity {
     }
 
     private void initSchoolModifyPopWindow() {
-        modifySchoolPopWindow = new PopupWindow(Constants.screenW - Utils.dip2px(mContext, 80), WindowManager.LayoutParams.WRAP_CONTENT);
+        modifySchoolPopWindow = new PopupWindow(
+                screenWidth - Utils.dip2px(context, 20),
+                WindowManager.LayoutParams.WRAP_CONTENT
+        );
         View content = LayoutInflater.from(mContext).inflate(R.layout.tklayout, null);
         content.findViewById(R.id.ivHead).setVisibility(View.GONE);
         content.findViewById(R.id.ivClose).setOnClickListener(view -> modifySchoolPopWindow.dismiss());
@@ -284,7 +282,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
 
     private void getSchoolData() {
         setBodyParams(new String[]{"type"}, new String[]{"school"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
     private void initItemsView() {
@@ -376,7 +374,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         String filePath = PhotoUtils.getRealPathFromUri(this, uri);
         File uploadFile = new File(filePath);
         setFileBodyParams(new String[]{"file"}, new File[]{uploadFile});
-        sendPost(Constants.base_url + "/api/user/update.do", UPLOAD_HEAD, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/user/update.do", UPLOAD_HEAD, Constants.token);
     }
 
     @Override
@@ -402,8 +400,8 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                     break;
                 }
 
-                Log.i(TAG, "UPLOAD_HEAD success " + Constants.base_url + userHead);
-                Glide.with(this).load(Constants.base_url + userHead).asBitmap().into(ivHead);
+                Log.i(TAG, "UPLOAD_HEAD success " + Constants.BASE_URL + userHead);
+                Glide.with(this).load(Constants.BASE_URL + userHead).asBitmap().into(ivHead);
                 EventBus.getDefault().post(new RefUserInfo());
                 break;
             case UPLOAD_NAME:
@@ -448,7 +446,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                     pvOptions = new OptionsPickerBuilder(this, (options1, option2, options3, v) -> {
                         school = data.get(options1);
                         setBodyParams(new String[]{"college"}, new String[]{school});
-                        sendPost(Constants.base_url + "/api/user/update.do", UPDATE_SCHOOL, Constants.token);
+                        sendPost(Constants.BASE_URL + "/api/user/update.do", UPDATE_SCHOOL, Constants.token);
                     }).setSubmitText("确定")//确定按钮文字
                             .setCancelText("取消")//取消按钮文字
                             .setTitleText("选择学校")//标题

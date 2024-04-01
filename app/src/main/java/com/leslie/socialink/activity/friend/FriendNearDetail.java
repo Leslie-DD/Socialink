@@ -90,7 +90,7 @@ public class FriendNearDetail extends NetWorkActivity {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
         set.setOnClickListener(v -> OkHttpUtils.post(WenConstans.JudgeSetques)
                 .tag(this)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("uid", hisid + "")
                 .execute(new StringCallback() {
                     @Override
@@ -187,8 +187,8 @@ public class FriendNearDetail extends NetWorkActivity {
             Log.e("gerenxinxitouxiang", "touxiang " + touxiang1);
 
             if (touxiang1 != null) {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + touxiang1).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showset", "" + Constants.base_url + "/info/file/pub.do?fileId=" + touxiang1);
+                Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=" + touxiang1).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("showset", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + touxiang1);
             } else {
                 ivHead.setImageResource(R.mipmap.head3);
             }

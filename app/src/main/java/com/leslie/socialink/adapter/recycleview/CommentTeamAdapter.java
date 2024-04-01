@@ -204,7 +204,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                     if (TextUtils.isEmpty(bean.getLogoImage())) {
                         ivHead.setImageResource(R.mipmap.head3);
                     } else {
-                        Glide.with(context).load(Constants.base_url + bean.getLogoImage()).asBitmap().into(ivHead);
+                        Glide.with(context).load(Constants.BASE_URL + bean.getLogoImage()).asBitmap().into(ivHead);
                     }
                     tvCollege.setText(bean.getCollege());
                     tvName.setText(bean.getName());
@@ -216,7 +216,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                     if (bean.getLogoImage().isEmpty()) {
                         ivHead.setImageResource(R.mipmap.head3);
                     } else {
-                        Glide.with(context).load(Constants.base_url + bean.getLogoImage()).asBitmap().into(ivHead);
+                        Glide.with(context).load(Constants.BASE_URL + bean.getLogoImage()).asBitmap().into(ivHead);
                     }
                     tvCollege.setText(bean.getCollege());
                     tvName.setText(bean.getName());
@@ -228,7 +228,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                         gw.setVisibility(View.VISIBLE);
                         imgs = new ArrayList<>();
                         for (int i = 0; i < data.get(position).getSpeak().getPhotos().size(); i++) {
-                            imgs.add(Constants.base_url + data.get(position).getSpeak().getPhotos().get(i).getPhotoId());
+                            imgs.add(Constants.BASE_URL + data.get(position).getSpeak().getPhotos().get(i).getPhotoId());
                         }
                         switch (imgs.size()) {
                             case 1:
@@ -252,7 +252,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                                 imgs = new ArrayList<>();
                                 if (data.get(position).getSpeak() != null && data.get(position).getSpeak().getPhotos() != null) {
                                     for (int j = 0; j < data.get(position).getSpeak().getPhotos().size(); j++) {
-                                        imgs.add(Constants.base_url + data.get(position).getSpeak().getPhotos().get(j).getPhotoId());
+                                        imgs.add(Constants.BASE_URL + data.get(position).getSpeak().getPhotos().get(j).getPhotoId());
                                     }
                                 }
                                 Intent intent = new Intent(context, ImagePreviewActivity.class);
@@ -273,7 +273,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                         ivHead.setImageResource(R.mipmap.head2);
                     } else {
                         if (ivHead != null) {
-                            Glide.with(context).load(Constants.base_url + bean.getLogoImage()).asBitmap().into(ivHead);
+                            Glide.with(context).load(Constants.BASE_URL + bean.getLogoImage()).asBitmap().into(ivHead);
                         }
                     }
                     if (tvName != null) {
@@ -310,7 +310,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                         if (gw != null) {
                             imgs = new ArrayList<>();
                             for (TeamBean.ActivityBean.PhotosBeanX photosBeanX : data.get(position).getActivity().getPhotos()) {
-                                imgs.add(Constants.base_url + photosBeanX.getPhotoId());
+                                imgs.add(Constants.BASE_URL + photosBeanX.getPhotoId());
                             }
                             switch (imgs.size()) {
                                 case 1:
@@ -333,7 +333,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     imgs = new ArrayList<>();
                                     for (int j = 0; j < data.get(position).getActivity().getPhotos().size(); j++) {
-                                        imgs.add(Constants.base_url + data.get(position).getActivity().getPhotos().get(j).getPhotoId());
+                                        imgs.add(Constants.BASE_URL + data.get(position).getActivity().getPhotos().get(j).getPhotoId());
                                     }
                                     Intent intent = new Intent(context, ImagePreviewActivity.class);
                                     intent.putStringArrayListExtra("imageList", imgs);
@@ -381,9 +381,9 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
     private void getImgs(final int position) {
         /*setBodyParams(new String[]{"category"},new String[]{""+1});
         sendPost(Constants.base_url+"/api/pub/category/advertisement.do",getimgsCode,Constants.token);*/
-        OkHttpUtils.post(Constants.base_url + "/api/pub/category/advertisement.do")
+        OkHttpUtils.post(Constants.BASE_URL + "/api/pub/category/advertisement.do")
                 .tag(context)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("category", "2")
                 .execute(new StringCallback() {
                     @Override
@@ -396,7 +396,7 @@ public class CommentTeamAdapter extends RecyclerView.Adapter {
                                     }.getType());
                                     if (imgsData != null && imgsData.size() > 0) {
                                         for (HomeBanner bannerImgsBean : imgsData) {
-                                            imgs.add(Constants.base_url + bannerImgsBean.getCoverImage());
+                                            imgs.add(Constants.BASE_URL + bannerImgsBean.getCoverImage());
                                         }
 
                                     }

@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
             viewModel.homeBannersStateFlow.collect { homeBanners ->
-                bannerAdapter.setData(homeBanners.map { homeBanner -> Constants.base_url + homeBanner.coverImage })
+                bannerAdapter.setData(homeBanners.map { homeBanner -> Constants.BASE_URL + homeBanner.coverImage })
             }
         }
     }

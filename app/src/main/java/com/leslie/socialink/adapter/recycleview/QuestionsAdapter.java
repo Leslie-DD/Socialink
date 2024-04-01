@@ -153,7 +153,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     if (TextUtils.isEmpty(wenwenBean.header)) {
                         ivHead.setImageResource(R.mipmap.head3);
                     } else {
-                        Glide.with(context).load(Constants.base_url + wenwenBean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                        Glide.with(context).load(Constants.BASE_URL + wenwenBean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                     }
                 } else {
                     tvName.setText("匿名用户");
@@ -246,9 +246,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     //获取首页轮播图
     private void getImgs(final int position) {
-        OkHttpUtils.post(Constants.base_url + "/api/pub/category/advertisement.do")
+        OkHttpUtils.post(Constants.BASE_URL + "/api/pub/category/advertisement.do")
                 .tag(context)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("category", "4")
                 .execute(new StringCallback() {
                     @Override
@@ -266,7 +266,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             }.getType());
                             if (imgsData != null && !imgsData.isEmpty()) {
                                 for (HomeBanner bannerImgsBean : imgsData) {
-                                    images.add(Constants.base_url + bannerImgsBean.getCoverImage());
+                                    images.add(Constants.BASE_URL + bannerImgsBean.getCoverImage());
                                 }
                             }
                             if (!images.isEmpty()) {

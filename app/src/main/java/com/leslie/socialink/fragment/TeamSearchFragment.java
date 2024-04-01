@@ -139,11 +139,11 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
                 setBodyParams(new String[]{"type", "pn", "ps", "keyword"},
                         new String[]{"1", pn + "", ps + "", s});
             }
-            sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", 100, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/base/pglist.do", 100, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
-            sendPostConnection(Constants.base_url + "/api/club/base/labelList.do", 101, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/base/labelList.do", 101, Constants.token);
         }
     }
 
@@ -156,11 +156,11 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
                 setBodyParams(new String[]{"type", "pn", "ps", "keyword"},
                         new String[]{"1", pn + "", ps + "", content});
             }
-            sendPostConnection(Constants.base_url + "/api/club/base/pglist.do", 101, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/base/pglist.do", 101, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
-            sendPostConnection(Constants.base_url + "/api/club/base/labelList.do", 101, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/club/base/labelList.do", 101, Constants.token);
         }
     }
 
@@ -170,7 +170,7 @@ public class TeamSearchFragment extends NetWorkFragment implements XRecyclerView
         this.content = content;
         setBodyParams(new String[]{"pn", "ps", "label"},
                 new String[]{pn + "", ps + "", content});
-        sendPostConnection(Constants.base_url + "/api/club/base/labelList.do", 100, Constants.token);
+        sendPostConnection(Constants.BASE_URL + "/api/club/base/labelList.do", 100, Constants.token);
     }
 
     public void setIslabel(boolean islabel) {

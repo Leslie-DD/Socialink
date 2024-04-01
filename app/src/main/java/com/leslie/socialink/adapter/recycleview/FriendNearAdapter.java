@@ -113,11 +113,11 @@ public class FriendNearAdapter extends RecyclerView.Adapter {
 
             tvName.setText(data.get(position).nickname == null ? "" : data.get(position).nickname);
             if (TextUtils.isEmpty(data.get(position).header)) {
-                Log.e("shownearnull", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).header);
+                Log.e("shownearnull", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).header);
                 ivHead.setImageResource(R.mipmap.head3);
             } else {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("shownear", "" + Constants.base_url + "/info/file/pub.do?fileId=" + data.get(position).header);
+                Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("shownear", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + data.get(position).header);
             }
             if (data.get(position).sex == 1) {
                 FriendSex.setImageResource(R.mipmap.me19);

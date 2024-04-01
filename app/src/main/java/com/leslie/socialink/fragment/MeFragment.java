@@ -109,8 +109,8 @@ public class MeFragment extends Fragment {
                     settingClub = userInfoBean.getSettingClub();
                     if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
                         //Glide.with(mContext).load(R.mipmap.head2).asBitmap().into(target);
-                        Glide.with(getActivity()).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(target);
-                        Glide.with(getActivity()).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().into(ivHead);
+                        Glide.with(getActivity()).load(Constants.BASE_URL + userInfoBean.getHeader()).asBitmap().into(target);
+                        Glide.with(getActivity()).load(Constants.BASE_URL + userInfoBean.getHeader()).asBitmap().into(ivHead);
                         ivBg.setBackgroundColor(Color.WHITE);
                     } else {
                         Glide.with(getActivity()).load(R.mipmap.head2).asBitmap().into(ivHead);
@@ -182,12 +182,12 @@ public class MeFragment extends Fragment {
 
     private void initUserinfo() {
         httpRequest.setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
-        httpRequest.sendPostConnection(Constants.base_url + "/api/user/info.do", initUserInfo, Constants.token);
+        httpRequest.sendPostConnection(Constants.BASE_URL + "/api/user/info.do", initUserInfo, Constants.token);
     }
 
     private void getXiangyuMoney() {
         httpRequest.setBodyParams(new String[]{"uid"}, new String[]{String.valueOf(Constants.uid)});
-        httpRequest.sendPostConnection(Constants.base_url + "/api/user/cornAmount.do", XIANGYU_MONEY, Constants.token);
+        httpRequest.sendPostConnection(Constants.BASE_URL + "/api/user/cornAmount.do", XIANGYU_MONEY, Constants.token);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

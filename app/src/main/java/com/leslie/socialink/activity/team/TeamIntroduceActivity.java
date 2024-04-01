@@ -58,7 +58,7 @@ public class TeamIntroduceActivity extends NetWorkActivity {
             }
             tvSave.setClickable(false);
             setBodyParams(new String[]{"id", "introduction"}, new String[]{"" + teamId, "" + content});
-            sendPost(Constants.base_url + "/api/club/base/update.do", upcode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/update.do", upcode, Constants.token);
         });
         tvCancel.setOnClickListener(v -> finish());
     }

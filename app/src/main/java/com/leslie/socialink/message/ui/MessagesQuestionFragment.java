@@ -76,7 +76,7 @@ public class MessagesQuestionFragment extends NetWorkFragment implements XRecycl
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
                 setBodyParams(new String[]{"id"}, new String[]{"" + data.get(delp).getId()});
-                sendPostConnection(Constants.base_url + "/api/user/news/clearNews.do", DelMsg, Constants.token);
+                sendPostConnection(Constants.BASE_URL + "/api/user/news/clearNews.do", DelMsg, Constants.token);
                 deldialog.dismiss();
             }
 
@@ -94,11 +94,11 @@ public class MessagesQuestionFragment extends NetWorkFragment implements XRecycl
 
     private void getData(int pn, int type) {
         if (type == 1) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
-            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", GetCode, Constants.token);
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + 3});
+            sendPostConnection(Constants.BASE_URL + "/api/user/news/pglist.do", GetCode, Constants.token);
         } else if (type == 2) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
-            sendPostConnection(Constants.base_url + "/api/user/news/pglist.do", LoadMore, Constants.token);
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + 3});
+            sendPostConnection(Constants.BASE_URL + "/api/user/news/pglist.do", LoadMore, Constants.token);
         }
     }
 

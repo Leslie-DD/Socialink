@@ -57,11 +57,11 @@ public class TimetableSecondCheckin extends NetWorkActivity {
         yanzheng = (EditText) findViewById(R.id.yanzheng);
         yanzhengtupian = (ImageView) findViewById(R.id.yanzhengtupian);
         if (url == null) {
-            Log.e("shownearnull", "" + Constants.base_url + url);
+            Log.e("shownearnull", "" + Constants.BASE_URL + url);
             yanzhengtupian.setImageResource(R.mipmap.head3);
         } else {
-            Glide.with(context).load(Constants.base_url + url).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(yanzhengtupian);
-            Log.e("shownear", "" + Constants.base_url + url);
+            Glide.with(context).load(Constants.BASE_URL + url).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(yanzhengtupian);
+            Log.e("shownear", "" + Constants.BASE_URL + url);
         }
     }
 

@@ -169,7 +169,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
-            sendPostConnection(Constants.base_url + "/api/ask/base/labelList.do", 101, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/ask/base/labelList.do", 101, Constants.token);
         }
     }
 
@@ -186,7 +186,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
-            sendPostConnection(Constants.base_url + "/api/ask/base/labelList.do", 101, Constants.token);
+            sendPostConnection(Constants.BASE_URL + "/api/ask/base/labelList.do", 101, Constants.token);
         }
     }
 
@@ -196,7 +196,7 @@ public class WwSearchFragment extends NetWorkFragment implements XRecyclerView.L
         this.content = content;
         setBodyParams(new String[]{"pn", "ps", "label"},
                 new String[]{pn + "", ps + "", content});
-        sendPostConnection(Constants.base_url + "/api/ask/base/labelList.do", 100, Constants.token);
+        sendPostConnection(Constants.BASE_URL + "/api/ask/base/labelList.do", 100, Constants.token);
     }
 
     public void setIslabel(boolean islabel) {

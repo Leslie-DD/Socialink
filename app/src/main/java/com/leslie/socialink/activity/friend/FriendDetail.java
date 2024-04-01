@@ -70,7 +70,7 @@ public class FriendDetail extends NetWorkActivity {
         Log.e("得到hisid", hisid + "");
         OkHttpUtils.post(WenConstans.UserInfo)
                 .tag(this)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("id", uid + "")
                 .execute(new StringCallback() {
                     @Override
@@ -123,7 +123,7 @@ public class FriendDetail extends NetWorkActivity {
     private void event() {
         deletefriend.setOnClickListener(v -> OkHttpUtils.post(WenConstans.DeleteFriend)
                 .tag(this)
-                .headers(Constants.Token_Header, Constants.token)
+                .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("user_id", hisid + "")
                 .execute(new StringCallback() {
                     @Override
@@ -234,8 +234,8 @@ public class FriendDetail extends NetWorkActivity {
             Log.e("gerenxinxitouxiang", "touxiang " + touxiang1);
 
             if (touxiang1 != null) {
-                Glide.with(context).load(Constants.base_url + "/info/file/pub.do?fileId=" + touxiang1).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
-                Log.e("showset", "" + Constants.base_url + "/info/file/pub.do?fileId=" + touxiang1);
+                Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=" + touxiang1).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                Log.e("showset", "" + Constants.BASE_URL + "/info/file/pub.do?fileId=" + touxiang1);
             } else {
                 ivHead.setImageResource(R.mipmap.head3);
             }

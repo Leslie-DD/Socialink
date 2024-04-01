@@ -172,7 +172,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
         builder.setPositiveButton("确定", (dialogInterface, i) -> {
             //删除
             setBodyParams(new String[]{"id"}, new String[]{"" + delid});
-            sendPost(Constants.base_url + "/api/club/activity/delcomment.do", delComment, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/activity/delcomment.do", delComment, Constants.token);
             deldialog.dismiss();
         });
         builder.setNegativeButton("取消", (dialogInterface, i) -> deldialog.dismiss());
@@ -182,24 +182,24 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
 
     private void getHeadData() {
         setBodyParams(new String[]{"id"}, new String[]{"" + activityId});
-        sendPost(Constants.base_url + "/api/club/activity/detail.do", getheadCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/club/activity/detail.do", getheadCode, Constants.token);
     }
 
     private void getData(int pn, int type) {
         // type = 1 初始化/刷新  2 加载
         if (type == 1) {
-            setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{"" + activityId, "" + pn, "" + Constants.default_PS});
-            sendPost(Constants.base_url + "/api/club/activity/pgcomment.do", initData, Constants.token);
+            setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{"" + activityId, "" + pn, "" + Constants.DEFAULT_PS});
+            sendPost(Constants.BASE_URL + "/api/club/activity/pgcomment.do", initData, Constants.token);
         } else if (type == 2) {
-            setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{"" + activityId, "" + pn, "" + Constants.default_PS});
-            sendPost(Constants.base_url + "/api/club/activity/pgcomment.do", lodData, Constants.token);
+            setBodyParams(new String[]{"id", "pn", "ps"}, new String[]{"" + activityId, "" + pn, "" + Constants.DEFAULT_PS});
+            sendPost(Constants.BASE_URL + "/api/club/activity/pgcomment.do", lodData, Constants.token);
         }
 
     }
 
     private void setDataToHeadUi(TeamTestBean.ObjBean bean) {
         if (bean != null) {
-            Glide.with(this).load(Constants.base_url + bean.getHeader()).asBitmap().error(R.mipmap.head3).into(ivHead);
+            Glide.with(this).load(Constants.BASE_URL + bean.getHeader()).asBitmap().error(R.mipmap.head3).into(ivHead);
             tvClubName.setText(bean.getClubInfo().getName());
             tvName.setText(bean.getPresentorName());
             tvTime.setText(bean.getTime());
@@ -231,7 +231,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
                 gv.setVisibility(View.VISIBLE);
                 imgs = new ArrayList<>();
                 for (PhotosBean photosBean : bean.getPhotos()) {
-                    imgs.add(Constants.base_url + photosBean.getPhotoId());
+                    imgs.add(Constants.BASE_URL + photosBean.getPhotoId());
                 }
 
                 gv.setNumColumns(1);
@@ -263,11 +263,11 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
                 memberImgs = new ArrayList<>();
                 if (bean.getLikes().size() > 3) {
                     for (int i = 0; i < 3; i++) {
-                        memberImgs.add(Constants.base_url + bean.getLikes().get(i).getHeader());
+                        memberImgs.add(Constants.BASE_URL + bean.getLikes().get(i).getHeader());
                     }
                 } else {
                     for (TeamTestBean.ObjBean.LikesBean bean1 : bean.getLikes()) {
-                        memberImgs.add(Constants.base_url + bean1.getHeader());
+                        memberImgs.add(Constants.BASE_URL + bean1.getHeader());
                     }
                 }
                 if (memberImgs.size() == 1) {
@@ -316,7 +316,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
         });
         ll_del.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}, new String[]{"" + bean.getId()});
-            sendPost(Constants.base_url + "/api/club/activity/delete.do", DelCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/activity/delete.do", DelCode, Constants.token);
         });
         ll_cacel.setOnClickListener(v -> pop.dismiss());
 
@@ -386,7 +386,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
                 return;
             }
             setBodyParams(new String[]{"activityId", "content"}, new String[]{"" + activityId, "" + comment});
-            sendPost(Constants.base_url + "/api/club/activity/comment.do", sendComment, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/activity/comment.do", sendComment, Constants.token);
         });
         etComment.setOnClickListener(v -> {
             if (isEmojiShow) {
@@ -409,7 +409,7 @@ public class ActivityDateilActivity extends NetWorkActivity implements XRecycler
         });
         tvBm.setOnClickListener(v -> {
             setBodyParams(new String[]{"id", "op"}, new String[]{"" + bean.getId(), "" + 1});
-            sendPost(Constants.base_url + "/api/club/activity/apply.do", ApplyCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/activity/apply.do", ApplyCode, Constants.token);
         });
         //emoji 点击
         gvEmoji.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -102,11 +102,11 @@ public class MessagesChatFragment extends NetWorkFragment implements XRecyclerVi
     //type=2 加载
     private void getData(int pn, int type) {
         if (type == 1) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
-            sendPostConnection(Constants.base_url + "/api/chat/base/myChatBox.do", GetCode, Constants.token);
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + 3});
+            sendPostConnection(Constants.BASE_URL + "/api/chat/base/myChatBox.do", GetCode, Constants.token);
         } else if (type == 2) {
-            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.default_PS, "" + 3});
-            sendPostConnection(Constants.base_url + "/api/chat/base/myChatBox.do", LoadMore, Constants.token);
+            setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + 3});
+            sendPostConnection(Constants.BASE_URL + "/api/chat/base/myChatBox.do", LoadMore, Constants.token);
         }
 
     }

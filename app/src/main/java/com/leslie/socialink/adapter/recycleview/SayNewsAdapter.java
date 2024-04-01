@@ -121,7 +121,7 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
             final MsgSayBean.SayBean sayBean = data.get(position);
             tvName.setText(sayBean.getNickName());
             if (!TextUtils.isEmpty(sayBean.getHeader())) {
-                Glide.with(context).load(Constants.base_url + sayBean.getHeader()).asBitmap().into(ivHead);
+                Glide.with(context).load(Constants.BASE_URL + sayBean.getHeader()).asBitmap().into(ivHead);
             } else {
                 ivHead.setImageResource(R.mipmap.head3);
             }
@@ -165,9 +165,9 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     if (type == 1) {
-                        OkHttpUtils.post(Constants.base_url + "/api/club/speak/detail.do")
+                        OkHttpUtils.post(Constants.BASE_URL + "/api/club/speak/detail.do")
                                 .tag(context)
-                                .headers(Constants.Token_Header, Constants.token)
+                                .headers(Constants.TOKEN_HEADER, Constants.token)
                                 .params("id", "" + data.get(position).getBizId())
                                 .execute(new StringCallback() {
                                     @Override
@@ -197,9 +197,9 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                                 });
 
                     } else if (type == 2) {
-                        OkHttpUtils.post(Constants.base_url + "/api/ask/base/askInfo.do")
+                        OkHttpUtils.post(Constants.BASE_URL + "/api/ask/base/askInfo.do")
                                 .tag(context)
-                                .headers(Constants.Token_Header, Constants.token)
+                                .headers(Constants.TOKEN_HEADER, Constants.token)
                                 .params("askid", "" + data.get(position).getBizId())
                                 .execute(new StringCallback() {
                                     @Override
@@ -233,9 +233,9 @@ public class SayNewsAdapter extends RecyclerView.Adapter {
                         //直接跳转
                         context.startActivity(new Intent(context, MessageActivity.class).putExtra("hisid", sayBean.getObjectId()).putExtra("nickname", sayBean.getObjectNickname()));
                     } else if (type == 4) {
-                        OkHttpUtils.post(Constants.base_url + "/api/ask/base/askInfo.do")
+                        OkHttpUtils.post(Constants.BASE_URL + "/api/ask/base/askInfo.do")
                                 .tag(context)
-                                .headers(Constants.Token_Header, Constants.token)
+                                .headers(Constants.TOKEN_HEADER, Constants.token)
                                 .params("askid", "" + data.get(position).getBizId())
                                 .execute(new StringCallback() {
                                     @Override

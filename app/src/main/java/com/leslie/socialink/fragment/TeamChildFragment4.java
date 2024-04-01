@@ -54,21 +54,21 @@ public class TeamChildFragment4 extends BaseTeamPagerFragment {
         switch (type) {
             case 0:
                 setBodyParams(new String[]{"type", "pn", "ps"},
-                        new String[]{"" + 4, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
+                        new String[]{"" + 4, "" + pn, "" + Constants.DEFAULT_PS});
+                sendPostConnection(Constants.BASE_URL + "/api/club/base/pglist.do",
                         GETDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"},
-                        new String[]{"" + 4, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
+                        new String[]{"" + 4, "" + pn, "" + Constants.DEFAULT_PS});
+                sendPostConnection(Constants.BASE_URL + "/api/club/base/pglist.do",
                         REFDATA, SharedPreferencesHelp.getString("token", ""));
 
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"},
-                        new String[]{"" + 4, "" + pn, "" + Constants.default_PS});
-                sendPostConnection(Constants.base_url + "/api/club/base/pglist.do",
+                        new String[]{"" + 4, "" + pn, "" + Constants.DEFAULT_PS});
+                sendPostConnection(Constants.BASE_URL + "/api/club/base/pglist.do",
                         LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }

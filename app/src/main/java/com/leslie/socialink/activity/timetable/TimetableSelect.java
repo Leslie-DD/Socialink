@@ -102,7 +102,7 @@ public class TimetableSelect extends NetWorkActivity {
                 today_1 = today.getText().toString();
                 OkHttpUtils.post(WenConstans.ZhongnanGetTimetable)
                         .tag(this)
-                        .headers(Constants.Token_Header, Constants.token)
+                        .headers(Constants.TOKEN_HEADER, Constants.token)
                         .params("studentId", studentId + "")
                         .params("pwd", "" + pwd)
                         .params("yearFirst", "" + year_1)

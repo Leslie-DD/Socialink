@@ -350,7 +350,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
                 if (TextUtils.isEmpty(secondhandgoodBean.header)) {
                     ivHead.setImageResource(R.mipmap.head3);
                 } else {
-                    Glide.with(context).load(Constants.base_url + secondhandgoodBean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
+                    Glide.with(context).load(Constants.BASE_URL + secondhandgoodBean.header).asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 }
             } else {
                 tvName.setText("匿名用户");

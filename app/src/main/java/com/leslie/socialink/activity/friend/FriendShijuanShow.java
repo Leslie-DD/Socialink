@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -94,7 +93,7 @@ public class FriendShijuanShow extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"user_id"}, new String[]{"" + id});
-        sendPost(Constants.base_url + "/api/social/getquest.do", 100, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/social/getquest.do", 100, Constants.token);
     }
 
 

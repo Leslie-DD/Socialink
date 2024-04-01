@@ -211,7 +211,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
 
     private void getLableData() {
         setBodyParams(new String[]{"type"}, new String[]{"label"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
     private void event() {
@@ -242,10 +242,10 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
 //            } else {
             setBodyParams(new String[]{"type", "pn", "ps", "keyword"}, new String[]{"1", pn + "", ps + "", s});
 //            }
-            sendPost(Constants.base_url + "/api/club/base/pglist.do", 100, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", 100, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"}, new String[]{pn + "", ps + "", content});
-            sendPost(Constants.base_url + "/api/club/base/labelList.do", 100, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/labelList.do", 100, Constants.token);
         }
     }
 
@@ -256,10 +256,10 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
             } else {
                 setBodyParams(new String[]{"type", "pn", "ps", "keyword"}, new String[]{"2", pn + "", ps + "", content});
             }
-            sendPost(Constants.base_url + "/api/club/base/pglist.do", 101, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", 101, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"}, new String[]{pn + "", ps + "", content});
-            sendPost(Constants.base_url + "/api/club/base/labelList.do", 101, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/labelList.do", 101, Constants.token);
         }
     }
 

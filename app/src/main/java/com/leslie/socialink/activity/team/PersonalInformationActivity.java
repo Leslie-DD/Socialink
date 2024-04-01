@@ -212,7 +212,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
 
         //getUserInfo
         setBodyParams(new String[]{"uid"}, new String[]{"" + uid});
-        sendPost(Constants.base_url + "/api/user/info.do", getUserCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/user/info.do", getUserCode, Constants.token);
         setBodyParams(new String[]{"concerned"}, new String[]{"" + uid});
         sendPost(WenConstans.CheckAttention, CHECKATTENTION, Constants.token);
         setBodyParams(new String[]{"black"}, new String[]{"" + uid});
@@ -269,7 +269,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
                 setBodyParams(new String[]{"clubId", "uid"}, new String[]{"" + teamid, "" + uid});
-                sendPost(Constants.base_url + "/api/club/base/expel.do", delCode, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/base/expel.do", delCode, Constants.token);
                 deldialog.dismiss();
             }
 
@@ -327,7 +327,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
                     return;
                 }
                 setBodyParams(new String[]{"friendId", "aliasName"}, new String[]{"" + userInfoBean.getId(), mark});
-                sendPost(Constants.base_url + "/api/user/updateRemark.do", changeName, SharedPreferencesHelp.getString("token", ""));
+                sendPost(Constants.BASE_URL + "/api/user/updateRemark.do", changeName, SharedPreferencesHelp.getString("token", ""));
                 pop.dismiss();
                 //onItemEditorNameListener.ItemEditor(position,mark);
             }
@@ -416,16 +416,16 @@ public class PersonalInformationActivity extends NetWorkActivity implements
     private void getTeamData(int pn, int type) {
         switch (type) {
             case 0:
-                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 3, "" + pn, "" + Constants.default_PS, "" + uid});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", GETDATA_T, Constants.token);
+                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 3, "" + pn, "" + Constants.DEFAULT_PS, "" + uid});
+                sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", GETDATA_T, Constants.token);
                 break;
             case 1:
-                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 3, "" + pn, "" + Constants.default_PS, "" + uid});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", REFDATA_T, Constants.token);
+                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 3, "" + pn, "" + Constants.DEFAULT_PS, "" + uid});
+                sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", REFDATA_T, Constants.token);
                 break;
             case 2:
-                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 3, "" + pn, "" + Constants.default_PS, "" + uid});
-                sendPost(Constants.base_url + "/api/club/base/pglist.do", LOADATA_T, Constants.token);
+                setBodyParams(new String[]{"type", "pn", "ps", "uid"}, new String[]{"" + 3, "" + pn, "" + Constants.DEFAULT_PS, "" + uid});
+                sendPost(Constants.BASE_URL + "/api/club/base/pglist.do", LOADATA_T, Constants.token);
                 break;
         }
     }
@@ -440,29 +440,29 @@ public class PersonalInformationActivity extends NetWorkActivity implements
         switch (quType) {
             case 0:
                 if (type == 1) {
-                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pnQ, "" + Constants.default_PS, "" + type});
-                    sendPost(Constants.base_url + "/api/ask/base/myPglist.do", GETDATA_Q, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pnQ, "" + Constants.DEFAULT_PS, "" + type});
+                    sendPost(Constants.BASE_URL + "/api/ask/base/myPglist.do", GETDATA_Q, Constants.token);
                 } else if (type == 2) {
-                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + pnQ, "" + Constants.default_PS, "" + type, "" + uid});
-                    sendPost(Constants.base_url + "/api/ask/base/myPglist.do", GETDATA_Q, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + pnQ, "" + Constants.DEFAULT_PS, "" + type, "" + uid});
+                    sendPost(Constants.BASE_URL + "/api/ask/base/myPglist.do", GETDATA_Q, Constants.token);
                 }
                 break;
             case 1:
                 if (type == 1) {
-                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pnQ, "" + Constants.default_PS, "" + type});
-                    sendPost(Constants.base_url + "/api/ask/base/myPglist.do", REFDATA_Q, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pnQ, "" + Constants.DEFAULT_PS, "" + type});
+                    sendPost(Constants.BASE_URL + "/api/ask/base/myPglist.do", REFDATA_Q, Constants.token);
                 } else if (type == 2) {
-                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + pnQ, "" + Constants.default_PS, "" + type, "" + uid});
-                    sendPost(Constants.base_url + "/api/ask/base/myPglist.do", REFDATA_Q, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + pnQ, "" + Constants.DEFAULT_PS, "" + type, "" + uid});
+                    sendPost(Constants.BASE_URL + "/api/ask/base/myPglist.do", REFDATA_Q, Constants.token);
                 }
                 break;
             case 2:
                 if (type == 1) {
-                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pnQ, "" + Constants.default_PS, "" + type});
-                    sendPost(Constants.base_url + "/api/ask/base/myPglist.do", LOADATA_Q, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pnQ, "" + Constants.DEFAULT_PS, "" + type});
+                    sendPost(Constants.BASE_URL + "/api/ask/base/myPglist.do", LOADATA_Q, Constants.token);
                 } else if (type == 2) {
-                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + pnQ, "" + Constants.default_PS, "" + type, "" + uid});
-                    sendPost(Constants.base_url + "/api/ask/base/myPglist.do", LOADATA_Q, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + pnQ, "" + Constants.DEFAULT_PS, "" + type, "" + uid});
+                    sendPost(Constants.BASE_URL + "/api/ask/base/myPglist.do", LOADATA_Q, Constants.token);
                 }
                 break;
         }
@@ -479,29 +479,29 @@ public class PersonalInformationActivity extends NetWorkActivity implements
         switch (goodType) {
             case 0:
                 if (type == 1) {
-                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + png, "" + Constants.default_PS, "" + type});
-                    sendPost(Constants.base_url + "/api/goods/base/myPglist.do", GETDATA_G, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + png, "" + Constants.DEFAULT_PS, "" + type});
+                    sendPost(Constants.BASE_URL + "/api/goods/base/myPglist.do", GETDATA_G, Constants.token);
                 } else if (type == 2) {
-                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + png, "" + Constants.default_PS, "" + type, "" + uid});
-                    sendPost(Constants.base_url + "/api/goods/base/myPglist.do", GETDATA_G, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + png, "" + Constants.DEFAULT_PS, "" + type, "" + uid});
+                    sendPost(Constants.BASE_URL + "/api/goods/base/myPglist.do", GETDATA_G, Constants.token);
                 }
                 break;
             case 1:
                 if (type == 1) {
-                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + png, "" + Constants.default_PS, "" + type});
-                    sendPost(Constants.base_url + "/api/goods/base/myPglist.do", REFDATA_G, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + png, "" + Constants.DEFAULT_PS, "" + type});
+                    sendPost(Constants.BASE_URL + "/api/goods/base/myPglist.do", REFDATA_G, Constants.token);
                 } else if (type == 2) {
-                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + png, "" + Constants.default_PS, "" + type, "" + uid});
-                    sendPost(Constants.base_url + "/api/goods/base/myPglist.do", REFDATA_G, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + png, "" + Constants.DEFAULT_PS, "" + type, "" + uid});
+                    sendPost(Constants.BASE_URL + "/api/goods/base/myPglist.do", REFDATA_G, Constants.token);
                 }
                 break;
             case 2:
                 if (type == 1) {
-                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + png, "" + Constants.default_PS, "" + type});
-                    sendPost(Constants.base_url + "/api/goods/base/myPglist.do", LOADATA_G, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + png, "" + Constants.DEFAULT_PS, "" + type});
+                    sendPost(Constants.BASE_URL + "/api/goods/base/myPglist.do", LOADATA_G, Constants.token);
                 } else if (type == 2) {
-                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + png, "" + Constants.default_PS, "" + type, "" + uid});
-                    sendPost(Constants.base_url + "/api/goods/base/myPglist.do", LOADATA_G, Constants.token);
+                    setBodyParams(new String[]{"pn", "ps", "type", "uid"}, new String[]{"" + png, "" + Constants.DEFAULT_PS, "" + type, "" + uid});
+                    sendPost(Constants.BASE_URL + "/api/goods/base/myPglist.do", LOADATA_G, Constants.token);
                 }
                 break;
         }
@@ -539,10 +539,10 @@ public class PersonalInformationActivity extends NetWorkActivity implements
         tvSet.setOnClickListener(v -> {
             if (role == 2) { //取消管理员
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 2});
-                sendPost(Constants.base_url + "/api/club/member/setAdmin.do", cancelAdministrator, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/member/setAdmin.do", cancelAdministrator, Constants.token);
             } else if (role == 3) { //设置管理员
                 setBodyParams(new String[]{"id", "op"}, new String[]{"" + id, "" + 1});
-                sendPost(Constants.base_url + "/api/club/member/setAdmin.do", setAdministrator, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/club/member/setAdmin.do", setAdministrator, Constants.token);
             }
         });
         ivMore.setOnClickListener(v -> showSpvPop());
@@ -758,7 +758,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
                                 }
 
                                 if (userInfoBean.getHeader() != null && !userInfoBean.getHeader().isEmpty()) {
-                                    Glide.with(this).load(Constants.base_url + userInfoBean.getHeader()).asBitmap().error(R.mipmap.head3).into(ivHead);
+                                    Glide.with(this).load(Constants.BASE_URL + userInfoBean.getHeader()).asBitmap().error(R.mipmap.head3).into(ivHead);
                                 } else {
                                     Glide.with(this).load(R.mipmap.head3).asBitmap().error(R.mipmap.head3).into(ivHead);
                                 }
@@ -1004,7 +1004,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
             case changeName:
                 if (result.optInt("code") == 0) {
                     setBodyParams(new String[]{"uid"}, new String[]{"" + uid});
-                    sendPost(Constants.base_url + "/api/user/info.do", getUserCode, Constants.token);
+                    sendPost(Constants.BASE_URL + "/api/user/info.do", getUserCode, Constants.token);
                     EventBus.getDefault().post(new RefMembers());
                 }
                 Utils.toastShort(this, result.optString("msg"));

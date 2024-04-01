@@ -78,16 +78,16 @@ public class DefaultProblemActivity extends NetWorkActivity {
     }
 
     private void initIsQ() {
-        sendPost(Constants.base_url + "/api/user/myQuestion.do", myQuestion, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/user/myQuestion.do", myQuestion, Constants.token);
     }
 
     private void getQ() {
         setBodyParams(new String[]{"type"}, new String[]{"question1"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", getCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", getCode, Constants.token);
         setBodyParams(new String[]{"type"}, new String[]{"question2"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", getCode2, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", getCode2, Constants.token);
         setBodyParams(new String[]{"type"}, new String[]{"question3"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", getCode3, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", getCode3, Constants.token);
     }
 
     private void event() {
@@ -131,7 +131,7 @@ public class DefaultProblemActivity extends NetWorkActivity {
                 array.put(obj3);
                 setBodyParams(new String[]{"questions"}
                         , new String[]{array.toString() + ""});
-                sendPost(Constants.base_url + "/api/user/question.do", 66, Constants.token);
+                sendPost(Constants.BASE_URL + "/api/user/question.do", 66, Constants.token);
             } catch (Exception e) {
 
             }

@@ -318,7 +318,7 @@ public class PublishVoteActivity extends NetWorkActivity {
             String content = new Gson().toJson(voteBeans);
             setBodyParams(new String[]{"clubId", "name", "introduction", "deadline", "content"},
                     new String[]{"" + Constants.clubId, title, introduction, time, content});
-            sendPost(Constants.base_url + "/api/club/vote/save.do", postCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/vote/save.do", postCode, Constants.token);
 
         });
         llAddVote.setOnClickListener(v -> showPop());

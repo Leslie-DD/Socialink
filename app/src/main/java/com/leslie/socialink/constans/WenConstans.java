@@ -4,7 +4,7 @@ package com.leslie.socialink.constans;
 import com.leslie.socialink.network.Constants;
 
 public class WenConstans {
-    public static String BaseUrl = Constants.base_url;
+    public static String BaseUrl = Constants.BASE_URL;
     //    public static String BaseUrl="http://rxcpe2.natappfree.cc";
     public static String UserInfo = BaseUrl + "/api/user/info.do";
     public static String SendQuestion = BaseUrl + "/api/ask/base/save.do";

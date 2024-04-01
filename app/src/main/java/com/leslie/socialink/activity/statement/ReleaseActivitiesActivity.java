@@ -133,7 +133,7 @@ public class ReleaseActivitiesActivity extends NetWorkActivity {
                 if (bean.getPhotos() != null && bean.getPhotos().size() > 0) {
                     fristfiles = bean.getPhotos().size();
                     for (int i = 0; i < bean.getPhotos().size(); i++) {
-                        strings.add(strings.size() - 1, Constants.base_url + bean.getPhotos().get(i).getPhotoId());
+                        strings.add(strings.size() - 1, Constants.BASE_URL + bean.getPhotos().get(i).getPhotoId());
                         gwPictureAdapter.setData(strings);
                         filesid[i] = bean.getPhotos().get(i).getId();
 
@@ -258,9 +258,9 @@ public class ReleaseActivitiesActivity extends NetWorkActivity {
             }
             if (type == 1) {
                 tvSave.setClickable(false);
-                OkHttpUtils.post(Constants.base_url + "/api/club/activity/save.do")
+                OkHttpUtils.post(Constants.BASE_URL + "/api/club/activity/save.do")
                         .tag(this)
-                        .headers(Constants.Token_Header, Constants.token)
+                        .headers(Constants.TOKEN_HEADER, Constants.token)
                         .params("clubId", "" + Constants.clubId)
                         .params("title", "" + title)
                         .params("content", "" + content)
@@ -309,9 +309,9 @@ public class ReleaseActivitiesActivity extends NetWorkActivity {
                     tvSave.setClickable(false);
                     Log.e("DDQ", "没有图片删除");
                     //修改保存
-                    OkHttpUtils.post(Constants.base_url + "/api/club/activity/update.do")
+                    OkHttpUtils.post(Constants.BASE_URL + "/api/club/activity/update.do")
                             .tag(this)
-                            .headers(Constants.Token_Header, Constants.token)
+                            .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("clubId", "" + Constants.clubId)
                             .params("title", "" + title)
                             .params("content", "" + content)
@@ -362,9 +362,9 @@ public class ReleaseActivitiesActivity extends NetWorkActivity {
                 } else {
                     //修改保存
                     tvSave.setClickable(false);
-                    OkHttpUtils.post(Constants.base_url + "/api/club/activity/update.do")
+                    OkHttpUtils.post(Constants.BASE_URL + "/api/club/activity/update.do")
                             .tag(this)
-                            .headers(Constants.Token_Header, Constants.token)
+                            .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("clubId", "" + Constants.clubId)
                             .params("title", "" + title)
                             .params("content", "" + content)

@@ -97,13 +97,13 @@ public class MessageFragment extends Fragment {
             //删除
             if (currentPosition == 0) {
                 httpRequest.setBodyParams(new String[]{"type"}, new String[]{"" + 2});
-                httpRequest.sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", DELETE_ALL_MESSAGES, Constants.token);
+                httpRequest.sendPostConnection(Constants.BASE_URL + "/api/user/news/clearBatchNews.do", DELETE_ALL_MESSAGES, Constants.token);
             } else if (currentPosition == 1) {
                 httpRequest.setBodyParams(new String[]{"type"}, new String[]{"" + 1});
-                httpRequest.sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", DELETE_ALL_MESSAGES, Constants.token);
+                httpRequest.sendPostConnection(Constants.BASE_URL + "/api/user/news/clearBatchNews.do", DELETE_ALL_MESSAGES, Constants.token);
             } else if (currentPosition == 2) {
                 httpRequest.setBodyParams(new String[]{"type"}, new String[]{"" + 3});
-                httpRequest.sendPostConnection(Constants.base_url + "/api/user/news/clearBatchNews.do", DELETE_ALL_MESSAGES, Constants.token);
+                httpRequest.sendPostConnection(Constants.BASE_URL + "/api/user/news/clearBatchNews.do", DELETE_ALL_MESSAGES, Constants.token);
             }
             deleteDialog.dismiss();
         });

@@ -217,7 +217,7 @@ public class SendQuestionActivity extends NetWorkActivity {
             tvSave.setClickable(false);
             OkHttpUtils.post(WenConstans.SendQuestion)
                     .tag(this)
-                    .headers(Constants.Token_Header, Constants.token)
+                    .headers(Constants.TOKEN_HEADER, Constants.token)
                     .params("name", title + "")
                     .params("content", content + "")
                     .params("labels", biaoqain + "")
@@ -318,7 +318,7 @@ public class SendQuestionActivity extends NetWorkActivity {
 
     private void getLabel() {
         setBodyParams(new String[]{"type"}, new String[]{"label"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", 10086, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", 10086, Constants.token);
     }
 
     private void initPop() {

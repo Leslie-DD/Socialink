@@ -94,7 +94,7 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter {
             //nickname.setText(bean.getNickname());
             nickname.setText(bean.getBlacknickname());
             if (!TextUtils.isEmpty(bean.getHeader())) {
-                Glide.with(context).load(Constants.base_url + bean.getHeader()).asBitmap().into(header);
+                Glide.with(context).load(Constants.BASE_URL + bean.getHeader()).asBitmap().into(header);
             } else {
                 header.setImageResource(R.mipmap.head3);
             }
@@ -105,7 +105,7 @@ public class PullTheBlackAdapter extends RecyclerView.Adapter {
 
                     OkHttpUtils.post(WenConstans.DeletePullTheBlack)
                             .tag(context)
-                            .headers(Constants.Token_Header, Constants.token)
+                            .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("black", "" + datas.get(position).getBlackId())
                             .execute(new StringCallback() {
                                 @Override

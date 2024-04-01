@@ -86,7 +86,7 @@ public class AddTeamActivity extends NetWorkActivity {
         flowLayout = (FlowLayout) findViewById(R.id.flow_layout);
         //获取标签
         setBodyParams(new String[]{"type"}, new String[]{"label"});
-        sendPost(Constants.base_url + "/api/pub/category/list.do", getLabelCode, Constants.token);
+        sendPost(Constants.BASE_URL + "/api/pub/category/list.do", getLabelCode, Constants.token);
 
     }
 
@@ -157,7 +157,7 @@ public class AddTeamActivity extends NetWorkActivity {
             btSave.setClickable(false);
             setFileBodyParams(new String[]{"file"}, new File[]{fileList.get(0)});
             setBodyParams(new String[]{"name", "labels"}, new String[]{name, label});
-            sendPost(Constants.base_url + "/api/club/base/save.do", addCode, Constants.token);
+            sendPost(Constants.BASE_URL + "/api/club/base/save.do", addCode, Constants.token);
         });
         ivHead.setOnClickListener(v -> showPop());
 

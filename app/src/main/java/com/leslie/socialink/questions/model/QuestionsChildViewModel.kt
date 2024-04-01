@@ -30,8 +30,14 @@ class QuestionsChildViewModel : ViewModel() {
 
     private var updateCount = 0
 
-    init {
-        fetchData(refresh = true)
+    private var initialized = false
+
+    fun initData(type: String) {
+        if (initialized) {
+            return
+        }
+        fetchData(refresh = true, type = type)
+        initialized = true
     }
 
     fun fetchData(

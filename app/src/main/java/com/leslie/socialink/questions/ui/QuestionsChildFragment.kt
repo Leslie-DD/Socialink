@@ -56,7 +56,7 @@ class QuestionsChildFragment : Fragment(), IListFragment {
             viewModel.like(position)
         }
         initCollect()
-        viewModel.fetchData(refresh = true, type = type)
+        viewModel.initData(type = type)
         return view
     }
 

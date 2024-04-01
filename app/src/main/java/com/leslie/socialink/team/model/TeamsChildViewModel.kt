@@ -21,9 +21,15 @@ class TeamsChildViewModel : ViewModel() {
     private var pn = 0
     private var totalPage = 0
 
-//    init {
-//        fetchData(refresh = true)
-//    }
+    private var initialized = false
+
+    fun initData(type: String) {
+        if (initialized) {
+            return
+        }
+        fetchData(refresh = true, type = type)
+        initialized = true
+    }
 
     fun fetchData(refresh: Boolean = false, type: String = "1") = viewModelScope.launch(Dispatchers.IO) {
         Log.w(TAG, "(fetchData) refresh ? $refresh, pn = $pn, totalPage = $totalPage")

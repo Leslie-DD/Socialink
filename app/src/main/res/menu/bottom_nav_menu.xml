@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/bottom_nav_icon_home"
         android:title="@string/menu_home" />
 
     <item
         android:id="@+id/navigation_team"
-        android:icon="@drawable/team"
+        android:icon="@drawable/bottom_nav_icon_team"
         android:title="@string/menu_team" />
 
     <item
         android:id="@+id/navigation_question"
-        android:icon="@drawable/question"
+        android:icon="@drawable/bottom_nav_icon_question"
         android:title="@string/menu_ask" />
 
 <!--    TODO: set red dot to notify-->
     <item
         android:id="@+id/navigation_message"
-        android:icon="@drawable/message"
+        android:icon="@drawable/bottom_nav_icon_message"
         android:title="@string/menu_message" />
 
     <item
         android:id="@+id/navigation_mine"
-        android:icon="@drawable/mine"
+        android:icon="@drawable/bottom_nav_icon_mine"
         android:title="@string/menu_mine" />
 </menu>

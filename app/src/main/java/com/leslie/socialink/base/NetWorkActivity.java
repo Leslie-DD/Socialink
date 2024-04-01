@@ -10,7 +10,6 @@ import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.SharedPreferencesHelp;
 import com.leslie.socialink.view.CustomDialog;
-import com.leslie.socialink.view.CustomProgressDialog;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.lzy.okhttputils.request.BaseRequest;
@@ -35,7 +34,6 @@ import okhttp3.Response;
 public abstract class NetWorkActivity extends BaseActivity {
     private static final String TAG = "[NetWorkActivity]";
 
-    private CustomProgressDialog progressDialog;
     protected NetWorkActivity context;
     private Vector<Integer> vector;
 
@@ -57,12 +55,6 @@ public abstract class NetWorkActivity extends BaseActivity {
         Constants.token = SharedPreferencesHelp.getString("token", "");
         WenConstans.token = SharedPreferencesHelp.getString("token", "");
         Constants.userName = SharedPreferencesHelp.getString("user", "18274962484");
-        try {
-            progressDialog = new CustomProgressDialog(this);
-            progressDialog.setMessage("载入中...");
-        } catch (Exception e) {
-            Log.e(TAG, "progressDialog error: " + e.getMessage());
-        }
 
         if (vector != null) {
             vector = new Vector<>();
@@ -158,13 +150,6 @@ public abstract class NetWorkActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (progressDialog != null) {
-            if (progressDialog.isShowing()) {
-                progressDialog.dismiss();
-            }
-            progressDialog.cancel();
-            progressDialog = null;
-        }
         if (dialog != null) {
             if (dialog.isShowing()) {
                 dialog.dismiss();

@@ -13,7 +13,8 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.team.TeamDetailActivity;
 import com.leslie.socialink.bean.SearchTeamBean;
-import com.leslie.socialink.constans.WenConstans;
+
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 
 import java.util.ArrayList;
@@ -82,7 +83,7 @@ public class SearchTeamAdapter extends RecyclerView.Adapter {
         public void setData(final int position) {
             SearchTeamBean bean = data.get(position);
             if (bean != null) {
-                Glide.with(context).load(WenConstans.BaseUrl + bean.logoImage)
+                Glide.with(context).load(Constants.BASE_URL + bean.logoImage)
                         .asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 tvName.setText(bean.name + "");
                 tvTitle.setText(bean.introduction + "");

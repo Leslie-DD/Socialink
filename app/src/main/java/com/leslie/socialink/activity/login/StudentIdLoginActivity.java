@@ -23,7 +23,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.SchoolBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.launcher.MainActivity;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
@@ -325,7 +325,7 @@ public class StudentIdLoginActivity extends NetWorkActivity {
                 } else {
                     viewChanged();
                     Animation animation = AnimationUtils.loadAnimation(this, R.anim.bigger);
-                    Uri uri = Uri.parse(WenConstans.BaseUrl + url);
+                    Uri uri = Uri.parse(Constants.BASE_URL + url);
                     DraweeController controller = Fresco.newDraweeControllerBuilder()
                             .setUri(uri)
                             //动画支持，

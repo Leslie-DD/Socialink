@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.team.PersonalInformationActivity;
 import com.leslie.socialink.bean.AttentionBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -99,7 +99,7 @@ public class AttentionAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
 
-                    OkHttpUtils.post(WenConstans.DelecteAttention)
+                    OkHttpUtils.post(Constants.DELETE_ATTENTION)
                             .tag(context)
                             .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("concerned", "" + data.get(position).getConcerned())

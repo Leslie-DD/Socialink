@@ -19,7 +19,7 @@ import com.leslie.socialink.adapter.recycleview.TeamAndWenwenAdapter;
 import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
 import com.leslie.socialink.utils.Utils;
@@ -66,7 +66,7 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
 
     private void getData(int where) {
         setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{pn + "", ps + "", "1"});
-        sendPostConnection(WenConstans.MySaves, where, Constants.token);
+        sendPostConnection(Constants.MY_FAVORITE, where, Constants.token);
     }
 
     @Override
@@ -192,7 +192,7 @@ public class CollectTeamFragment extends NetWorkFragment implements XRecyclerVie
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-        sendPostConnection(WenConstans.WwLike, 1000, Constants.token);
+        sendPostConnection(Constants.QUESTION_LIKES, 1000, Constants.token);
     }
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")

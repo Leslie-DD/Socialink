@@ -14,7 +14,8 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.ZcBean;
-import com.leslie.socialink.constans.WenConstans;
+import com.leslie.socialink.network.Constants;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class ZcWwAdapter extends RecyclerView.Adapter {
             ZcBean bean = data.get(position);
             if (bean != null) {
                 tvTitle.setText(data.get(position).title + "");
-                Glide.with(context).load(WenConstans.BaseUrl + bean.coverImage).asBitmap().fitCenter()
+                Glide.with(context).load(Constants.BASE_URL + bean.coverImage).asBitmap().fitCenter()
                         .placeholder(R.mipmap.mrtp).into(ivImg);
                 tvTime.setText(bean.time + "");
                 tvName.setText(bean.presentorName + "");

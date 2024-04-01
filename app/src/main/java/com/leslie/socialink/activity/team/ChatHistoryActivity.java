@@ -18,7 +18,7 @@ import com.leslie.socialink.adapter.recycleview.MessageAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.MessageBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.zkk.view.rulerview.RulerView;
@@ -210,7 +210,7 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
                 historysearch.setImageResource(R.mipmap.historysearching);
                 tv_register_info_height_value.setTextColor(Color.parseColor("#ababab"));
                 setBodyParams(new String[]{"receiver", "pn", "ps", "content"}, new String[]{"" + hisid, "" + 1, "" + ps, message});
-                sendPost(WenConstans.SearchMessage, refresh, Constants.token);
+                sendPost(Constants.SEARCH_MESSAGE, refresh, Constants.token);
             }
         });
 
@@ -237,16 +237,16 @@ public class ChatHistoryActivity extends NetWorkActivity implements XRecyclerVie
     private void getData(int hisid, int pn, int type) {
         if (type == 1) {
             setBodyParams(new String[]{"receiver", "pn", "ps", "time"}, new String[]{"" + hisid, "" + pn, "" + ps, tv_register_info_height_value.getText().toString()});
-            sendPost(WenConstans.SearchMessage, refresh, Constants.token);
+            sendPost(Constants.SEARCH_MESSAGE, refresh, Constants.token);
         } else if (type == 2) {
             setBodyParams(new String[]{"receiver", "pn", "ps", "time"}, new String[]{"" + hisid, "" + pn, "" + ps, tv_register_info_height_value.getText().toString()});
-            sendPost(WenConstans.SearchMessage, loadmore, Constants.token);
+            sendPost(Constants.SEARCH_MESSAGE, loadmore, Constants.token);
         } else if (type == 3) {
             setBodyParams(new String[]{"receiver", "pn", "ps", "content"}, new String[]{"" + hisid, "" + pn, "" + ps, message});
-            sendPost(WenConstans.SearchMessage, refresh, Constants.token);
+            sendPost(Constants.SEARCH_MESSAGE, refresh, Constants.token);
         } else {
             setBodyParams(new String[]{"receiver", "pn", "ps", "content"}, new String[]{"" + hisid, "" + pn, "" + ps, message});
-            sendPost(WenConstans.SearchMessage, loadmore, Constants.token);
+            sendPost(Constants.SEARCH_MESSAGE, loadmore, Constants.token);
         }
 
     }

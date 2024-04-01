@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 
 import org.json.JSONException;
@@ -69,7 +69,7 @@ public class ClassifationActivity extends NetWorkActivity {
     }
 
     private void getData() {
-        sendPost(WenConstans.SecondhandClassify, 102, Constants.token);
+        sendPost(Constants.SECOND_GOOD_CLASSIFICATIONS, 102, Constants.token);
     }
 
     @Override

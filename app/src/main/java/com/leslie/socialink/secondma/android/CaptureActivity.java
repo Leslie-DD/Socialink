@@ -1,5 +1,7 @@
 package com.leslie.socialink.secondma.android;
 
+import static com.leslie.socialink.secondma.decode.DecodeHandler.INTENT_ZXING_CONFIG;
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.FeatureInfo;
@@ -24,7 +26,6 @@ import com.leslie.socialink.base.BaseActivity;
 import com.leslie.socialink.entity.ScanResultEvent;
 import com.leslie.socialink.secondma.bean.ZxingConfig;
 import com.leslie.socialink.secondma.camera.CameraManager;
-import com.leslie.socialink.secondma.common.Constant;
 import com.leslie.socialink.secondma.decode.DecodeImgCallback;
 import com.leslie.socialink.secondma.decode.DecodeImgThread;
 import com.leslie.socialink.secondma.decode.ImageUtil;
@@ -45,6 +46,8 @@ import java.io.IOException;
 public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callback {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
+    public static final int REQUEST_IMAGE = 10;
+
     private ZxingConfig config;
     private SurfaceView previewView;
     private ViewfinderView viewfinderView;
@@ -91,7 +94,7 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
 
         /*先获取配置信息*/
         try {
-            config = (ZxingConfig) getIntent().getExtras().get(Constant.INTENT_ZXING_CONFIG);
+            config = (ZxingConfig) getIntent().getExtras().get(INTENT_ZXING_CONFIG);
         } catch (Exception e) {
 
             Log.i("config", e.toString());
@@ -281,7 +284,7 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == Constant.REQUEST_IMAGE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE && resultCode == RESULT_OK) {
             String path = ImageUtil.getImageAbsolutePath(this, data.getData());
 
             new DecodeImgThread(path, new DecodeImgCallback() {

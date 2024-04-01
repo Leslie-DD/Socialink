@@ -12,7 +12,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.FriendListBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -88,7 +88,7 @@ public class FriendNearDetail extends NetWorkActivity {
 
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
-        set.setOnClickListener(v -> OkHttpUtils.post(WenConstans.JudgeSetques)
+        set.setOnClickListener(v -> OkHttpUtils.post(Constants.JUDGE_SET_QUESTIONS)
                 .tag(this)
                 .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("uid", hisid + "")
@@ -197,7 +197,7 @@ public class FriendNearDetail extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + uid, "" + hisid});
-        sendPost(WenConstans.FriendInfo, 1, Constants.token);
+        sendPost(Constants.FRIEND_INFO, 1, Constants.token);
     }
 
 

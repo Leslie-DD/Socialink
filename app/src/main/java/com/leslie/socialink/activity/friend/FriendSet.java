@@ -19,7 +19,7 @@ import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.adapter.listview.FriendfiltrateAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.FriendBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.UserInfoBean;
 import com.leslie.socialink.utils.Utils;
@@ -111,7 +111,7 @@ public class FriendSet extends NetWorkActivity {
 //        new Thread(new Runnable() {
 //            @Override
 //            public void run() {
-//                OkHttpUtils.post(WenConstans.InitUserinfo)
+//                OkHttpUtils.post(Constants.InitUserinfo)
 //                        .tag(this)
 //                        .headers(Constants.Token_Header, Constants.token)
 //                        .params("id", id+"")
@@ -175,7 +175,7 @@ public class FriendSet extends NetWorkActivity {
     public static class MyThread extends Thread {
         @Override
         public void run() {
-            OkHttpUtils.post(WenConstans.InitUserinfo)
+            OkHttpUtils.post(Constants.USER_INFO)
                     .tag(this)
                     .headers(Constants.TOKEN_HEADER, Constants.token)
                     .params("id", id + "")
@@ -428,7 +428,7 @@ public class FriendSet extends NetWorkActivity {
 
     private void getData() {
         setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + id, "" + id});
-        sendPost(WenConstans.FriendInfo, jibenxinxi, Constants.token);
+        sendPost(Constants.FRIEND_INFO, jibenxinxi, Constants.token);
     }
 
     /**

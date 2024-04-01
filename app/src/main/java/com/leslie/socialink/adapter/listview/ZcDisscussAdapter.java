@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.wenwen.ZcQusetionActivity;
 import com.leslie.socialink.bean.ZcQuestionBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyLv;
@@ -84,7 +84,7 @@ public class ZcDisscussAdapter extends RecyclerView.Adapter {
                     tvTo.setVisibility(View.VISIBLE);
                 }
                 if (TextUtils.isEmpty(bean.anonymity)) {
-                    Glide.with(context).load(WenConstans.BaseUrl + bean.header).asBitmap()
+                    Glide.with(context).load(Constants.BASE_URL + bean.header).asBitmap()
                             .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                     tvName.setText(bean.nn + "");
                 } else {
@@ -92,7 +92,7 @@ public class ZcDisscussAdapter extends RecyclerView.Adapter {
                         ivHead.setImageResource(R.mipmap.head3);
                         tvName.setText("匿名用户");
                     } else {
-                        Glide.with(context).load(WenConstans.BaseUrl + bean.header).asBitmap()
+                        Glide.with(context).load(Constants.BASE_URL + bean.header).asBitmap()
                                 .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                         tvName.setText(bean.nn + "");
                     }

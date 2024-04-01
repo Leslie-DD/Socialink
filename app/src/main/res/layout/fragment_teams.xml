@@ -37,37 +37,6 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:tabIndicatorColor="@color/colorPrimary" />
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#ffffff"-->
-<!--        android:paddingLeft="12dp"-->
-<!--        android:paddingTop="15dp"-->
-<!--        android:paddingRight="12dp"-->
-<!--        android:paddingBottom="15dp">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvMine"-->
-<!--            style="@style/tv_style"-->
-<!--            android:text="我的" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvRecommended"-->
-<!--            style="@style/tv_style"-->
-<!--            android:text="推荐" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvNew"-->
-<!--            style="@style/tv_style"-->
-<!--            android:text="最新" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvCollection"-->
-<!--            style="@style/tv_style"-->
-<!--            android:text="收藏"-->
-<!--            android:visibility="gone" />-->
-<!--    </LinearLayout>-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -77,11 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-<!--        <com.leslie.socialink.view.NoScrollViewPager-->
-<!--            android:id="@+id/vp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
-
         <ImageView
             android:id="@+id/ivAdd"
             android:layout_width="60dp"
@@ -89,7 +53,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="20dp"
-            android:src="@mipmap/increase" />
+            android:src="@drawable/full_add" />
     </RelativeLayout>
 
 </LinearLayout>

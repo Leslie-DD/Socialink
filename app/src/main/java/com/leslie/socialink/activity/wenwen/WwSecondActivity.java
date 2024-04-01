@@ -23,7 +23,7 @@ import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.WwDisscussBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -219,7 +219,7 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
         tvDing = (TextView) headview.findViewById(R.id.tvDing);
         tvDing.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}, new String[]{bean.id + ""});
-            sendPost(WenConstans.WwDing, 103, Constants.token);
+            sendPost(Constants.QUESTIONS_TOP, 103, Constants.token);
         });
         tvContent = (TextView) headview.findViewById(R.id.tvContent);
         tvResult = (TextView) headview.findViewById(R.id.tvResult);
@@ -266,7 +266,7 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
         lv.addHeaderView(headview);
         lv.setLoadingListener(this);
         if (bean != null) {
-            Glide.with(this).load(WenConstans.BaseUrl + bean.header).asBitmap()
+            Glide.with(this).load(Constants.BASE_URL + bean.header).asBitmap()
                     .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
             tvName.setText(bean.nn + "");
             tvTime.setText(bean.time + "");
@@ -298,25 +298,25 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
     private void getDisscuss(int where) {
         setBodyParams(new String[]{"firstid", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.WwSecond, where, Constants.token);
+        sendPost(Constants.QUESTION_SECOND, where, Constants.token);
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{bean.id + "", 2 + "", content});
-        sendPost(WenConstans.WwDisscuss, 102, Constants.token);
+        sendPost(Constants.QUESTION_COMMENT, 102, Constants.token);
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}
                 , new String[]{bean.askId + "", type});
-        sendPost(WenConstans.WwDSave, 104, Constants.token);
+        sendPost(Constants.QUESTION_SAVE, 104, Constants.token);
     }
 
     private void jbWw() {
         setBodyParams(new String[]{"id"}
                 , new String[]{bean.askId + ""});
-        sendPost(WenConstans.WwJuBao, 105, Constants.token);
+        sendPost(Constants.QUESTION_INFO, 105, Constants.token);
     }
 
     @Override

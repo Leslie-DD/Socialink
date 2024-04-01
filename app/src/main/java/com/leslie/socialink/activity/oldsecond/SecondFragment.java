@@ -38,7 +38,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.classification.ClassifationActivity;
 import com.leslie.socialink.classification.ClassificationBean;
 import com.leslie.socialink.classification.ClassifySecondaryBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.HomeBanner;
 import com.leslie.socialink.utils.Utils;
@@ -236,7 +236,7 @@ public class SecondFragment extends NetWorkFragment implements XRecyclerView.Loa
 
     // 获取二级分类
     private void getCategory() {
-        sendPostConnection(WenConstans.SecondhandClassify, 102, Constants.token);
+        sendPostConnection(Constants.SECOND_GOOD_CLASSIFICATIONS, 102, Constants.token);
     }
 
     public void setTvBg(int status) {

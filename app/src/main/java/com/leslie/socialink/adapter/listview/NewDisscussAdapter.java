@@ -11,7 +11,8 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.friend.NewDetail;
 import com.leslie.socialink.bean.DynamicComment;
-import com.leslie.socialink.constans.WenConstans;
+
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class NewDisscussAdapter extends RecyclerView.Adapter {
         public void setData(final int position) {
             DynamicComment bean = data.get(position);
             if (bean != null) {
-                Glide.with(context).load(WenConstans.BaseUrl + "/info/file/pub.do?fileId=ai/25_20180729071859_904.jpg").asBitmap()
+                Glide.with(context).load(Constants.BASE_URL + "/info/file/pub.do?fileId=ai/25_20180729071859_904.jpg").asBitmap()
                         .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 tvName.setText(bean.criticsName + "");
                 tvTime.setText(bean.gmt_create + "");

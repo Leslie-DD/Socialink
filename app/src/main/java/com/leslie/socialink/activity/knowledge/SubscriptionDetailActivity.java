@@ -15,7 +15,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.knowledge.ArticleSimpleBean;
 import com.leslie.socialink.bean.knowledge.Author;
 import com.leslie.socialink.bean.knowledge.SubscriptionBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -69,7 +69,7 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements XRecy
 
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
-        btnUnsubscribe.setOnClickListener(v -> sendPostConnection(WenConstans.unsubscribe + "?id=" + subscriptionId, new String[]{}, new String[]{}, 200, Constants.token));
+        btnUnsubscribe.setOnClickListener(v -> sendPostConnection(Constants.UNSUBSCRIBE + "?id=" + subscriptionId, new String[]{}, new String[]{}, 200, Constants.token));
     }
 
     @Override
@@ -135,7 +135,7 @@ public class SubscriptionDetailActivity extends NetWorkActivity implements XRecy
     }
 
     private void getData() {
-        sendGetConnection(WenConstans.getColumnDetail + "?id=" + subscriptionId, new String[]{}, new String[]{}, 100, Constants.token);
+        sendGetConnection(Constants.COLUMN_DETAIL + "?id=" + subscriptionId, new String[]{}, new String[]{}, 100, Constants.token);
     }
 
 

@@ -11,7 +11,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.knowledge.ArticleBean;
 import com.leslie.socialink.bean.knowledge.Author;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 
@@ -110,7 +110,7 @@ public class ArticleDetialActivity extends NetWorkActivity {
     }
 
     private void getData(int id) {
-        sendGetConnection(WenConstans.getArticleDetail + "?id=" + id, new String[]{}, new String[]{}, 100, Constants.token);
+        sendGetConnection(Constants.ARTICLE_DETAIL + "?id=" + id, new String[]{}, new String[]{}, 100, Constants.token);
     }
 
 

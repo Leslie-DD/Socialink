@@ -23,7 +23,7 @@ import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.FriendNewBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -72,7 +72,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
 
     private void getData(int where) {
         setBodyParams(new String[]{"pn", "ps", "uid"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + hisid});
-        sendPostConnection(WenConstans.GetonesDynamic, where, Constants.token);
+        sendPostConnection(Constants.GET_ONES_DYNAMIC, where, Constants.token);
     }
 
     @Override
@@ -169,7 +169,7 @@ public class OthersDynamicFragment extends NetWorkFragment implements XRecyclerV
     public void doSave(int position) {
 //        clickPosition = position;
 //        setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-//        sendPost(WenConstans.WwLike, 1000, Constants.token);
+//        sendPost(Constants.WwLike, 1000, Constants.token);
         //暂时还没写交友的关注功能
     }
 

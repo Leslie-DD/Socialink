@@ -25,7 +25,7 @@ import com.leslie.socialink.bean.ZcBean;
 import com.leslie.socialink.bean.ZcQuestionBean;
 import com.leslie.socialink.bean.ZcSecondBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.NoScrollWebView;
@@ -230,7 +230,7 @@ public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView
         lv.setLoadingListener(this);
         if (bean != null) {
             tvTitles.setText(bean.title + "");
-            Glide.with(context).load(WenConstans.BaseUrl + bean.coverImage).asBitmap().fitCenter()
+            Glide.with(context).load(Constants.BASE_URL + bean.coverImage).asBitmap().fitCenter()
                     .placeholder(R.mipmap.mrtp).into(ivImg);
             tvTime.setText(bean.time + "");
             tvName.setText(bean.presentorName + "");
@@ -249,18 +249,18 @@ public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView
         }
         setBodyParams(new String[]{"id", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.ZcProblemsList, where, Constants.token);
+        sendPost(Constants.ZC_PG_HOT_REVIEW, where, Constants.token);
     }
 
     private void setQuestion(int type, String content) {
         if (type == 1) {
             setBodyParams(new String[]{"id", "content", "anonymity", "type"}
                     , new String[]{bean.id + "", content, niming + "", type + ""});
-            sendPost(WenConstans.ZcSendDisscuss, 1, Constants.token);
+            sendPost(Constants.ZC_HOT_REVIEW_COMMENT, 1, Constants.token);
         } else {
             setBodyParams(new String[]{"id", "content", "anonymity", "type", "askid"}
                     , new String[]{bean.id + "", content, niming + "", type + "", askid + ""});
-            sendPost(WenConstans.ZcSendDisscuss, 2, Constants.token);
+            sendPost(Constants.ZC_HOT_REVIEW_COMMENT, 2, Constants.token);
         }
 
     }
@@ -312,12 +312,12 @@ public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView
     public void doDing(int position) {
         dingPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.WwLike, 1000, Constants.token);
+        sendPost(Constants.QUESTION_LIKES, 1000, Constants.token);
     }
 
     public void doDelete(String askId, int pofirst, int posecond) {
         /*setBodyParams(new String[]{"id"}, new String[]{delid + ""});
-        sendPost(WenConstans.ZcDeleteDisscuss, 1001, Constants.token);*/
+        sendPost(Constants.ZcDeleteDisscuss, 1001, Constants.token);*/
         firstItem = pofirst;
         secondItem = posecond;
         delid = askId;
@@ -351,7 +351,7 @@ public class ZcQusetionActivity extends NetWorkActivity implements XRecyclerView
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
                 setBodyParams(new String[]{"id"}, new String[]{delid + ""});
-                sendPost(WenConstans.ZcDeleteDisscuss, 1001, Constants.token);
+                sendPost(Constants.ZC_DELETE_COMMENT, 1001, Constants.token);
                 deldialog.dismiss();
             }
 

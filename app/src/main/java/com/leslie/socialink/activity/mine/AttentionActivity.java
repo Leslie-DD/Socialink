@@ -15,7 +15,7 @@ import com.leslie.socialink.adapter.recycleview.AttentionAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.AttentionBean;
 import com.leslie.socialink.bean.ConsTants;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -84,7 +84,7 @@ public class AttentionActivity extends NetWorkActivity implements XRecyclerView.
 
     private void getData(int pn) {
         setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, "" + ps});
-        sendPost(WenConstans.SearchAttention, getCode, Constants.token);
+        sendPost(Constants.SEARCH_ATTENTION, getCode, Constants.token);
     }
 
     //刷新功能

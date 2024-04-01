@@ -22,7 +22,7 @@ import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.DynamicComment;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -249,7 +249,7 @@ public class NewSecondActivity extends NetWorkActivity implements XRecyclerView.
         lv.addHeaderView(headview);
         lv.setLoadingListener(this);
         if (bean != null) {
-            Glide.with(this).load(WenConstans.BaseUrl + "").asBitmap()
+            Glide.with(this).load(Constants.BASE_URL + "").asBitmap()
                     .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
             tvName.setText(bean.criticsName + "");
             tvTime.setText(bean.gmt_create + "");
@@ -274,25 +274,25 @@ public class NewSecondActivity extends NetWorkActivity implements XRecyclerView.
     private void getDisscuss(int where) {
         setBodyParams(new String[]{"firstid", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.SecondgooddiscussSecond, where, Constants.token);
+        sendPost(Constants.SECOND_GOOD_DISCUSS_SECOND, where, Constants.token);
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{bean.id + "", 2 + "", content});
-        sendPost(WenConstans.Secondgooddiscuss, 102, Constants.token);
+        sendPost(Constants.SECOND_GOOD_DISCUSS, 102, Constants.token);
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}
                 , new String[]{bean.id + "", type});
-        sendPost(WenConstans.Secondgoodcollect, 104, Constants.token);
+        sendPost(Constants.SECOND_GOOD_FAVORITE, 104, Constants.token);
     }
 
     private void jbWw() {
 //        setBodyParams(new String[]{"id"}
 //                , new String[]{bean.askId + ""});
-//        sendPost(WenConstans.WwJuBao, 105, Constants.token);
+//        sendPost(Constants.WwJuBao, 105, Constants.token);
     }
 
     @Override

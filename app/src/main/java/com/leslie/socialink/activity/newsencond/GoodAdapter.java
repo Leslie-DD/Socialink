@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.oldsecond.GoodDetailActivity;
 import com.leslie.socialink.bean.SecondhandgoodBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyGv;
@@ -146,7 +146,7 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
                 if (bean.photos == null || bean.photos.size() == 0) {
 
                 } else {
-                    String imgurl = WenConstans.BaseUrl + bean.photos.get(0).photoId;
+                    String imgurl = Constants.BASE_URL + bean.photos.get(0).photoId;
                     Glide.with(mContext)
                             .load(imgurl)
                             .asBitmap()

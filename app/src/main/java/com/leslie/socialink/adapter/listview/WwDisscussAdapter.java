@@ -13,7 +13,8 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.wenwen.WenwenDetailActivity;
 import com.leslie.socialink.bean.WwDisscussBean;
-import com.leslie.socialink.constans.WenConstans;
+
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class WwDisscussAdapter extends RecyclerView.Adapter {
         public void setData(final int position) {
             WwDisscussBean bean = data.get(position);
             if (bean != null) {
-                Glide.with(context).load(WenConstans.BaseUrl + bean.header).asBitmap()
+                Glide.with(context).load(Constants.BASE_URL + bean.header).asBitmap()
                         .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 tvName.setText(bean.nn + "");
                 tvTime.setText(bean.time + "");

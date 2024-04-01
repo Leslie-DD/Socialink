@@ -20,7 +20,7 @@ import com.leslie.socialink.activity.team.ActivityDateilActivity;
 import com.leslie.socialink.activity.team.ImagePreviewActivity;
 import com.leslie.socialink.adapter.Adapter_GridView;
 import com.leslie.socialink.constans.P;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.HotActivities;
 import com.leslie.socialink.view.CircleView;
@@ -118,7 +118,7 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
                 }
                 ArrayList<String> strings = new ArrayList<>();
                 for (int i = 0; i < hotBean.getPhotos().size(); i++) {
-                    strings.add(WenConstans.BaseUrl + hotBean.getPhotos().get(i).getPhotoId());
+                    strings.add(Constants.BASE_URL + hotBean.getPhotos().get(i).getPhotoId());
                 }
                 gw.setAdapter(new Adapter_GridView(context, strings));
                 gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -128,7 +128,7 @@ public class HotActiveAdapter extends RecyclerView.Adapter {
                         ArrayList<String> list = new ArrayList<String>();
                         if (photoList != null && photoList.size() > 0) {
                             for (int j = 0; j < photoList.size(); j++) {
-                                list.add(WenConstans.BaseUrl + photoList.get(j).getPhotoId());
+                                list.add(Constants.BASE_URL + photoList.get(j).getPhotoId());
                             }
                         }
                         Intent intent = new Intent(context, ImagePreviewActivity.class);

@@ -24,7 +24,7 @@ import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.SecondhandgoodBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -93,10 +93,10 @@ public class SecondClassifyFragment extends NetWorkFragment implements XRecycler
 
     private void getData(int where) {
         if (category2Id == 0 && category1Id == 0) {
-            sendPostConnection(WenConstans.SecondhandRecommend, where, Constants.token);
+            sendPostConnection(Constants.SECOND_GOOD_RECOMMEND, where, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{pn + "", ps + "", category2Id + ""});
-            sendPostConnection(WenConstans.Secondhand, where, Constants.token);
+            sendPostConnection(Constants.SECOND_GOODS, where, Constants.token);
         }
     }
 
@@ -222,7 +222,7 @@ public class SecondClassifyFragment extends NetWorkFragment implements XRecycler
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-        sendPostConnection(WenConstans.WwLike, 1000, Constants.token);
+        sendPostConnection(Constants.QUESTION_LIKES, 1000, Constants.token);
     }
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")

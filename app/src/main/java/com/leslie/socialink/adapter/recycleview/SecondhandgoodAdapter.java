@@ -20,7 +20,7 @@ import com.jude.rollviewpager.RollPagerView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.oldsecond.GoodDetailActivity;
 import com.leslie.socialink.bean.SecondhandgoodBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyGv;
@@ -176,7 +176,7 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
 //                    }
 //                    ArrayList<String> strings = new ArrayList<>();
 //                    for (int i = 0; i < data.get(position).photos.size(); i++) {
-//                        strings.add(WenConstans.BaseUrl + data.get(position).photos.get(i).photoId);
+//                        strings.add(Constants.BASE_URL + data.get(position).photos.get(i).photoId);
 //                    }
 //                    gv.setAdapter(new Adapter_GridView(context, strings));
 //                    gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -186,7 +186,7 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
 //                            ArrayList<String> list = new ArrayList<String>();
 //                            if (photoList != null && photoList.size() > 0) {
 //                                for (int j = 0; j < photoList.size(); j++) {
-//                                    list.add(WenConstans.BaseUrl + photoList.get(j).photoId);
+//                                    list.add(Constants.BASE_URL + photoList.get(j).photoId);
 //                                }
 //                            }
 //                            Intent intent = new Intent(context, ImagePreviewActivity.class);
@@ -207,7 +207,7 @@ public class SecondhandgoodAdapter extends RecyclerView.Adapter {
                 } else {
                     Glide
                             .with(context)
-                            .load(WenConstans.BaseUrl + data.get(position).photos.get(0).photoId)
+                            .load(Constants.BASE_URL + data.get(position).photos.get(0).photoId)
                             .placeholder(R.drawable.noimg)//图片加载中显示
                             .into(ivImage);
                 }

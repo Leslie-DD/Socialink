@@ -27,7 +27,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.adapter.listview.GwPictureAdapter;
 import com.leslie.socialink.base.PhotoBaseActivity;
 import com.leslie.socialink.classification.ClassificationBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.PhotoUtils;
 import com.leslie.socialink.utils.Utils;
@@ -178,7 +178,7 @@ public class SecondhandPostActivity extends PhotoBaseActivity {
     }
 
     private void getCategory() {
-        sendPost(WenConstans.SecondhandClassify, 10086, Constants.token);
+        sendPost(Constants.SECOND_GOOD_CLASSIFICATIONS, 10086, Constants.token);
     }
 
     private void showPop() {
@@ -266,7 +266,7 @@ public class SecondhandPostActivity extends PhotoBaseActivity {
         }
         promptDialog = new PromptDialog(this);
         promptDialog.showLoading("正在发布");
-        OkHttpUtils.post(WenConstans.Sendgoods).tag(this)
+        OkHttpUtils.post(Constants.SECOND_GOOD_SAVE).tag(this)
                 .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("price", temp + "")
                 .params("content", content + "")

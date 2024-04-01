@@ -21,7 +21,7 @@ import com.leslie.socialink.bean.SecondhandgoodBean;
 import com.leslie.socialink.classification.ClassificationBean;
 import com.leslie.socialink.classification.ClassifySecondaryBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.HomeBanner;
 import com.leslie.socialink.utils.Utils;
@@ -237,16 +237,16 @@ public class SecondHandActivity extends NetWorkActivity {
 
     // 获取二级分类
     private void getCategory() {
-        sendPost(WenConstans.SecondhandClassify, 102, Constants.token);
+        sendPost(Constants.SECOND_GOOD_CLASSIFICATIONS, 102, Constants.token);
     }
 
     // 获取商品
     private void getData(int where) {
         if (category2Id == 0 && category1Id == 0) {
-            sendPost(WenConstans.SecondhandRecommend, where, Constants.token);
+            sendPost(Constants.SECOND_GOOD_RECOMMEND, where, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{pn + "", ps + "", category2Id + ""});
-            sendPost(WenConstans.Secondhand, where, Constants.token);
+            sendPost(Constants.SECOND_GOODS, where, Constants.token);
         }
     }
 

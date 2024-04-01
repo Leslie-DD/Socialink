@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.wenwen.ZcArticleActivity;
 import com.leslie.socialink.bean.ZcAnswerBean;
-import com.leslie.socialink.constans.WenConstans;
+
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyLv;
 
@@ -75,7 +76,7 @@ public class ZcAnswerAdapter extends RecyclerView.Adapter {
             ZcAnswerBean bean = data.get(position);
             if (bean != null) {
                 if (bean.anonymity == 0) {
-                    Glide.with(context).load(WenConstans.BaseUrl + bean.header)
+                    Glide.with(context).load(Constants.BASE_URL + bean.header)
                             .asBitmap().fitCenter().placeholder(R.mipmap.head3)
                             .into(ivHead);
                     tvName.setText(bean.nn + "");

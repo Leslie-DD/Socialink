@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -80,7 +80,7 @@ public class FriendAnswerQues extends NetWorkActivity {
 //                answerlist.put(getTerm(""+hisid,content[2]+"",""+answer_3));
 //                answerlist.put(getTerm(""+hisid,content[3]+"",""+answer_4));
 //                answerlist.put(getTerm(""+hisid,content[4]+"",""+answer_5));
-            OkHttpUtils.post(WenConstans.AnswerSave)
+            OkHttpUtils.post(Constants.ANSWER_SAVE)
                     .tag(this)
                     .headers(Constants.TOKEN_HEADER, Constants.token)
                     .params("answerlist", answerlist + "")

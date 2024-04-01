@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
+
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONArray;
@@ -321,8 +322,8 @@ public class ShidaTimetableShow extends NetWorkActivity {
 
     public void getData() {
         setBodyParams(new String[]{"studentId", "pwd", "yearFirst", "yearSecond", "num", "Date", "currentWeek", "school"}, new String[]{studentId, pwd, year_1, year_2, term_1, today_1, week_1, schoolname});
-        sendPost(WenConstans.ZhongnanGetTimetable, 1, WenConstans.Timetabletoken);
-        Log.e("token", WenConstans.Timetabletoken + "");
+        sendPost(Constants.ZHONGNAN_TIME_TABLE, 1, Constants.timetableToken);
+        Log.e("token", Constants.timetableToken + "");
     }
 
 

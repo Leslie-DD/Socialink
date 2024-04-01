@@ -20,7 +20,7 @@ import com.leslie.socialink.adapter.recycleview.QuestionsAdapter;
 import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
 import com.leslie.socialink.utils.Utils;
@@ -174,7 +174,7 @@ public class MyWenWenFragment extends NetWorkFragment implements QuestionsAdapte
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-        sendPostConnection(WenConstans.WwLike, 1000, Constants.token);
+        sendPostConnection(Constants.QUESTION_LIKES, 1000, Constants.token);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class MyWenWenFragment extends NetWorkFragment implements QuestionsAdapte
 
     private void getData(int where) {
         setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", pn + "", ps + ""});
-        sendPostConnection(WenConstans.MyFoots, where, Constants.token);
+        sendPostConnection(Constants.MY_FOOT_PRINT, where, Constants.token);
     }
 
     @Override

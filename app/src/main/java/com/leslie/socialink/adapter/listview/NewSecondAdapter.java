@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.team.PersonalInformationActivity;
 import com.leslie.socialink.bean.DynamicComment;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 
@@ -80,7 +80,7 @@ public class NewSecondAdapter extends RecyclerView.Adapter {
         public void setData(final int position) {
             final DynamicComment bean = data.get(position);
             if (bean != null) {
-                Glide.with(context).load(WenConstans.BaseUrl + "").asBitmap()
+                Glide.with(context).load(Constants.BASE_URL + "").asBitmap()
                         .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                 tvName.setText(bean.criticsName + "");
                 tvTime.setText(bean.gmt_create + "");

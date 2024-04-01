@@ -15,7 +15,7 @@ import com.leslie.socialink.activity.team.TeamDetailActivity;
 import com.leslie.socialink.adapter.recycleview.CommentTeamAdapter;
 import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.TeamBean;
 import com.leslie.socialink.utils.SharedPreferencesHelp;
@@ -229,15 +229,15 @@ public class MyTeamFragment extends NetWorkFragment implements XRecyclerView.Loa
         switch (type) {
             case 0:
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.DEFAULT_PS});
-                sendPostConnection(WenConstans.MyFoots, GETDATA, SharedPreferencesHelp.getString("token", ""));
+                sendPostConnection(Constants.MY_FOOT_PRINT, GETDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 1:
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.DEFAULT_PS});
-                sendPostConnection(WenConstans.MyFoots, REFDATA, SharedPreferencesHelp.getString("token", ""));
+                sendPostConnection(Constants.MY_FOOT_PRINT, REFDATA, SharedPreferencesHelp.getString("token", ""));
                 break;
             case 2:
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + 2, "" + pn, "" + Constants.DEFAULT_PS});
-                sendPostConnection(WenConstans.MyFoots, LOADATA, SharedPreferencesHelp.getString("token", ""));
+                sendPostConnection(Constants.MY_FOOT_PRINT, LOADATA, SharedPreferencesHelp.getString("token", ""));
                 break;
         }
     }

@@ -23,7 +23,7 @@ import com.leslie.socialink.activity.team.ImagePreviewActivity;
 import com.leslie.socialink.activity.team.PersonalInformationActivity;
 import com.leslie.socialink.bean.MessageBean;
 import com.leslie.socialink.constans.P;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 
@@ -106,7 +106,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             if (this.data.get(i).getType() == 1) {
                 if (position == i)
                     currentPostation = count;
-                picture.add(WenConstans.BaseUrl + this.data.get(i).getContent());
+                picture.add(Constants.BASE_URL + this.data.get(i).getContent());
                 data.get(i).setIndexofpicture(count);
                 count++;
             }
@@ -133,7 +133,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             } else {
                 holder.receivephoto.setVisibility(View.VISIBLE);
                 holder.il.setVisibility(View.GONE);
-                Uri uri = Uri.parse(WenConstans.BaseUrl + messageBean.getcontent());
+                Uri uri = Uri.parse(Constants.BASE_URL + messageBean.getcontent());
                 DraweeController controller = Fresco.newDraweeControllerBuilder()
                         .setUri(uri)
                         .setAutoPlayAnimations(true)
@@ -163,7 +163,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             {
                 holder.sendphoto.setVisibility(View.VISIBLE);
                 holder.li.setVisibility(View.GONE);
-                Uri uri = Uri.parse(WenConstans.BaseUrl + messageBean.getcontent());
+                Uri uri = Uri.parse(Constants.BASE_URL + messageBean.getcontent());
                 DraweeController controller = Fresco.newDraweeControllerBuilder()
                         .setUri(uri)
                         //动画支持，

@@ -23,7 +23,7 @@ import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.FriendListBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -83,7 +83,7 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
 
     private void getData() {
         setBodyParams(new String[]{"age", "sex", "college", "distance", "interest"}, new String[]{"" + age, "" + sex, "" + college, "" + distance, "" + interest});
-        sendPostConnection(WenConstans.FriendFritrate, 100, Constants.token);
+        sendPostConnection(Constants.FRIEND_FRITRATE, 100, Constants.token);
     }
 
     @Override
@@ -180,7 +180,7 @@ public class FriendFritrateFragment extends NetWorkFragment implements XRecycler
     public void doSave(int position) {
 //        clickPosition = position;
 //        setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-//        sendPost(WenConstans.WwLike, 1000, Constants.token);
+//        sendPost(Constants.WwLike, 1000, Constants.token);
         //暂时还没写交友的关注功能
     }
 

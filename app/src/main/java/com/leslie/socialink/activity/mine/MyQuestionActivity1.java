@@ -20,7 +20,7 @@ import com.leslie.socialink.adapter.recycleview.QuestionsAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
 import com.leslie.socialink.utils.Utils;
@@ -147,7 +147,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
             pn = 1;
         }
         setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"1", pn + "", ps + ""});
-        sendPost(WenConstans.MyProblems, where, Constants.token);
+        sendPost(Constants.MY_QUESTIONS, where, Constants.token);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{allList.get(position).id + ""});
-        sendPost(WenConstans.WwLike, 1000, Constants.token);
+        sendPost(Constants.QUESTION_LIKES, 1000, Constants.token);
     }
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")

@@ -16,7 +16,7 @@ import com.leslie.socialink.adapter.recycleview.PullTheBlackAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.PullTheBlackBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -85,7 +85,7 @@ public class MyPullTheBlackActivity extends NetWorkActivity implements XRecycler
 
     private void getData(int pn) {
         setBodyParams(new String[]{"pn", "ps"}, new String[]{"" + pn, "" + ps});
-        sendPost(WenConstans.SearchPullTheBlack, getCode, Constants.token);
+        sendPost(Constants.SearchPullTheBlack, getCode, Constants.token);
     }
 
     //刷新功能

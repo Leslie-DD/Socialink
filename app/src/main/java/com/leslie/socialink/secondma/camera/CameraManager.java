@@ -27,7 +27,6 @@ import android.view.SurfaceHolder;
 
 import com.google.zxing.PlanarYUVLuminanceSource;
 import com.leslie.socialink.secondma.android.CaptureActivityHandler;
-import com.leslie.socialink.secondma.common.Constant;
 
 import java.io.IOException;
 
@@ -41,6 +40,9 @@ import java.io.IOException;
 public final class CameraManager {
 
     private static final String TAG = CameraManager.class.getSimpleName();
+
+    public static final int FLASH_OPEN = 8;
+    public static final int FLASH_CLOSE = 9;
 
     private static CameraManager cameraManager;
 
@@ -174,13 +176,13 @@ public final class CameraManager {
             /*关闭闪光灯*/
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
 
-            msg.what = Constant.FLASH_CLOSE;
+            msg.what = FLASH_CLOSE;
 
 
         } else {
             /*打开闪光灯*/
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-            msg.what = Constant.FLASH_OPEN;
+            msg.what = FLASH_OPEN;
         }
         camera.setParameters(parameters);
         handler.sendMessage(msg);

@@ -50,7 +50,7 @@ import com.leslie.socialink.adapter.recycleview.RecycleAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.ShareBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.entity.RefCollect;
 import com.leslie.socialink.entity.RefTeamChild1;
 import com.leslie.socialink.entity.RefTeamDetailEvent;
@@ -503,7 +503,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
 
         setNoSecret.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}, new String[]{id + ""});
-            sendPost(WenConstans.DELETEJOINSECRET, DELETEJOINSECRET, Constants.token);
+            sendPost(Constants.DELETEJOINSECRET, DELETEJOINSECRET, Constants.token);
         });
 
         setSecret.setOnClickListener(v -> openPayPasswordDialog());
@@ -536,7 +536,7 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
 
         closeSecret.setOnClickListener(v -> {//关闭团队密码
             setBodyParams(new String[]{"id",}, new String[]{id + ""});
-            sendPost(WenConstans.CLOSEJOINSECRET, CLOSESECRET, Constants.token);
+            sendPost(Constants.CLOSEJOINSECRET, CLOSESECRET, Constants.token);
 
             Utils.toastShort(context, "你点击了关闭密码按钮");
         });
@@ -764,43 +764,43 @@ public class TeamDetailActivity extends NetWorkActivity implements XRecyclerView
     private void checkSecret() {
         //团长或管理员检测是否有设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
-        sendPost(WenConstans.CHECKJOINSECRET, CHECKJOINSECRET, Constants.token);
+        sendPost(Constants.CHECKJOINSECRET, CHECKJOINSECRET, Constants.token);
     }
 
     private void checkSecret2() {
         //检测是否有设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
-        sendPost(WenConstans.CHECKJOINSECRET, CHECKJOINSECRET2, Constants.token);
+        sendPost(Constants.CHECKJOINSECRET, CHECKJOINSECRET2, Constants.token);
     }
 
     private void checkSecret3() {
         //检测是否有设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
-        sendPost(WenConstans.CHECKJOINSECRET, CHECKJOINSECRET3, Constants.token);
+        sendPost(Constants.CHECKJOINSECRET, CHECKJOINSECRET3, Constants.token);
     }
 
     public void joinWithSecret() {
         //检测是否有设置团队密码
         setBodyParams(new String[]{"id", "pwd"}, new String[]{id + "", getNewSecret()});
-        sendPost(WenConstans.TEAMJOINSECRET, 2019, Constants.token);
+        sendPost(Constants.TEAMJOINSECRET, 2019, Constants.token);
     }
 
     private void searchSecret() {
         //检测是否有设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
-        sendPost(WenConstans.CHECKJOINSECRET, SEARCHJOINSECRET, Constants.token);
+        sendPost(Constants.CHECKJOINSECRET, SEARCHJOINSECRET, Constants.token);
     }
 
     public void changeSecret() {
         //设置团队密码
         setBodyParams(new String[]{"id", "pwd"}, new String[]{id + "", getNewSecret()});
-        sendPost(WenConstans.SETJOINSECRET, SETJOINSECRET, Constants.token);
+        sendPost(Constants.SETJOINSECRET, SETJOINSECRET, Constants.token);
     }
 
     public void joinTeam() {
         //设置团队密码
         setBodyParams(new String[]{"id"}, new String[]{id + ""});
-        sendPost(WenConstans.JOINWITHNOSECRET, 2018, Constants.token);
+        sendPost(Constants.JOINWITHNOSECRET, 2018, Constants.token);
     }
 
     @Override

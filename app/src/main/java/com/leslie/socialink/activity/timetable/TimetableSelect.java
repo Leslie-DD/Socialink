@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
@@ -100,7 +100,7 @@ public class TimetableSelect extends NetWorkActivity {
                 term_1 = term.getText().toString();
                 week_1 = week.getText().toString();
                 today_1 = today.getText().toString();
-                OkHttpUtils.post(WenConstans.ZhongnanGetTimetable)
+                OkHttpUtils.post(Constants.ZHONGNAN_VERIFICATION_CODE)
                         .tag(this)
                         .headers(Constants.TOKEN_HEADER, Constants.token)
                         .params("studentId", studentId + "")
@@ -194,7 +194,7 @@ public class TimetableSelect extends NetWorkActivity {
 
     public void getData() {
         setBodyParams(new String[]{"studentId", "pwd", "yearFirst", "yearSecond", "num", "Date", "currentWeek", "school"}, new String[]{studentId + "", pwd + "", year_1 + "", year_2 + "", term_1 + "", today_1 + "", week_1 + "", "" + schoolname});
-        sendPost(WenConstans.ZhongnanGetTimetable, 1, WenConstans.Timetabletoken);
+        sendPost(Constants.ZHONGNAN_VERIFICATION_CODE, 1, Constants.timetableToken);
     }
 
 

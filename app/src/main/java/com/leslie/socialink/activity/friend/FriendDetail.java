@@ -14,7 +14,7 @@ import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.activity.team.MessageActivity;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.FriendListBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -68,7 +68,7 @@ public class FriendDetail extends NetWorkActivity {
         }
         hisid = friendListBean.user_id;
         Log.e("得到hisid", hisid + "");
-        OkHttpUtils.post(WenConstans.UserInfo)
+        OkHttpUtils.post(Constants.USER_INFO)
                 .tag(this)
                 .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("id", uid + "")
@@ -121,7 +121,7 @@ public class FriendDetail extends NetWorkActivity {
     }
 
     private void event() {
-        deletefriend.setOnClickListener(v -> OkHttpUtils.post(WenConstans.DeleteFriend)
+        deletefriend.setOnClickListener(v -> OkHttpUtils.post(Constants.DELETE_FRIEND)
                 .tag(this)
                 .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("user_id", hisid + "")
@@ -245,7 +245,7 @@ public class FriendDetail extends NetWorkActivity {
     private void getData() {
         Log.e("uid: " + uid, "hisid: " + hisid);
         setBodyParams(new String[]{"uid", "hisid"}, new String[]{"" + uid, "" + hisid});
-        sendPost(WenConstans.FriendInfo, 1, Constants.token);
+        sendPost(Constants.FRIEND_INFO, 1, Constants.token);
     }
 
 }

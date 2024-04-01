@@ -28,7 +28,7 @@ import com.leslie.socialink.adapter.Adapter_GridView;
 import com.leslie.socialink.adapter.BannerAdapter;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.constans.P;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.HomeBanner;
 import com.leslie.socialink.network.entity.QuestionBean;
@@ -200,7 +200,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     }
                     ArrayList<String> strings = new ArrayList<>();
                     for (int i = 0; i < wenwenBean.photos.size(); i++) {
-                        strings.add(WenConstans.BaseUrl + wenwenBean.photos.get(i).photoId);
+                        strings.add(Constants.BASE_URL + wenwenBean.photos.get(i).photoId);
                     }
                     gv.setAdapter(new Adapter_GridView(context, strings));
                     gv.setOnItemClickListener((adapterView, view, i, l) -> {
@@ -208,7 +208,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         ArrayList<String> list = new ArrayList<>();
                         if (photoList != null && !photoList.isEmpty()) {
                             for (int j = 0; j < photoList.size(); j++) {
-                                list.add(WenConstans.BaseUrl + photoList.get(j).photoId);
+                                list.add(Constants.BASE_URL + photoList.get(j).photoId);
                             }
                         }
                         Intent intent = new Intent(context, ImagePreviewActivity.class);

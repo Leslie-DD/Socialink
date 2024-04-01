@@ -34,7 +34,7 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.DynamicComment;
 import com.leslie.socialink.bean.FriendNewBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.fragment.BottomShareFragment;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
@@ -134,7 +134,7 @@ public class NewDetail extends NetWorkActivity {
             setBodyParams(new String[]{"user_id", "dynamic_id"}, new String[]{Constants.uid + "", "" + friendNewBean.dtid});
             // 修改用Constants.uid而不用Constants.uid，不然返回
 //                setBodyParams(new String[]{"user_id","dynamic_id"}, new String[]{Constants.uid+ "",""+friendNewBean.dtid});
-            sendPost(WenConstans.FriendNewZan, 1000, Constants.token);
+            sendPost(Constants.FRIEND_NEW_ZAN, 1000, Constants.token);
         });
         ivImg = (ImageView) headview.findViewById(R.id.ivImg);
         ivBq = (ImageView) findViewById(R.id.ivBq);
@@ -193,7 +193,7 @@ public class NewDetail extends NetWorkActivity {
             if (friendNewBean.photos != null && friendNewBean.photos.size() > 0) {
                 ArrayList<String> list = new ArrayList<>();
                 for (int i = 0; i < friendNewBean.photos.size(); i++) {
-                    // list.add(WenConstans.BaseUrl + friendNewBean.photos.get(i).photoId);
+                    // list.add(Constants.BASE_URL + friendNewBean.photos.get(i).photoId);
                 }
                 lvPicture.setVisibility(View.VISIBLE);
                 pictureAdapter.setData(list);
@@ -243,7 +243,7 @@ public class NewDetail extends NetWorkActivity {
         }
         setBodyParams(new String[]{"dynamic_id"}
                 , new String[]{friendNewBean.dtid + ""});
-        sendPost(WenConstans.GetSingleDynamic, where, Constants.token);
+        sendPost(Constants.GET_SINGLE_DYNAMIC, where, Constants.token);
 
     }
 
@@ -433,7 +433,7 @@ public class NewDetail extends NetWorkActivity {
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"dynamic_id", "type", "content", "presentor"}
                 , new String[]{friendNewBean.dtid + "", 1 + "", content, "" + friendNewBean.user_id});
-        sendPost(WenConstans.FriendDiscuss, 102, Constants.token);
+        sendPost(Constants.FRIEND_COMMENT, 102, Constants.token);
 
     }
 

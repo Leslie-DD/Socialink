@@ -9,7 +9,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.FriendAddNewsBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.QuestionAnswerItem;
@@ -68,7 +68,7 @@ public class FriendShowAnswers extends NetWorkActivity {
 
     private void event() {
         findViewById(R.id.ivBack).setOnClickListener(v -> finish());
-        ivreject.setOnClickListener(v -> OkHttpUtils.post(WenConstans.RejectFriend)
+        ivreject.setOnClickListener(v -> OkHttpUtils.post(Constants.REJECT_FRIEND)
                 .tag(this)
                 .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("user_id", user_id + "")
@@ -96,7 +96,7 @@ public class FriendShowAnswers extends NetWorkActivity {
                         Log.e("gerenxinxi", "onError Exception: " + e.toString());
                     }
                 }));
-        ivaccept.setOnClickListener(v -> OkHttpUtils.post(WenConstans.AcceptFriend)
+        ivaccept.setOnClickListener(v -> OkHttpUtils.post(Constants.ACCEPT_FRIEND)
                 .tag(this)
                 .headers(Constants.TOKEN_HEADER, Constants.token)
                 .params("user_id", user_id + "")

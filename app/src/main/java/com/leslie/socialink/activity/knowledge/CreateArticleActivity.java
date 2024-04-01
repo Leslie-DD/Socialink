@@ -18,7 +18,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.knowledge.ArticleBean;
 import com.leslie.socialink.bean.knowledge.Author;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -64,7 +64,7 @@ public class CreateArticleActivity extends NetWorkActivity {
 
                 if (articleId == -1) {
 
-                    OkHttpUtils.put(WenConstans.newArticle)
+                    OkHttpUtils.put(Constants.NEW_ARTICLE)
                             .tag(this)
                             .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("specialColumnId", specialColumnId)
@@ -91,7 +91,7 @@ public class CreateArticleActivity extends NetWorkActivity {
                     mArticle.updateTime = "2020-05-26 16:00:00";
                     mArticle.title = tvTitle.getText().toString();
                     mArticle.content = richEditText.toHtml();
-                    OkHttpUtils.put(WenConstans.midifyArticle)
+                    OkHttpUtils.put(Constants.MODIFY_ARTICLE)
                             .tag(this)
                             .headers(Constants.TOKEN_HEADER, Constants.token)
                             .params("createTime", mArticle.createTime)
@@ -178,7 +178,7 @@ public class CreateArticleActivity extends NetWorkActivity {
     }
 
     private void getData(int id) {
-        sendGetConnection(WenConstans.getMyArticleDetail + "?id=" + id, new String[]{}, new String[]{}, 100, Constants.token);
+        sendGetConnection(Constants.MY_ARTICLE_DETAIL + "?id=" + id, new String[]{}, new String[]{}, 100, Constants.token);
     }
 
     @Override

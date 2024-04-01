@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
+
+import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONArray;
@@ -305,8 +306,8 @@ public class ShidaZhouShow extends NetWorkActivity {
 
     public void getData() {
         setBodyParams(new String[]{"week"}, new String[]{week});
-        sendPost(WenConstans.WeekTimetable, 1, WenConstans.Timetabletoken);
-        Log.e("token", WenConstans.Timetabletoken + "");
+        sendPost(Constants.WEEK_TIME_TABLE, 1, Constants.timetableToken);
+        Log.e("token", Constants.timetableToken + "");
     }
 
 

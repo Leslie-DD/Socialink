@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -50,7 +50,7 @@ public class ReportActivity extends NetWorkActivity {
             }
             setBodyParams(new String[]{"type", "id", "content"}
                     , new String[]{type + "", id, contennt});
-            sendPost(WenConstans.WwJuBao, 100, Constants.token);
+            sendPost(Constants.QUESTION_INFO, 100, Constants.token);
         });
     }
 

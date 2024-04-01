@@ -30,7 +30,6 @@ import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.entity.TestBean;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
@@ -267,7 +266,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
                 setBodyParams(new String[]{"type", "pn", "ps", "name"},
                         new String[]{"2", pn + "", ps + "", s});
             }
-            sendPost(WenConstans.WenwenList, 100, Constants.token);
+            sendPost(Constants.QUESTIONS, 100, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
@@ -284,7 +283,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
                 setBodyParams(new String[]{"type", "pn", "ps", "name"},
                         new String[]{"2", pn + "", ps + "", content});
             }
-            sendPost(WenConstans.WenwenList, 101, Constants.token);
+            sendPost(Constants.QUESTIONS, 101, Constants.token);
         } else {
             setBodyParams(new String[]{"pn", "ps", "label"},
                     new String[]{pn + "", ps + "", content});
@@ -359,7 +358,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.WwLike, 1000, Constants.token);
+        sendPost(Constants.QUESTION_LIKES, 1000, Constants.token);
     }
 
     private class FragmentBrodcast extends BroadcastReceiver {

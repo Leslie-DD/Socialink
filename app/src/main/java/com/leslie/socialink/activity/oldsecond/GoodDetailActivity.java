@@ -35,7 +35,7 @@ import com.leslie.socialink.bean.GoodsdiscussBean;
 import com.leslie.socialink.bean.SecondhandgoodBean;
 import com.leslie.socialink.bean.ShareBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.fragment.BottomShareFragment;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
@@ -287,7 +287,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
         llSave = (LinearLayout) headview.findViewById(R.id.llSave);
         llSave.setOnClickListener(v -> {
             setBodyParams(new String[]{"goodsid"}, new String[]{secondhandgoodBean.id + ""});
-            sendPost(WenConstans.Secondgoodlike, 1000, Constants.token);
+            sendPost(Constants.SECOND_GOOD_LIKES, 1000, Constants.token);
         });
         ivImg = (ImageView) headview.findViewById(R.id.ivImg);
         ivBq = (ImageView) findViewById(R.id.ivBq);
@@ -389,7 +389,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             if (secondhandgoodBean.photos != null && secondhandgoodBean.photos.size() > 0) {
                 ArrayList<String> list = new ArrayList<>();
                 for (int i = 0; i < secondhandgoodBean.photos.size(); i++) {
-                    list.add(WenConstans.BaseUrl + secondhandgoodBean.photos.get(i).photoId);
+                    list.add(Constants.BASE_URL + secondhandgoodBean.photos.get(i).photoId);
                 }
                 lvPicture.setVisibility(View.VISIBLE);
                 pictureAdapter.setData(list);
@@ -411,7 +411,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 setBodyParams(new String[]{"uid", "goodsid"}, new String[]{secondhandgoodBean.uid, secondhandgoodBean.id + ""});
-                sendPost(WenConstans.SecondhandGoodDele, 10010, Constants.token);
+                sendPost(Constants.SECOND_GOOD_DELETE_MY_GOODS, 10010, Constants.token);
                 deldialog.dismiss();
             }
 
@@ -435,7 +435,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
      */
     private void sendClickGoods() {
         setBodyParams(new String[]{"goodsid"}, new String[]{secondhandgoodBean.id + ""});
-        sendPost(WenConstans.SecondhandGoodsInfo, 123, Constants.token);
+        sendPost(Constants.SECOND_GOOD_GOODS_INFO, 123, Constants.token);
     }
 
     private void getDisscuss(int where) {
@@ -444,20 +444,20 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
         }
         setBodyParams(new String[]{"goodsid", "pn", "ps"}
                 , new String[]{secondhandgoodBean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.SecondgooddiscussFirst, where, Constants.token);
+        sendPost(Constants.SECOND_GOOD_DISCUSS_FIRST, where, Constants.token);
 
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{secondhandgoodBean.id + "", 1 + "", content});
-        sendPost(WenConstans.Secondgooddiscuss, 102, Constants.token);
+        sendPost(Constants.SECOND_GOOD_DISCUSS, 102, Constants.token);
 
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}, new String[]{secondhandgoodBean.id + "", type});
-        sendPost(WenConstans.Secondgoodcollect, 104, Constants.token);
+        sendPost(Constants.SECOND_GOOD_FAVORITE, 104, Constants.token);
 
     }
 
@@ -504,7 +504,7 @@ public class GoodDetailActivity extends NetWorkActivity implements XRecyclerView
         clickPosition = position;
         setBodyParams(new String[]{"id"}
                 , new String[]{newList.get(position).id + ""});
-        sendPost(WenConstans.SecondgooddiscussDing, 103, Constants.token);
+        sendPost(Constants.SECOND_GOOD_DISCUSS_DING, 103, Constants.token);
     }
 
     public void doSecond(int position) {

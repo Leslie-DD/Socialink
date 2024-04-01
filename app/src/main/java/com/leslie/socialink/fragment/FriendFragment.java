@@ -22,7 +22,7 @@ import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.FriendListBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 
 import org.json.JSONArray;
@@ -67,7 +67,7 @@ public class FriendFragment extends NetWorkFragment implements XRecyclerView.Loa
     }
 
     private void getData() {
-        sendPostConnection(WenConstans.FriendShow, 100, Constants.token);
+        sendPostConnection(Constants.FRIEND_SHOW, 100, Constants.token);
     }
 
     @Override

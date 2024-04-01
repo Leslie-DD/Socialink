@@ -16,7 +16,7 @@ import com.leslie.socialink.adapter.recycleview.SayNewsAdapter;
 import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.MsgSayBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -82,7 +82,7 @@ public class MessagesChatFragment extends NetWorkFragment implements XRecyclerVi
             public void onClick(DialogInterface dialogInterface, int i) {
                 //删除
                 setBodyParams(new String[]{"chatBoxId"}, new String[]{"" + data.get(delp).getId()});
-                sendPostConnection(WenConstans.DeleteMessageBox, DelMsg, Constants.token);
+                sendPostConnection(Constants.DELETE_MESSAGE_BOX, DelMsg, Constants.token);
                 deldialog.dismiss();
             }
 

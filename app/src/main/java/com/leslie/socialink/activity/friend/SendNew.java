@@ -29,7 +29,7 @@ import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.adapter.listview.GwPictureAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.FriendUserId;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.PhotoUtils;
 import com.leslie.socialink.utils.Utils;
@@ -169,7 +169,7 @@ public class SendNew extends NetWorkActivity {
 
             Log.e("showid", id + "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
             setBodyParams(new String[]{"uid", "content", "location", "photoList"}, new String[]{id + "", content + "", location + "", photoList});
-            sendPost(WenConstans.SendNew, 100, Constants.token);
+            sendPost(Constants.SEND_NEW, 100, Constants.token);
 
             SendNew.this.finish();
         });

@@ -14,7 +14,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.adapter.recycleview.QuestionsAdapter;
 import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
 import com.leslie.socialink.utils.IChildFragment;
@@ -131,7 +131,7 @@ public class ChildFragment2 extends NetWorkFragment implements QuestionsAdapter.
         mRecyclerView.setAdapter(adapter);
         adapter.setSaveListener(this);
         setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, "1", "20"});
-        sendPostConnection(WenConstans.WenwenList, 100, Constants.token);
+        sendPostConnection(Constants.QUESTIONS, 100, Constants.token);
         return view;
     }
 
@@ -150,13 +150,13 @@ public class ChildFragment2 extends NetWorkFragment implements QuestionsAdapter.
             hasRefresh = true;
             pn = 1;
             setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, pn + "", ps + ""});
-            sendPostConnection(WenConstans.WenwenList, 100, Constants.token);
+            sendPostConnection(Constants.QUESTIONS, 100, Constants.token);
         } else {
             pn++;
             if (pn > totalPage) {
             } else {
                 setBodyParams(new String[]{"type", "pn", "ps"}, new String[]{"" + type, pn + "", ps + ""});
-                sendPostConnection(WenConstans.WenwenList, 101, Constants.token);
+                sendPostConnection(Constants.QUESTIONS, 101, Constants.token);
             }
         }
     }
@@ -165,7 +165,7 @@ public class ChildFragment2 extends NetWorkFragment implements QuestionsAdapter.
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{newList.get(position).id});
-        sendPostConnection(WenConstans.WwLike, 1000, Constants.token);
+        sendPostConnection(Constants.QUESTION_LIKES, 1000, Constants.token);
     }
 
     @Override

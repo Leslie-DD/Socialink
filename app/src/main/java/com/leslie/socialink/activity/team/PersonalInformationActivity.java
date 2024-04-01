@@ -39,7 +39,7 @@ import com.leslie.socialink.bean.MessageBean;
 import com.leslie.socialink.bean.NoticeBean;
 import com.leslie.socialink.bean.PullTheBlackBean;
 import com.leslie.socialink.bean.SecondhandgoodBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.entity.RefMembers;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
@@ -214,9 +214,9 @@ public class PersonalInformationActivity extends NetWorkActivity implements
         setBodyParams(new String[]{"uid"}, new String[]{"" + uid});
         sendPost(Constants.BASE_URL + "/api/user/info.do", getUserCode, Constants.token);
         setBodyParams(new String[]{"concerned"}, new String[]{"" + uid});
-        sendPost(WenConstans.CheckAttention, CHECKATTENTION, Constants.token);
+        sendPost(Constants.CHECK_ATTENTION, CHECKATTENTION, Constants.token);
         setBodyParams(new String[]{"black"}, new String[]{"" + uid});
-        sendPost(WenConstans.CheckPullTheBlack, CHECKPULLTHEBLACK, Constants.token);
+        sendPost(Constants.CheckPullTheBlack, CHECKPULLTHEBLACK, Constants.token);
 //
 //        getattention();
         teamAdapter = new CommentTeamAdapter(mContext, new ArrayList<TeamBean>());
@@ -251,12 +251,12 @@ public class PersonalInformationActivity extends NetWorkActivity implements
 //    private void setattention()
 //    {
 //        setBodyParams(new String[]{"followId"},new String[]{""+userInfoBean.getId()});
-//        sendPost(WenConstans.DelecteAttention,ATTENTION2,SharedPreferencesHelp.getString("token",""));
+//        sendPost(Constants.DelecteAttention,ATTENTION2,SharedPreferencesHelp.getString("token",""));
 //    }
 //    private void getAttention()
 //    {
 //        setBodyParams(new String[]{"followId"},new String[]{""+userInfoBean.getId()});
-//        sendPost(WenConstans.DelecteAttention,ATTENTION2,SharedPreferencesHelp.getString("token",""));
+//        sendPost(Constants.DelecteAttention,ATTENTION2,SharedPreferencesHelp.getString("token",""));
 //    }
     private void initDialog() {
 
@@ -362,13 +362,13 @@ public class PersonalInformationActivity extends NetWorkActivity implements
             @Override
             public void onClick(View v) {
                 setBodyParams(new String[]{"black"}, new String[]{"" + userInfoBean.getId()});
-                sendPost(WenConstans.SetPullTheBlack, SETPULLTHEBLACK, Constants.token);
+                sendPost(Constants.SetPullTheBlack, SETPULLTHEBLACK, Constants.token);
             }
         });
 
         llBlack1.setOnClickListener(v -> {
             setBodyParams(new String[]{"black"}, new String[]{"" + userInfoBean.getId()});
-            sendPost(WenConstans.DeletePullTheBlack, DELETETHEBLACK, Constants.token);
+            sendPost(Constants.DeletePullTheBlack, DELETETHEBLACK, Constants.token);
         });
 
         llDel.setOnClickListener(v -> {
@@ -559,10 +559,10 @@ public class PersonalInformationActivity extends NetWorkActivity implements
         guanzhu.setOnClickListener(v -> {
             if (!isattention) {
                 setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
-                sendPost(WenConstans.SetAttention, SETATTENTION, Constants.token);
+                sendPost(Constants.SET_ATTENTION, SETATTENTION, Constants.token);
             } else {
                 setBodyParams(new String[]{"concerned"}, new String[]{"" + userInfoBean.getId()});
-                sendPost(WenConstans.DelecteAttention, DELETEATTENTION, Constants.token);
+                sendPost(Constants.DELETE_ATTENTION, DELETEATTENTION, Constants.token);
             }
         });
     }
@@ -1091,7 +1091,7 @@ public class PersonalInformationActivity extends NetWorkActivity implements
     public void doSave(int position) {
         clickPosition = position;
         setBodyParams(new String[]{"id"}, new String[]{quData.get(position).id + ""});
-        sendPost(WenConstans.WwLike, dosave, Constants.token);
+        sendPost(Constants.QUESTION_LIKES, dosave, Constants.token);
     }
 
     @Override

@@ -18,7 +18,7 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.oldsecond.GoodDetailActivity;
 import com.leslie.socialink.bean.SecondhandgoodBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyGv;
@@ -179,7 +179,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
 //                        }
 //                        ArrayList<String> strings = new ArrayList<>();
 //                        for (int i = 0; i < bean.photos.size(); i++) {
-//                            strings.add(WenConstans.BaseUrl + bean.photos.get(i).photoId);
+//                            strings.add(Constants.BASE_URL + bean.photos.get(i).photoId);
 //                        }
 //                        gv.setAdapter(new Adapter_GridView(context, strings));
 //                        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -189,7 +189,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
 //                                ArrayList<String> list = new ArrayList<String>();
 //                                if (photoList != null && photoList.size() > 0) {
 //                                    for (int j = 0; j < photoList.size(); j++) {
-//                                        list.add(WenConstans.BaseUrl + photoList.get(j).photoId);
+//                                        list.add(Constants.BASE_URL + photoList.get(j).photoId);
 //                                    }
 //                                }
 //                                Intent intent = new Intent(context, ImagePreviewActivity.class);
@@ -210,7 +210,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
                     } else {
                         Glide
                                 .with(context)
-                                .load(WenConstans.BaseUrl + bean.photos.get(0).photoId)
+                                .load(Constants.BASE_URL + bean.photos.get(0).photoId)
                                 .placeholder(R.drawable.noimg)//图片加载中显示
                                 .into(ivImage);
                     }
@@ -225,7 +225,7 @@ public class LabelsortAdapter extends RecyclerView.Adapter {
             } else {
 //                WenwenBean bean = data.get(position);
 //                if (bean != null) {
-//                    Glide.with(context).load(WenConstans.BaseUrl + bean.logoImage)
+//                    Glide.with(context).load(Constants.BASE_URL + bean.logoImage)
 //                            .asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
 //                    tvName.setText(bean.creatorName + "");
 //                    tvTitle.setText(bean.introduction + "");

@@ -22,7 +22,7 @@ import com.leslie.socialink.activity.team.ImagePreviewActivity;
 import com.leslie.socialink.adapter.Adapter_GridView;
 import com.leslie.socialink.bean.FriendNewBean;
 import com.leslie.socialink.constans.P;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyGv;
@@ -160,7 +160,7 @@ public class FriendNewAdapter extends RecyclerView.Adapter {
                 List<String> photoList = data.get(position).photos;
                 for (int i = 0; i < bean.photos.size(); i++) {
 
-                    strings.add(WenConstans.BaseUrl + photoList.get(i));
+                    strings.add(Constants.BASE_URL + photoList.get(i));
                 }
                 gv.setAdapter(new Adapter_GridView(context, strings));
                 gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -170,7 +170,7 @@ public class FriendNewAdapter extends RecyclerView.Adapter {
                         ArrayList<String> list = new ArrayList<String>();
                         if (photoList != null && photoList.size() > 0) {
                             for (int j = 0; j < photoList.size(); j++) {
-                                list.add(WenConstans.BaseUrl + photoList.get(j));
+                                list.add(Constants.BASE_URL + photoList.get(j));
                             }
                         }
                         Intent intent = new Intent(context, ImagePreviewActivity.class);

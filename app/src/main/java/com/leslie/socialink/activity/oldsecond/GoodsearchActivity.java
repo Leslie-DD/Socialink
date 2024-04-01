@@ -21,7 +21,7 @@ import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.SecondhandgoodBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.UserInfoBean;
 import com.leslie.socialink.utils.Utils;
@@ -130,7 +130,7 @@ public class GoodsearchActivity extends NetWorkActivity implements XRecyclerView
         } else {
             Utils.toastShort(context, "商品搜索 category2Id=" + category2Id);
             setBodyParams(new String[]{"pn", "ps", "category2_id"}, new String[]{"" + pn, "" + ps, category2Id + ""});
-            sendPost(WenConstans.Secondhand, 10086, Constants.token);
+            sendPost(Constants.SECOND_GOODS, 10086, Constants.token);
         }
     }
 

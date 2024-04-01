@@ -35,7 +35,7 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.adapter.listview.GwPictureAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.LableBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.entity.TestBean;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.PhotoUtils;
@@ -215,7 +215,7 @@ public class SendQuestionActivity extends NetWorkActivity {
             }
             biaoqain.substring(0, biaoqain.length() - 1);
             tvSave.setClickable(false);
-            OkHttpUtils.post(WenConstans.SendQuestion)
+            OkHttpUtils.post(Constants.SEND_QUESTION)
                     .tag(this)
                     .headers(Constants.TOKEN_HEADER, Constants.token)
                     .params("name", title + "")

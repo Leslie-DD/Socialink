@@ -23,7 +23,7 @@ import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.GoodsdiscussBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -218,7 +218,7 @@ public class GoodsecondActivity extends NetWorkActivity implements XRecyclerView
         tvDing = (TextView) headview.findViewById(R.id.tvDing);
         tvDing.setOnClickListener(v -> {
             setBodyParams(new String[]{"id"}, new String[]{bean.id + ""});
-            sendPost(WenConstans.SecondgooddiscussDing, 103, Constants.token);
+            sendPost(Constants.SECOND_GOOD_DISCUSS_DING, 103, Constants.token);
         });
         tvContent = (TextView) headview.findViewById(R.id.tvContent);
         tvResult = (TextView) headview.findViewById(R.id.tvResult);
@@ -269,7 +269,7 @@ public class GoodsecondActivity extends NetWorkActivity implements XRecyclerView
         lv.addHeaderView(headview);
         lv.setLoadingListener(this);
         if (bean != null) {
-            Glide.with(this).load(WenConstans.BaseUrl + bean.header).asBitmap()
+            Glide.with(this).load(Constants.BASE_URL + bean.header).asBitmap()
                     .fitCenter().placeholder(R.mipmap.head3).into(ivHead);
             tvName.setText(bean.nn + "");
             tvTime.setText(bean.time + "");
@@ -301,25 +301,25 @@ public class GoodsecondActivity extends NetWorkActivity implements XRecyclerView
     private void getDisscuss(int where) {
         setBodyParams(new String[]{"firstid", "pn", "ps"}
                 , new String[]{bean.id + "", pn + "", ps + ""});
-        sendPost(WenConstans.SecondgooddiscussSecond, where, Constants.token);
+        sendPost(Constants.SECOND_GOOD_DISCUSS_SECOND, where, Constants.token);
     }
 
     private void sendDisscuss(String content) {
         setBodyParams(new String[]{"id", "type", "content"}
                 , new String[]{bean.id + "", 2 + "", content});
-        sendPost(WenConstans.Secondgooddiscuss, 102, Constants.token);
+        sendPost(Constants.SECOND_GOOD_DISCUSS, 102, Constants.token);
     }
 
     private void saveWw(String type) {
         setBodyParams(new String[]{"id", "op"}
                 , new String[]{bean.id + "", type});
-        sendPost(WenConstans.Secondgoodcollect, 104, Constants.token);
+        sendPost(Constants.SECOND_GOOD_FAVORITE, 104, Constants.token);
     }
 
     private void jbWw() {
 //        setBodyParams(new String[]{"id"}
 //                , new String[]{bean.askId + ""});
-//        sendPost(WenConstans.WwJuBao, 105, Constants.token);
+//        sendPost(Constants.WwJuBao, 105, Constants.token);
     }
 
     @Override

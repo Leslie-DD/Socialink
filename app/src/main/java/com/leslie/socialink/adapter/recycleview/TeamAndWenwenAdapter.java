@@ -22,7 +22,7 @@ import com.leslie.socialink.activity.team.TeamDetailActivity;
 import com.leslie.socialink.activity.wenwen.WenwenDetailActivity;
 import com.leslie.socialink.adapter.Adapter_GridView;
 import com.leslie.socialink.constans.P;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
 import com.leslie.socialink.network.entity.QuestionPhotoBean;
@@ -184,7 +184,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
                         }
                         ArrayList<String> strings = new ArrayList<>();
                         for (int i = 0; i < bean.photos.size(); i++) {
-                            strings.add(WenConstans.BaseUrl + bean.photos.get(i).photoId);
+                            strings.add(Constants.BASE_URL + bean.photos.get(i).photoId);
                         }
                         gv.setAdapter(new Adapter_GridView(context, strings));
                         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -194,7 +194,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
                                 ArrayList<String> list = new ArrayList<String>();
                                 if (photoList != null && photoList.size() > 0) {
                                     for (int j = 0; j < photoList.size(); j++) {
-                                        list.add(WenConstans.BaseUrl + photoList.get(j).photoId);
+                                        list.add(Constants.BASE_URL + photoList.get(j).photoId);
                                     }
                                 }
                                 Intent intent = new Intent(context, ImagePreviewActivity.class);
@@ -220,7 +220,7 @@ public class TeamAndWenwenAdapter extends RecyclerView.Adapter {
             } else {
                 QuestionBean bean = data.get(position);
                 if (bean != null) {
-                    Glide.with(context).load(WenConstans.BaseUrl + bean.logoImage)
+                    Glide.with(context).load(Constants.BASE_URL + bean.logoImage)
                             .asBitmap().fitCenter().placeholder(R.mipmap.head3).into(ivHead);
                     tvName.setText(bean.creatorName + "");
                     tvTitle.setText(bean.introduction + "");

@@ -21,7 +21,7 @@ import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.FriendAddNewsBean;
 import com.leslie.socialink.constans.ResultUtils;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
@@ -68,7 +68,7 @@ public class MessagesFriendApplyFragment extends NetWorkFragment implements XRec
 
     private void getData(int pn) {
         setBodyParams(new String[]{"pn", "ps", "type"}, new String[]{"" + pn, "" + Constants.DEFAULT_PS, "" + 4});
-        sendPostConnection(WenConstans.ShowFriendAdd, 100, Constants.token);
+        sendPostConnection(Constants.SHOW_FRIEND_ADD, 100, Constants.token);
         Log.e("token", "" + Constants.token);
         Log.e("userid", "" + Constants.uid);
     }

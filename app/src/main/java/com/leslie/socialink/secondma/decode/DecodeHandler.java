@@ -28,13 +28,22 @@ import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.leslie.socialink.secondma.android.CaptureActivity;
-import com.leslie.socialink.secondma.common.Constant;
 
 import java.util.Map;
 
 public final class DecodeHandler extends Handler {
 
     private static final String TAG = DecodeHandler.class.getSimpleName();
+
+    public static final int DECODE = 1;
+    public static final int DECODE_FAILED = 2;
+    public static final int DECODE_SUCCEEDED = 3;
+
+    public static final int QUIT = 5;
+    public static final int RESTART_PREVIEW = 6;
+    public static final int RETURN_SCAN_RESULT = 7;
+
+    public static final String INTENT_ZXING_CONFIG = "zxingConfig";
 
     private final CaptureActivity activity;
     private final MultiFormatReader multiFormatReader;
@@ -52,11 +61,11 @@ public final class DecodeHandler extends Handler {
             return;
         }
         switch (message.what) {
-            case Constant.DECODE:
+            case DECODE:
 
                 decode((byte[]) message.obj, message.arg1, message.arg2);
                 break;
-            case Constant.QUIT:
+            case QUIT:
                 running = false;
                 Looper.myLooper().quit();
                 break;
@@ -103,12 +112,12 @@ public final class DecodeHandler extends Handler {
 
             if (handler != null) {
                 Message message = Message.obtain(handler,
-                        Constant.DECODE_SUCCEEDED, rawResult);
+                        DECODE_SUCCEEDED, rawResult);
                 message.sendToTarget();
             }
         } else {
             if (handler != null) {
-                Message message = Message.obtain(handler, Constant.DECODE_FAILED);
+                Message message = Message.obtain(handler, DECODE_FAILED);
                 message.sendToTarget();
             }
         }

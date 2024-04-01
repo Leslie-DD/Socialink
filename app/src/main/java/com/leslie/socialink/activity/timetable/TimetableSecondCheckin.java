@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
@@ -71,7 +71,7 @@ public class TimetableSecondCheckin extends NetWorkActivity {
             verification = yanzheng.getText().toString();
             Log.e("key", "" + key);
             Log.e("verification", "" + verification);
-            OkHttpUtils.post(WenConstans.ZhongnanGetYanzheng)
+            OkHttpUtils.post(Constants.ZHONGNAN_VERIFICATION)
                     .tag(this)
                     .params("key", key + "")
                     .params("verification", "" + verification)

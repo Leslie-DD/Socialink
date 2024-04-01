@@ -1,6 +1,6 @@
 package com.leslie.socialink.activity.team;
 
-import static com.leslie.socialink.constans.WenConstans.BaseUrl;
+import static com.leslie.socialink.network.Constants.BASE_URL;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -29,7 +29,7 @@ import com.leslie.socialink.adapter.recycleview.MessageAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.MessageBean;
-import com.leslie.socialink.constans.WenConstans;
+
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.PhotoUtils;
 import com.leslie.socialink.utils.Utils;
@@ -138,7 +138,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
             else if (msgs.length() == 0) Utils.toastShort(this, "输入为空");
             else {
                 setBodyParams(new String[]{"receiver", "content"}, new String[]{"" + hisid, "" + msgs});
-                sendPost(WenConstans.SendMessage, Sendmessage, Constants.token);
+                sendPost(Constants.SEND_MESSAGE, Sendmessage, Constants.token);
             }
         });
         send_photo.setOnClickListener(v -> {
@@ -161,7 +161,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
         onRefresh();
 
 //        setBodyParams(new String[]{"black"}, new String[]{"" + hisid});
-//        sendPost(WenConstans.CheckPullTheBlack, CHECKPULLTHEBLACK, Constants.token);
+//        sendPost(Constants.CheckPullTheBlack, CHECKPULLTHEBLACK, Constants.token);
     }
 
     private void showPopupWindow() {
@@ -215,7 +215,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
                                 @Override
                                 public void onSuccess(final File file) {
                                     OkHttpUtils
-                                            .post(WenConstans.SendMessage)
+                                            .post(Constants.SEND_MESSAGE)
                                             .tag(context)
                                             .headers(Constants.TOKEN_HEADER, Constants.token)
                                             .params("type", "" + 1)
@@ -270,7 +270,7 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
 
                                 @Override
                                 public void onSuccess(File file) {
-                                    OkHttpUtils.post(BaseUrl + "/api/chat/base/save.do")
+                                    OkHttpUtils.post(BASE_URL + "/api/chat/base/save.do")
                                             .tag(context)
                                             .headers(Constants.TOKEN_HEADER, Constants.token)
                                             .params("file", file)
@@ -308,25 +308,25 @@ public class MessageActivity extends NetWorkActivity implements XRecyclerView.Lo
             gmtCreate = testData.get(testData.size() - 1).getGmtCreate();
             if (gmtCreate != null) {
                 setBodyParams(new String[]{"receiver", "pn", "ps", "gmtCreate"}, new String[]{"" + hisid, "" + pn, "" + ps, gmtCreate});
-                sendPost(WenConstans.SearchMessage, Loadmessage, Constants.token);
+                sendPost(Constants.SEARCH_MESSAGE, Loadmessage, Constants.token);
                 return;
             }
         }
 
         setBodyParams(new String[]{"receiver", "pn", "ps"}, new String[]{"" + hisid, "" + pn, "" + ps});
-        sendPost(WenConstans.SearchMessage, Loadmessage, Constants.token);
+        sendPost(Constants.SEARCH_MESSAGE, Loadmessage, Constants.token);
 
     }
 
     //获取聊天历史记录第一页消息，在初始化和发送信息时调用
     private void getData1(int hisid) {
         setBodyParams(new String[]{"receiver", "pn", "ps"}, new String[]{"" + hisid, "" + 1, "" + ps});
-        sendPost(WenConstans.SearchMessage, 1, Constants.token);
+        sendPost(Constants.SEARCH_MESSAGE, 1, Constants.token);
     }
 
     private void getData2(int hisid) {
         setBodyParams(new String[]{"receiver", "pn", "ps"}, new String[]{"" + hisid, "" + 1, "" + ps});
-        sendPost(WenConstans.SearchMessage, 2, Constants.token);
+        sendPost(Constants.SEARCH_MESSAGE, 2, Constants.token);
     }
 
     @Override

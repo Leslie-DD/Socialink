@@ -88,7 +88,7 @@ public class Tj_Adapter extends RecyclerView.Adapter {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         BuildingBean bean = data.get(position);
         if (type == 1) {

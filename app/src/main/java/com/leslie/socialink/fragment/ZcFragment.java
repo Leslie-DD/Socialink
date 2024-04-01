@@ -1,5 +1,6 @@
 package com.leslie.socialink.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -79,7 +80,7 @@ public class ZcFragment extends NetWorkFragment {
                 hasRefresh = false;
                 totalPage1 = setData(result);
                 Intent intent = new Intent();
-                intent.setAction("fragment.listener");
+                intent.setPackage(getContext().getPackageName());;intent.setAction("fragment.listener");
                 intent.putExtra("item", 3);
                 getActivity().sendBroadcast(intent);
             } else {
@@ -91,7 +92,7 @@ public class ZcFragment extends NetWorkFragment {
                 hasRefresh = false;
                 totalPage2 = setData(result);
                 Intent intent = new Intent();
-                intent.setAction("fragment.listener");
+                intent.setPackage(getContext().getPackageName());;intent.setAction("fragment.listener");
                 intent.putExtra("item", 3);
                 getActivity().sendBroadcast(intent);
             } else {
@@ -103,7 +104,7 @@ public class ZcFragment extends NetWorkFragment {
                 hasRefresh = false;
                 totalPage3 = setData(result);
                 Intent intent = new Intent();
-                intent.setAction("fragment.listener");
+                intent.setPackage(getContext().getPackageName());;intent.setAction("fragment.listener");
                 intent.putExtra("item", 3);
                 getActivity().sendBroadcast(intent);
             } else {
@@ -115,7 +116,7 @@ public class ZcFragment extends NetWorkFragment {
                 hasRefresh = false;
                 totalPage4 = setData(result);
                 Intent intent = new Intent();
-                intent.setAction("fragment.listener");
+                intent.setPackage(getContext().getPackageName());;intent.setAction("fragment.listener");
                 intent.putExtra("item", 3);
                 getActivity().sendBroadcast(intent);
             } else {
@@ -123,7 +124,7 @@ public class ZcFragment extends NetWorkFragment {
             }
         } else if (where == 100) {
             Intent intent = new Intent();
-            intent.setAction("fragment.listener");
+            intent.setPackage(getContext().getPackageName());;intent.setAction("fragment.listener");
             intent.putExtra("item", 1);
             getActivity().sendBroadcast(intent);
             Gson gson = new Gson();
@@ -227,6 +228,7 @@ public class ZcFragment extends NetWorkFragment {
         return view;
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void init() {
         zcList1 = new ArrayList<>();
         zcList2 = new ArrayList<>();
@@ -446,7 +448,7 @@ public class ZcFragment extends NetWorkFragment {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.setAction("fragment.listener");
+                        intent.setPackage(getContext().getPackageName());;intent.setAction("fragment.listener");
                         intent.putExtra("item", 1);
                         getActivity().sendBroadcast(intent);
                     }

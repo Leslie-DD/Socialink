@@ -1,5 +1,6 @@
 package com.leslie.socialink.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -168,6 +169,7 @@ public class MyDynamicFragment extends NetWorkFragment implements XRecyclerView.
         //暂时还没写交友的关注功能
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

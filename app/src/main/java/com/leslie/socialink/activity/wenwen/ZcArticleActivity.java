@@ -167,6 +167,7 @@ public class ZcArticleActivity extends NetWorkActivity implements XRecyclerView.
                 tvZan.setTextColor(Color.parseColor("#00bbff"));
             }
             Intent intent = new Intent();
+            intent.setPackage(getPackageName());
             intent.setAction("zcRefresh");
             intent.putExtra("refresh", true);
             sendBroadcast(intent);

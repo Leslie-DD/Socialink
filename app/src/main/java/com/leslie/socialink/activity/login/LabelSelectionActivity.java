@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import com.leslie.socialink.MeetApplication;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
+import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.entity.RefUserInfo;
 import com.leslie.socialink.entity.TestBean;
@@ -259,42 +260,6 @@ public class LabelSelectionActivity extends NetWorkActivity {
         tvMale.setTextColor(Color.parseColor(sex == 0 ? c1 : c2));
         tvFemale.setTextColor(Color.parseColor(sex == 1 ? c1 : c2));
 
-    }
-
-    public class LableBean {
-        /**
-         * id : 1
-         * category : label
-         * value : 湖南大学
-         */
-
-        private int id;
-        private String category;
-        private String value;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getCategory() {
-            return category;
-        }
-
-        public void setCategory(String category) {
-            this.category = category;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
     }
 
 

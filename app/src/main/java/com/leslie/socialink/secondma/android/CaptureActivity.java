@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.FeatureInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -129,11 +130,9 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     public static boolean isSupportCameraLedFlash(PackageManager pm) {
         if (pm != null) {
             FeatureInfo[] features = pm.getSystemAvailableFeatures();
-            if (features != null) {
-                for (FeatureInfo f : features) {
-                    if (f != null && PackageManager.FEATURE_CAMERA_FLASH.equals(f.name)) {
-                        return true;
-                    }
+            for (FeatureInfo f : features) {
+                if (f != null && PackageManager.FEATURE_CAMERA_FLASH.equals(f.name)) {
+                    return true;
                 }
             }
         }
@@ -190,7 +189,9 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
             }
 
             beepManager.updatePrefs();
-            inactivityTimer.onResume();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                inactivityTimer.onResume();
+            }
         }
     }
 

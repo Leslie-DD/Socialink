@@ -20,10 +20,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LabelSelectionActivity;
 import com.leslie.socialink.adapter.recycleview.SearchTeamAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
+import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.bean.SearchTeamBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.entity.TestBean;
@@ -57,7 +57,7 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
     private List<SearchTeamBean> newList, moreList;
     private int clickPosition;
     private FlowLayout flowLayout;
-    private ArrayList<LabelSelectionActivity.LableBean> datas;
+    private ArrayList<LableBean> datas;
     private ArrayList<TestBean> testData;
 
     @Override
@@ -123,10 +123,10 @@ public class TeamSearchActivity extends NetWorkActivity implements XRecyclerView
                 setList(newList);
             } else if (where == 10086) {
                 if (result.optInt("code") == 0) {
-                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LableBean>>() {
                     }.getType());
                     if (datas != null && !datas.isEmpty()) {
-                        for (LabelSelectionActivity.LableBean b : datas) {
+                        for (LableBean b : datas) {
                             // 循环添加TextView到容器
                             TestBean bean = new TestBean();
                             bean.setName(b.getValue());

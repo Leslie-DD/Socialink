@@ -1,5 +1,6 @@
 package com.leslie.socialink.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -149,6 +150,7 @@ public class NewFragment extends NetWorkFragment implements XRecyclerView.Loadin
         // TODO: implement
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

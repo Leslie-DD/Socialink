@@ -32,9 +32,9 @@ import com.blankj.utilcode.util.PermissionUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LabelSelectionActivity;
 import com.leslie.socialink.adapter.listview.GwPictureAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
+import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.entity.TestBean;
 import com.leslie.socialink.network.Constants;
@@ -79,7 +79,7 @@ public class SendQuestionActivity extends NetWorkActivity {
     private File[] fileArray;
     private int niming;
     private LinearLayout llSelect;
-    private ArrayList<LabelSelectionActivity.LableBean> datas;
+    private ArrayList<LableBean> datas;
     private Gson gson;
     private ArrayList<TestBean> testData;
     private List<String> stringList;
@@ -89,10 +89,10 @@ public class SendQuestionActivity extends NetWorkActivity {
     protected void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException {
         if (where == 10086) {
             if (result.optInt("code") == 0) {
-                datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LableBean>>() {
                 }.getType());
                 if (datas != null && datas.size() > 0) {
-                    for (LabelSelectionActivity.LableBean b : datas) {
+                    for (LableBean b : datas) {
                         // 循环添加TextView到容器
                         TestBean bean = new TestBean();
                         bean.setName(b.getValue());
@@ -234,7 +234,7 @@ public class SendQuestionActivity extends NetWorkActivity {
                                 if (result.optInt("code") == 0) {
                                     Intent intent = new Intent();
                                     intent.putExtra("item", 2);
-                                    intent.setAction("fragment.listener");
+                                    intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
                                     sendBroadcast(intent);
                                     SendQuestionActivity.this.finish();
                                 } else {

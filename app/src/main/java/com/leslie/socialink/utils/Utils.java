@@ -411,35 +411,35 @@ public class Utils {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
-
-    /**
-     * 获取IMEI
-     *
-     * @param context
-     * @return
-     */
-    public static String getIMSI(Context context) {
-        TelephonyManager mTelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return mTelephonyMgr.getDeviceId();
-    }
-
-    /**
-     * 返回电话的IMEI:手机的唯一标识码
-     *
-     * @param context
-     * @return
-     */
-    public static String getDeviceId(Context context) {
-        String imei = "";
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        if (tm != null) {
-            imei = tm.getDeviceId();
-            if (isEmpty(imei)) {
-                imei = createIMSI();
-            }
-        }
-        return imei;
-    }
+//
+//    /**
+//     * 获取IMEI
+//     *
+//     * @param context
+//     * @return
+//     */
+//    public static String getIMSI(Context context) {
+//        TelephonyManager mTelephonyMgr = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+//        return mTelephonyMgr.getDeviceId();
+//    }
+//
+//    /**
+//     * 返回电话的IMEI:手机的唯一标识码
+//     *
+//     * @param context
+//     * @return
+//     */
+//    public static String getDeviceId(Context context) {
+//        String imei = "";
+//        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+//        if (tm != null) {
+//            imei = tm.getDeviceId();
+//            if (isEmpty(imei)) {
+//                imei = createIMSI();
+//            }
+//        }
+//        return imei;
+//    }
 
     /**
      * 获取手机IMSI

@@ -98,6 +98,7 @@ public class GoodsecondActivity extends NetWorkActivity implements XRecyclerView
                 bean.commentAmount = newList.size();
                 hasDiss = false;
                 Intent intent = new Intent();
+                intent.setPackage(getPackageName());
                 intent.setAction("refresh.data");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("beans", bean);
@@ -151,6 +152,7 @@ public class GoodsecondActivity extends NetWorkActivity implements XRecyclerView
                 tvDing.setTextColor(Color.parseColor("#939393"));
             }
             Intent intent = new Intent();
+            intent.setPackage(getPackageName());
             intent.setAction("refresh.data");
             Bundle bundle = new Bundle();
             bundle.putSerializable("beans", bean);
@@ -165,6 +167,7 @@ public class GoodsecondActivity extends NetWorkActivity implements XRecyclerView
                 save = "收藏";
             }
             Intent intent = new Intent();
+            intent.setPackage(getPackageName());
             intent.setAction("refresh.data");
             intent.putExtra("save", save);
             sendBroadcast(intent);

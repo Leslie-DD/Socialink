@@ -1,5 +1,6 @@
 package com.leslie.socialink.activity.mine;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -178,6 +179,7 @@ public class MyQuestionActivity1 extends NetWorkActivity implements XRecyclerVie
         sendPost(WenConstans.WwLike, 1000, Constants.token);
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

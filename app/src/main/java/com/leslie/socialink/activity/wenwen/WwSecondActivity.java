@@ -99,6 +99,7 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
                 bean.commentAmount = newList.size();
                 hasDiss = false;
                 Intent intent = new Intent();
+                intent.setPackage(getPackageName());
                 intent.setAction("refresh.data");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("beans", bean);
@@ -152,6 +153,7 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
                 tvDing.setTextColor(Color.parseColor("#939393"));
             }
             Intent intent = new Intent();
+            intent.setPackage(getPackageName());
             intent.setAction("refresh.data");
             Bundle bundle = new Bundle();
             bundle.putSerializable("beans", bean);
@@ -166,6 +168,7 @@ public class WwSecondActivity extends NetWorkActivity implements XRecyclerView.L
                 save = "收藏";
             }
             Intent intent = new Intent();
+            intent.setPackage(getPackageName());
             intent.setAction("refresh.data");
             intent.putExtra("save", save);
             sendBroadcast(intent);

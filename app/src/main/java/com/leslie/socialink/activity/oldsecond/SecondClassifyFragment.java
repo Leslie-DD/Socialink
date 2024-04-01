@@ -225,6 +225,7 @@ public class SecondClassifyFragment extends NetWorkFragment implements XRecycler
         sendPostConnection(WenConstans.WwLike, 1000, Constants.token);
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

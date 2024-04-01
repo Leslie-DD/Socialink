@@ -1,5 +1,6 @@
 package com.leslie.socialink.activity;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,10 +25,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LabelSelectionActivity;
 import com.leslie.socialink.adapter.recycleview.QuestionsAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
+import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.constans.ResultUtils;
 import com.leslie.socialink.constans.WenConstans;
 import com.leslie.socialink.entity.TestBean;
@@ -61,7 +62,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
     private List<QuestionBean> newList, moreList;
     private int clickPosition;
     private FlowLayout flowLayout;
-    private ArrayList<LabelSelectionActivity.LableBean> datas;
+    private ArrayList<LableBean> datas;
     private ArrayList<TestBean> testData;
 
     @Override
@@ -139,10 +140,10 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
                 adapter.setData(newList);
             } else if (where == 10086) {
                 if (result.optInt("code") == 0) {
-                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LableBean>>() {
                     }.getType());
                     if (datas != null && datas.size() > 0) {
-                        for (LabelSelectionActivity.LableBean b : datas) {
+                        for (LableBean b : datas) {
                             // 循环添加TextView到容器
                             TestBean bean = new TestBean();
                             bean.setName(b.getValue());
@@ -342,6 +343,7 @@ public class WwSearchActivity extends NetWorkActivity implements XRecyclerView.L
         }
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

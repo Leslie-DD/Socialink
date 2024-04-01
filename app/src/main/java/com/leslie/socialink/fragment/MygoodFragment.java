@@ -1,5 +1,6 @@
 package com.leslie.socialink.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -171,6 +172,7 @@ public class MygoodFragment extends NetWorkFragment implements XRecyclerView.Loa
         sendPostConnection(WenConstans.WwLike, 1000, Constants.token);
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

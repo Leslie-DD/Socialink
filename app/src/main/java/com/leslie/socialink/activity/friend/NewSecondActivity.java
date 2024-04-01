@@ -96,6 +96,7 @@ public class NewSecondActivity extends NetWorkActivity implements XRecyclerView.
             if (hasDiss) {
                 hasDiss = false;
                 Intent intent = new Intent();
+                intent.setPackage(getPackageName());
                 intent.setAction("refresh.data");
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("beans", bean);
@@ -135,6 +136,7 @@ public class NewSecondActivity extends NetWorkActivity implements XRecyclerView.
             getDisscuss(100);
         } else if (where == 103) {
             Intent intent = new Intent();
+            intent.setPackage(getPackageName());
             intent.setAction("refresh.data");
             Bundle bundle = new Bundle();
             bundle.putSerializable("beans", bean);
@@ -149,6 +151,7 @@ public class NewSecondActivity extends NetWorkActivity implements XRecyclerView.
                 save = "收藏";
             }
             Intent intent = new Intent();
+            intent.setPackage(getPackageName());
             intent.setAction("refresh.data");
             intent.putExtra("save", save);
             sendBroadcast(intent);

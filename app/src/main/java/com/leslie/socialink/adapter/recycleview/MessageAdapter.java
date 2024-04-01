@@ -1,5 +1,6 @@
 package com.leslie.socialink.adapter.recycleview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -114,7 +115,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
 
     //根据type设置聊天时数据的显示界面，左方接收消息界面，右方发送消息界面。//并设置头像
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final MessageBean messageBean = data.get(position);
         //接收消息
         if (messageBean.getSor() == 1) {

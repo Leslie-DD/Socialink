@@ -1,5 +1,6 @@
 package com.leslie.socialink.message.ui;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -174,6 +175,7 @@ public class MessagesFriendApplyFragment extends NetWorkFragment implements XRec
         getData(pn);
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     private void setFragmentListener() {
         IntentFilter filter = new IntentFilter();
         filter.addAction("fragment.listener");

@@ -25,10 +25,10 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LabelSelectionActivity;
 import com.leslie.socialink.adapter.listview.BaseInfoItemAdapter;
 import com.leslie.socialink.base.PhotoBaseActivity;
 import com.leslie.socialink.bean.ItemBean;
+import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.entity.RefUserInfo;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.UserInfoBean;
@@ -343,7 +343,7 @@ public class BaseInfoActivity extends PhotoBaseActivity {
                 break;
             case 10086:
                 if (result.optInt("code") == 0) {
-                    ArrayList<LabelSelectionActivity.LableBean> datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    ArrayList<LableBean> datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LableBean>>() {
                     }.getType());
                     final ArrayList<String> data = new ArrayList<>();
                     for (int i = 0; i < datas.size(); i++) {

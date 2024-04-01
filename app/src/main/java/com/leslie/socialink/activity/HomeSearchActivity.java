@@ -18,9 +18,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LabelSelectionActivity;
 import com.leslie.socialink.adapter.MyFragmentPagerAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
+import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.entity.TestBean;
 import com.leslie.socialink.fragment.TeamSearchFragment;
 import com.leslie.socialink.fragment.WwSearchFragment;
@@ -43,7 +43,7 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
     private MyFragmentPagerAdapter pagerAdapter;
     private Gson gson = new Gson();
     private FlowLayout flowLayout;
-    private ArrayList<LabelSelectionActivity.LableBean> datas;
+    private ArrayList<LableBean> datas;
     private boolean isLable = false;
     private int position = 0;
     private ArrayList<TestBean> testData;
@@ -53,10 +53,10 @@ public class HomeSearchActivity extends NetWorkActivity implements TabLayout.OnT
         switch (where) {
             case 10086:
                 if (result.optInt("code") == 0) {
-                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LableBean>>() {
                     }.getType());
                     if (datas != null && datas.size() > 0) {
-                        for (LabelSelectionActivity.LableBean b : datas) {
+                        for (LableBean b : datas) {
                             // 循环添加TextView到容器
                             TestBean bean = new TestBean();
                             bean.setName(b.getValue());

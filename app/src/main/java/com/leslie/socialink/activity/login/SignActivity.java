@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
+import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.EncryptUtils;
 import com.leslie.socialink.utils.MatcherUtils;
@@ -50,7 +51,7 @@ public class SignActivity extends NetWorkActivity {
     private String pwd, pwd2;
     private Gson gson;
     private OptionsPickerView pvOptions;
-    private ArrayList<LabelSelectionActivity.LableBean> datas;
+    private ArrayList<LableBean> datas;
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -236,7 +237,7 @@ public class SignActivity extends NetWorkActivity {
                 break;
             case 10086:
                 if (result.optInt("code") == 0) {
-                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LabelSelectionActivity.LableBean>>() {
+                    datas = gson.fromJson(result.optString("data"), new TypeToken<ArrayList<LableBean>>() {
                     }.getType());
                     final ArrayList<String> data = new ArrayList<>();
                     for (int i = 0; i < datas.size(); i++) {

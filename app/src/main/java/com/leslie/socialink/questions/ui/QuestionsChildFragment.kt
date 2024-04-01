@@ -76,6 +76,10 @@ class QuestionsChildFragment : Fragment(), IListFragment {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.clearLike()
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.likeResultErrorMessage
                 .filter { !it.second.isNullOrBlank() }
                 .collect { Utils.toastShort(context, it.second) }

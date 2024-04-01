@@ -2,8 +2,8 @@ package com.leslie.socialink.network;
 
 public class Constants {
 
-//    public static String BASE_URL = "http://182.92.84.79:8081/xiangyu";
-    public static final String BASE_URL = "http://8.138.85.81:6000/xiangyu";
+    public static String BASE_URL = "http://182.92.84.79:8081/xiangyu";
+//    public static final String BASE_URL = "http://8.138.85.81:6000/xiangyu";
 
     public static final String TOKEN_HEADER = "XIANGYU-ACCESS-TOKEN";
     public static final int DEFAULT_PS = 10;

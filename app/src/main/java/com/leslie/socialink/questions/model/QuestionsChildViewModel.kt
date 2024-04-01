@@ -102,6 +102,10 @@ class QuestionsChildViewModel : ViewModel() {
         }
     }
 
+    fun clearLike() {
+        _likeResultErrorMessage.value = Pair(0, null)
+    }
+
     companion object {
         private const val TAG = "[HotQuestionsViewModel]"
     }

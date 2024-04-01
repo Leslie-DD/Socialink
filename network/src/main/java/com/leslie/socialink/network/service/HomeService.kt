@@ -22,7 +22,7 @@ interface HomeService {
     ): UnifyResponse<HotActivities>
 
     @POST("/xiangyu/api/club/base/pglist.do")
-    suspend fun hotTeams(
+    suspend fun teams(
         @Query("type") type: String,
         @Query("pn") pn: String,
         @Query("ps") ps: String

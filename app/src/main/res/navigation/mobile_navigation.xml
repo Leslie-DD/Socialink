@@ -12,13 +12,13 @@
 
     <fragment
         android:id="@+id/navigation_team"
-        android:name="com.leslie.socialink.fragment.TeamsFragment"
+        android:name="com.leslie.socialink.team.ui.TeamsFragment"
         android:label="@string/menu_team"
         tools:layout="@layout/fragment_teams" />
 
     <fragment
         android:id="@+id/navigation_question"
-        android:name="com.leslie.socialink.questions.QuestionsFragment"
+        android:name="com.leslie.socialink.questions.ui.QuestionsFragment"
         android:label="@string/menu_ask"
         tools:layout="@layout/fragment_questions" />
 

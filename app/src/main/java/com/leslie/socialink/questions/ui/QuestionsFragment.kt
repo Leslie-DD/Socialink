@@ -1,4 +1,4 @@
-package com.leslie.socialink.questions
+package com.leslie.socialink.questions.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -18,11 +18,12 @@ import com.leslie.socialink.utils.StatusBarUtil.setMarginStatusBar
 class QuestionsFragment : Fragment() {
     private lateinit var view: View
 
-    private var pagerAdapter : QuestionsFragmentViewPagerAdapter? = null
+    private var pagerAdapter: QuestionsFragmentViewPagerAdapter? = null
 
     private val tabsValue = arrayOf("推荐", "最新")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.i(TAG, "onCreateView")
         view = inflater.inflate(R.layout.fragment_questions, container, false)
         val titleLayout = view.findViewById<RelativeLayout>(R.id.title_layout)
         setMarginStatusBar<MarginLayoutParams>(titleLayout)

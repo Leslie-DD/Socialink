@@ -1,4 +1,4 @@
-package com.leslie.socialink.home.model
+package com.leslie.socialink.questions.model
 
 import android.text.TextUtils
 import android.util.Log
@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class HotQuestionsViewModel : ViewModel() {
+class QuestionsChildViewModel : ViewModel() {
 
-    private val _hotTeamsBeanStateFlow = MutableStateFlow<List<QuestionBean>>(emptyList())
-    val hotTeamsBeanStateFlow = _hotTeamsBeanStateFlow.asStateFlow()
+    private val _teamsBeanStateFlow = MutableStateFlow<List<QuestionBean>>(emptyList())
+    val teamsBeanStateFlow = _teamsBeanStateFlow.asStateFlow()
 
     private val _likeResultErrorMessage = MutableStateFlow<Pair<Int, String?>>(Pair(0, null))
     val likeResultErrorMessage = _likeResultErrorMessage.asStateFlow()
@@ -34,7 +34,10 @@ class HotQuestionsViewModel : ViewModel() {
         fetchData(refresh = true)
     }
 
-    fun fetchData(refresh: Boolean = false) = viewModelScope.launch(Dispatchers.IO) {
+    fun fetchData(
+        refresh: Boolean = false,
+        type: String = "1"
+    ) = viewModelScope.launch(Dispatchers.IO) {
         Log.w(TAG, "(fetchData) refresh ? $refresh, pn = $pn, totalPage = $totalPage")
         if (!refresh && pn >= totalPage) {
             _loadFinish.value = loadFinish.value + 1
@@ -47,7 +50,7 @@ class HotQuestionsViewModel : ViewModel() {
             pn += 1
         }
         RetrofitClient.homeService.hotQuestions(
-            type = "1",
+            type = type,
             pn = pn.toString(),
             ps = "20"
         ).data?.let {
@@ -55,10 +58,10 @@ class HotQuestionsViewModel : ViewModel() {
             if (it.data.isEmpty()) {
                 return@launch
             }
-            _hotTeamsBeanStateFlow.value = if (refresh) {
+            _teamsBeanStateFlow.value = if (refresh) {
                 it.data
             } else {
-                hotTeamsBeanStateFlow.value + it.data
+                teamsBeanStateFlow.value + it.data
             }
 
         }
@@ -66,7 +69,7 @@ class HotQuestionsViewModel : ViewModel() {
     }
 
     fun like(position: Int) = viewModelScope.launch(Dispatchers.IO) {
-        val questions = hotTeamsBeanStateFlow.value
+        val questions = teamsBeanStateFlow.value
         if (position < 0 || position >= questions.size) {
             return@launch
         }

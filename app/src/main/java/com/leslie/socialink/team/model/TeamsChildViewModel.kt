@@ -1,4 +1,4 @@
-package com.leslie.socialink.home.model
+package com.leslie.socialink.team.model
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class HotTeamsViewModel : ViewModel() {
-    private val _hotTeamsBeanStateFlow = MutableStateFlow<List<TeamBean>>(emptyList())
-    val hotTeamsBeanStateFlow = _hotTeamsBeanStateFlow.asStateFlow()
+class TeamsChildViewModel : ViewModel() {
+    private val _teamsBeanStateFlow = MutableStateFlow<List<TeamBean>>(emptyList())
+    val teamsBeanStateFlow = _teamsBeanStateFlow.asStateFlow()
 
     private val _loadFinish = MutableStateFlow(1)
     val loadFinish = _loadFinish.asStateFlow()
@@ -21,11 +21,11 @@ class HotTeamsViewModel : ViewModel() {
     private var pn = 0
     private var totalPage = 0
 
-    init {
-        fetchData(refresh = true)
-    }
+//    init {
+//        fetchData(refresh = true)
+//    }
 
-    fun fetchData(refresh: Boolean = false) = viewModelScope.launch(Dispatchers.IO) {
+    fun fetchData(refresh: Boolean = false, type: String = "1") = viewModelScope.launch(Dispatchers.IO) {
         Log.w(TAG, "(fetchData) refresh ? $refresh, pn = $pn, totalPage = $totalPage")
         if (!refresh && pn >= totalPage) {
             _loadFinish.value = loadFinish.value + 1
@@ -37,8 +37,8 @@ class HotTeamsViewModel : ViewModel() {
         } else {
             pn += 1
         }
-        RetrofitClient.homeService.hotTeams(
-            type = "1",
+        RetrofitClient.homeService.teams(
+            type = type,
             pn = pn.toString(),
             ps = Constants.default_PS.toString()
         ).data?.let {
@@ -47,10 +47,10 @@ class HotTeamsViewModel : ViewModel() {
                 return@launch
             }
             it.data.forEach { teamBean -> teamBean.itemType = 1 }
-            _hotTeamsBeanStateFlow.value = if (refresh) {
+            _teamsBeanStateFlow.value = if (refresh) {
                 it.data
             } else {
-                hotTeamsBeanStateFlow.value + it.data
+                teamsBeanStateFlow.value + it.data
             }
 
         }

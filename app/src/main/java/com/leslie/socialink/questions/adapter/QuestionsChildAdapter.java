@@ -1,4 +1,4 @@
-package com.leslie.socialink.home.adapter;
+package com.leslie.socialink.questions.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -32,11 +32,11 @@ import com.leslie.socialink.view.MyGv;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotQuestionsAdapter extends RecyclerView.Adapter<HotQuestionsAdapter.ViewHolder> {
+public class QuestionsChildAdapter extends RecyclerView.Adapter<QuestionsChildAdapter.ViewHolder> {
     private final Context context;
     private List<QuestionBean> data = new ArrayList<>();
 
-    public HotQuestionsAdapter(Context context) {
+    public QuestionsChildAdapter(Context context) {
         super();
         this.context = context;
     }

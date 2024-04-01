@@ -1,4 +1,4 @@
-package com.leslie.socialink.home.ui
+package com.leslie.socialink.team.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,17 +16,20 @@ import com.leslie.socialink.R
 import com.leslie.socialink.activity.team.TeamDetailActivity
 import com.leslie.socialink.adapter.recycleview.CommentTeamAdapter
 import com.leslie.socialink.bean.ConsTants
-import com.leslie.socialink.home.model.HotTeamsViewModel
+import com.leslie.socialink.home.ui.IListFragment
+import com.leslie.socialink.team.model.TeamsChildViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class HotTeamsFragment : Fragment(), IListFragment {
+class TeamsChildFragment : Fragment(), IListFragment {
 
     private lateinit var tvTips: TextView
     private lateinit var recyclerView: XRecyclerView
     private var adapter: CommentTeamAdapter? = null
 
-    private val viewModel: HotTeamsViewModel by viewModels()
+    private val type: String by lazy { arguments?.getString("type") ?: "1" }
+
+    private val viewModel: TeamsChildViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
@@ -35,6 +38,7 @@ class HotTeamsFragment : Fragment(), IListFragment {
         recyclerView = view.findViewById(R.id.rv)
         init()
         initCollect()
+        viewModel.fetchData(refresh = true, type = type)
         return view
     }
 
@@ -53,7 +57,7 @@ class HotTeamsFragment : Fragment(), IListFragment {
             override fun onLoadMore() {
                 viewLifecycleOwner.lifecycleScope.launch {
                     delay(1000)
-                    viewModel.fetchData(false)
+                    viewModel.fetchData(refresh = false, type = type)
                 }
             }
         })
@@ -62,7 +66,7 @@ class HotTeamsFragment : Fragment(), IListFragment {
 
     private fun initCollect() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.hotTeamsBeanStateFlow
+            viewModel.teamsBeanStateFlow
                 .collect {
                     tvTips.visibility = if (it.isNotEmpty()) View.GONE else View.VISIBLE
                     recyclerView.refreshComplete()
@@ -88,5 +92,9 @@ class HotTeamsFragment : Fragment(), IListFragment {
 
     companion object {
         private const val TAG = "[HotTeamsFragment]"
+
+        fun newInstance(type: String = "1"): TeamsChildFragment {
+            return TeamsChildFragment().apply { arguments = Bundle().apply { putString("type", type) } }
+        }
     }
 }

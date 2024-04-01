@@ -5,8 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.leslie.socialink.home.ui.HotActivitiesFragment
-import com.leslie.socialink.home.ui.HotQuestionsFragment
-import com.leslie.socialink.home.ui.HotTeamsFragment
+import com.leslie.socialink.questions.ui.QuestionsChildFragment
+import com.leslie.socialink.team.ui.TeamsChildFragment
 
 class HomeFragmentViewPagerAdapter(
     fragmentManager: FragmentManager,
@@ -17,8 +17,8 @@ class HomeFragmentViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> HotTeamsFragment()
-            1 -> HotQuestionsFragment()
+            0 -> TeamsChildFragment.newInstance(type = "1")
+            1 -> QuestionsChildFragment()
             else -> HotActivitiesFragment()
         }
     }

@@ -44,14 +44,14 @@ public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerV
     @Override
     protected View createView(LayoutInflater inflater) {
         if (view == null) {
-            view = inflater.inflate(R.layout.vp_tim, null);
+            view = inflater.inflate(R.layout.fragment_teams_child, null);
             init();
         }
         return view;
     }
 
     private void init() {
-        rv = (XRecyclerView) view.findViewById(R.id.rv);
+        rv = view.findViewById(R.id.rv);
         tvNoData = view.findViewById(R.id.tvNoData);
         ConsTants.initXRecycleView(getActivity(), true, true, rv);
         list = new ArrayList<>();
@@ -77,7 +77,7 @@ public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerV
         if (list != null) {
             adapter.setData(list);
         } else {
-            adapter.setData(new ArrayList<TeamBean>());
+            adapter.setData(new ArrayList<>());
         }
     }
 
@@ -92,7 +92,6 @@ public class BaseTeamPagerFragment extends NetWorkFragment implements XRecyclerV
 
     @Override
     public void OnItemClick(int position) {
-        //Log.e("YSF","我运行了"+adapter.getData().get(position).getId());
         int type = adapter.getData().get(position).getItemType();
         Intent intent = new Intent(mContext, TeamDetailActivity.class);
         intent.putExtra("id", adapter.getData().get(position).getId());

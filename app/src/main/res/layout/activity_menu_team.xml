@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/my_team"
-        android:name="com.leslie.socialink.fragment.TeamsFragment"
+        android:name="com.leslie.socialink.team.ui.TeamsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </fragment>

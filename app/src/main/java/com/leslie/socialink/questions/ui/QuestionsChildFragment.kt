@@ -1,4 +1,4 @@
-package com.leslie.socialink.home.ui
+package com.leslie.socialink.questions.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,27 +13,30 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.jcodecraeer.xrecyclerview.XRecyclerView.LoadingListener
 import com.leslie.socialink.R
 import com.leslie.socialink.bean.ConsTants
-import com.leslie.socialink.home.adapter.HotQuestionsAdapter
-import com.leslie.socialink.home.model.HotQuestionsViewModel
+import com.leslie.socialink.home.ui.IListFragment
+import com.leslie.socialink.questions.adapter.QuestionsChildAdapter
+import com.leslie.socialink.questions.model.QuestionsChildViewModel
 import com.leslie.socialink.utils.Utils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
-class HotQuestionsFragment : Fragment(), IListFragment {
+class QuestionsChildFragment : Fragment(), IListFragment {
     private lateinit var view: View
     private lateinit var tvTips: TextView
 
     private lateinit var recyclerView: XRecyclerView
-    private var adapter: HotQuestionsAdapter? = null
+    private var adapter: QuestionsChildAdapter? = null
 
-    private val viewModel: HotQuestionsViewModel by viewModels()
+    private val type: String by lazy { arguments?.getString("type") ?: "1" }
+
+    private val viewModel: QuestionsChildViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         view = inflater.inflate(R.layout.fragment_tim, container, false)
         tvTips = view.findViewById(R.id.tvTips)
-        adapter = HotQuestionsAdapter(activity)
+        adapter = QuestionsChildAdapter(activity)
         recyclerView = view.findViewById(R.id.rv)
         ConsTants.initXRecycleView(activity, true, false, recyclerView)
         recyclerView.setLoadingListener(object : LoadingListener {
@@ -43,7 +46,7 @@ class HotQuestionsFragment : Fragment(), IListFragment {
             override fun onLoadMore() {
                 viewLifecycleOwner.lifecycleScope.launch {
                     delay(1000)
-                    viewModel.fetchData()
+                    viewModel.fetchData(refresh = false, type = type)
                 }
             }
         })
@@ -53,12 +56,13 @@ class HotQuestionsFragment : Fragment(), IListFragment {
             viewModel.like(position)
         }
         initCollect()
+        viewModel.fetchData(refresh = true, type = type)
         return view
     }
 
     private fun initCollect() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.hotTeamsBeanStateFlow.collect {
+            viewModel.teamsBeanStateFlow.collect {
                 tvTips.visibility = if (it.isNotEmpty()) View.GONE else View.VISIBLE
                 recyclerView.refreshComplete()
                 adapter?.setData(it)
@@ -94,5 +98,9 @@ class HotQuestionsFragment : Fragment(), IListFragment {
 
     companion object {
         private const val TAG = "[HotQuestionsFragment]"
+
+        fun newInstance(type: String = "1"): QuestionsChildFragment {
+            return QuestionsChildFragment().apply { arguments = Bundle().apply { putString("type", type) } }
+        }
     }
 }

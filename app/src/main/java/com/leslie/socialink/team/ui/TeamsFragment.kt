@@ -1,4 +1,4 @@
-package com.leslie.socialink.fragment
+package com.leslie.socialink.team.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.leslie.socialink.R
 import com.leslie.socialink.activity.TeamSearchActivity
 import com.leslie.socialink.activity.team.AddTeamActivity
-import com.leslie.socialink.adapter.TeamsFragmentViewPagerAdapter
+import com.leslie.socialink.team.adapter.TeamsFragmentViewPagerAdapter
 import com.leslie.socialink.utils.StatusBarUtil.setMarginStatusBar
 
 class TeamsFragment : Fragment() {
@@ -38,9 +38,11 @@ class TeamsFragment : Fragment() {
         val titleLayout = view.findViewById<RelativeLayout>(R.id.title_layout)
         setMarginStatusBar<MarginLayoutParams>(titleLayout)
 
-        view.findViewById<ImageView>(R.id.llSearch).setOnClickListener { startActivity(Intent(activity, TeamSearchActivity::class.java)) }
+        view.findViewById<ImageView>(R.id.llSearch)
+            .setOnClickListener { startActivity(Intent(activity, TeamSearchActivity::class.java)) }
 
-        view.findViewById<ImageView>(R.id.ivAdd).setOnClickListener { startActivity(Intent(activity, AddTeamActivity::class.java)) }
+        view.findViewById<ImageView>(R.id.ivAdd)
+            .setOnClickListener { startActivity(Intent(activity, AddTeamActivity::class.java)) }
 
         val tabs = view.findViewById<TabLayout>(R.id.tabs)
         pagerAdapter = TeamsFragmentViewPagerAdapter(childFragmentManager, lifecycle)

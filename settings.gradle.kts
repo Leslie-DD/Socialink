@@ -23,6 +23,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "socialink"
+rootProject.name = "Socialink"
 include(":app")
 include(":network")

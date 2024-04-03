@@ -23,8 +23,8 @@ import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONObject;
 
-public class MessageFragment extends Fragment {
-    private static final String TAG = "[MessageFragment]";
+public class MessagesFragment extends Fragment {
+    private static final String TAG = "[MessagesFragment]";
     private final int DELETE_ALL_MESSAGES = 1000;
 
     private View view;

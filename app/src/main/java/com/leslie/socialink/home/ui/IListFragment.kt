@@ -6,4 +6,5 @@ package com.leslie.socialink.home.ui
  */
 interface IListFragment {
     fun isFirstItemVisible(): Boolean
+    fun isLastItemVisible(): Boolean
 }

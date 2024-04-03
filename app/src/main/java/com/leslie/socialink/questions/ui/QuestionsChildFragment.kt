@@ -100,6 +100,14 @@ class QuestionsChildFragment : Fragment(), IListFragment {
         return false
     }
 
+    override fun isLastItemVisible(): Boolean {
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
+        if (adapter == null || layoutManager == null) {
+            return false
+        }
+        return layoutManager.findLastVisibleItemPosition() == adapter?.itemCount
+    }
+
     companion object {
         private const val TAG = "[HotQuestionsFragment]"
 

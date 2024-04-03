@@ -6,16 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.createViewModelLazy
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.HasDefaultViewModelProviderFactory
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.jcodecraeer.xrecyclerview.XRecyclerView.LoadingListener
@@ -97,6 +90,14 @@ class TeamsChildFragment : Fragment(), IListFragment {
         return false
     }
 
+    override fun isLastItemVisible(): Boolean {
+        val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
+        if (adapter == null || layoutManager == null) {
+            return false
+        }
+        return layoutManager.findLastVisibleItemPosition() == adapter?.itemCount
+    }
+
     companion object {
         private const val TAG = "[HotTeamsFragment]"
 
@@ -104,25 +105,4 @@ class TeamsChildFragment : Fragment(), IListFragment {
             return TeamsChildFragment().apply { arguments = Bundle().apply { putString("type", type) } }
         }
     }
-}
-
-@MainThread
-public inline fun <reified VM : ViewModel> Fragment.viewModels(
-    noinline ownerProducer: () -> ViewModelStoreOwner = { this },
-    noinline extrasProducer: (() -> CreationExtras)? = null,
-    noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
-): Lazy<VM> {
-    val owner by lazy(LazyThreadSafetyMode.NONE) { ownerProducer() }
-    return createViewModelLazy(
-        VM::class,
-        { owner.viewModelStore },
-        {
-            extrasProducer?.invoke()
-                ?: (owner as? HasDefaultViewModelProviderFactory)?.defaultViewModelCreationExtras
-                ?: CreationExtras.Empty
-        },
-        factoryProducer ?: {
-            (owner as? HasDefaultViewModelProviderFactory)?.defaultViewModelProviderFactory
-                ?: defaultViewModelProviderFactory
-        })
 }

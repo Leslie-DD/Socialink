@@ -174,6 +174,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
             }
             wwDisscussAdapter.setData(newList);
         } else if (where == 102) {
+            ivSend.setClickable(true);
             etContent.setText("");
             Utils.toastShort(mContext, "评论成功");
             Intent intent = new Intent();
@@ -240,7 +241,9 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
 
     @Override
     protected void onFailure(String result, int where) {
-
+        if (where == 102) {
+            ivSend.setClickable(true);
+        }
     }
 
     @Override
@@ -322,6 +325,7 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
 //                imm.showSoftInput(etContent,InputMethodManager.SHOW_FORCED);
             imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); //强制隐藏键盘
             sendDisscuss(content);
+            v.setClickable(false);
         });
         ivHead.setOnClickListener(v -> {
             if (wenwenBean.anonymity == 0) {

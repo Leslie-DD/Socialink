@@ -25,7 +25,7 @@ class AuthorizationInterceptor : Interceptor {
         private val token: String
             get() {
                 return _token ?: (appCtx.getSharedPreferences(
-                    "meet",
+                    "socialink",
                     Context.MODE_PRIVATE
                 ).getString("token", "") ?: "").also {
                     _token = it

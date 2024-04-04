@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-
 import com.leslie.socialink.network.Constants;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;

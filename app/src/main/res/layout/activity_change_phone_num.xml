@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-    tools:context="com.leslie.socialink.activity.login.ForgetPwdActivity">
+    tools:context="com.leslie.socialink.login.ui.ForgetPwdActivity">
     <include layout="@layout/new_title_bar2"/>
     <EditText
         android:layout_width="match_parent"

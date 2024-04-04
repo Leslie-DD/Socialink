@@ -8,10 +8,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.DefaultProblemActivity;
-import com.leslie.socialink.activity.login.LabelSelectionActivity;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.entity.RefUserInfo;
+import com.leslie.socialink.login.ui.DefaultProblemActivity;
+import com.leslie.socialink.login.ui.LabelSelectionActivity;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.UserInfoBean;
 import com.leslie.socialink.utils.Utils;

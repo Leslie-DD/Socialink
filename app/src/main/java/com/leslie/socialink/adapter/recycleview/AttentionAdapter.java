@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.team.PersonalInformationActivity;
 import com.leslie.socialink.bean.AttentionBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;

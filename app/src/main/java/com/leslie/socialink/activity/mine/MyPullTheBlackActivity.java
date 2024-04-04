@@ -16,7 +16,6 @@ import com.leslie.socialink.adapter.recycleview.PullTheBlackAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.PullTheBlackBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 

@@ -346,21 +346,9 @@ public class BaseInfoActivity extends PhotoBaseActivity {
         windowLayoutParams.alpha = 0.5f;
         getWindow().setAttributes(windowLayoutParams);
         modifyNamePopWindow.showAtLocation(tvTitle, Gravity.CENTER, 0, 0);
-//
-//        new AlertDialog.Builder(context)
-//                .setTitle("退出登录")
-//                .setMessage("确定退出当前账号吗")
-//                .setNegativeButton("取消", (dialogInterface, i1) -> {
-//                    dialogInterface.dismiss();//销毁对话框
-//                })
-//                .setPositiveButton("确定", (dialog1, which) -> {
-//                    dialog1.dismiss();
-//                    goLoginPage();
-//                })
-//                .create()
-//                .show();
     }
 
+    @SuppressWarnings("unused")
     private void showModifySchoolPop() {
         etSchoolContent.setText("");
         windowLayoutParams.alpha = 0.5f;

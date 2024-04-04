@@ -9,12 +9,15 @@ import com.leslie.socialink.utils.CrashHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeetApplication extends Application {
+import dagger.hilt.android.HiltAndroidApp;
 
-    private static final String TAG = "[MeetApplication]";
+@HiltAndroidApp
+public class SocialinkApplication extends Application {
+
+    private static final String TAG = "[SocialinkApplication]";
 
     private final List<Activity> activityList = new ArrayList<>();
-    private static MeetApplication sInstance;
+    private static SocialinkApplication sInstance;
 
     @Override
     public void onCreate() {
@@ -25,7 +28,7 @@ public class MeetApplication extends Application {
 //        CrashReport.initCrashReport(getApplicationContext(), "8c0feaed02", true);
     }
 
-    public static MeetApplication getInstance() {
+    public static SocialinkApplication getInstance() {
         return sInstance;
     }
 

@@ -21,7 +21,6 @@ import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.SecondhandgoodBean;
 import com.leslie.socialink.constans.ResultUtils;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.UserInfoBean;
 import com.leslie.socialink.utils.Utils;

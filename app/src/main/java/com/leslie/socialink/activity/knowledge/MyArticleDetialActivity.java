@@ -12,7 +12,6 @@ import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.knowledge.ArticleBean;
 import com.leslie.socialink.bean.knowledge.Author;
 import com.leslie.socialink.bean.knowledge.RecommendItemBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 

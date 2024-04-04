@@ -15,7 +15,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
-
 import com.leslie.socialink.network.Constants;
 
 import org.json.JSONException;

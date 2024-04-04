@@ -15,7 +15,6 @@ import com.leslie.socialink.adapter.recycleview.AttentionAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.AttentionBean;
 import com.leslie.socialink.bean.ConsTants;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 

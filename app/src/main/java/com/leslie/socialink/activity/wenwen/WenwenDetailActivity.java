@@ -34,7 +34,6 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.ShareBean;
 import com.leslie.socialink.bean.WwDisscussBean;
 import com.leslie.socialink.constans.ResultUtils;
-
 import com.leslie.socialink.fragment.BottomShareFragment;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
@@ -116,7 +115,9 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
             tvLoves.setText(zan + "");
             if (dz != zan) {
                 Intent intent = new Intent();
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 intent.putExtra("item", 2);
                 sendBroadcast(intent);
             }
@@ -178,7 +179,9 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
             etContent.setText("");
             Utils.toastShort(mContext, "评论成功");
             Intent intent = new Intent();
-            intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+            intent.setPackage(getPackageName());
+            ;
+            intent.setAction("fragment.listener");
             intent.putExtra("item", 2);
             sendBroadcast(intent);
             getDisscuss(100);
@@ -200,14 +203,18 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
             if (save.equals("收藏")) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "收藏成功");
                 save = "取消收藏";
             } else {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "取消收藏成功");
                 save = "收藏";
@@ -229,7 +236,9 @@ public class WenwenDetailActivity extends NetWorkActivity implements XRecyclerVi
             if (result.optInt("code") == 0) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "删除问问成功");
                 this.finish();

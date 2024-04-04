@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/navigation_mine"
-        android:name="com.leslie.socialink.fragment.MeFragment"
+        android:name="com.leslie.socialink.me.ui.MeFragment"
         android:label="@string/menu_mine"
         tools:layout="@layout/fragment_me" />
 </navigation>

@@ -6,10 +6,9 @@ import android.util.Log;
 import android.widget.Button;
 
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.FriendAddNewsBean;
-
+import com.leslie.socialink.login.ui.LoginActivity;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.QuestionAnswerItem;

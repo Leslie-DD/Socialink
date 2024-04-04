@@ -1,7 +1,6 @@
-package com.leslie.socialink.activity.login;
+package com.leslie.socialink.login.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,9 +22,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.SchoolBean;
-
 import com.leslie.socialink.launcher.MainActivity;
 import com.leslie.socialink.network.Constants;
+import com.leslie.socialink.utils.SharedPreferencesHelp;
 import com.leslie.socialink.utils.Utils;
 
 import org.json.JSONException;
@@ -48,7 +47,6 @@ public class StudentIdLoginActivity extends NetWorkActivity {
     private final int APPLY_FOR_LOGIN = 0;//申请登陆
     private final int APPLY_FOR_LOGIN_WITH_VERIFICATION_CODE = 1;//验证码登陆
     private int landingMode = APPLY_FOR_LOGIN;//当前登陆方式，默认为不需要验证码账号登陆。
-    private SharedPreferences memory;
     private String key;
     private String verification;
     private String studentId;
@@ -100,7 +98,6 @@ public class StudentIdLoginActivity extends NetWorkActivity {
      * 初始化视图
      */
     private void initView() {
-        memory = getSharedPreferences("meet", 0);
         mHead = (SimpleDraweeView) findViewById(R.id.head);
         mHead0 = (SimpleDraweeView) findViewById(R.id.head0);
         mLlSchool = (LinearLayout) findViewById(R.id.llSchool);
@@ -293,7 +290,7 @@ public class StudentIdLoginActivity extends NetWorkActivity {
             String token = dd.optString("token");
             int uid = dd.optInt("uid");
             Constants.uid = uid;
-            memory.edit().putString("ID", studentId).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
+            SharedPreferencesHelp.getEditor().putString("ID", studentId).putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
 
             this.finish();
             startActivity(new Intent(mContext, MainActivity.class));

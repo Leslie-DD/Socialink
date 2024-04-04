@@ -7,7 +7,7 @@ import splitties.init.appCtx
 object SharedPreferencesHelp {
 
     private val sharedPreferences: SharedPreferences by lazy {
-        appCtx.getSharedPreferences("meet", Context.MODE_PRIVATE)
+        appCtx.getSharedPreferences("socialink", Context.MODE_PRIVATE)
     }
 
     private val _editor: SharedPreferences.Editor by lazy {

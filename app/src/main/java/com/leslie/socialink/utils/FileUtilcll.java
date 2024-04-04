@@ -3,7 +3,7 @@ package com.leslie.socialink.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.leslie.socialink.MeetApplication;
+import com.leslie.socialink.SocialinkApplication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,7 +42,7 @@ public class FileUtilcll {
      * @return
      */
     public static String getPublicDir() {
-        return MeetApplication.getInstance().getExternalFilesDir("").getAbsolutePath();
+        return SocialinkApplication.getInstance().getExternalFilesDir("").getAbsolutePath();
     }
 
     public static String saveFile(Context c, String filePath, String fileName, byte[] bytes) {

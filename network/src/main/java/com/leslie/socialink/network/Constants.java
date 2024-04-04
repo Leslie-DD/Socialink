@@ -135,7 +135,7 @@ public class Constants {
     public static String GET_SINGLE_DYNAMIC = BASE_URL + "/api/social/getSingleDynamic.do";
     //交友获取所有好友的动态
     public static String GET_FRIENDS_DYNAMIC = BASE_URL + "/api/social/getFriendsDynamic.do";
-    
+
     //------------------课程表相关接口--------------------
     //中南课程表获取验证码
     public static String ZHONGNAN_VERIFICATION_CODE = BASE_URL + "/api/account/getSch.do";
@@ -157,7 +157,7 @@ public class Constants {
     public static String MY_COLUMN_LIST = BASE_URL + "/api/payforkownledge/specialColumn/listMy.do";
     public static String MODIFY_ARTICLE = BASE_URL + "/api/payforkownledge/passage/put.do";
     public static String NEW_ARTICLE = BASE_URL + "/api/payforkownledge/passage/addNew.do";
-    
+
     public static final int DEFAULT_PS = 10;
 
     public static String token;

@@ -34,6 +34,8 @@ public class UserInfoBean implements Serializable {
     private String userNickName;
     private ArrayList<UserLabelsBean> userLabels;
 
+    private int money;
+
     public int getId() {
         return id;
     }
@@ -146,6 +148,14 @@ public class UserInfoBean implements Serializable {
         this.userLabels = userLabels;
     }
 
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     public static class UserLabelsBean implements Serializable {
         /**
          * id : 26
@@ -209,6 +219,7 @@ public class UserInfoBean implements Serializable {
                 ", needExperience=" + needExperience +
                 ", userNickName='" + userNickName + '\'' +
                 ", userLabels=" + userLabels +
+                ", money=" + money +
                 '}';
     }
 

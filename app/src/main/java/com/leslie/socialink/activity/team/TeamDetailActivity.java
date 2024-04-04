@@ -50,7 +50,6 @@ import com.leslie.socialink.adapter.recycleview.RecycleAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.ShareBean;
-
 import com.leslie.socialink.entity.RefCollect;
 import com.leslie.socialink.entity.RefTeamChild1;
 import com.leslie.socialink.entity.RefTeamDetailEvent;

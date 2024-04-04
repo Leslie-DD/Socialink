@@ -20,8 +20,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.githang.statusbar.StatusBarCompat;
-import com.leslie.socialink.MeetApplication;
 import com.leslie.socialink.R;
+import com.leslie.socialink.SocialinkApplication;
 import com.leslie.socialink.bean.ConsTants;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         Log.d("[ActivityCreate]", "(onCreate) " + TAG);
         super.onCreate(savedInstanceState);
-        MeetApplication.getInstance().addActivity(this);
+        SocialinkApplication.getInstance().addActivity(this);
         WindowManager wm = this.getWindowManager();
         ConsTants.screenW = wm.getDefaultDisplay().getWidth();
         ConsTants.screenH = wm.getDefaultDisplay().getHeight();
@@ -222,6 +222,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MeetApplication.getInstance().removeActivity(this);
+        SocialinkApplication.getInstance().removeActivity(this);
     }
 }

@@ -22,7 +22,6 @@ import com.leslie.socialink.activity.team.TeamDetailActivity;
 import com.leslie.socialink.activity.wenwen.WenwenDetailActivity;
 import com.leslie.socialink.adapter.Adapter_GridView;
 import com.leslie.socialink.constans.P;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;
 import com.leslie.socialink.network.entity.QuestionPhotoBean;

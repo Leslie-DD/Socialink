@@ -39,7 +39,6 @@ import com.leslie.socialink.bean.MessageBean;
 import com.leslie.socialink.bean.NoticeBean;
 import com.leslie.socialink.bean.PullTheBlackBean;
 import com.leslie.socialink.bean.SecondhandgoodBean;
-
 import com.leslie.socialink.entity.RefMembers;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.QuestionBean;

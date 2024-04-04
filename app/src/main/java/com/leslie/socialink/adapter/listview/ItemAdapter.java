@@ -11,19 +11,19 @@ import android.widget.TextView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.bean.ItemBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class ItemAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<ItemBean> data;
+    private List<ItemBean> data;
 
-    public ItemAdapter(Context context, ArrayList<ItemBean> data) {
+    public ItemAdapter(Context context, List<ItemBean> data) {
         this.data = data;
         this.context = context;
     }
 
-    public void setData(ArrayList<ItemBean> data) {
+    public void setData(List<ItemBean> data) {
         this.data = data;
         this.notifyDataSetChanged();
     }

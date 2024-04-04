@@ -3,7 +3,6 @@ package com.leslie.socialink.adapter.listview;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.entity.Item;
 import com.leslie.socialink.entity.VoteBean;
-import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 
 import java.util.ArrayList;

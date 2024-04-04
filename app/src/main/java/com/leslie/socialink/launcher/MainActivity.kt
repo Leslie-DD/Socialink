@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.leslie.socialink.MeetApplication
 import com.leslie.socialink.R
+import com.leslie.socialink.SocialinkApplication
 import com.leslie.socialink.databinding.ActivityMainBinding
 import com.leslie.socialink.launcher.model.MainViewModel
 import com.leslie.socialink.utils.StatusBarUtil
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MeetApplication.getInstance().addActivity(this)
+        SocialinkApplication.getInstance().addActivity(this)
 
         StatusBarUtil.hackInStatusBar(this@MainActivity)
 

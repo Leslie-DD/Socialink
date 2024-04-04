@@ -47,8 +47,8 @@ import androidx.core.util.Pair;
 
 import com.bumptech.glide.Glide;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.leslie.socialink.MeetApplication;
 import com.leslie.socialink.R;
+import com.leslie.socialink.SocialinkApplication;
 import com.leslie.socialink.constans.Name;
 import com.leslie.socialink.entity.TeamMemberBean;
 import com.leslie.socialink.network.Constants;
@@ -964,7 +964,7 @@ public class Utils {
      */
     public static void showSoftInput(final View view) {
         InputMethodManager imm =
-                (InputMethodManager) MeetApplication.getInstance().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) SocialinkApplication.getInstance().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         view.setFocusable(true);
         view.setFocusableInTouchMode(true);
@@ -993,7 +993,7 @@ public class Utils {
      */
     public static void hideSoftInput(final View view) {
         InputMethodManager imm =
-                (InputMethodManager) MeetApplication.getInstance().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) SocialinkApplication.getInstance().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) return;
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
@@ -1028,7 +1028,7 @@ public class Utils {
                     Object obj = c.newInstance();
                     Field field = c.getField("status_bar_height");
                     int x = Integer.parseInt(field.get(obj).toString());
-                    statusBarHeight = MeetApplication.getInstance().getApplicationContext().getResources().getDimensionPixelSize(x);
+                    statusBarHeight = SocialinkApplication.getInstance().getApplicationContext().getResources().getDimensionPixelSize(x);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1209,7 +1209,7 @@ public class Utils {
      * @return the paths of sdcard
      */
     public static List<String> getSDCardPaths() {
-        StorageManager storageManager = (StorageManager) MeetApplication.getInstance().getApplicationContext().getSystemService(Context.STORAGE_SERVICE);
+        StorageManager storageManager = (StorageManager) SocialinkApplication.getInstance().getApplicationContext().getSystemService(Context.STORAGE_SERVICE);
         List<String> paths = new ArrayList<>();
         try {
             //noinspection JavaReflectionMemberAccess

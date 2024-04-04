@@ -23,7 +23,6 @@ import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.FriendNewBean;
 import com.leslie.socialink.constans.ResultUtils;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 

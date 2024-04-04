@@ -18,7 +18,6 @@ import com.leslie.socialink.adapter.recycleview.MessageAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.MessageBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.zkk.view.rulerview.RulerView;

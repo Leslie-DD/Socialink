@@ -144,7 +144,7 @@ public class HttpRequestUtil {
     }
 
     public interface RequestCallBack {
-        void onSuccess(JSONObject result, int where, boolean fromCache);
+        void onSuccess(JSONObject result, int where, boolean fromCache) throws JSONException;
 
         void onFailure(String result, int where);
     }

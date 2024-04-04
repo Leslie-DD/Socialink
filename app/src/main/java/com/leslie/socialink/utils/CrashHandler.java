@@ -13,7 +13,7 @@ import android.util.Log;
 import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.SDCardUtils;
-import com.leslie.socialink.MeetApplication;
+import com.leslie.socialink.SocialinkApplication;
 import com.lzy.okhttputils.utils.OkLogger;
 
 import java.io.BufferedReader;
@@ -104,7 +104,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
-            MeetApplication.getInstance().finishAll();
+            SocialinkApplication.getInstance().finishAll();
             System.exit(1);
         }
     }
@@ -200,7 +200,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 return "";
             }
             if (SDCardUtils.isSDCardEnableByEnvironment()) {
-                String path = SDCardUtils.getSDCardPathByEnvironment() + "/BugInfo/Meet/crash/";
+                String path = SDCardUtils.getSDCardPathByEnvironment() + "/BugInfo/Socialink/crash/";
                 File dir = new File(path);
                 if (!FileUtils.createOrExistsDir(dir)) {  // 判断目录是否存在，不存在则判断是否创建成功
                     OkLogger.e(dir + "目录创建失败");

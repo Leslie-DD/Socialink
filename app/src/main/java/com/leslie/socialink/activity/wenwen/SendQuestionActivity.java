@@ -35,7 +35,6 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.adapter.listview.GwPictureAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.LableBean;
-
 import com.leslie.socialink.entity.TestBean;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.PhotoUtils;
@@ -234,7 +233,9 @@ public class SendQuestionActivity extends NetWorkActivity {
                                 if (result.optInt("code") == 0) {
                                     Intent intent = new Intent();
                                     intent.putExtra("item", 2);
-                                    intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                                    intent.setPackage(getPackageName());
+                                    ;
+                                    intent.setAction("fragment.listener");
                                     sendBroadcast(intent);
                                     SendQuestionActivity.this.finish();
                                 } else {

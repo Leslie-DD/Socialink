@@ -23,7 +23,6 @@ import com.leslie.socialink.activity.team.ImagePreviewActivity;
 import com.leslie.socialink.activity.team.PersonalInformationActivity;
 import com.leslie.socialink.bean.MessageBean;
 import com.leslie.socialink.constans.P;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 

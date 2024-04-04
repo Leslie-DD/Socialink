@@ -20,7 +20,6 @@ import com.jude.rollviewpager.RollPagerView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.oldsecond.GoodDetailActivity;
 import com.leslie.socialink.bean.SecondhandgoodBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyGv;

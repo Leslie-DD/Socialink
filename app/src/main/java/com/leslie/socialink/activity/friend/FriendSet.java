@@ -15,11 +15,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.adapter.listview.FriendfiltrateAdapter;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.FriendBean;
-
+import com.leslie.socialink.login.ui.LoginActivity;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.UserInfoBean;
 import com.leslie.socialink.utils.Utils;

@@ -27,7 +27,6 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.adapter.listview.GwPictureAdapter;
 import com.leslie.socialink.base.PhotoBaseActivity;
 import com.leslie.socialink.classification.ClassificationBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.PhotoUtils;
 import com.leslie.socialink.utils.Utils;
@@ -282,7 +281,9 @@ public class SecondhandPostActivity extends PhotoBaseActivity {
                             if (result.optInt("code") == 0) {
                                 Intent intent = new Intent();
                                 intent.putExtra("item", 2);
-                                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                                intent.setPackage(getPackageName());
+                                ;
+                                intent.setAction("fragment.listener");
                                 sendBroadcast(intent);
                                 SecondhandPostActivity.this.finish();
                                 Utils.toastShort(mContext, "发布成功");

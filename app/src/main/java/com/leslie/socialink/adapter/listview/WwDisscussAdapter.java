@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.wenwen.WenwenDetailActivity;
 import com.leslie.socialink.bean.WwDisscussBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 

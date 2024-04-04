@@ -1,4 +1,4 @@
-package com.leslie.socialink.activity.login;
+package com.leslie.socialink.login.ui;
 
 import android.content.Intent;
 import android.graphics.Color;

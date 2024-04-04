@@ -21,7 +21,6 @@ import com.leslie.socialink.bean.SecondhandgoodBean;
 import com.leslie.socialink.classification.ClassificationBean;
 import com.leslie.socialink.classification.ClassifySecondaryBean;
 import com.leslie.socialink.constans.ResultUtils;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.HomeBanner;
 import com.leslie.socialink.utils.Utils;

@@ -15,7 +15,6 @@ import com.leslie.socialink.activity.team.TeamDetailActivity;
 import com.leslie.socialink.adapter.recycleview.CommentTeamAdapter;
 import com.leslie.socialink.base.NetWorkFragment;
 import com.leslie.socialink.bean.ConsTants;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.TeamBean;
 import com.leslie.socialink.utils.SharedPreferencesHelp;

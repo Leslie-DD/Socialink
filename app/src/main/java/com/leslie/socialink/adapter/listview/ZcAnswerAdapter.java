@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.leslie.socialink.R;
 import com.leslie.socialink.activity.wenwen.ZcArticleActivity;
 import com.leslie.socialink.bean.ZcAnswerBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.view.CircleView;
 import com.leslie.socialink.view.MyLv;

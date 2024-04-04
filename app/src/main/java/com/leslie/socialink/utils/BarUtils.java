@@ -27,7 +27,7 @@ import androidx.annotation.RequiresApi;
 import androidx.annotation.RequiresPermission;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.leslie.socialink.MeetApplication;
+import com.leslie.socialink.SocialinkApplication;
 
 import java.lang.reflect.Method;
 
@@ -120,19 +120,15 @@ public final class BarUtils {
      */
     public static void setStatusBarLightMode(@NonNull final Window window,
                                              final boolean isLightMode) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View decorView = window.getDecorView();
-            if (decorView != null) {
-                int vis = decorView.getSystemUiVisibility();
-                if (isLightMode) {
-                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                } else {
-                    vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                }
-                decorView.setSystemUiVisibility(vis);
-            }
+        View decorView = window.getDecorView();
+        int visibility = decorView.getSystemUiVisibility();
+        if (isLightMode) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            visibility |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        } else {
+            visibility &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         }
+        decorView.setSystemUiVisibility(visibility);
     }
 
     /**
@@ -541,9 +537,9 @@ public final class BarUtils {
      */
     public static int getActionBarHeight() {
         TypedValue tv = new TypedValue();
-        if (MeetApplication.getInstance().getApplicationContext().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+        if (SocialinkApplication.getInstance().getApplicationContext().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
             return TypedValue.complexToDimensionPixelSize(
-                    tv.data, MeetApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics()
+                    tv.data, SocialinkApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics()
             );
         }
         return 0;
@@ -574,7 +570,7 @@ public final class BarUtils {
     private static void invokePanels(final String methodName) {
         try {
             @SuppressLint("WrongConstant")
-            Object service = MeetApplication.getInstance().getApplicationContext().getSystemService("statusbar");
+            Object service = SocialinkApplication.getInstance().getApplicationContext().getSystemService("statusbar");
             @SuppressLint("PrivateApi")
             Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
             Method expand = statusBarManager.getMethod(methodName);
@@ -706,7 +702,7 @@ public final class BarUtils {
      */
     public static boolean isSupportNavBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            WindowManager wm = (WindowManager) MeetApplication.getInstance().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+            WindowManager wm = (WindowManager) SocialinkApplication.getInstance().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
             //noinspection ConstantConditions
             Display display = wm.getDefaultDisplay();
             Point size = new Point();
@@ -715,7 +711,7 @@ public final class BarUtils {
             display.getRealSize(realSize);
             return realSize.y != size.y || realSize.x != size.x;
         }
-        boolean menu = ViewConfiguration.get(MeetApplication.getInstance().getInstance().getApplicationContext()).hasPermanentMenuKey();
+        boolean menu = ViewConfiguration.get(SocialinkApplication.getInstance().getInstance().getApplicationContext()).hasPermanentMenuKey();
         boolean back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
         return !menu && !back;
     }

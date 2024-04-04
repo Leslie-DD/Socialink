@@ -116,7 +116,7 @@ public class PullLayout extends LinearLayout {
 
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
 //        if (mHeaderHeight > 0) {
-            mInitDataSucceed = true;
+        mInitDataSucceed = true;
 //        }
         RuntimeException runtimeException = new RuntimeException();
         runtimeException.fillInStackTrace();
@@ -403,11 +403,13 @@ public class PullLayout extends LinearLayout {
 
     public interface OnHeaderChangedListener {
         void onCollapsed();
+
         void onExpanded();
     }
 
     public interface OnGiveUpTouchEventListener {
         boolean giveUpTouchEventSinceTopList(MotionEvent event);
+
         boolean giveUpTouchEventSinceBottomList(MotionEvent event);
     }
 

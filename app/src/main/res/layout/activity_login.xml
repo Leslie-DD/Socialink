@@ -8,21 +8,21 @@
     android:orientation="vertical"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
-    tools:context="com.leslie.socialink.activity.login.LoginActivity">
-
-    <TextView
-        android:id="@+id/tvSign"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical|right"
-        android:text="去注册"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp" />
+    tools:context="com.leslie.socialink.login.ui.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/outside_layer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvSign"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|right"
+            android:text="去注册"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:id="@+id/main"
@@ -45,19 +45,12 @@
                 android:textColor="@color/light_gray"
                 android:textSize="24sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-            </RelativeLayout>
-
             <EditText
                 android:id="@+id/etUser"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/bg_f8f8fd_23"
                 android:gravity="center_vertical"

@@ -44,7 +44,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
-import com.leslie.socialink.MeetApplication;
+import com.leslie.socialink.SocialinkApplication;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -136,7 +136,7 @@ public final class ImageUtils {
      * @return drawable
      */
     public static Drawable bitmap2Drawable(final Bitmap bitmap) {
-        return bitmap == null ? null : new BitmapDrawable(MeetApplication.getInstance().getApplicationContext().getResources(), bitmap);
+        return bitmap == null ? null : new BitmapDrawable(SocialinkApplication.getInstance().getApplicationContext().getResources(), bitmap);
     }
 
     /**
@@ -306,7 +306,7 @@ public final class ImageUtils {
      * @return bitmap
      */
     public static Bitmap getBitmap(@DrawableRes final int resId) {
-        Drawable drawable = ContextCompat.getDrawable(MeetApplication.getInstance().getApplicationContext(), resId);
+        Drawable drawable = ContextCompat.getDrawable(SocialinkApplication.getInstance().getApplicationContext(), resId);
         Canvas canvas = new Canvas();
         Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
                 drawable.getIntrinsicHeight(),
@@ -329,7 +329,7 @@ public final class ImageUtils {
                                    final int maxWidth,
                                    final int maxHeight) {
         BitmapFactory.Options options = new BitmapFactory.Options();
-        final Resources resources = MeetApplication.getInstance().getApplicationContext().getResources();
+        final Resources resources = SocialinkApplication.getInstance().getApplicationContext().getResources();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(resources, resId, options);
         options.inSampleSize = calculateInSampleSize(options, maxWidth, maxHeight);
@@ -1201,7 +1201,7 @@ public final class ImageUtils {
         RenderScript rs = null;
         Bitmap ret = recycle ? src : src.copy(src.getConfig(), true);
         try {
-            rs = RenderScript.create(MeetApplication.getInstance().getApplicationContext());
+            rs = RenderScript.create(SocialinkApplication.getInstance().getApplicationContext());
             rs.setMessageHandler(new RenderScript.RSMessageHandler());
             Allocation input = Allocation.createFromBitmap(rs,
                     ret,

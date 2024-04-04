@@ -1,4 +1,4 @@
-package com.leslie.socialink.activity.login;
+package com.leslie.socialink.login.ui;
 
 import android.os.Bundle;
 import android.os.Handler;

@@ -28,7 +28,6 @@ import com.leslie.socialink.adapter.Adapter_GridView;
 import com.leslie.socialink.adapter.BannerAdapter;
 import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.constans.P;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.HomeBanner;
 import com.leslie.socialink.network.entity.QuestionBean;

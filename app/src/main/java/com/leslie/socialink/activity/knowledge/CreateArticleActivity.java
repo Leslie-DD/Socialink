@@ -18,7 +18,6 @@ import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.knowledge.ArticleBean;
 import com.leslie.socialink.bean.knowledge.Author;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.lzy.okhttputils.OkHttpUtils;

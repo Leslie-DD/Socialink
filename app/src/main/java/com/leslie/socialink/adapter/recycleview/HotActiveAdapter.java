@@ -20,7 +20,6 @@ import com.leslie.socialink.activity.team.ActivityDateilActivity;
 import com.leslie.socialink.activity.team.ImagePreviewActivity;
 import com.leslie.socialink.adapter.Adapter_GridView;
 import com.leslie.socialink.constans.P;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.network.entity.HotActivities;
 import com.leslie.socialink.view.CircleView;

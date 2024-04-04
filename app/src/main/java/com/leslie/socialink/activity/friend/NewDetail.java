@@ -25,7 +25,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.leslie.socialink.R;
-import com.leslie.socialink.activity.login.LoginActivity;
 import com.leslie.socialink.activity.team.PersonalInformationActivity;
 import com.leslie.socialink.adapter.listview.FriendPictureAdapter;
 import com.leslie.socialink.adapter.listview.NewDisscussAdapter;
@@ -34,8 +33,8 @@ import com.leslie.socialink.bean.ConsTants;
 import com.leslie.socialink.bean.DynamicComment;
 import com.leslie.socialink.bean.FriendNewBean;
 import com.leslie.socialink.constans.ResultUtils;
-
 import com.leslie.socialink.fragment.BottomShareFragment;
+import com.leslie.socialink.login.ui.LoginActivity;
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 import com.leslie.socialink.view.CircleView;
@@ -303,7 +302,9 @@ public class NewDetail extends NetWorkActivity {
             tvLoves.setText(zan + "");
             if (dz != zan) {
                 Intent intent = new Intent();
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 intent.putExtra("item", 2);
                 sendBroadcast(intent);
             }
@@ -368,7 +369,9 @@ public class NewDetail extends NetWorkActivity {
             etContent.setText("");
             Utils.toastShort(mContext, "评论成功");
             Intent intent = new Intent();
-            intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+            intent.setPackage(getPackageName());
+            ;
+            intent.setAction("fragment.listener");
             intent.putExtra("item", 2);
             sendBroadcast(intent);
             getDisscuss(100);
@@ -379,14 +382,18 @@ public class NewDetail extends NetWorkActivity {
             if (save.equals("收藏")) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "收藏成功");
                 save = "取消收藏";
             } else {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "取消收藏成功");
                 save = "收藏";
@@ -408,7 +415,9 @@ public class NewDetail extends NetWorkActivity {
             if (result.optInt("code") == 0) {
                 Intent intent = new Intent();
                 intent.putExtra("item", 2);
-                intent.setPackage(getPackageName());;intent.setAction("fragment.listener");
+                intent.setPackage(getPackageName());
+                ;
+                intent.setAction("fragment.listener");
                 sendBroadcast(intent);
                 Utils.toastShort(mContext, "删除动态成功");
                 this.finish();

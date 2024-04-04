@@ -1,4 +1,4 @@
-package com.leslie.socialink.activity.login;
+package com.leslie.socialink.login.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.leslie.socialink.MeetApplication;
 import com.leslie.socialink.R;
+import com.leslie.socialink.SocialinkApplication;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.LableBean;
 import com.leslie.socialink.constans.ResultUtils;
@@ -237,7 +237,7 @@ public class LabelSelectionActivity extends NetWorkActivity {
                 String token = dd.optString("token");
                 int uid = dd.optInt("uid");
                 SharedPreferencesHelp.getEditor().putString("token", token).putInt("uid", uid).putBoolean("isLogin", true).apply();
-                MeetApplication.getInstance().finishAll();
+                SocialinkApplication.getInstance().finishAll();
                 startActivity(new Intent(mContext, MainActivity.class));
                 Utils.toastShort(mContext, "登录成功");
             } else {

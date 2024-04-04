@@ -22,7 +22,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.leslie.socialink.R;
 import com.leslie.socialink.base.NetWorkActivity;
 import com.leslie.socialink.bean.SchoolBean;
-
 import com.leslie.socialink.network.Constants;
 import com.leslie.socialink.utils.Utils;
 

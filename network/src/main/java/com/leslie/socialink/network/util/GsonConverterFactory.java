@@ -62,24 +62,24 @@ public final class GsonConverterFactory extends Converter.Factory {
     public Converter<ResponseBody, ?> responseBodyConverter(@NonNull Type type,
                                                             Annotation[] annotations,
                                                             @NonNull Retrofit retrofit) {
-        Type newType = type;
-        IHandler handler = null;
-        for (Annotation annotation : annotations) {
-            if (annotation.annotationType().equals(ResponseHandler.class)) {
-                ResponseHandler responseType = (ResponseHandler) annotation;
-                newType = wrapperType(responseType.cls(), type);
-
-                Class handlerCls = responseType.handler();
-                try {
-                    handler = (IHandler) handlerCls.newInstance();
-                } catch (Exception e) {
-                    Log.e("create handle failed", " " + e.getMessage());
-                    e.printStackTrace();
-                }
-            }
-        }
-        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(newType));
-        return new GsonResponseBodyConverter<>(gson, adapter, handler);
+//        Type newType = type;
+//        IHandler handler = null;
+//        for (Annotation annotation : annotations) {
+//            if (annotation.annotationType().equals(ResponseHandler.class)) {
+//                ResponseHandler responseType = (ResponseHandler) annotation;
+//                newType = wrapperType(responseType.cls(), type);
+//
+//                Class handlerCls = responseType.handler();
+//                try {
+//                    handler = (IHandler) handlerCls.newInstance();
+//                } catch (Exception e) {
+//                    Log.e("create handle failed", " " + e.getMessage());
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+        TypeAdapter<?> adapter = gson.getAdapter(TypeToken.get(type));
+        return new GsonResponseBodyConverter<>(gson, adapter, null);
     }
 
     @Override

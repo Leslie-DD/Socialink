@@ -13,6 +13,7 @@ dependencies {
     implementation(libs.splitties.appctx)
 
     implementation(libs.retrofit)
+    implementation(libs.retrofit.adapter.rxjava)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp3)
     implementation(libs.okhttp3.logging.interceptor)

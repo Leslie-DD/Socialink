@@ -32,7 +32,7 @@ public class HotActivities {
         this.totalPage = totalPage;
     }
 
-    public ArrayList<HotBean> getData() {
+    public List<HotBean> getData() {
         return list;
     }
 

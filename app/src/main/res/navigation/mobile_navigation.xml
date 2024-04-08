@@ -26,7 +26,7 @@
         android:id="@+id/navigation_message"
         android:name="com.leslie.socialink.message.ui.MessagesFragment"
         android:label="@string/menu_message"
-        tools:layout="@layout/fragment_wenwen" />
+        tools:layout="@layout/fragment_msg" />
 
     <fragment
         android:id="@+id/navigation_mine"

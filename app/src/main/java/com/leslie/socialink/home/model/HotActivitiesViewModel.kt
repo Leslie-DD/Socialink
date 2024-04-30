@@ -37,19 +37,23 @@ class HotActivitiesViewModel : ViewModel() {
         } else {
             pn += 1
         }
-        RetrofitClient.homeService.hotActivities(
+        Log.w(TAG, "(fetchData)  = ${RetrofitClient.homeService.hotActivities(
             pn = pn.toString(),
             ps = Constants.DEFAULT_PS.toString()
-        ).data?.let {
-            totalPage = it.totalPage
-            if (it.data.isNotEmpty()) {
-                _hotActivitiesBeanStateFlow.value = if (refresh) {
-                    it.data
-                } else {
-                    hotActivitiesBeanStateFlow.value + it.data
-                }
-            }
-        }
+        ).getOrNull()}")
+//        RetrofitClient.homeService.hotActivities(
+//            pn = pn.toString(),
+//            ps = Constants.DEFAULT_PS.toString()
+//        ).getOrNull()?.data?.let {
+//            totalPage = it.totalPage
+//            if (it.data.isNotEmpty()) {
+//                _hotActivitiesBeanStateFlow.value = if (refresh) {
+//                    it.data
+//                } else {
+//                    hotActivitiesBeanStateFlow.value + it.data
+//                }
+//            }
+//        }
         _loadFinish.value = loadFinish.value + 1
     }
 

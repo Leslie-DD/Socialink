@@ -33,6 +33,7 @@ okhttputils = "1.8.1"
 photoview = "2.0.0"
 recyclerview = "1.3.2"
 retrofit = "2.9.0"
+moshi = "1.14.0"
 rollviewpager = "1.2.9"
 rxjava2 = "2.2.21"
 sharpview = "v2.3.0"
@@ -91,6 +92,9 @@ rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava2" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-adapter-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofit" }
 retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 rollviewpager = { module = "com.jude:rollviewpager", version.ref = "rollviewpager" }
 sharpview = { module = "com.github.zengzhaoxing:SharpView", version.ref = "sharpview" }
 status-bar-compat = { module = "com.githang:status-bar-compat", version.ref = "statusBarCompat" }

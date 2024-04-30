@@ -15,6 +15,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.adapter.rxjava)
     implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.moshi)
     implementation(libs.okhttp3)
     implementation(libs.okhttp3.logging.interceptor)
 

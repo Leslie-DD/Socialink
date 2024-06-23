@@ -15,8 +15,11 @@ public class Constants {
 //    public static String base_url = "http://182.92.84.79:8081/xiangyu";
 //    public static String base_url_tmp = "http://182.92.84.79:8081/xiangyu";
 
-    public static String base_url = "http://8.138.85.81:6000/xiangyu";
-    public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
+//    public static String base_url = "http://8.138.85.81:6000/xiangyu";
+//    public static String base_url_tmp = "http://8.138.85.81:6000/xiangyu";
+
+    public static String base_url = "http://gxstlm.hukewei.cn:6000/xiangyu";
+    public static String base_url_tmp = "http://gxstlm.hukewei.cn:6000/xiangyu";
 
     public static final String APP_AD_WX = "wx78748a644eb7d5f7";
 

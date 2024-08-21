@@ -15,7 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL = "http://182.92.84.79:8081/"
+    private const val BASE_URL = "http://139.159.191.41:8081/"
 //    private const val BASE_URL = "http://8.138.85.81:6000/"
 
     private val authorizedOkHttpClient: OkHttpClient by lazy {
